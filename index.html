@@ -1,0 +1,113 @@
+---
+layout: default
+title: 主页
+---
+
+<div class="profile-container">
+  <section class="profile-intro">
+    <div class="profile-photo-container">
+      <img
+        src="{{ '/assets/image/profile.jpg' | relative_url }}"
+        alt="个人照片"
+        class="profile-photo"
+      />
+    </div>
+    <h1 class="section-title">个人简介</h1>
+    <p>北京大学元培学院在读, 大数据&物理方向~</p>
+    <p>曾获全国中学生物理竞赛金牌第12名</p>
+    <p>
+      喜欢理论物理⚛️、文学📚、音乐🎵、徒步🚶‍♂️、春花🌸、以及好多好美的东西! 🌟
+    </p>
+  </section>
+
+  <div class="content-grid">
+    <section class="content-section">
+      <h2 class="section-title">教育</h2>
+      <div class="education">
+        <div class="education-item">
+          <span class="education-date">2021.9 - 2024.6</span>
+          <span class="education-description">浙江省温州中学</span>
+        </div>
+
+        <div class="education-item">
+          <span class="education-date">2024.2 - 2024.9</span>
+          <span class="education-description">北京大学物理学院预科</span>
+        </div>
+        <div class="education-item">
+          <span class="education-date">2024.9 - 至今</span>
+          <span class="education-description">北京大学元培学院</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">笔记</h2>
+      <ul class="content-list">
+        <li>
+          <a href="{{ '/assets/pdf/sulantihua_public.pdf' | relative_url }}"
+            >一份并不简短的物竞笔记(公开版)</a
+          >
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="content-grid">
+    <section class="content-section">
+      <h2 class="section-title">开发</h2>
+      <div class="development-placeholder">
+        <p>敬请期待...</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">博客</h2>
+      <ul class="content-list blog-list">
+        {% for post in site.posts %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+</div>
+
+<style>
+    .profile-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .profile-photo-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: var(--main-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .profile-photo-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px var(--shadow-color);
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .development-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: var(--text-light);
+    font-style: italic;
+  }
+</style>

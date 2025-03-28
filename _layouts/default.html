@@ -1,20 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-</head>
-<body>
-    <header>
-        <h1>{{ site.title }}</h1>
-    </header>
-    <div class="container">
-        {{ content }}
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/assets/css/syntax.css" />
+    {% if page.custom_css %} {% for stylesheet in page.custom_css %}
+    <link
+      rel="stylesheet"
+      href="{{ site.baseurl }}/assets/css/{{ stylesheet }}.css"
+    />
+    {% endfor %} {% endif %}
+    <script type="text/javascript">
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ], // 行内公式
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ], // 块级公式
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"], // 跳过这些标签
+        },
+      };
+    </script>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="{{ '/' | relative_url }}" class="nav-logo">{{ site.title }}</a>
+        <div class="nav-links">
+          <a href="{{ '/' | relative_url }}" class="nav-item">首页</a>
+          <a href="{{ '/about' | relative_url }}" class="nav-item">关于</a>
+          <a href="{{ '/blog' | relative_url }}" class="nav-item">博客</a>
+          <a href="{{ '/projects' | relative_url }}" class="nav-item">项目</a>
+          <a href="{{ '/contact' | relative_url }}" class="nav-item">联系</a>
+          <button
+            id="darkModeToggle"
+            class="dark-mode-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      {% if page.hero_image %}
+      <div class="hero" style="background-image: url('{{ page.hero_image }}')">
+        <div class="hero-content">
+          <h1>{{ page.hero_title | default: page.title }}</h1>
+          {% if page.hero_subtitle %}
+          <p>{{ page.hero_subtitle }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="container">{{ content }}</div>
+    </main>
+
     <footer>
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>你好, 陌生人</h3>
+          {{ site.description | newline_to_br}}
+        </div>
+        <div class="footer-section">
+          <h3>链接</h3>
+          <ul>
+            <li><a href="{{ '/' | relative_url }}">首页</a></li>
+            <li><a href="{{ '/blog' | relative_url }}">博客</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>联系我</h3>
+          {% if site.email %}
+          <span><i class="fas fa-envelope"></i> {{ site.email }}</span>
+          {% endif %}
+          <span class="social-icons">
+            {% if site.github_username %}
+            <a
+              href="https://github.com/{{ site.github_username }}"
+              target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+            {% endif %}
+          </span>
+        </div>
+        <div class="footer-section">
+          <h3>站点统计</h3>
+          <ul class="site-stats">
+            <li>最近更新: {{ site.time | date: "%Y-%m-%d" }}</li>
+            <li>建站日期: 2023-03-14</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>
+          &copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights
+          reserved.
+        </p>
+      </div>
     </footer>
-</body>
+
+    <script>
+      // Dark mode functionality
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const html = document.documentElement;
+
+      // Check for saved user preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        html.classList.add("dark-mode");
+        darkModeToggle.classList.add("active");
+      }
+
+      // Toggle dark mode on button click
+      darkModeToggle.addEventListener("click", () => {
+        html.classList.toggle("dark-mode");
+        darkModeToggle.classList.toggle("active");
+
+        // Save user preference
+        const currentTheme = html.classList.contains("dark-mode")
+          ? "dark"
+          : "light";
+        localStorage.setItem("theme", currentTheme);
+      });
+    </script>
+  </body>
 </html>

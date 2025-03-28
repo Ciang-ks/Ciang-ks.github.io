@@ -1,0 +1,130 @@
+/* 基础与CSS变量 */
+
+/* 变量 */
+:root {
+  /* Light mode (default) - 更柔和的配色 */
+  --main-color: #ebe3d5; /* 更柔和的奶油色 */
+  --secondary-color: #d4a5a5; /* 更柔和的玫瑰色 */
+  --tertiary-color: #a1b78d; /* 更柔和的莴苣绿 */
+  --accent-color: #8d6e63; /* 柔和中性棕色 */
+  --accent-alt: #546e7a; /* 蓝灰色 */
+  --gradient-start: #e6ddd6; /* 更柔和的渐变开始 */
+  --gradient-end: #d1c4bc; /* 更柔和的渐变结束 */
+  --text-color: #4a4a4a; /* 不那么刺眼的文本 */
+  --text-light: #777777; /* 柔和的次要文本 */
+  --white: #ffffff;
+  --card-bg: #faf7f2; /* 奶油色卡片背景 */
+  --navbar-bg: #f0e9df; /* 柔和的导航栏背景 */
+  --container-bg: #f9f6f1; /* 温暖的容器背景 */
+  --shadow-color: rgba(0, 0, 0, 0.06);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+.dark-mode {
+  --main-color: #8c7b6b; /* 柔和的深棕色 */
+  --secondary-color: #c28d98; /* 柔和的玫瑰色 */
+  --tertiary-color: #7d9665; /* 柔和的橄榄绿 */
+  --accent-color: #ffcc80; /* 温暖的橙色 */
+  --accent-alt: #141413; /* 深紫棕色，与玫瑰色调和 */
+  --gradient-start: #3e3630; /* 柔和的深棕色渐变开始 */
+  --gradient-end: #2e2925; /* 柔和的深棕色渐变结束 */
+  --text-color: #e8e8e8; /* 不那么刺眼的文本 */
+  --text-light: #bbbbbb; /* 更柔和的次要文本 */
+  --white: #ffffff;
+  --card-bg: #353331; /* 稍微带褐色的背景，不是纯黑 */
+  --navbar-bg: #2a2725; /* 柔和的导航栏背景 */
+  --container-bg: #322e2b; /* 温暖的深色容器 */
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* 重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 排版 */
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* 标题 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* 容器 */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+main {
+  min-height: 70vh;
+}
+
+.container pre {
+  max-width: 100%;
+  overflow-x: auto;
+}

@@ -1,0 +1,238 @@
+/* 导入 Fira Code 字体 */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+/* 基础样式 */
+.highlight {
+  color: #5c4f43;
+  background: linear-gradient(178deg, #f7f3e8 0%, #f0ebdf 100%);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow: auto;
+  box-shadow: 0 4px 6px -1px rgba(92, 79, 67, 0.05);
+  font-family: "Fira Code", monospace;
+  line-height: 1.5;
+  font-size: 0.95em;
+}
+
+.highlight pre {
+  margin: 0;
+  font-family: "Fira Code", monospace;
+}
+
+.highlight table td {
+  padding: 5px;
+}
+
+.highlight table pre {
+  margin: 0;
+}
+
+/* 注释 */
+.highlight .c,
+.highlight .ch,
+.highlight .cd,
+.highlight .cpf,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs {
+  color: #a8a29e;
+  font-style: italic;
+}
+
+.highlight .cp {
+  color: #a8a29e;
+  font-weight: 500;
+}
+
+/* 错误 */
+.highlight .err {
+  color: #5c4f43;
+  background-color: rgba(212, 185, 150, 0.2);
+  border-radius: 3px;
+}
+
+/* Git 差异 */
+.highlight .gi {
+  color: #5c4f43;
+  background-color: rgba(138, 166, 123, 0.15);
+}
+
+.highlight .gd {
+  color: #5c4f43;
+  background-color: rgba(168, 162, 158, 0.15);
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .ges {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.highlight .gr,
+.highlight .gt {
+  color: #8aa67b;
+}
+
+.highlight .gh,
+.highlight .go,
+.highlight .gp {
+  color: #a8a29e;
+}
+
+.highlight .gs {
+  font-weight: 500;
+}
+
+.highlight .gu {
+  color: #a8a29e;
+}
+
+/* 关键字（带呼吸动画） */
+.highlight .k,
+.highlight .kv,
+.highlight .kc,
+.highlight .kd,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .kn,
+.highlight .ow,
+.highlight .o {
+  color: #8aa67b;
+  font-weight: 500;
+  animation: breath 3s ease-in-out infinite;
+}
+
+/* 数字 */
+.highlight .mf,
+.highlight .mh,
+.highlight .il,
+.highlight .mi,
+.highlight .mo,
+.highlight .m,
+.highlight .mb,
+.highlight .mx,
+.highlight .se {
+  color: #7b8b6e;
+}
+
+/* 字符串 */
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .sr,
+.highlight .s1,
+.highlight .ss,
+.highlight .s,
+.highlight .dl {
+  color: #7b8b6e;
+}
+
+/* 函数名和类名（悬停效果） */
+.highlight .na,
+.highlight .nc,
+.highlight .nd,
+.highlight .ne,
+.highlight .nf,
+.highlight .fm {
+  color: #d4b996;
+  position: relative;
+  padding: 0 2px;
+  transition: all 0.2s ease;
+}
+
+.highlight .na:hover,
+.highlight .nc:hover,
+.highlight .nd:hover,
+.highlight .ne:hover,
+.highlight .nf:hover,
+.highlight .fm:hover {
+  background: linear-gradient(
+    to right,
+    rgba(212, 185, 150, 0.1) 0%,
+    rgba(212, 185, 150, 0.3) 100%
+  );
+  border-radius: 3px;
+}
+
+.highlight .nc,
+.highlight .nd,
+.highlight .ne {
+  font-weight: 500;
+}
+
+/* 变量与普通文本 */
+.highlight .no,
+.highlight .bp,
+.highlight .nb,
+.highlight .ni,
+.highlight .nn,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi,
+.highlight .nv,
+.highlight .vm,
+.highlight .w {
+  color: #5c4f43;
+}
+
+.highlight .nl {
+  color: #5c4f43;
+  font-weight: 500;
+}
+
+.highlight .nt {
+  color: #8aa67b;
+}
+
+/* 呼吸灯动画 */
+.highlight .o,
+.highlight .ow {
+  opacity: 0.85;
+}
+
+/* 行间距优化 */
+@keyframes breath {
+  0%,
+  100% {
+    text-shadow: 0 0 2px rgba(138, 166, 123, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 6px rgba(138, 166, 123, 0.6);
+  }
+}
+
+/* 行间距优化 */
+.highlight pre code {
+  display: inline-block;
+  padding: 0.25rem 0;
+}
+
+/* 滚动条美化 */
+.highlight::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.highlight::-webkit-scrollbar-track {
+  background: rgba(247, 243, 232, 0.6);
+  border-radius: 4px;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+  background: rgba(92, 79, 67, 0.2);
+  border-radius: 4px;
+}
+
+.highlight::-webkit-scrollbar-thumb:hover {
+  background: rgba(92, 79, 67, 0.3);
+}

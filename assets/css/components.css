@@ -1,0 +1,354 @@
+/* 个人资料 */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--main-color);
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  border-color: var(--secondary-color);
+}
+
+.profile-name {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.profile-title {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.profile-bio {
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+}
+
+.profile-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.profile-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.profile-social a:hover {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+/* 博客卡片 */
+.blog-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+}
+
+.blog-card-date {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.blog-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color);
+}
+
+.blog-card-excerpt {
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-light);
+}
+
+.blog-card-link {
+  display: inline-block;
+  color: var(--secondary-color);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.blog-card-link:hover {
+  color: var(--accent-color);
+}
+
+/* 按钮 */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--main-color);
+  color: var(--accent-color);
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--main-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--main-color);
+}
+
+/* 社交图标 */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+/* 深色模式切换 */
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid var(--main-color);
+  color: var(--text-color);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: var(--transition);
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--main-color);
+  transform: translateY(-3px);
+}
+
+.dark-mode-toggle .fa-sun {
+  display: none;
+}
+
+.dark-mode-toggle .fa-moon {
+  display: block;
+}
+
+.dark-mode-toggle.active .fa-sun {
+  display: block;
+}
+
+.dark-mode-toggle.active .fa-moon {
+  display: none;
+}
+
+/* 响应式图片容器 */
+.image-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: var(--transition);
+  background-color: var(--card-bg);
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.02);
+}
+
+/* 图片容器变体 */
+.image-container-sm {
+  max-width: 400px;
+}
+
+.image-container-md {
+  max-width: 600px;
+}
+
+.image-container-lg {
+  max-width: 1000px;
+}
+
+.image-container-fluid {
+  max-width: 100%;
+}
+
+.image-container-rounded {
+  border-radius: 16px;
+}
+
+.image-container-circle {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+.image-container-no-shadow {
+  box-shadow: none;
+}
+
+.section-title {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.content-section {
+  background-color: var(--card-bg);
+  padding: 1.75rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  min-height: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.content-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
+  opacity: 0.6;
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+}
+
+.content-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.content-section:hover::before {
+  transform: translateY(0);
+}
+
+.content-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.content-list li {
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.content-list li::before {
+  content: "✨";
+  position: absolute;
+  left: 0;
+}
+
+.blog-list li {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
