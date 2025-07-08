@@ -1,0 +1,514 @@
+---
+layout: default
+title: "随机事件生成器"
+---
+
+<div class="random-generator-container">
+  <h1 class="generator-title">海上探险事件分派</h1>
+  
+  <div class="generator-card">
+    <div class="event-info">
+      <h3>事件列表</h3>
+      <div class="event-list">
+        <div class="event-item">
+          <span class="event-number">1</span>
+          <span class="event-name">暴风雨</span>
+        </div>
+        <div class="event-item">
+          <span class="event-number">2</span>
+          <span class="event-name">野生动物攻击</span>
+        </div>
+        <div class="event-item">
+          <span class="event-number">3</span>
+          <span class="event-name">迷路</span>
+        </div>
+        <div class="event-item">
+          <span class="event-number">4</span>
+          <span class="event-name">饮食短缺</span>
+        </div>
+        <div class="event-item">
+          <span class="event-number">5</span>
+          <span class="event-name">低温</span>
+        </div>
+        <div class="event-item">
+          <span class="event-number">6</span>
+          <span class="event-name">外伤感染</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="button-section">
+      <button id="generateBtn" class="generate-btn">生成随机事件</button>
+      <button id="clearBtn" class="clear-btn">清空</button>
+    </div>
+    
+    <div class="result-section">
+      <h3>当前事件 (3个)</h3>
+      <div id="result" class="result-display">
+        <span class="placeholder">点击生成按钮开始</span>
+      </div>
+    </div>
+    
+    <div class="history-section">
+      <h3>历史记录</h3>
+      <div id="history" class="history-display">
+        <span class="placeholder">暂无历史记录</span>
+      </div>
+      <button id="clearHistoryBtn" class="clear-history-btn">清空历史</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .random-generator-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .generator-title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+
+  .generator-card {
+    background: var(--bg-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+  }
+
+  .event-info {
+    margin-bottom: 2rem;
+  }
+
+  .event-info h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .event-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .event-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--main-color);
+    color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+
+  .event-name {
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
+
+  .input-section {
+    margin-bottom: 2rem;
+  }
+
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(139, 0, 18, 0.1);
+  }
+
+  .checkbox-group {
+    margin-top: 1rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    display: none;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: var(--main-color);
+    border-color: var(--main-color);
+  }
+
+  .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .button-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .generate-btn, .clear-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .generate-btn {
+    background: var(--main-color);
+    color: white;
+  }
+
+  .generate-btn:hover {
+    background: #a50014;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 0, 18, 0.3);
+  }
+
+  .clear-btn {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+  }
+
+  .clear-btn:hover {
+    background: var(--border-color);
+    transform: translateY(-2px);
+  }
+
+  .result-section, .history-section {
+    margin-bottom: 2rem;
+  }
+
+  .result-section h3, .history-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .result-display {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+  }
+
+  .result-numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .event-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    animation: fadeInScale 0.5s ease;
+    box-shadow: 0 2px 8px rgba(139, 0, 18, 0.3);
+  }
+
+  .event-result .event-number {
+    background: rgba(255, 255, 255, 0.2);
+    margin-right: 1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .number-badge {
+    background: var(--main-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    animation: fadeInScale 0.5s ease;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .history-display {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+  }
+
+  .history-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .history-item:last-child {
+    border-bottom: none;
+  }
+
+  .history-time {
+    color: var(--text-lighter);
+    font-size: 0.8rem;
+  }
+
+  .clear-history-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+  }
+
+  .clear-history-btn:hover {
+    background: var(--border-color);
+  }
+
+  .placeholder {
+    color: var(--text-lighter);
+    font-style: italic;
+  }
+
+  @media (max-width: 480px) {
+    .generator-card {
+      padding: 1.5rem;
+    }
+    
+    .button-section {
+      flex-direction: column;
+    }
+    
+    .generator-title {
+      font-size: 2rem;
+    }
+
+    .event-list {
+      grid-template-columns: 1fr;
+    }
+
+    .event-result {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .event-result .event-number {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  class RandomEventGenerator {
+    constructor() {
+      this.events = {
+        1: '暴风雨',
+        2: '野生动物攻击',
+        3: '迷路',
+        4: '饮食短缺',
+        5: '低温',
+        6: '外伤感染'
+      };
+      this.history = JSON.parse(localStorage.getItem('randomEventHistory') || '[]');
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.updateHistoryDisplay();
+    }
+
+    bindEvents() {
+      document.getElementById('generateBtn').addEventListener('click', () => this.generate());
+      document.getElementById('clearBtn').addEventListener('click', () => this.clear());
+      document.getElementById('clearHistoryBtn').addEventListener('click', () => this.clearHistory());
+      
+      // 回车键生成
+      document.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          this.generate();
+        }
+      });
+    }
+
+    generate() {
+      // 固定生成3个1-6的随机数
+      const numbers = this.generateNumbers();
+      this.displayResult(numbers);
+      this.addToHistory(numbers);
+    }
+
+    generateNumbers() {
+      const numbers = [];
+      const available = [1, 2, 3, 4, 5, 6];
+      
+      // 从可用数字中随机选择3个不重复的数字
+      for (let i = 0; i < 3; i++) {
+        const randomIndex = Math.floor(Math.random() * available.length);
+        numbers.push(available.splice(randomIndex, 1)[0]);
+      }
+      
+      return numbers;
+    }
+
+    displayResult(numbers) {
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `
+        <div class="result-numbers">
+          ${numbers.map(num => `
+            <div class="event-result">
+              <span class="event-number">${num}</span>
+              <span class="event-name">${this.events[num]}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    addToHistory(numbers) {
+      const timestamp = new Date().toLocaleString('zh-CN');
+      const historyItem = {
+        numbers,
+        events: numbers.map(num => this.events[num]),
+        timestamp
+      };
+
+      this.history.unshift(historyItem);
+      
+      // 保持历史记录不超过20条
+      if (this.history.length > 20) {
+        this.history = this.history.slice(0, 20);
+      }
+
+      localStorage.setItem('randomEventHistory', JSON.stringify(this.history));
+      this.updateHistoryDisplay();
+    }
+
+    updateHistoryDisplay() {
+      const historyElement = document.getElementById('history');
+      
+      if (this.history.length === 0) {
+        historyElement.innerHTML = '<span class="placeholder">暂无历史记录</span>';
+        return;
+      }
+
+      historyElement.innerHTML = this.history.map(item => `
+        <div class="history-item">
+          <div>${item.numbers.map((num, index) => `${num}.${item.events[index]}`).join(', ')}</div>
+          <div class="history-time">${item.timestamp}</div>
+        </div>
+      `).join('');
+    }
+
+    clear() {
+      document.getElementById('result').innerHTML = '<span class="placeholder">点击生成按钮开始</span>';
+    }
+
+    clearHistory() {
+      this.history = [];
+      localStorage.removeItem('randomEventHistory');
+      this.updateHistoryDisplay();
+    }
+  }
+
+  // 初始化随机事件生成器
+  document.addEventListener('DOMContentLoaded', () => {
+    new RandomEventGenerator();
+  });
+</script>
