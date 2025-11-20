@@ -41,7 +41,7 @@ import { ClientRouter } from 'astro:transitions';
     <ClientRouter />
     <script is:inline>
       // Dark mode initialization
-      const theme = (() => {
+      const getTheme = () => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');
         }
@@ -49,13 +49,24 @@ import { ClientRouter } from 'astro:transitions';
           return 'dark';
         }
         return 'light';
-      })();
-    
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark-mode');
-      } else {
-        document.documentElement.classList.remove('dark-mode');
-      }
+      };
+
+      const setTheme = (doc = document) => {
+        const theme = getTheme();
+        if (theme === 'dark') {
+          doc.documentElement.classList.add('dark-mode');
+        } else {
+          doc.documentElement.classList.remove('dark-mode');
+        }
+      };
+
+      // Apply theme on initial load
+      setTheme();
+
+      // Apply theme to the new document before swap to avoid flicker
+      document.addEventListener('astro:before-swap', (ev) => {
+        setTheme(ev.newDocument);
+      });
     </script>
   </head>
   <body>
