@@ -1,0 +1,164 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer>
+  <div class="footer-content">
+    <!-- Column 1: Hello Stranger -->
+    <div class="footer-section">
+      <h3>Hello, Stranger</h3>
+      <div class="poetic-block">
+        <p class="poetic-cn">你从远方来, 我到远方去<br>遥远的路程经过这里</p>
+        <p class="poetic-en"><small>"You come from afar, I go afar, and this long journey passes through here."</small></p>
+      </div>
+    </div>
+
+    <!-- Column 2: Sitemap -->
+    <div class="footer-section">
+      <h3>Sitemap</h3>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/posts">Archive</a></li>
+        <li><a href="/#projects">View Work</a></li>
+        <li><a href="/assets/pdf/CV_English.pdf" target="_blank" class="resume-link">Resume (PDF) <i class="fas fa-external-link-alt"></i></a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Site Info -->
+    <div class="footer-section">
+      <h3>Site Info</h3>
+      <ul class="site-info-list">
+        <li><span class="label">Established:</span> 2025-03-14</li>
+        <li><span class="label">Built with:</span> <a href="https://astro.build" target="_blank">Astro</a></li>
+        <li class="copyright-text">&copy; {currentYear} Jiang Xuqi</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: var(--bg-alt);
+    padding: 5rem 0 3rem;
+    margin-top: 6rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr; /* Adjusted ratios for better balance */
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    font-weight: 600;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Column 1 Styles */
+  .poetic-block {
+    color: var(--text-secondary);
+  }
+
+  .poetic-cn {
+    font-family: "KaiTi", "STKaiti", "FangSong", "Georgia", serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .poetic-en {
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    line-height: 1.4;
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  /* Column 2 Styles */
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-color);
+  }
+
+  .resume-link i {
+    font-size: 0.8em;
+    opacity: 0.7;
+  }
+
+  /* Column 3 Styles */
+  .site-info-list {
+    list-style: none;
+    padding: 0;
+    color: var(--text-secondary);
+  }
+
+  .site-info-list li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .site-info-list .label {
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  .site-info-list a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--border-color);
+    text-underline-offset: 3px;
+  }
+
+  .site-info-list a:hover {
+    color: var(--primary-color);
+    text-decoration-color: var(--primary-color);
+  }
+
+  .copyright-text {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .footer-section {
+      text-align: left; /* Keep left align for better readability on mobile */
+    }
+  }
+</style>

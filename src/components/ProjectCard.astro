@@ -1,0 +1,89 @@
+---
+interface Props {
+  title: string;
+  desc: string;
+  tags: string[];
+  link: string;
+  linkText?: string;
+}
+
+const { title, desc, tags, link, linkText = "View Project" } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="project-content">
+    <h3 class="project-title">{title}</h3>
+    <p class="project-desc">{desc}</p>
+    <div class="project-tech-stack">
+      {tags.map((tag) => <span class="tech-tag">{tag}</span>)}
+    </div>
+  </div>
+  <div class="project-footer">
+    <a href={link} class="project-link" target="_blank">{linkText} <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid var(--border-color);
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    white-space: pre-line;
+  }
+
+  .project-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--bg-alt);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+  }
+
+  .project-link:hover {
+    color: var(--secondary-color);
+    gap: 0.75rem;
+  }
+</style>

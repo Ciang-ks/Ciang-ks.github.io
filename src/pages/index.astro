@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BlogList from '../components/BlogList.astro';
+import Contact from '../components/Contact.astro';
+import { projects } from '../data/projects';
+---
+
+<Layout title="Home | Ciang-ks">
+  <Hero />
+  
+  <section id="projects" class="section-container">
+    <div class="container">
+      <h2 class="section-heading">Selected Projects</h2>
+      <div class="projects-grid">
+        {projects.map(project => (
+          <ProjectCard 
+            title={project.title} 
+            desc={project.description}
+            tags={project.tags.filter(tag => tag !== 'Project')}
+            link={project.link}
+            linkText={project.linkText}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="blog" class="section-container bg-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-heading">Recent Writing</h2>
+      </div>
+      <BlogList />
+    </div>
+  </section>
+
+  <section id="contact" class="section-container">
+    <div class="container">
+      <h2 class="section-heading text-center">Get In Touch</h2>
+      <Contact />
+    </div>
+  </section>
+</Layout>

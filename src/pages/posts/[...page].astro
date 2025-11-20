@@ -1,0 +1,385 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { projects } from '../../data/projects';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('blog');
+  
+  // Normalize blog posts to a common shape
+  const formattedPosts = allPosts.map(post => ({
+    title: post.data.title,
+    date: post.data.date,
+    description: post.data.description || post.body.substring(0, 100) + "...",
+    tags: post.data.tags || [],
+    link: `/blog/${post.slug}`,
+    type: "blog"
+  }));
+
+  // Combine and sort
+  const allItems = [...formattedPosts, ...projects].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+
+  // Return paginated paths
+  return paginate(allItems, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+
+// Fetch all items again for client-side search index
+const allPostsForSearch = await getCollection('blog');
+
+const formattedPostsForSearch = allPostsForSearch.map(post => ({
+    title: post.data.title,
+    date: post.data.date,
+    description: post.data.description || post.body.substring(0, 100) + "...",
+    tags: post.data.tags || [],
+    link: `/blog/${post.slug}`,
+    type: "blog"
+}));
+
+const allItemsForSearch = [...formattedPostsForSearch, ...projects].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const allTags = [...new Set(allItemsForSearch.flatMap(item => item.tags))];
+
+---
+
+<Layout title="Archive | Ciang-ks">
+  <div class="container archive-page">
+    <header class="archive-header">
+      <h1>Archive</h1>
+      <p>All blog posts and projects.</p>
+    </header>
+
+    <div class="controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search title or tags..." />
+      </div>
+      
+      <div class="tags-cloud">
+        <button class="tag-btn active" data-tag="all">All</button>
+        {allTags.map(tag => (
+          <button class="tag-btn" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="archive-list" id="archiveList">
+      {page.data.map(item => (
+        <article class="archive-item" data-tags={item.tags.join(',')} data-title={item.title.toLowerCase()}>
+          <div class="item-meta">
+            <span class={`item-type ${item.type}`}>{item.type === 'blog' ? 'Blog' : 'Project'}</span>
+            <time datetime={item.date.toISOString()}>
+              {item.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+          </div>
+          <h2 class="item-title">
+            <a href={item.link} target={item.type === 'project' && item.link.startsWith('http') ? '_blank' : '_self'}>
+              {item.title}
+            </a>
+          </h2>
+          <p class="item-desc">{item.description}</p>
+          <div class="item-tags">
+            {item.tags.map(tag => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="pagination" id="paginationControls">
+      {page.url.prev ? <a href={page.url.prev} class="page-link">&larr; Prev</a> : <span class="page-link disabled">&larr; Prev</span>}
+      <span class="page-info">Page {page.currentPage} of {page.lastPage}</span>
+      {page.url.next ? <a href={page.url.next} class="page-link">Next &rarr;</a> : <span class="page-link disabled">Next &rarr;</span>}
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ allItems: allItemsForSearch }}>
+  const searchInput = document.getElementById('searchInput');
+  const tagBtns = document.querySelectorAll('.tag-btn');
+  const archiveList = document.getElementById('archiveList');
+  const paginationControls = document.getElementById('paginationControls');
+
+  let currentTag = 'all';
+  let currentSearch = '';
+  let currentType = 'all'; // 'all', 'blog', 'project'
+
+  // Store original HTML to restore when clearing filters
+  // Actually, since we have pagination, "restoring" means showing the initial page content.
+  // But if we filter, we want to show results from ALL pages.
+  // So we will render from `allItems` when filtering, and restore initial HTML when clearing?
+  // No, simpler: If filter is active, render from `allItems`. If not, reload page? No, that's bad UX.
+  // Better: Store the initial innerHTML of archiveList.
+  const initialListHTML = archiveList.innerHTML;
+
+  // Initialize from URL params
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get('type');
+  const tagParam = urlParams.get('tag');
+
+  if (typeParam) {
+    currentType = typeParam;
+  }
+  if (tagParam) {
+    currentTag = tagParam;
+    // Activate tag button if exists
+    const btn = document.querySelector(`.tag-btn[data-tag="${tagParam}"]`);
+    if (btn) {
+      tagBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+  
+  // Initial filter if params exist
+  if (typeParam || tagParam) {
+    filterItems();
+  }
+
+  function renderItems(items) {
+    if (items.length === 0) {
+      archiveList.innerHTML = '<p class="no-results">No items found.</p>';
+      return;
+    }
+
+    archiveList.innerHTML = items.map(item => `
+      <article class="archive-item">
+        <div class="item-meta">
+          <span class="item-type ${item.type}">${item.type === 'blog' ? 'Blog' : 'Project'}</span>
+          <time datetime="${new Date(item.date).toISOString()}">
+            ${new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </time>
+        </div>
+        <h2 class="item-title">
+          <a href="${item.link}" target="${item.type === 'project' && item.link.startsWith('http') ? '_blank' : '_self'}">
+            ${item.title}
+          </a>
+        </h2>
+        <p class="item-desc">${item.description}</p>
+        <div class="item-tags">
+          ${item.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function filterItems() {
+    const isFiltering = currentSearch !== '' || currentTag !== 'all' || currentType !== 'all';
+
+    if (!isFiltering) {
+      archiveList.innerHTML = initialListHTML;
+      paginationControls.style.display = 'flex';
+      return;
+    }
+
+    paginationControls.style.display = 'none';
+
+    const filtered = allItems.filter(item => {
+      const title = item.title.toLowerCase();
+      const tags = item.tags.map(t => t.toLowerCase());
+      
+      const matchesSearch = title.includes(currentSearch) || tags.some(t => t.includes(currentSearch));
+      const matchesTag = currentTag === 'all' || item.tags.includes(currentTag);
+      const matchesType = currentType === 'all' || item.type === currentType;
+
+      return matchesSearch && matchesTag && matchesType;
+    });
+
+    renderItems(filtered);
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value.toLowerCase();
+    filterItems();
+  });
+
+  tagBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tagBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      currentTag = btn.getAttribute('data-tag');
+      filterItems();
+    });
+  });
+</script>
+
+<style>
+  .archive-page {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    max-width: 800px;
+  }
+
+  .archive-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .archive-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+  }
+
+  .controls {
+    margin-bottom: 3rem;
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .search-box {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-size: 1rem;
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-btn {
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .tag-btn:hover, .tag-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .archive-item {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+    border: 1px solid var(--border-color);
+  }
+
+  .archive-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .item-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+
+  .item-type {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .item-type.blog {
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+  }
+
+  .item-type.project {
+    background-color: rgba(var(--secondary-rgb), 0.1);
+    color: var(--secondary-color);
+  }
+
+  .item-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-title a {
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .item-title a:hover {
+    color: var(--primary-color);
+  }
+
+  .item-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .item-tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .page-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .page-link:hover:not(.disabled) {
+    background: var(--bg-alt);
+  }
+
+  .page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .page-info {
+    color: var(--text-secondary);
+  }
+</style>

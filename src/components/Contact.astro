@@ -1,0 +1,103 @@
+---
+const email = "sulanzhai@qq.com";
+const github = "Ciang-ks";
+---
+
+<div class="contact-wrapper">
+  <a href={`mailto:${email}`} class="contact-item">
+    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+    <div class="contact-info">
+      <span class="contact-label">Email</span>
+      <span class="contact-value">{email}</span>
+    </div>
+  </a>
+  
+  <a href={`https://github.com/${github}`} class="contact-item" target="_blank">
+    <div class="contact-icon"><i class="fab fa-github"></i></div>
+    <div class="contact-info">
+      <span class="contact-label">GitHub</span>
+      <span class="contact-value">@{github}</span>
+    </div>
+  </a>
+  
+  <!-- Placeholder for LinkedIn/X -->
+  <a href="#" class="contact-item">
+    <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+    <div class="contact-info">
+      <span class="contact-label">LinkedIn</span>
+      <span class="contact-value">Connect</span>
+    </div>
+  </a>
+</div>
+
+<style>
+  .contact-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--bg-card);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    min-width: 250px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+  }
+
+  .contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+  }
+
+  .contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    transition: var(--transition-fast);
+  }
+
+  .contact-item:hover .contact-icon {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-value {
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+---
+
+<div class="blog-grid">
+  {sortedPosts.map((post) => (
+    <article class="blog-card-minimal">
+      <span class="blog-date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+      <h3 class="blog-title"><a href={`/blog/${post.slug}`}>{post.data.title}</a></h3>
+      <p class="blog-excerpt">{post.body.substring(0, 100)}...</p>
+      <a href={`/blog/${post.slug}`} class="read-more">Read more</a>
+    </article>
+  ))}
+</div>
+
+<style>
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card-minimal {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    border: 1px solid var(--border-color);
+  }
+
+  .blog-card-minimal:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .blog-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .blog-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-title a {
+    color: var(--text-main);
+  }
+
+  .blog-title a:hover {
+    color: var(--primary-color);
+  }
+
+  .blog-excerpt {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    position: relative;
+  }
+
+  .read-more::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  .read-more:hover::after {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

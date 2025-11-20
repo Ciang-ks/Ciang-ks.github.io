@@ -1,0 +1,166 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  {entry.data.hero_image ? (
+    <div class="hero-header" style={`background-image: url(${entry.data.hero_image})`}>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="post-title hero-title">{entry.data.title}</h1>
+        <div class="post-meta hero-meta">
+          <time datetime={entry.data.date.toISOString()}>
+            {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div class="container blog-post-header-simple">
+      <header class="post-header">
+        <h1 class="post-title">{entry.data.title}</h1>
+        <div class="post-meta">
+          <time datetime={entry.data.date.toISOString()}>
+            {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+      </header>
+    </div>
+  )}
+
+  <div class="container blog-post">
+    <div class="post-content">
+      <Content />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-header {
+    position: relative;
+    height: 50vh;
+    min-height: 350px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+    color: #faf9f6;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 800px;
+  }
+
+  .hero-header .hero-title {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    color: #faf9f6;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .hero-header .hero-meta {
+    color: rgba(250, 249, 246, 0.9);
+    font-size: 1.1rem;
+  }
+
+  .blog-post-header-simple {
+    padding-top: 4rem;
+  }
+
+  .blog-post {
+    padding-bottom: 4rem;
+    max-width: 800px;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .post-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+  }
+
+  .post-meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .post-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+  
+  /* Markdown Content Styles */
+  .post-content :global(h2) {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+  }
+  
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin-left: 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  .post-content :global(img) {
+    max-width: 100%;
+    border-radius: var(--radius-sm);
+    margin: 1.5rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-header {
+      height: 50vh;
+    }
+  }
+</style>

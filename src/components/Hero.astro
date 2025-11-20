@@ -1,0 +1,224 @@
+---
+import profileImg from '../assets/profile.jpg'; // We will need to move the image
+// For now, let's use the path we know works or update it later.
+// Astro recommends importing images. I'll assume we move assets/image/profile.jpg to src/assets/profile.jpg later.
+// But for now, to keep it simple and working with existing paths, I'll use the public folder approach.
+// In Astro, files in 'public/' are served at root. So 'assets/image/profile.jpg' needs to be in 'public/assets/image/profile.jpg'.
+// I will move the assets folder to public later.
+---
+
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-wrapper">
+      <div class="hero-text">
+        <h1 class="hero-title">Hi, I'm <span class="highlight">Jiang Xuqi</span> <span class="cn-name">(蒋徐祺)</span>.</h1>
+        <p class="hero-subtitle">Data Science Student at Peking University.</p>
+        <p class="hero-description">
+          I explore intelligence at the intersection of artificial intelligence, neuroscience, and complex systems, driven by a core pursuit: to understand how we build and use structured representations of the world.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Contact Me</a>
+          <a href="#projects" class="btn btn-outline">View Work</a>
+        </div>
+        
+        <!-- Education Mini-Section -->
+        <div class="education-mini">
+          <div class="edu-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Yuanpei College</span>
+          </div>
+          <div class="edu-item">
+            <i class="fas fa-medal"></i>
+            <span>40th CPhO Gold Medal (Rank 12)</span>
+          </div>
+          <div class="edu-item">
+            <i class="fas fa-award"></i>
+            <span>2025 National Scholarship</span>
+          </div>
+          <div class="edu-item">
+            <i class="fas fa-star"></i>
+            <span>PKU 14th CUPT Best Individual</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image-container">
+         <div class="hero-img-backdrop"></div>
+         <img src="/assets/image/profile.jpg" alt="Jiang Xuqi" class="hero-profile-img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding: 8rem 0 6rem;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-wrapper {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-text {
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .cn-name {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .highlight {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+  }
+
+  .highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background-color: var(--secondary-color);
+    opacity: 0.2;
+    z-index: -1;
+    transform: skewX(-10deg);
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-30px);
+  }
+
+  .hero-profile-img {
+    width: 360px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-normal);
+    z-index: 2;
+    position: relative;
+  }
+
+  .hero-img-backdrop {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    background-color: var(--secondary-color);
+    border-radius: var(--radius-lg);
+    opacity: 0.3;
+    z-index: 1;
+    transform: translate(20px, 20px);
+    transition: var(--transition-normal);
+  }
+
+  /* Hover effects for a modern feel */
+  .hero-image-container:hover .hero-profile-img {
+    transform: translate(-5px, -5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-image-container:hover .hero-img-backdrop {
+    transform: translate(25px, 25px);
+    opacity: 0.5;
+  }
+
+  .education-mini {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .edu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .edu-item i {
+    color: var(--primary-color);
+    width: 24px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 6rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero-wrapper {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .hero-image-container {
+      order: -1;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-actions {
+      justify-content: center;
+    }
+    
+    .hero-profile-img {
+      width: 250px;
+      height: 250px;
+    }
+
+    .hero-img-backdrop {
+      width: 250px;
+      height: 250px;
+    }
+    
+    .education-mini {
+      justify-content: center;
+    }
+  }
+</style>
