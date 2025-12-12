@@ -143,7 +143,7 @@ const allTags = [...new Set(allItemsForSearch.flatMap(item => item.tags))];
     }
 
     archiveList.innerHTML = items.map(item => `
-      <article class="archive-item">
+      <article class="archive-item" data-tags="${item.tags.join(',')}" data-title="${item.title.toLowerCase()}">
         <div class="item-meta">
           <span class="item-type ${item.type}">${item.type === 'blog' ? 'Blog' : 'Project'}</span>
           <time datetime="${new Date(item.date).toISOString()}">
@@ -282,6 +282,38 @@ const allTags = [...new Set(allItemsForSearch.flatMap(item => item.tags))];
     gap: 2rem;
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .page-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .page-link:hover:not(.disabled) {
+    background: var(--bg-alt);
+  }
+
+  .page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .page-info {
+    color: var(--text-secondary);
+  }
+</style>
+
+<style is:global>
   .archive-item {
     background: var(--bg-card);
     padding: 2rem;
@@ -289,6 +321,8 @@ const allTags = [...new Set(allItemsForSearch.flatMap(item => item.tags))];
     box-shadow: var(--shadow-sm);
     transition: transform 0.2s;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
   }
 
   .archive-item:hover {
@@ -345,41 +379,23 @@ const allTags = [...new Set(allItemsForSearch.flatMap(item => item.tags))];
 
   .item-tags {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: auto;
   }
 
   .tag {
     font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 3rem;
-  }
-
-  .page-link {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: var(--text-main);
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .page-link:hover:not(.disabled) {
-    background: var(--bg-alt);
-  }
-
-  .page-link.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .page-info {
     color: var(--text-secondary);
+    background-color: var(--bg-alt);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
   }
+
+  .tag:hover {
+    background-color: var(--border-color);
+    color: var(--text-main);
+  }
+</style>
 </style>

@@ -2,7 +2,7 @@
 title: "Dog Minder"
 date: 2025-03-24
 hero_image: /assets/image/to_sleep_dog.png
-tags: ["Project", "DevLog"]
+tags: ["DevLog"]
 ---
 
 纪念下终于写完了第一版的<a href="https://github.com/Ciang-ks/dog-minder">Dog Minder</a>!

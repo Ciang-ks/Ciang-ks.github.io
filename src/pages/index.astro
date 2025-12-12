@@ -14,7 +14,7 @@ import { projects } from '../data/projects';
     <div class="container">
       <h2 class="section-heading">Selected Projects</h2>
       <div class="projects-grid">
-        {projects.map(project => (
+        {projects.filter(project => project.featured).map(project => (
           <ProjectCard 
             title={project.title} 
             desc={project.description}

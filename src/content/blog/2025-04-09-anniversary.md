@@ -2,7 +2,7 @@
 title: "某个纪念日"
 date: 2025-04-09
 hero_image: /assets/image/taohua.jpg
-tags: ["Life", "Philosophy"]
+tags: ["Life"]
 ---
 
 04.09 特别重要的日子, 说不出口的东西还是写下来为好

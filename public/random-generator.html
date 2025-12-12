@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海上探险事件分派</title>
+<style>
+  :root {
+    --main-color: #8b0012;
+    --text-color: #424040;
+    --bg-color: #ffffff;
+    --bg-secondary: #f9f9f9;
+    --border-color: #e0e0e0;
+    --text-light: #666666;
+    --text-lighter: #999999;
+    --text-white: #ffffff;
+  }
+</style>
+</head>
+<body>
 <div class="random-generator-container">
   <h1 class="generator-title">海上探险事件分派</h1>
   
@@ -121,6 +141,10 @@
 
   .event-name {
     color: var(--text-color);
+    font-size: 0.9rem;
+  }
+  .event-show-name {
+    color: var(--text-white);
     font-size: 0.9rem;
   }
 
@@ -449,7 +473,7 @@
           ${numbers.map(num => `
             <div class="event-result">
               <span class="event-number">${num}</span>
-              <span class="event-name">${this.events[num]}</span>
+              <span class="event-show-name">${this.events[num]}</span>
             </div>
           `).join('')}
         </div>
@@ -507,3 +531,6 @@
     new RandomEventGenerator();
   });
 </script>
+
+</body>
+</html>
