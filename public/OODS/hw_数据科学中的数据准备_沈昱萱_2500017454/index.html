@@ -77,30 +77,30 @@ OODS
 <li>
 <p>知识遗忘的对抗： 阻止模型在学习新数据时，对先前学到的重要特征表示产生灾难性覆盖。</p>
 </li>
-<li>
-<p><strong>核心策略</strong>：</p>
-</li>
 </ul>
+<p><strong>核心策略</strong>：</p>
 <p>数据调度策略主要围绕如何在通用能力和专业化能力之间取得平衡，并优化学习效率来设计。</p>
 <ol>
-<li>
-<p><strong>Multi-task learning</strong>：增强专业化能力，兼顾通用能力；</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>通过共享底层参数，迫使模型学习最通用的特征，从而天然地抵抗任务间的负迁移。</span></span>
-<span class="line"><span></span></span></code></pre>
-</li>
-<li>
-<p><strong>Sequential/mixed sequential training</strong>：增强通用能力，兼顾专业化能力；</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>在学习新数据时，周期性地混入少量旧数据进行复习。通过定期提供旧任务的梯度信号，阻止模型权重被新任务的梯度彻底洗掉，巩固模型在所有已学任务上的表现。</span></span>
-<span class="line"><span></span></span></code></pre>
-</li>
-<li>
-<p>以“难度递增”的形式调度数据，模拟人类学习过程。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>优化收敛过程。简单数据帮助模型快速找到一个良好的初始化和收敛方向，避免在早期陷入复杂数据导致的次优局部极小值，从而提高最终模型的性能和训练速度。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>（笔者理解：简单的数据具有更明显的特征和较少的噪声，先使用简单数据训练模型可以使模型对整个评估函数进行粗略浏览以找到合适的方向，之后再引入复杂数据进行更细化的训练，即先易后难的过程也是“先粗略后详细”的过程，而复杂数据的高噪声可能导致模型受到干扰，更难找到全局上更优的区间）</span></span>
-<span class="line"><span></span></span></code></pre>
-</li>
+<li><strong>Multi-task learning</strong>：增强专业化能力，兼顾通用能力；</li>
 </ol>
+<ul>
+<li>通过共享底层参数，迫使模型学习最通用的特征，从而天然地抵抗任务间的负迁移。</li>
+</ul>
+<ol start="2">
+<li><strong>Sequential/mixed sequential training</strong>：增强通用能力，兼顾专业化能力；</li>
+</ol>
+<ul>
+<li>在学习新数据时，周期性地混入少量旧数据进行复习。通过定期提供旧任务的梯度信号，阻止模型权重被新任务的梯度彻底洗掉，巩固模型在所有已学任务上的表现。</li>
+</ul>
+<ol start="3">
+<li>以“难度递增”的形式调度数据，模拟人类学习过程。</li>
+</ol>
+<ul>
+<li>优化收敛过程。简单数据帮助模型快速找到一个良好的初始化和收敛方向，避免在早期陷入复杂数据导致的次优局部极小值，从而提高最终模型的性能和训练速度。</li>
+</ul>
+<blockquote>
+<p>（笔者理解：简单的数据具有更明显的特征和较少的噪声，先使用简单数据训练模型可以使模型对整个评估函数进行粗略浏览以找到合适的方向，之后再引入复杂数据进行更细化的训练，即先易后难的过程也是“先粗略后详细”的过程，而复杂数据的高噪声可能导致模型受到干扰，更难找到全局上更优的区间）</p>
+</blockquote>
 <h3 id="三多模态llm训练">（三）多模态LLM训练</h3>
 <ul>
 <li><strong>预训练目标</strong>：获取不同模态的对齐能力，数据以“图像+文本”为主。</li>
