@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="description" content="OODS Homeworks"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.19"><title>感想与拓展-数科中的优化</title><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/OODS/_astro/_slug_.yDLEMZEj.css"><script type="module" src="/OODS/_astro/hoisted.DVZEIXQB.js"></script></head> <body class="bg-white text-slate-900 min-h-screen selection:bg-indigo-100 selection:text-indigo-900"> <header class="bg-[#24292e] text-white top-0 sticky z-50 shadow-sm"> <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between"> <a href="/OODS" class="font-bold text-xl tracking-tight text-white/90 hover:text-white transition-colors flex items-center gap-2"> <svg height="20" viewBox="0 0 24 24" width="20" fill="currentColor" style="opacity: 0.8;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg>
+OODS
+</a> <span class="text-xs font-mono text-white/60">Course Works</span> </div> </header> <main class="max-w-4xl mx-auto px-6 py-12">  <article class="max-w-none"> <header class="mb-16 pb-12 border-b border-slate-200 relative -mx-6 px-6 py-16 md:py-24 overflow-hidden" style="background-image: url('/OODS/optimazation.png'); background-size: cover; background-position: center;"> <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/85 to-white/95 backdrop-blur-[2px]"></div> <div class="relative z-10"> <div class="flex flex-wrap items-center gap-3 text-sm mb-6 font-mono"> <span class="uppercase tracking-wider text-xs font-semibold text-slate-600">report</span> </div> <h1 class="text-4xl md:text-5xl font-extrabold mb-8 leading-tight tracking-tight text-balance text-slate-900"> 感想与拓展-数科中的优化 </h1> <div class="flex flex-wrap gap-4"> <div class="flex items-center gap-3 bg-white/90 backdrop-blur-sm pr-4 pl-2 py-2 rounded-full border border-slate-200 shadow-sm"> <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-200"> 李 </div> <span class="text-base font-medium text-slate-700"> 李泽宏 </span> </div><div class="flex items-center gap-3 bg-white/90 backdrop-blur-sm pr-4 pl-2 py-2 rounded-full border border-slate-200 shadow-sm"> <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-200"> 孙 </div> <span class="text-base font-medium text-slate-700"> 孙本杰 </span> </div><div class="flex items-center gap-3 bg-white/90 backdrop-blur-sm pr-4 pl-2 py-2 rounded-full border border-slate-200 shadow-sm"> <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-200"> 陈 </div> <span class="text-base font-medium text-slate-700"> 陈昊冉 </span> </div> </div> </div> </header> <div class="content-body relative markdown-body" style="background-color: transparent;"> <h2 id="优化相关内容拓展">优化相关内容拓展</h2>
+<p>课程伊始，老师指出了多分类问题与回归问题的本质区别。在多元分类中，我们不能再简单地将类别编号视为回归目标，因为这样做隐含地假设了类别之间存在数值关系，例如类别1与类别2的”距离”比类别1与类别3更近，这在大多数实际分类问题中并不成立。</p>
+<p>为解决这一问题，课程引入了One-hot编码表示法。对于有K个类别的问题，我们将每个标签表示为一个K维向量，其中正确类别位置为1，其余为0。例如，三个类别中的第二类可表示为[0, 1,0]。这种表示方法消除了类别间的虚假数值关系，使所有类别在表示空间中都处于平等地位。当然，这样做也增加了维数，引发后续处理困难。</p>
+<p>为了将模型输出转化为有效的概率分布，课程讲解了Softmax函数。Softmax通过指数变换与归一化操作，将原始的得分向量转换为概率分布，这一过程不仅确保了输出值在0到1之间且和为1，还具有放大数值差异的效果。</p>
+<p>在损失函数方面，课程先后讲述了均方误差与交叉熵损失在分类问题中的表现。相较于均方误差，交叉熵更加灵敏，梯度计算更有效，并且与Softmax函数一脉相承。交叉熵损失在数学上等价于最大似然估计，能够提供更有效的梯度信号，特别是在预测概率与真实标签相差较大时。<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup></p>
+<p>课程深入探讨了优化过程中的多个关键挑战。其一是局部最小值与鞍点问题。解决局部最小值问题可以采用随机梯度下降与小批量梯度下降的方法。随机梯度下降与每次仅使用一个数据计算梯度，这个梯度是全数据梯度的有噪声估计。一方面，它能避免像梯度下降落入局部最小点的困境，采用带有噪声的估计，更容易达到全局的最小点。而另一方面，它每次计算只用一个数据，每个样本都经历一次更新，更新速率快，且对内存更友好。同时还有一种折中的方法即小批量梯度下降，它每次更新采取小批量的数据，这种做法既包含了上述随机梯度下降的优势，又减小了噪声，结果更加稳定。</p>
+<p>在高维非凸优化问题中，真正的局部最小值相对少见，更常见的是鞍点，某些方向是上坡，某些方向是下坡这些点会显著减慢学习过程，甚至使训练停滞不前。解决这个问题可以采用动量法，利用先前累计的梯度“惯性”来避免优化在鞍点停滞。也可以采用二阶优化法，通过黑塞矩阵计算曲率，从而判断出优化位置是否在鞍点，从而寻找到梯度下降最有效的方向。在鞍点处，它可以识别负曲率方向来下降。<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup></p>
+<p>其二是维数灾难问题。例如对于一张256*256的照片用RGB表示，其维数就至少是3*256*256。维数的增加会导致训练样本在特征空间下的密度指数级下降。如果可用的训练样本数量是固定的，那么如果增加特征维度的话，容易导致分类器维数高，放大并吸纳了过量噪声和异常，结果最终的拟合效果很差，过拟合就会发生。也就是说，如果增加特征维度，为了覆盖同样的特征值范围、防止过拟合，那么所需的训练样本数量就会成指数型增长。</p>
+<p>因此我们考虑采取措施降低数据维度。可以采取特征选择算法。如果有N个特征，我们可以选取M个特征作为代表。选取方法一是在曲线中找到性能最佳的位置。但是，由于很难对所有的特征组合进行训练和测试，所以有一些其他办法来找到最佳选择。这些方法称之为特征选择算法，经常用启发式方法（例如贪心算法、best-first方法等）来定位最佳的特征组合和数量。</p>
+<p>还有一种方法是用M个特征替换N个特征，M个特征由原始特征组合而成。这种通过对原始特征进行优化的线性或非线性组合来减少问题维度的算法称为特征提取。一个著名的维度降低技术是主成分分析法（PCA），它去除不相关维度，对N个原始特征进行线性组合。PCA算法试着找到低维的线性子空间，保持原始数据的最大方差。<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref="" aria-describedby="footnote-label">3</a></sup></p>
+<h2 id="感想">感想</h2>
+<p>通过本次课程，我首次了解了优化的概念以及优化问题在AI大模型训练中的重要地位。优化“最大程度利用有限资源解决问题”的概念在生活中无处不在，而在AI模型训练领域，则主要表现为如何在有限训练成本下使模型预测更加准确。对于深度学习的基础——多分类模型，如何不断修正打分矩阵X，再利用损失函数(如交叉熵)衡量预测结果与真实结果的差距，进而使X的预测准确度不断上升，这就是优化问题。训练神经网络模型的过程也就是找到其参数的过程，而通过引入优化的概念，可以将将深度学习问题写成简洁的优化问题形式，进而通过设计优化算法来提高模型的性能和训练效率。我了解到大模型训练不仅仅是单纯增加参数量、数据量，更能通过优化问题的巧妙解决“事半功倍”。当然，大模型优化也存在一些困难，目标函数非凸使得优化方法必须被仔细设计，避免被优化进入局部最优解而非全局最优解；同时变量维度的上升使算力开销急剧增大。</p>
+<p>当然，除了模型训练中的优化问题，老师还介绍了大模型训练的一般流程，包括预训练、有监督微调、回馈训练(奖励训练)、强化学习等环节。从2022年底GPT“横空出世”以来，AI大模型实现了跨越式的大发展。中国AI的发展也突破了最初不被看好的阴霾：deepseek的诞生证明了在算法侧的精细设计能够冲破算力与数据的限制，达到与GPT接近的水平。当下，可以说全球AI格局是中美占主导地位。中国AI技术发展前景广阔，大有可为。</p>
+<p>不过大模型发展也面临“数据瓶颈”等挑战——有人认为大模型消耗数据速度超过人类产生数据的速度<sup><a href="#user-content-fn-4" id="user-content-fnref-4" data-footnote-ref="" aria-describedby="footnote-label">4</a></sup>。为此，大模型通过具身智能、AI4S自己产生数据，“自产自销”不失为一种解决办法，尤其是在具身智能等应用场景方兴未艾，亟待探索开发的当下。</p>
+<p>生活在智能时代，我们更应当以积极的态度与理性的精神拥抱AI技术，充分利用AI模型和AI技术助力自身的学习发展，并以理性思考促进合理应用，不让自己沦为AIGC的搬运工；在可能的情况下，积极推动AI向新、向善。</p>
+<h2 id="ai协作记录">AI协作记录</h2>
+<div style="font-size: small;">
+<p><strong>Prompt 1:</strong>
+交叉熵损失比起均方误差好在哪里？</p>
+<p><strong>Answer:</strong>
+AI：简单来说，交叉熵在分类问题中更优，主要有两个层面的原因：1. 数学梯度层面 和 2. 概率意义层面。</p>
+<p>1. 数学梯度层面：收敛效率与梯度消失</p>
+<p>这是最直接、最实际的原因。交叉熵损失与Softmax或Sigmoid激活函数配合使用时，其梯度计算非常简洁有效。</p>
+<ul>
+<li>均方误差的问题：当输出层使用Sigmoid函数时，其导数在接近0或1的饱和区会变得极小。
+<ul>
+<li>公式解释：MSE的损失为 ，其中 。其梯度为 。</li>
+<li>核心问题：梯度里包含了 。当预测值a非常正确（接近0或1）或非常错误时， 会接近0，导致整个梯度极小，这就是梯度消失。模型在需要大幅更新参数时（尤其是初始化阶段或错误预测时），收到的更新信号却非常微弱，学习会变得极其缓慢。</li>
+</ul>
+</li>
+<li>交叉熵的优势：它巧妙地绕过了激活函数导数的陷阱。
+<ul>
+<li>公式解释：交叉熵损失为 ，其中 。其梯度计算后为：。</li>
+<li>核心优势：梯度简化为 （预测值 - 真实值）。这个形式极为理想：
+<ol>
+<li>梯度与误差成正比：预测越离谱（误差越大），梯度就越大，模型收到的“修正信号”就越强，收敛速度越快。</li>
+<li>避免了梯度消失：梯度中不再包含  这个小因子，即使在饱和区也能保证有效的梯度流。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>比喻：MSE像是一把“软尺子”，当错误很大时（需要大力纠正），尺子本身却变得没弹性，惩罚力度不足。交叉熵像一把“硬鞭子”，错得越狠，鞭策力度越大。</p>
+<p>2. 概率意义层面：衡量“分布距离”</p>
+<p>这是更本质、更理论的原因。交叉熵源自信息论，它衡量的是两个概率分布之间的差异。</p>
+<ul>
+<li>分类任务的本质：我们希望模型输出一个概率分布（例如，对于三分类，输出 [0.1, 0.8, 0.1]），而真实标签通常可以表示为一个独热编码分布（例如 [0, 1, 0]）。</li>
+<li>交叉熵是为此而生：它直接计算这两个概率分布之间的“距离”。交叉熵越小，说明模型预测的概率分布与真实分布越接近。这从信息论上可以推导出，最小化交叉熵等价于最小化这两个分布的 KL散度。</li>
+<li>均方误差的“不匹配”：MSE衡量的是向量空间中两个点之间的欧氏距离。它更关心每个输出节点的数值是否接近，而不是它们作为一个概率分布是否接近。
+<ul>
+<li>这会导致问题：例如，在A、B、C三分类中，真实标签是B [0, 1, 0]。
+<ul>
+<li>模型1预测为 [0.3, 0.4, 0.3] （信心不足，但答案对）</li>
+<li>模型2预测为 [0, 0.9, 0.1] （信心十足，答案也对）</li>
+</ul>
+</li>
+<li>从概率角度看，模型2显然更好。交叉熵会明确惩罚模型1，因为它预测的分布更“平坦”，不确定性高。</li>
+<li>而MSE可能会认为两者差别不大，因为它更关注每个坐标的数值差，而不是整个分布的形状。</li>
+</ul>
+</li>
+</ul>
+<p>核心结论：<br>
+对于分类任务，交叉熵损失在数学梯度上更高效（避免饱和、加速收敛），在概率解释上更正确（直接优化概率分布）。 而均方误差虽然直观，但其梯度特性和衡量目标都与分类任务的内在需求不匹配，因此在实践中表现远不如交叉熵。</p>
+<p><strong>Prompt 2:</strong>
+我听说，用多项式拟合散点时，如果多项式次数过高，会导致次数越高，拟合效果越差。这似乎只是一个数学问题。这和我们机器学习中维数灾难，密度下降等导致的过拟合有本质联系吗？</p>
+<p><strong>Answer:</strong>
+AI：是的，这不仅是联系，而且多项式拟合就是“维数灾难”导致“过拟合”的一个最经典、最直观的物理示例。 您提到的现象，完美地演示了机器学习中一个核心的权衡原理。</p>
+<p>理论解释：为什么会产生联系？</p>
+<p>两者的根源都是 “模型灵活性”与“数据量/信息量”之间的不匹配。</p>
+<ol>
+<li>自由度与约束的竞赛
+<ul>
+<li>一个 d 次多项式有 d+1 个自由参数（系数）。</li>
+<li>每个数据点提供一个约束（方程）。</li>
+<li>当 模型自由度 >> 有效数据约束 时，模型就有无数种方式在满足约束的同时，在数据点之间“随意摇摆”。它会倾向于学习那些使曲线震荡得刚好穿过每个点的模式，而这些模式往往只是噪声。</li>
+</ul>
+</li>
+<li>特征空间的稀疏性（维数灾难的核心）
+<ul>
+<li>在低维（如1次，直线），数据点相对“稠密”，模型很难在不偏离整体趋势的情况下穿过每一个点。</li>
+<li>随着维度（次数）升高，特征空间的体积呈指数增长，而你的数据点数量固定不变，导致数据点在该高维空间中变得极其稀疏。模型在大量的空白区域“为所欲为”，其行为缺乏数据的约束，因此会表现怪异。</li>
+</ul>
+</li>
+<li>噪声学习
+<ul>
+<li>真实世界的数据总是包含测量误差或固有噪声。</li>
+<li>一个简单的模型（如2次多项式）会忽略这些小噪声，捕捉主要趋势（抛物线）。</li>
+<li>一个复杂的模型（如15次多项式）会试图解释数据中的每一个微小变动，包括噪声。它把噪声当成了信号来学习，这就是过拟合的本质。</li>
+</ul>
+</li>
+</ol>
+<p>与机器学习中“维数灾难”的直接联系</p>
+<p>在机器学习中，“维数灾难”不仅指原始特征多（如图像像素），也指通过非线性变换（如多项式核、神经网络）后产生的高维表示空间。多项式拟合就是把一维输入 x 通过基函数展开 [1, x, x², x³, …, x^d] 变换到一个 d+1 维的特征空间，然后进行线性拟合。次数 d 就是这个映射后的特征空间的维度。</p>
+<p>因此，多项式拟合过拟合，就是特征维度 (d) 过高导致维数灾难，进而引发过拟合的一个教科书案例。它直观地展示了：单纯增加模型复杂度（维度）以追求训练集上的完美表现，最终会损害模型对未知数据的预测能力。</p>
+<p><strong>Prompt 3:</strong>
+在解释过拟合的成因时，我们谈论的维数是模型参数的维数；但是我们刚才举例说到图片的像素数大导致维数增大时，指的是样本的特征维数。“维数灾难”中的维数是指哪一个？难道样本维数增大必然导致模型维数增大吗？</p>
+<p><strong>Answer:</strong>
+AI：您的这个问题切中了“维数灾难”概念中最核心、也最容易混淆的要点。答案是：“维数灾难”中的“维数”，在两个层面都成立，且二者有深刻的因果关系。您发现了一个关键事实：样本维数增大并不必然导致模型维数增大，但会极大增加其必要性。</p>
+<p>让我用一个清晰的框架来分解这个问题：</p>
+<p>1. “维数灾难”的两个战场</p>
+<p>实际上，我们是在两个不同的空间里谈论灾难：</p>
+<ul>
+<li>特征空间：由样本的特征维度（如图像像素、文本词汇）张成。这是数据本身的“居住空间”。</li>
+<li>假设空间：由模型的参数维度（如多项式系数、神经网络权重）张成。这是所有可能函数的“搜索空间”。</li>
+</ul>
+<p>“维数灾难”同时在这两个空间发生，且它们互相加剧。</p>
+<p>2. 关键回答：样本维数增大必然导致模型维数增大吗？</p>
+<p>不必然，但如果不增加，模型将无法有效工作。</p>
+<p>这是一个必要性和充分性的问题：</p>
+<ul>
+<li>不是充分条件：我可以对1000维的图像特征，强制使用一个线性模型（参数维数只有1001个）。此时模型维数很低，但结果通常是严重的欠拟合——因为模型太简单，无法从高维像素中捕捉任何有意义的结构（如边缘、纹理）。</li>
+<li>几乎是必要条件：为了从高维、复杂的数据（如图像、语言）中学习，我们必须使用一个高容量的模型（高维参数空间）。深度神经网络就是典型代表——它用巨大的参数维数，来学习如何将高维、冗余的原始特征（像素）逐层抽象为低维、有意义的语义概念（“猫”、“车”）。如果模型维数不跟着增大，它就缺乏足够的表达能力。</li>
+</ul>
+<p>3. 统一视角：本质是“有效自由度”与“有效数据量”的比值</p>
+<p>这才是理解问题的核心。我们需要区分名义维度和有效维度。</p>
+<ul>
+<li>名义特征维数：像素数量（如 256x256x3 ≈ 20万）。绝大部分是冗余和噪声。</li>
+<li>有效特征维数：数据内在的真实变量数（可能只有几十个，如物体形状、颜色、位置）。好的模型（如CNN）能自动进行降维，将高维像素映射到有效的低维流形上。</li>
+<li>名义参数维数：神经网络的总权重数（可能百万级）。</li>
+<li>有效参数维数：真正对任务有贡献的、独立的参数方向。正则化、权重衰减等目的就是降低有效参数维数。</li>
+</ul>
+<p>“维数灾难”的本质是：数据提供的有效信息量（由样本量和数据内在复杂度决定）无法约束模型的有效自由度，导致模型用它的多余自由度去“编故事”（拟合噪声）。</p>
+<p>结论与联系</p>
+<p>回到您的两个观察：</p>
+<ol>
+<li>解释过拟合时谈模型参数维数：这是正确的，因为过拟合是模型在假设空间中“过度发挥”其自由度的直接结果。</li>
+<li>举例图片像素数大导致维数增大：这也是正确的，因为高维像素将问题抛入了一个极其稀疏的特征空间，为了在其中导航，我们不得不启用一个高维的假设空间（复杂模型），从而将特征空间的稀疏性问题，转化并加剧为假设空间的过拟合问题。</li>
+</ol>
+<p>二者并不矛盾，而是同一枚硬币的两面：</p>
+<ul>
+<li>特征空间的维数灾难是起因和舞台。它描述了问题的难度。</li>
+<li>假设空间（模型）的维数灾难是后果和表现。它描述了错误应对方式的风险。</li>
+</ul>
+</div>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p><a href="https://blog.csdn.net/qq_57758323/article/details/148925818">https://blog.csdn.net/qq_57758323/article/details/148925818</a> <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-2">
+<p><a href="https://zhuanlan.zhihu.com/p/25638650409">https://zhuanlan.zhihu.com/p/25638650409</a> <a href="#user-content-fnref-2" data-footnote-backref="" aria-label="Back to reference 2" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-3">
+<p><a href="https://zhuanlan.zhihu.com/p/66643429">https://zhuanlan.zhihu.com/p/66643429</a> <a href="#user-content-fnref-3" data-footnote-backref="" aria-label="Back to reference 3" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-4">
+<p><a href="http://cn.chinagate.cn/news/2025-04/27/content_117799809.shtml">http://cn.chinagate.cn/news/2025-04/27/content_117799809.shtml</a> <a href="#user-content-fnref-4" data-footnote-backref="" aria-label="Back to reference 4" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section> </div> </article>   </main> <footer class="border-t border-slate-200 mt-20 py-12 text-center text-slate-500 text-sm"> <p>
+&copy; 2026 OODS. All rights reserved.
+</p> </footer> </body></html>
