@@ -19,79 +19,71 @@ OODS
 <p>我们对大模型的工作原理仍处于“盲人摸象”的阶段。未来的研究方向，必将聚焦于破解模型“黑箱”，寻找其理论本质。当这些问题被解开时，我们迎来的将不仅是更高效、更强大的模型，更是人工智能作为一种科学范式的真正成熟。</p>
 <h2 id="ai协作记录">AI协作记录</h2>
 <div style="font-size: small;">
-<p><strong>Prompt 1:</strong>
-具体解释一下“双下降”现象，复杂度是指数据量吗</p>
-<p><strong>Answer:</strong>
-deepseek回复：
-复杂度是指数据量吗？答案是：不完全是。在“双下降”现象中，“复杂度”更准确地是指模型的容量或能力，通常由模型的参数量来衡量。而数据量（训练样本的数量）是另一个独立的、至关重要的因素。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>“双下降”现象的详细解释：</span></span>
-<span class="line"><span>第一阶段：经典U形曲线（欠参数化区域 → 临界点）</span></span>
-<span class="line"><span>*   **欠参数化区域**：当模型参数很少（复杂度低）时，模型过于简单，无法捕捉数据中的基本规律。此时无论是训练误差还是测试（泛化）误差都很高，这就是 **“欠拟合”**。</span></span>
-<span class="line"><span>*   **走向临界点**：随着模型参数量的增加，模型能力变强，开始学习到有效的规律。训练误差和测试误差都会下降，泛化性能提升。</span></span>
-<span class="line"><span>第二阶段：临界点——插值阈值</span></span>
-<span class="line"><span>这是一个非常关键的转折点。当模型复杂度刚刚达到能够**完美拟合（甚至记忆）所有训练数据**时，即训练误差降至几乎为0。</span></span>
-<span class="line"><span>*   在经典理论中，这里被认为是**最危险**的区域。因为模型为了拟合所有点，包括噪声点，会变得极其“敏感”和“扭曲”，导致**严重的过拟合**，泛化误差会达到峰值。</span></span>
-<span class="line"><span>*   此时，模型处于一种“僵硬的”状态，它没有多余的能力来以更平滑的方式拟合数据。</span></span>
-<span class="line"><span>第三阶段：双下降的出现（过参数化区域）</span></span>
-<span class="line"><span>这是反直觉和革命性的发现。当模型的参数量继续增加，远超插值阈值后，泛化误差非但不会维持在高位，反而会再次下降！</span></span>
-<span class="line"><span>为什么会发生第二次下降？</span></span>
-<span class="line"><span>1.  更平滑的插值：一个拥有巨大容量的模型，有无数种方式可以完美拟合训练数据（即达到训练误差为0）。在所有这些解中，梯度下降等优化算法倾向于找到的那个解，往往是一个更平滑、更简单的函数。想象一下，用一支巨大的画笔（高复杂度）可以轻松地画出一条平滑的曲线穿过所有数据点；而用一支小画笔（临界点复杂度）则需要扭曲自己才能勉强穿过，导致线条崎岖不平。</span></span>
-<span class="line"><span>2.  隐式正则化：如你之前的笔记所探讨，优化过程本身存在一种隐式偏好（例如通过SGD算法），它会从所有能完美拟合训练数据的解中，挑选出那个泛化能力最好的解。在过参数化区域，这种简单的、泛化能力好的解是大量存在的。</span></span>
-<span class="line"><span>3.  理论上的解释：某些简化模型（如线性回归）的理论分析证明，当参数无限多时，模型会收敛到使用最小范数解（一种最“简单”的解），而这个解通常具有良好的泛化性能。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>“复杂度”与“数据量”的关系</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>   模型的复杂度：通常指模型的参数量。是模型固有的、描述其拟合能力上限的属性。</span></span>
-<span class="line"><span>   数据量：指训练样本的数量（N）。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>这两个因素共同决定了模型是否处于“过参数化”状态：</span></span>
-<span class="line"><span>   过参数化 regime: 参数量 > 数据量。</span></span>
-<span class="line"><span>   欠参数化 regime: 参数量 &#x3C; 数据量。</span></span>
-<span class="line"><span>（有删减）</span></span>
-<span class="line"><span></span></span></code></pre>
-<p><strong>Prompt 2:</strong>
-那么为什么优化算法对简单有偏好呢</p>
-<p><strong>Answer:</strong>
-deepseek回复：
-以下是最主流的几种解释，它们共同构成了这个答案：</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. 算法本身的“惰性”与平滑路径：SGD的噪声本质</span></span>
-<span class="line"><span>随机梯度下降（SGD）是我们最常用的优化器，它的工作方式内在地倾向于简单解。</span></span>
-<span class="line"><span>   比喻：想象你在下山，但每一步都蒙着眼睛，只根据脚下的一小块地方感觉坡度。在这种情况下，你会本能地倾向于走向宽阔、平缓的山谷，因为那里即使你的步子迈得不准，也不容易掉下悬崖。相反，如果你走向一个狭窄、陡峭的裂缝（一个复杂的、过拟合的解），任何一步的噪声和误差都可能让你撞上墙壁，甚至被“抛”出去。</span></span>
-<span class="line"><span>   结论：SGD的噪声使得它在优化过程中对尖锐的、复杂的解非常不稳定，而平滑的、平坦的 minima（对应简单的解）则能更好地吸收这种更新噪声，因此更受SGD的“青睐”。研究表明，收敛于平坦区域的模型，其泛化能力显著更强。</span></span>
-<span class="line"><span>（有删减）</span></span>
-<span class="line"><span></span></span></code></pre>
+`model: deepseek V3.2`
+<p><strong>Prompt 1:</strong></p>
+<p>具体解释一下“双下降”现象，复杂度是指数据量吗</p>
+<p><strong>Answer:</strong></p>
+<p>复杂度是指数据量吗？答案是：不完全是。在“双下降”现象中，“复杂度”更准确地是指模型的容量或能力，通常由模型的参数量来衡量。而数据量（训练样本的数量）是另一个独立的、至关重要的因素。</p>
+<p>“双下降”现象的详细解释：
+第一阶段：经典U形曲线（欠参数化区域 → 临界点）</p>
+<ul>
+<li><strong>欠参数化区域</strong>：当模型参数很少（复杂度低）时，模型过于简单，无法捕捉数据中的基本规律。此时无论是训练误差还是测试（泛化）误差都很高，这就是 <strong>“欠拟合”</strong>。</li>
+<li><strong>走向临界点</strong>：随着模型参数量的增加，模型能力变强，开始学习到有效的规律。训练误差和测试误差都会下降，泛化性能提升。
+第二阶段：临界点——插值阈值
+这是一个非常关键的转折点。当模型复杂度刚刚达到能够<strong>完美拟合（甚至记忆）所有训练数据</strong>时，即训练误差降至几乎为0。</li>
+<li>在经典理论中，这里被认为是<strong>最危险</strong>的区域。因为模型为了拟合所有点，包括噪声点，会变得极其“敏感”和“扭曲”，导致<strong>严重的过拟合</strong>，泛化误差会达到峰值。</li>
+<li>此时，模型处于一种“僵硬的”状态，它没有多余的能力来以更平滑的方式拟合数据。
+第三阶段：双下降的出现（过参数化区域）
+这是反直觉和革命性的发现。当模型的参数量继续增加，远超插值阈值后，泛化误差非但不会维持在高位，反而会再次下降！
+为什么会发生第二次下降？</li>
+</ul>
+<ol>
+<li>更平滑的插值：一个拥有巨大容量的模型，有无数种方式可以完美拟合训练数据（即达到训练误差为0）。在所有这些解中，梯度下降等优化算法倾向于找到的那个解，往往是一个更平滑、更简单的函数。想象一下，用一支巨大的画笔（高复杂度）可以轻松地画出一条平滑的曲线穿过所有数据点；而用一支小画笔（临界点复杂度）则需要扭曲自己才能勉强穿过，导致线条崎岖不平。</li>
+<li>隐式正则化：如你之前的笔记所探讨，优化过程本身存在一种隐式偏好（例如通过SGD算法），它会从所有能完美拟合训练数据的解中，挑选出那个泛化能力最好的解。在过参数化区域，这种简单的、泛化能力好的解是大量存在的。</li>
+<li>理论上的解释：某些简化模型（如线性回归）的理论分析证明，当参数无限多时，模型会收敛到使用最小范数解（一种最“简单”的解），而这个解通常具有良好的泛化性能。</li>
+</ol>
+<p>“复杂度”与“数据量”的关系</p>
+<p>模型的复杂度：通常指模型的参数量。是模型固有的、描述其拟合能力上限的属性。
+数据量：指训练样本的数量（N）。</p>
+<p>这两个因素共同决定了模型是否处于“过参数化”状态：
+过参数化 regime: 参数量 > 数据量。
+欠参数化 regime: 参数量 &#x3C; 数据量。
+（有删减）</p>
+<p><strong>Prompt 2:</strong></p>
+<p>那么为什么优化算法对简单有偏好呢</p>
+<p><strong>Answer:</strong></p>
+<p>以下是最主流的几种解释，它们共同构成了这个答案：</p>
+<ol>
+<li>算法本身的“惰性”与平滑路径：SGD的噪声本质
+随机梯度下降（SGD）是我们最常用的优化器，它的工作方式内在地倾向于简单解。
+比喻：想象你在下山，但每一步都蒙着眼睛，只根据脚下的一小块地方感觉坡度。在这种情况下，你会本能地倾向于走向宽阔、平缓的山谷，因为那里即使你的步子迈得不准，也不容易掉下悬崖。相反，如果你走向一个狭窄、陡峭的裂缝（一个复杂的、过拟合的解），任何一步的噪声和误差都可能让你撞上墙壁，甚至被“抛”出去。
+结论：SGD的噪声使得它在优化过程中对尖锐的、复杂的解非常不稳定，而平滑的、平坦的 minima（对应简单的解）则能更好地吸收这种更新噪声，因此更受SGD的“青睐”。研究表明，收敛于平坦区域的模型，其泛化能力显著更强。
+（有删减）</li>
+</ol>
 <p><strong>Prompt 3:</strong>
 你说训练在还没来得及记噪声是就终止，那么是不是在参数量大于样本量过拟合的情况下，损失函数随训练时间也形成U形曲线？</p>
 <p><strong>Answer:</strong>
-deepseek回复：
 您的直觉是完全正确的。
 第一阶段：曲线下降段（学习规律）
 行为：模型正在快速学习训练数据中存在的普遍、稳健的规律。这些规律同样适用于未见过的测试数据。
 结果：训练损失和测试损失同时稳步下降。模型的泛化能力随着训练不断增强。我们追求的目标，就是在此阶段找到最佳停止点。</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>第二阶段：曲线最低点（最佳拟合）</span></span>
-<span class="line"><span>  此时模型已经较好地掌握了数据的核心规律，但还没有开始记忆噪声。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>第三阶段：曲线上升段（记忆噪声）</span></span>
-<span class="line"><span>  行为：模型已经学会了所有可用的通用规律。为了进一步最小化训练损失，它开始记忆训练集中的特定样本和随机噪声。</span></span>
-<span class="line"><span>  结果：训练损失继续下降并趋近于零，然而测试损失开始反弹并上升，因为模型学到的这些“记忆”对于测试集来说是无用甚至有害的，这导致了过拟合。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>与“双下降”现象的区别与联系</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>您可能会发现，这个U形曲线和之前讨论的“双下降”现象（模型复杂度与误差的关系）非常相似但又不同。它们是理解过参数化模型的两个互补视角：</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>一个生动的类比：</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>   “测试损失-U形曲线”好比观察一个学生准备一场考试。</span></span>
-<span class="line"><span>      第一阶段：他学习通用的概念和解题原理。</span></span>
-<span class="line"><span>      第二阶段：他达到了最佳状态，掌握了知识。</span></span>
-<span class="line"><span>      第三阶段：他开始死记硬背特定习题的答案和印刷瑕疵，这反而损害了他解决新问题的能力。</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>   “双下降”现象 好比比较不同天赋的学生。</span></span>
-<span class="line"><span>      能力弱的学生（欠参数化）：无法掌握核心知识。</span></span>
-<span class="line"><span>      能力刚好的学生（临界点）：为了及格，扭曲地记忆所有东西，非常僵硬（过拟合峰值）。</span></span>
-<span class="line"><span>      能力超强的学生（过参数化）：他完全可以轻松记忆所有细节，但他理解了更深层的原理，因此能用更优雅、更通用的方式解题（找到简单解）。</span></span>
-<span class="line"><span>（有删减）</span></span>
-<span class="line"><span></span></span></code></pre>
+<p>第二阶段：曲线最低点（最佳拟合）
+此时模型已经较好地掌握了数据的核心规律，但还没有开始记忆噪声。</p>
+<p>第三阶段：曲线上升段（记忆噪声）
+行为：模型已经学会了所有可用的通用规律。为了进一步最小化训练损失，它开始记忆训练集中的特定样本和随机噪声。
+结果：训练损失继续下降并趋近于零，然而测试损失开始反弹并上升，因为模型学到的这些“记忆”对于测试集来说是无用甚至有害的，这导致了过拟合。</p>
+<p>与“双下降”现象的区别与联系</p>
+<p>您可能会发现，这个U形曲线和之前讨论的“双下降”现象（模型复杂度与误差的关系）非常相似但又不同。它们是理解过参数化模型的两个互补视角：</p>
+<p>一个生动的类比：</p>
+<p>“测试损失-U形曲线”好比观察一个学生准备一场考试。
+第一阶段：他学习通用的概念和解题原理。
+第二阶段：他达到了最佳状态，掌握了知识。
+第三阶段：他开始死记硬背特定习题的答案和印刷瑕疵，这反而损害了他解决新问题的能力。</p>
+<p>“双下降”现象 好比比较不同天赋的学生。
+能力弱的学生（欠参数化）：无法掌握核心知识。
+能力刚好的学生（临界点）：为了及格，扭曲地记忆所有东西，非常僵硬（过拟合峰值）。
+能力超强的学生（过参数化）：他完全可以轻松记忆所有细节，但他理解了更深层的原理，因此能用更优雅、更通用的方式解题（找到简单解）。
+（有删减）</p>
 </div>
 <section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
 <ol>

@@ -192,11 +192,12 @@ GPT流派的核心架构为自回归Transformer解码器，利用当前词之前
 </ul>
 <h2 id="ai协作记录">AI协作记录</h2>
 <div style="font-size: small;">
+`model: deepseek V3.2`
 <p><strong>Prompt 1:</strong>
 关于LSTM、Seq2Seq模型和Attention机制。
 LSTM、Seq2Seq模型和Attention机制都是针对提升长序列处理能力所进行的技术创新，这三者之间是否是一种递进关系？</p>
 <p><strong>Answer:</strong>
-<strong>DeepSeek</strong>：好的，我们来更详细地阐述这三者之间的递进关系。这种关系可以被清晰地描述为 <strong>“发现问题 -> 创新架构 -> 革命机制”</strong> 的三步演进。</p>
+好的，我们来更详细地阐述这三者之间的递进关系。这种关系可以被清晰地描述为 <strong>“发现问题 -> 创新架构 -> 革命机制”</strong> 的三步演进。</p>
 <p><strong>1. LSTM：解决“记忆丢失”问题的单元级突破</strong></p>
 <ul>
 <li><strong>前身问题</strong>：传统的RNN在处理长序列时，信息需要在时间步间多次传递，导致<strong>梯度消失/爆炸</strong>，模型难以学到长距离的依赖关系，即存在“短期记忆”问题。</li>
@@ -242,14 +243,14 @@ LSTM、Seq2Seq模型和Attention机制都是针对提升长序列处理能力所
 噪声信号通道模型和端到端学习。
 噪声信道模型和端到端学习有什么区别。</p>
 <p><strong>Answer:</strong>
-<strong>DeepSeek</strong>：<strong>噪声信道模型</strong>与<strong>端到端学习</strong>的根本区别在于<strong>问题解决范式</strong>的不同。</p>
+<strong>噪声信道模型</strong>与<strong>端到端学习</strong>的根本区别在于<strong>问题解决范式</strong>的不同。</p>
 <p><strong>噪声信道模型</strong>采用<strong>分治策略</strong>，将任务（如机器翻译）拆解为独立的子模块（如翻译模型和语言模型），各模块分别训练优化，最后通过解码器组合。它基于贝叶斯定理，从生成式视角逆向推断源信息，需要人工设计流水线，依赖不同类型的数据训练不同模块。</p>
 <p><strong>端到端学习</strong>采用<strong>统一映射策略</strong>，用一个单一的神经网络（如Transformer）直接学习从输入到输出的完整映射。模型内部通过注意力机制等动态学习所有中间特征和步骤，所有参数为同一目标联合优化，只需端到端的对齐数据。</p>
 <p>简言之，<strong>前者是“先分解，后集成”的模块化工程思想，后者是“一口入，一口出”的数据驱动黑箱学习</strong>。端到端方法因其更强的表征能力和更简单的训练流程，已成为当前主流，但它也牺牲了噪声信道模型固有的模块清晰性和可解释性。</p>
 <p><strong>Prompt 3:</strong>
 能否将两者结合起来实现AI的可解释性。</p>
 <p><strong>Answer:</strong>
-<strong>DeepSeek</strong>：<strong>完全可以结合，这是实现可解释AI的关键路径。</strong></p>
+<strong>完全可以结合，这是实现可解释AI的关键路径。</strong></p>
 <p>核心方法是 <strong>“内嵌符号推理”</strong> 和 <strong>“外挂知识检索”</strong>：</p>
 <ol>
 <li>
