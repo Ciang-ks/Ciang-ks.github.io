@@ -15,3 +15,39 @@
 .md-typeset table:not([class]) {
   font-size: 0.72rem;
 }
+
+/* ===== 标题配色与强调 ===== */
+
+/* H1 页面标题：深蓝（深色模式用亮蓝保证可读） */
+.md-typeset h1 {
+  color: #1e3a8a;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: #93c5fd;
+}
+
+/* H2 小节标题：主题色 + 底部分隔线 */
+.md-typeset h2 {
+  color: var(--md-primary-fg-color);
+  border-bottom: 2px solid var(--md-primary-fg-color);
+  padding-bottom: 0.25em;
+  scroll-margin-top: 4rem;
+}
+
+/* H3 题目标题：左侧强调竖条 */
+.md-typeset h3 {
+  border-left: 0.25rem solid var(--md-primary-fg-color);
+  padding-left: 0.6em;
+  scroll-margin-top: 4rem;
+}
+
+/* 导航表中跳转链接更醒目 */
+.md-typeset table a {
+  font-weight: 700;
+}
+
+/* 锚点定位时不被固定头遮挡 */
+.md-typeset :target {
+  scroll-margin-top: 4.5rem;
+}

@@ -1035,7 +1035,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#sec-一博弈与决策" class="md-nav__link">
     <span class="md-ellipsis">
       
         一、博弈与决策
@@ -1058,7 +1058,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#q447-ski-ball" class="md-nav__link">
+  <a href="#q447" class="md-nav__link">
     <span class="md-ellipsis">
       
         Q447 · Ski-Ball 对策
@@ -1370,7 +1370,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#sec-一博弈与决策" class="md-nav__link">
     <span class="md-ellipsis">
       
         一、博弈与决策
@@ -1393,7 +1393,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#q447-ski-ball" class="md-nav__link">
+  <a href="#q447" class="md-nav__link">
     <span class="md-ellipsis">
       
         Q447 · Ski-Ball 对策
@@ -1489,18 +1489,20 @@
 </thead>
 <tbody>
 <tr>
-<td>一、博弈与决策</td>
-<td>Q446–Q451</td>
+<td><a href="#sec-一博弈与决策">一、博弈与决策</a></td>
+<td><a href="#q446">Q446</a>–<a href="#q451">Q451</a></td>
 <td>博弈与决策、资金管理</td>
 </tr>
 </tbody>
 </table>
-<h2 id="_2">一、博弈与决策<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="sec-一博弈与决策">一、博弈与决策<a class="headerlink" href="#sec-一博弈与决策" title="Permanent link">&para;</a></h2>
 <p>博弈与决策题考察不完全信息下的最优应对：先声明假设、再建立条件分布或价值函数，最后给出可执行的出价或下注脚本。</p>
 <h3 id="q446">Q446 · 隐匿罐子竞拍<a class="headerlink" href="#q446" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：你与我各持一枚对对方隐藏的 d6。各自掷出后，第三方看到两个点数并把<strong>和</strong>放入一个我们看不到内容的罐子。我们轮流对罐子竞价：每步可以加价一个正整数（+1、+2、…）或 pass。一旦有人 pass，最后出价者按其出价支付给第三方、并获得罐中之物。你的策略是什么？</p>
-<p><strong>解答</strong>：题目没有给出完整的出价顺序、平价时处理及效用函数，因此不存在唯一的数值策略；面试重点是先补充规则，再展示条件分布与动态推断。下面给出一种保守分析框架。</p>
+<details class="note">
+<summary>解答</summary>
+<p>题目没有给出完整的出价顺序、平价时处理及效用函数，因此不存在唯一的数值策略；面试重点是先补充规则，再展示条件分布与动态推断。下面给出一种保守分析框架。</p>
 <ol>
 <li><strong>先算条件分布</strong>：你看到自己的骰子 <span class="arithmatex">\( v \in \{1,\ldots,6\} \)</span>，则罐中价值 <span class="arithmatex">\( = v + U \)</span>，<span class="arithmatex">\( U \sim \operatorname{Uniform}\{1,\ldots,6\} \)</span>。给定 <span class="arithmatex">\( v \)</span>，罐子的条件期望为 <span class="arithmatex">\( v + 3.5 \)</span>、条件分布为 <span class="arithmatex">\( v+1 \ldots v+6 \)</span> 各 <span class="arithmatex">\( 1/6 \)</span>。</li>
 <li><strong>设定出价上限</strong>：风险中性时，忽略竞价信息的初始上限可取条件期望 <span class="arithmatex">\(v+3.5\)</span>；若要求逐结果都不亏，上限只能取最小可能价值 <span class="arithmatex">\(v+1\)</span>。二者是不同风险准则，不能把“低于期望”误称为保证不亏。</li>
@@ -1508,23 +1510,28 @@
 <li><strong>候选均衡</strong>：可先假设对手采用同类阈值策略，把自对弈作为分析起点，再检验对手在某价位 pass 所带来的后验更新。双方都按条件期望出价并不保证逐结果不亏，也不能在没有证明时直接称为最优均衡。</li>
 </ol>
 <p><strong>展示要点</strong>：声明假设、量化每个价位的条件期望、说明 pass 的信息含义、以及"永不亏钱"约束下的完整决策树。</p>
-<h3 id="q447-ski-ball">Q447 · Ski-Ball 对策<a class="headerlink" href="#q447-ski-ball" title="Permanent link">&para;</a></h3>
+</details>
+<h3 id="q447">Q447 · Ski-Ball 对策<a class="headerlink" href="#q447" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：一台虚拟 Ski-Ball 机：若你瞄准某个洞，就给你<strong>该洞的</strong>命中概率。你与一系列对手对局：每局 10 投比总分，先押下筹码，赢了拿走双倍（本金 + 等额奖励）、输了全失。给你 5 局的"练习赛"来评估对手策略，然后正式对局 1 局。观察到的对手策略类型：
 ① 恒打那个瞄准即 100% 命中的 10 分洞；
 ② 恒打 100 分洞、未中再打 10 分洞；若 100 分洞连续失手太多则干脆改为恒打 10 分洞。
 如何应对？</p>
-<p><strong>解答</strong>：分三步：</p>
+<details class="note">
+<summary>解答</summary>
+<p>分三步：</p>
 <p><strong>第一步：从练习赛估计对手类型与参数</strong>。对手是 ① 还是 ②？若为 ②，其 100 分洞的命中率 <span class="arithmatex">\( p \)</span> 是多少（用 5 局 <span class="arithmatex">\( \times \)</span> 10 投的观测频率估计，并给出置信区间——命中次数是二项样本）？其"连失切换"的阈值大约是几次失手？</p>
 <p><strong>第二步：计算己方的最优瞄准策略</strong>。设各洞命中概率向量已知（10 分洞 100%；100 分洞的命中概率为 <span class="arithmatex">\( q \)</span>）。目标不是单纯最大化期望分数，而是最大化在既定平局规则下战胜对手的概率。若对方是 ①（稳定得到 100 分），你需要让总分超过 100；若每次命中 100 分洞得 100、未中得 0，则全投该洞的命中次数服从 <span class="arithmatex">\(\operatorname{Binomial}(10,q)\)</span>，可由此与混合策略的完整得分分布比较。若对方是 ②，则先估计其得分分布，再用动态规划选择每一投的动作。</p>
 <p><strong>第三步：决定下注额度</strong>。赢了拿 2 倍、输了归零 <span class="arithmatex">\( \Rightarrow \)</span> 每押 1 筹码相当于一个二元赌注：胜率 <span class="arithmatex">\( p_{\mathrm{win}} \)</span>、赔率 1:1。期望回报 <span class="arithmatex">\( = 2p_{\mathrm{win}} - 1 \)</span>。只有 <span class="arithmatex">\( 2p_{\mathrm{win}} - 1 &gt; 0 \)</span> 才该下注；下注多少取决于你的风险厌恶（与 Q450/Q451 的 Kelly 思路衔接：若可多轮，按 Kelly 比例 <span class="arithmatex">\( f = 2p_{\mathrm{win}} - 1 \)</span> 押注）。</p>
 <p><strong>展示要点</strong>：把"观察 → 参数估计 → 策略计算 → 下注决策"串成一条线，并随时声明统计不确定性（练习赛样本只有 50 投）。</p>
+</details>
 <h3 id="q448">Q448 · 硬币概率质量函数与探索—利用权衡<a class="headerlink" href="#q448" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：概率构造｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：有 10 枚硬币，其中 1 枚的正面概率已知为二分之一，其余 9 枚硬币各自的正面概率分布已经给出。你付 50 枚筹码参加游戏，获得 100 次投掷机会，每次掷出正面可得 1 枚筹码。
 <strong>第一问</strong>：要不要玩？
 <strong>实际游玩时</strong>，你被允许记录每枚硬币已观测的正面比例与已被投掷的次数。如何设计<strong>探索（exploration）与利用（exploitation）</strong>的策略？</p>
-<p><strong>解答</strong>：</p>
+<details class="note">
+<summary>解答</summary>
 <p><strong>第一问（入场决策）</strong>：算期望。给定 PMF，可以算出随机选一枚硬币掷一次的期望收益。游戏允许边掷边学，因此最优自适应策略的期望收益不低于“随机固定一枚”的期望；只有信息确实具有决策价值时才严格更高。入场应比较最优策略下 100 次投掷的预期总收益与 50 的成本，而不能只凭单次平均成功率判断。</p>
 <p><strong>游玩策略（多臂老虎机框架）</strong>：这是经典的 <strong>exploration–exploitation</strong> 权衡：</p>
 <ul>
@@ -1533,10 +1540,13 @@
 <li><strong>贝叶斯 Thompson 采样</strong>：对每枚硬币维护其后验分布（由 PMF + 观测更新），每轮从各后验采样、掷采样值最大的硬币。</li>
 </ul>
 <p><strong>边界注意</strong>：已知那枚 50/50 的硬币是天然基准；若 9 枚的 PMF 都明显差于 0.5，应及早把投掷集中到"不那么差 + 幸运样本"上。展示要点：明确探索预算（前多少次投掷用于辨识）、何时切换到纯利用、以及如何用后验/置信区间量化"还没试够"。</p>
+</details>
 <h3 id="q449">Q449 · 掷筹码贴墙<a class="headerlink" href="#q449" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：你与面试官对局：每步你有两个选择——<strong>扔一枚筹码到墙上</strong>，或 <strong>pass</strong>（筹码扔出即不可收回）。若连续两人都 pass，则游戏结束：在<strong>所有</strong>已投掷的筹码中，离墙最近的那枚的主人获得 20 筹码。线上版用两个完全未知的随机数发生器输出"到墙的距离"。策略是什么？</p>
-<p><strong>解答</strong>：这是一个<strong>消耗战/威慑博弈</strong>与最优停止问题的混合：</p>
+<details class="note">
+<summary>解答</summary>
+<p>这是一个<strong>消耗战/威慑博弈</strong>与最优停止问题的混合：</p>
 <ol>
 <li><strong>状态</strong>：你已投的最小距离 <span class="arithmatex">\( d_{\mathrm{you}} \)</span> 与对手的最小距离 <span class="arithmatex">\( d_{\mathrm{opp}} \)</span>（初始 <span class="arithmatex">\( \infty \)</span>）；</li>
 <li><strong>信息</strong>：线上版 RNG 未知 <span class="arithmatex">\( \Rightarrow \)</span> 每次投掷的分布要<strong>边投边学</strong>：前几投同时是"测量 RNG"与"争夺领先"；</li>
@@ -1545,22 +1555,28 @@
 <li><strong>与真实做市的类比</strong>：每枚筹码是沉没成本；决策只应基于<strong>边际</strong>期望改善（机会成本思维），而不是"已经扔了多少"。</li>
 </ol>
 <p>面试中往往还会实际对局数轮，重点考察你如何根据领先/落后状态、筹码预算与随机数发生器的观测结果动态更新决策。</p>
+</details>
 <h3 id="q450">Q450 · 单轮下注：风险偏好<a class="headerlink" href="#q450" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：资金管理｜<strong>公司</strong>：Five Rings</p>
 <p><strong>题目</strong>：就 n=3 的袜子配对博弈（Q195）与面试官对赌，赔率 1:1：游戏获胜则你的钱翻倍、失败则失去所押金额。若你从 $100 开始，<strong>只赌一轮</strong>，你押多少钱？</p>
-<p><strong>解答</strong>：</p>
+<details class="note">
+<summary>解答</summary>
 <p><strong>先算期望回报</strong>：Q195 已精确算得 n=3 时胜率 <span class="arithmatex">\(p=1/3\)</span>。1:1 赔率下，每押 1 元的净期望为 <span class="arithmatex">\(p-(1-p)=2p-1=-1/3\)</span>，是负期望赌局。</p>
 <p><strong>结论：押 0 元。</strong> 这不是风险厌恶造成的保守选择，而是任何风险中性或厌恶风险、且不能反向下注的参与者都不应接受负期望赌局。若面试官另给不同胜率或赔率，再明确效用函数与破产约束后决定下注额。</p>
+</details>
 <h3 id="q451">Q451 · 无限轮下注：凯利准则<a class="headerlink" href="#q451" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：资金管理｜<strong>公司</strong>：Five Rings</p>
 <p><strong>题目</strong>：同一博弈可以无限轮下注（每轮重新开始）。能否给出一个下注策略？每轮应押当前总财富的多大比例？</p>
-<p><strong>解答</strong>：使用<strong>凯利准则</strong>。这是业界常用的头寸规模框架；面试中一般不要求完整推导，但理解其目标与适用条件会是加分项。</p>
+<details class="note">
+<summary>解答</summary>
+<p>使用<strong>凯利准则</strong>。这是业界常用的头寸规模框架；面试中一般不要求完整推导，但理解其目标与适用条件会是加分项。</p>
 <p><strong>结论</strong>：当你知道期望回报时，Kelly 准则告诉你每轮应押<strong>总财富的比例</strong>。对"以概率 q 损失投入的比例 a、以概率 p 获得投入的比例 b"的简单赌注，最优比例为</p>
 <div class="arithmatex">\[f^{*} = \frac{p}{a} - \frac{q}{b}\]</div>
 <p><strong>应用到袜子博弈</strong>：真实胜率为 <span class="arithmatex">\(p=1/3\)</span>、<span class="arithmatex">\(q=2/3\)</span>，且 <span class="arithmatex">\(a=b=1\)</span>，故无约束公式给出 <span class="arithmatex">\(f^*=-1/3\)</span>。若只允许下注而不允许反向做庄，可行域是 <span class="arithmatex">\(0\le f&lt;1\)</span>，最优解就在边界 <strong><span class="arithmatex">\(f^*=0\)</span>：不参与</strong>。</p>
 <p><strong>推导要点</strong>（1:1 情形）：每轮后财富乘以 <span class="arithmatex">\( 1+f \)</span>（胜）或 <span class="arithmatex">\( 1-f \)</span>（负）。<span class="arithmatex">\( N \)</span> 轮后对数财富的期望增长率</p>
 <div class="arithmatex">\[g(f) = p\ln(1+f) + q\ln(1-f) \Rightarrow g'(f) = \frac{p}{1+f} - \frac{q}{1-f} = 0 \Rightarrow f^* = p - q = 2p - 1\]</div>
 <p>本题 <span class="arithmatex">\(p=1/3\)</span> 时驻点为负，不在只做多下注的可行域内；先验证期望符号、再谈 Kelly 比例，是回答这类题的关键。</p>
+</details>
 
 
 
