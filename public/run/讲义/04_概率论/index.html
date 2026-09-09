@@ -1,0 +1,2126 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="量化金融面试讲义、真题与题库索引">
+      
+      
+      
+        <link rel="canonical" href="https://ciang-ks.github.io/run/%E8%AE%B2%E4%B9%89/04_%E6%A6%82%E7%8E%87%E8%AE%BA/">
+      
+      
+        <link rel="prev" href="../03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+      
+      
+        <link rel="next" href="../05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>04 概率论 - Run Quant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Run Quant" class="md-header__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Run Quant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              04 概率论
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Run Quant" class="md-nav__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Run Quant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    讲义
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_%E9%9D%A2%E8%AF%95%E6%80%BB%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 面试总原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 概率论
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节要解决的核心问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-bible-21-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 条件概率与贝叶斯定理（bible 2.1 + guide 4 相关）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 条件概率与贝叶斯定理（bible 2.1 + guide 4 相关）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键认知：先验的力量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见题型与套路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率公理与全概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-bible-22-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 期望与方差（bible 2.2 + guide 相关）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 期望与方差（bible 2.2 + guide 相关）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经典例子（线性期望）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件期望与全方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-bible-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 随机变量与常用分布（bible 2.3）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 随机变量与常用分布（bible 2.3）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        离散分布速查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连续分布速查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-bible-24-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 函数的分布与联合分布（bible 2.4 + guide 4）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-bible-25-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 协方差与相关（bible 2.5 + guide 4）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-guide-42bible-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 组合分析（guide 4.2，bible 2 提及）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-guide-46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 次序统计量（guide 4.6）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7 次序统计量（guide 4.6）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用次序统计公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 生成函数与近似
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点 / 面试提示
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.9 从期望到随机过程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关联题库
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 统计基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_%E9%87%91%E8%9E%8D_%E6%9C%9F%E6%9D%83%E5%AE%9A%E4%BB%B7%E4%B8%8EGreeks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 金融、期权定价与 Greeks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%8C%96%E7%A0%94%E7%A9%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 数据科学与量化研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_%E5%81%9A%E5%B8%82%E4%B8%8E%E4%BA%A4%E6%98%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 做市与交易
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    真题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/04_%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9B%9E%E5%BD%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 统计与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/05_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/06_%E9%87%91%E8%9E%8D%E8%A1%8D%E7%94%9F%E5%93%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 金融衍生品
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9C%9F%E9%A2%98/10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 行为面试与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    题库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按知识点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E9%A2%98%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按题型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E5%85%AC%E5%8F%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按公司
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节要解决的核心问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-bible-21-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 条件概率与贝叶斯定理（bible 2.1 + guide 4 相关）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 条件概率与贝叶斯定理（bible 2.1 + guide 4 相关）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键认知：先验的力量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见题型与套路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率公理与全概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-bible-22-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 期望与方差（bible 2.2 + guide 相关）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 期望与方差（bible 2.2 + guide 相关）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经典例子（线性期望）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件期望与全方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-bible-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 随机变量与常用分布（bible 2.3）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 随机变量与常用分布（bible 2.3）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        离散分布速查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连续分布速查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-bible-24-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 函数的分布与联合分布（bible 2.4 + guide 4）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-bible-25-guide-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 协方差与相关（bible 2.5 + guide 4）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-guide-42bible-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 组合分析（guide 4.2，bible 2 提及）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-guide-46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 次序统计量（guide 4.6）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.7 次序统计量（guide 4.6）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用次序统计公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 生成函数与近似
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        易错点 / 面试提示
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.9 从期望到随机过程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关联题库
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="4">第 4 章 概率论<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>整合来源</strong>：<code>quant_bible.md</code> Ch2（定义、分布表、应试例题）+ <code>quant_guide.md</code> Ch4（深入推导、组合、次序统计）</p>
+<p>整合方式：<strong>bible 提供清晰的「公式与分布速查」，guide 提供「更深的概念与更难的例题」</strong>，两处内容合并、互补。</p>
+</blockquote>
+<h2 id="_1">本节要解决的核心问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>概率是量化面试的<strong>第一权重</strong>。几乎所有「期望值 / 博弈 / 定价」问题最终都能归约到概率计算。核心能力：<strong>正确建模随机变量、熟练使用条件概率与期望的线性性质</strong>。</p>
+<h2 id="41-bible-21-guide-4">4.1 条件概率与贝叶斯定理（bible 2.1 + guide 4 相关）<a class="headerlink" href="#41-bible-21-guide-4" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[P(A|B)=\frac{P(A\cap B)}{P(B)}\]</div>
+<p><strong>贝叶斯定理</strong>：</p>
+<div class="arithmatex">\[P(A|B)=\frac{P(B|A)P(A)}{P(B)}\]</div>
+<p>其中 <span class="arithmatex">\(P(B\mid A)\)</span>=似然，<span class="arithmatex">\(P(A)\)</span>=先验，<span class="arithmatex">\(P(B)\)</span>=证据，证据用全概率公式 <span class="arithmatex">\(P(B)=P(B\mid A)P(A)+P(B\mid\neg A)P(\neg A)\)</span> 计算。</p>
+<h3 id="_2">关键认知：先验的力量<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>直觉会低估先验的作用。经典例题（Tversky &amp; Kahneman）：</li>
+<li><strong>出租车案</strong>：85% 绿、15% 蓝，目击者 80% 准确 → <span class="arithmatex">\(P(\text{蓝}\mid\text{目击蓝})=0.8\times0.15/(0.8\times0.15+0.2\times0.85)\approx0.41\)</span>，<strong>不是</strong> 80%！</li>
+<li><strong>图书管理员还是农夫</strong>：即使性格描述更贴合图书管理员，若农夫数量是图书管理员的 20 倍，贝叶斯仍指向农夫。</li>
+<li><strong>医学检测</strong>：患病率 1%、假阳/假阴 1% → <span class="arithmatex">\(P(\text{患病}\mid\text{阳性})=0.5\)</span>；连续两次阳性即接近 99%。</li>
+<li><strong>双正面硬币</strong>：1000 枚（999 公平 + 1 双正），抛 10 次全正面 → 概率 <span class="arithmatex">\( \approx 0.5 \)</span>。</li>
+</ul>
+<h3 id="_3">常见题型与套路<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>先验 + 似然 → 后验型：写出贝叶斯式 → 全概率展开分母。</li>
+<li><strong>先验悬殊时</strong>千万别忽略先验，它是「翻盘」的关键。</li>
+</ul>
+<h3 id="_4">概率公理与全概率<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>样本空间 <span class="arithmatex">\(\Omega\)</span> 上 <span class="arithmatex">\(P(\Omega)=1\)</span>、<span class="arithmatex">\(P(A)\ge0\)</span>；互斥事件可加：<span class="arithmatex">\(P(\bigcup A_i)=\sum P(A_i)\)</span>。</li>
+<li><strong>全概率公式</strong>：若 <span class="arithmatex">\(\{B_i\}\)</span> 构成互斥完备划分，<span class="arithmatex">\(P(A)=\sum_iP(A\mid B_i)P(B_i)\)</span>。</li>
+<li><strong>独立性</strong>：<span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 独立当且仅当 <span class="arithmatex">\(P(A\cap B)=P(A)P(B)\)</span>；条件独立不能直接推出无条件独立。</li>
+<li>条件概率的链式法则：<span class="arithmatex">\(P(A_1\cap\cdots\cap A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1\cap\cdots\cap A_{n-1})\)</span>。</li>
+</ul>
+<h2 id="42-bible-22-guide">4.2 期望与方差（bible 2.2 + guide 相关）<a class="headerlink" href="#42-bible-22-guide" title="Permanent link">&para;</a></h2>
+<p><strong>期望</strong>：<span class="arithmatex">\(E[X]=\sum_x x p(x)\)</span>（离散）/ <span class="arithmatex">\(\int x f(x)\,dx\)</span>（连续）。<strong>直觉=加权平均</strong>。</p>
+<p><strong>核心性质——期望的线性性</strong>：</p>
+<div class="arithmatex">\[E[aX+b]=aE[X]+b,\qquad E[X_1+\dots+X_n]=E[X_1]+\dots+E[X_n]\ \ (\text{即使 } X_i \text{ 相关})\]</div>
+<blockquote>
+<p>⚠️ 这是量化面试<strong>最有用的工具</strong>。「用指示变量/依赖变量 + 线性期望拆分」能把看似复杂的期望题秒杀。</p>
+</blockquote>
+<p><strong>方差</strong>：</p>
+<div class="arithmatex">\[Var(X)=E[(X-\mu)^2]=E[X^2]-E[X]^2\]</div>
+<div class="arithmatex">\[Var(aX+b)=a^2Var(X),\quad Var(X+Y)=Var(X)+Var(Y)\ (\text{独立时})\]</div>
+<div class="arithmatex">\[Var(\bar X)=\frac{\sigma^2}{n}\]</div>
+<h3 id="_5">经典例子（线性期望）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>10 男 10 女随机排一列，相邻不同性别的对数期望：设指示变量 <span class="arithmatex">\(X_i\)</span>（第 <span class="arithmatex">\(i\)</span> 对是否异性别），<span class="arithmatex">\(E[X_i]=2\cdot10\cdot10/(20\cdot19)=10/19\)</span>，线性相加得 <span class="arithmatex">\(19\cdot10/19=10\)</span>。</li>
+</ul>
+<h3 id="_6">条件期望与全方差<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>条件期望是随机变量：<span class="arithmatex">\(E[X\mid Y]\)</span>；塔式法则 <span class="arithmatex">\(E[X]=E[E[X\mid Y]]\)</span>。</li>
+<li><strong>全方差公式</strong>：<span class="arithmatex">\(\operatorname{Var}(X)=E[\operatorname{Var}(X\mid Y)]+\operatorname{Var}(E[X\mid Y])\)</span>，适合分层抽样、混合分布和随机效应题。</li>
+<li>指示变量 <span class="arithmatex">\(I(A)\)</span> 满足 <span class="arithmatex">\(E[I(A)]=P(A)\)</span>；计数题先写成指示变量之和通常最稳。</li>
+<li>高阶矩：偏度描述不对称，峰度描述尾部；金融中常用 <span class="arithmatex">\(E[X^k]\)</span> 检查尾风险，但必须确认矩存在。</li>
+</ul>
+<h2 id="43-bible-23">4.3 随机变量与常用分布（bible 2.3）<a class="headerlink" href="#43-bible-23" title="Permanent link">&para;</a></h2>
+<p><strong>cdf</strong>：<span class="arithmatex">\(F_X(a)=P(X\le a)=\int_{-\infty}^{a}f(x)\,dx\)</span>（连续型中 <span class="arithmatex">\(&lt;\)</span> 与 <span class="arithmatex">\(\le\)</span> 等价）。</p>
+<h3 id="_7">离散分布速查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>实验</th>
+<th>PMF</th>
+<th><span class="arithmatex">\( E[X] \)</span></th>
+<th><span class="arithmatex">\( \operatorname{Var}(X) \)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bernoulli</td>
+<td>单次两结果</td>
+<td><span class="arithmatex">\(p\)</span>（成功）/<span class="arithmatex">\(q=1-p\)</span></td>
+<td><span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(pq\)</span></td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td><span class="arithmatex">\(n\)</span> 次独立 Bernoulli 的成功数</td>
+<td><span class="arithmatex">\(\binom{n}{x}p^xq^{n-x}\)</span></td>
+<td><span class="arithmatex">\(np\)</span></td>
+<td><span class="arithmatex">\(npq\)</span></td>
+</tr>
+<tr>
+<td>Poisson</td>
+<td>固定时间/空间内事件次数</td>
+<td><span class="arithmatex">\(\lambda^xe^{-\lambda}/x!\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+</tr>
+<tr>
+<td>Geometric</td>
+<td>直到首次成功的试验数</td>
+<td><span class="arithmatex">\((1-p)^{x-1}p\)</span></td>
+<td><span class="arithmatex">\(1/p\)</span></td>
+<td><span class="arithmatex">\((1-p)/p^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">连续分布速查<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>分布</th>
+<th>实验</th>
+<th>PDF</th>
+<th><span class="arithmatex">\( E[X] \)</span></th>
+<th><span class="arithmatex">\( \operatorname{Var}(X) \)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uniform[<span class="arithmatex">\(a,b\)</span>]</td>
+<td><span class="arithmatex">\([a,b]\)</span> 内等概率</td>
+<td><span class="arithmatex">\(1/(b-a)\)</span></td>
+<td><span class="arithmatex">\((a+b)/2\)</span></td>
+<td><span class="arithmatex">\((b-a)^2/12\)</span></td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>钟形曲线</td>
+<td><span class="arithmatex">\(\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\)</span></td>
+<td><span class="arithmatex">\(\mu\)</span></td>
+<td><span class="arithmatex">\(\sigma^2\)</span></td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td>到首个 Poisson 事件的等待时间</td>
+<td><span class="arithmatex">\(\lambda e^{-\lambda x}\)</span></td>
+<td><span class="arithmatex">\(1/\lambda\)</span></td>
+<td><span class="arithmatex">\(1/\lambda^2\)</span></td>
+</tr>
+<tr>
+<td>Gamma(<span class="arithmatex">\(k,\theta\)</span>)</td>
+<td><span class="arithmatex">\(k\)</span> 个指数等待时间之和</td>
+<td><span class="arithmatex">\(x^{k-1}e^{-x/\theta}/(\Gamma(k)\theta^k)\)</span></td>
+<td><span class="arithmatex">\(k\theta\)</span></td>
+<td><span class="arithmatex">\(k\theta^2\)</span></td>
+</tr>
+<tr>
+<td>Lognormal</td>
+<td><span class="arithmatex">\(\ln X\)</span> 服正态（乘法增长）</td>
+<td>由正态变换得到</td>
+<td><span class="arithmatex">\(e^{\mu+\sigma^2/2}\)</span></td>
+<td><span class="arithmatex">\((e^{\sigma^2}-1)e^{2\mu+\sigma^2}\)</span></td>
+</tr>
+<tr>
+<td>Beta(<span class="arithmatex">\(a,b\)</span>)</td>
+<td><span class="arithmatex">\([0,1]\)</span> 概率/比例</td>
+<td><span class="arithmatex">\(x^{a-1}(1-x)^{b-1}/B(a,b)\)</span></td>
+<td><span class="arithmatex">\(a/(a+b)\)</span></td>
+<td><span class="arithmatex">\(ab/[(a+b)^2(a+b+1)]\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">重要性质<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Poisson</strong> = 当 <span class="arithmatex">\(n\)</span> 很大、<span class="arithmatex">\(p\)</span> 很小、<span class="arithmatex">\(np=\lambda\)</span> 时的二项极限。</li>
+<li><strong>Poisson 过程</strong> <span class="arithmatex">\(N(t)\)</span> 的相邻到达间隔是独立同分布的参数为 <span class="arithmatex">\(\lambda\)</span> 的指数随机变量。</li>
+<li><strong>几何与指数分布都是无记忆的</strong>（memoryless）：已流逝的时间/次数不影响剩余分布。</li>
+</ul>
+<h2 id="44-bible-24-guide-4">4.4 函数的分布与联合分布（bible 2.4 + guide 4）<a class="headerlink" href="#44-bible-24-guide-4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>严格增函数</strong>：<span class="arithmatex">\(Y=g(X)\)</span>，<span class="arithmatex">\(F_Y(a)=F_X(g^{-1}(a))\)</span>，求导得 pdf。</li>
+<li><strong>联合分布</strong>：<span class="arithmatex">\(p_{X,Y}(x,y)=P(X=x,Y=y)\)</span>，边际化求和/积分即得边缘分布。</li>
+<li><strong>独立性</strong>：<span class="arithmatex">\(p_{X,Y}=p_Xp_Y\)</span>（联合 = 边缘之积）。</li>
+<li>一维变换的密度公式：若 <span class="arithmatex">\(g\)</span> 可逆且可微，<span class="arithmatex">\(f_Y(y)=f_X(g^{-1}(y))\left|\frac{d g^{-1}(y)}{dy}\right|\)</span>；非单调时对所有原像求和。</li>
+<li>二维变换需乘 Jacobian 的绝对值：<span class="arithmatex">\(f_{U,V}=f_{X,Y}\left|\det\frac{\partial(x,y)}{\partial(u,v)}\right|\)</span>。</li>
+<li><strong>卷积</strong>：独立和 <span class="arithmatex">\(Z=X+Y\)</span> 的密度 <span class="arithmatex">\(f_Z(z)=\int f_X(x)f_Y(z-x)\,dx\)</span>；独立 Poisson 之和仍为 Poisson，参数相加。</li>
+<li><strong>全期望做法</strong>：先求 <span class="arithmatex">\(E[X\mid Y=y]\)</span>，再对 <span class="arithmatex">\(y\)</span> 积分，往往比直接做二维积分简单。</li>
+</ul>
+<h2 id="45-bible-25-guide-4">4.5 协方差与相关（bible 2.5 + guide 4）<a class="headerlink" href="#45-bible-25-guide-4" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[Cov(X,Y)=E[(X-E[X])(Y-E[Y])]=E[XY]-E[X]E[Y]\]</div>
+<div class="arithmatex">\[\rho(X,Y)=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\]</div>
+<ul>
+<li>独立 <span class="arithmatex">\( \Rightarrow \)</span> 协方差 0（反之<strong>不成立</strong>）。</li>
+<li>双线性：<span class="arithmatex">\(\operatorname{Cov}(aX_1+bX_2,Y)=a\operatorname{Cov}(X_1,Y)+b\operatorname{Cov}(X_2,Y)\)</span>。</li>
+</ul>
+<h2 id="46-guide-42bible-2">4.6 组合分析（guide 4.2，bible 2 提及）<a class="headerlink" href="#46-guide-42bible-2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="arithmatex">\(\binom{n}{k}\)</span>、排列、鸽巢、生日问题等。详见 guide 4.2 例题（扑克牌、跳跳兔、海盗 2、父子、申请信等）。</li>
+<li><strong>要点</strong>：区分「有序/无序」「放回/不放回」。</li>
+</ul>
+<h2 id="47-guide-46">4.7 次序统计量（guide 4.6）<a class="headerlink" href="#47-guide-46" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>max/min 的期望</strong>：由 cdf 推导，<span class="arithmatex">\(F_{X_{(n)}}(x)=F_X(x)^n\)</span>（i.i.d. 时）。</li>
+<li><strong>max 与 min 的相关</strong>：利用联合分布积分。</li>
+<li>例：随机蚂蚁、n 点圆周等。</li>
+</ul>
+<h3 id="_10">常用次序统计公式<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(F_{\min}(x)=1-[1-F(x)]^n\)</span>，<span class="arithmatex">\(F_{\max}(x)=F(x)^n\)</span>；连续情形密度分别为 <span class="arithmatex">\(n[1-F(x)]^{n-1}f(x)\)</span> 与 <span class="arithmatex">\(nF(x)^{n-1}f(x)\)</span>。</li>
+<li>i.i.d. <span class="arithmatex">\(\operatorname{Uniform}(0,1)\)</span> 时，<span class="arithmatex">\(E[\min]=1/(n+1)\)</span>，<span class="arithmatex">\(E[\max]=n/(n+1)\)</span>；第 <span class="arithmatex">\(k\)</span> 个次序统计量服 <span class="arithmatex">\(\operatorname{Beta}(k,n+1-k)\)</span>。</li>
+<li><strong>分位数近似</strong>：样本分位数的标准误约为 <span class="arithmatex">\(\sqrt{p(1-p)/(n f(q_p)^2)}\)</span>，密度低的尾部估计更不稳定。</li>
+</ul>
+<h2 id="48">4.8 生成函数与近似<a class="headerlink" href="#48" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>矩母函数</strong> <span class="arithmatex">\(M_X(t)=E[e^{tX}]\)</span>（存在时），<span class="arithmatex">\(M'_X(0)=E[X]\)</span>、<span class="arithmatex">\(M''_X(0)=E[X^2]\)</span>；独立和满足 <span class="arithmatex">\(M_{X+Y}=M_XM_Y\)</span>。</li>
+<li><strong>特征函数</strong> <span class="arithmatex">\(\varphi_X(t)=E[e^{itX}]\)</span> 总是存在，可用于证明分布收敛；面试通常只需知道它比 MGF 更稳健。</li>
+<li><strong>Delta method</strong>：若 <span class="arithmatex">\(\hat\theta\approx\mathcal N(\theta,\Sigma/n)\)</span>，则 <span class="arithmatex">\(g(\hat\theta)\approx\mathcal N(g(\theta),J\Sigma J^\top/n)\)</span>；非线性报价或风险变换常用。</li>
+<li><strong>正态近似</strong>：二项 <span class="arithmatex">\(\operatorname{Bin}(n,p)\)</span> 在 <span class="arithmatex">\(np\)</span> 与 <span class="arithmatex">\(n(1-p)\)</span> 足够大时可用 <span class="arithmatex">\(\mathcal N(np,np(1-p))\)</span>，必要时做连续性修正 <span class="arithmatex">\(\pm0.5\)</span>。</li>
+</ul>
+<h2 id="_11">易错点 / 面试提示<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>先验容易被忽略</strong>（贝叶斯题最大坑）。</li>
+<li><strong>期望线性性对「依赖变量」依然成立</strong>——千万别因变量相关就放弃拆分。</li>
+<li><strong>几何/指数无记忆性</strong>是很多题的捷径。</li>
+<li><strong>独立 <span class="arithmatex">\( \neq \)</span> 不相关</strong>，命题方向别写反。</li>
+<li>记忆分布表（E、Var）是基本功，尤其 Binomial/Poisson/Geometric/Uniform/Normal/Exponential。
+- 变换题不要漏掉 Jacobian，非单调变换要累加多个原像。
+- 条件独立、无条件独立、不相关三者不是同一概念；先写定义再化简。</li>
+</ol>
+<h2 id="49">4.9 从期望到随机过程<a class="headerlink" href="#49" title="Permanent link">&para;</a></h2>
+<p>概率题的完整解法通常包含三层：先用指示变量或条件化把目标写成期望，再用分布、递推或对称性计算，最后检查独立性、停止规则和边界条件。对于连续变量，先写密度或分布函数，再做变量变换并乘 Jacobian；对于次序统计量，先确定“恰有几个样本落在阈值两侧”的组合项。</p>
+<p>当题目进入布朗运动或随机微积分时，应明确增量独立性、正态方差随时间线性增长、鞅条件和二次变差。Itô 公式中的二阶项不能省略，因为 <span class="arithmatex">\((dW_t)^2\)</span> 的量级与 <span class="arithmatex">\(dt\)</span> 相同。</p>
+<h2 id="_12">关联题库<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<ul>
+<li>题库「按知识点：概率论」节点，覆盖 bible Ch2 全部例题 + guide Ch4 各例题（组合、条件概率、分布、期望方差、次序统计量等）。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 03 微积分与线性代数">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                03 微积分与线性代数
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="md-footer__link md-footer__link--next" aria-label="下一页: 05 统计基础">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                05 统计基础
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Jiang Xuqi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

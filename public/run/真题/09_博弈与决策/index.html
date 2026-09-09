@@ -1,0 +1,1674 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="量化金融面试讲义、真题与题库索引">
+      
+      
+      
+        <link rel="canonical" href="https://ciang-ks.github.io/run/%E7%9C%9F%E9%A2%98/09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/">
+      
+      
+        <link rel="prev" href="../08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/">
+      
+      
+        <link rel="next" href="../10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>09 博弈与决策 - Run Quant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#q446q451" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Run Quant" class="md-header__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Run Quant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              09 博弈与决策
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Run Quant" class="md-nav__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Run Quant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    讲义
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/01_%E9%9D%A2%E8%AF%95%E6%80%BB%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 面试总原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/02_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/04_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 统计基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/06_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/07_%E9%87%91%E8%9E%8D_%E6%9C%9F%E6%9D%83%E5%AE%9A%E4%BB%B7%E4%B8%8EGreeks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 金融、期权定价与 Greeks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/08_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%8C%96%E7%A0%94%E7%A9%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 数据科学与量化研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/09_%E5%81%9A%E5%B8%82%E4%B8%8E%E4%BA%A4%E6%98%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 做市与交易
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/10_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    真题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9B%9E%E5%BD%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 统计与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_%E9%87%91%E8%9E%8D%E8%A1%8D%E7%94%9F%E5%93%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 金融衍生品
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、博弈与决策
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、博弈与决策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q446" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q446 · 隐匿罐子竞拍
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q447-ski-ball" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q447 · Ski-Ball 对策
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q448" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q448 · 硬币概率质量函数与探索—利用权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q449" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q449 · 掷筹码贴墙
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q450" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q450 · 单轮下注：风险偏好
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q451" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q451 · 无限轮下注：凯利准则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 行为面试与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    题库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按知识点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E9%A2%98%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按题型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E5%85%AC%E5%8F%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按公司
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、博弈与决策
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、博弈与决策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q446" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q446 · 隐匿罐子竞拍
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q447-ski-ball" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q447 · Ski-Ball 对策
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q448" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q448 · 硬币概率质量函数与探索—利用权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q449" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q449 · 掷筹码贴墙
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q450" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q450 · 单轮下注：风险偏好
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q451" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q451 · 无限轮下注：凯利准则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="q446q451">真题 · 博弈与决策（Q446–Q451）<a class="headerlink" href="#q446q451" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文件为<strong>完整题面 + 完整解答</strong>，术语、概率口径和开放题边界采用统一约定。
+<strong>这类题没有标准答案</strong>：面试官考察的是结构化思维、假设声明（"假设对手采用与你相同的最优策略"）、以及对不确定性的量化。</p>
+</blockquote>
+<hr />
+<h2 id="_1">本节导航<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>节</th>
+<th>题号</th>
+<th>代表题型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、博弈与决策</td>
+<td>Q446–Q451</td>
+<td>博弈与决策、资金管理</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">一、博弈与决策<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>博弈与决策题考察不完全信息下的最优应对：先声明假设、再建立条件分布或价值函数，最后给出可执行的出价或下注脚本。</p>
+<h3 id="q446">Q446 · 隐匿罐子竞拍<a class="headerlink" href="#q446" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
+<p><strong>题目</strong>：你与我各持一枚对对方隐藏的 d6。各自掷出后，第三方看到两个点数并把<strong>和</strong>放入一个我们看不到内容的罐子。我们轮流对罐子竞价：每步可以加价一个正整数（+1、+2、…）或 pass。一旦有人 pass，最后出价者按其出价支付给第三方、并获得罐中之物。你的策略是什么？</p>
+<p><strong>解答</strong>：题目没有给出完整的出价顺序、平价时处理及效用函数，因此不存在唯一的数值策略；面试重点是先补充规则，再展示条件分布与动态推断。下面给出一种保守分析框架。</p>
+<ol>
+<li><strong>先算条件分布</strong>：你看到自己的骰子 <span class="arithmatex">\( v \in \{1,\ldots,6\} \)</span>，则罐中价值 <span class="arithmatex">\( = v + U \)</span>，<span class="arithmatex">\( U \sim \operatorname{Uniform}\{1,\ldots,6\} \)</span>。给定 <span class="arithmatex">\( v \)</span>，罐子的条件期望为 <span class="arithmatex">\( v + 3.5 \)</span>、条件分布为 <span class="arithmatex">\( v+1 \ldots v+6 \)</span> 各 <span class="arithmatex">\( 1/6 \)</span>。</li>
+<li><strong>设定出价上限</strong>：风险中性时，忽略竞价信息的初始上限可取条件期望 <span class="arithmatex">\(v+3.5\)</span>；若要求逐结果都不亏，上限只能取最小可能价值 <span class="arithmatex">\(v+1\)</span>。二者是不同风险准则，不能把“低于期望”误称为保证不亏。</li>
+<li><strong>对每个 v 写出具体的应对脚本</strong>：出价、跟价到多少就 pass、对手 pass 后自己何时开价。要求对每个可能的骰子点数都有完整决策——这本身就需要把竞价过程的每一步想清楚：对手在某个价位 pass，透露他对罐子价值的判断上限。</li>
+<li><strong>候选均衡</strong>：可先假设对手采用同类阈值策略，把自对弈作为分析起点，再检验对手在某价位 pass 所带来的后验更新。双方都按条件期望出价并不保证逐结果不亏，也不能在没有证明时直接称为最优均衡。</li>
+</ol>
+<p><strong>展示要点</strong>：声明假设、量化每个价位的条件期望、说明 pass 的信息含义、以及"永不亏钱"约束下的完整决策树。</p>
+<h3 id="q447-ski-ball">Q447 · Ski-Ball 对策<a class="headerlink" href="#q447-ski-ball" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
+<p><strong>题目</strong>：一台虚拟 Ski-Ball 机：若你瞄准某个洞，就给你<strong>该洞的</strong>命中概率。你与一系列对手对局：每局 10 投比总分，先押下筹码，赢了拿走双倍（本金 + 等额奖励）、输了全失。给你 5 局的"练习赛"来评估对手策略，然后正式对局 1 局。观察到的对手策略类型：
+① 恒打那个瞄准即 100% 命中的 10 分洞；
+② 恒打 100 分洞、未中再打 10 分洞；若 100 分洞连续失手太多则干脆改为恒打 10 分洞。
+如何应对？</p>
+<p><strong>解答</strong>：分三步：</p>
+<p><strong>第一步：从练习赛估计对手类型与参数</strong>。对手是 ① 还是 ②？若为 ②，其 100 分洞的命中率 <span class="arithmatex">\( p \)</span> 是多少（用 5 局 <span class="arithmatex">\( \times \)</span> 10 投的观测频率估计，并给出置信区间——命中次数是二项样本）？其"连失切换"的阈值大约是几次失手？</p>
+<p><strong>第二步：计算己方的最优瞄准策略</strong>。设各洞命中概率向量已知（10 分洞 100%；100 分洞的命中概率为 <span class="arithmatex">\( q \)</span>）。目标不是单纯最大化期望分数，而是最大化在既定平局规则下战胜对手的概率。若对方是 ①（稳定得到 100 分），你需要让总分超过 100；若每次命中 100 分洞得 100、未中得 0，则全投该洞的命中次数服从 <span class="arithmatex">\(\operatorname{Binomial}(10,q)\)</span>，可由此与混合策略的完整得分分布比较。若对方是 ②，则先估计其得分分布，再用动态规划选择每一投的动作。</p>
+<p><strong>第三步：决定下注额度</strong>。赢了拿 2 倍、输了归零 <span class="arithmatex">\( \Rightarrow \)</span> 每押 1 筹码相当于一个二元赌注：胜率 <span class="arithmatex">\( p_{\mathrm{win}} \)</span>、赔率 1:1。期望回报 <span class="arithmatex">\( = 2p_{\mathrm{win}} - 1 \)</span>。只有 <span class="arithmatex">\( 2p_{\mathrm{win}} - 1 &gt; 0 \)</span> 才该下注；下注多少取决于你的风险厌恶（与 Q450/Q451 的 Kelly 思路衔接：若可多轮，按 Kelly 比例 <span class="arithmatex">\( f = 2p_{\mathrm{win}} - 1 \)</span> 押注）。</p>
+<p><strong>展示要点</strong>：把"观察 → 参数估计 → 策略计算 → 下注决策"串成一条线，并随时声明统计不确定性（练习赛样本只有 50 投）。</p>
+<h3 id="q448">Q448 · 硬币概率质量函数与探索—利用权衡<a class="headerlink" href="#q448" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：概率构造｜<strong>公司</strong>：Jane Street</p>
+<p><strong>题目</strong>：有 10 枚硬币，其中 1 枚的正面概率已知为二分之一，其余 9 枚硬币各自的正面概率分布已经给出。你付 50 枚筹码参加游戏，获得 100 次投掷机会，每次掷出正面可得 1 枚筹码。
+<strong>第一问</strong>：要不要玩？
+<strong>实际游玩时</strong>，你被允许记录每枚硬币已观测的正面比例与已被投掷的次数。如何设计<strong>探索（exploration）与利用（exploitation）</strong>的策略？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一问（入场决策）</strong>：算期望。给定 PMF，可以算出随机选一枚硬币掷一次的期望收益。游戏允许边掷边学，因此最优自适应策略的期望收益不低于“随机固定一枚”的期望；只有信息确实具有决策价值时才严格更高。入场应比较最优策略下 100 次投掷的预期总收益与 50 的成本，而不能只凭单次平均成功率判断。</p>
+<p><strong>游玩策略（多臂老虎机框架）</strong>：这是经典的 <strong>exploration–exploitation</strong> 权衡：</p>
+<ul>
+<li><strong>ε-greedy</strong>：以概率 ε 随机试掷任意硬币（探索）、以 1−ε 掷当前经验正面率最高的硬币（利用）；</li>
+<li><strong>UCB（置信上界）</strong>：每次掷"经验正面率 + 不确定性奖励"最高的硬币，例如 <span class="arithmatex">\( \hat p_i + c\sqrt{\ln t / n_i} \)</span>（<span class="arithmatex">\( n_i \)</span> 为硬币 <span class="arithmatex">\( i \)</span> 已掷次数、<span class="arithmatex">\( t \)</span> 为总次数）——被掷得少的硬币不确定性大、自动获得探索机会；</li>
+<li><strong>贝叶斯 Thompson 采样</strong>：对每枚硬币维护其后验分布（由 PMF + 观测更新），每轮从各后验采样、掷采样值最大的硬币。</li>
+</ul>
+<p><strong>边界注意</strong>：已知那枚 50/50 的硬币是天然基准；若 9 枚的 PMF 都明显差于 0.5，应及早把投掷集中到"不那么差 + 幸运样本"上。展示要点：明确探索预算（前多少次投掷用于辨识）、何时切换到纯利用、以及如何用后验/置信区间量化"还没试够"。</p>
+<h3 id="q449">Q449 · 掷筹码贴墙<a class="headerlink" href="#q449" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>公司</strong>：Jane Street</p>
+<p><strong>题目</strong>：你与面试官对局：每步你有两个选择——<strong>扔一枚筹码到墙上</strong>，或 <strong>pass</strong>（筹码扔出即不可收回）。若连续两人都 pass，则游戏结束：在<strong>所有</strong>已投掷的筹码中，离墙最近的那枚的主人获得 20 筹码。线上版用两个完全未知的随机数发生器输出"到墙的距离"。策略是什么？</p>
+<p><strong>解答</strong>：这是一个<strong>消耗战/威慑博弈</strong>与最优停止问题的混合：</p>
+<ol>
+<li><strong>状态</strong>：你已投的最小距离 <span class="arithmatex">\( d_{\mathrm{you}} \)</span> 与对手的最小距离 <span class="arithmatex">\( d_{\mathrm{opp}} \)</span>（初始 <span class="arithmatex">\( \infty \)</span>）；</li>
+<li><strong>信息</strong>：线上版 RNG 未知 <span class="arithmatex">\( \Rightarrow \)</span> 每次投掷的分布要<strong>边投边学</strong>：前几投同时是"测量 RNG"与"争夺领先"；</li>
+<li><strong>决策</strong>：若你当前领先（<span class="arithmatex">\( d_{\mathrm{you}} &lt; d_{\mathrm{opp}} \)</span>）：pass 对你有利——对手必须继续投入筹码才能反超，而每次投掷对他都有成本（筹码不可回收）；你甚至可以连续 pass 逼他"弃权"（他也 pass 则你凭领先直接赢 20）。若你落后：你<strong>必须</strong>投掷，直到反超或筹码耗尽；</li>
+<li><strong>威慑与反威慑</strong>：领先方希望声明自己的领先并让对手相信继续投入不划算；落后方则需比较再投一次的边际胜率改善与一枚筹码的成本。选择 pass 只是不再增加沉没成本；若对手也 pass，落后方仍损失此前投入并拿不到 20。</li>
+<li><strong>与真实做市的类比</strong>：每枚筹码是沉没成本；决策只应基于<strong>边际</strong>期望改善（机会成本思维），而不是"已经扔了多少"。</li>
+</ol>
+<p>面试中往往还会实际对局数轮，重点考察你如何根据领先/落后状态、筹码预算与随机数发生器的观测结果动态更新决策。</p>
+<h3 id="q450">Q450 · 单轮下注：风险偏好<a class="headerlink" href="#q450" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：资金管理｜<strong>公司</strong>：Five Rings</p>
+<p><strong>题目</strong>：就 n=3 的袜子配对博弈（Q195）与面试官对赌，赔率 1:1：游戏获胜则你的钱翻倍、失败则失去所押金额。若你从 $100 开始，<strong>只赌一轮</strong>，你押多少钱？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>先算期望回报</strong>：Q195 已精确算得 n=3 时胜率 <span class="arithmatex">\(p=1/3\)</span>。1:1 赔率下，每押 1 元的净期望为 <span class="arithmatex">\(p-(1-p)=2p-1=-1/3\)</span>，是负期望赌局。</p>
+<p><strong>结论：押 0 元。</strong> 这不是风险厌恶造成的保守选择，而是任何风险中性或厌恶风险、且不能反向下注的参与者都不应接受负期望赌局。若面试官另给不同胜率或赔率，再明确效用函数与破产约束后决定下注额。</p>
+<h3 id="q451">Q451 · 无限轮下注：凯利准则<a class="headerlink" href="#q451" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：资金管理｜<strong>公司</strong>：Five Rings</p>
+<p><strong>题目</strong>：同一博弈可以无限轮下注（每轮重新开始）。能否给出一个下注策略？每轮应押当前总财富的多大比例？</p>
+<p><strong>解答</strong>：使用<strong>凯利准则</strong>。这是业界常用的头寸规模框架；面试中一般不要求完整推导，但理解其目标与适用条件会是加分项。</p>
+<p><strong>结论</strong>：当你知道期望回报时，Kelly 准则告诉你每轮应押<strong>总财富的比例</strong>。对"以概率 q 损失投入的比例 a、以概率 p 获得投入的比例 b"的简单赌注，最优比例为</p>
+<div class="arithmatex">\[f^{*} = \frac{p}{a} - \frac{q}{b}\]</div>
+<p><strong>应用到袜子博弈</strong>：真实胜率为 <span class="arithmatex">\(p=1/3\)</span>、<span class="arithmatex">\(q=2/3\)</span>，且 <span class="arithmatex">\(a=b=1\)</span>，故无约束公式给出 <span class="arithmatex">\(f^*=-1/3\)</span>。若只允许下注而不允许反向做庄，可行域是 <span class="arithmatex">\(0\le f&lt;1\)</span>，最优解就在边界 <strong><span class="arithmatex">\(f^*=0\)</span>：不参与</strong>。</p>
+<p><strong>推导要点</strong>（1:1 情形）：每轮后财富乘以 <span class="arithmatex">\( 1+f \)</span>（胜）或 <span class="arithmatex">\( 1-f \)</span>（负）。<span class="arithmatex">\( N \)</span> 轮后对数财富的期望增长率</p>
+<div class="arithmatex">\[g(f) = p\ln(1+f) + q\ln(1-f) \Rightarrow g'(f) = \frac{p}{1+f} - \frac{q}{1-f} = 0 \Rightarrow f^* = p - q = 2p - 1\]</div>
+<p>本题 <span class="arithmatex">\(p=1/3\)</span> 时驻点为负，不在只做多下注的可行域内；先验证期望符号、再谈 Kelly 比例，是回答这类题的关键。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 08 案例与做市">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                08 案例与做市
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/" class="md-footer__link md-footer__link--next" aria-label="下一页: 10 行为面试与金融常识">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                10 行为面试与金融常识
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Jiang Xuqi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

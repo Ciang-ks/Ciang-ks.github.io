@@ -1,0 +1,1981 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="量化金融面试讲义、真题与题库索引">
+      
+      
+      
+        <link rel="canonical" href="https://ciang-ks.github.io/run/%E7%9C%9F%E9%A2%98/08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/">
+      
+      
+        <link rel="prev" href="../07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/">
+      
+      
+        <link rel="next" href="../09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>08 案例与做市 - Run Quant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#q435q445" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Run Quant" class="md-header__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Run Quant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              08 案例与做市
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Run Quant" class="md-nav__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Run Quant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    讲义
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/01_%E9%9D%A2%E8%AF%95%E6%80%BB%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 面试总原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/02_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/04_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 统计基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/06_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/07_%E9%87%91%E8%9E%8D_%E6%9C%9F%E6%9D%83%E5%AE%9A%E4%BB%B7%E4%B8%8EGreeks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 金融、期权定价与 Greeks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/08_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%8C%96%E7%A0%94%E7%A9%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 数据科学与量化研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/09_%E5%81%9A%E5%B8%82%E4%B8%8E%E4%BA%A4%E6%98%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 做市与交易
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/10_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    真题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9B%9E%E5%BD%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 统计与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_%E9%87%91%E8%9E%8D%E8%A1%8D%E7%94%9F%E5%93%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 金融衍生品
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、数据科学案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、数据科学案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q435-two-sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q435 · Two Sigma：纽约住房价格预测
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q436-quantco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q436 · QuantCo：歌剧院动态定价
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q437-two-sigmacitibike" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q437 · Two Sigma：CitiBike 共享单车用量预测【进阶】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、做市理论与案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、做市理论与案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q438" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q438 · 做市的含义与报价三要素
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q439" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q439 · 信息不对称下的报价
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q440-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q440 · 案例 1：体育博彩（红袜队胜场数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q441-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q441 · 案例 2：国家人口（坦桑尼亚）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q442-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q442 · 案例 3：成交还是收窄价差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q443" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q443 · 成交后的风险管理（对冲原则）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、做市互动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、做市互动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q444-airbnb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q444 · 做市场景：Airbnb 杂志数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q445-sig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q445 · 做市综合演练：SIG 窗户费米估算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 行为面试与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    题库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按知识点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E9%A2%98%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按题型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E5%85%AC%E5%8F%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按公司
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、数据科学案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、数据科学案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q435-two-sigma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q435 · Two Sigma：纽约住房价格预测
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q436-quantco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q436 · QuantCo：歌剧院动态定价
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q437-two-sigmacitibike" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q437 · Two Sigma：CitiBike 共享单车用量预测【进阶】
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、做市理论与案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、做市理论与案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q438" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q438 · 做市的含义与报价三要素
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q439" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q439 · 信息不对称下的报价
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q440-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q440 · 案例 1：体育博彩（红袜队胜场数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q441-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q441 · 案例 2：国家人口（坦桑尼亚）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q442-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q442 · 案例 3：成交还是收窄价差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q443" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q443 · 成交后的风险管理（对冲原则）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、做市互动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、做市互动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q444-airbnb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q444 · 做市场景：Airbnb 杂志数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q445-sig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q445 · 做市综合演练：SIG 窗户费米估算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="q435q445">真题 · 案例与做市（Q435–Q445）<a class="headerlink" href="#q435q445" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文件为<strong>完整题面 + 完整解答</strong>，术语和推导采用统一口径。案例题没有唯一答案，考察的是结构化的思考流程。</p>
+</blockquote>
+<hr />
+<h2 id="_1">本节导航<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>节</th>
+<th>题号</th>
+<th>代表题型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、数据科学案例</td>
+<td>Q435–Q437</td>
+<td>案例分析</td>
+</tr>
+<tr>
+<td>二、做市理论与案例</td>
+<td>Q438–Q443</td>
+<td>做市互动</td>
+</tr>
+<tr>
+<td>三、做市互动</td>
+<td>Q444–Q445</td>
+<td>做市互动</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">一、数据科学案例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="q435-two-sigma">Q435 · Two Sigma：纽约住房价格预测<a class="headerlink" href="#q435-two-sigma" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：案例分析｜<strong>副题型</strong>：回归与正则化</p>
+<p><strong>题目</strong>：给你一份纽约房产的假想数据集（最近成交价、卧室数、卫浴数、面积 sqft、建造年份、位置——行政区/街区），目标是预测纽约房屋未来的成交价与估值，以及成交价未知的房屋的价值。这是一个常见的数据科学场景。请讨论：如何做多元回归的主框架？如何预处理与编码各变量？如何归一化？如何度量与处理特征间相关性（尤其面积 vs 卧室/卫浴数）？如何应对多重共线性？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>主框架</strong>：对输出（成交价）做关于所有输入（面积、卧室数、卫浴数、建造年份、位置）的多元线性回归。</p>
+<p><strong>预处理（编码）</strong>：
+- <strong>面积与建造年份</strong>：名义上取整数值，但离散化程度对回归不显著——按<strong>连续变量</strong>处理，保持原样；
+- <strong>卧室数与卫浴数</strong>：按<strong>离散变量</strong>处理，可直接入回归；
+- <strong>行政区（位置）</strong>：分类数据，用 <strong>one-hot 编码</strong>。</p>
+<p><strong>归一化</strong>：多元回归中不同量纲混合容易产生数值问题。连续输入通常先减去训练集均值、再除以训练集标准差；不必假设它们服从正态或均匀分布。面积常呈明显右偏，可把“取对数后标准化”作为候选变换，并用训练数据与样本外误差检验，而不是预先断定其严格服从对数正态。</p>
+<p><strong>相关性</strong>：面积、卧室数、卫浴数天然彼此相关。可同时查看 Pearson 线性相关与 Spearman 秩相关；后者适合捕捉单调但非线性的关系，也能处理有序离散变量的秩，不过大量并列值会影响解释。还应结合方差膨胀因子、条件数和系数稳定性诊断共线性。</p>
+<p><strong>多重共线性</strong>：回归运行期间与之后可探索子集选择与降维：
+- <strong>ridge 回归</strong>：压缩不显著变量的权重；
+- <strong>lasso 回归</strong>：可把部分系数压到零，但在高度相关变量之间的选择可能不稳定；
+- <strong>逐次正交化回归</strong>（或逐步回归）：先回归最重要的变量，再对"其他变量关于先前变量的残差"回归，补偿相关性；
+- <strong>解释阶段</strong>：在线性模型假设适用时，对单个系数查看 t 统计量、置信区间和多重检验影响；预测任务则应以严格的样本外误差为主。</p>
+<p>处理完这些考虑后，房价预测的多元回归即可顺利落地。</p>
+<hr />
+<h3 id="q436-quantco">Q436 · QuantCo：歌剧院动态定价<a class="headerlink" href="#q436-quantco" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：案例分析</p>
+<p><strong>题目</strong>：用演出场馆的售票数据（每个座位/排/区的票价历史、售出时间、对应的演出与时间等）构建模型，为未来定价。我们是场馆的顾问、目标是<strong>最大化利润</strong>（改变定价方式）而不仅是预测价格——有哪些超出输入变量本身的建模思路？</p>
+<p><strong>解答</strong>：这道题开放度很高，好的答案不唯一，以下是几条思路。</p>
+<p><strong>思路一：近邻法</strong>。只看排号、列号和区号输入时，最简单的其实是近邻法：座位在场馆平面图上构成真实的二维或三维空间关系——离舞台的远近、看舞台的视角直接决定座位好坏。<strong>相邻座位应定价相近、远离座位定价不同</strong>。可控参数包括每个座位取多少近邻；进阶做法是引入<strong>核函数</strong>，按距离给邻居加权。座位价格等于邻近座位价格的加权平均。<strong>边界点</strong>（分区的角落或边缘座位）要取更大的窗口，并相应调整核函数。</p>
+<p><strong>思路二：多元回归</strong>。对票价关于排号、列号、区号做多元线性回归。依据同样的距离/视角逻辑做预处理：把排号换成<strong>到舞台的欧氏距离</strong>（或至少转成有序数据）；列号同样处理；甚至可利用场馆<strong>左右对称</strong>配对座位。<strong>共线性</strong>：排/列/区高度相关——用 lasso 或子集选择挑变量剔除；不想全删则用 ridge 或逐次正交化（对残差回归）。</p>
+<p><strong>思路三：时间维度（进阶）</strong>。目前还没用<strong>售出时间</strong>。现实经验：距演出日的时间对票价影响巨大。购票人数（先不看价格）随日期临近<strong>持续加速</strong>——可合理假设接近指数增长。对"已售票数 vs（演出日 − 售出日）"做指数拟合；同时供给（总座位 − 已售）随时间指数减少；两者结合可推断<strong>价格也应随时间指数变化</strong>。</p>
+<p>直接的做法是把 <strong>log1p(距演出时间)</strong> 作为候选输入加入模型，避免临近演出时对 0 取对数；具体函数形状应通过验证集或样条选择。时间变量与空间变量的关联仍应从数据检验，不能预先认定很小。</p>
+<p><strong>思路四：稀缺性（FOMO）</strong>。供给随演出临近急剧减少——消费心理学开始起作用：剩余座位很少时，<strong>损失厌恶/错失恐惧</strong>推高支付意愿。建模：构造"稀缺度"变量 = 总座位 − 此前已售票数，加入回归。稀缺度与 log-时间可能有相关性，需按共线性方法处理。稀缺度还帮助<strong>解释</strong>一个现象：最后一排的成交价高于排/列/区线性回归的预测——因为最差的后排座总是最后才卖掉，接盘的往往是 FOMO 的高支付意愿人群。</p>
+<p><strong>思路五：支付意愿分布（利润最大化）</strong>。要最大化利润，需要引入消费微观数据。可把支付意愿从对数正态等正值分布起步建模，但必须用成交、未成交或实验数据检验分布假设。消费者通常会在价格不超过其支付意愿时购买。于是定价策略是：建模支付意愿与需求弹性，再在座位、时间和稀缺度上调节价格，在容量约束下最大化预期收入或利润。</p>
+<hr />
+<h3 id="q437-two-sigmacitibike">Q437 · Two Sigma：CitiBike 共享单车用量预测【进阶】<a class="headerlink" href="#q437-two-sigmacitibike" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：案例分析｜<strong>副题型</strong>：回归与正则化</p>
+<p><strong>题目</strong>：为曼哈顿的 CitiBike 用量建立预测模型：对指定的任一 CitiBike 站点，给定相关近期数据，预测未来短时间内该站停靠的自行车数量及其变化。本题不再给定输入变量集——需要先从"关于曼哈顿的一切可能数据"中头脑风暴出相关变量，再讨论回归的技术细节。面试中典型的做法是"引入新变量 ↔ 预处理/调参"反复迭代。请给出两轮迭代。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一轮变量：时刻、街区、季节、温度、天气</strong>——每个变量的预处理都相当讲究。</p>
+<p><strong>（1）循环变量（时刻、月份）</strong>：两者都有序但<strong>首尾循环相接</strong>（23:59 → 0:00，12 月 → 1 月），没有"从最小到最大"的定义。朴素做法（小时 0–23、月份 1–12 的数值化）会引入 0/24、12/1 处的断裂。三种处理：
+- <strong>one-hot</strong>：小时 24 维、月份 12 维——维度暴增且丢失顺序；
+- <strong>分桶 + one-hot</strong>：小时分早/午/晚/夜、月份分四季，降维同时部分恢复顺序；
+- <strong>基变换直接刻画循环</strong>：三角函数（sin/cos 对）或循环样条（分段多项式）。</p>
+<p><strong>（2）街区（最复杂）</strong>：街区在曼哈顿地理上不规则分布、活动模式受复杂社会因素影响。基本做法：假设同街区/相邻街区活动较均匀 → one-hot 编码。<strong>更巧的做法</strong>：把位置编码为<strong>经纬度坐标对</strong>（连续变量），则街区活动的不规则性化为"活动对经纬度的任意非线性依赖"——需要基变换。若保留"街区内活动均匀"假设，可理解为两层回归（用量 ~ 街区；街区 ~ 经纬度的非线性变换），由回归的线性结构可知其等价于直接对经纬度的同一非线性变换回归。中等阶多项式即可胜任；为控制维度可用低阶<strong>多项式样条</strong>（二次/三次样条）。</p>
+<p><strong>（3）温度与天气</strong>：单独看最简单——温度连续直接编码（归一化后）、天气分类 one-hot。麻烦在于<strong>相关性</strong>：
+- 温度与天气状况可能高度相关：二元天气指标可用点二列相关；多类别天气可用组间比较、互信息或预测模型评估关联；相关性高时可用正则化、降维或经验证的组合变量处理；
+- 温度/天气与时刻/季节循环变量相关（气温随昼夜与季节变化）：常用补救是<strong>按循环归一化</strong>——例如把温度减去"前一日同一时刻的温度"得到"温差"再入回归。</p>
+<p><strong>第二批变量</strong>：星期几、节假日、交通强度、地铁客流、降雨量、空气质量指数、本地房价、本地商业活跃度等。它们的预处理考量与第一批类似（循环、相关、地理），不必重复。</p>
+<p><strong>收尾的调参流程</strong>（变量多了以后）：
+1. 在线性模型中查看系数的 <strong>t 统计量</strong>与置信区间，并结合多重检验和样本外贡献判断变量；
+2. 根据不显著变量间的相关性，对相关的组算 <strong>F 统计量</strong>，验证整组是否可剔除；
+3. 降维：正则化回归——由于变量多且互相关、方差各异，<strong>elastic net</strong>（ridge 的等比收缩 + lasso 的软阈值截断结合）可能最有效；
+4. 想看全局图景：前向/后向<strong>逐步回归</strong>等子集选择。</p>
+<hr />
+<h2 id="_3">二、做市理论与案例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="q438">Q438 · 做市的含义与报价三要素<a class="headerlink" href="#q438" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动</p>
+<p><strong>题目</strong>：
+<strong>(a)</strong> 什么是做市商？买卖价差的意义是什么？
+<strong>(b)</strong> 实践中决定你的报价（bid@ask）的三个主要因素是什么？分别如何影响报价的宽度与偏斜？
+<strong>(c)</strong> 什么是置信区间？为什么报价必须"现实"？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>(a)</strong> 你下"买入 TSLA 期权"的订单时，需要有人把这些期权卖给你；10 万多种证券，你不可能总是恰好找到对手方。<strong>做市商的工作：持续给出可执行的买卖报价，并在风险限额内承接订单流</strong>。许多交易所与做市商合作以保证证券的<strong>流动性</strong>（成交不引起价格剧烈波动），作为回报做市商可能获得更稳定的订单流或其他制度安排。做市商以 <strong>bid@ask</strong> 形式报价：bid 是愿意<strong>买入</strong>的价格、ask（offer）是愿意<strong>卖出</strong>的价格；具体成交义务取决于交易场所规则。每笔成交都有风险（买入后价格下跌）——理论上，<strong>bid-ask 价差正是对承担任一侧风险的补偿</strong>；成交后做市商用期权等工具对冲该风险。</p>
+<p><strong>(b) 报价三要素</strong>：</p>
+<ol>
+<li><strong>理论价值</strong>：你认为它值多少。掷骰子这种已知量（3.5）可以报很窄；"帝国大厦能塞下多少乒乓球"这种模糊量就要报宽。面试官要看的是<strong>你根据不确定性调整宽度</strong>。</li>
+<li><strong>最近成交价</strong>：现行的市场价。成交价偏离你的理论值时，需要权衡"信市场"还是"信模型"。面试官通常不告知最近成交价，但在多轮报价博弈中，<strong>记住上一笔成交价</strong>是调整市场的重要依据。</li>
+<li><strong>当前持仓</strong>：净多头/空头敞口。理想状态是 <strong>flat</strong>（无敞口）。仓位太重时应把报价<strong>偏斜</strong>——使更希望发生的那个方向更便宜。例如极度多头一个理论价值 <span class="arithmatex">\(0.50 的资产，合理报价可能是 **\)</span>0.43@$0.53<strong>：卖价离理论值更近（愿意少赚以减仓）。一般 flat 时报价应</strong>对称**（bid/ask 关于理论值等距）。</li>
+</ol>
+<p><strong>(c) 不确定性区间</strong>：报价练习中常把主观分布的中央覆盖区间口语化为“置信区间”。例如若数量服从 <span class="arithmatex">\( N(100,10^2) \)</span>，其约 95% 中央区间为 80@120；严格地说，这不是频率学意义下参数的置信区间。SIG 曾让人对“大楼有多少扇窗”给 90% 覆盖区间——没有公式可套的量。不确定性越大，区间与市场都应越宽。报价仍须现实：0@10 亿虽然包住真值，但不会成交；做市的意义在于以风险可控的价格提供流动性。</p>
+<hr />
+<h3 id="q439">Q439 · 信息不对称下的报价<a class="headerlink" href="#q439" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动</p>
+<p><strong>题目</strong>：就"SIG 大楼有多少扇窗户"做市，对手方（可能知道真值）与你的报价成交。"买/卖窗户数"如何结算？假设真值是 400 扇而你不知情，首报 350@370，会发生什么？即使你对真值 100% 确定，为什么也应报"你预计对手仍会成交的最宽报价"？若你认为对手的估值偏高，如何偏斜报价？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>结算机制</strong>：假设你以 300 扇“买入窗户数”：若实际 350 扇，你赚 50 个单位（美元/餐券/作业辅导小时等）；若实际 275 扇，你亏 25 个单位。</p>
+<p><strong>交易推演</strong>（真值 400，你不知情，首报 350@370）：对手若知道真值会<strong>以 370 买入</strong>——他赚 400 − 370 = 30、你亏 30。若对手不知情恰以 350 卖给你，你赚 400 − 350 = 50。</p>
+<p><strong>为什么要报最宽的可行报价</strong>：即使你 100% 确定真值，报得越宽，对手成交的概率越低——你的目标是"在你预计对手仍会成交的最宽报价"上交易，每笔拿最多补偿。</p>
+<p><strong>偏斜报价</strong>：若你认为对手至少会估 600 扇，可以开 <strong>550@600</strong>：你的 bid（550）已高于自己的理论值，但把市场整体上移后，对手更可能<strong>在 600 买入</strong>而非在 550 卖出——当他选择买入时你获得更多补偿。</p>
+<hr />
+<h3 id="q440-1">Q440 · 案例 1：体育博彩（红袜队胜场数）<a class="headerlink" href="#q440-1" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动</p>
+<p><strong>题目</strong>：对"红袜队 2021 赛季常规赛胜场数"做一个<strong>宽度为 10</strong> 的市场；随后给出 50% 与 90% 置信区间。之后对手逐轮成交，你每轮更新报价。终局对手问：你的 PNL 与当前持仓？若红袜赢 90 场你赚/亏多少？盈亏平衡胜场数是多少？</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步：理论价值（先声明假设）</strong>。假设打满 162 场常规赛。棒球背景：2020 红袜伤病严重（尤其投手）、休赛期补强，今年应更好。历史：2020 年 60 场赢 24 场（胜率 0.400）；2019 年 162 场赢 84 场（0.519）；2018 夺冠年 162 场赢 108 场（0.667）。用近三年数据（阵容更替意味着越近的赛季越有预测力），判断今年胜率更接近 0.519；再因 2020 更近且 2018 班底流失而向下微调——取 <strong>0.5</strong>，理论价值 <span class="arithmatex">\( = 0.5\times162 = 81 \)</span> 场。宽度 10 <span class="arithmatex">\( \Rightarrow \)</span> 开盘市场 <strong>76@86</strong>。</p>
+<p><strong>第二步：置信区间</strong>。把胜场数视为 <span class="arithmatex">\( \operatorname{Binomial}(N=162, p=0.5) \)</span>，<span class="arithmatex">\( N \)</span> 大近似正态：均值 81、标准差 <span class="arithmatex">\( \sqrt{162\times0.25} \approx 6.36 \)</span>。50% CI 的 <span class="arithmatex">\( z \approx 0.67 \)</span>、90% CI 的 <span class="arithmatex">\( z \approx 1.64 \)</span>：</p>
+<ul>
+<li>50% 置信区间：<span class="arithmatex">\( 81 \pm 0.67\times6.36 \Rightarrow [76.75, 85.25] \)</span>；</li>
+<li>90% 置信区间：<span class="arithmatex">\( 81 \pm 1.64\times6.36 \Rightarrow [70.5, 91.5] \)</span>。</li>
+</ul>
+<p><strong>第三步：逐轮报价与调价</strong>。对话（Y=你，I=对手）：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Y: 76@86    I: Buy!
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Y: 81@91    I: Buy!
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Y: 85@95    I: Sell!
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Y: 83@93    I: Buy!
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Y: 84@94    I: Sell! 游戏结束
+</span></code></pre></div>
+<p>每轮调价逻辑：对手买入 → ①这透露他认为价值高于 86，应把信息纳入新市场；②他若 86 都肯买，你再报 76@86 他还会买——不如抬高卖价；③你现在是空头 1 份，想回补，抬高市场使他更可能卖给你。<strong>信息少时移动幅度大、信息多时递减</strong>：第二报 81@91（上移半个宽度、顶到 90% CI 上沿——他再买你也基本安全、他卖你大赚）；第三报 85@95（他在 85 卖给你：你刚在 91 卖、85 买回——此时可把他的估值夹在 86 与 90 之间）；第四报 83@93（中点 88 恰在夹出的区间中央）；第五报 84@94（他卖过 85，仍要上移但幅度收窄）。<strong>最后两笔：93 卖给他、84 从他买回——无风险 PNL 9 个单位，只用了 2 笔交易。</strong></p>
+<p><strong>第四步：PNL 与持仓</strong>。全部成交：86 卖、91 卖、85 买、93 卖、84 买。配对：第 1 笔（86 卖）+ 第 3 笔（85 买）→ 赚 1、仓位平；第 4 笔（93 卖）+ 第 5 笔（84 买）→ 赚 9、仓位平；剩第 2 笔——<strong>当前持仓为空头 1 份，建仓卖价为 91；已实现 PNL 为 10。</strong> 配对方式不影响总现金流与净持仓。</p>
+<ul>
+<li>若红袜赢 90 场：空头 91 合约赚 1，<strong>总 PNL = 11</strong>；</li>
+<li><strong>盈亏平衡 = 101 胜</strong>：只要红袜赢不到 101 场（我们对此相当有信心），PNL 为正。</li>
+</ul>
+<p>本题完整覆盖做市面试的核心：<strong>理论值生成、置信区间、信息不对称、依成交调价</strong>。</p>
+<hr />
+<h3 id="q441-2">Q441 · 案例 2：国家人口（坦桑尼亚）<a class="headerlink" href="#q441-2" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动</p>
+<p><strong>题目</strong>：对坦桑尼亚人口做市（单位：百万人；附加规则：每轮 <span class="arithmatex">\( ask \le 1.5\times bid \)</span>）。对手逐轮成交，最后问 PNL 与持仓。开局信息极少时如何定价与调价？（真值 5600 万，你不知道。）</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一步：粗估</strong>。知道美国人口约 3.25 亿，坦桑尼亚小得多——估 <strong>25M</strong>。开盘市场（受 <span class="arithmatex">\( 1.5\times \)</span> 规则约束）：<strong>20@30</strong>。</p>
+<p><strong>逐轮推演</strong>：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Y: 20@30    I: Buy!
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Y: 60@90    I: Sell!
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Y: 40@60    I: Buy!
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Y: 50@75    I: Sell! 游戏结束
+</span></code></pre></div>
+<ul>
+<li>对手买入后必须上移。<strong>只有一笔信息时宁可大幅上移</strong>：上移太少的下行风险大于上移太多的下行风险。用美国人口 3.25 亿可把坦桑尼亚上界合理地压在 100M 以内——把原理论值乘 3 得 75M，围绕它报价：60@90；</li>
+<li>对手随后卖出——此时情况好多了：真值大概率在 30–60M 之间（可略超出）。且两笔交易给出：真值 &gt; 25M（第一笔）且 &lt; 75M（第二笔），中点 50M。围绕 50M、偏向 60M 一侧报：<strong>40@60</strong>；</li>
+<li>对手又在 60 买入而非在 40 卖出——真值相当接近 60M！第三笔说明真值 &gt; 50M，第二笔说明 &lt; 75M。验证移动幅度：第一次移动中点 +50（25→75）、第二次 +25（75→50）、这次 +12.5（50→62.5）——<strong>当两侧成交价已夹住估值时，每次移动应递减</strong>。报：<strong>50@75</strong>。</li>
+</ul>
+<p><strong>PNL 与持仓</strong>：对手两买两卖 → <strong>持仓 flat</strong>。配对：前两笔——30 卖给他、60 从他买 → 亏 30；后两笔——60 卖给他、50 从他买 → 赚 10。<strong>总 PNL = −$20。</strong></p>
+<p><strong>输了钱完全正常</strong>——面试官并不指望你背出非洲国家的人口。本题考的是：<strong>对成交的反应、调价的幅度纪律（信息越多移动越小）、以及 <span class="arithmatex">\( 1.5\times \)</span> 规则下的合规报价</strong>。</p>
+<hr />
+<h3 id="q442-3">Q442 · 案例 3：成交还是收窄价差<a class="headerlink" href="#q442-3" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：做市互动</p>
+<p><strong>题目</strong>：你与对手各持一个对股票 XYZ 的理论价值（独立、均匀分布于 90–110）。你先开价；之后对手可以选择<strong>收紧你的市场</strong>（抬高 bid 和/或压低 ask）或<strong>按现价成交</strong>；若对手收紧，你可以选择收紧他的新市场或在他的市场上成交；如此交替直到有人成交。你的理论价值是 <strong>100</strong>（对手的你不知道）。请给出并解释一套合理策略；在没有完整规则、效用函数和对手策略时，不存在可直接断言的唯一最优报价。</p>
+<p><strong>解答</strong>：一局高质量的博弈记录：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Y: 90@110      （你的理论值=100，已知分布 90–110，开最宽合理市场）
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>I: 95@107      （对手收紧——透露信息：若其市场关于理论值对称，暗示其理论值 \( \approx 101 \)）
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Y: 97@106      （不急于成交：95 卖、107 买对我们都是亏的；但对手的 95@107 暗示其理论值 &gt; 100，
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                我们顺势报 97@106，显得我们的理论值也偏高——对手若在此成交我们乐意）
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>I: 100 bid     （对手出 100 买价——进一步确认其理论值 &gt; 100）
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Y: 101 bid     （内盘 100@106：可 @105 或 101 bid。选 101 bid——虽然暴露更多、
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>                但对手刚 100 bid 且双方一路抬价，他不太可能在 101 卖给你；
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>                101 bid 为将来以更高价卖出保留期权，风险被回报补偿）
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>I: 102 bid
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Y: @105        （102 bid 之后：@105 或 103 bid。选 @105——被 103 卖穿的风险
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                远大于边际更好的成交价）
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>I: 103 bid
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>Y: @104        （内盘 103@105：不能买自己的，只能收紧到 @104）
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>I: Buy!        （对手以 104 买入——以你的理论值 100 计，PNL = +4）
+</span></code></pre></div>
+<p><strong>要点拆解</strong>：</p>
+<ol>
+<li><strong>每次收紧都在交换信息与位置</strong>：对手的市场形态透露其理论值的方向（对称 <span class="arithmatex">\( \Rightarrow \)</span> 中点；偏斜 <span class="arithmatex">\( \Rightarrow \)</span> 倾向）；</li>
+<li><strong>何时该卖"价差"（@ask）何时该出 bid</strong>：出 bid 的回报更高但可能被对手立刻卖穿——只有当对手大概率不会卖给你时才值得冒险；</li>
+<li><strong>风险-回报权衡贯穿始终</strong>：@105 稳但暴露全部价格；101 bid 激进但为更高卖价留出空间；</li>
+<li>终局以 104 成交、按你的理论值 100 计 <strong>PNL +4</strong>。</li>
+</ol>
+<p><strong>附加练习</strong>：本局对手的真实理论值是 105——从他的报价序列（95@107 → 100 bid → 102 bid → 103 bid → 以 104 买入）你能提前推断出来吗？</p>
+<hr />
+<h3 id="q443">Q443 · 成交后的风险管理（对冲原则）<a class="headerlink" href="#q443" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：风险管理与组合优化</p>
+<p><strong>题目</strong>：做市商成交（比如从想卖股票的个人那里买入）后承担什么风险？理论上是什么补偿了这份风险？成交后可采取什么措施？这一原则在面试中如何体现？</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li><strong>风险</strong>：以上例（做市商买入股票）为例，风险是刚买入的证券价格下跌；</li>
+<li><strong>补偿</strong>：理论上 <strong>bid-ask 价差正是对承担交易任一侧风险的补偿</strong>；</li>
+<li><strong>措施</strong>：成交后，做市商可以用<strong>期权或其他金融工具对冲</strong>来缓解该风险；</li>
+<li><strong>面试意义</strong>："通过受控的、经过对冲的下注来化解风险"——这一原则会直接体现在做市公司的面试中：面试官考察你是否清楚每笔成交带来什么敞口、价差如何补偿、以及如何在成交后用对冲把敞口降回中性。做市案例（Q440–Q442）中"随时记录当前持仓与已实现 PNL（trader memory）"正是该原则的实战形态。</li>
+</ul>
+<hr />
+<h2 id="_4">三、做市互动<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>做市互动题考察报价、调价与库存风险管理：先报出买卖价与名义量，再说明如何根据对方成交行为更新对公允价值的判断。</p>
+<h3 id="q444-airbnb">Q444 · 做市场景：Airbnb 杂志数<a class="headerlink" href="#q444-airbnb" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：做市互动｜<strong>公司</strong>：Jane Street</p>
+<p><strong>题目</strong>："对我住的 Airbnb 里有几本杂志做个市场。"（主要考察你对做市<strong>术语与流程</strong>的熟悉程度，Fermi 估计本身不是重点。）</p>
+<p><strong>解答</strong>：完整流程演示：</p>
+<ol>
+<li><strong>给理论值</strong>：快速合理化（民宿一般摆多少本书/杂志？1–2 本旅游杂志常见）→ 理论值约 <strong>3 本</strong>；</li>
+<li><strong>报价</strong>：报 <strong>x@y</strong>（例如 <strong>2@4</strong>），宽度反映不确定性（"杂志"定义模糊、样本方差大——报窄了显得不专业）；</li>
+<li><strong>可能被追问置信区间</strong>：如"90% 置信区间"→ 0@8 之类，宽度与不确定性一致；</li>
+<li><strong>成交后更新</strong>：面试官买入（说明他心中数字更高）→ 上移市场如 3@6 并给出理由（信息 + 仓位 + 再成交风险，见 Q438/Q440 的三要素与调价逻辑）；</li>
+<li><strong>始终保持市场可成交</strong>：不要报 0@10⁹ 这种"安全但永远不成交"的市场——做市的意义在于成交。</li>
+</ol>
+<p><strong>评分点</strong>：术语准确（bid/ask/mid/宽度/偏斜）、流程自然、成交后调价有据。</p>
+<h3 id="q445-sig">Q445 · 做市综合演练：SIG 窗户费米估算<a class="headerlink" href="#q445-sig" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>公司</strong>：SIG</p>
+<p><strong>题目</strong>：面试官就"我们这栋楼有多少扇窗户"与你做市，且他知道真值。请完整走一遍：Fermi 估计 → 报价 → 置信区间 → 根据成交更新 → 复述你的 PNL 与持仓。</p>
+<p><strong>解答</strong>：这是一个可反复练习的标准剧本（细节理论见 Q438、Q439；案例实练见 Q440/Q441）：</p>
+<ol>
+<li><strong>Fermi 估计理论值</strong>：层数 <span class="arithmatex">\( \times \)</span> 每层窗数（如 8 层 <span class="arithmatex">\( \times \)</span> 每层每面 6 扇 <span class="arithmatex">\( \times \)</span> 4 面 <span class="arithmatex">\( \approx 190 \)</span>，再考虑走廊/大厅窗）→ 理论值 <span class="arithmatex">\( \approx 200 \)</span>；</li>
+<li><strong>首报</strong>：不确定性大 <span class="arithmatex">\( \Rightarrow \)</span> 宽度大：<strong>160@240</strong>；被问 90% 置信区间则给 <strong>100@300</strong>；</li>
+<li><strong>依成交更新</strong>：对手在 240 买入 → 真值更可能更高 → 上移（首移幅度大）至 <strong>200@280</strong>；他继续买 → 再上移但幅度递减，同时留意把市场保持在"他仍愿成交"的范围内；</li>
+<li><strong>双向成交后夹值</strong>：他在高位买、低位卖后，用两次成交价夹出区间，把 mid 移到区间中央、宽度收窄；</li>
+<li><strong>终局复述</strong>：配对买卖计算已实现 PNL，剩余敞口单独列出（"我现在空头 1 份 240，若真值 <span class="arithmatex">\( X \)</span> 则 <span class="arithmatex">\( PNL = 240 - X \)</span> + 已实现 15"）；</li>
+<li><strong>全程原则</strong>：宽度 = 不确定性；移动幅度 = 信息量（信息少大动、信息多小动）；任何时刻市场必须可成交。</li>
+</ol>
+<p><strong>练习建议</strong>：与朋友用随机真值（100–1000）互相扮演面试官，各做 5 轮，复盘每次调价幅度与最终 PNL——这是 SIG/Jane Street/Optiver 做市面的最佳准备方式。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 07 算法与数值方法">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                07 算法与数值方法
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/" class="md-footer__link md-footer__link--next" aria-label="下一页: 09 博弈与决策">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                09 博弈与决策
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Jiang Xuqi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

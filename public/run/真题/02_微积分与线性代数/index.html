@@ -1,0 +1,3422 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="量化金融面试讲义、真题与题库索引">
+      
+      
+      
+        <link rel="canonical" href="https://ciang-ks.github.io/run/%E7%9C%9F%E9%A2%98/02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+      
+      
+        <link rel="prev" href="../01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/">
+      
+      
+        <link rel="next" href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>02 微积分与线性代数 - Run Quant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#q61q107" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Run Quant" class="md-header__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Run Quant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              02 微积分与线性代数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Run Quant" class="md-nav__button md-logo" aria-label="Run Quant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Run Quant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    讲义
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/01_%E9%9D%A2%E8%AF%95%E6%80%BB%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 面试总原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/02_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/03_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/04_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/05_%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 统计基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/06_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/07_%E9%87%91%E8%9E%8D_%E6%9C%9F%E6%9D%83%E5%AE%9A%E4%BB%B7%E4%B8%8EGreeks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 金融、期权定价与 Greeks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/08_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%8C%96%E7%A0%94%E7%A9%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 数据科学与量化研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/09_%E5%81%9A%E5%B8%82%E4%B8%8E%E4%BA%A4%E6%98%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 做市与交易
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%B2%E4%B9%89/10_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    真题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        要点提示（各节核心公式）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="要点提示（各节核心公式）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q61 · 复合函数求导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q62-epi-pie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q62 · 比较 \( e^\pi \) 与 \( \pi^e \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q63 · 洛必达求极限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q64-int-lnxdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q64 · \( \int \ln(x)\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q65-int_0pi6-secxdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q65 · \( \int_0^{\pi/6} \sec(x)\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q66 · 两圆柱相交体积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q67 · 扫雪机问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q68 · 正态条件期望积分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q69" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q69 · 高斯积分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q70 · 虚数幂
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q71 · 伯努利不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q72-sqrt37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q72 · 牛顿法求 \( \sqrt{37} \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q73 · 求根算法比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q74 · 拉格朗日乘子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q75-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q75 · 可分离变量 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q76-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q76 · 齐次型 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q77 · 一阶线性微分方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q78-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q78 · 二阶齐次线性 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q79-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q79 · 二阶非齐次线性 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q80 · 相关即夹角
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q81-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q81 · QR 分解解最小二乘
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q82 · 特征值与特征向量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q83-lu-cholesky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q83 · LU 分解与 Cholesky 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q84 · 生成相关正态随机变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q85 · 三元相关矩阵半正定（金融应用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学基础进阶
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学基础进阶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q86 · 灯塔光束沿岸移动速度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q87-sqrtx25x-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q87 · 求极限 \( \sqrt{x^2+5x}-x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q88 · 斐波那契数列的闭式解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q89 · 证明均值严格大于几何均值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q90 · 求无穷连分数的值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q91-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q91 · 正态 cdf 的拐点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q92 · 正定矩阵及其性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q93-m-am2-c-actop-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q93 · 求 \( M \) 使 \( A=M^2 \)，求 \( C \) 使 \( A=C^\top C \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q94 · 排列乘积的奇偶性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q95 · 证明刘维尔定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q96-sin-cos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q96 · sin 与 cos 的傅里叶变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q97" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q97 · 解析有界必为常数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q98-exp-ln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q98 · 近似计算 exp 与 ln
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q99" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q99 · 调和级数是否收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q100-bs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q100 · BS 方程化为热传导方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q101-fxxx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q101 · 求导 \( f(x)=x^x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q102 · 远期贴现因子的偏导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q103-ecos-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q103 · 从定义推导 e^cos x 的导数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q104-fxxlog-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q104 · 求导 \( f(x)=x\log x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q105-int-logn-xdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q105 · 积分 \( \int \log^n x\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q106 · 求二重积分值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q107-int-log-x1xx2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q107 · 围道积分求 \( \int \log x/(1+x+x^2) \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9B%9E%E5%BD%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 统计与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E7%A7%AF%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_%E9%87%91%E8%9E%8D%E8%A1%8D%E7%94%9F%E5%93%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 金融衍生品
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_%E5%8D%9A%E5%BC%88%E4%B8%8E%E5%86%B3%E7%AD%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%A1%8C%E4%B8%BA%E9%9D%A2%E8%AF%95%E4%B8%8E%E9%87%91%E8%9E%8D%E5%B8%B8%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 行为面试与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    题库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按知识点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E9%A2%98%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按题型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%A2%98%E5%BA%93/%E6%8C%89%E5%85%AC%E5%8F%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按公司
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本节导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        要点提示（各节核心公式）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="要点提示（各节核心公式）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q61 · 复合函数求导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q62-epi-pie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q62 · 比较 \( e^\pi \) 与 \( \pi^e \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q63 · 洛必达求极限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q64-int-lnxdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q64 · \( \int \ln(x)\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q65-int_0pi6-secxdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q65 · \( \int_0^{\pi/6} \sec(x)\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q66 · 两圆柱相交体积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q67 · 扫雪机问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q68 · 正态条件期望积分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q69" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q69 · 高斯积分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q70 · 虚数幂
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q71 · 伯努利不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q72-sqrt37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q72 · 牛顿法求 \( \sqrt{37} \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q73 · 求根算法比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q74 · 拉格朗日乘子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q75-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q75 · 可分离变量 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q76-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q76 · 齐次型 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q77 · 一阶线性微分方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q78-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q78 · 二阶齐次线性 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q79-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q79 · 二阶非齐次线性 ODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q80 · 相关即夹角
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q81-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q81 · QR 分解解最小二乘
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q82 · 特征值与特征向量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q83-lu-cholesky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q83 · LU 分解与 Cholesky 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q84 · 生成相关正态随机变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q85 · 三元相关矩阵半正定（金融应用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学基础进阶
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学基础进阶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q86 · 灯塔光束沿岸移动速度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q87-sqrtx25x-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q87 · 求极限 \( \sqrt{x^2+5x}-x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q88 · 斐波那契数列的闭式解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q89 · 证明均值严格大于几何均值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q90 · 求无穷连分数的值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q91-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q91 · 正态 cdf 的拐点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q92 · 正定矩阵及其性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q93-m-am2-c-actop-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q93 · 求 \( M \) 使 \( A=M^2 \)，求 \( C \) 使 \( A=C^\top C \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q94 · 排列乘积的奇偶性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q95 · 证明刘维尔定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q96-sin-cos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q96 · sin 与 cos 的傅里叶变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q97" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q97 · 解析有界必为常数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q98-exp-ln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q98 · 近似计算 exp 与 ln
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q99" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q99 · 调和级数是否收敛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q100-bs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q100 · BS 方程化为热传导方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q101-fxxx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q101 · 求导 \( f(x)=x^x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q102 · 远期贴现因子的偏导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q103-ecos-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q103 · 从定义推导 e^cos x 的导数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q104-fxxlog-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q104 · 求导 \( f(x)=x\log x \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q105-int-logn-xdx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q105 · 积分 \( \int \log^n x\,dx \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q106 · 求二重积分值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q107-int-log-x1xx2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q107 · 围道积分求 \( \int \log x/(1+x+x^2) \)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="q61q107">真题 · 微积分与线性代数（Q61–Q107）<a class="headerlink" href="#q61q107" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文件收录完整题面与解答；个别影响结论的笔误在正文中单独说明。
+编号说明：高斯积分经典题已并入主编号 Q69。</p>
+</blockquote>
+<h2 id="_1">本节导航<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>节</th>
+<th>题号</th>
+<th>代表题型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要点提示（各节核心公式）</td>
+<td>Q61–Q85</td>
+<td>微积分、微分方程、有限差分与数值方法、线性代数</td>
+</tr>
+<tr>
+<td>数学基础进阶</td>
+<td>Q86–Q107</td>
+<td>微积分、线性代数、组合计数与数论、微分方程</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">要点提示（各节核心公式）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>求导</strong>：乘积法则 <span class="arithmatex">\( (uv)' = u'v + uv' \)</span>；商法则 <span class="arithmatex">\( (u/v)' = (u'v - uv')/v^2 \)</span>；链式法则 <span class="arithmatex">\( dy/dx = (dy/du)(du/dx) \)</span>；广义幂法则 <span class="arithmatex">\( dy^n/dx = ny^{n-1}\cdot dy/dx \)</span>。</li>
+<li>常用极限：<span class="arithmatex">\( \lim_{x\to 0} \sin x / x = 1 \)</span>；<span class="arithmatex">\( \lim_{x\to\infty} (\ln x)/x^r = 0 \)</span>（<span class="arithmatex">\( r&gt;0 \)</span>）；<span class="arithmatex">\( \lim_{x\to\infty} x^r e^{-x} = 0 \)</span>；<span class="arithmatex">\( e^x = \lim_{n\to\infty}(1+x/n)^n \)</span>。</li>
+<li><strong>极值</strong>：可导点取局部极值 <span class="arithmatex">\( \Rightarrow f'(c)=0 \)</span>；二阶判别法 <span class="arithmatex">\( f''(c)&gt;0 \)</span> 极小、<span class="arithmatex">\( f''(c)&lt;0 \)</span> 极大。</li>
+<li><strong>洛必达法则</strong>：<span class="arithmatex">\( 0/0 \)</span> 或 <span class="arithmatex">\( \pm\infty/\infty \)</span> 型时 <span class="arithmatex">\( \lim f/g = \lim f'/g' \)</span>。</li>
+<li><strong>积分</strong>：换元 <span class="arithmatex">\( \int f(g(x))g'(x)\,dx = \int f(u)\,du \)</span>；分部 <span class="arithmatex">\( \int u\,dv = uv - \int v\,du \)</span>。</li>
+<li><strong>泰勒级数</strong>：<span class="arithmatex">\( f(x) = f(x_0) + f'(x_0)(x-x_0) + f''(x_0)/2!\cdot(x-x_0)^2 + \cdots \)</span>，余项 <span class="arithmatex">\( |R_n| \le M\cdot|x-x_0|^{n+1}/(n+1)! \)</span>。</li>
+</ul>
+<hr />
+<h3 id="q61">Q61 · 复合函数求导<a class="headerlink" href="#q61" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\( y = (\ln x)^{\ln x} \)</span> 的导数。</p>
+<p><strong>解答</strong>：这是检验基本求导公式——特别是链式法则与乘积法则——的好题。</p>
+<p>设 <span class="arithmatex">\( u = \ln y = \ln\big((\ln x)^{\ln x}\big) = \ln x \times \ln(\ln x) \)</span>。由链式法则，<span class="arithmatex">\( du/dx = (1/y)\cdot dy/dx \)</span>。再设 <span class="arithmatex">\( v = \ln x \)</span> 求 <span class="arithmatex">\( d(\ln(\ln x))/dx \)</span>：</p>
+<div class="arithmatex">\[\frac{d(\ln(\ln x))}{dx} = \frac{d(\ln v)}{dv}\cdot\frac{dv}{dx} = \frac{1}{v}\cdot\frac{1}{x} = \frac{1}{x\ln x}\]</div>
+<p>于是由乘积法则：</p>
+<div class="arithmatex">\[\frac{1}{y}\frac{dy}{dx} = \frac{d(\ln x)}{dx}\times\ln(\ln x) + \ln x \times \frac{d(\ln(\ln x))}{dx} = \frac{\ln(\ln x)}{x} + \frac{\ln x}{x\ln x}\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\frac{dy}{dx} = \frac{y}{x}\big(\ln(\ln x) + 1\big) = \frac{(\ln x)^{\ln x}}{x}\big(\ln(\ln x)+1\big)\]</div>
+<hr />
+<h3 id="q62-epi-pie">Q62 · 比较 <span class="arithmatex">\( e^\pi \)</span> 与 <span class="arithmatex">\( \pi^e \)</span><a class="headerlink" href="#q62-epi-pie" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：不用算出数值，你能判断 <span class="arithmatex">\( e^\pi \)</span> 和 <span class="arithmatex">\( \pi^e \)</span> 哪个大吗？</p>
+<p><strong>解答</strong>：两边取自然对数：<span class="arithmatex">\( e^\pi &gt; \pi^e \iff \pi\cdot\ln e &gt; e\cdot\ln \pi \iff (\ln e)/e &gt; (\ln \pi)/\pi \)</span>。</p>
+<p>这取决于 <span class="arithmatex">\( f(x) = (\ln x)/x \)</span> 在 <span class="arithmatex">\( e \)</span> 到 <span class="arithmatex">\( \pi \)</span> 上是增还是减。求导：</p>
+<div class="arithmatex">\[f'(x) = \frac{(1/x)\cdot x - \ln x}{x^2} = \frac{1 - \ln x}{x^2}\]</div>
+<p>当 <span class="arithmatex">\( x &gt; e \)</span> 时 <span class="arithmatex">\( \ln x &gt; 1 \)</span>，<span class="arithmatex">\( f'(x) &lt; 0 \)</span>，<span class="arithmatex">\( f \)</span> 递减。事实上 <span class="arithmatex">\( f(x) \)</span> 在 <span class="arithmatex">\( x = e \)</span> 处取<strong>全局最大值</strong>。所以 <span class="arithmatex">\( (\ln e)/e &gt; (\ln \pi)/\pi \)</span>，即</p>
+<div class="arithmatex">\[e^{\pi} &gt; \pi^{e}\]</div>
+<p><strong>替代方法</strong>：若熟悉泰勒级数（§3.4），对 <span class="arithmatex">\( e^x \)</span> 展开：<span class="arithmatex">\( e^x = 1 + x/1! + x^2/2! + \cdots \)</span>，故对一切 <span class="arithmatex">\( x&gt;0 \)</span> 有 <span class="arithmatex">\( e^x &gt; 1 + x \)</span>。令 <span class="arithmatex">\( x = \pi/e - 1 \)</span>，则</p>
+<div class="arithmatex">\[e^{\pi/e - 1} &gt; \pi/e \iff e^{\pi/e} &gt; \pi \iff e^{\pi} &gt; \pi^{e}\]</div>
+<hr />
+<h3 id="q63">Q63 · 洛必达求极限<a class="headerlink" href="#q63" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\( \lim_{x\to\infty} e^x/x^2 \)</span> 以及 <span class="arithmatex">\( \lim_{x\to 0^+} x^2 \ln x \)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>第一部分</strong>：<span class="arithmatex">\( \lim_{x\to\infty} e^x = \infty \)</span> 且 <span class="arithmatex">\( \lim_{x\to\infty} x^2 = \infty \)</span>，是典型的 <span class="arithmatex">\( \infty/\infty \)</span> 型，直接用洛必达：</p>
+<div class="arithmatex">\[\lim_{x\to\infty}\frac{e^x}{x^2} = \lim_{x\to\infty}\frac{e^x}{2x}\]</div>
+<p>结果仍是 <span class="arithmatex">\( \infty/\infty \)</span> 型，再用一次：</p>
+<div class="arithmatex">\[\lim_{x\to\infty}\frac{e^x}{2x} = \lim_{x\to\infty}\frac{e^x}{2} = \infty\]</div>
+<p><strong>第二部分</strong>：<span class="arithmatex">\( x^2 \ln x \)</span> 不是 <span class="arithmatex">\( f/g \)</span> 型，先改写为</p>
+<div class="arithmatex">\[\lim_{x\to 0^+} x^2\ln x = \lim_{x\to 0^+}\frac{\ln x}{x^{-2}}\]</div>
+<p>此时分子 <span class="arithmatex">\( \to -\infty \)</span>、分母 <span class="arithmatex">\( \to +\infty \)</span>，可用洛必达：</p>
+<div class="arithmatex">\[\lim_{x\to 0^+}\frac{1/x}{-2/x^3} = \lim_{x\to 0^+}\frac{-x^2}{2} = 0\]</div>
+<hr />
+<h3 id="q64-int-lnxdx">Q64 · <span class="arithmatex">\( \int \ln(x)\,dx \)</span><a class="headerlink" href="#q64-int-lnxdx" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\( \int \ln(x)\,dx \)</span>。</p>
+<p><strong>解答</strong>：分部积分的典型例子。取 u = ln x、v = x，则</p>
+<div class="arithmatex">\[d(uv) = v\,du + u\,dv = \left(x\times\frac{1}{x}\right)dx + \ln x\,dx = dx + \ln x\,dx\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\int \ln x\,dx = x\ln x - \int dx = x\ln x - x + c\]</div>
+<hr />
+<h3 id="q65-int_0pi6-secxdx">Q65 · <span class="arithmatex">\( \int_0^{\pi/6} \sec(x)\,dx \)</span><a class="headerlink" href="#q65-int_0pi6-secxdx" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\( \int_0^{\pi/6} \sec(x)\,dx \)</span>。</p>
+<p><strong>解答</strong>：基本三角函数只需记 <span class="arithmatex">\( d(\sin x)/dx = \cos x \)</span>、<span class="arithmatex">\( d(\cos x)/dx = -\sin x \)</span>，其余用商法则推导：</p>
+<div class="arithmatex">\[\frac{d\sec x}{dx} = \frac{d(1/\cos x)}{dx} = \frac{\sin x}{\cos^2 x} = \sec x\tan x,\qquad \frac{d\tan x}{dx} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} = \sec^2 x\]</div>
+<p>于是</p>
+<div class="arithmatex">\[\frac{d(\sec x + \tan x)}{dx} = \sec x(\sec x + \tan x)\]</div>
+<p>导数中恰好出现了 <span class="arithmatex">\( \sec x + \tan x \)</span> 本身，所以</p>
+<div class="arithmatex">\[\frac{d\ln|\sec x + \tan x|}{dx} = \frac{\sec x(\sec x + \tan x)}{\sec x + \tan x} = \sec x \;\Rightarrow\; \int\sec x\,dx = \ln|\sec x + \tan x| + c\]</div>
+<p>代入上下限：</p>
+<div class="arithmatex">\[\int_0^{\pi/6}\sec x\,dx = \ln\big(\sec(\pi/6) + \tan(\pi/6)\big) - \ln\big(\sec 0 + \tan 0\big) = \ln(\sqrt{3})\]</div>
+<hr />
+<h3 id="q66">Q66 · 两圆柱相交体积<a class="headerlink" href="#q66" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：两个半径均为 r 的圆柱，轴线垂直相交且中心重合。求它们公共部分的体积。</p>
+<p><strong>解答</strong>：积分求体积的应用题，最难的一步是正确列出积分。三维体积的一般公式为 <span class="arithmatex">\( V = \int A(z)\,dz \)</span>，其中 <span class="arithmatex">\( A(z) \)</span> 是在坐标 <span class="arithmatex">\( z \)</span> 处垂直于 <span class="arithmatex">\( z \)</span> 轴的平面截立体所得截面面积。</p>
+<p>用高度为 <span class="arithmatex">\(z\)</span> 的水平面截公共部分，截面是边长为 <span class="arithmatex">\(\sqrt{(2r)^2-(2z)^2}\)</span> 的正方形。利用对称性：</p>
+<div class="arithmatex">\[V = 2\times\int_0^{r}\left[(2r)^2 - (2z)^2\right]dz = 8\left[r^2 z - \frac{z^3}{3}\right]_0^r = \frac{16}{3}r^3\]</div>
+<p><strong>替代方法</strong>（需要更强的三维想象力）：想象一个同时内切于两圆柱的球，其半径为 <span class="arithmatex">\(r\)</span>。在每个垂直于 <span class="arithmatex">\(z\)</span> 轴的截面上，球的截面圆恰好内切于公共部分的截面正方形，所以 <span class="arithmatex">\(A_{circle}=(\pi/4)A_{square}\)</span> 对所有 <span class="arithmatex">\(z\in[-r,r]\)</span> 成立，故 <span class="arithmatex">\(V_{sphere}=(\pi/4)V_{intersection}\)</span>：</p>
+<div class="arithmatex">\[V_{\text{sphere}} = \frac{4}{3}\pi r^3 = \frac{\pi}{4}V_{\text{intersection}} \;\Rightarrow\; V_{\text{intersection}} = \frac{16}{3}r^3\]</div>
+<p>（<span class="arithmatex">\( r = 1 \)</span> 时 <span class="arithmatex">\( V = 16/3 \)</span>。）</p>
+<hr />
+<h3 id="q67">Q67 · 扫雪机问题<a class="headerlink" href="#q67" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：正午之前某时刻开始下雪，雪以恒定速率降落。剑桥市正午派出一辆扫雪车沿 Massachusetts Avenue 从 MIT 清扫到哈佛。扫雪车每分钟按恒定的体积速率除雪。下午 1 点它扫过了 2 英里，下午 2 点又扫过了 3 英里。问雪是什么时候开始下的？</p>
+<p><strong>解答</strong>：把正午记为时刻 0，设雪在正午前 T 小时开始下。</p>
+<p>扫雪车速度与雪的竖直截面积成反比：<span class="arithmatex">\( v = c_1/A(t) \)</span>，其中 <span class="arithmatex">\( c_1 \)</span> 是扫雪车每小时能除掉的雪的体积（常数），<span class="arithmatex">\( A(t) \)</span> 是雪的截面积。由于雪以恒定速率降落，<span class="arithmatex">\( A(t) = c_2(t + T) \)</span>，<span class="arithmatex">\( c_2 \)</span> 是截面积每小时的增长率。于是</p>
+<div class="arithmatex">\[v = \frac{c_1}{c_2(t+T)} = \frac{c}{t+T},\qquad c = \frac{c_1}{c_2}\]</div>
+<p>对速度积分得到里程。到下午 1 点（<span class="arithmatex">\( t \)</span> 从 0 到 1）走了 2 英里，到下午 2 点（<span class="arithmatex">\( t \)</span> 从 0 到 2）走了 3 英里：</p>
+<div class="arithmatex">\[\int_0^1\frac{c}{T+t}dt = c\ln\frac{1+T}{T} = 2,\qquad \int_0^2\frac{c}{T+t}dt = c\ln\frac{2+T}{T} = 3\]</div>
+<p>两式联立：</p>
+<div class="arithmatex">\[\left(\frac{1+T}{T}\right)^3 = \left(\frac{2+T}{T}\right)^2 \;\Rightarrow\; T^2 + T - 1 = 0 \;\Rightarrow\; T = \frac{\sqrt{5}-1}{2} \approx 0.618 \text{ 小时}\]</div>
+<p><strong>雪始于正午前 <span class="arithmatex">\( (\sqrt{5}-1)/2 \)</span> 小时 <span class="arithmatex">\( \approx 37 \)</span> 分钟</strong>（黄金分割之比）。此题虽直接，却同时考察分析能力、积分与代数。</p>
+<hr />
+<h3 id="q68">Q68 · 正态条件期望积分<a class="headerlink" href="#q68" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：若 <span class="arithmatex">\( X \)</span> 是标准正态随机变量，<span class="arithmatex">\( X \sim N(0,1) \)</span>，求 <span class="arithmatex">\( E[X \mid X &gt; 0] \)</span>。</p>
+<p><strong>解答</strong>：<span class="arithmatex">\( X \sim N(0,1) \)</span> 的密度函数为 <span class="arithmatex">\( f(x) = (1/\sqrt{2\pi})\cdot e^{-x^2/2} \)</span>，于是</p>
+<p>条件密度为 <span class="arithmatex">\(f_{X\mid X&gt;0}(x)=f(x)/P(X&gt;0)=2f(x)\)</span>（<span class="arithmatex">\(x&gt;0\)</span>），因此</p>
+<div class="arithmatex">\[E[X\mid X&gt;0] = \frac{\int_0^{\infty} x f(x)\,dx}{P(X&gt;0)} = 2\int_0^{\infty} x\cdot\frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx.\]</div>
+<p>因为 <span class="arithmatex">\( d(-x^2/2) = -x\,dx \)</span>，可用换元 <span class="arithmatex">\( u = -x^2/2 \)</span>（<span class="arithmatex">\( du = -x\,dx \)</span>）：<span class="arithmatex">\( x = 0 \Rightarrow u = 0 \)</span>，<span class="arithmatex">\( x = \infty \Rightarrow u = -\infty \)</span>。</p>
+<div class="arithmatex">\[\int_0^{\infty}\frac{1}{\sqrt{2\pi}}xe^{-x^2/2}dx = -\frac{1}{\sqrt{2\pi}}\int_0^{-\infty}e^u du = -\frac{1}{\sqrt{2\pi}}\left[e^u\right]_0^{-\infty} = -\frac{1}{\sqrt{2\pi}}(0-1) = \frac{1}{\sqrt{2\pi}}\]</div>
+<p>上式中的积分是截断一阶矩 <span class="arithmatex">\(E[X\mathbf1_{\{X&gt;0\}}]=1/\sqrt{2\pi}\)</span>。再除以 <span class="arithmatex">\(P(X&gt;0)=1/2\)</span>，得到</p>
+<div class="arithmatex">\[E[X\mid X&gt;0] = \sqrt{\frac{2}{\pi}} \approx 0.7979.\]</div>
+<hr />
+<h3 id="q69">Q69 · 高斯积分<a class="headerlink" href="#q69" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\( \int_0^{\infty} e^{-x^2/2}\,dx \)</span>。</p>
+<p><strong>解答</strong>：若记得标准正态分布的密度函数 <span class="arithmatex">\( f(x) = (1/\sqrt{2\pi})e^{-x^2/2} \)</span>，由密度归一性</p>
+<div class="arithmatex">\[\int_{-\infty}^{\infty}f(x)dx = 2\int_0^{\infty}\frac{1}{\sqrt{2\pi}}e^{-x^2/2}dx = 1 \;\Rightarrow\; \int_0^{\infty}e^{-x^2/2}dx = \sqrt{\frac{\pi}{2}}\]</div>
+<p>若忘了密度函数（或被明确要求证明 <span class="arithmatex">\( \int (1/\sqrt{2\pi})e^{-x^2/2}\,dx = 1 \)</span>），需用<strong>极坐标二重积分</strong>。把两个一维积分相乘化为二重积分，再换极坐标 <span class="arithmatex">\( x = r\cos\theta \)</span>、<span class="arithmatex">\( y = r\sin\theta \)</span>（面积元 <span class="arithmatex">\( dx\,dy = r\,dr\,d\theta \)</span>）：</p>
+<div class="arithmatex">\[\int_{-\infty}^{\infty}e^{-x^2/2}dx\int_{-\infty}^{\infty}e^{-y^2/2}dy = \iint e^{-(x^2+y^2)/2}dxdy = \int_0^{\infty}\!\!\int_0^{2\pi}e^{-r^2/2}\,r\,dr\,d\theta\]</div>
+<div class="arithmatex">\[= -\int_0^{\infty}e^{-r^2/2}d(-r^2/2)\int_0^{2\pi}d\theta = -\left[e^{-r^2/2}\right]_0^{\infty}\cdot 2\pi = 2\pi\]</div>
+<p>由对称性 <span class="arithmatex">\( \int e^{-x^2/2}\,dx = \int e^{-y^2/2}\,dy \)</span>，所以 <span class="arithmatex">\( \int_{-\infty}^{\infty}e^{-x^2/2}\,dx = \sqrt{2\pi} \)</span>，即</p>
+<div class="arithmatex">\[\int_0^{\infty}e^{-x^2/2}dx = \sqrt{\frac{\pi}{2}}\]</div>
+<hr />
+<h3 id="q70">Q70 · 虚数幂<a class="headerlink" href="#q70" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\( i^i \)</span>（<span class="arithmatex">\( i \)</span> 的 <span class="arithmatex">\( i \)</span> 次幂）。</p>
+<p><strong>解答</strong>：此题要用欧拉公式 <span class="arithmatex">\( e^{i\theta} = \cos\theta + i\sin\theta \)</span>，它可以由泰勒级数证明。对 <span class="arithmatex">\( e^{i\theta} \)</span>、<span class="arithmatex">\( \cos\theta \)</span>、<span class="arithmatex">\( \sin\theta \)</span> 分别做泰勒展开：</p>
+<div class="arithmatex">\[e^{i\theta} = 1 + \frac{i\theta}{1!} + \frac{(i\theta)^2}{2!} + \frac{(i\theta)^3}{3!} + \cdots = 1 + i\frac{\theta}{1!} - \frac{\theta^2}{2!} - i\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + \cdots\]</div>
+<div class="arithmatex">\[\cos\theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots,\qquad i\sin\theta = i\frac{\theta}{1!} - i\frac{\theta^3}{3!} + i\frac{\theta^5}{5!} - \cdots\]</div>
+<p>合并三个级数显然有 <span class="arithmatex">\( e^{i\theta} = \cos\theta + i\sin\theta \)</span>。</p>
+<p>取 <span class="arithmatex">\( \theta = \pi \)</span>：<span class="arithmatex">\( e^{i\pi} = -1 \)</span>；取 <span class="arithmatex">\( \theta = \pi/2 \)</span>：<span class="arithmatex">\( e^{i\pi/2} = i \)</span>。所以 <span class="arithmatex">\( \ln i = \ln(e^{i\pi/2}) = i\pi/2 \)</span>，于是</p>
+<div class="arithmatex">\[\ln(i^i) = i\ln i = i\cdot\frac{i\pi}{2} = -\frac{\pi}{2} \;\Rightarrow\; i^i = e^{-\pi/2}\]</div>
+<p>（注：<span class="arithmatex">\( i^i \)</span> 实际上是一个实数 <span class="arithmatex">\( \approx 0.2079 \)</span>。由于复对数的多值性，一般值为 <span class="arithmatex">\( e^{-\pi/2 - 2k\pi} \)</span>，主值为 <span class="arithmatex">\( e^{-\pi/2} \)</span>。）</p>
+<hr />
+<h3 id="q71">Q71 · 伯努利不等式<a class="headerlink" href="#q71" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：证明：对一切 <span class="arithmatex">\( x &gt; -1 \)</span> 及一切整数 <span class="arithmatex">\( n \ge 2 \)</span>，<span class="arithmatex">\( (1+x)^n \ge 1 + nx \)</span>。</p>
+<p><strong>解答</strong>：</p>
+<p><strong>方法一：泰勒级数。</strong> 设 <span class="arithmatex">\( f(x) = (1+x)^n \)</span>。显然 <span class="arithmatex">\( 1 + nx \)</span> 正是 <span class="arithmatex">\( f \)</span> 在 <span class="arithmatex">\( x_0 = 0 \)</span> 处泰勒级数的前两项。<span class="arithmatex">\( f \)</span> 的导数：<span class="arithmatex">\( f'(x) = n(1+x)^{n-1} \)</span>，<span class="arithmatex">\( f''(x) = n(n-1)(1+x)^{n-2} \)</span>。用带拉格朗日余项的泰勒展开（<span class="arithmatex">\( x_0 = 0 \)</span>）：</p>
+<div class="arithmatex">\[f(x) = f(0) + f'(0)x + \frac{f''(\tilde{x})}{2!}x^2 = 1 + nx + \frac{n(n-1)}{2}(1+\tilde{x})^{n-2}x^2\]</div>
+<p>其中当 <span class="arithmatex">\( x &lt; 0 \)</span> 时 <span class="arithmatex">\( x \le \tilde{x} \le 0 \)</span>，当 <span class="arithmatex">\( x &gt; 0 \)</span> 时 <span class="arithmatex">\( x \ge \tilde{x} \ge 0 \)</span>（<span class="arithmatex">\( \tilde{x} \)</span> 介于 0 与 <span class="arithmatex">\( x \)</span> 之间）。</p>
+<p>由于 <span class="arithmatex">\( x &gt; -1 \)</span>、<span class="arithmatex">\( n \ge 2 \)</span>，有 <span class="arithmatex">\( n &gt; 0 \)</span>、<span class="arithmatex">\( n-1 &gt; 0 \)</span>、<span class="arithmatex">\( (1+\tilde{x})^{n-2} &gt; 0 \)</span>、<span class="arithmatex">\( x^2 \ge 0 \)</span>，所以</p>
+<div class="arithmatex">\[\frac{n(n-1)}{2}(1+\tilde{x})^{n-2}x^2 \geq 0 \;\Rightarrow\; f(x) = (1+x)^n \geq 1 + nx \qquad\blacksquare\]</div>
+<p><strong>方法二：数学归纳。</strong> "n 为整数"这一条件本身就是提示。</p>
+<ul>
+<li>基础情形 <span class="arithmatex">\( n = 2 \)</span>：<span class="arithmatex">\( (1+x)^2 = 1 + 2x + x^2 \ge 1 + 2x \)</span> 对一切 <span class="arithmatex">\( x &gt; -1 \)</span> 成立。</li>
+<li>归纳步：设 n = k 时成立，则对 n = k+1：</li>
+</ul>
+<div class="arithmatex">\[(1+x)^{k+1} = (1+x)^k(1+x) \geq (1+kx)(1+x) = 1 + (k+1)x + kx^2 \geq 1 + (k+1)x\]</div>
+<p>所以对一切整数 <span class="arithmatex">\( n \ge 2 \)</span>、<span class="arithmatex">\( x &gt; -1 \)</span> 成立。∎</p>
+<hr />
+<h3 id="q72-sqrt37">Q72 · 牛顿法求 <span class="arithmatex">\( \sqrt{37} \)</span><a class="headerlink" href="#q72-sqrt37" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：有限差分与数值方法</p>
+<p><strong>题目</strong>：用牛顿法解 <span class="arithmatex">\( x^2 = 37 \)</span>，精确到第三位有效数字。</p>
+<p><strong>解答</strong>：令 <span class="arithmatex">\( f(x) = x^2 - 37 \)</span>，原问题等价于解 <span class="arithmatex">\( f(x) = 0 \)</span>。自然初始值 <span class="arithmatex">\( x_0 = 6 \)</span>。牛顿迭代：</p>
+<div class="arithmatex">\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x_n^2 - 37}{2x_n}\]</div>
+<div class="arithmatex">\[x_1 = 6 - \frac{36-37}{2\times 6} = 6.08\overline{3}\]</div>
+<p>（验证：<span class="arithmatex">\( 6.083^2 = 37.00289 \)</span>，已非常接近 37；再迭代一步得 6.08276，即 <span class="arithmatex">\( \sqrt{37} \)</span>。）</p>
+<p><strong>不用牛顿法的替代解法一（泰勒展开）</strong>：对 <span class="arithmatex">\( f(x) = \sqrt{x} \)</span>（<span class="arithmatex">\( f'(x) = \frac12 x^{-1/2} \)</span>）在 36 处展开：</p>
+<div class="arithmatex">\[\sqrt{37} \approx \sqrt{36} + \frac{1}{2\sqrt{36}}(37-36) = 6 + \frac{1}{12} = 6.083\]</div>
+<p><strong>替代解法二（代数）</strong>：解应略大于 6。设 <span class="arithmatex">\( x = 6+y \)</span>，则 <span class="arithmatex">\( (6+y)^2 = 37 \Rightarrow y^2 + 12y - 1 = 0 \)</span>。忽略小的 <span class="arithmatex">\( y^2 \)</span> 项得 <span class="arithmatex">\( y \approx 1/12 \approx 0.083 \)</span>，故 <span class="arithmatex">\( x \approx 6.083 \)</span>。</p>
+<hr />
+<h3 id="q73">Q73 · 求根算法比较<a class="headerlink" href="#q73" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：有限差分与数值方法</p>
+<p><strong>题目</strong>：请解释几种解 <span class="arithmatex">\( f(x) = 0 \)</span> 的求根算法（设 <span class="arithmatex">\( f \)</span> 可导）。</p>
+<p><strong>解答</strong>：除牛顿法外，<strong>二分法</strong>和<strong>割线法</strong>是两种常用的替代方法。</p>
+<p><strong>牛顿法</strong>：从初值 <span class="arithmatex">\( x_0 \)</span> 出发，迭代 <span class="arithmatex">\( x_{n+1} = x_n - f(x_n)/f'(x_n) \)</span>。（迭代式来自一阶泰勒展开：<span class="arithmatex">\( f(x_{n+1}) \approx f(x_n) + f'(x_n)(x_{n+1} - x_n) = 0 \)</span>。）收敛不保证，尤其初值离根较远时；要求初值足够接近根、<span class="arithmatex">\( f \)</span> 在根附近可导。一旦收敛，速度是<strong>二阶（二次）的</strong>：<span class="arithmatex">\( (x_{n+1}-x_f)/(x_n-x_f)^2 \le \delta &lt; 1 \)</span>。</p>
+<p><strong>二分法</strong>：直观的算法。取两个初值 <span class="arithmatex">\( a_0 \)</span>、<span class="arithmatex">\( b_0 \)</span> 使 <span class="arithmatex">\( f(a_0) &lt; 0 &lt; f(b_0) \)</span>；由可导（连续）性，根必在两者之间。每步检查中点符号：<span class="arithmatex">\( f((a_n+b_n)/2) &lt; 0 \)</span> 则令 <span class="arithmatex">\( a_{n+1} = \)</span> 中点、<span class="arithmatex">\( b_{n+1} = b_n \)</span>；<span class="arithmatex">\( &gt; 0 \)</span> 则反之；<span class="arithmatex">\( = 0 \)</span>（或误差允许）则停止，<span class="arithmatex">\( x = (a_n+b_n)/2 \)</span>。收敛是<strong>线性</strong>的：<span class="arithmatex">\( (x_{n+1}-x_f)/(x_n-x_f) \le \delta &lt; 1 \)</span>，比牛顿法慢；但只要找到变号区间，<strong>收敛有保证</strong>。</p>
+<p><strong>割线法</strong>：从两个初值 <span class="arithmatex">\( x_0 \)</span>、<span class="arithmatex">\( x_1 \)</span> 出发，迭代</p>
+<div class="arithmatex">\[x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}\,f(x_n)\]</div>
+<p>即用线性近似 <span class="arithmatex">\( (f(x_n)-f(x_{n-1}))/(x_n-x_{n-1}) \)</span> 代替牛顿法中的 <span class="arithmatex">\( f'(x_n) \)</span>。优点是<strong>不需要计算导数</strong>（<span class="arithmatex">\( f' \)</span> 难算时很有价值）。收敛阶为 <span class="arithmatex">\( (1+\sqrt{5})/2 \approx 1.618 \)</span>：快于二分法、慢于牛顿法；与牛顿法一样，初值不佳时收敛不保证。</p>
+<p><strong>比较总结</strong>：二分法（线性、稳）＜ 割线法（1.618 阶、免导数）＜ 牛顿法（二阶、需导数与好初值）。</p>
+<hr />
+<h3 id="q74">Q74 · 拉格朗日乘子<a class="headerlink" href="#q74" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：用拉格朗日乘子法求原点到平面 2x + 3y + 4z = 12 的（最短）距离，并推广到一般平面 ax + by + cz = d。</p>
+<p><strong>解答</strong>：方法背景：求 <span class="arithmatex">\( f(x) \)</span> 在约束 <span class="arithmatex">\( g_1(x)=0, \ldots, g_k(x)=0 \)</span> 下的极值的必要条件是</p>
+<div class="arithmatex">\[\nabla f + \lambda_1\nabla g_1 + \cdots + \lambda_k\nabla g_k = 0\]</div>
+<p><span class="arithmatex">\( \lambda \)</span> 称为拉格朗日乘子。</p>
+<p>原点到平面的距离即原点与平面上各点距离的最小值。数学表达：</p>
+<div class="arithmatex">\[\min D^2 = f(x,y,z) = x^2+y^2+z^2 \quad \text{s.t.}\quad g(x,y,z) = 2x+3y+4z-12=0\]</div>
+<p>应用拉格朗日乘子法：</p>
+<div class="arithmatex">\[\begin{cases} 2x + 2\lambda = 0 \\ 2y + 3\lambda = 0 \\ 2z + 4\lambda = 0 \\ 2x+3y+4z-12 = 0 \end{cases} \Rightarrow \lambda = -\frac{24}{29},\; x = \frac{24}{29},\; y = \frac{36}{29},\; z = \frac{48}{29}\]</div>
+<div class="arithmatex">\[D = \sqrt{\left(\tfrac{24}{29}\right)^2 + \left(\tfrac{36}{29}\right)^2 + \left(\tfrac{48}{29}\right)^2} = \frac{12}{\sqrt{29}}\]</div>
+<p><strong>一般结论</strong>：平面 ax + by + cz = d 到原点的距离为</p>
+<div class="arithmatex">\[D = \frac{|d|}{\sqrt{a^2+b^2+c^2}}\]</div>
+<hr />
+<h3 id="q75-ode">Q75 · 可分离变量 ODE<a class="headerlink" href="#q75-ode" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：解常微分方程 y' + 6xy = 0，y(0) = 1。</p>
+<p><strong>解答</strong>：可分离变量方程形如 <span class="arithmatex">\( dy/dx = g(x)h(y) \)</span>，改写为 <span class="arithmatex">\( dy/h(y) = g(x)dx \)</span> 后两边积分。</p>
+<p>取 <span class="arithmatex">\( g(x) = -6x \)</span>、<span class="arithmatex">\( h(y) = y \)</span>：</p>
+<div class="arithmatex">\[\frac{dy}{y} = -6x\,dx \;\Rightarrow\; \int\frac{dy}{y} = \int -6x\,dx \;\Rightarrow\; \ln y = -3x^2 + c \;\Rightarrow\; y = e^{-3x^2+c}\]</div>
+<p>代入初始条件 y(0) = 1 得 c = 0，所以</p>
+<div class="arithmatex">\[y = e^{-3x^2}\]</div>
+<hr />
+<h3 id="q76-ode">Q76 · 齐次型 ODE<a class="headerlink" href="#q76-ode" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：解常微分方程 <span class="arithmatex">\( y' = (x-y)/(x+y) \)</span>。</p>
+<p><strong>解答</strong>：此方程当前形式不可分离，但可通过<strong>换元</strong>化为可分离方程。令 <span class="arithmatex">\( z = x + y \)</span>（则 <span class="arithmatex">\( y = z - x \)</span>，<span class="arithmatex">\( y' = dz/dx - 1 \)</span>）：</p>
+<div class="arithmatex">\[\frac{d(z-x)}{dx} = \frac{x-(z-x)}{z} \;\Rightarrow\; \frac{dz}{dx} - 1 = \frac{2x}{z} - 1 \;\Rightarrow\; z\,dz = 2x\,dx\]</div>
+<p>两边积分：</p>
+<div class="arithmatex">\[\int z\,dz = \int 2x\,dx + c \;\Rightarrow\; z^2 = 2x^2 + c\]</div>
+<p>回代 <span class="arithmatex">\( z = x + y \)</span>：</p>
+<div class="arithmatex">\[(x+y)^2 = 2x^2 + c \;\Rightarrow\; y^2 + 2xy - x^2 = c\]</div>
+<hr />
+<h3 id="q77">Q77 · 一阶线性微分方程<a class="headerlink" href="#q77" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：解一阶线性方程 <span class="arithmatex">\( y' + y/x = 1/x^2 \)</span>，<span class="arithmatex">\( y(1) = 1 \)</span>（<span class="arithmatex">\( x &gt; 0 \)</span>）。</p>
+<p><strong>解答</strong>：一阶线性方程形如 <span class="arithmatex">\( y' + P(x)y = Q(x) \)</span>。标准做法是找<strong>积分因子</strong> <span class="arithmatex">\( I(x) \)</span>，满足 <span class="arithmatex">\( dI/dx = I(x)P(x) \)</span>，即 <span class="arithmatex">\( I(x) = e^{\int P(x)dx} \)</span>，使得 <span class="arithmatex">\( I(x)(y' + P(x)y) = (I(x)y)' \)</span>；然后 <span class="arithmatex">\( (I(x)y)' = I(x)Q(x) \)</span> 两边积分得 <span class="arithmatex">\( y = \int I(x)Q(x)dx / I(x) \)</span>。</p>
+<p>本题 <span class="arithmatex">\( P(x) = 1/x \)</span>、<span class="arithmatex">\( Q(x) = 1/x^2 \)</span>：</p>
+<div class="arithmatex">\[I(x) = e^{\int(1/x)dx} = e^{\ln x} = x\]</div>
+<p>于是 <span class="arithmatex">\( (xy)' = I(x)Q(x) = 1/x \)</span>。两边积分：</p>
+<div class="arithmatex">\[xy = \int\frac{1}{x}dx = \ln x + c \;\Rightarrow\; y = \frac{\ln x + c}{x}\]</div>
+<p>代入 y(1) = 1 得 c = 1，所以</p>
+<div class="arithmatex">\[y = \frac{\ln x + 1}{x}\]</div>
+<hr />
+<h3 id="q78-ode">Q78 · 二阶齐次线性 ODE<a class="headerlink" href="#q78-ode" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：求常微分方程 y'' + y' + y = 0 的通解。</p>
+<p><strong>解答</strong>：背景：常系数二阶齐次线性方程 <span class="arithmatex">\( ar^2 + br + c = 0 \)</span> 称为特征方程。设其两根为 <span class="arithmatex">\( r_1 \)</span>、<span class="arithmatex">\( r_2 \)</span>：
+1. 实根 <span class="arithmatex">\( r_1 \neq r_2 \)</span>：通解 <span class="arithmatex">\( y = c_1e^{r_1x} + c_2e^{r_2x} \)</span>；
+2. 实重根 <span class="arithmatex">\( r_1 = r_2 = r \)</span>：通解 <span class="arithmatex">\( y = c_1e^{rx} + c_2xe^{rx} \)</span>；
+3. 复根 <span class="arithmatex">\( \alpha \pm i\beta \)</span>：通解 <span class="arithmatex">\( y = e^{\alpha x}(c_1\cos\beta x + c_2\sin\beta x) \)</span>。</p>
+<p>本题 <span class="arithmatex">\( a = b = c = 1 \)</span>，判别式 <span class="arithmatex">\( b^2 - 4ac = -3 &lt; 0 \)</span>，得复根 <span class="arithmatex">\( r = -1/2 \pm (\sqrt{3}/2)i \)</span>（<span class="arithmatex">\( \alpha = -1/2 \)</span>，<span class="arithmatex">\( \beta = \sqrt{3}/2 \)</span>），通解为</p>
+<div class="arithmatex">\[y = e^{-x/2}\left(c_1\cos\frac{\sqrt{3}}{2}x + c_2\sin\frac{\sqrt{3}}{2}x\right)\]</div>
+<hr />
+<h3 id="q79-ode">Q79 · 二阶非齐次线性 ODE<a class="headerlink" href="#q79-ode" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：求 ODE y'' + y' + y = 1 与 y'' + y' + y = x 的解。</p>
+<p><strong>解答</strong>：非齐次方程 <span class="arithmatex">\(a y''+b y'+c y=d(x)\)</span> 一般未必有简单闭式解；若能找到一个<strong>特解</strong> <span class="arithmatex">\(y_p(x)\)</span>，则通解为 <span class="arithmatex">\(y=y_p+y_g\)</span>，其中 <span class="arithmatex">\(y_g\)</span> 是对应齐次方程的通解。当 <span class="arithmatex">\(d(x)\)</span> 是简单多项式且不与齐次解共振时，可从同次多项式开始尝试待定系数。</p>
+<p>齐次部分与 Q77 相同：<span class="arithmatex">\( y_g = e^{-x/2}(c_1\cos(\sqrt{3}x/2) + c_2\sin(\sqrt{3}x/2)) \)</span>。</p>
+<p><strong>方程一 <span class="arithmatex">\( y'' + y' + y = 1 \)</span></strong>：显然 <span class="arithmatex">\( y = 1 \)</span> 是特解。所以</p>
+<div class="arithmatex">\[y = e^{-x/2}\left(c_1\cos\frac{\sqrt{3}}{2}x + c_2\sin\frac{\sqrt{3}}{2}x\right) + 1\]</div>
+<p><strong>方程二 <span class="arithmatex">\( y'' + y' + y = x \)</span></strong>：设特解 <span class="arithmatex">\( y_p = mx + n \)</span>，代入：</p>
+<div class="arithmatex">\[0 + m + (mx + n) = x \;\Rightarrow\; m = 1,\; n = -1\]</div>
+<p>特解为 x − 1，所以</p>
+<div class="arithmatex">\[y = e^{-x/2}\left(c_1\cos\frac{\sqrt{3}}{2}x + c_2\sin\frac{\sqrt{3}}{2}x\right) + (x - 1)\]</div>
+<hr />
+<h3 id="q80">Q80 · 相关即夹角<a class="headerlink" href="#q80" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：有 3 个随机变量 x、y、z。x 与 y 的相关系数为 0.8，x 与 z 的相关系数为 0.8。y 与 z 的相关系数最大、最小各是多少？</p>
+<p><strong>解答</strong>：把随机变量看成 <span class="arithmatex">\( \mathbb{R}^n \)</span> 空间中的向量（相关系数 = 两向量夹角的余弦，<span class="arithmatex">\( \rho = \cos\theta \)</span>）。</p>
+<p>设 <span class="arithmatex">\( x \)</span> 与 <span class="arithmatex">\( y \)</span> 的夹角为 <span class="arithmatex">\( \theta \)</span>，则 <span class="arithmatex">\( \cos\theta = \rho_{x,y} = 0.8 \)</span>；<span class="arithmatex">\( x \)</span> 与 <span class="arithmatex">\( z \)</span> 的夹角同样是 <span class="arithmatex">\( \theta \)</span>。</p>
+<ul>
+<li><strong>最大相关</strong>：y 与 z 夹角最小为 0（两向量同方向），相关系数为 <strong>1</strong>。</li>
+<li><strong>最小相关</strong>：<span class="arithmatex">\( y \)</span> 与 <span class="arithmatex">\( z \)</span> 夹角最大时，它们分居 <span class="arithmatex">\( x \)</span> 两侧各 <span class="arithmatex">\( \theta \)</span>，彼此夹角为 <span class="arithmatex">\( 2\theta \)</span>。</li>
+</ul>
+<p>由三角恒等式：</p>
+<div class="arithmatex">\[\cos 2\theta = \cos^2\theta - \sin^2\theta = 0.8^2 - 0.6^2 = 0.28\]</div>
+<p>（<span class="arithmatex">\( \sin\theta = \sqrt{1-0.8^2} = 0.6 \)</span>。）若忘了恒等式，也可用勾股定理：<span class="arithmatex">\( 0.8\times1.2 = 1\times h \Rightarrow h = 0.96 \)</span>，<span class="arithmatex">\( \cos 2\theta = \sqrt{1^2 - 0.96^2} = 0.28 \)</span>。</p>
+<p><strong>结论：<span class="arithmatex">\( \rho(y,z) \in [0.28, 1] \)</span></strong>。</p>
+<p>（与 Q82/Q84 的半正定解法互相印证，答案一致。）</p>
+<hr />
+<h3 id="q81-qr">Q81 · QR 分解解最小二乘<a class="headerlink" href="#q81-qr" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：如果你使用的编程语言没有线性最小二乘回归的函数，你会如何设计算法实现它？</p>
+<p><strong>解答</strong>：线性最小二乘回归是使用最广的统计分析方法。n 个观测的线性回归可写为</p>
+<div class="arithmatex">\[y_i = \beta_0 x_{i,0} + \beta_1 x_{i,1} + \cdots + \beta_{p-1}x_{i,p-1} + \varepsilon_i,\quad i=1,\cdots,n\]</div>
+<p>其中 <span class="arithmatex">\( x_{i,0} \equiv 1 \)</span> 为截距项。目标是找 <span class="arithmatex">\( \beta = [\beta_0,\ldots,\beta_{p-1}]^\top \)</span> 使 <span class="arithmatex">\( \sum\varepsilon_i^2 \)</span> 最小。写成矩阵形式 <span class="arithmatex">\( Y = X\beta + \varepsilon \)</span>，问题变为</p>
+<div class="arithmatex">\[\min_{\beta} f(\beta) = \min_{\beta}(Y - X\beta)^T(Y - X\beta)\]</div>
+<p>对 <span class="arithmatex">\(\beta\)</span> 求导并令其为零：<span class="arithmatex">\(\nabla f(\beta)=-2X^\top(Y-X\hat\beta)=0\)</span>，得到<strong>正规方程</strong> <span class="arithmatex">\((X^\top X)\hat\beta=X^\top Y\)</span>，其中 <span class="arithmatex">\(X^\top X\)</span> 是 <span class="arithmatex">\(p\times p\)</span> 对称阵、<span class="arithmatex">\(X^\top Y\)</span> 是 <span class="arithmatex">\(p\times1\)</span> 列向量。</p>
+<p><strong>QR 分解求解</strong>：对满列秩的 <span class="arithmatex">\(n\times p\)</span> 设计矩阵 <span class="arithmatex">\(X\)</span>（<span class="arithmatex">\(n\ge p\)</span>）做薄 QR 分解 <span class="arithmatex">\(X=QR\)</span>，其中 <span class="arithmatex">\(Q^\top Q=I_p\)</span>，<span class="arithmatex">\(R\)</span> 为对角元非零的 <span class="arithmatex">\(p\times p\)</span> 上三角矩阵。最小化 <span class="arithmatex">\(\lVert y-X\beta\rVert_2\)</span> 等价于解</p>
+<div class="arithmatex">\[R\hat\beta=Q^\top y,\]</div>
+<p>再对上三角方程回代即可。应直接分解 <span class="arithmatex">\(X\)</span>，不要先形成 <span class="arithmatex">\(X^\top X\)</span>：后者会平方条件数并损失数值精度。若 <span class="arithmatex">\(X\)</span> 秩亏，则使用带列主元的 QR 或 SVD；代码中也不应显式计算 <span class="arithmatex">\((X^\top X)^{-1}\)</span>。</p>
+<p><strong>顺带（面试常见统计问题）——线性最小二乘回归的假设</strong>：
+1. <span class="arithmatex">\( Y \)</span> 与 <span class="arithmatex">\( X \)</span> 线性相关：<span class="arithmatex">\( Y = X\beta + \varepsilon \)</span>；
+2. <span class="arithmatex">\( E[\varepsilon_i] = 0 \)</span>（对所有 <span class="arithmatex">\( i \)</span>）；
+3. <span class="arithmatex">\( \operatorname{var}(\varepsilon_i) = \sigma^2 \)</span> 为常数，且 <span class="arithmatex">\( E[\varepsilon_i\varepsilon_j] = 0 \)</span>（<span class="arithmatex">\( i\neq j \)</span>）——同方差、不相关误差；
+4. 无完全多重共线性：<span class="arithmatex">\( \rho(x_i, x_j) \neq \pm1 \)</span>；
+5. <span class="arithmatex">\( \varepsilon \)</span> 与 <span class="arithmatex">\( x_i \)</span> 独立。</p>
+<p>实践中这些假设常被违反，简单最小二乘不再是最佳线性无偏估计（BLUE），计量经济学有大量针对假设违反的后果与补救的讨论。</p>
+<hr />
+<h3 id="q82">Q82 · 特征值与特征向量<a class="headerlink" href="#q82" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：设矩阵 <span class="arithmatex">\( A = [[2,1],[1,2]] \)</span>，求 <span class="arithmatex">\( A \)</span> 的特征值与特征向量（可用多种方法）。</p>
+<p><strong>解答</strong>：背景：<span class="arithmatex">\( \lambda \)</span> 是 <span class="arithmatex">\( A \)</span> 的特征值当且仅当存在非零向量 <span class="arithmatex">\( x \)</span> 使 <span class="arithmatex">\( Ax = \lambda x \)</span>；<span class="arithmatex">\( \det(A-\lambda I) = 0 \)</span> 称为特征方程，其根即特征值。并有重要恒等式：<span class="arithmatex">\( \lambda_1\lambda_2\cdots\lambda_n = \det(A) \)</span>，<span class="arithmatex">\( \sum\lambda_i = \operatorname{trace}(A) \)</span>。<span class="arithmatex">\( A \)</span> 可对角化 <span class="arithmatex">\( \iff \)</span> 有 <span class="arithmatex">\( n \)</span> 个线性无关的特征向量，此时 <span class="arithmatex">\( A = XDX^{-1} \)</span>，<span class="arithmatex">\( A^k = XD^kX^{-1} \)</span>。</p>
+<p><strong>方法 A（直接用定义）</strong>：设 <span class="arithmatex">\( Ax = \lambda x \)</span>：</p>
+<div class="arithmatex">\[\begin{cases} 2x_1 + x_2 = \lambda x_1 \\ x_1 + 2x_2 = \lambda x_2 \end{cases} \Rightarrow 3(x_1+x_2) = \lambda(x_1+x_2)\]</div>
+<p>两式相加得 <span class="arithmatex">\( (3-\lambda)(x_1+x_2) = 0 \)</span>。若 <span class="arithmatex">\( x_1 = x_2 \)</span>，代入得 <span class="arithmatex">\( \lambda = 3 \)</span>，归一化特征向量为 <span class="arithmatex">\( [1/\sqrt{2}, 1/\sqrt{2}]^\top \)</span>；若 <span class="arithmatex">\( x_2 = -x_1 \)</span>，代入得 <span class="arithmatex">\( \lambda = 1 \)</span>，归一化特征向量为 <span class="arithmatex">\( [1/\sqrt{2}, -1/\sqrt{2}]^\top \)</span>。</p>
+<p><strong>方法 B（特征方程）</strong>：<span class="arithmatex">\( \det(A-\lambda I) = (2-\lambda)^2 - 1 = 0 \Rightarrow \lambda_1 = 1 \)</span>、<span class="arithmatex">\( \lambda_2 = 3 \)</span>。再把特征值代回 <span class="arithmatex">\( Ax = \lambda x \)</span> 求相应特征向量。</p>
+<p><strong>方法 C（迹与行列式）</strong>：<span class="arithmatex">\( \det(A) = 2\times2 - 1\times1 = 3 \)</span>，<span class="arithmatex">\( \operatorname{trace}(A) = 4 \)</span>，所以 <span class="arithmatex">\( \lambda_1\lambda_2 = 3 \)</span>、<span class="arithmatex">\( \lambda_1+\lambda_2 = 4 \)</span>，解得 <span class="arithmatex">\( \lambda_1 = 1 \)</span>、<span class="arithmatex">\( \lambda_2 = 3 \)</span>。再代回求特征向量。</p>
+<hr />
+<h3 id="q83-lu-cholesky">Q83 · LU 分解与 Cholesky 分解<a class="headerlink" href="#q83-lu-cholesky" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：解释 LU 分解如何用于解 Ax = b 与求 det(A)；什么是 Cholesky 分解，它有什么用？</p>
+<p><strong>解答</strong>：设 <span class="arithmatex">\( A \)</span> 为非奇异 <span class="arithmatex">\( n\times n \)</span> 矩阵，LU 分解把 <span class="arithmatex">\( A \)</span> 表示为下三角阵与上三角阵的乘积：<span class="arithmatex">\( A = LU \)</span>。</p>
+<ul>
+<li><strong>解 Ax = b</strong>：LUx = b 分两步——先解 Ly = b（前代），再解 Ux = y（回代），三角方程组的求解非常高效。</li>
+<li><strong>求行列式</strong>：<span class="arithmatex">\( \det(A) = \det(L)\det(U) = \prod L_{ii} \cdot \prod U_{jj} \)</span>（三角阵的行列式等于对角元之积）。</li>
+</ul>
+<p>当 <span class="arithmatex">\( A \)</span> 是<strong>对称正定</strong>矩阵时，<strong>Cholesky 分解</strong>把 <span class="arithmatex">\( A \)</span> 表示为 <span class="arithmatex">\( A = R^\top R \)</span>，其中 <span class="arithmatex">\( R \)</span> 是唯一对角元为正的上三角阵——本质上是满足 <span class="arithmatex">\( L = U^\top \)</span> 的 LU 分解，计算量约为 LU 的一半，数值稳定。</p>
+<p>Cholesky 分解在蒙特卡洛模拟中用于生成相关随机变量（见 Q83）。</p>
+<hr />
+<h3 id="q84">Q84 · 生成相关正态随机变量<a class="headerlink" href="#q84" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：如果你有一个标准正态分布的随机数生成器，如何生成两个相关系数为 <span class="arithmatex">\( \rho \)</span> 的 <span class="arithmatex">\( N(0,1) \)</span> 随机变量？</p>
+<p><strong>解答</strong>：由两个独立的 <span class="arithmatex">\( N(0,1) \)</span> 随机变量 <span class="arithmatex">\( z_1 \)</span>、<span class="arithmatex">\( z_2 \)</span> 出发：</p>
+<div class="arithmatex">\[x_1 = z_1,\qquad x_2 = \rho z_1 + \sqrt{1-\rho^2}\,z_2\]</div>
+<p>容易验证：</p>
+<ul>
+<li><span class="arithmatex">\( \operatorname{var}(x_1) = \operatorname{var}(z_1) = 1 \)</span>；</li>
+<li><span class="arithmatex">\( \operatorname{var}(x_2) = \rho^2\operatorname{var}(z_1) + (1-\rho^2)\operatorname{var}(z_2) = 1 \)</span>；</li>
+<li><span class="arithmatex">\( \operatorname{cov}(x_1, x_2) = \operatorname{cov}(z_1, \rho z_1 + \sqrt{1-\rho^2}\,z_2) = \rho\cdot\operatorname{cov}(z_1,z_1) = \rho \)</span>。</li>
+</ul>
+<p>所以 <span class="arithmatex">\( (x_1, x_2) \)</span> 是相关系数为 <span class="arithmatex">\( \rho \)</span> 的两个 <span class="arithmatex">\( N(0,1) \)</span> 随机变量。这正是 Cholesky 分解（协方差矩阵 <span class="arithmatex">\( \Sigma = [[1,\rho],[\rho,1]] = R^\top R \)</span>）生成相关随机数的基本例子。</p>
+<p><strong>推广到 <span class="arithmatex">\( n \)</span> 维</strong>：要生成 <span class="arithmatex">\( X \sim N(\mu, \Sigma) \)</span>（<span class="arithmatex">\( \Sigma \)</span> 为正定协方差矩阵），把 <span class="arithmatex">\( \Sigma \)</span> 分解为 <span class="arithmatex">\( R^\top R \)</span>，生成 <span class="arithmatex">\( n \)</span> 个独立 <span class="arithmatex">\( N(0,1) \)</span> 变量 <span class="arithmatex">\( Z \)</span>，则 <span class="arithmatex">\( X = \mu + R^\top Z \)</span>。（也可用奇异值分解 SVD：<span class="arithmatex">\( \Sigma = UDU^\top \)</span>，<span class="arithmatex">\( D \)</span> 为特征值对角阵、<span class="arithmatex">\( U \)</span> 为特征向量矩阵，<span class="arithmatex">\( X = \mu + UD^{1/2}Z \)</span>，其中 <span class="arithmatex">\( D^{1/2} \)</span> 的对角元为 <span class="arithmatex">\( \sqrt{\lambda_i} \)</span>。）</p>
+<hr />
+<h3 id="q85">Q85 · 三元相关矩阵半正定（金融应用）<a class="headerlink" href="#q85" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：相关矩阵必须满足什么条件？用该条件说明：任意三个随机变量的两两相关系数不能任意取值（例如 <span class="arithmatex">\( \rho(x,y) = \rho(x,z) = 0.8 \)</span> 时 <span class="arithmatex">\( \rho(y,z) \)</span> 的取值范围）。</p>
+<p><strong>解答</strong>：协方差/相关矩阵是<strong>对称半正定矩阵</strong>；若随机变量间无完全线性相关，则为对称<strong>正定</strong>矩阵。等价判据（对半正定）：</p>
+<ol>
+<li><span class="arithmatex">\( x^\top A x \ge 0 \)</span> 对任意向量 <span class="arithmatex">\( x \)</span> 成立；</li>
+<li>所有特征值非负（对称阵的特征值全为实数，且属于不同特征值的特征向量相互正交）；</li>
+<li>所有主子式非负。对正定矩阵可以使用更简洁的 Sylvester 判据：所有顺序主子式严格为正。</li>
+</ol>
+<p>（正定时三条均改为严格为正。）</p>
+<p>以 ρ(x,y) = ρ(x,z) = 0.8 为例，相关矩阵的行列式必须非负（三阶主子式）：</p>
+<div class="arithmatex">\[\det P = -\rho^2 + 1.28\rho - 0.28 \geq 0 \;\Rightarrow\; 0.28 \leq \rho(y,z) \leq 1\]</div>
+<p>同时二阶主子式要求 <span class="arithmatex">\( 1 - 0.8^2 = 0.36 &gt; 0 \)</span>（自动满足）。所以三个随机变量的两两相关系数被半正定性约束在一系列不等式内，<strong>不能任意取值</strong>。这一条件在金融中随处可见：构建多资产协方差矩阵、验证风险模型参数是否合理时，都必须先通过半正定性检验。</p>
+<h2 id="_3">数学基础进阶<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>本节覆盖微积分、级数、复分析、矩阵和线性代数。基础题要求计算准确，高阶题要求说明定理条件、收敛性和数值稳定性。</p>
+<h3 id="q86">Q86 · 灯塔光束沿岸移动速度<a class="headerlink" href="#q86" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：灯塔位于距平直海岸 x 英里处，每分钟旋转一圈。当光束沿岸照到距"最近点" y 英里处时，光斑沿岸移动的速度是多少？</p>
+<p><strong>解答</strong>：令 <span class="arithmatex">\(y\)</span> 表示光束在海滩上的位置（从离灯塔最近的海滩点起算），令 <span class="arithmatex">\(\theta\)</span> 为光束与灯塔到该最近点连线的夹角。要求的是 <span class="arithmatex">\(dy/dt\)</span>，其中 <span class="arithmatex">\(t\)</span> 以分钟计。由链式法则</p>
+<div class="arithmatex">\[ \frac{dy}{dt}=\frac{dy}{d\theta}\frac{d\theta}{dt}. \]</div>
+<p>灯塔每分钟旋转一周，并假设匀速旋转，因此</p>
+<div class="arithmatex">\[ \frac{d\theta}{d t}=2\pi. \]</div>
+<p>由几何关系 <span class="arithmatex">\(y=x\tan\theta\)</span>、<span class="arithmatex">\(\theta=\arctan(y/x)\)</span>，所以</p>
+<div class="arithmatex">\[ \frac{dy}{d\theta}=x\sec^{2}(\theta), \]</div>
+<p>最终得到</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{dy}{dt}&amp;=2\pi x\sec^{2}(\theta)\\&amp;=2\pi x\sec^{2}\left(\arctan\left(\frac{y}{x}\right)\right)\\&amp;=2\pi\frac{x^{2}+y^{2}}{x},\end{aligned} \]</div>
+<p>其中使用了 <span class="arithmatex">\(\sec^2\eta=1+\tan^2\eta\)</span>。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>当光束位于离最近点 <span class="arithmatex">\(y\)</span> 英里处时，光束速度变化率是多少？</p>
+</li>
+<li>
+<p>若灯塔位于以恒速 <span class="arithmatex">\(s\)</span> 平行海滩航行的船上，光束沿海滩移动的速度如何变化？</p>
+</li>
+</ul>
+<h3 id="q87-sqrtx25x-x">Q87 · 求极限 <span class="arithmatex">\( \sqrt{x^2+5x}-x \)</span><a class="headerlink" href="#q87-sqrtx25x-x" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\(\lim_{x\to+\infty}\left(\sqrt{x^{2}+5x}-x\right)\)</span>。</p>
+<p><strong>解答</strong>：为使用 Taylor 展开，先整理极限：</p>
+<div class="arithmatex">\[ \begin{aligned}\lim_{x\to+\infty}\left(\sqrt{x^{2}+5x}-x\right)&amp;=\lim_{x\to+\infty}\left(x\sqrt{1+\frac{5}{x}}-x\right)\\&amp;=\lim_{x\to+\infty}\left(x\left(\sqrt{1+\frac{5}{x}}-1\right)\right)\\&amp;=\lim_{y\to0}\left(\frac{1}{y}\left(\sqrt{1+5y}-1\right)\right).\end{aligned} \]</div>
+<p>对 <span class="arithmatex">\(f(x)=\sqrt{1+ax}\)</span> 在 <span class="arithmatex">\(x=0\)</span> 处展开，有</p>
+<div class="arithmatex">\[ f^{\prime}(x)=\frac{1}{2}a(1+ax)^{-1/2},\qquad f^{\prime\prime}(x)=\frac{-1}{4}a^{2}(1+ax)^{-3/2}, \]</div>
+<p>因此</p>
+<div class="arithmatex">\[ f(x)=1+\frac{1}{2}ax+\mathcal{O}(x^{2}) \]</div>
+<p>把它代入原极限即可得到</p>
+<div class="arithmatex">\[ \begin{aligned}\lim_{x\to+\infty}\left(\sqrt{x^{2}+5x}-x\right)&amp;=\lim_{y\to0}\left(\frac{1}{y}\left(1+\frac{5}{2}y+\mathcal{O}(y^{2})-1\right)\right)\\&amp;=\lim_{y\to0}\left(\frac{5}{2}+\mathcal{O}(y)\right)=\frac{5}{2}.\end{aligned} \]</div>
+<p><strong>相关追问：</strong></p>
+<p>陈述 l'Hôpital 法则。</p>
+<ul>
+<li>证明以下极限：</li>
+</ul>
+<p>(1)</p>
+<div class="arithmatex">\[ \lim_{x\to0}\frac{\sin(x)}{x}=1. \]</div>
+<p>(2)</p>
+<div class="arithmatex">\[ \lim_{|x|\to\infty}\left(x\sin\left(\frac{1}{x}\right)\right)=1. \]</div>
+<p>(3)  <span class="arithmatex">\( \lim_{x \to \infty} (x^n e^{-x}) = 0 \)</span>，其中 <span class="arithmatex">\(n\)</span> 为正整数。</p>
+<h3 id="q88">Q88 · 斐波那契数列的闭式解<a class="headerlink" href="#q88" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求斐波那契数列的闭式（解析）表达式。</p>
+<p><strong>解答</strong>：Fibonacci 数列 <span class="arithmatex">\(f(n)\)</span> 定义为</p>
+<div class="arithmatex">\[ f(n):=\begin{cases}{1,}&amp;{n=1,}\\ {1,}&amp;{n=2,}\\ {f(n-1)+f(n-2),}&amp;{n\ge3.}\\ \end{cases} \]</div>
+<p>这是一类二阶线性递推。识别出 <span class="arithmatex">\(f(n)=Af(n-1)+Bf(n-2)\)</span>（<span class="arithmatex">\(n\ge2\)</span>）后，设特征根为 <span class="arithmatex">\(x_1,x_2\)</span>，通解可写为</p>
+<div class="arithmatex">\[ f(n)=\frac{x_{1}^{n}-x_{2}^{n}}{x_{1}-x_{2}}, \]</div>
+<p>其中 <span class="arithmatex">\(x_1,x_2\)</span> 满足 <span class="arithmatex">\(x^2=Ax+B\)</span>。本题 <span class="arithmatex">\(A=B=1\)</span>，所以</p>
+<div class="arithmatex">\[ x_{1}=\frac{1+\sqrt{5}}{2},\quad x_{2}=\frac{1-\sqrt{5}}{2}. \]</div>
+<p>于是数列闭式为</p>
+<div class="arithmatex">\[ f(n)=\frac{1}{\sqrt{5}}(x_{1}^{n}-x_{2}^{n})=\frac{(1+\sqrt{5})^{n}-(1-\sqrt{5})^{n}}{2^{n}\sqrt{5}}. \]</div>
+<p>这就是 Binet 公式，<span class="arithmatex">\(x_1\)</span> 也称为黄金比例。</p>
+<p>若题目给出闭式并要求验证其满足 Fibonacci 定义，最简单的是数学归纳法：先验证 <span class="arithmatex">\(n=0,1\)</span>，再假设所有 <span class="arithmatex">\(n&lt;k\)</span> 成立，利用特征根方程验证 <span class="arithmatex">\(n=k\)</span>。</p>
+<div class="arithmatex">\[ \begin{aligned}f(k)&amp;=f(k-1)+f(k-2)\\&amp;=\frac{1}{\sqrt{5}}(x_{1}^{n-1}-x_{2}^{n-1})+\frac{1}{\sqrt{5}}(x_{1}^{n-2}-x_{2}^{n-2})\\&amp;=\frac{1}{\sqrt{5}}x_{1}^{n-2}(1+x_{1})-\frac{1}{\sqrt{5}}x_{2}^{n-2}(1+x_{2})\\&amp;=\frac{1}{\sqrt{5}}(x_{1}^{n}-x_{2}^{n}),\\ \end{aligned} \]</div>
+<p>最后一步使用了 <span class="arithmatex">\(x_1,x_2\)</span> 满足 <span class="arithmatex">\(x^2=x+1\)</span>，归纳证明完成。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>证明</li>
+</ul>
+<div class="arithmatex">\[ \lim_{n\to\infty}\frac{f(n+1)}{f(n)}=\frac{1+\sqrt{5}}{2}. \]</div>
+<ul>
+<li>Lucas 数列满足递推关系</li>
+</ul>
+<div class="arithmatex">\[ L(n):=\begin{cases}{1}&amp;{n=1,}\\ {3}&amp;{n=2,}\\ {L(n-1)+L(n-2)}&amp;{n\ge3.}\\ \end{cases} \]</div>
+<p>请用归纳法验证其闭式为</p>
+<div class="arithmatex">\[ L(n)=\left(\frac{1+\sqrt{5}}{2}\right)^{n}+\left(\frac{1-\sqrt{5}}{2}\right)^{n}. \]</div>
+<h3 id="q89">Q89 · 证明均值严格大于几何均值<a class="headerlink" href="#q89" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：证明：<span class="arithmatex">\(\dfrac{e^{a}+e^{b}}{2}&gt;e^{\frac{a+b}{2}}\)</span>。</p>
+<p><strong>解答</strong>：本题本质是凸性。函数严格凸当且仅当二阶导数为正；等价地，图像上两点连线位于图像上方。本题只需证明中点情形。</p>
+<p>令 <span class="arithmatex">\(f(x)=e^x\)</span>，有 <span class="arithmatex">\(f''(x)&gt;0\)</span>，结论立即成立。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>凸函数一定处处可导吗？</p>
+</li>
+<li>
+<p>凸函数一定连续吗？</p>
+</li>
+<li>
+<p>若任意弦的中点都在图像上方，能否推出函数凸？</p>
+</li>
+</ul>
+<p>请用算术—几何平均不等式完成证明。</p>
+<h3 id="q90">Q90 · 求无穷连分数的值<a class="headerlink" href="#q90" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\(2+\dfrac{2}{2+\dfrac{2}{2+\dfrac{2}{\cdots}}}\)</span> 的值。</p>
+<p><strong>解答</strong>：这是一个无限连分数。关键是识别其重复结构。令</p>
+<div class="arithmatex">\[ y=2+\frac{2}{2+\frac{2}{2+\frac{2}{...}}}, \]</div>
+<p>实际得到的就是</p>
+<div class="arithmatex">\[ y=2+\frac{2}{y}. \]</div>
+<p>两边乘以 <span class="arithmatex">\(y\)</span> 得 <span class="arithmatex">\(y^2-2y-2=0\)</span>，所以候选解为 <span class="arithmatex">\(1\pm\sqrt3\)</span>。原连分数显然只有一个正解，且由定义 <span class="arithmatex">\(y&gt;2\)</span>，故取 <span class="arithmatex">\(y=1+\sqrt3\)</span>；另一个根是代数变形引入的伪解。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>求</li>
+</ul>
+<div class="arithmatex">\[ 1+\frac{1}{1+\frac{1}{1+\frac{1}{...}}} \]</div>
+<h3 id="q91-cdf">Q91 · 正态 cdf 的拐点<a class="headerlink" href="#q91-cdf" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：什么是拐点？求 <span class="arithmatex">\(N(\mu,\sigma)\)</span> 随机变量累积分布函数拐点的坐标。</p>
+<p><strong>解答</strong>：拐点是曲率（凹凸性）发生改变的点。寻找 <span class="arithmatex">\(f(x)\)</span> 的拐点时，<span class="arithmatex">\(f''(x)=0\)</span> 是必要条件，但还需检查二阶导数在该点两侧确实变号。</p>
+<p>正态变量 <span class="arithmatex">\(N(\mu,\sigma)\)</span> 的分布函数为</p>
+<div class="arithmatex">\[ F(x)=\int_{-\infty}^{x}\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(y-\mu)^2}{2\sigma^2}\right)dy. \]</div>
+<p>因此</p>
+<div class="arithmatex">\[ F^{\prime}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right), \]</div>
+<p>and</p>
+<div class="arithmatex">\[ F^{\prime\prime}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)\left(-\frac{(x-\mu)}{\sigma^{2}}\right). \]</div>
+<p>显然，<span class="arithmatex">\(F''(x)=0\)</span> 当且仅当</p>
+<div class="arithmatex">\[ \left(-\frac{(x-\mu)}{\sigma^{2}}\right)=0, \]</div>
+<p>or</p>
+<div class="arithmatex">\[ x=\mu. \]</div>
+<p>还需检查 <span class="arithmatex">\(x=\mu\)</span> 两侧变号。指数项始终为正，符号只由 <span class="arithmatex">\(-(x-\mu)\)</span> 决定，故在两侧变号，<span class="arithmatex">\(x=\mu\)</span> 是拐点。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(N(\mu,\sigma)\)</span> 密度函数的拐点在哪里？（注意这是一个陷阱题。）</p>
+</li>
+<li>
+<p><span class="arithmatex">\(g(x)=\sin(kx)\)</span> 的拐点在哪里？</p>
+</li>
+</ul>
+<h3 id="q92">Q92 · 正定矩阵及其性质<a class="headerlink" href="#q92" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：什么是正定矩阵？正定矩阵有哪些性质？</p>
+<p><strong>解答</strong>：正定矩阵必须是方阵，有多种等价定义。记 <span class="arithmatex">\(A^T\)</span> 为转置，<span class="arithmatex">\(A^*\)</span> 为共轭转置；共轭转置先转置再对元素取共轭。</p>
+<p>令 <span class="arithmatex">\(M\)</span> 为 <span class="arithmatex">\(n\times n\)</span> 矩阵。若对所有非零 <span class="arithmatex">\(\mathbf z\in\mathbb C^n\)</span> 都有</p>
+<div class="arithmatex">\[ \mathbf{z}^{*}M\mathbf{z}&gt;0. \]</div>
+<p>这是正定的常用定义。若 <span class="arithmatex">\(M\)</span> 是 Hermitian 矩阵（实矩阵情形即对称矩阵），则正定还等价于：</p>
+<ul>
+<li>
+<p>所有特征值均为正；或</p>
+</li>
+<li>
+<p>所有左上角主子矩阵的行列式均为正：</p>
+</li>
+</ul>
+<p>– <span class="arithmatex">\(M\)</span> 的左上角 <span class="arithmatex">\(1\times1\)</span> 主子矩阵</p>
+<p>– <span class="arithmatex">\(M\)</span> 的左上角 <span class="arithmatex">\(2\times2\)</span> 主子矩阵</p>
+<p>– ……</p>
+<p>量化金融中常见的是协方差矩阵，此时矩阵为实对称矩阵。</p>
+<p>实对称矩阵是某组随机变量的协方差矩阵，当且仅当它半正定。“半”表示允许零特征值，因此可能存在非零向量满足</p>
+<p>允许零特征值，因此可能存在非零向量满足</p>
+<div class="arithmatex">\[ x^{t}M x=0, \]</div>
+<p>但仍要求非负性。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>下列矩阵是否正定？</li>
+</ul>
+<p>(a)</p>
+<div class="arithmatex">\[ \left(\begin{array}{l l}{1}&amp;{0}\\ {0}&amp;{1}\end{array}\right) \]</div>
+<p>(b)</p>
+<div class="arithmatex">\[ \left(\begin{array}{c c}\cos(\theta)&amp;-\sin(\theta)\\ \sin(\theta)&amp;\cos(\theta)\end{array}\right) \]</div>
+<h3 id="q93-m-am2-c-actop-c">Q93 · 求 <span class="arithmatex">\( M \)</span> 使 <span class="arithmatex">\( A=M^2 \)</span>，求 <span class="arithmatex">\( C \)</span> 使 <span class="arithmatex">\( A=C^\top C \)</span><a class="headerlink" href="#q93-m-am2-c-actop-c" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：线性代数</p>
+<p><strong>题目</strong>：已知 <span class="arithmatex">\(A=\begin{pmatrix}5&amp;-3\\-3&amp;5\end{pmatrix}\)</span>：求矩阵 <span class="arithmatex">\(M\)</span> 使 <span class="arithmatex">\(A=M^{2}\)</span>；再求矩阵 <span class="arithmatex">\(C\)</span> 使 <span class="arithmatex">\(A=C^{T}C\)</span>。</p>
+<p><strong>解答</strong>：把矩阵 <span class="arithmatex">\(M\)</span> 记为</p>
+<div class="arithmatex">\[ M=\left[\begin{array}{l l}{a}&amp;{b}\\ {c}&amp;{d}\end{array}\right]. \]</div>
+<p>矩阵平方为</p>
+<div class="arithmatex">\[ M^{2}=\left[\begin{array}{l l}{a^{2}+b c}&amp;{a b+b d}\\ {a c+c d}&amp;{b c+d^{2}}\end{array}\right]. \]</div>
+<p>令 <span class="arithmatex">\( M^{2} = A \)</span> 得到四个方程</p>
+<div class="arithmatex">\[ \begin{array}{l}a^{2}+bc=5,\quad ab+bd=-3,\\ ac+cd=-3,\quad bc+d^{2}=5.\end{array} \]</div>
+<p>第二、三式分别给出 <span class="arithmatex">\(-3=b(a+d)\)</span> 与 <span class="arithmatex">\(-3=c(a+d)\)</span>，所以 <span class="arithmatex">\(b=c\)</span>，问题化为三条方程：</p>
+<div class="arithmatex">\[ 5=a^{2}+b^{2},\qquad-3=a b+b d,\qquad5=b^{2}+d^{2}. \]</div>
+<p>第一、三式给出 <span class="arithmatex">\(a^2=d^2\)</span>，取 <span class="arithmatex">\(a=d=\sqrt{5-b^2}\)</span>，代入第二式得</p>
+<div class="arithmatex">\[ -\frac{3}{2}=b\sqrt{5-b^{2}}, \]</div>
+<p>由此知 <span class="arithmatex">\(b\)</span> 必为负；平方求解会引入伪根，最后要回代筛选。平方并用求根公式得到</p>
+<div class="arithmatex">\[ b^{2}=\frac{5\pm4}{2}. \]</div>
+<p>为使 <span class="arithmatex">\(a,d\)</span> 为实数，取 <span class="arithmatex">\(b^2=1/2\)</span>、<span class="arithmatex">\(b=-1/\sqrt2\)</span>，于是解为</p>
+<div class="arithmatex">\[ M=\left[\begin{array}{c c}{\frac{3}{\sqrt{2}}}&amp;{-\frac{1}{\sqrt{2}}}\\ {-\frac{1}{\sqrt{2}}}&amp;{\frac{3}{\sqrt{2}}}\end{array}\right]. \]</div>
+<p>第二问要求 <span class="arithmatex">\(A=C^TC\)</span>。令矩阵 <span class="arithmatex">\(C\)</span> 为</p>
+<div class="arithmatex">\[ C=\left[\begin{array}{l l}{e}&amp;{f}\\ {g}&amp;{h}\end{array}\right]. \]</div>
+<p>则</p>
+<div class="arithmatex">\[ C^{T}C=\left[\begin{array}{c c}{e^{2}+f^{2}}&amp;{e g+f h}\\ {e g+f h}&amp;{g^{2}+h^{2}}\\ \end{array}\right]. \]</div>
+<p>令 <span class="arithmatex">\(C^TC=A\)</span> 得到三条独立方程：</p>
+<div class="arithmatex">\[ e^{2}+f^{2}=5, \]</div>
+<div class="arithmatex">\[ eg+fh=-3, \]</div>
+<div class="arithmatex">\[ g^{2}+h^{2}=5. \]</div>
+<p>三条独立方程含四个未知数，解不唯一，至少有一个自由变量。题目只要求找一个 <span class="arithmatex">\(C\)</span>，因此可任选一个变量（例如令 <span class="arithmatex">\(f=0\)</span>），再求其余变量。</p>
+<p>最方便的是令 <span class="arithmatex">\(f=0\)</span>，则 <span class="arithmatex">\(e=\pm\sqrt5\)</span>；取 <span class="arithmatex">\(e=\sqrt5\)</span>，由第二式得 <span class="arithmatex">\(g=-3/\sqrt5\)</span>，最后 <span class="arithmatex">\(h=\pm4/\sqrt5\)</span>。因此可取</p>
+<div class="arithmatex">\[ \left[\begin{array}{c c}{\sqrt{5}}&amp;{0}\\ {\frac{-3}{\sqrt{5}}}&amp;{\frac{4}{\sqrt{5}}}\\ \end{array}\right]. \]</div>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>第一问是否有多个解？</p>
+</li>
+<li>
+<p>如何定义矩阵的特征值和特征向量？</p>
+</li>
+</ul>
+<p>还可以利用矩阵的特征值和特征向量构造更优雅的平方根，请将该方法应用于本例。</p>
+<h3 id="q94">Q94 · 排列乘积的奇偶性<a class="headerlink" href="#q94" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论</p>
+<p><strong>题目</strong>：设 <span class="arithmatex">\(A_1,A_2,\ldots,A_n\)</span> 是 <span class="arithmatex">\(1,2,\ldots,n\)</span> 的一个排列。证明：当 <span class="arithmatex">\(n\)</span> 为奇数时，<span class="arithmatex">\((A_1-1)(A_2-2)\cdots(A_n-n)\)</span> 是偶数。</p>
+<p><strong>解答</strong>：先回顾奇偶数的运算规则：</p>
+<div class="arithmatex">\[  odd-odd=even,\qquad odd-even=odd,\qquad even-even=even, \]</div>
+<div class="arithmatex">\[  odd\times odd=odd,\qquad odd\times even=even,\qquad even\times even=even. \]</div>
+<p>因此乘积 <span class="arithmatex">\(B_1\cdots B_n\)</span> 为偶数，当且仅当至少一个 <span class="arithmatex">\(B_i\)</span> 为偶数。题目化为证明当 <span class="arithmatex">\(n\)</span> 为奇数时，至少一个 <span class="arithmatex">\(A_i-i\)</span> 为偶数。</p>
+<p>当 <span class="arithmatex">\(n\)</span> 为奇数时，<span class="arithmatex">\(A_i\)</span> 中有 <span class="arithmatex">\((n+1)/2\)</span> 个奇数、<span class="arithmatex">\((n-1)/2\)</span> 个偶数，索引 <span class="arithmatex">\(1,\ldots,n\)</span> 也同样如此。若所有 <span class="arithmatex">\(A_i-i\)</span> 都为奇数，每个奇数 <span class="arithmatex">\(A_i\)</span> 都必须配一个偶数索引，但奇数个数更多，不可能全部配对，故至少一个差为偶数。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>当 <span class="arithmatex">\(n\)</span> 为偶数时能得到什么结论？</p>
+</li>
+<li>
+<p>若把 <span class="arithmatex">\(A_i-i\)</span> 改为 <span class="arithmatex">\(A_i+i\)</span>，结论是否改变？</p>
+</li>
+<li>
+<p>为什么 <span class="arithmatex">\(\prod_i(A_i-2i)\)</span> 总是偶数？</p>
+</li>
+</ul>
+<h3 id="q95">Q95 · 证明刘维尔定理<a class="headerlink" href="#q95" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：证明刘维尔定理：在全复平面上可微且有界的函数必为常数。</p>
+<p><strong>解答</strong>：下面用 Cauchy 估计证明 Liouville 定理。</p>
+<p>设 <span class="arithmatex">\(f\)</span> 在整个复平面上全纯且有界：<span class="arithmatex">\(|f(z)|\le M\)</span>。</p>
+<p>使用 Cauchy 估计：若 <span class="arithmatex">\(f\)</span> 在圆盘 <span class="arithmatex">\(|z-z_0|&lt;R\)</span> 内全纯，且在 <span class="arithmatex">\(|z-z_0|\le r\)</span> 上满足 <span class="arithmatex">\(|f(z)|\le M\)</span>（<span class="arithmatex">\(0&lt;r&lt;R\)</span>），则</p>
+<div class="arithmatex">\[ |f^{(n)}(z_{0})|\leq\frac{M n!}{r^{n}}, \]</div>
+<p>其中 <span class="arithmatex">\(n\)</span> 为任意非负整数。</p>
+<p>取 <span class="arithmatex">\(n=1\)</span> 得</p>
+<div class="arithmatex">\[ |f^{\prime}(z_{0})|\leq\frac{M}{r}. \]</div>
+<p>由于 <span class="arithmatex">\(f\)</span> 在整个平面上全纯，<span class="arithmatex">\(r\)</span> 可任意增大并令 <span class="arithmatex">\(r\to\infty\)</span>；而 <span class="arithmatex">\(f'(z_0)\)</span> 与 <span class="arithmatex">\(r\)</span> 无关，于是</p>
+<div class="arithmatex">\[ |f^{\prime}(z_{0})|=0. \]</div>
+<p>该结论对所有 <span class="arithmatex">\(z_0\)</span> 成立，故 <span class="arithmatex">\(f'(z)=0\)</span>，<span class="arithmatex">\(f\)</span> 为常数。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>定义全纯函数与整函数。</p>
+</li>
+<li>
+<p>Cauchy–Riemann 方程是什么，有何意义？</p>
+</li>
+<li>
+<p>什么是 Cauchy 积分公式？</p>
+</li>
+<li>
+<p>证明 Cauchy 估计。</p>
+</li>
+<li>
+<p>陈述 Cauchy 留数定理。</p>
+</li>
+</ul>
+<h3 id="q96-sin-cos">Q96 · sin 与 cos 的傅里叶变换<a class="headerlink" href="#q96-sin-cos" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\(\sin(x)\)</span> 与 <span class="arithmatex">\(\cos(x)\)</span> 的傅里叶变换。</p>
+<p><strong>解答</strong>：对函数作 Fourier 变换本质上是积分计算。对 <span class="arithmatex">\(f(x)\)</span> 定义 Fourier 变换 <span class="arithmatex">\(F(s)\)</span> 为</p>
+<div class="arithmatex">\[ F(t)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-itx}f(x)dx, \]</div>
+<p>该定义与概率论中的特征函数密切相关；其他约定只差常数因子，不影响后续结论。</p>
+<p>本题要计算</p>
+<div class="arithmatex">\[ F_{s}(t)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-itx}\sin(x)dx, \]</div>
+<p>下标 <span class="arithmatex">\(s\)</span> 表示 <span class="arithmatex">\(\sin x\)</span> 的 Fourier 变换。关键是把正弦写成复指数的线性组合：</p>
+<div class="arithmatex">\[ \sin(x)=\frac{e^{ix}-e^{-ix}}{2i}. \]</div>
+<p>于是</p>
+<div class="arithmatex">\[ F_{s}(t)=\frac{1}{2i\sqrt{2\pi}}\int_{-\infty}^{\infty}\left(e^{-ix(t-1)}-e^{-ix(t+1)}\right)dx. \]</div>
+<p>先回顾简单函数的 Fourier 变换。常数函数 1 的变换为</p>
+<div class="arithmatex">\[ F_{1}(t)=\sqrt{2\pi}\delta(t), \]</div>
+<p>其中 <span class="arithmatex">\(\delta(t)\)</span> 是 Dirac delta 函数，定义满足对适当函数 <span class="arithmatex">\(f\)</span> 有</p>
+<div class="arithmatex">\[ \int_{-\infty}^{\infty}f(x)\delta(x)d x=f(0). \]</div>
+<p>Fourier 变换可由反演公式恢复原函数：</p>
+<div class="arithmatex">\[ f(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{itx}F(t)dt. \]</div>
+<p>直接对 <span class="arithmatex">\(\sqrt{2\pi}\delta(t)\)</span> 作反演可得</p>
+<div class="arithmatex">\[ \begin{aligned}f(x)&amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{itx}\sqrt{2\pi}\delta(t)dt\\&amp;=1,\end{aligned} \]</div>
+<p>因此 <span class="arithmatex">\(\sqrt{2\pi}\delta(t)\)</span> 是常数 1 的变换。还需使用频移性质：若 <span class="arithmatex">\(f\)</span> 的变换为 <span class="arithmatex">\(F\)</span>，则 <span class="arithmatex">\(e^{iax}f(x)\)</span> 的变换为 <span class="arithmatex">\(F(t-a)\)</span>。</p>
+<div class="arithmatex">\[ \begin{aligned}G(t)&amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-itx}e^{iax}f(x)dx\\&amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-ix(t-a)}f(x)dx\\&amp;=F(t-a).\end{aligned} \]</div>
+<p>将正弦写成指数和后，两项是常数函数的频移，合并得</p>
+<div class="arithmatex">\[ F_{s}(t)=i\sqrt{2\pi}\frac{\delta(t+1)-\delta(t-1)}{2}. \]</div>
+<p>同理可得</p>
+<div class="arithmatex">\[ F_{c}(t)=\sqrt{2\pi}\frac{\delta(t-1)+\delta(t+1)}{2}, \]</div>
+<p>其中 <span class="arithmatex">\(F_c(t)\)</span> 表示 <span class="arithmatex">\(\cos x\)</span> 的 Fourier 变换。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>Fourier 变换与概率论中的特征函数有什么关系？</p>
+</li>
+<li>
+<p>证明 <span class="arithmatex">\(e^{-\alpha x^2}\)</span>（<span class="arithmatex">\(\alpha&gt;0\)</span>）的 Fourier 变换为</p>
+</li>
+</ul>
+<div class="arithmatex">\[ \frac{1}{\sqrt{2\alpha}}e^{-\frac{t^{2}}{4\alpha}}. \]</div>
+<ul>
+<li>在适当假设下，若 <span class="arithmatex">\(f\)</span> 的变换为 <span class="arithmatex">\(F\)</span>，证明其 <span class="arithmatex">\(n\)</span> 阶导数的变换为</li>
+</ul>
+<div class="arithmatex">\[ (it)^{n}F(t). \]</div>
+<p>需要哪些假设？</p>
+<ul>
+<li>设 <span class="arithmatex">\(f_1,f_2\)</span> 的变换分别为 <span class="arithmatex">\(F_1,F_2\)</span>，卷积定义为</li>
+</ul>
+<div class="arithmatex">\[ g(x)=(f_{1}\star f_{2})(x)=\int_{-\infty}^\infty f_{1}(s)f_{2}(x-s)ds. \]</div>
+<p>证明 <span class="arithmatex">\(g(x)\)</span> 的 Fourier 变换为</p>
+<div class="arithmatex">\[ G(t)=\sqrt{2\pi}F_{1}(t)F_{2}(t). \]</div>
+<h3 id="q97">Q97 · 解析有界必为常数<a class="headerlink" href="#q97" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：若 <span class="arithmatex">\(f(z)\)</span> 解析且有界，证明 <span class="arithmatex">\(f\)</span> 是常数。</p>
+<p><strong>解答</strong>：这只是 Liouville 定理的另一种表述，证明见 Q95。</p>
+<h3 id="q98-exp-ln">Q98 · 近似计算 exp 与 ln<a class="headerlink" href="#q98-exp-ln" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：如何近似计算 <span class="arithmatex">\(\exp(x)\)</span> 与 <span class="arithmatex">\(\ln(x)\)</span>？误差有多大？</p>
+<p><strong>解答</strong>：近似函数时可考虑 Taylor 展开。若 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(z\)</span> 附近无穷可微，则可写成</p>
+<div class="arithmatex">\[ f(x)\sim\sum_{n=0}^{\infty}\frac{f^{(n)}(z)}{n!}(x-z)^{n}, \]</div>
+<p>其中 <span class="arithmatex">\(f^{(n)}(z)\)</span> 是在 <span class="arithmatex">\(z\)</span> 处的 <span class="arithmatex">\(n\)</span> 阶导数。级数不一定收敛；若收敛到 <span class="arithmatex">\(f(x)\)</span>，则称函数解析。无论是否解析，都有余项估计</p>
+<div class="arithmatex">\[ f(x)-\sum_{n=0}^{N}\frac{f^{(n)}(z)}{n!}(x-z)^{n}=\mathcal{O}\left((x-z)^{N+1}\right). \]</div>
+<p>取前 <span class="arithmatex">\(N\)</span> 项近似时，Lagrange 余项说明存在介于 <span class="arithmatex">\(x,z\)</span> 之间的 <span class="arithmatex">\(\zeta\)</span>，使</p>
+<div class="arithmatex">\[ R_{N}=\frac{f^{(N+1)}(\zeta)}{(N+1)!}(x-z)^{N+1}. \]</div>
+<p>通常我们关心余项的绝对值上界，此时有</p>
+<div class="arithmatex">\[ |R_{N}|\leq\sup_{\zeta\in(x,z)}\frac{|f^{(N+1)}(\zeta)|}{(N+1)!}|x-z|^{N+1}. \]</div>
+<p>对 <span class="arithmatex">\(f(x)=e^x\)</span>，最方便的展开点是 <span class="arithmatex">\(z=0\)</span>，因为</p>
+<div class="arithmatex">\[ f^{(n)}(x)=\exp(x) \]</div>
+<p>对所有 <span class="arithmatex">\(n=0,1,2,\ldots\)</span> 均成立，且 <span class="arithmatex">\(f^{(n)}(0)=1\)</span>，因此 Taylor 级数为</p>
+<div class="arithmatex">\[ \exp(x)=\sum_{n=0}^{\infty}\frac{1}{n!}x^{n}. \]</div>
+<p>用 <span class="arithmatex">\(N\)</span> 项近似 <span class="arithmatex">\(f(x)\)</span> 时余项为</p>
+<div class="arithmatex">\[ \frac{e^{\zeta}}{(N+1)!}x^{N+1}, \]</div>
+<p>其中 <span class="arithmatex">\(\zeta\)</span> 位于 <span class="arithmatex">\(x,z\)</span> 之间。<span class="arithmatex">\(x\)</span> 小时收敛快，<span class="arithmatex">\(x\)</span> 大时可写成</p>
+<div class="arithmatex">\[ e^{x}=\left(e^{x/N}\right)^{N}, \]</div>
+<p>其中 <span class="arithmatex">\(N\)</span> 取大于 <span class="arithmatex">\(x\)</span> 的整数。</p>
+<p>对 <span class="arithmatex">\(g(x)=\ln x\)</span>，因 <span class="arithmatex">\(x=0\)</span> 不在定义域内，通常在 <span class="arithmatex">\(z=1\)</span> 处展开。其导数为</p>
+<div class="arithmatex">\[ g^{(n)}(x)=\frac{(-1)^{n+1}(n-1)!}{x^{n}}, \]</div>
+<p>（<span class="arithmatex">\(n = 1,2,\ldots\)</span>），因此</p>
+<div class="arithmatex">\[ g^{(n)}(1)=(-1)^{n+1}(n-1)!. \]</div>
+<p>因此 Taylor 级数为</p>
+<div class="arithmatex">\[ \ln(x)=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}(x-1)^{n}, \]</div>
+<p>取 <span class="arithmatex">\(N\)</span> 项后的余项为</p>
+<div class="arithmatex">\[ \frac{(-1)^{N+2}}{\zeta^{N+1}(N+1)}(x-1)^{N+1}, \]</div>
+<p>其中 <span class="arithmatex">\(\zeta\)</span> 介于 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(z\)</span> 之间。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(\sqrt{x}\)</span> 的 Taylor 级数是什么？余项如何表示？</p>
+</li>
+<li>
+<p>用上述 Taylor 级数积分 <span class="arithmatex">\(\sqrt{x}\)</span>。</p>
+</li>
+<li>
+<p>什么是 Maclaurin 级数？</p>
+</li>
+</ul>
+<h3 id="q99">Q99 · 调和级数是否收敛<a class="headerlink" href="#q99" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(\sum_{n=1}^{\infty} n^{-1}\)</span> 收敛吗？为什么？</p>
+<p><strong>解答</strong>：答案是否定的；调和级数是最经典的发散级数之一。下面用积分判别法证明。</p>
+<p>先考虑函数</p>
+<div class="arithmatex">\[ g(x)=\frac{1}{\lfloor x\rfloor},\qquad x&gt;1, \]</div>
+<p>其中 <span class="arithmatex">\(\lfloor x\rfloor\)</span> 表示不超过 <span class="arithmatex">\(x\)</span> 的最大整数。该函数在 <span class="arithmatex">\((1,\infty)\)</span> 上的积分正好给出所需级数，</p>
+<div class="arithmatex">\[ \int_{1}^{\infty}g(x)dx=\sum_{n=1}^{\infty}\frac{1}{n}. \]</div>
+<p>此外，对 <span class="arithmatex">\(x&gt;1\)</span> 有 <span class="arithmatex">\(g(x)\ge f(x)=1/x\)</span>，因此</p>
+<div class="arithmatex">\[ \begin{aligned}\int_{1}^{\infty}g(x)dx&amp;\geq\int_{1}^{\infty}\frac{1}{x}dx\\&amp;=\left[\log(x)\right]_{1}^{\infty}=\infty,\end{aligned} \]</div>
+<p>这证明了原级数发散（此处记号上略有不严谨，但思路是可靠的）。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>证明 <span class="arithmatex">\(\sum_{n=1}^{\infty}1/n^2\)</span> 收敛。</p>
+</li>
+<li>
+<p>什么是交错级数判别法？用它证明 <span class="arithmatex">\(\sum_{n=1}^{\infty}(-1)^n/n\)</span> 收敛；它绝对收敛吗？</p>
+</li>
+<li>
+<p>什么是比值判别法？用它证明 <span class="arithmatex">\(\sum_{n=1}^{\infty}n/e^n\)</span> 收敛。</p>
+</li>
+</ul>
+<h3 id="q100-bs">Q100 · BS 方程化为热传导方程<a class="headerlink" href="#q100-bs" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微分方程</p>
+<p><strong>题目</strong>：把 Black–Scholes 方程变换为热传导方程。</p>
+<p><strong>解答</strong>：设 <span class="arithmatex">\(C\)</span> 为时刻 <span class="arithmatex">\(t\)</span>、当前股价为 <span class="arithmatex">\(S\)</span> 的看涨期权价格，股价满足随机微分方程</p>
+<div class="arithmatex">\[ d S_{t}=\mu S_{t}d t+\sigma S_{t}d W_{t}, \]</div>
+<p>其中 <span class="arithmatex">\(W_t\)</span> 为布朗运动。若无风险利率 <span class="arithmatex">\(r\)</span> 为常数，则 Black–Scholes 方程为</p>
+<div class="arithmatex">\[ \frac{\partial C}{\partial t}+r S\frac{\partial C}{\partial S}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}C}{\partial S^{2}}=r C, \]</div>
+<p>其中 <span class="arithmatex">\(C\)</span> 及其偏导数均视为 <span class="arithmatex">\(S,t\)</span> 的函数。为化为热方程，注意 <span class="arithmatex">\(S_t\)</span> 的解具有指数形式，令 <span class="arithmatex">\(S=e^Z\)</span>，即 <span class="arithmatex">\(Z=\log S\)</span>，于是</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{\partial C}{\partial S}&amp;=\frac{\partial C}{\partial\overrightarrow{Z}}\cdot\frac{\partial Z}{\partial S}\\&amp;=\frac{\partial C}{\partial\overrightarrow{Z}}\cdot\frac{1}{S},\end{aligned} \]</div>
+<p>and</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{\partial^{2}C}{\partial S^{2}}&amp;=\frac{\partial}{\partial S}\left(\frac{\partial C}{\partial S}\right)=\frac{\partial}{\partial S}\left(\frac{\partial C}{\partial Z}\cdot\frac{1}{S}\right)\\&amp;=\frac{1}{S^{2}}\left(\frac{\partial^{2}C}{\partial Z^{2}}-\frac{\partial C}{\partial Z}\right).\end{aligned} \]</div>
+<p>把它代入原方程得到</p>
+<div class="arithmatex">\[ \frac{\partial C}{\partial t}+\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial C}{\partial Z}+\frac{1}{2}\sigma^{2}\frac{\partial^{2}C}{\partial Z^{2}}=r C. \]</div>
+<p>此时方程已是常系数形式。定价真正相关的是到期剩余时间 <span class="arithmatex">\(\tau=T-t\)</span>，代换后得到</p>
+<div class="arithmatex">\[ \frac{\partial C}{\partial\tau}-\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial C}{\partial Z}-\frac{1}{2}\sigma^{2}\frac{\partial^{2}C}{\partial Z^{2}}=-r C. \]</div>
+<p>看涨期权价格是未来现金流的贴现值。令现金流为 <span class="arithmatex">\(D\)</span>，写成 <span class="arithmatex">\(C=e^{-r\tau}D\)</span>，得到</p>
+<div class="arithmatex">\[ \frac{\partial D}{\partial\tau}-\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial D}{\partial Z}-\frac{1}{2}\sigma^{2}\frac{\partial^{2}D}{\partial Z^{2}}=0. \]</div>
+<p>最后，时刻 <span class="arithmatex">\(t\)</span> 的 <span class="arithmatex">\(Z\)</span> 均值为 <span class="arithmatex">\(Z_0+(r-\frac12\sigma^2)t\)</span>。令 <span class="arithmatex">\(y=Z+(r-\frac12\sigma^2)\tau\)</span> 平移坐标，计算新偏导数得到</p>
+<div class="arithmatex">\[ \frac{\partial D}{\partial\tau}=\frac{1}{2}\sigma^{2}\frac{\partial^{2}D}{\partial y^{2}}, \]</div>
+<p>这正是一维热传导方程。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>原 Black–Scholes 方程的边界条件是什么？</p>
+</li>
+<li>
+<p>沿用上述变换，求热方程形式下的边界条件。</p>
+</li>
+<li>
+<p>用新边界条件求解热方程，再逆变换得到 Black–Scholes 方程的解。</p>
+</li>
+</ul>
+<h3 id="q101-fxxx">Q101 · 求导 <span class="arithmatex">\( f(x)=x^x \)</span><a class="headerlink" href="#q101-fxxx" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\(f(x)=x^{x}\)</span> 的导数。</p>
+<p><strong>解答</strong>：这道题不能直接套用常见幂函数求导规则，但可把它写成指数形式。关键是</p>
+<div class="arithmatex">\[ f(x)=e^{x\log(x)}, \]</div>
+<p>由对数和指数运算规则可得，再用乘积法则：</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{d}{dx}f(x)&amp;=e^{x\log(x)}\frac{d}{dx}(x\log(x))\\&amp;=x^{x}(\log(x)+1).\end{aligned} \]</div>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>求 <span class="arithmatex">\(g(x)=\alpha^x\)</span> 关于 <span class="arithmatex">\(x\)</span> 的导数。</p>
+</li>
+<li>
+<p>求 <span class="arithmatex">\(g(x)\)</span> 关于 <span class="arithmatex">\(\alpha\)</span> 的导数。</p>
+</li>
+</ul>
+<h3 id="q102">Q102 · 远期贴现因子的偏导<a class="headerlink" href="#q102" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\(\dfrac{\partial}{\partial f}\left(\dfrac{1}{1+f\tau}\right)^{n}\)</span>，以及 <span class="arithmatex">\(\dfrac{\partial}{\partial f_{j}}\displaystyle\prod_{i=1}^{n}\dfrac{1}{1+f_{i}\tau_{i}}\)</span>。</p>
+<p><strong>解答</strong>：两问都直接使用链式法则和乘积法则。第一问为</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{\partial}{\partial f}\left(\frac{1}{1+f\tau}\right)^{n}&amp;=\frac{\partial}{\partial f}\left(1+f\tau\right)^{-n}\\&amp;=-n\tau\left(\frac{1}{1+f\tau}\right)^{n+1}\end{aligned} \]</div>
+<p>第二问中假设 <span class="arithmatex">\(f_j\)</span> 与其他 <span class="arithmatex">\(f_i\)</span>（<span class="arithmatex">\(i\ne j\)</span>）相互独立，于是</p>
+<div class="arithmatex">\[ \begin{align*}\frac{\partial}{\partial f_{j}}\prod_{i=1}^{n}\frac{1}{1+f_{i}\tau_{i}}&amp;=\left(\prod_{\substack{i=1\\ i\neq j}}^{n}\frac{1}{1+f_{i}\tau_{i}}\right)\left(-\tau_{j}\frac{1}{(1+f_{j}\tau_{j})^{2}}\right)\\&amp;=\frac{-\tau_{j}}{1+f_{j}\tau_{j}}\prod_{i=1}^{n}\frac{1}{1+f_{i}\tau_{i}}.\end{align*} \]</div>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>正在求导的两个函数有什么金融含义？</p>
+</li>
+<li>
+<p>如何解释这些偏导数？</p>
+</li>
+</ul>
+<h3 id="q103-ecos-x">Q103 · 从定义推导 e^cos x 的导数<a class="headerlink" href="#q103-ecos-x" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：从导数定义出发，推导 <span class="arithmatex">\(g(x)=e^{\cos(x)}\)</span> 的导数。</p>
+<p><strong>解答</strong>：从第一性原理出发，就是使用导数定义</p>
+<div class="arithmatex">\[ f^{\prime}(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}. \]</div>
+<p>先用链式法则得到目标结果，再从导数定义验证：</p>
+<div class="arithmatex">\[ g^{\prime}(x)=-\sin(x)e^{\cos(x)}. \]</div>
+<p>先得到目标形式有助于检查后续极限推导是否正确。</p>
+<p>回到原题，需要计算</p>
+<div class="arithmatex">\[ g^{\prime}(x)=\lim_{h\to0}\frac{e^{\cos(x+h)}-e^{\cos(x)}}{h}. \]</div>
+<p>先将分子改写为</p>
+<div class="arithmatex">\[ e^{\cos(x+h)}-e^{\cos(x)}=e^{\cos(x)}\left(e^{\cos(x+h)-\cos(x)}-1\right). \]</div>
+<p>再利用 <span class="arithmatex">\(e^x\)</span> 的级数展开</p>
+<div class="arithmatex">\[ e^{x}=1+x+\frac{x^{2}}{2!}+\mathcal{O}(x^{3}), \]</div>
+<p><span class="arithmatex">\(\cos(x)\)</span> 的级数展开为</p>
+<div class="arithmatex">\[ \cos(x)=1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}+\mathcal{O}(x^{6}), \]</div>
+<p>hence</p>
+<div class="arithmatex">\[ \cos(x+h)-\cos(x)=\mathcal{O}(h), \]</div>
+<p>因此</p>
+<div class="arithmatex">\[ e^{\cos(x+h)-\cos(x)}-1=\cos(x+h)-\cos(x)+\mathcal{O}(h^{2}). \]</div>
+<p>从而导数为</p>
+<div class="arithmatex">\[ \begin{aligned}g^{\prime}(x)&amp;=e^{\cos(x)}\lim_{h\to0}\frac{\cos(x+h)-\cos(x)+\mathcal{O}(h^{2})}{h}\\&amp;=e^{\cos(x)}\lim_{h\to0}\frac{\cos(x+h)-\cos(x)}{h}.\end{aligned} \]</div>
+<p>此处可以直接使用 <span class="arithmatex">\(\cos x\)</span> 的导数 <span class="arithmatex">\(-\sin x\)</span>；也可以同样利用上面的级数展开推导，最终得到所需结果。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>
+<p>写出 <span class="arithmatex">\(\sin x\)</span> 与 <span class="arithmatex">\(\cos x\)</span> 的级数展开。</p>
+</li>
+<li>
+<p>用级数证明 <span class="arithmatex">\(e^{i\theta}=\cos\theta+i\sin\theta\)</span>。</p>
+</li>
+<li>
+<p>从导数定义求下列函数的导数：</p>
+</li>
+</ul>
+<p>(a)</p>
+<div class="arithmatex">\[ x^{2}; \]</div>
+<p>(b)</p>
+<div class="arithmatex">\[ \cos(x); \]</div>
+<p>(c)</p>
+<div class="arithmatex">\[ \frac{1}{1-x}. \]</div>
+<h3 id="q104-fxxlog-x">Q104 · 求导 <span class="arithmatex">\( f(x)=x\log x \)</span><a class="headerlink" href="#q104-fxxlog-x" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：对 <span class="arithmatex">\(f(x)=x\log(x)\)</span> 求导。</p>
+<p><strong>解答</strong>：这是乘积法则的直接应用，也是 6.22 的预备题：</p>
+<div class="arithmatex">\[ \begin{aligned}\frac{df(x)}{dx}&amp;=\frac{d(x)}{dx}\log(x)+x\frac{d\log(x)}{dx}\\&amp;=\log(x)+1.\end{aligned} \]</div>
+<p>相关练习：</p>
+<ul>
+<li>求 <span class="arithmatex">\(g(x)=e^x\sin x\)</span> 的导数。</li>
+</ul>
+<h3 id="q105-int-logn-xdx">Q105 · 积分 <span class="arithmatex">\( \int \log^n x\,dx \)</span><a class="headerlink" href="#q105-int-logn-xdx" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\(\int \log^{n} x\,dx\)</span>。</p>
+<p><strong>解答</strong>：仿照 6.22 使用分部积分。每做一次分部积分，对数幂次降低 1，因此自然用归纳法得到一般公式。</p>
+<p>先看归纳基例</p>
+<div class="arithmatex">\[ \int\log x d x=x\log x-x. \]</div>
+<p>再次用分部积分，考虑 <span class="arithmatex">\(n = 2\)</span> 的情形：</p>
+<div class="arithmatex">\[ \begin{aligned}\int\log^{2}xdx&amp;=x\log^{2}x-2\int\log xdx\\&amp;=x\log^{2}x-2x\log x+2x,\end{aligned} \]</div>
+<p>可见该方法成立。下面处理一般情形：</p>
+<div class="arithmatex">\[ \begin{aligned}\int\log^{n} x dx&amp;=x\log^{n} x-n\int x\log^{n-1}x\frac{1}{x}dx\\&amp;=x\log^{n} x-n\int\log^{n-1}x dx\\&amp;=x\log^{n} x-n\left(x\log^{n-1}x-(n-1)\int\log^{n-2}x dx\right)\\&amp;=x\log^{n} x-nx\log^{n-1}x+n(n-1)\int\log^{n-2}x dx.\end{aligned} \]</div>
+<p>由此提出待证公式：</p>
+<div class="arithmatex">\[ \int\log^{n}(x)dx=x\sum_{j=0}^{n}(-1)^{j}n\cdots(n-j+1)\log^{n-j}x, \]</div>
+<p>其中约定 <span class="arithmatex">\(j=0\)</span> 时 <span class="arithmatex">\(n\cdots(n-j+1)=1\)</span>。<span class="arithmatex">\(n=1\)</span> 时公式已验证，下面用归纳法证明一般情形。</p>
+<p>为证明一般情形，假设 <span class="arithmatex">\(n=k\)</span> 时成立，即</p>
+<div class="arithmatex">\[ \int\log^{k}(x)dx=x\sum_{j=0}^{k}(-1)^{j}k\cdots(k-j+1)\log^{k-j}x. \]</div>
+<p>对 <span class="arithmatex">\(n=k+1\)</span> 是否仍成立？由前面的分部积分可得</p>
+<div class="arithmatex">\[ \int\log^{k+1}(x)dx=x\log^{k+1}x-(k+1)\int\log^{k} x dx, \]</div>
+<p>代入归纳假设可得</p>
+<div class="arithmatex">\[ \begin{aligned}\int&amp;\log^{k+1}(x)dx\\&amp;=x\log^{k+1}x-(k+1)x\sum_{j=0}^{k}(-1)^{j}k\cdots(k-j+1)\log^{k-j}x\\&amp;=x\log^{k+1}x+x\sum_{j=0}^{k}(-1)^{j+1}(k+1)k\cdots(k-j+1)\log^{k-j}x\\&amp;=x\sum_{j=0}^{k+1}(-1)^{j}(k+1)\cdots(k+1-j+1)\log^{k+1-j}x,\end{aligned} \]</div>
+<p>这就证明了归纳假设可由 <span class="arithmatex">\(k\)</span> 推至 <span class="arithmatex">\(k+1\)</span>。</p>
+<p><strong>相关追问：</strong></p>
+<p>如何证明数学归纳法有效？</p>
+<ul>
+<li>计算</li>
+</ul>
+<div class="arithmatex">\[ \int x^{k}(\log x)^{l}dx. \]</div>
+<h3 id="q106">Q106 · 求二重积分值<a class="headerlink" href="#q106" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：求 <span class="arithmatex">\(2\int_{0}^{1/2}dx\int_{1/2}^{1/2+x}dy\)</span>。</p>
+<p><strong>解答</strong>：先计算关于 <span class="arithmatex">\(y\)</span> 的内层积分，得到</p>
+<div class="arithmatex">\[ \int_{1/2}^{1/2+x}d y=x. \]</div>
+<p>问题化为计算</p>
+<div class="arithmatex">\[ \begin{aligned}2\int_{0}^{1/2}x d x&amp;=\left[x^{2}\right]_{x=0}^{x=1/2}\\&amp;=1/4.\end{aligned} \]</div>
+<p>也可以画出积分区域，几何上可直接看出结果。</p>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>证明</li>
+</ul>
+<p>(a)</p>
+<div class="arithmatex">\[ \int_{0}^{\pi}\int_{0}^{\sin(x)}d y d x=2. \]</div>
+<p>(b)</p>
+<div class="arithmatex">\[ \int_{0}^{1}d x\int_{x^{2}}^{1}d y f(x,y)=\int_{0}^{1}d y\int_{0}^{\sqrt{y}}d x f(x,y). \]</div>
+<p>设 <span class="arithmatex">\(D\)</span> 为区域</p>
+<div class="arithmatex">\[ \{0\leq x\leq1,y\geq x^{2},y\leq1\}; \]</div>
+<p>求积分</p>
+<div class="arithmatex">\[ \int\int_{D}(x+y)dx dy. \]</div>
+<h3 id="q107-int-log-x1xx2">Q107 · 围道积分求 <span class="arithmatex">\( \int \log x/(1+x+x^2) \)</span><a class="headerlink" href="#q107-int-log-x1xx2" title="Permanent link">&para;</a></h3>
+<p><strong>难度</strong>：★★★｜<strong>题型</strong>：微积分</p>
+<p><strong>题目</strong>：计算 <span class="arithmatex">\(\int_{0}^{\infty}\dfrac{\log(x)}{1+x+x^{2}}\,dx\)</span>（提示：使用围道积分）。</p>
+<p><strong>解答</strong>：先考虑更一般的积分</p>
+<div class="arithmatex">\[ \int_{0}^{\infty}\log(x)Q(x)d x, \]</div>
+<p>其中 <span class="arithmatex">\(Q(x)\)</span> 为有理函数。为保证积分收敛，设分母次数为 <span class="arithmatex">\(n\)</span>、分子次数为 <span class="arithmatex">\(m\)</span>，且 <span class="arithmatex">\(n\ge m+2\)</span>；同时分母在非负实轴上不为零。</p>
+<p>取围绕负实轴分支割线的钥匙孔围道 <span class="arithmatex">\(C\)</span>，内圆半径为 <span class="arithmatex">\(\epsilon\)</span>、外圆半径为 <span class="arithmatex">\(R\)</span>。</p>
+<p>于是考虑积分</p>
+<div class="arithmatex">\[ \oint(\log z)^{2}Q(-z)d z=\int_{{t o p}}+\int_{{b o t t o m}}+\int_{{s m a l l~c i r c l e}}+\int_{{b i g~c i r c l e}}, \]</div>
+<p>其中 top、bottom 分别表示分支割线上方和下方的直线。上侧取 <span class="arithmatex">\(z=te^{i\pi}\)</span>（<span class="arithmatex">\(t\)</span> 从 <span class="arithmatex">\(\epsilon\)</span> 到 <span class="arithmatex">\(R\)</span>），下侧取 <span class="arithmatex">\(z=te^{-i\pi}\)</span>；内外圆分别取 <span class="arithmatex">\(z=\epsilon e^{i\theta}\)</span>、<span class="arithmatex">\(z=Re^{i\theta}\)</span>，<span class="arithmatex">\(-\pi\le\theta\le\pi\)</span>，从而</p>
+<div class="arithmatex">\[ \int_{t o p}=\int_{\epsilon}^{R}(\log(t e^{i\pi}))^{2}Q(-t e^{i\pi})e^{i\pi}d t=-\int_{\epsilon}^{R}(\log(t)+i\pi)^{2}Q(t)d t \]</div>
+<div class="arithmatex">\[ \int_{{bottom}}=\int_{R}^{\epsilon}(\log(t e^{-i\pi}))^{2}Q(-t e^{-i\pi})e^{-i\pi}d t=\int_{\epsilon}^{R}(\log(t)-i\pi)^{2}Q(t)d t \]</div>
+<div class="arithmatex">\[ \int_{{small\ circle}}=\int_{\pi}^{-\pi}(\log(\epsilon e^{i\theta}))^{2}Q(-\epsilon e^{i\theta})i\epsilon e^{i\theta}d t=\mathcal{O}(\epsilon\log^{2}\epsilon),\quad \epsilon\to0 \]</div>
+<div class="arithmatex">\[ \begin{aligned}\int_{big~circle}=\int_{\pi}^{-\pi}(\log(Re^{i\theta}))^{2}Q(-Re^{i\theta})iRe^{i\theta}dt\\=\mathcal{O}(R^{m-n+1}\log^{2}R),\quad R\to\infty.\end{aligned} \]</div>
+<p>注意我们的围道取顺时针方向，于是当 <span class="arithmatex">\( \epsilon \to 0 \)</span> 且 <span class="arithmatex">\( R \to \infty \)</span> 时（因为 <span class="arithmatex">\( m - n + 1 \leq -1 \)</span>），</p>
+<div class="arithmatex">\[ \begin{aligned}\int_{0}^{\infty}\big((\log t+i\pi)^{2}-(\log t-i\pi)^{2}\big)Q(t)dt\\=2\pi i\sum\mathbf{Residues}\left\{(\log z)^{2}Q(-z)\right\},\end{aligned} \]</div>
+<p>or</p>
+<div class="arithmatex">\[ \int_{0}^{\infty}\log t Q(t)d t=\frac{1}{2}\sum\mathbf{R e s i d u e s}\left\{(\log z)^{2}Q(-z)\right\}, \]</div>
+<p>其中求和遍历 <span class="arithmatex">\(Q(-z)\)</span> 的全部奇点。</p>
+<p>现在回到本题所考虑的函数</p>
+<div class="arithmatex">\[ Q(-z)=\frac{1}{1-z+z^{2}}. \]</div>
+<p>该函数的奇点为 <span class="arithmatex">\(z=\tfrac12(1\pm\sqrt3 i)\)</span>。记</p>
+<div class="arithmatex">\[ a=\frac{1}{2}(1+\sqrt{3}i)=e^{i\frac{\pi}{3}}, \]</div>
+<div class="arithmatex">\[ b=\frac{1}{2}(1-\sqrt{3}i)=e^{-i\frac{\pi}{3}}, \]</div>
+<p>则函数</p>
+<div class="arithmatex">\[ (\log(z))^{2}Q(-z)=\frac{(\log(z))^{2}}{(z-a)(z-b)} \]</div>
+<p>在 <span class="arithmatex">\(a\)</span> 点的留数为</p>
+<div class="arithmatex">\[ \frac{(\log a)^{2}}{a-b}=\frac{-\frac{\pi^{2}}{9}}{a-b}, \]</div>
+<p><span class="arithmatex">\(b\)</span> 点的留数为</p>
+<div class="arithmatex">\[ \frac{(\log b)^{2}}{b-a}=-\frac{-\frac{\pi^{2}}{9}}{a-b}. \]</div>
+<p>因此</p>
+<div class="arithmatex">\[ \sum{\mathrm{Residues}\left\{(\log z)^{2}Q(-z)\right\}}=0, \]</div>
+<p>最终</p>
+<div class="arithmatex">\[ \int_{0}^{\infty}\frac{\log(x)}{\left(1+x+x^{2}\right)}dx=0. \]</div>
+<p><strong>相关追问：</strong></p>
+<ul>
+<li>使用围道积分证明下列公式（围道可与上文不同，应根据奇点位置选择）：</li>
+</ul>
+<p>(1)</p>
+<div class="arithmatex">\[ \int_{-\infty}^{\infty}\frac{1}{(x^{2}+1)^{2}}dx=\frac{\pi}{2}. \]</div>
+<p>(2) 对 <span class="arithmatex">\(t&gt;0\)</span>，证明</p>
+<div class="arithmatex">\[ \int_{-\infty}^{\infty}\frac{e^{itx}}{x^{2}+1}dx=\pi e^{-t}. \]</div>
+<p>(3) 对 <span class="arithmatex">\(0 &lt; \operatorname{Re}(s) &lt; 1\)</span>，</p>
+<div class="arithmatex">\[ \int_{-\infty}^{\infty}\frac{e^{sx}}{e^{x}+1}dx=\frac{\pi}{\sin(\pi s)}. \]</div>
+<p>(4)</p>
+<div class="arithmatex">\[ \int_{0}^{\infty}\frac{\sin(x)}{x}dx=\frac{\pi}{2}. \]</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../01_%E8%84%91%E7%AD%8B%E6%80%A5%E8%BD%AC%E5%BC%AF/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 01 脑筋急转弯">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                01 脑筋急转弯
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-footer__link md-footer__link--next" aria-label="下一页: 03 概率论">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                03 概率论
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Jiang Xuqi
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
