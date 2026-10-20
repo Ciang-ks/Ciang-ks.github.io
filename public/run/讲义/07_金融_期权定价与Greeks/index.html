@@ -805,6 +805,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#sec-BlackScholes公式带连续股息率y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Black–Scholes 公式（带连续股息率 y）
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1674,6 +1685,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#sec-BlackScholes公式带连续股息率y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Black–Scholes 公式（带连续股息率 y）
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1695,9 +1717,6 @@
 
 
 <h1 id="7-greeks">第 7 章 金融：期权定价与 Greeks<a class="headerlink" href="#7-greeks" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>来源：<code>quant_guide.md</code> Ch6</p>
-</blockquote>
 <h2 id="_1">本节要解决的核心问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>衍生品（尤其期权）问题在量化面试中很常见，因为复杂度足以考察你的量化金融理解。重点在于<strong>直觉与数学</strong>，而非零散金融常识。</p>
 <h2 id="_2">符号约定<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1926,6 +1945,10 @@
 <ul>
 <li>题库「按知识点：金融 / 期权」节点，对应 guide Ch6 全部例题（价格方向、平价、美欧差异、B-S 假设、Greeks 正负、价差、VaR、利率模型等）。</li>
 </ul>
+<h2 id="sec-BlackScholes公式带连续股息率y">Black–Scholes 公式（带连续股息率 y）<a class="headerlink" href="#sec-BlackScholes公式带连续股息率y" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[c = Se^{-y\tau}N(d_1) - Ke^{-r\tau}N(d_2),\qquad p = Ke^{-r\tau}N(-d_2) - Se^{-y\tau}N(-d_1)\]</div>
+<div class="arithmatex">\[d_1 = \frac{\ln(S/K) + (r - y + \sigma^2/2)\tau}{\sigma\sqrt{\tau}},\qquad d_2 = d_1 - \sigma\sqrt{\tau}\]</div>
+<p>（标的为期货时 <span class="arithmatex">\( y = r \)</span>；标的为外币时 <span class="arithmatex">\( y = r_f \)</span> 外币无风险利率。）<span class="arithmatex">\( N(x) \)</span> 为标准正态 cdf，<span class="arithmatex">\( N'(x) = (1/\sqrt{2\pi})e^{-x^2/2} \)</span> 为 pdf。</p>
 
 
 
