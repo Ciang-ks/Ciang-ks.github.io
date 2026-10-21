@@ -1,12 +1,15 @@
 document$.subscribe(async () => {
-  const directory = document.getElementById('probability-directory');
-  if (!directory || !location.hash) return;
+  const directory = document.getElementById('chapter-directory');
+  if (!directory) return;
   const original = location.href;
   try {
-    const response = await fetch(new URL(directory.dataset.anchors, original));
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const anchors = await response.json();
-    const target = anchors[decodeURIComponent(location.hash.slice(1))];
+    let target = directory.dataset.target;
+    if (!target && location.hash && directory.dataset.anchors) {
+      const response = await fetch(new URL(directory.dataset.anchors, original));
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const anchors = await response.json();
+      target = anchors[decodeURIComponent(location.hash.slice(1))];
+    }
     if (target && location.href === original) {
       const destination = new URL(target, original);
       destination.search = location.search;
@@ -14,6 +17,6 @@ document$.subscribe(async () => {
       location.replace(destination.href);
     }
   } catch (error) {
-    console.error('Probability bookmark navigation failed', error);
+    console.error('Chapter bookmark navigation failed', error);
   }
 });
