@@ -796,14 +796,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+      <a href="../03-1_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%80/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    03 概率论
+    概率论 一
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-2_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%BA%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论 二
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-3_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论 三
   
 
     
@@ -8527,7 +8583,7 @@ P(i\text{ 最后访问})=\frac{(1-r)r^{m-i}}{1-r^m},\quad1\le i\le m.
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(T\)</span> 为首个累计和<span class="arithmatex">\(&gt;1\)</span> 的时刻，事件 <span class="arithmatex">\(T\ge i\)</span> 只取决于此前样本，与 <span class="arithmatex">\(X_{i}\)</span> 独立。非负性允许逐项求和，<span class="arithmatex">\(\mathbb{E} [S_{T}]=\sum \mathbb{E} [X_{i}1_{T\ge i}]=(1/2)\sum P(T\ge i)=(1/2)\mathbb{E} T=e/2\)</span>。这同时解释为什么随机停止不能未经条件检查就写 <span class="arithmatex">\(\mathbb{E} [N]\mathbb{E} [X]\)</span>。</p>
-<p>已知 <a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/#problem-0ff4f5ababc9">Q844 · 累加超过 1</a> 的 <span class="arithmatex">\(ET=e\)</span>。<span class="arithmatex">\(T=N(1)+1\)</span> 是相对于增量滤过的停时，但 <span class="arithmatex">\(N(1)\)</span> 本身不是；由 Wald，<span class="arithmatex">\(ES_T=EU_1ET=e/2\)</span>，故平均剩余 <span class="arithmatex">\(e/2-1\)</span>。这使用 <span class="arithmatex">\(ET&lt;\infty,E|U_1|&lt;\infty\)</span>；Wald 不要求停时与增量独立，却要求其为给定增量信息的停时。</p>
+<p>已知 <a href="../03-3_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%89/#problem-0ff4f5ababc9">Q844 · 累加超过 1</a> 的 <span class="arithmatex">\(ET=e\)</span>。<span class="arithmatex">\(T=N(1)+1\)</span> 是相对于增量滤过的停时，但 <span class="arithmatex">\(N(1)\)</span> 本身不是；由 Wald，<span class="arithmatex">\(ES_T=EU_1ET=e/2\)</span>，故平均剩余 <span class="arithmatex">\(e/2-1\)</span>。这使用 <span class="arithmatex">\(ET&lt;\infty,E|U_1|&lt;\infty\)</span>；Wald 不要求停时与增量独立，却要求其为给定增量信息的停时。</p>
 </details>
 <p><span id="q199"></span></p>
 <h3 id="problem-81ab5b2c929c">Q1084 · 不均匀硬币的等待时间<a class="headerlink" href="#problem-81ab5b2c929c" title="Permanent link">&para;</a></h3>
@@ -10052,7 +10108,7 @@ X_{t}=X_{0}+\int_{0}^{t}f(t,W_{t})d W_{t},
 <div class="arithmatex">\[
 \begin{align*}\mathbb{E}\left(\int_{0}^{T}f(t,W_{t})^{2}dt\right)&amp;=\frac{\lambda^{2}}{4}\mathbb{E}\left(\int_{0}^{T}\left(e^{2\lambda W_{t}}-2+e^{-2\lambda W_{t}}\right)e^{-\lambda^{2}t}dt\right)\\&amp;\leq\frac{\lambda^{2}}{4}\int_{0}^{T}\mathbb{E}\left(e^{2\lambda W_{t}}+e^{-2\lambda W_{t}}\right)dt\\&amp;=\frac{\lambda^{2}}{4}\int_{0}^{T}2e^{2t\lambda^{2}}dt,\end{align*}
 \]</div>
-<p>这里使用<a href="../03_%E6%A6%82%E7%8E%87%E8%AE%BA/#problem-8f76dccc266f">Q644 · 正态的 <span class="arithmatex">\( E(X^2) \)</span> 与 <span class="arithmatex">\( E(e^{\lambda X}) \)</span></a> 的结论。该积分有限，故条件成立。</p>
+<p>这里使用<a href="../03-2_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%BA%8C/#problem-8f76dccc266f">Q644 · 正态的 <span class="arithmatex">\( E(X^2) \)</span> 与 <span class="arithmatex">\( E(e^{\lambda X}) \)</span></a> 的结论。该积分有限，故条件成立。</p>
 <p>Itô 分别给 <span class="arithmatex">\(d(W^{2}-t)=2W dW\)</span>，<span class="arithmatex">\(d(W^{3}-3tW)=3(W^{2}-t)dW\)</span>。在每个有限区间，正态二、四阶矩保证上述积分核平方可积，因此都是零均值鞅。指数过程由独立增量直接验证 <span class="arithmatex">\(\mathbb{E} [e^{\sigma W_{t}-\sigma ^{2}t/2}|F_{s}]=e^{\sigma W_{s}-\sigma ^{2}s/2}\mathbb{E} [e^{\sigma (W_{t}-W_{s})-\sigma ^{2}(t-s)/2}]=e^{\sigma W_{s}-\sigma ^{2}s/2}\)</span>，并且均值为 1。cosh 过程也是参数 <span class="arithmatex">\(\pm \lambda\)</span> 的两个指数鞅的平均。</p>
 </details>
 <p><span id="q260"></span></p>
@@ -10306,6 +10362,8 @@ d f=\frac{\partial f}{\partial t}d t+\frac{\partial f}{\partial x}d x+\frac{1}{2
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       
