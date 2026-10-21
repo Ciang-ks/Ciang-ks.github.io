@@ -615,7 +615,7 @@
   <a href="#p" class="md-nav__link">
     <span class="md-ellipsis">
       
-        假设检验与 p 值
+        假设检验与 \(p\) 值
       
     </span>
   </a>
@@ -664,7 +664,7 @@
   <a href="#55-t" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.5 t 检验与标准误
+        5.5 \(t\) 检验与标准误
       
     </span>
   </a>
@@ -1484,7 +1484,7 @@
   <a href="#p" class="md-nav__link">
     <span class="md-ellipsis">
       
-        假设检验与 p 值
+        假设检验与 \(p\) 值
       
     </span>
   </a>
@@ -1533,7 +1533,7 @@
   <a href="#55-t" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.5 t 检验与标准误
+        5.5 \(t\) 检验与标准误
       
     </span>
   </a>
@@ -1587,23 +1587,25 @@
 <p>概率与统计的区别：<strong>概率 = 已知参数推结果；统计 = 由数据反推未知参数</strong>。量化研究中大量「从数据估计 + 给出置信区间」的工作依赖本讲，也是面试中统计/数据题的理论根基。</p>
 <h2 id="51">5.1 统计建模框架<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>把每个数据事件当作随机变量</strong>，假设其服从某分布（Bernoulli、Uniform、Exponential、Poisson…）。</li>
-<li><strong>i.i.d. 假设</strong>：各事件独立、且服从同一分布（“independent and identically distributed”）。</li>
+<li><strong>把每个数据事件当作随机变量</strong>，假设其服从某分布（Bernoulli、Uniform、Exponential、<span class="arithmatex">\(\operatorname{Poisson} \ldots\)</span>）。</li>
+<li><strong><span class="arithmatex">\(i.i.d\)</span>. 假设</strong>：各事件独立、且服从同一分布（“independent and identically distributed”）。</li>
 <li><strong>建立「待估参数 → 数据统计量」的联系</strong>：该统计量即<strong>估计量（estimator）</strong>。
    - 例：数据为 Bernoulli，<span class="arithmatex">\(\bar X_n=(X_1+\cdots+X_n)/n\)</span> 收敛到 <span class="arithmatex">\(E(X)=p\)</span>，故用 <span class="arithmatex">\(\hat p=\bar X_n\)</span> 估计 <span class="arithmatex">\(p\)</span>。</li>
-<li><strong>评估置信度</strong>：估计到 <span class="arithmatex">\(\hat p=0.55\)</span> 后，95% 置信它落在哪个区间？</li>
+<li><strong>评估置信度</strong>：估计到 <span class="arithmatex">\(\hat p=0.55\)</span> 后，<span class="arithmatex">\(95\%\)</span> 置信它落在哪个区间？</li>
 </ol>
 <h2 id="52-lln">5.2 大数定律（LLN）<a class="headerlink" href="#52-lln" title="Permanent link">&para;</a></h2>
-<p>$$</p>
-<p>\bar X_n\xrightarrow{\mathrm{a.s.}}\mu\quad\text{（强大数定律）}.</p>
-<p>$$</p>
+<div class="arithmatex">\[
+\bar X_n\xrightarrow{\mathrm{a.s.}}\mu\quad\text{（强大数定律）}.
+\]</div>
 <ul>
 <li>当均值是未知参数的函数时（所有常见分布都如此），LLN 是「理论参数 ↔ 经验数据」的桥梁。</li>
-<li>弱大数定律给出依概率收敛，强大数定律给出几乎处处收敛；面试中要先说明采用哪种版本。</li>
-<li>i.i.d. 不是唯一条件：弱相关、平稳且遍历的时间序列也可能满足 LLN，但不能机械套用独立样本标准误。</li>
+<li>弱大数定律给出依概率收敛，强大数定律给出几乎处处收敛；面试中要先说明采用哪种版本。
+<span class="arithmatex">\(- i.i.d\)</span>. 不是唯一条件：弱相关、平稳且遍历的时间序列也可能满足 LLN，但不能机械套用独立样本标准误。</li>
 </ul>
 <h2 id="53-clt">5.3 中心极限定理（CLT）<a class="headerlink" href="#53-clt" title="Permanent link">&para;</a></h2>
-<div class="arithmatex">\[\sqrt{n}\frac{\bar X_n-\mu}{\sigma}\xrightarrow[n\to\infty]{(d)}\mathcal{N}(0,1)\]</div>
+<div class="arithmatex">\[
+\sqrt{n}\frac{\bar X_n-\mu}{\sigma}\xrightarrow[n\to\infty]{(d)}\mathcal{N}(0,1)
+\]</div>
 <ul>
 <li>CLT 说明「样本均值标准化后近似标准正态」，这是构造置信区间的依据。</li>
 <li>CLT 描述的是<strong>分布收敛</strong>，并不保证单次样本均值接近正态；小样本、重尾或强依赖时要检查条件。</li>
@@ -1611,22 +1613,28 @@
 </ul>
 <h2 id="54">5.4 置信区间<a class="headerlink" href="#54" title="Permanent link">&para;</a></h2>
 <p><strong>定义</strong>：置信水平 <span class="arithmatex">\(1-\alpha\)</span> 的区间 <span class="arithmatex">\(I\)</span> 满足</p>
-<div class="arithmatex">\[\mathbb{P}_\theta[I\ni\theta]\ge 1-\alpha,\quad\forall\theta\in\Theta\]</div>
-<p><strong>构造（中心 = LLN 的估计量，宽度 = CLT）</strong>：</p>
-<div class="arithmatex">\[I_{1-\alpha}=\Big[\hat\theta-\frac{\sigma}{\sqrt n}q_{\alpha/2},\ \hat\theta+\frac{\sigma}{\sqrt n}q_{\alpha/2}\Big]\]</div>
-<p>其中 <span class="arithmatex">\(q_{\alpha/2}=\Phi^{-1}(1-\alpha/2)&gt;0\)</span> 是 <span class="arithmatex">\(\mathcal N(0,1)\)</span> 的上侧临界值（例如 95% 区间约为 <span class="arithmatex">\(1.96\,\operatorname{SE}\)</span>）。</p>
+<div class="arithmatex">\[
+\mathbb{P}_\theta[I\ni\theta]\ge 1-\alpha,\quad\forall\theta\in\Theta
+\]</div>
+<p><strong>构造（中心 <span class="arithmatex">\(= LLN\)</span> 的估计量，宽度 <span class="arithmatex">\(= CLT\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+I_{1-\alpha}=\Big[\hat\theta-\frac{\sigma}{\sqrt n}q_{\alpha/2},\ \hat\theta+\frac{\sigma}{\sqrt n}q_{\alpha/2}\Big]
+\]</div>
+<p>其中 <span class="arithmatex">\(q_{\alpha/2}=\Phi^{-1}(1-\alpha/2)&gt;0\)</span> 是 <span class="arithmatex">\(\mathcal N(0,1)\)</span> 的上侧临界值（例如 <span class="arithmatex">\(95\%\)</span> 区间约为 <span class="arithmatex">\(1.96\,\operatorname{SE}\)</span>）。</p>
 <h3 id="_2">关键难点：消除对真实参数的依赖<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\( \sigma \)</span> 依赖真实参数，需去掉它：
 - <strong>特殊情形（Bernoulli）</strong>：<span class="arithmatex">\(\sigma=\sqrt{p(1-p)}\)</span>，且 <span class="arithmatex">\(p(1-p)\le1/4\)</span>，得保守区间</p>
-<div class="arithmatex">\[I=\Big[\hat p-\frac{1}{2\sqrt n}q_{\alpha/2},\ \hat p+\frac{1}{2\sqrt n}q_{\alpha/2}\Big]\]</div>
+<div class="arithmatex">\[
+I=\Big[\hat p-\frac{1}{2\sqrt n}q_{\alpha/2},\ \hat p+\frac{1}{2\sqrt n}q_{\alpha/2}\Big]
+\]</div>
 <ul>
 <li><strong>一般情况（Slutsky 定理）</strong>：把方差中的真实参数替换为估计量，再代入区间。</li>
 </ul>
-<h3 id="p">假设检验与 p 值<a class="headerlink" href="#p" title="Permanent link">&para;</a></h3>
+<h3 id="p">假设检验与 <span class="arithmatex">\(p\)</span> 值<a class="headerlink" href="#p" title="Permanent link">&para;</a></h3>
 <ul>
-<li>原假设 <span class="arithmatex">\(H_0\)</span>、备择假设 <span class="arithmatex">\(H_1\)</span>、显著性水平 <span class="arithmatex">\(\alpha\)</span> 必须在看数据前确定；拒绝 <span class="arithmatex">\(H_0\)</span> 不等于证明 <span class="arithmatex">\(H_1\)</span> 为真。</li>
-<li>p 值是在 <span class="arithmatex">\(H_0\)</span> 成立时观察到当前或更极端统计量的概率；它不是 <span class="arithmatex">\(H_0\)</span> 为真的概率。</li>
-<li><strong>I 类错误</strong>：错误拒绝 <span class="arithmatex">\(H_0\)</span>，概率控制为 <span class="arithmatex">\(\alpha\)</span>；<strong>II 类错误</strong>：未拒绝错误的 <span class="arithmatex">\(H_0\)</span>，概率为 <span class="arithmatex">\(\beta\)</span>；检验功效为 <span class="arithmatex">\(1-\beta\)</span>。</li>
+<li>原假设 <span class="arithmatex">\(H_0\)</span>、备择假设 <span class="arithmatex">\(H_1\)</span>、显著性水平 <span class="arithmatex">\(\alpha\)</span> 必须在看数据前确定；拒绝 <span class="arithmatex">\(H_0\)</span> 不等于证明 <span class="arithmatex">\(H_1\)</span> 为真。
+<span class="arithmatex">\(- p\)</span> 值是在 <span class="arithmatex">\(H_0\)</span> 成立时观察到当前或更极端统计量的概率；它不是 <span class="arithmatex">\(H_0\)</span> 为真的概率。</li>
+<li><strong><span class="arithmatex">\(I\)</span> 类错误</strong>：错误拒绝 <span class="arithmatex">\(H_0\)</span>，概率控制为 <span class="arithmatex">\(\alpha\)</span>；<strong>II 类错误</strong>：未拒绝错误的 <span class="arithmatex">\(H_0\)</span>，概率为 <span class="arithmatex">\(\beta\)</span>；检验功效为 <span class="arithmatex">\(1-\beta\)</span>。</li>
 <li>多重检验会放大假阳性；可用 Bonferroni 控制 FWER，或 Benjamini--Hochberg 控制 FDR。</li>
 </ul>
 <h3 id="_3">抽样、偏差与自助法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1673,16 +1681,16 @@
 </tr>
 </tbody>
 </table>
-<h2 id="55-t">5.5 t 检验与标准误<a class="headerlink" href="#55-t" title="Permanent link">&para;</a></h2>
+<h2 id="55-t">5.5 <span class="arithmatex">\(t\)</span> 检验与标准误<a class="headerlink" href="#55-t" title="Permanent link">&para;</a></h2>
 <p>用于「样本均值 vs 已知均值」「两个样本均值是否相等」的检验，是统计基本功的延伸（详见第 8 章 8.6）：
 - 抽样方差 <span class="arithmatex">\(\operatorname{Var}(\bar Y)=\sigma_Y^2/n\)</span>，估计 <span class="arithmatex">\(\operatorname{SE}(\bar Y)=S(Y_i)/\sqrt n\)</span>。
-- <strong>t 统计量</strong> <span class="arithmatex">\(t(\mu)=(\bar Y-\mu)/\operatorname{SE}(\bar Y)\)</span>；正态样本且用样本标准差估计方差时服 t 分布，大样本下近似标准正态。显著性应与指定自由度和显著性水平下的临界值比较；<span class="arithmatex">\(|t|\approx2\)</span> 只是双侧 5% 检验的经验近似。
+- <strong><span class="arithmatex">\(t\)</span> 统计量</strong> <span class="arithmatex">\(t(\mu)=(\bar Y-\mu)/\operatorname{SE}(\bar Y)\)</span>；正态样本且用样本标准差估计方差时服 <span class="arithmatex">\(t\)</span> 分布，大样本下近似标准正态。显著性应与指定自由度和显著性水平下的临界值比较；<span class="arithmatex">\(|t|\approx2\)</span> 只是双侧 <span class="arithmatex">\(5\%\)</span> 检验的经验近似。
 - <strong>两独立样本（Welch）</strong>：<span class="arithmatex">\(\operatorname{SE}(\bar Y^1-\bar Y^0)=\sqrt{s_1^2/n_1+s_0^2/n_0}\)</span>；只有在等方差假设下才使用合并方差版本。</p>
 <h2 id="_6">易错点 / 面试提示<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>置信区间的解读</strong>：<span class="arithmatex">\(95\%\)</span> 置信表示按同一程序重复抽样时，约 95% 的区间会覆盖真值；对已经算出的固定区间，不能说“真值有 95% 概率落在其中”。</li>
-<li>对统计建模：先写「假设 i.i.d.、分布类型」，再写估计量与置信区间。</li>
-<li>量化数据题常与第 8 章（数据科学）联动；t/SE/两样本检验的完整推导见第 8 章 8.6。</li>
+<li><strong>置信区间的解读</strong>：<span class="arithmatex">\(95\%\)</span> 置信表示按同一程序重复抽样时，约 <span class="arithmatex">\(95\%\)</span> 的区间会覆盖真值；对已经算出的固定区间，不能说“真值有 <span class="arithmatex">\(95\%\)</span> 概率落在其中”。</li>
+<li>对统计建模：先写「假设 <span class="arithmatex">\(i.i.d\)</span>.、分布类型」，再写估计量与置信区间。</li>
+<li>量化数据题常与第 8 章（数据科学）联动；<span class="arithmatex">\(t/\)</span>SE/两样本检验的完整推导见第 8 章 8.6。</li>
 <li>“不拒绝”不是“接受”；显著性也不等同于经济意义，应同时报告效应大小和区间。</li>
 <li>先区分标准差 <span class="arithmatex">\(\sigma\)</span>、标准误 <span class="arithmatex">\(\sigma/\sqrt n\)</span> 与置信区间半宽，三者经常被混淆。</li>
 </ul>
@@ -1796,7 +1804,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>

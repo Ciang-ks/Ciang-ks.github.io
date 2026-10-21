@@ -761,7 +761,7 @@
   <a href="#123" class="md-nav__link">
     <span class="md-ellipsis">
       
-        通用交易流程（案例 1/2/3 共同套路）
+        通用交易流程（案例1、2、3 共同套路）
       
     </span>
   </a>
@@ -1530,7 +1530,7 @@
   <a href="#123" class="md-nav__link">
     <span class="md-ellipsis">
       
-        通用交易流程（案例 1/2/3 共同套路）
+        通用交易流程（案例1、2、3 共同套路）
       
     </span>
   </a>
@@ -1628,14 +1628,14 @@
 <p>对含选择权的随机支付，先确认谁控制选择、何时看到信息、是否能撤回。持有人控制重掷用 max，卖方控制用 min（<a href="../../%E7%9C%9F%E9%A2%98/08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-86a0178153f6">Q1415 · 重掷权属于谁的合约定价</a>）；不能先假设有一个固定“重掷价值”再报价。</p>
 <h2 id="93">9.3 置信区间<a class="headerlink" href="#93" title="Permanent link">&para;</a></h2>
 <ul>
-<li>置信区间是由估计量构造的随机区间：重复抽样时约 95% 的区间覆盖参数真值；单次观测后不要说“真值有 95% 概率在区间内”。若讨论的是随机结果而非未知参数，例如 <span class="arithmatex">\(X\sim N(100,10^2)\)</span>，<span class="arithmatex">\([80,120]\)</span> 是约 95% 的中央覆盖区间，不是参数置信区间。</li>
+<li>置信区间是由估计量构造的随机区间：重复抽样时约 <span class="arithmatex">\(95\%\)</span> 的区间覆盖参数真值；单次观测后不要说“真值有 <span class="arithmatex">\(95\%\)</span> 概率在区间内”。若讨论的是随机结果而非未知参数，例如 <span class="arithmatex">\(X\sim N(100,10^2)\)</span>，<span class="arithmatex">\([80,120]\)</span> 是约 <span class="arithmatex">\(95\%\)</span> 的中央覆盖区间，不是参数置信区间。</li>
 <li><strong>不确定性越大 → 区间越宽</strong>，报价也越宽。</li>
 <li>但报价要<strong>现实</strong>：<code>0@1e9</code> 虽涵盖真值，却永远不会成交。</li>
 </ul>
 <h2 id="94">9.4 信息不对称与报价策略<a class="headerlink" href="#94" title="Permanent link">&para;</a></h2>
 <ul>
 <li>若你确信对方估值与你不同（如认为 windows 至少 600），可<strong>上移报价</strong> <code>550@600</code>；虽高于你的理论值，但对方更可能买入 → 获更多补偿。</li>
-<li><strong>关键洞察</strong>：即使你 100% 知道真值，也应报<strong>你预计对方仍会成交的最宽报价</strong>。</li>
+<li><strong>关键洞察</strong>：即使你 <span class="arithmatex">\(100\%\)</span> 知道真值，也应报<strong>你预计对方仍会成交的最宽报价</strong>。</li>
 </ul>
 <h3 id="adverse-selection">库存与 adverse selection<a class="headerlink" href="#adverse-selection" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1646,18 +1646,18 @@
 </ul>
 <h2 id="95">9.5 做市案例<a class="headerlink" href="#95" title="Permanent link">&para;</a></h2>
 <p>做市游戏是<strong>多回合</strong>的，核心是<strong>根据每次成交动态调整报价</strong>。</p>
-<h3 id="123">通用交易流程（案例 1/2/3 共同套路）<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<h3 id="123">通用交易流程（案例1、2、3 共同套路）<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>给出理论值</strong>：说明假设（数据、常识、迭代修正）。</li>
 <li><strong>报出市场</strong>（含宽度要求/规则，如 ask 最多 <span class="arithmatex">\( 1.5\times \)</span> bid）。</li>
 <li><strong>对方交易</strong>后调整：对上移/下移报价做决策。</li>
 <li><strong>追踪持仓与 PNL</strong>：配对多空头寸，算盈亏、剩余敞口。</li>
-<li><strong>回答终局问题</strong>：当前仓位？若真值为 X 赚/赔多少？盈亏平衡点？</li>
+<li><strong>回答终局问题</strong>：当前仓位？若真值为 <span class="arithmatex">\(X\)</span> 赚/赔多少？盈亏平衡点？</li>
 </ol>
 <h3 id="_3">案例要点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Case 1 体育博彩（Red Sox 胜场）</strong>：用 <span class="arithmatex">\(\operatorname{Bin}(162,p)\)</span> 近似正态，<span class="arithmatex">\(\sigma=\sqrt{162\cdot0.5\cdot0.5}\approx6.36\)</span>，50%/90% CI 用 <span class="arithmatex">\(z\approx0.67/1.64\)</span>。随成交<strong>上移报价</strong>（对方买入→你短仓→想买回→报价上行），并利用<strong>交易边界</strong>缩小真实值区间，制造<strong>无风险 PNL</strong>（低买高卖配对）。</li>
-<li><strong>Case 2 国家人口（Tanzania）</strong>：首报用粗略常识（25M→20@30）。首个买成交 → 大幅上移（信息少、上移风险小于下移）；后续用<strong>前后成交限制出的区间中点</strong>逐步收窄，每次移动<strong>递减小</strong>。最终可能亏损（正常，考的是应变而非猜对答案）。</li>
+<li><strong>Case 1 体育博彩（Red Sox 胜场）</strong>：用 <span class="arithmatex">\(\operatorname{Bin}(162,p)\)</span> 近似正态，<span class="arithmatex">\(\sigma=\sqrt{162\cdot0.5\cdot0.5}\approx6.36\)</span>，<span class="arithmatex">\(50\%/90\% CI\)</span> 用 <span class="arithmatex">\(z\approx0.67/1.64\)</span>。随成交<strong>上移报价</strong>（对方买入→你短仓→想买回→报价上行），并利用<strong>交易边界</strong>缩小真实值区间，制造<strong>无风险 PNL</strong>（低买高卖配对）。</li>
+<li><strong>Case 2 国家人口（Tanzania）</strong>：首报用粗略常识（<span class="arithmatex">\(25M\to 20\)</span>@30）。首个买成交 → 大幅上移（信息少、上移风险小于下移）；后续用<strong>前后成交限制出的区间中点</strong>逐步收窄，每次移动<strong>递减小</strong>。最终可能亏损（正常，考的是应变而非猜对答案）。</li>
 <li><strong>Case 3 Trade or Tighten</strong>：博弈场景 = 你的理论值 vs 对方未知理论值，在「收紧报价」与「成交」之间抉择，偏向对你不利的对手博弈。</li>
 </ul>
 <h3 id="trader-memory">做市成功的关键习惯（"trader memory"）<a class="headerlink" href="#trader-memory" title="Permanent link">&para;</a></h3>
@@ -1675,7 +1675,7 @@
 </ul>
 <h2 id="_5">关联题库<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li>题库「按题型：做市互动」节点，对应 bible Ch6.3 三个案例及公司真题（SIG 等常考做市）。</li>
+<li>题库「按题型：做市互动」节点，对应 bible <span class="arithmatex">\(Ch6.3\)</span> 三个案例及公司真题（SIG 等常考做市）。</li>
 </ul>
 
 
@@ -1783,7 +1783,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>

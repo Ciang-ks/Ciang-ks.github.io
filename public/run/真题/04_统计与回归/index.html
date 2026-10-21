@@ -1242,7 +1242,7 @@
   <a href="#problem-99099ac18098" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q942 · Student-t样本和标准化
+        Q942 · Student\(-t\)样本和标准化
       
     </span>
   </a>
@@ -1325,7 +1325,7 @@
   <a href="#problem-classifier-impurity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q948 · 不平衡分类的F1
+        Q948 · 不平衡分类的\(F_1\)
       
     </span>
   </a>
@@ -2254,7 +2254,7 @@
   <a href="#problem-99099ac18098" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q942 · Student-t样本和标准化
+        Q942 · Student\(-t\)样本和标准化
       
     </span>
   </a>
@@ -2337,7 +2337,7 @@
   <a href="#problem-classifier-impurity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q948 · 不平衡分类的F1
+        Q948 · 不平衡分类的\(F_1\)
       
     </span>
   </a>
@@ -2613,7 +2613,7 @@
 <details class="note">
 <summary>解答</summary>
 <ol>
-<li><strong>线性性</strong>：输入特征与目标输出之间的真实关系是线性的（这是选线性回归而非 k 近邻等"简单"方法的核心依据）。进一步假设目标 = 输入的线性函数 + 误差项，且<strong>误差项以 0 为中心</strong>（无偏）；可以进一步假设误差服从正态分布，但这并非严格必需。</li>
+<li><strong>线性性</strong>：输入特征与目标输出之间的真实关系是线性的（这是选线性回归而非 <span class="arithmatex">\(k\)</span> 近邻等"简单"方法的核心依据）。进一步假设目标 = 输入的线性函数 + 误差项，且<strong>误差项以 0 为中心</strong>（无偏）；可以进一步假设误差服从正态分布，但这并非严格必需。</li>
 <li><strong>低/无多重共线性</strong>：输入特征之间不能高度相关；实践中共线难免，但至少<strong>不能有输入是其他输入的完全线性组合</strong>。</li>
 <li><strong>同方差性（homoskedasticity）</strong>：误差在输入的任何取值处具有相同方差。</li>
 <li><strong>误差依赖结构</strong>：经典模型通常假设误差在观测间不相关；时间序列中若存在自相关，应使用相应模型或稳健标准误。外生性 <span class="arithmatex">\(E[\varepsilon\mid X]=0\)</span> 是另一项独立条件，不能与“误差彼此独立”等同。</li>
@@ -2625,16 +2625,16 @@
 <p><strong>题目</strong>：对两个变量 <span class="arithmatex">\( X \)</span>、<span class="arithmatex">\( Y \)</span> 做两个回归：<span class="arithmatex">\( \hat Y = \alpha_1 + \beta_1 X \)</span> 与 <span class="arithmatex">\( \hat X = \alpha_2 + \beta_2 Y \)</span>。<span class="arithmatex">\( \beta_1 = 1/\beta_2 \)</span> 成立吗？</p>
 <details class="note">
 <summary>解答</summary>
-<p><strong>不成立。</strong> 直觉：第一个回归最小化<strong>竖直</strong>残差之和（残差沿 Y 方向），第二个回归最小化<strong>水平</strong>残差之和（残差沿 X 方向）——这两个优化目标不同，没有理由恰好给出互为倒数的斜率。</p>
+<p><strong>不成立。</strong> 直觉：第一个回归最小化<strong>竖直</strong>残差之和（残差沿 <span class="arithmatex">\(Y\)</span> 方向），第二个回归最小化<strong>水平</strong>残差之和（残差沿 <span class="arithmatex">\(X\)</span> 方向）——这两个优化目标不同，没有理由恰好给出互为倒数的斜率。</p>
 <p>（精确地说：<span class="arithmatex">\(\beta_1=\operatorname{Cov}(X,Y)/\operatorname{Var}(X)\)</span>、<span class="arithmatex">\(\beta_2=\operatorname{Cov}(X,Y)/\operatorname{Var}(Y)\)</span>，故 <span class="arithmatex">\(\beta_1\beta_2=\rho^2\le1\)</span>。只要斜率非零，两者互为倒数当且仅当 <span class="arithmatex">\(|\rho|=1\)</span>，即变量存在完全线性关系；不要求方差相等。见 <a href="../08_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-cf1edaaae1b3">Q1404 · 案例 2：国家人口（坦桑尼亚）</a>。）</p>
 </details>
 <p><span id="q218"></span></p>
 <h3 id="problem-ddcb55ad9352">Q920 · 非满秩回归<a class="headerlink" href="#problem-ddcb55ad9352" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：回归与正则化</p>
-<p><strong>题目</strong>：若输入特征不是全部线性独立（X 非满秩），回归会发生什么？</p>
+<p><strong>题目</strong>：若输入特征不是全部线性独立（<span class="arithmatex">\(X\)</span> 非满秩），回归会发生什么？</p>
 <details class="note">
 <summary>解答</summary>
-<p><strong>回归的解不唯一</strong>。例如两个输入完全相关（<span class="arithmatex">\( x_2 = 3x_1 \)</span>）时，<span class="arithmatex">\( X^\top X \)</span> 奇异，最小二乘系数 <span class="arithmatex">\( \hat\beta \)</span> 无法唯一确定。但<strong>拟合值 <span class="arithmatex">\( \hat y = X\hat\beta \)</span> 仍然是 <span class="arithmatex">\( y \)</span> 到 <span class="arithmatex">\( X \)</span> 列空间上的投影</strong>——只是把该投影用 X 的列向量表示的方式不止一种。非满秩最常见的场景：一个或多个定性（分类）输入被冗余地编码（如哑变量陷阱）。</p>
+<p><strong>回归的解不唯一</strong>。例如两个输入完全相关（<span class="arithmatex">\( x_2 = 3x_1 \)</span>）时，<span class="arithmatex">\( X^\top X \)</span> 奇异，最小二乘系数 <span class="arithmatex">\( \hat\beta \)</span> 无法唯一确定。但<strong>拟合值 <span class="arithmatex">\( \hat y = X\hat\beta \)</span> 仍然是 <span class="arithmatex">\( y \)</span> 到 <span class="arithmatex">\( X \)</span> 列空间上的投影</strong>——只是把该投影用 <span class="arithmatex">\(X\)</span> 的列向量表示的方式不止一种。非满秩最常见的场景：一个或多个定性（分类）输入被冗余地编码（如哑变量陷阱）。</p>
 </details>
 <p><span id="q219"></span></p>
 <h3 id="problem-d4064417c707">Q921 · 共线性诊断<a class="headerlink" href="#problem-d4064417c707" title="Permanent link">&para;</a></h3>
@@ -2669,11 +2669,17 @@
 <details class="note">
 <summary>解答</summary>
 <p>用闭式解。两个 beta 分别为</p>
-<div class="arithmatex">\[\beta = (X^TX)^{-1}X^TY,\qquad \beta' = (Y^TY)^{-1}Y^TX\]</div>
+<div class="arithmatex">\[
+\beta = (X^TX)^{-1}X^TY,\qquad \beta' = (Y^TY)^{-1}Y^TX
+\]</div>
 <p>乘积为 <span class="arithmatex">\((X^TX)^{-1}X^TY(Y^TY)^{-1}Y^TX\)</span>。用线性代数技巧化简：对任意向量 <span class="arithmatex">\( X \)</span> 有 <span class="arithmatex">\( X^\top X = |X|^2 \)</span>（模的平方）、<span class="arithmatex">\( X^\top Y = \langle X,Y\rangle \)</span>（内积），于是</p>
-<div class="arithmatex">\[\beta\beta' = \frac{\langle X,Y\rangle^2}{|X|^2\,|Y|^2}\]</div>
+<div class="arithmatex">\[
+\beta\beta' = \frac{\langle X,Y\rangle^2}{|X|^2\,|Y|^2}
+\]</div>
 <p>这正是 <span class="arithmatex">\( \cos^2\theta \)</span>（<span class="arithmatex">\( X \)</span> 与 <span class="arithmatex">\( Y \)</span> 夹角余弦的平方），而余弦总在 <span class="arithmatex">\( -1 \)</span> 与 <span class="arithmatex">\( 1 \)</span> 之间：</p>
-<div class="arithmatex">\[0 \le \beta\beta' = \rho^2 \le 1\]</div>
+<div class="arithmatex">\[
+0 \le \beta\beta' = \rho^2 \le 1
+\]</div>
 <p><strong>注</strong>：不等式 <span class="arithmatex">\( \langle X,Y\rangle^2 \le |X|^2|Y|^2 \)</span> 正是 <strong>Cauchy–Schwarz 不等式</strong>（对更一般的内积也成立）。在含截距、变量先中心化的一元回归中，<span class="arithmatex">\( \beta\beta' = \rho^2 \)</span>；因此两者互为倒数当且仅当 <span class="arithmatex">\( |\rho|=1 \)</span>（此时线性关系完全，不要求两者方差相等）。</p>
 </details>
 <h2 id="sec-正则化-偏差方差与泛化">正则化、偏差方差与泛化<a class="headerlink" href="#sec-正则化-偏差方差与泛化" title="Permanent link">&para;</a></h2>
@@ -2696,26 +2702,28 @@
 <p>过拟合源于方差过大，主要手段是<strong>正则化与降维</strong>：</p>
 <ol>
 <li><strong><span class="arithmatex">\( L_p \)</span> 正则化</strong>：lasso（<span class="arithmatex">\( L_1 \)</span>，产生稀疏解）、ridge（<span class="arithmatex">\( L_2 \)</span>，等比例收缩）、elastic net（两者结合）；</li>
-<li><strong>降维</strong>：PCA 主成分回归等，把 p 个相关输入压缩为少数正交成分；</li>
+<li><strong>降维</strong>：PCA 主成分回归等，把 <span class="arithmatex">\(p\)</span> 个相关输入压缩为少数正交成分；</li>
 <li><strong>子集选择</strong>：逐步回归（forward stepwise：从空模型每步加入最能改善拟合的变量并对其正交化；backward stepwise：从全模型每步剔除贡献最小的变量；forward stagewise：从零系数出发小步前进）。</li>
 </ol>
 <p>理论依据是<strong>偏差-方差权衡</strong>：预测误差可分解为方差、偏差<span class="arithmatex">\( ^2 \)</span>与不可约噪声。未正则化的高维模型往往训练偏差较低、估计方差较高；施加合理约束可能以少量偏差换取更大的方差下降。此外，更小的变量子集也有助于解释模型。</p>
 </details>
 <h3 id="problem-regularization-scalar">Q926 · 一维正则化的求导与次梯度<a class="headerlink" href="#problem-regularization-scalar" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：OLS系数0.8，比较最小化(β−0.8)²/2+λβ²/2和(β−0.8)²/2+λ|β|，λ=1。</p>
+<p><strong>题目</strong>：OLS系数0.8，比较最小化<span class="arithmatex">\((\beta -0.8)^{2}/2+\lambda \beta ^{2}/2\)</span>和<span class="arithmatex">\((\beta -0.8)^{2}/2+\lambda |\beta |\)</span>，<span class="arithmatex">\(\lambda =1\)</span>。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Ridge导数(β−0.8)+λβ=0，β=0.8/(1+λ)=0.4。Lasso非零区间给β=sign(0.8)(|0.8|−λ)_+；在β=0，次梯度区间−0.8+λ[−1,1]包含0，故最优为0。两目标严格凸，所以均唯一。答案0.4,0。
-<strong>方法</strong>：光滑项直接求导，绝对值在0用次梯度；惩罚前的1/2系数会改变阈值。</p>
+<p>Ridge导数<span class="arithmatex">\((\beta -0.8)+\lambda \beta =0\)</span>，<span class="arithmatex">\(\beta =0.8/(1+\lambda )=0.4\)</span>。Lasso非零区间给<span class="arithmatex">\(\beta =\operatorname{sign} (0.8)(|0.8|-\lambda )_+\)</span>；在<span class="arithmatex">\(\beta =0\)</span>，次梯度区间<span class="arithmatex">\(-0.8+\lambda [-1,1]\)</span>包含0，故最优为0。两目标严格凸，所以均唯一。答案0.4,0。
+<strong>方法</strong>：光滑项直接求导，绝对值在0用次梯度；惩罚前的<span class="arithmatex">\(1/2\)</span>系数会改变阈值。</p>
 </details>
 <h2 id="sec-假设检验与置信区间">假设检验与置信区间<a class="headerlink" href="#sec-假设检验与置信区间" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>t 检验（单个系数）</strong>：<span class="arithmatex">\( t_j = \hat\beta_j/(\hat\sigma\sqrt{v_j}) \)</span>，<span class="arithmatex">\( v_j \)</span> 是 <span class="arithmatex">\( (X^\top X)^{-1} \)</span> 的第 <span class="arithmatex">\( j \)</span> 个对角元；原假设 <span class="arithmatex">\( \beta_j=0 \)</span> 下服从 <span class="arithmatex">\( t_{N-p-1} \)</span>。</li>
-<li><strong>F 统计量（一组系数）</strong>：<span class="arithmatex">\( F = [(RSS_0-RSS_1)/(p_1-p_0)] / [RSS_1/(N-p_1-1)] \)</span>。</li>
+<li><strong><span class="arithmatex">\(t\)</span> 检验（单个系数）</strong>：<span class="arithmatex">\( t_j = \hat\beta_j/(\hat\sigma\sqrt{v_j}) \)</span>，<span class="arithmatex">\( v_j \)</span> 是 <span class="arithmatex">\( (X^\top X)^{-1} \)</span> 的第 <span class="arithmatex">\( j \)</span> 个对角元；原假设 <span class="arithmatex">\( \beta_j=0 \)</span> 下服从 <span class="arithmatex">\( t_{N-p-1} \)</span>。</li>
+<li><strong><span class="arithmatex">\(F\)</span> 统计量（一组系数）</strong>：<span class="arithmatex">\( F = [(RSS_0-RSS_1)/(p_1-p_0)] / [RSS_1/(N-p_1-1)] \)</span>。</li>
 </ul>
 <p><strong>置信区间</strong>：水平 <span class="arithmatex">\( 1-\alpha \)</span> 的区间 <span class="arithmatex">\( I \)</span> 满足 <span class="arithmatex">\( P_\theta[I \ni \theta] \ge 1-\alpha \)</span>。由 CLT，取 <span class="arithmatex">\( q \)</span> 为 <span class="arithmatex">\( N(0,1) \)</span> 的 <span class="arithmatex">\( 1-\alpha/2 \)</span> 分位数：</p>
-<div class="arithmatex">\[I_{1-\alpha}=\left[\hat\theta - \frac{\sigma}{\sqrt n}q_{\alpha/2},\ \hat\theta + \frac{\sigma}{\sqrt n}q_{\alpha/2}\right]\]</div>
+<div class="arithmatex">\[
+I_{1-\alpha}=\left[\hat\theta - \frac{\sigma}{\sqrt n}q_{\alpha/2},\ \hat\theta + \frac{\sigma}{\sqrt n}q_{\alpha/2}\right]
+\]</div>
 <p><span class="arithmatex">\( \sigma \)</span> 依赖真参数 <span class="arithmatex">\( \Rightarrow \)</span> 用 <strong>Slutsky 定理</strong>把估计量代入方差（Bernoulli 特例：<span class="arithmatex">\( p(1-p) \le 1/4 \Rightarrow \)</span> CI 半宽 <span class="arithmatex">\( 1/(2\sqrt{n})\cdot q \)</span>）。中心来自 LLN（估计量本身），区间宽度来自 CLT。</p>
 <p><span id="q222"></span></p>
 <h3 id="problem-33a739dda45f">Q927 · 回归斜率显著性检验<a class="headerlink" href="#problem-33a739dda45f" title="Permanent link">&para;</a></h3>
@@ -2723,35 +2731,45 @@
 <p><strong>题目</strong>：一元（简单）线性回归中如何检验回归斜率的显著性？</p>
 <details class="note">
 <summary>解答</summary>
-<p>用 <strong>t 检验</strong>。检验原假设 <span class="arithmatex">\(\beta_j=0\)</span>，构造标准化系数：</p>
-<div class="arithmatex">\[t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}\]</div>
+<p>用 <strong><span class="arithmatex">\(t\)</span> 检验</strong>。检验原假设 <span class="arithmatex">\(\beta_j=0\)</span>，构造标准化系数：</p>
+<div class="arithmatex">\[
+t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}
+\]</div>
 <p>其中 <span class="arithmatex">\(v_j\)</span> 是 <span class="arithmatex">\((X^\top X)^{-1}\)</span> 的第 <span class="arithmatex">\(j\)</span> 个对角元，<span class="arithmatex">\(\hat\sigma\)</span> 是残差标准差。在经典正态误差模型下，<span class="arithmatex">\(t_j\sim t_{N-p-1}\)</span>；其绝对值超过指定显著性水平的临界值时拒绝原假设。</p>
-<p>直观上，<span class="arithmatex">\(|t_j|\)</span> 衡量估计系数相对其抽样不确定性的大小；统计显著不等于预测贡献或经济意义很大，不能只凭一次 t 检验机械删变量。单个系数的置信区间为：</p>
-<div class="arithmatex">\[\hat\beta_j \pm t_{1-\alpha/2,\,N-p-1}\,v_j^{1/2}\,\hat\sigma\]</div>
-<p>（<span class="arithmatex">\(\hat\beta\pm2\operatorname{SE}(\hat\beta)\)</span> 是大样本下的近似 95% 区间。若存在异方差或相关误差，必须改用相应稳健标准误，不能仅靠样本增大修复错误的方差公式。）</p>
-<p><strong>联合检验（F 检验）</strong>：检验一组系数可用 <span class="arithmatex">\(F=[(RSS_0-RSS_1)/(p_1-p_0)]/[RSS_1/(N-p_1-1)]\)</span>。一组高度相关的变量可能单独都不显著，但联合起来显著。</p>
+<p>直观上，<span class="arithmatex">\(|t_j|\)</span> 衡量估计系数相对其抽样不确定性的大小；统计显著不等于预测贡献或经济意义很大，不能只凭一次 <span class="arithmatex">\(t\)</span> 检验机械删变量。单个系数的置信区间为：</p>
+<div class="arithmatex">\[
+\hat\beta_j \pm t_{1-\alpha/2,\,N-p-1}\,v_j^{1/2}\,\hat\sigma
+\]</div>
+<p>（<span class="arithmatex">\(\hat\beta\pm2\operatorname{SE}(\hat\beta)\)</span> 是大样本下的近似 <span class="arithmatex">\(95\%\)</span> 区间。若存在异方差或相关误差，必须改用相应稳健标准误，不能仅靠样本增大修复错误的方差公式。）</p>
+<p><strong>联合检验（<span class="arithmatex">\(F\)</span> 检验）</strong>：检验一组系数可用 <span class="arithmatex">\(F=[(RSS_0-RSS_1)/(p_1-p_0)]/[RSS_1/(N-p_1-1)]\)</span>。一组高度相关的变量可能单独都不显著，但联合起来显著。</p>
 </details>
 <p><span id="q226"></span></p>
 <h3 id="problem-71f57edc4753">Q928 · 检验两样本均值<a class="headerlink" href="#problem-71f57edc4753" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：处理组样本均值 <span class="arithmatex">\( \bar Y^1 \)</span>、对照组样本均值 <span class="arithmatex">\( \bar Y^0 \)</span>。如何检验 <span class="arithmatex">\( \mu^1 = \mu^0 \)</span>？t 统计量与标准误如何构造？小 t 统计量说明什么？</p>
+<p><strong>题目</strong>：处理组样本均值 <span class="arithmatex">\( \bar Y^1 \)</span>、对照组样本均值 <span class="arithmatex">\( \bar Y^0 \)</span>。如何检验 <span class="arithmatex">\( \mu^1 = \mu^0 \)</span>？<span class="arithmatex">\(t\)</span> 统计量与标准误如何构造？小 <span class="arithmatex">\(t\)</span> 统计量说明什么？</p>
 <details class="note">
 <summary>解答</summary>
 <p>基础量：样本均值无偏 <span class="arithmatex">\( E[\bar Y] = E[Y_i] \)</span>；抽样方差 <span class="arithmatex">\( \operatorname{Var}(\bar Y) = \sigma_Y^2/n \)</span>，用样本方差代入得估计</p>
-<div class="arithmatex">\[\hat{SE}(\bar Y) = \frac{S(Y_i)}{\sqrt n}\]</div>
+<div class="arithmatex">\[
+\hat{SE}(\bar Y) = \frac{S(Y_i)}{\sqrt n}
+\]</div>
 <p><strong>两组均值之差的标准误</strong>（<span class="arithmatex">\( n_1 \)</span>、<span class="arithmatex">\( n_0 \)</span> 为两组样本量；不假定等方差时使用 Welch 标准误）：</p>
-<div class="arithmatex">\[\hat{SE}(\bar Y^1 - \bar Y^0) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_0^2}{n_0}}\]</div>
-<p><strong>t 统计量</strong>（原假设 <span class="arithmatex">\( \mu^1 - \mu^0 = \mu \)</span>）：</p>
-<div class="arithmatex">\[t(\mu) = \frac{\bar Y^1 - \bar Y^0 - \mu}{\hat{SE}(\bar Y^1 - \bar Y^0)}\]</div>
+<div class="arithmatex">\[
+\hat{SE}(\bar Y^1 - \bar Y^0) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_0^2}{n_0}}
+\]</div>
+<p><strong><span class="arithmatex">\(t\)</span> 统计量</strong>（原假设 <span class="arithmatex">\( \mu^1 - \mu^0 = \mu \)</span>）：</p>
+<div class="arithmatex">\[
+t(\mu) = \frac{\bar Y^1 - \bar Y^0 - \mu}{\hat{SE}(\bar Y^1 - \bar Y^0)}
+\]</div>
 <p>由 CLT，<span class="arithmatex">\( t(\mu) \)</span> 在大样本下趋于标准正态，可做显著性检验（<span class="arithmatex">\( |t| &gt; 2 \)</span> 左右为显著）并构造置信区间 <span class="arithmatex">\( I = [\bar Y - C\cdot\operatorname{SE}, \bar Y + C\cdot\operatorname{SE}] \)</span>。</p>
-<p><strong>重要提醒</strong>：大的 t 统计量可能同时来自效应较大和标准误较小（样本量大）。小的 <span class="arithmatex">\(|t|\)</span> 表示在当前显著性水平下证据不足，可能因为效应确实小，也可能因为样本不足、统计精度低；它不能证明效应为零。</p>
+<p><strong>重要提醒</strong>：大的 <span class="arithmatex">\(t\)</span> 统计量可能同时来自效应较大和标准误较小（样本量大）。小的 <span class="arithmatex">\(|t|\)</span> 表示在当前显著性水平下证据不足，可能因为效应确实小，也可能因为样本不足、统计精度低；它不能证明效应为零。</p>
 </details>
 <h3 id="problem-76b82afb7943">Q929 · 三种二项支持率置信区间<a class="headerlink" href="#problem-76b82afb7943" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：独立调查 1200 人，684 人支持。使用 1.96 的正态临界值，分别以无偏样本方差、p̂(1−p̂)、保守上界 1/4 构造支持率 95% 近似置信区间，比较宽度。</p>
+<p><strong>题目</strong>：独立调查 1200 人，684 人支持。使用 1.96 的正态临界值，分别以无偏样本方差、<span class="arithmatex">\(\hat{p}(1-\hat{p})\)</span>、保守上界 <span class="arithmatex">\(1/4\)</span> 构造支持率 <span class="arithmatex">\(95\%\)</span> 近似置信区间，比较宽度。</p>
 <details class="note">
 <summary>解答</summary>
-<p>1200人中684支持，p̂=.57。使用p̂±1.96√(v/n)：(a)无偏样本方差v=n p̂(1−p̂)/(n−1)，区间[.54197677,.59802323]；(b)代入v=p̂(1−p̂)给[.54198845,.59801155]；(c)保守上界v=1/4给[.54170984,.59829016]。均是正态近似区间，前两种还代入了估计方差；最保守者宽度稍大。</p>
+<p>1200人中684支持，<span class="arithmatex">\(\hat{p}=.57\)</span>。使用<span class="arithmatex">\(\hat{p}\pm 1.96\sqrt{v/n}\)</span>：(a)无偏样本方差<span class="arithmatex">\(v=n \hat{p}(1-\hat{p})/(n-1)\)</span>，区间[.54197677,.59802323]；(b)代入<span class="arithmatex">\(v=\hat{p}(1-\hat{p})\)</span>给[.54198845,.59801155]；(c)保守上界<span class="arithmatex">\(v=1/4\)</span>给[.54170984,.59829016]。均是正态近似区间，前两种还代入了估计方差；最保守者宽度稍大。</p>
 </details>
 <h2 id="sec-抽样权重与因果识别">抽样权重与因果识别<a class="headerlink" href="#sec-抽样权重与因果识别" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2765,10 +2783,12 @@
 <details class="note">
 <summary>解答</summary>
 <p>回归只能消除<strong>被编码为控制的已观测变量</strong>之间的选择偏差；控制集不完整时偏差依然残留。对某个控制变量，做两次回归（含控制 = 长回归、不含 = 短回归），处理变量系数之差即 OVB：</p>
-<div class="arithmatex">\[OVB = \beta^s - \beta^l = (\text{遗漏变量与处理的关系}) \times (\text{遗漏变量在长回归中的效应}) = \pi_1 \times \gamma\]</div>
+<div class="arithmatex">\[
+OVB = \beta^s - \beta^l = (\text{遗漏变量与处理的关系}) \times (\text{遗漏变量在长回归中的效应}) = \pi_1 \times \gamma
+\]</div>
 <p>其中：
 - <span class="arithmatex">\( \beta^s \)</span>、<span class="arithmatex">\( \beta^l \)</span> 分别是短、长回归中处理变量的系数；
-- γ 是遗漏控制在长回归中的系数；
+<span class="arithmatex">\(- \gamma\)</span> 是遗漏控制在长回归中的系数；
 - <span class="arithmatex">\( \pi_1 \)</span> 是遗漏控制对处理变量回归的系数：<span class="arithmatex">\( A_{\mathrm{omitted}} = \pi_0 + \pi_1 X + \varepsilon_{\mathrm{omitted}} \)</span>。</p>
 <p><strong>引用（MHE）</strong>："OVB 公式的重要性在于：如果你声称不存在遗漏变量偏差，通常也就意味着你手上的回归正是你想要的回归，而你要的回归一般具有因果解释——换言之，你已准备好依赖 CIA（条件独立假设）对长回归估计作因果解读。"</p>
 <p>OVB 公式对没有数据支持的遗漏变量无法给出精确数值，但可以做<strong>定性推理</strong>判断偏差方向为正还是负（符号 = <span class="arithmatex">\( \pi_1 \)</span> 的符号 <span class="arithmatex">\( \times\ \gamma \)</span> 的符号）。若除少数核心控制变量外，处理效应对其他任何遗漏变量都不敏感（OVB 小），我们对回归的信心就大（稳健性）。</p>
@@ -2780,9 +2800,13 @@
 <details class="note">
 <summary>解答</summary>
 <p><strong>问题结构</strong>：设 <span class="arithmatex">\( Y_{0i} \)</span> 为个体 <span class="arithmatex">\( i \)</span> 不参保的健康结果、<span class="arithmatex">\( Y_{1i} \)</span> 为参保的健康结果、<span class="arithmatex">\( D \)</span> 为参保指示。我们只能观测 <span class="arithmatex">\( D=1 \)</span> 组的 <span class="arithmatex">\( Y_1 \)</span> 与 <span class="arithmatex">\( D=0 \)</span> 组的 <span class="arithmatex">\( Y_0 \)</span>：</p>
-<div class="arithmatex">\[E[Y\mid D{=}1]-E[Y\mid D{=}0] = E[Y_1-Y_0\mid D{=}1] + \big(E[Y_0\mid D{=}1]-E[Y_0\mid D{=}0]\big)\]</div>
+<div class="arithmatex">\[
+E[Y\mid D{=}1]-E[Y\mid D{=}0] = E[Y_1-Y_0\mid D{=}1] + \big(E[Y_0\mid D{=}1]-E[Y_0\mid D{=}0]\big)
+\]</div>
 <p>即，观测到的组间差异可写成处理组的平均处理效应加上选择偏差：</p>
-<div class="arithmatex">\[(\text{观测组间差异}) = (\text{平均因果效应}) + (\text{选择偏差})\]</div>
+<div class="arithmatex">\[
+(\text{观测组间差异}) = (\text{平均因果效应}) + (\text{选择偏差})
+\]</div>
 <p><strong>为何有偏</strong>：收入、教育、年龄等因素既与参保状态相关又与健康相关，"其他条件相同（ceteris paribus）"不成立，第二项（选择偏差）非零。</p>
 <p><strong>随机化为何有效</strong>：把总体随机分配到处理组（<span class="arithmatex">\( D=1 \)</span>）与对照组（<span class="arithmatex">\( D=0 \)</span>）。由<strong>大数定律</strong>，两个大样本随机组的任何特征均值都趋于相等——特别是 <span class="arithmatex">\( \operatorname{Avg}[Y_0|D=1] = \operatorname{Avg}[Y_0|D=0] \)</span>，<strong>选择偏差项趋于 0</strong>，组间差异即因果效应。</p>
 <p><strong>随机化后的检查——平衡性检验（checking for balance）</strong>：报告两组在预先指定协变量上的标准化均值差异及其置信区间，检查是否存在明显失衡；小样本中出现偶然差异并不等于随机化失败。</p>
@@ -2795,27 +2819,29 @@
 <details class="note">
 <summary>解答</summary>
 <p>抽到群体 <span class="arithmatex">\(j\)</span> 的概率是 <span class="arithmatex">\(s_j/N\)</span>，因此普通样本均值估计的是 <span class="arithmatex">\(\sum_js_j^2/N\)</span>，偏向大群体。反过来</p>
-<p>[E[1/S]=\sum_j\frac{s_j}{N}\frac1{s_j}=\frac MN.]
-故可用 <span class="arithmatex">\(\widehat\theta=1/(n^{-1}\sum_{i=1}^n1/S_i)\)</span> 一致估计 <span class="arithmatex">\(N/M\)</span>。这是调和平均式校正，不保证有限样本无偏。独立放回抽人不等于均匀抽群体；若实际抽样有非应答或不同入样概率，还需加权建模。</p>
+<div class="arithmatex">\[
+E[1/S]=\sum_j\frac{s_j}{N}\frac1{s_j}=\frac MN.
+\]</div>
+<p>故可用 <span class="arithmatex">\(\widehat\theta=1/(n^{-1}\sum_{i=1}^n1/S_i)\)</span> 一致估计 <span class="arithmatex">\(N/M\)</span>。这是调和平均式校正，不保证有限样本无偏。独立放回抽人不等于均匀抽群体；若实际抽样有非应答或不同入样概率，还需加权建模。</p>
 </details>
 <h3 id="problem-ecc2a9823238">Q933 · 随机学生与随机司机的大巴规模<a class="headerlink" href="#problem-ecc2a9823238" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
 <p><strong>题目</strong>：四辆巴士载客分别 40、33、25、50 人，每车一名司机。均匀随机选一名学生和均匀随机选一名司机，分别求所在车载客数的期望并比较。</p>
 <details class="note">
 <summary>解答</summary>
-<p>4巴士分别载40、33、25、50人，总148。随机司机看到平均载客数EY=37；随机学生以人数/148概率命中该车，EX=(40²+33²+25²+50²)/148=2907/74≈39.2838，更大。规模偏差使随机人更常来自大车。</p>
+<p>4巴士分别载40、33、25、50人，总148。随机司机看到平均载客数<span class="arithmatex">\(\mathbb{E} Y=37\)</span>；随机学生以人数<span class="arithmatex">\(/148\)</span>概率命中该车，<span class="arithmatex">\(\mathbb{E} X=(40^{2}+33^{2}+25^{2}+50^{2})/148=2907/74\approx 39.2838\)</span>，更大。规模偏差使随机人更常来自大车。</p>
 </details>
 <h3 id="problem-5b2a6824ca07">Q934 · 随机排列分组的三种抽样单位<a class="headerlink" href="#problem-5b2a6824ca07" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：五十人各抽名字形成均匀随机排列，按排列环分组。求环数期望；再比较每次先算平均组大小 50/K 后取期望、随机选一个人所在组的期望大小、汇集大量排列的全部组后随机选一组的极限平均大小，给出有限计算公式。</p>
+<p><strong>题目</strong>：五十人各抽名字形成均匀随机排列，按排列环分组。求环数期望；再比较每次先算平均组大小 <span class="arithmatex">\(50/K\)</span> 后取期望、随机选一个人所在组的期望大小、汇集大量排列的全部组后随机选一组的极限平均大小，给出有限计算公式。</p>
 <details class="note">
 <summary>解答</summary>
-<p>50人各抽名字形成排列环。环数K的均值H₅₀≈4.4992。对每次座次先算平均组大小50/K再跨座次平均，值为50∑_{k=1}^{50}c(50,k)/(k·50!)≈13.32348（13.3）；无符号Stirling数满足c(n,k)=c(n−1,k−1)+(n−1)c(n−1,k)。随机抽一个人，其环长在1,…,50均匀，均值25.5。若把大量座次的全部组汇在一起再随机抽组，则均大小趋50/H₅₀≈11.1。这三者不能混称同一“平均组大小”。</p>
-<p>每个长度k环的期望个数1/k，因此组数均值H₅₀≈4.4992，最近一位小数为4.5。</p>
+<p>50人各抽名字形成排列环。环数<span class="arithmatex">\(K\)</span>的均值<span class="arithmatex">\(H_{50}\approx 4.4992\)</span>。对每次座次先算平均组大小<span class="arithmatex">\(50/K\)</span>再跨座次平均，值为<span class="arithmatex">\(50\sum _{k=1}^{50}c(50,k)/(k\cdot 50!)\approx 13.32348\)</span>（13.3）；无符号Stirling数满足<span class="arithmatex">\(c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)\)</span>。随机抽一个人，其环长在<span class="arithmatex">\(1,\ldots ,50\)</span>均匀，均值25.5。若把大量座次的全部组汇在一起再随机抽组，则均大小趋<span class="arithmatex">\(50/H_{50}\approx 11.1\)</span>。这三者不能混称同一“平均组大小”。</p>
+<p>每个长度<span class="arithmatex">\(k\)</span>环的期望个数<span class="arithmatex">\(1/k\)</span>，因此组数均值<span class="arithmatex">\(H_{50}\approx 4.4992\)</span>，最近一位小数为4.5。</p>
 </details>
 <h2 id="sec-极限定理与渐近近似">极限定理与渐近近似<a class="headerlink" href="#sec-极限定理与渐近近似" title="Permanent link">&para;</a></h2>
 <p><span id="sec-统计基础要点LLNCLT置信区间"></span></p>
-<p><strong>概率 vs 统计</strong>：概率从已知参数/模型出发分析结果；统计从数据反推未知参数。建模范式：把每个数据事件视为随机变量，假设 i.i.d.（同分布 + 独立）；构造连接参数与数据的<strong>估计量</strong>（如 Bernoulli 的 p̂ = X̄ₙ）；量化估计的置信水平。</p>
+<p><strong>概率 vs 统计</strong>：概率从已知参数/模型出发分析结果；统计从数据反推未知参数。建模范式：把每个数据事件视为随机变量，假设 <span class="arithmatex">\(i.i.d\)</span>.（同分布 + 独立）；构造连接参数与数据的<strong>估计量</strong>（如 Bernoulli 的 <span class="arithmatex">\(\hat{p} = \bar{X}_{n}\)</span>）；量化估计的置信水平。</p>
 <p><strong>大数定律（LLN）</strong>：弱大数定律给出 <span class="arithmatex">\(\bar X_n\xrightarrow{P}\mu\)</span>，强大数定律在更强结论下给出 <span class="arithmatex">\(\bar X_n\xrightarrow{a.s.}\mu\)</span>；二者建立理论均值与样本均值之间的桥梁。</p>
 <p><strong>中心极限定理（CLT）</strong>：<span class="arithmatex">\( \sqrt{n}(\bar X_n - \mu)/\sigma \xrightarrow{d} N(0,1) \)</span>——用于量化置信水平。</p>
 <p><span id="q213"></span></p>
@@ -2838,86 +2864,88 @@
 <p>中心极限定理有多种形式，本质上是概率弱收敛结论。这里给出最常用的形式。</p>
 <p>对具有有限二阶矩的独立同分布随机变量，随着样本量增加，适当标准化的和趋于正态分布；这一结论不依赖于原始分布的具体形状。</p>
 <p>更严格地，设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 独立同分布，均值为 <span class="arithmatex">\(\mu\)</span>、方差为 <span class="arithmatex">\(\sigma^2&lt;\infty\)</span>，记 <span class="arithmatex">\(S_n=\sum_{i=1}^nX_i\)</span>。则</p>
-<div class="arithmatex">\[ Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}} \]</div>
+<div class="arithmatex">\[
+Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}}
+\]</div>
 <p>依分布收敛到标准正态分布。</p>
 <p>还有其他形式；Lindeberg 给出了独立但不同分布变量的中心极限定理。</p>
 </details>
 <h3 id="problem-236ecdc6d623">Q936 · 每日产量的和与首次越界<a class="headerlink" href="#problem-236ecdc6d623" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：每日非负产量独立同分布，均值 5、方差 9，S_n 为累计量。(a) 用 CLT 估计 S₁₀₀&lt;440；(b) 求近似满足 P(S_n≥200+5n)≤0.05 的最大整数 n；(c) N 为首次累计超过 1000 的日子，估计 P(N≥220)，写明所用部分和下标。</p>
+<p><strong>题目</strong>：每日非负产量独立同分布，均值 5、方差 9，<span class="arithmatex">\(S_{n}\)</span> 为累计量。(a) 用 CLT 估计 <span class="arithmatex">\(S_{100}&lt;440\)</span>；(b) 求近似满足 <span class="arithmatex">\(P(S_{n}\ge 200+5n)\le 0.05\)</span> 的最大整数 <span class="arithmatex">\(n\)</span>；<span class="arithmatex">\((c) N\)</span> 为首次累计超过 1000 的日子，估计 <span class="arithmatex">\(P(N\ge 220)\)</span>，写明所用部分和下标。</p>
 <details class="note">
 <summary>解答</summary>
-<p>每日非负产量i.i.d.均值5、方差9。(a)100日总量&lt;440约Φ((440−500)/30)=Φ(−2)≈0.02275。(b)P(Sn≥200+5n)≈1−Φ(200/(3√n))，要求≤.05得n≤[200/(3Φ⁻¹(.95))]²≈1642.72，最大近似整数1642。(c)首次总量超过1000的日子N，N≥220等价S219≤1000（产量非负），约Φ((1000−1095)/(3√219))≈0.0161841。此处应使用219日，不能漏掉首次越界的下标差。</p>
+<p>每日非负产量<span class="arithmatex">\(i.i.d\)</span>.均值5、方差9。<span class="arithmatex">\((a)100\)</span>日总量<span class="arithmatex">\(&lt;440\)</span>约<span class="arithmatex">\(\Phi ((440-500)/30)=\Phi (-2)\approx 0.02275\)</span>。<span class="arithmatex">\((b)P(S_{n}\ge 200+5n)\approx 1-\Phi (200/(3\sqrt{n}))\)</span>，要求<span class="arithmatex">\(\le .05\)</span>得<span class="arithmatex">\(n\le [200/(3\Phi ^{-1}(.95))]^{2}\approx 1642.72\)</span>，最大近似整数1642。(c)首次总量超过1000的日子<span class="arithmatex">\(N\)</span>，<span class="arithmatex">\(N\ge 220\)</span>等价<span class="arithmatex">\(S219\le 1000\)</span>（产量非负），约<span class="arithmatex">\(\Phi ((1000-1095)/(3\sqrt{219}))\approx 0.0161841\)</span>。此处应使用219日，不能漏掉首次越界的下标差。</p>
 </details>
 <h3 id="problem-9e50347efcc0">Q937 · 均匀样本、缩放与高次幂<a class="headerlink" href="#problem-9e50347efcc0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：Xᵢ 独立 U(−1,1)。分别判断 Xᵢ、Xᵢ/i、Xᵢ^i 的依概率收敛，并求存在的极限。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(X_{i}\)</span> 独立 <span class="arithmatex">\(U(-1,1)\)</span>。分别判断 <span class="arithmatex">\(X_{i}\)</span>、<span class="arithmatex">\(X_{i}/i\)</span>、<span class="arithmatex">\(X_{i}^{i}\)</span> 的依概率收敛，并求存在的极限。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Xi i.i.d.U(−1,1)。(a)Xi的边际分布不收缩，且独立相邻样本之差的尾概率固定为正，不是依概率Cauchy，故无依概率极限；(b)Yi=Xi/i，|Yi|≤1/i，几乎必然趋0；(c)Zi=Xi^i，0&lt;ε&lt;1时P(|Zi|&gt;ε)=1−ε^(1/i)→0，依概率趋0。</p>
+<p><span class="arithmatex">\(X_{i} i.i.d.U(-1,1)\)</span>。<span class="arithmatex">\((a)X_{i}\)</span>的边际分布不收缩，且独立相邻样本之差的尾概率固定为正，不是依概率Cauchy，故无依概率极限；<span class="arithmatex">\((b)Y_{i}=X_{i}/i\)</span>，<span class="arithmatex">\(|Y_{i}|\le 1/i\)</span>，几乎必然趋0；<span class="arithmatex">\((c)Z_{i}=X_{i}^{i}\)</span>，<span class="arithmatex">\(0&lt;\epsilon &lt;1\)</span>时<span class="arithmatex">\(P(|Z_{i}|&gt;\epsilon )=1-\epsilon ^{1/i}\to 0\)</span>，依概率趋0。</p>
 </details>
 <h3 id="problem-83ca9268ab7f">Q938 · 依概率收敛不推出矩收敛<a class="headerlink" href="#problem-83ca9268ab7f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：X_n 以概率 1/n 为 1，否则 0；Y_n 以概率 1/n 为 n，否则 0。求均值、方差，证明两者依概率趋零，说明期望与均方收敛是否成立。再证明均方收敛到常数能推出依概率收敛。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(X_{n}\)</span> 以概率 <span class="arithmatex">\(1/n\)</span> 为 1，否则 0；<span class="arithmatex">\(Y_{n}\)</span> 以概率 <span class="arithmatex">\(1/n\)</span> 为 <span class="arithmatex">\(n\)</span>，否则 0。求均值、方差，证明两者依概率趋零，说明期望与均方收敛是否成立。再证明均方收敛到常数能推出依概率收敛。</p>
 <details class="note">
 <summary>解答</summary>
-<p>原图Xn=1概率1/n、0概率1−1/n；Yn=n概率1/n、0概率1−1/n。(a)EXn=1/n、VarXn=(n−1)/n²；EYn=1、VarYn=n−1。(b)Chebyshev可证Xn→0，但Yn方差发散无法直接给趋0；(c)直接P(|Yn|&gt;ε)=1/n（n&gt;ε）仍证明Yn依概率趋0。(d)EYn恒1不趋0，构成期望不收敛反例。(e)若E(Xn−c)²→0，Markov给P(|Xn−c|&gt;ε)≤E(Xn−c)²/ε²→0。(f)Yn趋0但EYn²=n不趋0，也是不均方收敛的反例。</p>
+<p>原图<span class="arithmatex">\(X_{n}=1\)</span>概率<span class="arithmatex">\(1/n\)</span>、0概率<span class="arithmatex">\(1-1/n\)</span>；<span class="arithmatex">\(Y_{n}=n\)</span>概率<span class="arithmatex">\(1/n\)</span>、0概率<span class="arithmatex">\(1-1/n\)</span>。<span class="arithmatex">\((a)\mathbb{E} X_{n}=1/n\)</span>、<span class="arithmatex">\(\operatorname{Var} X_{n}=(n-1)/n^{2}\)</span>；<span class="arithmatex">\(\mathbb{E} Y_{n}=1\)</span>、<span class="arithmatex">\(\operatorname{Var} Y_{n}=n-1\)</span>。(b)Chebyshev可证<span class="arithmatex">\(X_{n}\to 0\)</span>，但<span class="arithmatex">\(Y_{n}\)</span>方差发散无法直接给趋0；(c)直接<span class="arithmatex">\(P(|Y_{n}|&gt;\epsilon )=1/n\)</span>（<span class="arithmatex">\(n&gt;\epsilon\)</span>）仍证明<span class="arithmatex">\(Y_{n}\)</span>依概率趋0。<span class="arithmatex">\((d)\mathbb{E} Y_{n}\)</span>恒1不趋0，构成期望不收敛反例。(e)若<span class="arithmatex">\(\mathbb{E} (X_{n}-c)^{2}\to 0\)</span>，Markov给<span class="arithmatex">\(P(|X_{n}-c|&gt;\epsilon )\le \mathbb{E} (X_{n}-c)^{2}/\epsilon ^{2}\to 0\)</span>。<span class="arithmatex">\((f)Y_{n}\)</span>趋0但<span class="arithmatex">\(\mathbb{E} Y_{n}^{2}=n\)</span>不趋0，也是不均方收敛的反例。</p>
 </details>
 <h3 id="problem-2616b02b839d">Q939 · 三种窗口宽度的二项极限<a class="headerlink" href="#problem-2616b02b839d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：S_n~Bin(n,1/2)。分别求 S_n 落在中心 n/2 的 ±10、±n/10、±√n/2 三种窗口内概率的极限。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(S_{n}\sim \operatorname{Bin} (n,1/2)\)</span>。分别求 <span class="arithmatex">\(S_{n}\)</span> 落在中心 <span class="arithmatex">\(n/2\)</span> 的 <span class="arithmatex">\(\pm 10\)</span>、<span class="arithmatex">\(\pm n/10\)</span>、<span class="arithmatex">\(\pm \sqrt{n}/2\)</span> 三种窗口内概率的极限。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Sn~Bin(n,1/2)，中心n/2、标准差√n/2。(a)中心±10的固定窗口概率趋0；(b)中心±n/10的线性窗口概率趋1（弱大数律）；(c)中心±√n/2的一个标准差窗口趋Φ(1)−Φ(−1)≈0.682689。比较窗口相对√n的尺度即可。</p>
+<p><span class="arithmatex">\(S_{n}\sim \operatorname{Bin} (n,1/2)\)</span>，中心<span class="arithmatex">\(n/2\)</span>、标准差<span class="arithmatex">\(\sqrt{n}/2\)</span>。(a)中心<span class="arithmatex">\(\pm 10\)</span>的固定窗口概率趋0；(b)中心<span class="arithmatex">\(\pm n/10\)</span>的线性窗口概率趋1（弱大数律）；(c)中心<span class="arithmatex">\(\pm \sqrt{n}/2\)</span>的一个标准差窗口趋<span class="arithmatex">\(\Phi (1)-\Phi (-1)\approx 0.682689\)</span>。比较窗口相对<span class="arithmatex">\(\sqrt{n}\)</span>的尺度即可。</p>
 </details>
 <h3 id="problem-9b5245b27a18">Q940 · 男女投票人数之差<a class="headerlink" href="#problem-9b5245b27a18" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：男性支持人数 M~Bin(300,0.4)、女性支持人数 F~Bin(196,0.5)，相互独立。用正态近似估计 P(M&gt;F)，分别给出连续性修正及不修正的结果。</p>
+<p><strong>题目</strong>：男性支持人数 <span class="arithmatex">\(M\sim \operatorname{Bin} (300,0.4)\)</span>、女性支持人数 <span class="arithmatex">\(F\sim \operatorname{Bin} (196,0.5)\)</span>，相互独立。用正态近似估计 <span class="arithmatex">\(P(M&gt;F)\)</span>，分别给出连续性修正及不修正的结果。</p>
 <details class="note">
 <summary>解答</summary>
-<p>男M<sub>Bin(300,.4)、女F</sub>Bin(196,.5)独立；差D均值22、方差72+49=121。用连续性修正P(D&gt;0)=P(D≥1)≈P(N(22,121)&gt;.5)=Φ(21.5/11)≈0.974682；不修正得Φ(2)≈0.97725。</p>
+<p>男<span class="arithmatex">\(M\sim \operatorname{Bin} (300,.4)\)</span>、女<span class="arithmatex">\(F\sim \operatorname{Bin} (196,.5)\)</span>独立；差<span class="arithmatex">\(D\)</span>均值22、方差<span class="arithmatex">\(72+49=121\)</span>。用连续性修正<span class="arithmatex">\(P(D&gt;0)=P(D\ge 1)\approx P(N(22,121)&gt;.5)=\Phi (21.5/11)\approx 0.974682\)</span>；不修正得<span class="arithmatex">\(\Phi (2)\approx 0.97725\)</span>。</p>
 </details>
 <h3 id="problem-d9c52773b13f">Q941 · 均匀样本的均值最大值与乘积收敛<a class="headerlink" href="#problem-d9c52773b13f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：Xᵢ 独立 U(−1,1)。分别求样本均值、前 n 项最大值、前 n 项乘积的依概率极限，并给出直接证明。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(X_{i}\)</span> 独立 <span class="arithmatex">\(U(-1,1)\)</span>。分别求样本均值、前 <span class="arithmatex">\(n\)</span> 项最大值、前 <span class="arithmatex">\(n\)</span> 项乘积的依概率极限，并给出直接证明。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Xi独立U(−1,1)。(a)样本均值依概率趋0，因为方差1/(3n)；(b)最大值依概率趋1，P(max≤1−ε)=(1−ε/2)^n（0&lt;ε&lt;2）；(c)乘积依概率趋0，E|∏Xi|=(E|X|)^n=2⁻ⁿ，Markov给P(|乘积|&gt;ε)≤2⁻ⁿ/ε。不同序列应分别找均值、尾事件或绝对矩。</p>
+<p><span class="arithmatex">\(X_{i}\)</span>独立<span class="arithmatex">\(U(-1,1)\)</span>。(a)样本均值依概率趋0，因为方差<span class="arithmatex">\(1/(3n)\)</span>；(b)最大值依概率趋1，<span class="arithmatex">\(P(\max \le 1-\epsilon )=(1-\epsilon /2)^{n}\)</span>（<span class="arithmatex">\(0&lt;\epsilon &lt;2\)</span>）；(c)乘积依概率趋0，<span class="arithmatex">\(E|\prod X_{i}|=(E|X|)^{n}=2^{-n}\)</span>，Markov给<span class="arithmatex">\(P(|\)</span>乘积<span class="arithmatex">\(|&gt;\epsilon )\le 2^{-n}/\epsilon\)</span>。不同序列应分别找均值、尾事件或绝对矩。</p>
 </details>
-<h3 id="problem-99099ac18098">Q942 · Student-t样本和标准化<a class="headerlink" href="#problem-99099ac18098" title="Permanent link">&para;</a></h3>
+<h3 id="problem-99099ac18098">Q942 · Student<span class="arithmatex">\(-t\)</span>样本和标准化<a class="headerlink" href="#problem-99099ac18098" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：Tᵢ 独立同分布 Student-t，固定自由度 m≥3。求常数 a_n、b_n，使 a_n(ΣTᵢ−b_n) 依分布趋于标准正态，并说明自由度不超过 2 时的障碍。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(T_{i}\)</span> 独立同分布 Student<span class="arithmatex">\(-t\)</span>，固定自由度 <span class="arithmatex">\(m\ge 3\)</span>。求常数 <span class="arithmatex">\(a_{n}\)</span>、<span class="arithmatex">\(b_{n}\)</span>，使 <span class="arithmatex">\(a_{n}(\sum T_{i}-b_{n})\)</span> 依分布趋于标准正态，并说明自由度不超过 2 时的障碍。</p>
 <details class="note">
 <summary>解答</summary>
-<p>i.i.d.Student-t_m，m≥3时均值0、方差m/(m−2)。取b_n=0、a_n=√[(m−2)/(mn)]，则a_n(ΣT_i−b_n)依分布趋N(0,1)。自由度≤2时方差不存在，不能套这个CLT。</p>
+<p><span class="arithmatex">\(i.i.d\)</span>.Student<span class="arithmatex">\(-t_{m}\)</span>，<span class="arithmatex">\(m\ge 3\)</span>时均值0、方差<span class="arithmatex">\(m/(m-2)\)</span>。取<span class="arithmatex">\(b_{n}=0\)</span>、<span class="arithmatex">\(a_{n}=\sqrt{(m-2)/(mn)}\)</span>，则<span class="arithmatex">\(a_{n}(\sum T_{i}-b_{n})\)</span>依分布趋<span class="arithmatex">\(N(0,1)\)</span>。自由度<span class="arithmatex">\(\le 2\)</span>时方差不存在，不能套这个CLT。</p>
 </details>
 <h3 id="problem-b863dfd14368">Q943 · CLT怎样推出弱大数律<a class="headerlink" href="#problem-b863dfd14368" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：独立同分布变量均值 μ、有限非零方差 σ²。说明 CLT 如何推出弱大数律，区分标准化分布收敛与样本均值依概率收敛。</p>
+<p><strong>题目</strong>：独立同分布变量均值 <span class="arithmatex">\(\mu\)</span>、有限非零方差 <span class="arithmatex">\(\sigma ^{2}\)</span>。说明 CLT 如何推出弱大数律，区分标准化分布收敛与样本均值依概率收敛。</p>
 <details class="note">
 <summary>解答</summary>
-<p>有限方差σ²时Z_n=√n(X̄_n−μ)/σ依分布趋标准正态，因此Z_n的分布族紧。X̄_n−μ=(σ/√n)Z_n依概率趋0：给定ε&gt;0，先选固定M使尾部小，再令√n ε/σ&gt;M。CLT描述标准化分布形状，弱大数律描述偏离常数的概率趋0；依分布收敛与依概率收敛是不同概念。</p>
+<p>有限方差<span class="arithmatex">\(\sigma ^{2}\)</span>时<span class="arithmatex">\(Z_{n}=\sqrt{n}(\bar{X}_{n}-\mu )/\sigma\)</span>依分布趋标准正态，因此<span class="arithmatex">\(Z_{n}\)</span>的分布族紧。<span class="arithmatex">\(\bar{X}_{n}-\mu =(\sigma /\sqrt{n})Z_{n}\)</span>依概率趋0：给定<span class="arithmatex">\(\epsilon &gt;0\)</span>，先选固定<span class="arithmatex">\(M\)</span>使尾部小，再令<span class="arithmatex">\(\sqrt{n} \epsilon /\sigma &gt;M\)</span>。CLT描述标准化分布形状，弱大数律描述偏离常数的概率趋0；依分布收敛与依概率收敛是不同概念。</p>
 </details>
 <h3 id="problem-0da255e21023">Q944 · 400 次抛币不修正的 CLT<a class="headerlink" href="#problem-0da255e21023" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
 <p><strong>题目</strong>：公平币独立抛四百次。按不作连续性修正的 CLT 估计至少 230 次正面的概率，保留五位小数。</p>
 <details class="note">
 <summary>解答</summary>
-<p>均值 200、标准差 10，230 对应标准正态 3，故至少 230 的概率近似 1−Φ(3)=0.00135（保留五位小数）。</p>
+<p>均值 200、标准差 10，230 对应标准正态 3，故至少 230 的概率近似 <span class="arithmatex">\(1-\Phi (3)=0.00135\)</span>（保留五位小数）。</p>
 </details>
 <h3 id="problem-551b63430a17">Q945 · 两种 Beta 和的 CLT<a class="headerlink" href="#problem-551b63430a17" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：两组各 324 个独立样本，均服从 Beta(1,2)，两组相互独立。求两组总和之差大于 10 的 CLT 近似概率，先推导单样本均值与方差。</p>
+<p><strong>题目</strong>：两组各 324 个独立样本，均服从 <span class="arithmatex">\(\operatorname{Beta} (1,2)\)</span>，两组相互独立。求两组总和之差大于 10 的 CLT 近似概率，先推导单样本均值与方差。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Beta(1,2) 密度为 2(1−x)，积分得 EX=1/3、EX²=1/6、VarX=1/18。两组各 324 个独立样本的和之差均值 0、方差 36，所以大于 10 的概率近似 1−Φ(5/3)=Φ(−5/3)。</p>
+<p><span class="arithmatex">\(\operatorname{Beta} (1,2)\)</span> 密度为 <span class="arithmatex">\(2(1-x)\)</span>，积分得 <span class="arithmatex">\(\mathbb{E} X=1/3\)</span>、<span class="arithmatex">\(\mathbb{E} X^{2}=1/6\)</span>、<span class="arithmatex">\(\operatorname{Var} X=1/18\)</span>。两组各 324 个独立样本的和之差均值 0、方差 36，所以大于 10 的概率近似 <span class="arithmatex">\(1-\Phi (5/3)=\Phi (-5/3)\)</span>。</p>
 </details>
 <h3 id="problem-3375e02ac23a">Q946 · 未作连续性修正的指定近似<a class="headerlink" href="#problem-3375e02ac23a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：公平币独立抛一百次，H 为正面数。分别用不作连续性修正和作修正的正态近似计算 P(H≥60)，比较结果。</p>
+<p><strong>题目</strong>：公平币独立抛一百次，<span class="arithmatex">\(H\)</span> 为正面数。分别用不作连续性修正和作修正的正态近似计算 <span class="arithmatex">\(P(H\ge 60)\)</span>，比较结果。</p>
 <details class="note">
 <summary>解答</summary>
-<p>H∼Bin(100,1/2)，均值 50、标准差 5。按 CLT 且不作连续性修正，P(H≥60)≈1−Φ(2)=0.02275；若允许连续性修正，阈值改为 59.5，得到 1−Φ(1.9)≈0.02872。题目指定近似口径时两种数值不能混报。</p>
+<p><span class="arithmatex">\(H\sim \operatorname{Bin} (100,1/2)\)</span>，均值 50、标准差 5。按 CLT 且不作连续性修正，<span class="arithmatex">\(P(H\ge 60)\approx 1-\Phi (2)=0.02275\)</span>；若允许连续性修正，阈值改为 59.5，得到 <span class="arithmatex">\(1-\Phi (1.9)\approx 0.02872\)</span>。题目指定近似口径时两种数值不能混报。</p>
 </details>
 <h2 id="sec-损失函数与模型评价">损失函数与模型评价<a class="headerlink" href="#sec-损失函数与模型评价" title="Permanent link">&para;</a></h2>
 <p>先明确预测目标、损失函数与评价指标；不同损失对应不同的最优预测量。</p>
@@ -2926,120 +2954,120 @@
 <p><strong>题目</strong>：四个正类分数为 0.9、0.6、0.6、0.3，四个负类分数为 0.8、0.6、0.2、0.1。并列按半次胜，求 AUC。</p>
 <details class="note">
 <summary>解答</summary>
-<p>经验 AUC=<span class="arithmatex">\([\#(s_+&gt;s_-)+\frac12\#(s_+=s_-)]/(n_+n_-)\)</span>。它是随机抽一对正负样本时正类排序更高的概率，并列随机打散。四个正样本的胜数（含半胜）分别为 4、5/2、5/2、2，共 11，除 16 得 AUC=11/16。
+<p>经验 <span class="arithmatex">\(AUC= [\#(s_+&gt;s_-)+\frac12\#(s_+=s_-)]/(n_+n_-)\)</span>。它是随机抽一对正负样本时正类排序更高的概率，并列随机打散。四个正样本的胜数（含半胜）分别为 4、<span class="arithmatex">\(5/2\)</span>、<span class="arithmatex">\(5/2\)</span>、2，共 11，除 16 得 <span class="arithmatex">\(AUC=11/16\)</span>。
 <strong>方法</strong>：每个正样本与所有负样本比较；不同阈值产生的 ROC 曲线不需要逐点画出，重复分数必须半计。</p>
 </details>
-<h3 id="problem-classifier-impurity">Q948 · 不平衡分类的F1<a class="headerlink" href="#problem-classifier-impurity" title="Permanent link">&para;</a></h3>
+<h3 id="problem-classifier-impurity">Q948 · 不平衡分类的<span class="arithmatex">\(F_1\)</span><a class="headerlink" href="#problem-classifier-impurity" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：一万笔订单中两百笔快速成交，模型预测三百笔会快速成交，其中一百二十笔预测正确。求精确率、召回率与 F1。</p>
+<p><strong>题目</strong>：一万笔订单中两百笔快速成交，模型预测三百笔会快速成交，其中一百二十笔预测正确。求精确率、召回率与 <span class="arithmatex">\(F_1\)</span>。</p>
 <details class="note">
 <summary>解答</summary>
-<p>成交类TP=120、FP=180、FN=80，精确率120/300=2/5，召回120/200=3/5，F1=2TP/(2TP+FP+FN)=240/500=12/25。总体准确率即使高也不能替代少数类指标。</p>
+<p>成交类<span class="arithmatex">\(TP=120\)</span>、<span class="arithmatex">\(FP=180\)</span>、<span class="arithmatex">\(FN=80\)</span>，精确率<span class="arithmatex">\(120/300=2/5\)</span>，召回<span class="arithmatex">\(120/200=3/5\)</span>，<span class="arithmatex">\(F1=2TP/(2TP+FP+FN)=240/500=12/25\)</span>。总体准确率即使高也不能替代少数类指标。</p>
 </details>
 <h3 id="problem-32c5e9d8a0a3">Q949 · 树分裂的加权Gini<a class="headerlink" href="#problem-32c5e9d8a0a3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断</p>
 <p><strong>题目</strong>：父节点六正四负，分为左节点五正一负、右节点一正三负。求 Gini 降低量。</p>
 <details class="note">
 <summary>解答</summary>
-<p>父Gini=1−(3/5)²−(2/5)²=12/25。左Gini=1−(5/6)²−(1/6)²=5/18，右=1−(1/4)²−(3/4)²=3/8。按样本量加权为(6/10)(5/18)+(4/10)(3/8)=19/60；降低12/25−19/60=49/300。</p>
+<p>父Gini<span class="arithmatex">\(=1-(3/5)^{2}-(2/5)^{2}=12/25\)</span>。左Gini<span class="arithmatex">\(=1-(5/6)^{2}-(1/6)^{2}=5/18\)</span>，右<span class="arithmatex">\(=1-(1/4)^{2}-(3/4)^{2}=3/8\)</span>。按样本量加权为<span class="arithmatex">\((6/10)(5/18)+(4/10)(3/8)=19/60\)</span>；降低<span class="arithmatex">\(12/25-19/60=49/300\)</span>。</p>
 </details>
 <h3 id="problem-quantile-check-loss">Q950 · 绝对损失与分位数检查损失<a class="headerlink" href="#problem-quantile-check-loss" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：固定实数样本x₁,…,x_n，求∑|x_i−a|的全部极小点；构造使极小点为经验τ分位数的损失，0&lt;τ&lt;1。</p>
+<p><strong>题目</strong>：固定实数样本<span class="arithmatex">\(x_{1},\ldots ,x_{n}\)</span>，求<span class="arithmatex">\(\sum |x_{i}-a|\)</span>的全部极小点；构造使极小点为经验<span class="arithmatex">\(\tau\)</span>分位数的损失，<span class="arithmatex">\(0&lt;\tau &lt;1\)</span>。</p>
 <details class="note">
 <summary>解答</summary>
-<p>绝对损失在a的次梯度为#(x_i<a)−#(x_i>a)+[−#(x_i=a),#(x_i=a)]。包含0等价于a两侧各不超过n/2个样本。因此奇数n取中位顺序统计量，偶数n取两个中央顺序统计量之间整个闭区间。
-一般用检查损失ρτ(u)=τu（u≥0），(τ−1)u（u&lt;0）。目标凸，其极小条件为F_n(a−)≤τ≤F_n(a)。若nτ不是整数，取x_(⌈nτ⌉)；若nτ=k是整数，整个[x_(k),x_(k+1)]均最优，重复值可能使区间退化。τ=1/2时损失是|u|/2，与绝对损失同极小点。非对称平方损失通常给expectile，不给分位数。
+<p>设 <span class="arithmatex">\(N_&lt; =\#\{i:x_i&lt;a\}\)</span>、<span class="arithmatex">\(N_&gt; =\#\{i:x_i&gt;a\}\)</span>、<span class="arithmatex">\(N_= =\#\{i:x_i=a\}\)</span>。绝对损失在 <span class="arithmatex">\(a\)</span> 的次梯度为 <span class="arithmatex">\(N_&lt;-N_&gt;+[-N_=,N_=]\)</span>。包含0等价于 <span class="arithmatex">\(a\)</span> 两侧各不超过 <span class="arithmatex">\(n/2\)</span> 个样本。因此奇数 <span class="arithmatex">\(n\)</span> 取中位顺序统计量，偶数 <span class="arithmatex">\(n\)</span> 取两个中央顺序统计量之间整个闭区间。
+一般用检查损失 <span class="arithmatex">\(\rho_\tau(u)=\tau u\)</span>（<span class="arithmatex">\(u\ge0\)</span>）、<span class="arithmatex">\((\tau-1)u\)</span>（<span class="arithmatex">\(u&lt;0\)</span>）。目标凸，其极小条件为 <span class="arithmatex">\(F_n(a-)\le\tau\le F_n(a)\)</span>。若 <span class="arithmatex">\(n\tau\)</span> 不是整数，取 <span class="arithmatex">\(x_{(\lceil n\tau\rceil)}\)</span>；若 <span class="arithmatex">\(n\tau=k\)</span> 是整数，整个 <span class="arithmatex">\([x_{(k)},x_{(k+1)}]\)</span> 均最优，重复值可能使区间退化。<span class="arithmatex">\(\tau=1/2\)</span> 时损失是 <span class="arithmatex">\(|u|/2\)</span>，与绝对损失同极小点。非对称平方损失通常给expectile，不给分位数。
 <strong>方法</strong>：比较左右斜率穿过0的位置，并保留有平坦段时的全部答案。</p>
 </details>
 <h3 id="problem-81811b682077">Q951 · 平方损失与绝对损失的最优常数<a class="headerlink" href="#problem-81811b682077" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：T 为估计 θ 的二阶矩有限估计量，证明 MSE=方差加偏差平方。另设随机变量 X 二阶矩有限，求常数 c 使 E(X−c)² 最小；若 X 绝对一阶矩有限、密度处处正，证明使 E|X−c| 最小的常数是唯一中位数。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(T\)</span> 为估计 <span class="arithmatex">\(\theta\)</span> 的二阶矩有限估计量，证明 <span class="arithmatex">\(MSE=\)</span>方差加偏差平方。另设随机变量 <span class="arithmatex">\(X\)</span> 二阶矩有限，求常数 <span class="arithmatex">\(c\)</span> 使 <span class="arithmatex">\(\mathbb{E} (X-c)^{2}\)</span> 最小；若 <span class="arithmatex">\(X\)</span> 绝对一阶矩有限、密度处处正，证明使 <span class="arithmatex">\(E|X-c|\)</span> 最小的常数是唯一中位数。</p>
 <details class="note">
 <summary>解答</summary>
-<p>(a)T−θ=(T−ET)+(ET−θ)，平方后交叉项均值0，MSE(T)=Var(T)+(ET−θ)²。(b)E(X−c)²=VarX+(EX−c)²，唯一最优常数c=EX。(c)密度处处正且绝对损失有限时，dE|X−c|/dc=P(X<c)−P(X>c)=2F(c)−1，严格递增并在中位数处为0，因此最优是中位数。</p>
+<p><span class="arithmatex">\((a)T-\theta =(T-\mathbb{E} T)+(\mathbb{E} T-\theta )\)</span>，平方后交叉项均值0，<span class="arithmatex">\(MSE(T)=\operatorname{Var} (T)+(\mathbb{E} T-\theta )^{2}\)</span>。<span class="arithmatex">\((b)\mathbb{E} (X-c)^{2}=\operatorname{Var} X+(\mathbb{E} X-c)^{2}\)</span>，唯一最优常数<span class="arithmatex">\(c=\mathbb{E} X\)</span>。(c)密度处处正且绝对损失有限时，<span class="arithmatex">\(dE|X-c|/dc=P(X&lt;c)-P(X&gt;c)=2F(c)-1\)</span>，严格递增并在中位数处为0，因此最优是中位数。</p>
 </details>
 <h2 id="sec-极大似然估计">极大似然估计<a class="headerlink" href="#sec-极大似然估计" title="Permanent link">&para;</a></h2>
 <p>按观测机制写出似然和参数可行域，再求最大值；边界参数与无偏估计需要分别处理。</p>
 <h3 id="problem-serial-number-estimation">Q952 · 有限总体序号的极大值估计<a class="headerlink" href="#problem-serial-number-estimation" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断</p>
-<p><strong>题目</strong>：某批物品的序号恰为 1,…,N，其中 N 未知。从中不放回均匀抽取 k 件，观察到最大序号 M。分别求 N 的极大似然估计与基于 M 的无偏估计，并计算 k=1、k=5 且 M=60 时的结果。</p>
+<p><strong>题目</strong>：某批物品的序号恰为 <span class="arithmatex">\(1,\ldots ,N\)</span>，其中 <span class="arithmatex">\(N\)</span> 未知。从中不放回均匀抽取 <span class="arithmatex">\(k\)</span> 件，观察到最大序号 <span class="arithmatex">\(M\)</span>。分别求 <span class="arithmatex">\(N\)</span> 的极大似然估计与基于 <span class="arithmatex">\(M\)</span> 的无偏估计，并计算 <span class="arithmatex">\(k=1\)</span>、<span class="arithmatex">\(k=5\)</span> 且 <span class="arithmatex">\(M=60\)</span> 时的结果。</p>
 <details class="note">
 <summary>解答</summary>
-<p>似然为P(M=m|N)=C(m−1,k−1)/C(N,k)，N≥m。分母随N增加，所以MLE为m，两例都给60。这是最可能参数，并非无偏修正。
-由均匀顺序统计量的间隔对称性，E[M]=k(N+1)/(k+1)，所以无偏估计N̂=(k+1)M/k−1。k=1,m=60给119；k=5给71。若用连续均匀端点近似而忽略整数−1修正，会得到120与72，须标明是近似。</p>
+<p>似然为<span class="arithmatex">\(P(M=m|N)=\binom{m-1}{k-1}/\binom{N}{k}\)</span>，<span class="arithmatex">\(N\ge m\)</span>。分母随<span class="arithmatex">\(N\)</span>增加，所以MLE为<span class="arithmatex">\(m\)</span>，两例都给60。这是最可能参数，并非无偏修正。
+由均匀顺序统计量的间隔对称性，<span class="arithmatex">\(\mathbb{E} [M]=k(N+1)/(k+1)\)</span>，所以无偏估计<span class="arithmatex">\(\hat{N}=(k+1)M/k-1\)</span>。<span class="arithmatex">\(k=1,m=60\)</span>给119；<span class="arithmatex">\(k=5\)</span>给71。若用连续均匀端点近似而忽略整数<span class="arithmatex">\(-1\)</span>修正，会得到120与72，须标明是近似。</p>
 <p><strong>方法</strong>：用最大观察序号的精确分布写似然，再区分估计准则和整数偏差修正。</p>
 </details>
 <h3 id="problem-iid-likelihood-estimation">Q953 · Poisson率的极大似然<a class="headerlink" href="#problem-iid-likelihood-estimation" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：独立样本 Xᵢ~Poisson(λ)，λ≥0。求 MLE，判断无偏性、一致性，并处理全零样本。</p>
+<p><strong>题目</strong>：独立样本 <span class="arithmatex">\(X_{i}\sim \operatorname{Poisson} (\lambda )\)</span>，<span class="arithmatex">\(\lambda \ge 0\)</span>。求 MLE，判断无偏性、一致性，并处理全零样本。</p>
 <details class="note">
 <summary>解答</summary>
-<p>Poisson(λ)的对数似然为−nλ+(ΣXi)lnλ−Σln(Xi!)，导数为−n+ΣXi/λ，故λ̂=X̄；全部0时边界λ̂=0。EX̄=λ，无偏，VarX̄=λ/n，依概率趋λ，一致。</p>
+<p><span class="arithmatex">\(\operatorname{Poisson} (\lambda )\)</span>的对数似然为<span class="arithmatex">\(-n\lambda +(\sum X_{i})\ln \lambda -\sum \ln (X_{i}!)\)</span>，导数为<span class="arithmatex">\(-n+\sum X_{i}/\lambda\)</span>，故<span class="arithmatex">\(\hat{\lambda }=\bar{X}\)</span>；全部0时边界<span class="arithmatex">\(\hat{\lambda }=0\)</span>。<span class="arithmatex">\(E\bar{X}=\lambda\)</span>，无偏，<span class="arithmatex">\(\operatorname{Var} \bar{X}=\lambda /n\)</span>，依概率趋<span class="arithmatex">\(\lambda\)</span>，一致。</p>
 </details>
 <h3 id="problem-6eba8016f79d">Q954 · 指数率的极大似然<a class="headerlink" href="#problem-6eba8016f79d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：独立样本 Xᵢ~Expo(rate θ)，θ&gt;0。求 MLE、判断无偏性与一致性。</p>
+<p><strong>题目</strong>：独立样本 <span class="arithmatex">\(X_{i}\sim \operatorname{Expo} (rate \theta )\)</span>，<span class="arithmatex">\(\theta &gt;0\)</span>。求 MLE、判断无偏性与一致性。</p>
 <details class="note">
 <summary>解答</summary>
-<p>指数Expo(rateθ)的对数似然n lnθ−θΣXi，解θ̂=n/ΣXi（总和&gt;0）；因倒数是非线性的，θ̂不必无偏，但由样本均值收敛及连续映射一致。</p>
-<p>当 n&gt;1，和服从 Gamma(n,θ)，E[n/ΣXᵢ]=nθ/(n−1)，故有向上偏差；n=1 时均值无穷。</p>
+<p>指数<span class="arithmatex">\(\operatorname{Expo} (rate\theta )\)</span>的对数似然<span class="arithmatex">\(n \ln \theta -\theta \sum X_{i}\)</span>，解<span class="arithmatex">\(\hat{\theta }=n/\sum X_{i}\)</span>（总和<span class="arithmatex">\(&gt;0\)</span>）；因倒数是非线性的，<span class="arithmatex">\(\hat{\theta }\)</span>不必无偏，但由样本均值收敛及连续映射一致。</p>
+<p>当 <span class="arithmatex">\(n&gt;1\)</span>，和服从 <span class="arithmatex">\(\operatorname{Gamma} (n,\theta )\)</span>，<span class="arithmatex">\(\mathbb{E} [n/\sum X_{i}]=n\theta /(n-1)\)</span>，故有向上偏差；<span class="arithmatex">\(n=1\)</span> 时均值无穷。</p>
 </details>
 <h3 id="problem-27c5b63c3ec2">Q955 · 三比特消息的误码率估计<a class="headerlink" href="#problem-27c5b63c3ec2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：三比特消息每比特独立误码概率 p，每组只记录错误数 X，独立观察 n 组。求 PMF、p 的 MLE、均值、方差和一致性。n=100、总错误 20 时，分别用保守 Bernoulli 方差和代入 p̂(1−p̂) 构造约 95% 区间；说明使用组计数样本方差还需要什么数据。</p>
+<p><strong>题目</strong>：三比特消息每比特独立误码概率 <span class="arithmatex">\(p\)</span>，每组只记录错误数 <span class="arithmatex">\(X\)</span>，独立观察 <span class="arithmatex">\(n\)</span> 组。求 PMF、<span class="arithmatex">\(p\)</span> 的 MLE、均值、方差和一致性。<span class="arithmatex">\(n=100\)</span>、总错误 20 时，分别用保守 Bernoulli 方差和代入 <span class="arithmatex">\(\hat{p}(1-\hat{p})\)</span> 构造约 <span class="arithmatex">\(95\%\)</span> 区间；说明使用组计数样本方差还需要什么数据。</p>
 <details class="note">
 <summary>解答</summary>
-<p>独立逐比特误码率p，每组三位仅报告误码数X。(a)X~Bin(3,p)，PMF C(3,k)p^k(1−p)^(3−k)；(b)独立n组的MLE p̂=ΣXi/(3n)；(c)Ep̂=p，无偏；(d)Varp̂=p(1−p)/(3n)→0，一致；(e)n=100、总错误20，p̂=1/15，用保守Bernoulli方差1/4得约95%区间[.01008634,.12324699]；(f)代入p̂(1−p̂)则[.03843944,.09489389]，更窄。也可用组计数样本方差sX²，区间p̂±1.96√[sX²/(9n)]；仅给总误码数无法恢复这个样本方差，需各组Xi。</p>
+<p>独立逐比特误码率<span class="arithmatex">\(p\)</span>，每组三位仅报告误码数<span class="arithmatex">\(X\)</span>。<span class="arithmatex">\((a)X\sim \operatorname{Bin} (3,p)\)</span>，<span class="arithmatex">\(PMF \binom{3}{k}p^{k}(1-p)^{3-k}\)</span>；(b)独立<span class="arithmatex">\(n\)</span>组的<span class="arithmatex">\(MLE \hat{p}=\sum X_{i}/(3n)\)</span>；<span class="arithmatex">\((c)E\hat{p}=p\)</span>，无偏；<span class="arithmatex">\((d)\operatorname{Var} \hat{p}=p(1-p)/(3n)\to 0\)</span>，一致；<span class="arithmatex">\((e)n=100\)</span>、总错误20，<span class="arithmatex">\(\hat{p}=1/15\)</span>，用保守Bernoulli方差<span class="arithmatex">\(1/4\)</span>得约<span class="arithmatex">\(95\%\)</span>区间[.01008634,.12324699]；(f)代入<span class="arithmatex">\(\hat{p}(1-\hat{p})\)</span>则[.03843944,.09489389]，更窄。也可用组计数样本方差<span class="arithmatex">\(s_X^{2}\)</span>，区间<span class="arithmatex">\(\hat{p}\pm 1.96\sqrt{s_X^{2}/(9n)}\)</span>；仅给总误码数无法恢复这个样本方差，需各组<span class="arithmatex">\(X_{i}\)</span>。</p>
 </details>
 <h3 id="problem-6ed8c1e8604c">Q956 · 正态均值与方差的MLE<a class="headerlink" href="#problem-6ed8c1e8604c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：独立 N(μ,v) 样本，μ、v 未知，v&gt;0。求两参数 MLE，判断是否无偏，并讨论所有观察值相同时方差 MLE 的边界。</p>
+<p><strong>题目</strong>：独立 <span class="arithmatex">\(N(\mu ,v)\)</span> 样本，<span class="arithmatex">\(\mu\)</span>、<span class="arithmatex">\(v\)</span> 未知，<span class="arithmatex">\(v&gt;0\)</span>。求两参数 MLE，判断是否无偏，并讨论所有观察值相同时方差 MLE 的边界。</p>
 <details class="note">
 <summary>解答</summary>
-<p>独立N(μ,v)样本，最大化−n ln v/2−Σ(Xi−μ)²/(2v)，先得μ̂=X̄，再v̂=Σ(Xi−X̄)²/n。μ̂无偏，v̂期望(n−1)v/n有偏；无偏样本方差才用分母n−1。若全部样本完全相同且要求v&gt;0，似然在v→0无界，须说明边界退化。</p>
+<p>独立<span class="arithmatex">\(N(\mu ,v)\)</span>样本，最大化<span class="arithmatex">\(-n \ln v/2-\sum(X_{i}-\mu )^{2}/(2v)\)</span>，先得<span class="arithmatex">\(\hat{\mu }=\bar{X}\)</span>，再<span class="arithmatex">\(\hat{v}=\sum(X_{i}-\bar{X})^{2}/n\)</span>。<span class="arithmatex">\(\hat{\mu }\)</span>无偏，<span class="arithmatex">\(\hat{v}\)</span>期望<span class="arithmatex">\((n-1)v/n\)</span>有偏；无偏样本方差才用分母<span class="arithmatex">\(n-1\)</span>。若全部样本完全相同且要求<span class="arithmatex">\(v&gt;0\)</span>，似然在<span class="arithmatex">\(v\to 0\)</span>无界，须说明边界退化。</p>
 </details>
 <h3 id="problem-63fd9028d43d">Q957 · 玻璃总重量的置信区间与指数MLE<a class="headerlink" href="#problem-63fd9028d43d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：一千块独立同分布玻璃总重 2340 磅，单块方差不超过 4。用 CLT 和保守标准误构造均值的约 95% 区间。若另假设重量服从率 θ 的指数分布，求 θ 的 MLE。</p>
+<p><strong>题目</strong>：一千块独立同分布玻璃总重 2340 磅，单块方差不超过 4。用 CLT 和保守标准误构造均值的约 <span class="arithmatex">\(95\%\)</span> 区间。若另假设重量服从率 <span class="arithmatex">\(\theta\)</span> 的指数分布，求 <span class="arithmatex">\(\theta\)</span> 的 MLE。</p>
 <details class="note">
 <summary>解答</summary>
-<p>1000块独立同分布玻璃总重2340，样本均值2.34。(a)VarWi≤4，用CLT及保守标准误≤2/√1000，约95%区间2.34±1.96·2/√1000=[2.21604,2.46396]磅。(b)若另知Wi~Expo(rateθ)，MLE θ̂=1000/2340=50/117≈0.4273504。只给方差上界时正态区间是近似，并非分布无关的严格95%覆盖保证。</p>
+<p>1000块独立同分布玻璃总重2340，样本均值2.34。<span class="arithmatex">\((a)\operatorname{Var} Wi\le 4\)</span>，用CLT及保守标准误<span class="arithmatex">\(\le 2/\sqrt{1000}\)</span>，约<span class="arithmatex">\(95\%\)</span>区间<span class="arithmatex">\(2.34\pm 1.96\cdot 2/\sqrt{1000}=[2.21604,2.46396]\)</span>磅。(b)若另知<span class="arithmatex">\(Wi\sim \operatorname{Expo} (rate\theta )\)</span>，<span class="arithmatex">\(MLE \hat{\theta }=1000/2340=50/117\approx 0.4273504\)</span>。只给方差上界时正态区间是近似，并非分布无关的严格<span class="arithmatex">\(95\%\)</span>覆盖保证。</p>
 </details>
 <h3 id="problem-thermal-geometric-count">Q958 · 热辐射几何计数的参数估计与精度<a class="headerlink" href="#problem-thermal-geometric-count" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
-<p><strong>题目</strong>：独立一秒光子计数K的PMF正比exp(−k/θ)，k≥0、温度参数θ&gt;0。求归一化、矩、MLE和1%相对标准误需要的样本数。</p>
+<p><strong>题目</strong>：独立一秒光子计数<span class="arithmatex">\(K\)</span>的PMF正比<span class="arithmatex">\(\exp (-k/\theta )\)</span>，<span class="arithmatex">\(k\ge 0\)</span>、温度参数<span class="arithmatex">\(\theta &gt;0\)</span>。求归一化、矩、MLE和<span class="arithmatex">\(1\%\)</span>相对标准误需要的样本数。</p>
 <details class="note">
 <summary>解答</summary>
-<p>设r=e⁻¹ᐟθ，Z(θ)=1/(1−r)。K为从0起、成功率1−r的几何分布，μ=r/(1−r)=1/(e^(1/θ)−1)，σ²=r/(1−r)²=μ(1+μ)。独立n次样本均值s_n，MLE满足μ(θ̂)=s_n，所以θ̂=1/ln(1+1/s_n)；s_n=0时最优边界θ→0。高温θ≫1时μ≈θ，θ̂≈s_n。</p>
-<p>样本均值标准差/均值=√[(1+μ)/(nμ)]，要求≤.01需n≥10000(1+1/μ)=10000e^(1/θ)，高温约10000。95%正态置信区间可用s_n±1.96√[s_n(1+s_n)/n]；达到1%相对标准误时近似为观测均值的±1.96%。这只是大样本置信近似，不是确定误差保证。</p>
+<p>设<span class="arithmatex">\(r=e^{-1}\)</span>ᐟ<span class="arithmatex">\(\theta\)</span>，<span class="arithmatex">\(Z(\theta )=1/(1-r)\)</span>。<span class="arithmatex">\(K\)</span>为从0起、成功率<span class="arithmatex">\(1-r\)</span>的几何分布，<span class="arithmatex">\(\mu =r/(1-r)=1/(e^{1/\theta }-1)\)</span>，<span class="arithmatex">\(\sigma ^{2}=r/(1-r)^{2}=\mu (1+\mu )\)</span>。独立<span class="arithmatex">\(n\)</span>次样本均值<span class="arithmatex">\(s_{n}\)</span>，MLE满足<span class="arithmatex">\(\mu (\hat{\theta })=s_{n}\)</span>，所以<span class="arithmatex">\(\hat{\theta }=1/\ln (1+1/s_{n})\)</span>；<span class="arithmatex">\(s_{n}=0\)</span>时最优边界<span class="arithmatex">\(\theta \to 0\)</span>。高温<span class="arithmatex">\(\theta \gg 1\)</span>时<span class="arithmatex">\(\mu \approx \theta\)</span>，<span class="arithmatex">\(\hat{\theta }\approx s_{n}\)</span>。</p>
+<p>样本均值标准差/均值<span class="arithmatex">\(=\sqrt{(1+\mu )/(n\mu )}\)</span>，要求<span class="arithmatex">\(\le .01\)</span>需<span class="arithmatex">\(n\ge 10000(1+1/\mu )=10000e^{1/\theta }\)</span>，高温约10000。<span class="arithmatex">\(95\%\)</span>正态置信区间可用<span class="arithmatex">\(s_{n}\pm 1.96\sqrt{s_{n}(1+s_{n})/n}\)</span>；达到<span class="arithmatex">\(1\%\)</span>相对标准误时近似为观测均值的<span class="arithmatex">\(\pm 1.96\%\)</span>。这只是大样本置信近似，不是确定误差保证。</p>
 </details>
 <h3 id="problem-gaussian-linear-quadratic-fit">Q959 · 高斯噪声下线性与平方特征的似然拟合<a class="headerlink" href="#problem-gaussian-linear-quadratic-fit" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：统计推断</p>
-<p><strong>题目</strong>：数据x=(.8,2.5,5,7.3,9.1)，y=(−2.3,20.9,103.5,215.8,334)。比较模型Y=θ0+θ1x+W及Y=β0+β1x²+V，噪声分别独立零均值高斯。</p>
+<p><strong>题目</strong>：数据<span class="arithmatex">\(x=(.8,2.5,5,7.3,9.1)\)</span>，<span class="arithmatex">\(y=(-2.3,20.9,103.5,215.8,334)\)</span>。比较模型<span class="arithmatex">\(Y=\theta _{0}+\theta _{1}x+W\)</span>及<span class="arithmatex">\(Y=\beta _{0}+\beta _{1}x^{2}+V\)</span>，噪声分别独立零均值高斯。</p>
 <details class="note">
 <summary>解答</summary>
-<p>每种模型设计矩阵A的列分别为1和特征t，线性取t=x，平方特征取t=x²。最大似然最小化SSE=‖y−Ab‖²，正规方程AᵀAb=Aᵀy，b=(AᵀA)⁻¹Aᵀy；实现宜用QR或最小二乘求解，不显式求逆。</p>
-<p>线性结果θ0≈−65.86171583、θ1≈40.53476029；平方特征结果β0≈−3.07450457、β1≈4.09115139。若同时估计噪声方差，MLE用SSE/n，分别691.00029061与5.61380080；无偏残差方差才用n−2。平方特征模型只包含截距与 x² 两项。</p>
+<p>每种模型设计矩阵 <span class="arithmatex">\(A\)</span> 的列分别为1和特征 <span class="arithmatex">\(t\)</span>，线性取 <span class="arithmatex">\(t=x\)</span>，平方特征取 <span class="arithmatex">\(t=x^2\)</span>。最大似然最小化 <span class="arithmatex">\(\operatorname{SSE}=\lVert y-Ab\rVert^2\)</span>，正规方程为 <span class="arithmatex">\(A^{\mathsf T}Ab=A^{\mathsf T}y\)</span>，故 <span class="arithmatex">\(b=(A^{\mathsf T}A)^{-1}A^{\mathsf T}y\)</span>。实现宜用QR或最小二乘求解，不显式求逆。</p>
+<p>线性结果<span class="arithmatex">\(\theta _{0}\approx -65.86171583\)</span>、<span class="arithmatex">\(\theta _{1}\approx 40.53476029\)</span>；平方特征结果<span class="arithmatex">\(\beta _{0}\approx -3.07450457\)</span>、<span class="arithmatex">\(\beta _{1}\approx 4.09115139\)</span>。若同时估计噪声方差，MLE用SSE<span class="arithmatex">\(/n\)</span>，分别691.00029061与5.61380080；无偏残差方差才用<span class="arithmatex">\(n-2\)</span>。平方特征模型只包含截距与 <span class="arithmatex">\(x^{2}\)</span> 两项。</p>
 </details>
 <h2 id="sec-贝叶斯估计与最优预测">贝叶斯估计与最优预测<a class="headerlink" href="#sec-贝叶斯估计与最优预测" title="Permanent link">&para;</a></h2>
 <p>将先验与似然结合得到后验，再按损失函数选择后验均值、分位数或其他决策。</p>
 <h3 id="problem-uniform-endpoint-posterior">Q960 · 均匀分布上界的后验与平方损失<a class="headerlink" href="#problem-uniform-endpoint-posterior" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：条件概率与贝叶斯</p>
-<p><strong>题目</strong>：迟到X|Θ=θ~U(0,θ)，Θ先验U(0,1)。单次及多次观察后，求后验、MAP、均方最优和线性估计，并比较条件均方误差。</p>
+<p><strong>题目</strong>：迟到<span class="arithmatex">\(X|\Theta =\theta \sim U(0,\theta )\)</span>，<span class="arithmatex">\(\Theta\)</span>先验<span class="arithmatex">\(U(0,1)\)</span>。单次及多次观察后，求后验、MAP、均方最优和线性估计，并比较条件均方误差。</p>
 <details class="note">
 <summary>解答</summary>
-<p>单次0&lt;x&lt;1，似然θ⁻¹1_{x≤θ≤1}，边际fX(x)=−lnx=L，后验f(θ|x)=1/(Lθ)，x≤θ≤1。多次条件独立观察，a=max x_i，后验正比θ⁻ⁿ1_{a≤θ≤1}；n&gt;1归一化常数(n−1)/(a^(1−n)−1)，n=1为1/(−lna)。</p>
-<p>单次MAP=x；后验一、二阶矩m=(1−x)/L、v₂=(1−x²)/(2L)，均方损失最优估计m。条件于x的MSE对任意估计b为v₂−2bm+b²=(v₂−m²)+(b−m)²，所以MAP的MSE=v₂−2xm+x²，均方估计MSE=v₂−m²，后者最小。</p>
-<p>最佳线性估计利用EΘ=1/2、EX=1/4、Cov(Θ,X)=1/24、VarX=7/144，得到ℓ(x)=2/7+6x/7。其条件MSE=v₂−2ℓm+ℓ²，仍至少v₂−m²；它和MAP的条件误差谁小取决于x。整体线性MSE=1/12−(1/24)²/(7/144)=1/21。纯经典MLE不带先验上界时同样是θ̂=max x_i，因为θ⁻ⁿ在可行θ上递减。端点x=0、1是边际零概率观测，应以条件密度版本或极限处理。</p>
+<p>单次<span class="arithmatex">\(0&lt;x&lt;1\)</span>，似然<span class="arithmatex">\(\theta ^{-1}1_{x\le \theta \le 1}\)</span>，边际<span class="arithmatex">\(f_{X}(x)=-\ln x=L\)</span>，后验<span class="arithmatex">\(f(\theta |x)=1/(L\theta )\)</span>，<span class="arithmatex">\(x\le \theta \le 1\)</span>。多次条件独立观察，<span class="arithmatex">\(a=\max x_{i}\)</span>，后验正比<span class="arithmatex">\(\theta ^{-n}1_{a\le \theta \le 1}\)</span>；<span class="arithmatex">\(n&gt;1\)</span>归一化常数<span class="arithmatex">\((n-1)/(a^{1-n}-1)\)</span>，<span class="arithmatex">\(n=1\)</span>为<span class="arithmatex">\(1/(-\ln a)\)</span>。</p>
+<p>单次<span class="arithmatex">\(MAP=x\)</span>；后验一、二阶矩<span class="arithmatex">\(m=(1-x)/L\)</span>、<span class="arithmatex">\(v_{2}=(1-x^{2})/(2L)\)</span>，均方损失最优估计<span class="arithmatex">\(m\)</span>。条件于<span class="arithmatex">\(x\)</span>的MSE对任意估计<span class="arithmatex">\(b\)</span>为<span class="arithmatex">\(v_{2}-2bm+b^{2}=(v_{2}-m^{2})+(b-m)^{2}\)</span>，所以MAP的<span class="arithmatex">\(MSE=v_{2}-2xm+x^{2}\)</span>，均方估计<span class="arithmatex">\(MSE=v_{2}-m^{2}\)</span>，后者最小。</p>
+<p>最佳线性估计利用<span class="arithmatex">\(E\Theta =1/2\)</span>、<span class="arithmatex">\(\mathbb{E} X=1/4\)</span>、<span class="arithmatex">\(\operatorname{Cov} (\Theta ,X)=1/24\)</span>、<span class="arithmatex">\(\operatorname{Var} X=7/144\)</span>，得到<span class="arithmatex">\(\ell (x)=2/7+6x/7\)</span>。其条件<span class="arithmatex">\(MSE=v_{2}-2\ell m+\ell ^{2}\)</span>，仍至少<span class="arithmatex">\(v_{2}-m^{2}\)</span>；它和MAP的条件误差谁小取决于<span class="arithmatex">\(x\)</span>。整体线性<span class="arithmatex">\(MSE=1/12-(1/24)^{2}/(7/144)=1/21\)</span>。纯经典MLE不带先验上界时同样是<span class="arithmatex">\(\hat{\theta }=\max x_{i}\)</span>，因为<span class="arithmatex">\(\theta ^{-n}\)</span>在可行<span class="arithmatex">\(\theta\)</span>上递减。端点<span class="arithmatex">\(x=0\)</span>、1是边际零概率观测，应以条件密度版本或极限处理。</p>
 </details>
 <h3 id="problem-geometric-parameter-estimation">Q961 · 几何等待的Bayes、极大似然与线性预测<a class="headerlink" href="#problem-geometric-parameter-estimation" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：条件概率与贝叶斯</p>
-<p><strong>题目</strong>：同一未知成功率q的Bernoulli过程，记录k个含成功试验的间隔t_i≥1。求均匀先验下的后验、MAP、均方估计，并比较经典估计。</p>
+<p><strong>题目</strong>：同一未知成功率<span class="arithmatex">\(q\)</span>的Bernoulli过程，记录<span class="arithmatex">\(k\)</span>个含成功试验的间隔<span class="arithmatex">\(t_{i}\ge 1\)</span>。求均匀先验下的后验、MAP、均方估计，并比较经典估计。</p>
 <details class="note">
 <summary>解答</summary>
-<p>设S=Σt_i，似然L(q)=q^k(1−q)^(S−k)。U(0,1)先验下后验Beta(k+1,S−k+1)，MAP为k/S（S=k时边界1），平方损失最优后验均值(k+1)/(S+2)。单次间隔T的边际PMF∫₀¹q(1−q)^(t−1)dq=1/[t(t+1)]，相应E(Q|T=t)=2/(t+2)。经典MLE同为k/S，取倒数为样本间隔均值；由大数律趋1/q<em>。若q</em>≥1/2，则VarT=(1−q<em>)/(q</em>)²≤2，Chebyshev给P(|S/k−1/q*|&gt;.1)≤200/k，k≥4000保证至少95%。</p>
-<p>若改先验Q~U(.5,1)，用T₁线性预测T₂：μ=2ln2，VarT₁=4−2ln2−4(ln2)²，Cov(T₁,T₂)=Var(1/Q)=2−4(ln2)²。最佳线性预测为<span class="arithmatex">\(\mu+\frac{\operatorname{Cov}(T_1,T_2)}{\operatorname{Var}(T_1)}(t_1-\mu)\)</span>，系数由最小化平方损失得出。这里条件独立但边际共享Q相关，不能将Cov设为0。</p>
+<p>设<span class="arithmatex">\(S=\sum t_{i}\)</span>，似然<span class="arithmatex">\(L(q)=q^{k}(1-q)^{S-k}\)</span>。<span class="arithmatex">\(U(0,1)\)</span>先验下后验<span class="arithmatex">\(\operatorname{Beta} (k+1,S-k+1)\)</span>，MAP为<span class="arithmatex">\(k/S\)</span>（<span class="arithmatex">\(S=k\)</span>时边界1），平方损失最优后验均值<span class="arithmatex">\((k+1)/(S+2)\)</span>。单次间隔<span class="arithmatex">\(T\)</span>的边际<span class="arithmatex">\(PMF\int _{0}^{1}q(1-q)^{t-1}dq=1/[t(t+1)]\)</span>，相应<span class="arithmatex">\(\mathbb{E} (Q|T=t)=2/(t+2)\)</span>。经典MLE同为<span class="arithmatex">\(k/S\)</span>，取倒数为样本间隔均值；由大数律趋<span class="arithmatex">\(1/q*\)</span>。若<span class="arithmatex">\(q*\ge 1/2\)</span>，则<span class="arithmatex">\(\operatorname{Var} T=(1-q*)/(q*)^{2}\le 2\)</span>，Chebyshev给<span class="arithmatex">\(P(|S/k-1/q*|&gt;.1)\le 200/k\)</span>，<span class="arithmatex">\(k\ge 4000\)</span>保证至少<span class="arithmatex">\(95\%\)</span>。</p>
+<p>若改先验<span class="arithmatex">\(Q\sim U(.5,1)\)</span>，用<span class="arithmatex">\(T_{1}\)</span>线性预测<span class="arithmatex">\(T_{2}\)</span>：<span class="arithmatex">\(\mu =2\ln 2\)</span>，<span class="arithmatex">\(\operatorname{Var} T_{1}=4-2\ln 2-4(\ln 2)^{2}\)</span>，<span class="arithmatex">\(\operatorname{Cov} (T_{1},T_{2})=\operatorname{Var} (1/Q)=2-4(\ln 2)^{2}\)</span>。最佳线性预测为<span class="arithmatex">\(\mu+\frac{\operatorname{Cov}(T_1,T_2)}{\operatorname{Var}(T_1)}(t_1-\mu)\)</span>，系数由最小化平方损失得出。这里条件独立但边际共享<span class="arithmatex">\(Q\)</span>相关，不能将Cov设为0。</p>
 </details>
 
 
@@ -3147,7 +3175,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>

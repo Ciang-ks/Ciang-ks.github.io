@@ -1327,7 +1327,7 @@
   <a href="#problem-58d1f66c738a" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q45 · 掰开 n 格巧克力
+        Q45 · 掰开 \(n\) 格巧克力
       
     </span>
   </a>
@@ -1349,7 +1349,7 @@
   <a href="#problem-3d276268dd1d" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q47 · 称出 1–40 的最少砝码
+        Q47 · 称出 \(1-40\) 的最少砝码
       
     </span>
   </a>
@@ -1360,7 +1360,7 @@
   <a href="#problem-42c104322400" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q48 · 用 \( \pm \) 凑出 1–40 的最小子集
+        Q48 · 用 \( \pm \) 凑出 \(1-40\) 的最小子集
       
     </span>
   </a>
@@ -2541,7 +2541,7 @@
   <a href="#problem-58d1f66c738a" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q45 · 掰开 n 格巧克力
+        Q45 · 掰开 \(n\) 格巧克力
       
     </span>
   </a>
@@ -2563,7 +2563,7 @@
   <a href="#problem-3d276268dd1d" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q47 · 称出 1–40 的最少砝码
+        Q47 · 称出 \(1-40\) 的最少砝码
       
     </span>
   </a>
@@ -2574,7 +2574,7 @@
   <a href="#problem-42c104322400" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q48 · 用 \( \pm \) 凑出 1–40 的最小子集
+        Q48 · 用 \( \pm \) 凑出 \(1-40\) 的最小子集
       
     </span>
   </a>
@@ -2820,14 +2820,14 @@
 <p><span id="q1"></span></p>
 <h3 id="problem-88822cf302ef">Q1 · 海盗分金币<a class="headerlink" href="#problem-88822cf302ef" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策</p>
-<p><strong>题目</strong>：5 个海盗抢到了 100 枚金币。作为一群民主的海盗，他们约定如下分赃方法：由最年长的海盗提出一个分配方案，然后所有海盗（包括提议者本人）投票。若有至少 50% 的海盗（本情形即 3 人）同意，则按方案分金；否则最年长的海盗被喂鲨鱼，由次年长者重新提案……如此重复直到某个方案通过。假设所有海盗绝对理性：第一保命，第二尽量多拿金币；最后，作为嗜血的海盗，若在其余结果相同的方案之间选择，他们更希望船上人少。金币最终如何分配？</p>
+<p><strong>题目</strong>：5 个海盗抢到了 100 枚金币。作为一群民主的海盗，他们约定如下分赃方法：由最年长的海盗提出一个分配方案，然后所有海盗（包括提议者本人）投票。若有至少 <span class="arithmatex">\(50\%\)</span> 的海盗（本情形即 3 人）同意，则按方案分金；否则最年长的海盗被喂鲨鱼，由次年长者重新提案……如此重复直到某个方案通过。假设所有海盗绝对理性：第一保命，第二尽量多拿金币；最后，作为嗜血的海盗，若在其余结果相同的方案之间选择，他们更希望船上人少。金币最终如何分配？</p>
 <details class="note">
 <summary>解答</summary>
 <p>如果没学过博弈论或动态规划，这道题看起来很难。老办法：把 5 个海盗的问题简化。</p>
 <ul>
-<li><strong>2 个海盗</strong>：年长者（记为 2 号）可以独吞全部金币——他自己一票就占 50%，而 1 号什么也得不到。</li>
+<li><strong>2 个海盗</strong>：年长者（记为 2 号）可以独吞全部金币——他自己一票就占 <span class="arithmatex">\(50\%\)</span>，而 1 号什么也得不到。</li>
 <li><strong>3 个海盗</strong>：3 号知道，若他的方案被否决，1 号将一无所获。但如果他给 1 号 0 枚，1 号会很乐意让他喂鲨鱼（同等收益下希望人少）。所以 3 号给 1 号 1 枚、自己留 99 枚，方案获得 1 号与 3 号两票。</li>
-<li><strong>4 个海盗</strong>：4 号知道，若方案被否决，2 号将一无所获。所以给 2 号 1 枚即可买到他的票。4 号给 2 号 1 枚、自己留 99 枚，方案以 50%（2 号、4 号两票）通过。</li>
+<li><strong>4 个海盗</strong>：4 号知道，若方案被否决，2 号将一无所获。所以给 2 号 1 枚即可买到他的票。4 号给 2 号 1 枚、自己留 99 枚，方案以 <span class="arithmatex">\(50\%\)</span>（2 号、4 号两票）通过。</li>
 <li><strong>5 个海盗</strong>：他知道若方案被否决，3 号和 1 号都将一无所获。所以他只需给 1 号和 3 号各 1 枚买票，自己留 98 枚。这样他有三票（1 号、3 号及他自己），方案通过。</li>
 </ul>
 <p><strong>结论</strong>：年长者得 98 枚，给 1 号、3 号各 1 枚。</p>
@@ -2837,7 +2837,7 @@
 <p><span id="q2"></span></p>
 <h3 id="problem-4a49bc91e47c">Q2 · 老虎与羊<a class="headerlink" href="#problem-4a49bc91e47c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推</p>
-<p><strong>题目</strong>：100 只老虎和 1 只羊被放到一座只长草的魔岛上。老虎能吃草，但它们更愿意吃羊。假设：A. 每次只能有一只老虎吃一只羊，且吃完后这只老虎自己变成羊；B. 所有老虎都聪明且绝对理性，都想活命。问：羊会被吃掉吗？</p>
+<p><strong>题目</strong>：100 只老虎和 1 只羊被放到一座只长草的魔岛上。老虎能吃草，但它们更愿意吃羊。假设：<span class="arithmatex">\(A\)</span>. 每次只能有一只老虎吃一只羊，且吃完后这只老虎自己变成羊；<span class="arithmatex">\(B\)</span>. 所有老虎都聪明且绝对理性，都想活命。问：羊会被吃掉吗？</p>
 <details class="note">
 <summary>解答</summary>
 <p>100 是个大数，还是从简化版本开始。</p>
@@ -2852,27 +2852,27 @@
 <p><span id="q3"></span></p>
 <h3 id="problem-8d9f7b030ddf">Q3 · 四人过桥<a class="headerlink" href="#problem-8d9f7b030ddf" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理</p>
-<p><strong>题目</strong>：A、B、C、D 四人要过一条河，唯一的通道是一座旧桥，桥最多同时承 2 人。天黑无火把不能过桥，而他们只有一支火把，所以每次只能按较慢者的速度行走。A 最慢需 10 分钟，B 需 5 分钟，C 需 2 分钟，D 需 1 分钟。全部过桥最短需要多少时间？</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(C\)</span>、<span class="arithmatex">\(D\)</span> 四人要过一条河，唯一的通道是一座旧桥，桥最多同时承 2 人。天黑无火把不能过桥，而他们只有一支火把，所以每次只能按较慢者的速度行走。<span class="arithmatex">\(A\)</span> 最慢需 10 分钟，<span class="arithmatex">\(B\)</span> 需 5 分钟，<span class="arithmatex">\(C\)</span> 需 2 分钟，<span class="arithmatex">\(D\)</span> 需 1 分钟。全部过桥最短需要多少时间？</p>
 <details class="note">
 <summary>解答</summary>
 <p>关键点是：10 分钟的人必须和 5 分钟的人<strong>同时</strong>过桥，而且这一步不能放在第一轮——否则其中一人必须摸黑返回。</p>
-<p>方案：C、D 先过（2 分钟）→ D 带火把返回（1 分钟）→ A、B 同行过桥（10 分钟）→ C 带火把返回（2 分钟）→ C、D 再一起过桥（2 分钟）。</p>
-<p><strong>总计 17 分钟</strong>。（也可以第一轮让 C 返回、第二轮让 D 返回，同样 17 分钟。）</p>
+<p>方案：<span class="arithmatex">\(C\)</span>、<span class="arithmatex">\(D\)</span> 先过（2 分钟）<span class="arithmatex">\(\to D\)</span> 带火把返回（1 分钟）<span class="arithmatex">\(\to A\)</span>、<span class="arithmatex">\(B\)</span> 同行过桥（10 分钟）<span class="arithmatex">\(\to C\)</span> 带火把返回（2 分钟）<span class="arithmatex">\(\to C\)</span>、<span class="arithmatex">\(D\)</span> 再一起过桥（2 分钟）。</p>
+<p><strong>总计 17 分钟</strong>。（也可以第一轮让 <span class="arithmatex">\(C\)</span> 返回、第二轮让 <span class="arithmatex">\(D\)</span> 返回，同样 17 分钟。）</p>
 </details>
 <p><span id="q4"></span></p>
 <h3 id="problem-8526a55fd680">Q4 · 生日推理<a class="headerlink" href="#problem-8526a55fd680" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：逻辑推理</p>
-<p><strong>题目</strong>：你和同事都知道老板 A 的生日是以下 10 个日期之一：</p>
+<p><strong>题目</strong>：你和同事都知道老板 <span class="arithmatex">\(A\)</span> 的生日是以下 10 个日期之一：</p>
 <p>3 月 4 日、3 月 5 日、3 月 8 日、6 月 4 日、6 月 7 日、9 月 1 日、9 月 5 日、12 月 1 日、12 月 2 日、12 月 8 日。</p>
-<p>A 只把生日的<strong>月份</strong>告诉了你，只把<strong>日期</strong>告诉了同事 C。随后你先说："我不知道 A 的生日，我知道 C 也不知道。" C 听后说："本来我不知道，但现在我知道了。" 你笑着说："现在我也知道了。" 行政助理听完这段对话，没问任何问题就写下了 A 的生日。助理写的是哪一天？</p>
+<p><span class="arithmatex">\(A\)</span> 只把生日的<strong>月份</strong>告诉了你，只把<strong>日期</strong>告诉了同事 <span class="arithmatex">\(C\)</span>。随后你先说："我不知道 <span class="arithmatex">\(A\)</span> 的生日，我知道 <span class="arithmatex">\(C\)</span> 也不知道。" <span class="arithmatex">\(C\)</span> 听后说："本来我不知道，但现在我知道了。" 你笑着说："现在我也知道了。" 行政助理听完这段对话，没问任何问题就写下了 <span class="arithmatex">\(A\)</span> 的生日。助理写的是哪一天？</p>
 <details class="note">
 <summary>解答</summary>
 <p>不要被"你说、他说"绕晕，只需把每个人每句话背后的逻辑翻译成信息。</p>
-<p>设生日日期为 <span class="arithmatex">\( D \)</span>，则 <span class="arithmatex">\( D \in \{1, 2, 4, 5, 7, 8\} \)</span>。若日期在清单中只出现一次，C 立刻就能知道生日。这里唯一出现的日期是 <strong>2 和 7</strong>，分别只对应 12 月 2 日与 6 月 7 日。</p>
+<p>设生日日期为 <span class="arithmatex">\( D \)</span>，则 <span class="arithmatex">\( D \in \{1, 2, 4, 5, 7, 8\} \)</span>。若日期在清单中只出现一次，<span class="arithmatex">\(C\)</span> 立刻就能知道生日。这里唯一出现的日期是 <strong>2 和 7</strong>，分别只对应 12 月 2 日与 6 月 7 日。</p>
 <ul>
-<li>你敢肯定"C 不知道"，说明 C 拿到的日期不是 2 或 7；而这又要求<strong>月份不是 6 月也不是 12 月</strong>（否则日期可能是 2 或 7，你就无法断定 C 不知道）。结论：月份是 3 月或 9 月。</li>
-<li>C 听懂了这一点，立即知道了生日，说明日期在"3 月与 9 月的清单"中唯一——排除 3/5 与 9/5。结论：生日是 <strong>3/4、3/8 或 9/1</strong>。</li>
-<li>这三个可能中，3/4 与 3/8 同月。若你拿到的月份是 3 月，你仍然无法确定；既然你确定了，<strong>生日必是 9 月 1 日</strong>。</li>
+<li>你敢肯定"<span class="arithmatex">\(C\)</span> 不知道"，说明 <span class="arithmatex">\(C\)</span> 拿到的日期不是 2 或 7；而这又要求<strong>月份不是 6 月也不是 12 月</strong>（否则日期可能是 2 或 7，你就无法断定 <span class="arithmatex">\(C\)</span> 不知道）。结论：月份是 3 月或 9 月。
+<span class="arithmatex">\(- C\)</span> 听懂了这一点，立即知道了生日，说明日期在"3 月与 9 月的清单"中唯一——排除 <span class="arithmatex">\(3/5\)</span> 与 <span class="arithmatex">\(9/5\)</span>。结论：生日是 <strong><span class="arithmatex">\(3/4\)</span>、<span class="arithmatex">\(3/8\)</span> 或 <span class="arithmatex">\(9/1\)</span></strong>。</li>
+<li>这三个可能中，<span class="arithmatex">\(3/4\)</span> 与 <span class="arithmatex">\(3/8\)</span> 同月。若你拿到的月份是 3 月，你仍然无法确定；既然你确定了，<strong>生日必是 9 月 1 日</strong>。</li>
 </ul>
 <p>助理写下的是 <strong>9 月 1 日</strong>。</p>
 </details>
@@ -2907,13 +2907,13 @@
 <summary>解答</summary>
 <p>经典称重题，至今仍常被面试官问到。球数可以从 8 个到 100 多个不等，这里以 <span class="arithmatex">\( n=12 \)</span> 展示基本方法。</p>
 <p><strong>关键：把原始组（以及每个中间子组）分成三组而不是两组</strong>——因为前两组的比较总能提供第三组的信息。</p>
-<p>给球编号 1–12，分成各 4 球的三组。第一次：<strong>1,2,3,4 对 5,6,7,8</strong>。之后分两大情形（<span class="arithmatex">\( = \)</span> 平衡，或 <span class="arithmatex">\( &lt; \)</span> 1,2,3,4 更轻；至于 1,2,3,4 更重的情形与 <span class="arithmatex">\( &lt; \)</span> 完全对称，无需另述）：</p>
-<p><strong>情形一：天平平衡。</strong> 坏球必在 9、10、11、12 中，且偏轻（L）或偏重（H）。
+<p>给球编号 <span class="arithmatex">\(1-12\)</span>，分成各 4 球的三组。第一次：<strong>1,2,3,4 对 5,6,7,8</strong>。之后分两大情形（<span class="arithmatex">\( = \)</span> 平衡，或 <span class="arithmatex">\( &lt; \)</span> 1,2,3,4 更轻；至于 1,2,3,4 更重的情形与 <span class="arithmatex">\( &lt; \)</span> 完全对称，无需另述）：</p>
+<p><strong>情形一：天平平衡。</strong> 坏球必在 9、10、11、12 中，且偏轻（<span class="arithmatex">\(L\)</span>）或偏重（<span class="arithmatex">\(H\)</span>）。
 第二次：<strong>9、10 对 8、11</strong>（8 已知是好球）。
-- 若 9、10 轻：要么 9 或 10 是 L，要么 11 是 H。第三次：<strong>9 对 10</strong>——9 轻则 9 是 L；平衡则 11 是 H；9 重则 10 是 L。
+- 若 9、10 轻：要么 9 或 10 是 <span class="arithmatex">\(L\)</span>，要么 11 是 <span class="arithmatex">\(H\)</span>。第三次：<strong>9 对 10</strong>——9 轻则 9 是 <span class="arithmatex">\(L\)</span>；平衡则 11 是 <span class="arithmatex">\(H\)</span>；9 重则 10 是 <span class="arithmatex">\(L\)</span>。
 - 若平衡：12 是坏球（再称一次可知轻重）。
-- 若 9、10 重：要么 9 或 10 是 H，要么 11 是 L。第三次 9 对 10 同理判定。</p>
-<p><strong>情形二：第一次左盘较轻。</strong> 候选为 1–4 中某球偏轻，或 5–8 中某球偏重。第二次称 <strong>1、2、5 对 3、6、9</strong>，其中 9 已知正常：
+- 若 9、10 重：要么 9 或 10 是 <span class="arithmatex">\(H\)</span>，要么 11 是 <span class="arithmatex">\(L\)</span>。第三次 9 对 10 同理判定。</p>
+<p><strong>情形二：第一次左盘较轻。</strong> 候选为 <span class="arithmatex">\(1-4\)</span> 中某球偏轻，或 <span class="arithmatex">\(5-8\)</span> 中某球偏重。第二次称 <strong>1、2、5 对 3、6、9</strong>，其中 9 已知正常：
 - 若第二次左盘较轻，候选为 1 轻、2 轻、6 重。第三次称 1 对 2：哪边轻即对应球偏轻；平衡则 6 偏重。
 - 若第二次左盘较重，候选为 3 轻、5 重。第三次称 3 对正常球 9：若 3 轻则 3 是坏球；若平衡则 5 偏重。
 - 若第二次平衡，候选为 4 轻、7 重、8 重。第三次称 7 对 8：较重者是坏球；平衡则 4 偏轻。</p>
@@ -2929,8 +2929,8 @@
 <details class="note">
 <summary>解答</summary>
 <p>简单题。每一对 2 和 5 的乘积贡献一个尾零。对 100! 中所有数做质因数分解，显然 2 的个数远多于 5 的个数，所以 <strong>5 的个数决定尾零数</strong>。</p>
-<p>1 到 100 中：20 个数能被 5 整除（5, 10, …, 100）；其中 4 个还能被 <span class="arithmatex">\( 5^2 \)</span> 整除（25, 50, 75, 100），各额外贡献一个 5。</p>
-<p>所以 5 的总个数为 20 + 4 = <strong>24</strong>，即 100! 末尾有 <strong>24 个 0</strong>。</p>
+<p>1 到 100 中：20 个数能被 5 整除（<span class="arithmatex">\(5, 10, \ldots , 100\)</span>）；其中 4 个还能被 <span class="arithmatex">\( 5^2 \)</span> 整除（25, 50, 75, 100），各额外贡献一个 5。</p>
+<p>所以 5 的总个数为 <span class="arithmatex">\(20 + 4 =\)</span> <strong>24</strong>，即 100! 末尾有 <strong>24 个 0</strong>。</p>
 </details>
 <p><span id="q9"></span></p>
 <h3 id="problem-6f368b8c5c0f">Q9 · 25 匹马选前三<a class="headerlink" href="#problem-6f368b8c5c0f" title="Permanent link">&para;</a></h3>
@@ -2939,22 +2939,26 @@
 <details class="note">
 <summary>解答</summary>
 <p>要找最快的 3 匹，所有马都必须参赛。</p>
-<p><strong>第一轮（5 场）</strong>：分成 5 组（1–5、6–10、11–15、16–20、21–25）各赛一场。不妨设每组内名次与编号一致（如 6–10 组中 6 最快、10 最慢），则 1、6、11、16、21 是各组冠军。</p>
+<p><strong>第一轮（5 场）</strong>：分成 5 组（<span class="arithmatex">\(1-5\)</span>、<span class="arithmatex">\(6-10\)</span>、<span class="arithmatex">\(11-15\)</span>、<span class="arithmatex">\(16-20\)</span>、<span class="arithmatex">\(21-25\)</span>）各赛一场。不妨设每组内名次与编号一致（如 <span class="arithmatex">\(6-10\)</span> 组中 6 最快、10 最慢），则 1、6、11、16、21 是各组冠军。</p>
 <p>显然各组最后两名出局。还能推出更多：若某组冠军在 25 匹中排第 4 或第 5，则该组全组无望进前三；排第 3，则该组其余马无望；排第 2，则该组还有一匹有希望；排第 1，则该组还有两匹有希望。</p>
-<p><strong>第二轮（1 场）</strong>：让 1、6、11、16、21 五匹组冠军同赛。不妨设名次为 1、6、11、16、21。于是立即排除：4–5、8–10、12–15、16–20、21–25。1 号是全场最快，直接入选。剩下只需在 <strong>2、3、6、7、11</strong> 中确定前二三名。</p>
+<p><strong>第二轮（1 场）</strong>：让 1、6、11、16、21 五匹组冠军同赛。不妨设名次为 1、6、11、16、21。于是立即排除：<span class="arithmatex">\(4-5\)</span>、<span class="arithmatex">\(8-10\)</span>、<span class="arithmatex">\(12-15\)</span>、<span class="arithmatex">\(16-20\)</span>、<span class="arithmatex">\(21-25\)</span>。1 号是全场最快，直接入选。剩下只需在 <strong>2、3、6、7、11</strong> 中确定前二三名。</p>
 <p><strong>第三轮（1 场）</strong>：这 5 匹再赛一场，取前两名。</p>
 <p><strong>结论：共需 7 场（3 轮）</strong>。</p>
 </details>
 <p><span id="q10"></span></p>
 <h3 id="problem-01a4391d8775">Q10 · 无穷幂塔<a class="headerlink" href="#problem-01a4391d8775" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分</p>
-<p><strong>题目</strong>：若 <span class="arithmatex">\( x^{x^{x^{x^{\cdots}}}} = 2 \)</span>（x 的无穷次幂塔），求 x。</p>
+<p><strong>题目</strong>：若 <span class="arithmatex">\( x^{x^{x^{x^{\cdots}}}} = 2 \)</span>（<span class="arithmatex">\(x\)</span> 的无穷次幂塔），求 <span class="arithmatex">\(x\)</span>。</p>
 <details class="note">
 <summary>解答</summary>
-<p>看似困难，其实简单分析即可优雅解决。设整个幂塔为 L，则</p>
-<div class="arithmatex">\[x^{x^{x^{\cdots}}} = 2 \iff x^{\left(x^{x^{\cdots}}\right)} = 2\]</div>
+<p>看似困难，其实简单分析即可优雅解决。设整个幂塔为 <span class="arithmatex">\(L\)</span>，则</p>
+<div class="arithmatex">\[
+x^{x^{x^{\cdots}}} = 2 \iff x^{\left(x^{x^{\cdots}}\right)} = 2
+\]</div>
 <p>即"多一层 <span class="arithmatex">\( x \)</span> 的幂"不改变极限值：<span class="arithmatex">\( x^L = 2 \)</span> 且 <span class="arithmatex">\( L = 2 \)</span>，所以</p>
-<div class="arithmatex">\[x^{2} = 2 \Rightarrow x = \sqrt{2}\]</div>
+<div class="arithmatex">\[
+x^{2} = 2 \Rightarrow x = \sqrt{2}
+\]</div>
 <p>（注：幂塔收敛要求 <span class="arithmatex">\( 0 &lt; x \le e^{1/e} \approx 1.445 \)</span>，<span class="arithmatex">\( x = \sqrt{2} \approx 1.414 \)</span> 恰在收敛域内；若右端为 4，则解 <span class="arithmatex">\( x=2 \)</span> 不满足收敛条件，幂塔发散——这也是常见的追问点。）</p>
 </details>
 <p><span id="q11"></span></p>
@@ -2968,8 +2972,8 @@
 <p><strong>棋盘问题</strong>：<span class="arithmatex">\( 8\times8 \)</span> 棋盘去掉对角两角各一小格，剩 62 格。有很多 <span class="arithmatex">\( 1\times2 \)</span> 的砖，能否把 31 块砖装入剩余 62 格？</p>
 </blockquote>
 <p>棋盘黑白相间染色后，对角的两个小格<strong>同色</strong>。每块 <span class="arithmatex">\( 1\times2 \)</span> 砖必覆盖一黑一白。若去掉的是两个黑角格，则只剩 30 个黑格，每块砖都需要一个黑格，所以最多装 30 块——<strong>装 31 块是不可能的</strong>（同理也无法不重叠、不越界地铺满 62 格）。</p>
-<p>正因为棋盘问题太流行（很多人背过答案），面试官升级出 3D 版本考察思维过程。</p>
-<p><strong>3D 版本</strong>：算体积，53 块砖体积 <span class="arithmatex">\( 53\times4 = 212 \)</span> &lt; 箱子体积 <span class="arithmatex">\( 216 \)</span>，似乎装得下。但用类似染色法可证明不可能。</p>
+<p>正因为棋盘问题太流行（很多人背过答案），面试官升级出 <span class="arithmatex">\(3D\)</span> 版本考察思维过程。</p>
+<p><strong><span class="arithmatex">\(3D\)</span> 版本</strong>：算体积，53 块砖体积 <span class="arithmatex">\( 53\times4 = 212 \)</span> &lt; 箱子体积 <span class="arithmatex">\( 216 \)</span>，似乎装得下。但用类似染色法可证明不可能。</p>
 <p>把 <span class="arithmatex">\( 6\times6\times6 \)</span> 的箱子分成 27 个 <span class="arithmatex">\( 2\times2\times2 \)</span> 小立方体，并按三维棋盘格把这些小立方体染成黑白两色。两色小立方体分别有 14 个和 13 个，因此两种颜色覆盖的体积分别为 112 和 104。</p>
 <p>沿任一坐标轴，颜色每隔 2 个单位交替一次。任意一块轴对齐的 <span class="arithmatex">\( 1\times1\times4 \)</span> 砖沿长边连续跨过 4 个单位，恰好在黑色区域和白色区域中各占 2 个单位体积；即使它跨过三个 <span class="arithmatex">\( 2\times2\times2 \)</span> 分块，这个结论仍成立。因此每块砖都消耗两种颜色各 2 个单位体积，而较少的一色只有 104 个单位体积，至多支持 <span class="arithmatex">\(104/2=52\)</span> 块砖。</p>
 <p>所以 <strong>第 53 块砖无论如何都放不下</strong>。</p>
@@ -2978,10 +2982,10 @@
 <p><span id="q12"></span></p>
 <h3 id="problem-240fb90d884b">Q12 · 日历方块<a class="headerlink" href="#problem-240fb90d884b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论</p>
-<p><strong>题目</strong>：你刚定制了两只骰子。与普通骰子不同，你在每个面上写一位数字，使得每天早晨都能把两只骰子摆成两个正面恰好显示当天的日期。必须同时使用两只骰子（即 1–9 号要显示为 01–09），但可以随意交换两骰的左右顺序。两个骰子的六个面上各写哪些数字？</p>
+<p><strong>题目</strong>：你刚定制了两只骰子。与普通骰子不同，你在每个面上写一位数字，使得每天早晨都能把两只骰子摆成两个正面恰好显示当天的日期。必须同时使用两只骰子（即 <span class="arithmatex">\(1-9\)</span> 号要显示为 <span class="arithmatex">\(01-09\)</span>），但可以随意交换两骰的左右顺序。两个骰子的六个面上各写哪些数字？</p>
 <details class="note">
 <summary>解答</summary>
-<p>一个月里有 11 日和 22 日，所以<strong>两只骰子都必须有 1 和 2</strong>。要显示个位数日期，至少要有一个 0；先给骰一放 0。又因为骰二不可能同时放全 1–9 所有数字，为了显示全部个位数，<strong>骰二也必须有 0</strong>。</p>
+<p>一个月里有 11 日和 22 日，所以<strong>两只骰子都必须有 1 和 2</strong>。要显示个位数日期，至少要有一个 0；先给骰一放 0。又因为骰二不可能同时放全 <span class="arithmatex">\(1-9\)</span> 所有数字，为了显示全部个位数，<strong>骰二也必须有 0</strong>。</p>
 <p>目前已有：</p>
 <table>
 <thead>
@@ -3151,7 +3155,7 @@
 <p><span id="q21"></span></p>
 <h3 id="problem-074276d1934e">Q21 · 钟表碎片<a class="headerlink" href="#problem-074276d1934e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论</p>
-<p><strong>题目</strong>：一只钟面（数字 1–12 顺时针排列）从墙上摔下来摔成三片。你发现每片上的数字之和恰好相等。每片上各是哪些数字？（不允许出现奇怪的碎片形状。）</p>
+<p><strong>题目</strong>：一只钟面（数字 <span class="arithmatex">\(1-12\)</span> 顺时针排列）从墙上摔下来摔成三片。你发现每片上的数字之和恰好相等。每片上各是哪些数字？（不允许出现奇怪的碎片形状。）</p>
 <details class="note">
 <summary>解答</summary>
 <p>用求和公式，<span class="arithmatex">\( \sum_{1}^{12} n = 12\times13/2 = 78 \)</span>，所以每片数字和必为 <span class="arithmatex">\( 78/3 = 26 \)</span>。</p>
@@ -3169,10 +3173,14 @@
 <details class="note">
 <summary>解答</summary>
 <p>设缺失的两数为 <span class="arithmatex">\( x \)</span>、<span class="arithmatex">\( y \)</span>，现有的 98 个数为 <span class="arithmatex">\( z_1, \ldots, z_{98} \)</span>。应用求和公式：</p>
-<div class="arithmatex">\[x+y = \frac{100\times 101}{2} - \sum_{i=1}^{98} z_i = 5050 - \sum z_i\]</div>
-<div class="arithmatex">\[x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{100^2}{2}+\frac{100}{6} - \sum z_i^2 = 338350 - \sum z_i^2\]</div>
+<div class="arithmatex">\[
+x+y = \frac{100\times 101}{2} - \sum_{i=1}^{98} z_i = 5050 - \sum z_i
+\]</div>
+<div class="arithmatex">\[
+x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{100^2}{2}+\frac{100}{6} - \sum z_i^2 = 338350 - \sum z_i^2
+\]</div>
 <p>两个方程联立：由 <span class="arithmatex">\( x+y=S \)</span>、<span class="arithmatex">\( x^2+y^2=T \)</span> 得 <span class="arithmatex">\( xy=(S^2-T)/2 \)</span>，再由韦达定理解一元二次方程 <span class="arithmatex">\( t^2 - St + (S^2-T)/2 = 0 \)</span> 即得 <span class="arithmatex">\( x \)</span>、<span class="arithmatex">\( y \)</span>。</p>
-<p>用程序实现时，该算法对 1 到 n 中缺两个数的情形复杂度为 <strong>O(n)</strong>。</p>
+<p>用程序实现时，该算法对 1 到 <span class="arithmatex">\(n\)</span> 中缺两个数的情形复杂度为 <strong><span class="arithmatex">\(O(n)\)</span></strong>。</p>
 </details>
 <p><span id="q23"></span></p>
 <h3 id="problem-a7c2f5ac48f7">Q23 · 假币 I<a class="headerlink" href="#problem-a7c2f5ac48f7" title="Permanent link">&para;</a></h3>
@@ -3181,26 +3189,30 @@
 <details class="note">
 <summary>解答</summary>
 <p>可以。从第 1 袋取 1 枚、第 2 袋取 2 枚、第 3 袋取 3 枚……第 10 袋取 10 枚，共</p>
-<div class="arithmatex">\[\sum_{i=1}^{10} i = 55 \text{ 枚}\]</div>
-<p>若无假币，总重应为 550 克。设第 i 袋是假币袋，则其中有 i 枚假币，实际总重为 <span class="arithmatex">\( 550 \pm i \)</span> 克。由于 <span class="arithmatex">\( i \)</span> 对每袋各不相同，由偏差 <span class="arithmatex">\( \pm i \)</span> 即可同时确定<strong>哪一袋是假币</strong>以及<strong>假币偏轻还是偏重</strong>。</p>
+<div class="arithmatex">\[
+\sum_{i=1}^{10} i = 55 \text{ 枚}
+\]</div>
+<p>若无假币，总重应为 550 克。设第 <span class="arithmatex">\(i\)</span> 袋是假币袋，则其中有 <span class="arithmatex">\(i\)</span> 枚假币，实际总重为 <span class="arithmatex">\( 550 \pm i \)</span> 克。由于 <span class="arithmatex">\( i \)</span> 对每袋各不相同，由偏差 <span class="arithmatex">\( \pm i \)</span> 即可同时确定<strong>哪一袋是假币</strong>以及<strong>假币偏轻还是偏重</strong>。</p>
 <p>这不是唯一答案：只要从各袋取的枚数互不相同，任何取法都行。</p>
 </details>
 <p><span id="q24"></span></p>
 <h3 id="problem-5e7a26b38343">Q24 · 玻璃球<a class="headerlink" href="#problem-5e7a26b38343" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推</p>
-<p><strong>题目</strong>：你在一栋 100 层的楼里拿有两个玻璃球。把球从窗户扔出：若楼层号小于 X，球不会碎；若楼层号大于等于 X，球必碎。你想确定 X。什么策略能使<strong>最坏情形下的投掷次数</strong>最少？</p>
+<p><strong>题目</strong>：你在一栋 100 层的楼里拿有两个玻璃球。把球从窗户扔出：若楼层号小于 <span class="arithmatex">\(X\)</span>，球不会碎；若楼层号大于等于 <span class="arithmatex">\(X\)</span>，球必碎。你想确定 <span class="arithmatex">\(X\)</span>。什么策略能使<strong>最坏情形下的投掷次数</strong>最少？</p>
 <details class="note">
 <summary>解答</summary>
-<p>设我们设计一个最多投 N 次的策略。</p>
+<p>设我们设计一个最多投 <span class="arithmatex">\(N\)</span> 次的策略。</p>
 <ul>
 <li><strong>第一次</strong>掷球一：在第 <span class="arithmatex">\( N \)</span> 层试。若碎了，就用球二从第 1 层起逐层往上试，最多还有 <span class="arithmatex">\( N-1 \)</span> 层要试，总计不超过 <span class="arithmatex">\( N \)</span> 次。</li>
 <li>若球一在 <span class="arithmatex">\( N \)</span> 层没碎，还剩 <span class="arithmatex">\( N-1 \)</span> 次机会。这次球一只能再往上跳 <span class="arithmatex">\( N-1 \)</span> 层（因为若球一碎了，球二最多只能再覆盖 <span class="arithmatex">\( N-2 \)</span> 层）。</li>
 <li>若球一在第 <span class="arithmatex">\( 2N-1 \)</span> 层仍没碎，剩 <span class="arithmatex">\( N-2 \)</span> 次，球一再跳 <span class="arithmatex">\( N-2 \)</span> 层……以此类推。</li>
 </ul>
-<p>于是两个球在最多 N 次投掷下能覆盖的楼层数为</p>
-<div class="arithmatex">\[N + (N-1) + \cdots + 1 = \frac{N(N+1)}{2}\]</div>
+<p>于是两个球在最多 <span class="arithmatex">\(N\)</span> 次投掷下能覆盖的楼层数为</p>
+<div class="arithmatex">\[
+N + (N-1) + \cdots + 1 = \frac{N(N+1)}{2}
+\]</div>
 <p>要覆盖 100 层，需 <span class="arithmatex">\( N(N+1)/2 \ge 100 \)</span>，取最小整数 <span class="arithmatex">\( N = 14 \)</span>。</p>
-<p>具体操作：球一先在第 14 层试，碎了则用球二从 1 层试到 13 层（最多共 14 次）；没碎则球一上到 <span class="arithmatex">\( 14+13=27 \)</span> 层，碎了用球二覆盖 15–26 层；再没碎上到 <span class="arithmatex">\( 27+12=39 \)</span> 层……以此类推（14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100）。</p>
+<p>具体操作：球一先在第 14 层试，碎了则用球二从 1 层试到 13 层（最多共 14 次）；没碎则球一上到 <span class="arithmatex">\( 14+13=27 \)</span> 层，碎了用球二覆盖 <span class="arithmatex">\(15-26\)</span> 层；再没碎上到 <span class="arithmatex">\( 27+12=39 \)</span> 层……以此类推（14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100）。</p>
 </details>
 <p><span id="q25"></span></p>
 <h3 id="problem-96b514db9337">Q25 · 配对袜子<a class="headerlink" href="#problem-96b514db9337" title="Permanent link">&para;</a></h3>
@@ -3208,7 +3220,7 @@
 <p><strong>题目</strong>：抽屉里有 2 只红袜、20 只黄袜、31 只蓝袜。你是个忙碌健忘的 MIT学生，随手从抽屉里抓了一把袜子想配一双。假设每只袜子被取到的概率相同，最少抓几只才能<strong>保证</strong>有一双同色袜子？</p>
 <details class="note">
 <summary>解答</summary>
-<p>这只是双色袜子问题（3 只必成双）的三色版。3 种颜色 = 3 个鸽巢，由鸽巢原理，需要 <span class="arithmatex">\( 3+1 = 4 \)</span> 只袜子（4 只鸽）才能保证至少两袜同色（2 只鸽同巢）。</p>
+<p>这只是双色袜子问题（3 只必成双）的三色版。3 种颜色 <span class="arithmatex">\(= 3\)</span> 个鸽巢，由鸽巢原理，需要 <span class="arithmatex">\( 3+1 = 4 \)</span> 只袜子（4 只鸽）才能保证至少两袜同色（2 只鸽同巢）。</p>
 <p>注意与数量无关：红袜只有 2 只、黄袜 20 只、蓝袜 31 只都不影响答案——最坏情形是抓的前 3 只恰好三色各一。</p>
 </details>
 <p><span id="q26"></span></p>
@@ -3235,7 +3247,7 @@
 <p><strong>情形 2：至少 3 人不认识你。</strong>
 - 若这 3 人中有两人彼此不认识，则你与这两人构成 3 个彼此不认识的人；
 - 若这 3 人两两都认识，则这 3 人彼此认识。</p>
-<p>同样成立。∎</p>
+<p>同样成立。<span class="arithmatex">\(\square\)</span></p>
 <p>（这正是拉姆齐数 <span class="arithmatex">\( R(3,3) = 6 \)</span> 的初等证明。）</p>
 </details>
 <p><span id="q28"></span></p>
@@ -3306,7 +3318,7 @@
 <p>关键在第一个被叫出的囚徒——他能看到其他所有人的帽子。他若看到<strong>红帽数为奇数</strong>就宣布"红"，否则宣布"蓝"。他自己猜对的概率只有 <span class="arithmatex">\( 1/2 \)</span>。</p>
 <p>其余每个人都能据此推断自己的帽色：他们知道除第一人外 99 人中红帽数的奇偶性（由第一人的宣布给出），又看得见除第一人和自己之外的 98 人的帽子。例如：若第一人宣布"其余 99 人中红帽为奇数"，某囚徒看到其余 98 人（不含第一人和自己）中有偶数顶红帽，则可推出自己戴红帽。</p>
 <p><strong>三色版本</strong>：若帽子有红、绿、白三种颜色呢？答案仍是至少救 99 人，只是第一人生存概率降为 <span class="arithmatex">\( 1/3 \)</span>。</p>
-<p>评分系统：红 = 0，绿 = 1，蓝 = 2。第一人数出其余 99 人的总得分 <span class="arithmatex">\( s \)</span>，计算 <span class="arithmatex">\( s \% 3 \)</span>：余 0 宣布红，余 1 宣布绿，余 2 宣布蓝。他 <span class="arithmatex">\( 1/3 \)</span> 概率活命，但<strong>其余所有人</strong>都能确定自己的颜色。</p>
+<p>评分系统：红 <span class="arithmatex">\(= 0\)</span>，绿 <span class="arithmatex">\(= 1\)</span>，蓝 <span class="arithmatex">\(= 2\)</span>。第一人数出其余 99 人的总得分 <span class="arithmatex">\( s \)</span>，计算 <span class="arithmatex">\( s \% 3 \)</span>：余 0 宣布红，余 1 宣布绿，余 2 宣布蓝。他 <span class="arithmatex">\( 1/3 \)</span> 概率活命，但<strong>其余所有人</strong>都能确定自己的颜色。</p>
 <p>为什么？任一囚徒 <span class="arithmatex">\( i \)</span> 可以算出除第一人和自己外 98 人的总得分 <span class="arithmatex">\( x \)</span>。因为 <span class="arithmatex">\( (x+0) \% 3 \)</span>、<span class="arithmatex">\( (x+1) \% 3 \)</span>、<span class="arithmatex">\( (x+2) \% 3 \)</span> 互不相同，而第一人宣布的是"包含 <span class="arithmatex">\( i \)</span> 在内的 99 人总分 <span class="arithmatex">\( \bmod 3 \)</span>"，所以 <span class="arithmatex">\( i \)</span> 由差值唯一确定自己的得分（颜色）。</p>
 <p>例：囚徒 <span class="arithmatex">\( i \)</span> 看到那 98 人中有 32 红、29 绿、37 蓝，总分 103。若第一人宣布余数为 2（绿），则由于 103、104、105 中只有 <span class="arithmatex">\( 104 \% 3 = 2 \)</span>，囚徒 <span class="arithmatex">\( i \)</span> 知道自己总分为 104，即绿色（1）。</p>
 <p>理论上类似策略可推广到任意多种颜色（当然要求囚徒有超强的记忆和计算能力）。</p>
@@ -3316,7 +3328,7 @@
 <p><strong>题目</strong>：囚徒按正整数编号，每人只见所有更大编号者的黑白帽，不能听他人答案，允许事先约定任意非构造规则并使用选择公理。证明存在一种规则，任何帽色配置下只有有限人猜错。</p>
 <details class="note">
 <summary>解答</summary>
-<p>囚徒按正整数编号，每人看到所有更大编号的黑白帽，不能听他人答案；允许事先约定任意非构造规则。把无限二进制串按“只差有限位”分为等价类，借助选择公理每类固定一代表。第i人把看不到的有限前缀任意填上，所得串与真实串同类，所以每人找出的都是同一代表R，猜自己的帽为R_i。真实串与R只差有限位，故总共只错有限人。
+<p>囚徒按正整数编号，每人看到所有更大编号的黑白帽，不能听他人答案；允许事先约定任意非构造规则。把无限二进制串按“只差有限位”分为等价类，借助选择公理每类固定一代表。第<span class="arithmatex">\(i\)</span>人把看不到的有限前缀任意填上，所得串与真实串同类，所以每人找出的都是同一代表<span class="arithmatex">\(R\)</span>，猜自己的帽为<span class="arithmatex">\(R_{i}\)</span>。真实串与<span class="arithmatex">\(R\)</span>只差有限位，故总共只错有限人。
 该答案依赖允许选择公理下的非构造约定；若要求有限存储、有限观察或可计算策略，这个构造不满足那些额外限制。原有限帽题的奇偶校验也不能直接移到无限和。</p>
 </details>
 <p><span id="q31"></span></p>
@@ -3326,11 +3338,13 @@
 <details class="note">
 <summary>解答</summary>
 <p>规则（中学都学过）：<strong>把整数的各位数字相加，若和能被 9 整除，则原数能被 9 整除；否则不能。</strong> 如何证明？</p>
-<p>把整数写为 <span class="arithmatex">\(a = a_n 10^n + a_{n-1}10^{n-1} + \cdots + a_1 10 + a_0\)</span>。我们断言：若 <span class="arithmatex">\(a_n + a_{n-1} + \cdots + a_1 + a_0 = 9x\)</span>（x 为整数），则 a 也能被 9 整除。</p>
+<p>把整数写为 <span class="arithmatex">\(a = a_n 10^n + a_{n-1}10^{n-1} + \cdots + a_1 10 + a_0\)</span>。我们断言：若 <span class="arithmatex">\(a_n + a_{n-1} + \cdots + a_1 + a_0 = 9x\)</span>（<span class="arithmatex">\(x\)</span> 为整数），则 <span class="arithmatex">\(a\)</span> 也能被 9 整除。</p>
 <p>证明：令 <span class="arithmatex">\(b = a - (a_n + a_{n-1} + \cdots + a_1 + a_0)\)</span>，则</p>
-<div class="arithmatex">\[b = a_n(10^n - 1) + a_{n-1}(10^{n-1} - 1) + \cdots + a_1(10 - 1) = a - 9x\]</div>
-<p>由于所有 <span class="arithmatex">\(10^k - 1\)</span>（<span class="arithmatex">\( k = 1, \ldots, n \)</span>）都是 9 的倍数（<span class="arithmatex">\( 10 \equiv 1 \pmod 9 \)</span>），<span class="arithmatex">\( b \)</span> 能被 9 整除；又 <span class="arithmatex">\( 9x \)</span> 能被 9 整除，所以 <span class="arithmatex">\( a = b + 9x \)</span> 也能被 9 整除。∎</p>
-<p>（类似地可以证明：<span class="arithmatex">\(a = (-1)^n a_n + (-1)^{n-1} a_{n-1} + \cdots - a_1 + a_0 = 11x\)</span> 是 a 能被 11 整除的充要条件——即奇偶位数字交错求和被 11 整除。）</p>
+<div class="arithmatex">\[
+b = a_n(10^n - 1) + a_{n-1}(10^{n-1} - 1) + \cdots + a_1(10 - 1) = a - 9x
+\]</div>
+<p>由于所有 <span class="arithmatex">\(10^k - 1\)</span>（<span class="arithmatex">\( k = 1, \ldots, n \)</span>）都是 9 的倍数（<span class="arithmatex">\( 10 \equiv 1 \pmod 9 \)</span>），<span class="arithmatex">\( b \)</span> 能被 9 整除；又 <span class="arithmatex">\( 9x \)</span> 能被 9 整除，所以 <span class="arithmatex">\( a = b + 9x \)</span> 也能被 9 整除。<span class="arithmatex">\(\square\)</span></p>
+<p>（类似地可以证明：<span class="arithmatex">\(a = (-1)^n a_n + (-1)^{n-1} a_{n-1} + \cdots - a_1 + a_0 = 11x\)</span> 是 <span class="arithmatex">\(a\)</span> 能被 11 整除的充要条件——即奇偶位数字交错求和被 11 整除。）</p>
 </details>
 <p><span id="q32"></span></p>
 <h3 id="problem-274644d57d08">Q33 · 变色龙<a class="headerlink" href="#problem-274644d57d08" title="Permanent link">&para;</a></h3>
@@ -3342,13 +3356,15 @@
 <p><strong>方法一（化简 + 状态图）</strong>：13、15、17 是"大"数，可先化简为 0、2、4。（理由：若组合 <span class="arithmatex">\( (m+1, n+1, p+1) \)</span> 能变成同色，则 <span class="arithmatex">\( (m, n, p) \)</span> 也能。）组合 <span class="arithmatex">\( (0, 2, 4) \)</span> 能否变成 <span class="arithmatex">\( (0, 0, 6) \)</span>？答案是不能：实际组合 <span class="arithmatex">\( (1,2,3) \)</span> 等价于 <span class="arithmatex">\( (0,1,2) \)</span>，它只能变回另一个 <span class="arithmatex">\( (0,1,2) \)</span> 型（即两两之差不变），永远到不了 <span class="arithmatex">\( (0,0,3) \)</span> 型。</p>
 <p><strong>方法二（模 3 不变量，更根本）</strong>：要让所有变色龙同色，在某个中间阶段必有两种颜色的<strong>数量相等</strong>（想象最终一步前的状态必为 <span class="arithmatex">\( (1, 1, x) \)</span> 型）。而两种不同颜色的数量要相等，它们 <span class="arithmatex">\( \bmod 3 \)</span> 必须同余。</p>
 <p>初始：绿 <span class="arithmatex">\( 15 = 3x \)</span>，红 <span class="arithmatex">\( 13 = 3y+1 \)</span>，蓝 <span class="arithmatex">\( 17 = 3z+2 \)</span>，即三种颜色 <span class="arithmatex">\( \bmod 3 \)</span> 分别为 0、1、2，两两不同。每次相遇有三种情形：</p>
-<div class="arithmatex">\[(3x,\ 3y+1,\ 3z+2) \Rightarrow \begin{cases} (3x+2,\ 3y,\ 3z+1) &amp; \text{（一绿遇一红）} \\ (3(x-1)+2,\ 3(y+1),\ 3z+1) &amp; \text{（一蓝遇一红）} \\ (3(x-1)+2,\ 3y,\ 3(z+1)+1) &amp; \text{（一蓝遇一绿）} \end{cases}\]</div>
-<p>每种情形的结果仍是一个数 <span class="arithmatex">\( \equiv 0 \)</span>、一个数 <span class="arithmatex">\( \equiv 1 \)</span>、一个数 <span class="arithmatex">\( \equiv 2 \pmod 3 \)</span>。<strong>模式被保持</strong>——任何两种颜色的数量差 <span class="arithmatex">\( \bmod 3 \)</span> 永远不变（相对变化只能是 <span class="arithmatex">\( 0 \)</span> 或 <span class="arithmatex">\( \pm 3 \)</span>），因此永远无法使两种颜色数量相等，也就无法全部变成同一种颜色。∎</p>
+<div class="arithmatex">\[
+(3x,\ 3y+1,\ 3z+2) \Rightarrow \begin{cases} (3x+2,\ 3y,\ 3z+1) &amp; \text{（一绿遇一红）} \\ (3(x-1)+2,\ 3(y+1),\ 3z+1) &amp; \text{（一蓝遇一红）} \\ (3(x-1)+2,\ 3y,\ 3(z+1)+1) &amp; \text{（一蓝遇一绿）} \end{cases}
+\]</div>
+<p>每种情形的结果仍是一个数 <span class="arithmatex">\( \equiv 0 \)</span>、一个数 <span class="arithmatex">\( \equiv 1 \)</span>、一个数 <span class="arithmatex">\( \equiv 2 \pmod 3 \)</span>。<strong>模式被保持</strong>——任何两种颜色的数量差 <span class="arithmatex">\( \bmod 3 \)</span> 永远不变（相对变化只能是 <span class="arithmatex">\( 0 \)</span> 或 <span class="arithmatex">\( \pm 3 \)</span>），因此永远无法使两种颜色数量相等，也就无法全部变成同一种颜色。<span class="arithmatex">\(\square\)</span></p>
 </details>
 <p><span id="q33"></span></p>
 <h3 id="problem-a9c3cc3632f9">Q34 · 硬币拆分求和<a class="headerlink" href="#problem-a9c3cc3632f9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推</p>
-<p><strong>题目</strong>：把 1000 枚硬币分成两堆，数出每堆枚数：若第一堆 x 枚、第二堆 y 枚，把乘积 xy 记录下来。然后把两堆各自继续拆分，重复计数与相乘的过程，把新的乘积加到总和上。例如把 <span class="arithmatex">\( x \)</span> 拆成 <span class="arithmatex">\( x_1 \)</span>、<span class="arithmatex">\( x_2 \)</span>，把 <span class="arithmatex">\( y \)</span> 拆成 <span class="arithmatex">\( y_1 \)</span>、<span class="arithmatex">\( y_2 \)</span>，则总和为 <span class="arithmatex">\( xy + x_1x_2 + y_1y_2 \)</span>。如此重复直到每堆只剩 1 枚（最后的 1 不计入总和）。最终总和是多少？证明无论怎么分，答案都相同。</p>
+<p><strong>题目</strong>：把 1000 枚硬币分成两堆，数出每堆枚数：若第一堆 <span class="arithmatex">\(x\)</span> 枚、第二堆 <span class="arithmatex">\(y\)</span> 枚，把乘积 xy 记录下来。然后把两堆各自继续拆分，重复计数与相乘的过程，把新的乘积加到总和上。例如把 <span class="arithmatex">\( x \)</span> 拆成 <span class="arithmatex">\( x_1 \)</span>、<span class="arithmatex">\( x_2 \)</span>，把 <span class="arithmatex">\( y \)</span> 拆成 <span class="arithmatex">\( y_1 \)</span>、<span class="arithmatex">\( y_2 \)</span>，则总和为 <span class="arithmatex">\( xy + x_1x_2 + y_1y_2 \)</span>。如此重复直到每堆只剩 1 枚（最后的 1 不计入总和）。最终总和是多少？证明无论怎么分，答案都相同。</p>
 <details class="note">
 <summary>解答</summary>
 <p>设 <span class="arithmatex">\( n \)</span> 为硬币数、<span class="arithmatex">\( f(n) \)</span> 为最终总和。<span class="arithmatex">\( n = 1000 \)</span> 太大，先从最简情形找规律：</p>
@@ -3358,23 +3374,25 @@
 <li>由此得到关键递推：<span class="arithmatex">\( n \)</span> 枚拆成 <span class="arithmatex">\( x \)</span> 与 <span class="arithmatex">\( n-x \)</span> 时，<span class="arithmatex">\( f(n) = x(n-x) + f(x) + f(n-x) \)</span>。</li>
 <li><span class="arithmatex">\( n=4 \)</span>：可拆成 <span class="arithmatex">\( 2+2 \)</span> 或 <span class="arithmatex">\( 3+1 \)</span>，无论哪种，用上式算都得 6。</li>
 </ul>
-<p><strong>断言</strong>：n 枚硬币时，无论中间如何拆分，最终总和为 <span class="arithmatex">\(\dfrac{n(n-1)}{2}\)</span>。</p>
+<p><strong>断言</strong>：<span class="arithmatex">\(n\)</span> 枚硬币时，无论中间如何拆分，最终总和为 <span class="arithmatex">\(\dfrac{n(n-1)}{2}\)</span>。</p>
 <p><strong>证明（强归纳）</strong>：基础情形 <span class="arithmatex">\( n = 2, 3, 4 \)</span> 已验证。假设结论对 <span class="arithmatex">\( n = 2, \ldots, N-1 \)</span> 成立，证 <span class="arithmatex">\( n = N \)</span>。设 <span class="arithmatex">\( N \)</span> 枚拆成 <span class="arithmatex">\( x \)</span> 枚与 <span class="arithmatex">\( N-x \)</span> 枚：</p>
-<div class="arithmatex">\[f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{2} = \frac{N(N-1)}{2}\]</div>
-<p>（直接展开合并即得。）所以对任意 <span class="arithmatex">\( n \ge 2 \)</span> 都有 <span class="arithmatex">\( f(n) = \frac{n(n-1)}{2} \)</span>。∎</p>
+<div class="arithmatex">\[
+f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{2} = \frac{N(N-1)}{2}
+\]</div>
+<p>（直接展开合并即得。）所以对任意 <span class="arithmatex">\( n \ge 2 \)</span> 都有 <span class="arithmatex">\( f(n) = \frac{n(n-1)}{2} \)</span>。<span class="arithmatex">\(\square\)</span></p>
 <p>代入 <span class="arithmatex">\( n = 1000 \)</span>：最终总和 <span class="arithmatex">\( = 1000\times999/2 = 499500 \)</span>。</p>
 <p>（直观理解：每一对硬币在拆分过程中恰好"相遇并被计入乘积一次"，所以总和就是所有硬币对数 <span class="arithmatex">\( \binom{1000}{2} \)</span>，与拆分顺序无关。）</p>
 </details>
 <p><span id="q34"></span></p>
 <h3 id="problem-2e449f6e3dda">Q35 · 赛道加油<a class="headerlink" href="#problem-2e449f6e3dda" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推</p>
-<p><strong>题目</strong>：假设你在一条单向环形赛道上。赛道上随机放置着 N 罐汽油，各罐汽油总量恰好够你的车跑整整一圈。假设你的车油箱初始为空，但你可以把车放在赛道任意位置，并沿途拾取油罐加油。你总能选到一个出发位置使车跑完一整圈吗？</p>
+<p><strong>题目</strong>：假设你在一条单向环形赛道上。赛道上随机放置着 <span class="arithmatex">\(N\)</span> 罐汽油，各罐汽油总量恰好够你的车跑整整一圈。假设你的车油箱初始为空，但你可以把车放在赛道任意位置，并沿途拾取油罐加油。你总能选到一个出发位置使车跑完一整圈吗？</p>
 <details class="note">
 <summary>解答</summary>
 <p>又 stuck 的话，从最简情形（<span class="arithmatex">\( N=1, 2 \)</span>）开始并考虑归纳法。不妨设圆周长为 1。</p>
 <p><span class="arithmatex">\( N=1 \)</span>：平凡，从油罐处出发即可。</p>
 <p><span class="arithmatex">\( N=2 \)</span>：设罐 1、罐 2 的油量（以车能跑的距离计）为 <span class="arithmatex">\( x_1 \)</span>、<span class="arithmatex">\( x_2 \)</span>，则 <span class="arithmatex">\( x_1+x_2=1 \)</span>；两罐之间的弧段长为 <span class="arithmatex">\( y_1 \)</span>、<span class="arithmatex">\( y_2 \)</span>，则 <span class="arithmatex">\( y_1+y_2=1 \)</span>。由两个等式可知 <span class="arithmatex">\( x_1 \ge y_1 \)</span> 与 <span class="arithmatex">\( x_2 \ge y_2 \)</span> 至少一个成立（不可能两个都小于）。若 <span class="arithmatex">\( x_1 \ge y_1 \)</span>，则从罐 1 出发即可到达罐 2，再加油跑完全圈；否则从罐 2 出发同理。</p>
-<p><strong>归纳步</strong>：设结论对 <span class="arithmatex">\( N=n \)</span> 成立，证 <span class="arithmatex">\( N=n+1 \)</span>。由于 <span class="arithmatex">\( x_1+\cdots+x_{n+1} = 1 \)</span> 且 <span class="arithmatex">\( y_1+\cdots+y_{n+1} = 1 \)</span>，必存在某个 <span class="arithmatex">\( i \)</span> 使 <span class="arithmatex">\( x_i \ge y_i \)</span>——即车到达罐 <span class="arithmatex">\( i \)</span> 时油量足以到达罐 <span class="arithmatex">\( i+1 \)</span>（<span class="arithmatex">\( i = n+1 \)</span> 时回到 1）。于是可以<strong>把罐 <span class="arithmatex">\( i \)</span> 与罐 <span class="arithmatex">\( i+1 \)</span> "合并"成位于 <span class="arithmatex">\( x_i \)</span> 处、油量为 <span class="arithmatex">\( x_i + x_{i+1} \)</span> 的一个罐</strong>（删除罐 <span class="arithmatex">\( i+1 \)</span>），把 <span class="arithmatex">\( N=n+1 \)</span> 的问题化为 <span class="arithmatex">\( N=n \)</span> 的问题，而后者结论成立。所以结论对 <span class="arithmatex">\( N=n+1 \)</span> 成立。故对任意 <span class="arithmatex">\( N \)</span> 总能选到合适的出发点。∎</p>
+<p><strong>归纳步</strong>：设结论对 <span class="arithmatex">\( N=n \)</span> 成立，证 <span class="arithmatex">\( N=n+1 \)</span>。由于 <span class="arithmatex">\( x_1+\cdots+x_{n+1} = 1 \)</span> 且 <span class="arithmatex">\( y_1+\cdots+y_{n+1} = 1 \)</span>，必存在某个 <span class="arithmatex">\( i \)</span> 使 <span class="arithmatex">\( x_i \ge y_i \)</span>——即车到达罐 <span class="arithmatex">\( i \)</span> 时油量足以到达罐 <span class="arithmatex">\( i+1 \)</span>（<span class="arithmatex">\( i = n+1 \)</span> 时回到 1）。于是可以<strong>把罐 <span class="arithmatex">\( i \)</span> 与罐 <span class="arithmatex">\( i+1 \)</span> "合并"成位于 <span class="arithmatex">\( x_i \)</span> 处、油量为 <span class="arithmatex">\( x_i + x_{i+1} \)</span> 的一个罐</strong>（删除罐 <span class="arithmatex">\( i+1 \)</span>），把 <span class="arithmatex">\( N=n+1 \)</span> 的问题化为 <span class="arithmatex">\( N=n \)</span> 的问题，而后者结论成立。所以结论对 <span class="arithmatex">\( N=n+1 \)</span> 成立。故对任意 <span class="arithmatex">\( N \)</span> 总能选到合适的出发点。<span class="arithmatex">\(\square\)</span></p>
 <p><strong>给出具体出发点的替代解法</strong>：想象你另有一辆油箱满油、足以跑完一圈的车。把它放在随机选中的一个油罐位置，开整整一圈。<strong>每当到达一个油罐（包括起点），先记录加油前油箱里的油量，再把该罐的油加进去。</strong> 跑完一圈后，查看记录，找到<strong>最低的油量读数</strong>——与最低读数对应的油罐位置，就是初始无油的车应当的出发位置。（这个论证值得画图仔细体会：从最低点出发，途中任意时刻的油量都不低于 0。）</p>
 </details>
 <p><span id="q35"></span></p>
@@ -3385,7 +3403,7 @@
 <summary>解答</summary>
 <p>反证法的经典例子。假设 <span class="arithmatex">\( \sqrt{2} \)</span> 不是无理数，则它能表示为两个整数 <span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 之比。若 <span class="arithmatex">\( m \)</span> 与 <span class="arithmatex">\( n \)</span> 有公因子，可同时除以公因子消去，最终得到一对<strong>互质</strong>的 <span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span>（既约分数）。</p>
 <p>由 <span class="arithmatex">\( m/n = \sqrt{2} \)</span> 得 <span class="arithmatex">\( m^2 = 2n^2 \)</span>，所以 <span class="arithmatex">\( m^2 \)</span> 是偶数，<span class="arithmatex">\( m \)</span> 也是偶数。设 <span class="arithmatex">\( m = 2x \)</span>（<span class="arithmatex">\( x \)</span> 为整数），则 <span class="arithmatex">\( m^2 = 4x^2 \)</span>，代入得 <span class="arithmatex">\( n^2 = 2x^2 \)</span>，即 <span class="arithmatex">\( n^2 \)</span> 是偶数，<span class="arithmatex">\( n \)</span> 也是偶数。</p>
-<p>但 <span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 都是偶数与"<span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 互质"矛盾。所以 <span class="arithmatex">\( \sqrt{2} \)</span> 必是无理数。∎</p>
+<p>但 <span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 都是偶数与"<span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 互质"矛盾。所以 <span class="arithmatex">\( \sqrt{2} \)</span> 必是无理数。<span class="arithmatex">\(\square\)</span></p>
 </details>
 <p><span id="q36"></span></p>
 <h3 id="problem-51b5d35da8f6">Q37 · 彩虹帽子<a class="headerlink" href="#problem-51b5d35da8f6" title="Permanent link">&para;</a></h3>
@@ -3394,10 +3412,12 @@
 <details class="note">
 <summary>解答</summary>
 <p>此题常被认为比前面"囚徒与帽子"更难：那题中囚徒能听到别人的宣布，一人宣布即可提供所有人所需的信息；而这题里囚徒不知道别人的猜测。解它确实需要"aha moment"。</p>
-<p><strong>关键</strong>：把七种颜色编码为 0–6，则 <span class="arithmatex">\(\left(\sum_{i=1}^{7} x_i\right) \% 7\)</span> 必是 0–6 之一（<span class="arithmatex">\( x_i \)</span> 为各囚徒帽色编码）。给囚徒也编号 0–6，让囚徒 <span class="arithmatex">\( i \)</span> 给出猜测 <span class="arithmatex">\( g_i \)</span>，使得 <span class="arithmatex">\( g_i \)</span> 与其余 6 人帽色编码之和除以 7 的余数恰为 <span class="arithmatex">\( i \)</span>——这样的 <span class="arithmatex">\( g_i \)</span> 是 0–6 中唯一的数。例如囚徒 0 的猜测满足</p>
-<div class="arithmatex">\[\left(g_0 + \sum_{k \neq 0} x_k\right) \% 7 = 0\]</div>
-<p>这样，7 个人的猜测分别"押注"总和解 mod 7 的 7 种可能取值，而真实总和的余数必是其中之一。</p>
-<p><strong>用反证法证明至少一人猜对</strong>：若对某个 <span class="arithmatex">\( i \)</span> 有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq i\)</span>（因为 <span class="arithmatex">\(\left(g_i + \sum_{k\neq i} x_k\right) \% 7 \neq i\)</span>，且 <span class="arithmatex">\( g_i \)</span>、<span class="arithmatex">\( x_i \)</span> 都在 0–6 之间）。但若对所有 <span class="arithmatex">\( i = 0,\ldots,6 \)</span> 都有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq 0, 1, 2, 3, 4, 5, 6\)</span>——显然不可能。所以至少有一个 <span class="arithmatex">\( g_i = x_i \)</span>。∎</p>
+<p><strong>关键</strong>：把七种颜色编码为 <span class="arithmatex">\(0-6\)</span>，则 <span class="arithmatex">\(\left(\sum_{i=1}^{7} x_i\right) \% 7\)</span> 必是 <span class="arithmatex">\(0-6\)</span> 之一（<span class="arithmatex">\( x_i \)</span> 为各囚徒帽色编码）。给囚徒也编号 <span class="arithmatex">\(0-6\)</span>，让囚徒 <span class="arithmatex">\( i \)</span> 给出猜测 <span class="arithmatex">\( g_i \)</span>，使得 <span class="arithmatex">\( g_i \)</span> 与其余 6 人帽色编码之和除以 7 的余数恰为 <span class="arithmatex">\( i \)</span>——这样的 <span class="arithmatex">\( g_i \)</span> 是 <span class="arithmatex">\(0-6\)</span> 中唯一的数。例如囚徒 0 的猜测满足</p>
+<div class="arithmatex">\[
+\left(g_0 + \sum_{k \neq 0} x_k\right) \% 7 = 0
+\]</div>
+<p>这样，7 个人的猜测分别"押注"总和解 <span class="arithmatex">\(\operatorname{mod} 7\)</span> 的 7 种可能取值，而真实总和的余数必是其中之一。</p>
+<p><strong>用反证法证明至少一人猜对</strong>：若对某个 <span class="arithmatex">\( i \)</span> 有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq i\)</span>（因为 <span class="arithmatex">\(\left(g_i + \sum_{k\neq i} x_k\right) \% 7 \neq i\)</span>，且 <span class="arithmatex">\( g_i \)</span>、<span class="arithmatex">\( x_i \)</span> 都在 <span class="arithmatex">\(0-6\)</span> 之间）。但若对所有 <span class="arithmatex">\( i = 0,\ldots,6 \)</span> 都有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq 0, 1, 2, 3, 4, 5, 6\)</span>——显然不可能。所以至少有一个 <span class="arithmatex">\( g_i = x_i \)</span>。<span class="arithmatex">\(\square\)</span></p>
 <p><strong>结论：该策略保证至少一人猜对，全员获释</strong>（策略是确定性的，与行刑者如何选颜色无关）。</p>
 </details>
 <h2 id="sec-逻辑与脑筋急转弯">逻辑与脑筋急转弯<a class="headerlink" href="#sec-逻辑与脑筋急转弯" title="Permanent link">&para;</a></h2>
@@ -3437,7 +3457,9 @@
 <p>还可以先估计数量级：15 位于 10 和 20 之间，立方分别是 1000 和 8000；由于立方函数是凸函数，15 的立方小于两端立方的平均值 4500，因此先判断答案接近但小于 4000，再精确计算。</p>
 <p>若心算不熟练，应先练习分解、凑整和数量级估算。</p>
 <p>一种简便方法是先记熟常用平方，再把立方拆成乘法。本题可写成</p>
-<div class="arithmatex">\[ 15\ast225=10\ast225+0.5\ast10\ast225 \]</div>
+<div class="arithmatex">\[
+15\ast225=10\ast225+0.5\ast10\ast225
+\]</div>
 <p>这样即可快速得到结果。</p>
 </details>
 <p><span id="q39"></span></p>
@@ -3462,7 +3484,9 @@
 <summary>解答</summary>
 <p>有两种思路：逐面数小方块再扣除重复项容易繁琐出错；更简单的是数没有涂漆的小方块。</p>
 <p>没有涂漆的小方块组成内部的 <span class="arithmatex">\(2\times2\times2\)</span> 立方体，共 8 个，因此有涂漆的小方块数为</p>
-<div class="arithmatex">\[ 64-8=56 \]</div>
+<div class="arithmatex">\[
+64-8=56
+\]</div>
 <p>个。</p>
 </details>
 <p><span id="q40"></span></p>
@@ -3484,7 +3508,9 @@
 <summary>解答</summary>
 <p>关键是把立方体表面展开。展开后问题等价于在 <span class="arithmatex">\(1\times2\)</span> 的矩形中，从一个角走到对角的最短距离。</p>
 <p>由勾股定理，距离为</p>
-<div class="arithmatex">\[ \sqrt{1+2^{2}}=\sqrt{5}. \]</div>
+<div class="arithmatex">\[
+\sqrt{1+2^{2}}=\sqrt{5}.
+\]</div>
 </details>
 <p><span id="q41"></span></p>
 <h3 id="problem-9ef95dec58cb">Q42 · 睡莲铺满池塘<a class="headerlink" href="#problem-9ef95dec58cb" title="Permanent link">&para;</a></h3>
@@ -3506,7 +3532,7 @@
 <p><span id="q42"></span></p>
 <h3 id="problem-00e056681cfb">Q43 · 两圈平均时速 60 的悖论<a class="headerlink" href="#problem-00e056681cfb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理</p>
-<p><strong>题目</strong>：赛道一圈 1 英里。第一圈平均 30 mph，第二圈需多快才能使两圈平均时速达到 60 mph？</p>
+<p><strong>题目</strong>：赛道一圈 1 英里。第一圈平均 <span class="arithmatex">\(30 mph\)</span>，第二圈需多快才能使两圈平均时速达到 <span class="arithmatex">\(60 mph\)</span>？</p>
 <ul>
 <li>
 <p>若汽车最高时速为 120 英里，能达到的最高两圈平均速度是多少？</p>
@@ -3524,9 +3550,9 @@
 <p><span id="q43"></span></p>
 <h3 id="problem-992230c69f22">Q44 · 红酒杯里的白酒与白酒杯里的红酒<a class="headerlink" href="#problem-992230c69f22" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理</p>
-<p><strong>题目</strong>：白酒、红酒各 100ml。从红酒取 5ml 入白酒混匀，再从白酒取回 5ml 入红酒：是红酒杯里的白酒多，还是白酒杯里的红酒多？</p>
-<p>如果第二次倒回 6 ml，结论是否改变？</p>
-<p>如果第一次倒出 6 ml，结论是否改变？</p>
+<p><strong>题目</strong>：白酒、红酒各 <span class="arithmatex">\(100ml\)</span>。从红酒取 <span class="arithmatex">\(5ml\)</span> 入白酒混匀，再从白酒取回 <span class="arithmatex">\(5ml\)</span> 入红酒：是红酒杯里的白酒多，还是白酒杯里的红酒多？</p>
+<p>如果第二次倒回 <span class="arithmatex">\(6 ml\)</span>，结论是否改变？</p>
+<p>如果第一次倒出 <span class="arithmatex">\(6 ml\)</span>，结论是否改变？</p>
 <ul>
 <li>操作结束后白酒杯中的液体是什么颜色？</li>
 </ul>
@@ -3538,14 +3564,16 @@
 </ul>
 <p>利用物质守恒。</p>
 <p>下面采用第二种，因为守恒关系更直接。</p>
-<p>关键是操作结束后两个杯子都仍有 100 ml 液体。设白酒杯中混入 <span class="arithmatex">\(x\)</span> ml 红酒，红酒杯中混入 <span class="arithmatex">\(y\)</span> ml 白酒。红酒杯中的红酒为 <span class="arithmatex">\(100-y\)</span> ml，又从白酒杯带回 <span class="arithmatex">\(x\)</span> ml 红酒，因此</p>
-<div class="arithmatex">\[100-y+x=100,\]</div>
+<p>关键是操作结束后两个杯子都仍有 <span class="arithmatex">\(100 ml\)</span> 液体。设白酒杯中混入 <span class="arithmatex">\(x\)</span> ml 红酒，红酒杯中混入 <span class="arithmatex">\(y\)</span> ml 白酒。红酒杯中的红酒为 <span class="arithmatex">\(100-y\)</span> ml，又从白酒杯带回 <span class="arithmatex">\(x\)</span> ml 红酒，因此</p>
+<div class="arithmatex">\[
+100-y+x=100,
+\]</div>
 <p>所以 <span class="arithmatex">\(x=y\)</span>。因此白酒杯中的红酒量等于红酒杯中的白酒量。</p>
 </details>
 <p><span id="q44"></span></p>
-<h3 id="problem-58d1f66c738a">Q45 · 掰开 n 格巧克力<a class="headerlink" href="#problem-58d1f66c738a" title="Permanent link">&para;</a></h3>
+<h3 id="problem-58d1f66c738a">Q45 · 掰开 <span class="arithmatex">\(n\)</span> 格巧克力<a class="headerlink" href="#problem-58d1f66c738a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推</p>
-<p><strong>题目</strong>：n 格巧克力棒，每次掰开一段，要掰多少次才能得到 n 个单格？结果与巧克力形状有关吗？请证明。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 格巧克力棒，每次掰开一段，要掰多少次才能得到 <span class="arithmatex">\(n\)</span> 个单格？结果与巧克力形状有关吗？请证明。</p>
 <p>追问：若可以把多块巧克力叠在一起一次掰断，最少需要多少次？</p>
 <ul>
 <li>
@@ -3562,7 +3590,9 @@
 <summary>解答</summary>
 <p>第一问的关键是：有 <span class="arithmatex">\(k\)</span> 块时掰断其中一块，块数增加 1，因此从 1 块变成 <span class="arithmatex">\(n\)</span> 块恰需 <span class="arithmatex">\(n-1\)</span> 次，与巧克力形状无关。</p>
 <p>第二问中，每次掰断每一块最多只能让块数翻倍，因此至少需要最小的 <span class="arithmatex">\(k\)</span> 满足</p>
-<div class="arithmatex">\[ 2^{k}\geq n. \]</div>
+<div class="arithmatex">\[
+2^{k}\geq n.
+\]</div>
 <p>此时形状会影响可行性：如果某一块已经只有一个小方格，就无法继续掰开。</p>
 <p>例如，<span class="arithmatex">\(2\times2\)</span> 正方形可用两次掰断完成；但若三格排成一行且中间格下方再接一格，第一次掰断必然只分离一块，至少需要 3 次。</p>
 </details>
@@ -3583,14 +3613,20 @@
 <summary>解答</summary>
 <p>只需写出描述每个人饮用量的无穷级数，不必逐项求和。</p>
 <p>我先喝 <span class="arithmatex">\(1/2\)</span> 品脱，剩下 <span class="arithmatex">\(1/2\)</span>；你喝剩余的一半，即 <span class="arithmatex">\(1/4\)</span>，剩下 <span class="arithmatex">\(1/4\)</span>。之后我喝 <span class="arithmatex">\(1/8,1/32,\ldots\)</span>，你喝 <span class="arithmatex">\(1/4,1/16,\ldots\)</span>。因此</p>
-<div class="arithmatex">\[ \text{我喝的量}=\sum_{k=0}^{\infty}\frac{1}{2^{2k+1}}, \]</div>
-<div class="arithmatex">\[ \text{你喝的量}=\sum_{k=0}^{\infty}\frac{1}{2^{2k+2}}=\frac{1}{2}\sum_{k=0}^{\infty}\frac{1}{2^{2k+1}}. \]</div>
+<div class="arithmatex">\[
+\text{我喝的量}=\sum_{k=0}^{\infty}\frac{1}{2^{2k+1}},
+\]</div>
+<div class="arithmatex">\[
+\text{你喝的量}=\sum_{k=0}^{\infty}\frac{1}{2^{2k+2}}=\frac{1}{2}\sum_{k=0}^{\infty}\frac{1}{2^{2k+1}}.
+\]</div>
 <p>若令我喝的总量为 <span class="arithmatex">\(x\)</span>，则你喝的是 <span class="arithmatex">\(x/2\)</span>，我喝两倍于你。两级数之和为</p>
-<div class="arithmatex">\[ \text{总饮用量}=\sum_{k=1}^{\infty}\frac{1}{2^{k}}, \]</div>
+<div class="arithmatex">\[
+\text{总饮用量}=\sum_{k=1}^{\infty}\frac{1}{2^{k}},
+\]</div>
 <p>利用等比级数求和，整品脱都被喝完；结合比例可知我喝 <span class="arithmatex">\(2/3\)</span> 品脱，你喝 <span class="arithmatex">\(1/3\)</span> 品脱。</p>
 </details>
 <p><span id="q46"></span></p>
-<h3 id="problem-3d276268dd1d">Q47 · 称出 1–40 的最少砝码<a class="headerlink" href="#problem-3d276268dd1d" title="Permanent link">&para;</a></h3>
+<h3 id="problem-3d276268dd1d">Q47 · 称出 <span class="arithmatex">\(1-40\)</span> 的最少砝码<a class="headerlink" href="#problem-3d276268dd1d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论</p>
 <p><strong>题目</strong>：最少需要多少个整数砝码，才能用天平精确称出 1 到 40 的每个整数重量？请证明。</p>
 <ul>
@@ -3609,9 +3645,9 @@
 <p>5 个砝码只有 <span class="arithmatex">\(2^5=32\)</span> 种组合，不足以表示 1 到 40 的 40 个不同重量，所以至少需要 6 个。</p>
 </details>
 <p><span id="q47"></span></p>
-<h3 id="problem-42c104322400">Q48 · 用 <span class="arithmatex">\( \pm \)</span> 凑出 1–40 的最小子集<a class="headerlink" href="#problem-42c104322400" title="Permanent link">&para;</a></h3>
+<h3 id="problem-42c104322400">Q48 · 用 <span class="arithmatex">\( \pm \)</span> 凑出 <span class="arithmatex">\(1-40\)</span> 的最小子集<a class="headerlink" href="#problem-42c104322400" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论</p>
-<p><strong>题目</strong>：求最小的整数子集：只用 <span class="arithmatex">\( + \)</span> 或 <span class="arithmatex">\( - \)</span>、每个数至多用一次，即可表示 1,2,…,40。</p>
+<p><strong>题目</strong>：求最小的整数子集：只用 <span class="arithmatex">\( + \)</span> 或 <span class="arithmatex">\( - \)</span>、每个数至多用一次，即可表示 <span class="arithmatex">\(1,2,\ldots ,40\)</span>。</p>
 <ul>
 <li>
 <p>若要构造 1 到 50，最少需要几个数？</p>
@@ -3626,17 +3662,27 @@
 <details class="note">
 <summary>解答</summary>
 <p>先求下界。若有 <span class="arithmatex">\(k\)</span> 个数，每个数可取正、取负或不用，共可构造</p>
-<div class="arithmatex">\[ 3^{k} \]</div>
+<div class="arithmatex">\[
+3^{k}
+\]</div>
 <p>种不同结果；其中一个结果必为 0，正负结果成对出现。</p>
 <p>要覆盖 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(N\)</span>，必须满足</p>
-<div class="arithmatex">\[ 3^{k}\geq2N+1. \]</div>
+<div class="arithmatex">\[
+3^{k}\geq2N+1.
+\]</div>
 <p>本题要求覆盖 1 到 40，因此需要</p>
-<div class="arithmatex">\[ 3^{k}\geq81, \]</div>
+<div class="arithmatex">\[
+3^{k}\geq81,
+\]</div>
 <p>因此 <span class="arithmatex">\( k \geq 4 \)</span>。</p>
 <p>证明 4 个足够：先取 1，可得到 <span class="arithmatex">\(-1,0,1\)</span>；为覆盖 2，加入 3，可得到</p>
-<div class="arithmatex">\[ -4,-3,-2,-1,0,1,2,3,4. \]</div>
+<div class="arithmatex">\[
+-4,-3,-2,-1,0,1,2,3,4.
+\]</div>
 <p>为无重叠地覆盖 5，加入 9，可得到</p>
-<div class="arithmatex">\[ \mathbf{-13},\mathbf{-12},\mathbf{-11},\mathbf{-10},\ldots,\mathbf{10},\mathbf{11},\mathbf{12},\mathbf{13}. \]</div>
+<div class="arithmatex">\[
+\mathbf{-13},\mathbf{-12},\mathbf{-11},\mathbf{-10},\ldots,\mathbf{10},\mathbf{11},\mathbf{12},\mathbf{13}.
+\]</div>
 <p>再加入 27，即可覆盖从 <span class="arithmatex">\(-40\)</span> 到 40 的所有整数，因此 1 到 40 均可表示。</p>
 </details>
 <p><span id="q48"></span></p>
@@ -3661,15 +3707,19 @@
 <summary>解答</summary>
 <p>按第一列观察：若放一块竖直骨牌，剩下 <span class="arithmatex">\(2\times(n-1)\)</span>；若放两块水平骨牌，剩下 <span class="arithmatex">\(2\times(n-2)\)</span>。因此问题等价于用单格和双格铺满长度为 <span class="arithmatex">\(n\)</span> 的条带。</p>
 <p>令 <span class="arithmatex">\(F(n)\)</span> 为铺法数，则</p>
-<div class="arithmatex">\[ F(n)=F(n-1)+F(n-2). \]</div>
+<div class="arithmatex">\[
+F(n)=F(n-1)+F(n-2).
+\]</div>
 <p>由此有</p>
-<div class="arithmatex">\[ F(0)=1,\quad F(1)=1. \]</div>
+<div class="arithmatex">\[
+F(0)=1,\quad F(1)=1.
+\]</div>
 <p>所以在 <span class="arithmatex">\(\operatorname{Fib}(1)=\operatorname{Fib}(2)=1\)</span> 的约定下，<span class="arithmatex">\(F(n)\)</span> 是第 <span class="arithmatex">\(n+1\)</span> 个 Fibonacci 数。</p>
 </details>
 <p><span id="q49"></span></p>
 <h3 id="problem-ab36a5f10712">Q50 · 四张卡片检验命题<a class="headerlink" href="#problem-ab36a5f10712" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理</p>
-<p><strong>题目</strong>：四张卡片显示 7、6、A、C。命题：若卡片一面是元音字母，则另一面必是偶数。应翻开哪些卡片检验？为什么？</p>
+<p><strong>题目</strong>：四张卡片显示 7、6、<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(C\)</span>。命题：若卡片一面是元音字母，则另一面必是偶数。应翻开哪些卡片检验？为什么？</p>
 <ul>
 <li>
 <p>同样四张卡，命题改为“每张卡要么是元音，要么是偶数”，需要翻看哪些卡？</p>
@@ -3689,12 +3739,12 @@
 </ul>
 <details class="note">
 <summary>解答</summary>
-<p>这是基本演绎逻辑题，检验的是“若 P 则 Q”。其逆否命题“若非 Q 则非 P”与原命题等价，因此必须检查 P 卡和非 Q 卡。</p>
+<p>这是基本演绎逻辑题，检验的是“若 <span class="arithmatex">\(P\)</span> 则 <span class="arithmatex">\(Q\)</span>”。其逆否命题“若非 <span class="arithmatex">\(Q\)</span> 则非 <span class="arithmatex">\(P\)</span>”与原命题等价，因此必须检查 <span class="arithmatex">\(P\)</span> 卡和非 <span class="arithmatex">\(Q\)</span> 卡。</p>
 <p>命题没有要求翻看偶数卡片背面；题目默认每张卡一面是字母、另一面是数字。</p>
 <p>“7” 是奇数，必须翻看背面；若背面是元音，命题为假。</p>
 <p>“6” 是偶数，命题不限制其背面是否为元音，无需翻看。</p>
-<p>“A” 是元音，必须检查背面是否为偶数。</p>
-<p>“C” 不是元音，无需翻看背面。因此应翻开 7 和 A。</p>
+<p>“<span class="arithmatex">\(A\)</span>” 是元音，必须检查背面是否为偶数。</p>
+<p>“<span class="arithmatex">\(C\)</span>” 不是元音，无需翻看背面。因此应翻开 7 和 <span class="arithmatex">\(A\)</span>。</p>
 </details>
 <p><span id="q50"></span></p>
 <h3 id="problem-ccc1b0d720a8">Q51 · 三次称重找重弹珠<a class="headerlink" href="#problem-ccc1b0d720a8" title="Permanent link">&para;</a></h3>
@@ -3720,7 +3770,7 @@
 <p><span id="q51"></span></p>
 <h3 id="problem-aabc2fab7efe">Q52 · 狮子与肉<a class="headerlink" href="#problem-aabc2fab7efe" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策</p>
-<p><strong>题目</strong>：笼中 n 头狮子，扔进一块肉：每头狮子可吃掉整块或不吃；吃了就会睡着，变成其他狮子眼中的"一块肉"。最终会发生什么？</p>
+<p><strong>题目</strong>：笼中 <span class="arithmatex">\(n\)</span> 头狮子，扔进一块肉：每头狮子可吃掉整块或不吃；吃了就会睡着，变成其他狮子眼中的"一块肉"。最终会发生什么？</p>
 <ul>
 <li>
 <p>6 名海盗发现装有 1000 枚金币的宝箱，按顺序提出分配方案并投票；严格多数通过，否则提案者被扔下船。若海盗仅在新方案能让自己得到更多时投反对票，最终会怎样？</p>
@@ -3801,10 +3851,12 @@
 <summary>解答</summary>
 <p>袋子如何分装会影响被选中后的取球概率。例如，一个袋子只有 1 个球时，被选中后必取到该球。</p>
 <p>因此把 1 个白球单独放入一个袋子，其余 99 个球放入另一个袋子。获胜概率为</p>
-<div class="arithmatex">\[ \frac{1}{2}+\frac{1}{2}\frac{49}{99}. \]</div>
+<div class="arithmatex">\[
+\frac{1}{2}+\frac{1}{2}\frac{49}{99}.
+\]</div>
 <p>要证明最优，可设两个袋子中的白球和黑球数量为一般变量，写出获胜概率并优化；极值恰好在单白球袋的方案处取得。</p>
-<p><strong>最优性的补全</strong>：设较小袋共 t≤50 球，其中 w 个好球。胜率为 <span class="arithmatex">\(P=\tfrac12[w/t+(50-w)/(100-t)]\)</span>。固定 t 时，w 的系数非负，故取 w=t（小袋全好）；于是 <span class="arithmatex">\(P=\tfrac12[1+(50-t)/(100-t)]\)</span>，随整数 t≥1 递减，最大值在 t=1，等于 <span class="arithmatex">\(74/99\)</span>。两袋均须非空。</p>
-<p><strong>等量好坏对象的通式</strong>：好坏各 m 件、两盒都非空，沿用小盒大小 t≤m 的最优性证明，最优为一枚好物单放。成功率 <span class="arithmatex">\(\frac12+\frac{m-1}{2(2m-1)}\)</span>，m=5 时为 13/18。</p>
+<p><strong>最优性的补全</strong>：设较小袋共 <span class="arithmatex">\(t\le 50\)</span> 球，其中 <span class="arithmatex">\(w\)</span> 个好球。胜率为 <span class="arithmatex">\(P=\tfrac12[w/t+(50-w)/(100-t)]\)</span>。固定 <span class="arithmatex">\(t\)</span> 时，<span class="arithmatex">\(w\)</span> 的系数非负，故取 <span class="arithmatex">\(w=t\)</span>（小袋全好）；于是 <span class="arithmatex">\(P=\tfrac12[1+(50-t)/(100-t)]\)</span>，随整数 <span class="arithmatex">\(t\ge 1\)</span> 递减，最大值在 <span class="arithmatex">\(t=1\)</span>，等于 <span class="arithmatex">\(74/99\)</span>。两袋均须非空。</p>
+<p><strong>等量好坏对象的通式</strong>：好坏各 <span class="arithmatex">\(m\)</span> 件、两盒都非空，沿用小盒大小 <span class="arithmatex">\(t\le m\)</span> 的最优性证明，最优为一枚好物单放。成功率 <span class="arithmatex">\(\frac12+\frac{m-1}{2(2m-1)}\)</span>，<span class="arithmatex">\(m=5\)</span> 时为 <span class="arithmatex">\(13/18\)</span>。</p>
 </details>
 <p><span id="q54"></span></p>
 <h3 id="problem-1a0fad54c04c">Q55 · 蓝眼睛岛民<a class="headerlink" href="#problem-1a0fad54c04c" title="Permanent link">&para;</a></h3>
@@ -3841,8 +3893,8 @@
 <summary>解答</summary>
 <p>囚犯先选出一名“队长”。队长负责记录已经确认到过房间的其他囚犯数量，达到 21 人时向狱警宣布。其余 21 人与队长采用不同策略。</p>
 <p>其余 21 人的策略是：</p>
-<p>(i) 进入房间时，若至少一个开关向下且自己过去从未拨过开关，就把一个开关拨向上；每个人最多执行一次。</p>
-<p>(ii) 若两个开关都向上，则什么也不做。</p>
+<p><span class="arithmatex">\((i)\)</span> 进入房间时，若至少一个开关向下且自己过去从未拨过开关，就把一个开关拨向上；每个人最多执行一次。</p>
+<p><span class="arithmatex">\((ii)\)</span> 若两个开关都向上，则什么也不做。</p>
 <p>队长每次进入时统计向上的开关数，然后把向上的开关全部拨下。累计数达到 21 时，队长即可确认所有人都来过并通知狱警。</p>
 </details>
 <p><span id="q56"></span></p>
@@ -3874,7 +3926,9 @@
 <p>因为最后一根只能在桌上只剩一根时被取走，目标是把轮到对手时的局面变成只剩一根。因而“取最后一根者输”等价于普通取法下少一根的游戏。</p>
 <p>例如桌上有 5 根且轮到对手，对手取 1、2、3 根后分别剩 4、3、2 根，我取 3、2、1 根，把局面留成 1 根。因此轮到当前玩家时，1 和 5 是必败位置。</p>
 <p>同理，9 根时可把对手送回 5 根。一般地，应让对手面对</p>
-<div class="arithmatex">\[ 4j+1 \]</div>
+<div class="arithmatex">\[
+4j+1
+\]</div>
 <p>根（<span class="arithmatex">\(j\)</span> 为非负整数）的局面；若无法做到，对手采取最优策略时我方必败。</p>
 <p>若取最后一根者获胜，则必败位置是 4 的倍数，应把 <span class="arithmatex">\(4j\)</span> 根留给对手。</p>
 </details>
@@ -3932,17 +3986,17 @@
 <details class="note">
 <summary>解答</summary>
 <p>北极是一解：先沿任一经线南行，东行仍在同纬圈，再沿经线北行1公里回北极。
-另在南极附近，对任意正整数m，取周长恰为1/m公里的纬圈，再从它向北1公里的纬圈上任取一点。南行1公里后到小纬圈，向东恰绕m圈回同点，再北行回出发点。每个这样的起点纬圈本身就有无穷多点，所以选项答案“大于3”，实际上无穷多。
-若球半径R，小纬圈距南极的角度α满足2πR sinα=1/m公里，起点距南极的弧长为Rα+1公里。
+另在南极附近，对任意正整数<span class="arithmatex">\(m\)</span>，取周长恰为<span class="arithmatex">\(1/m\)</span>公里的纬圈，再从它向北1公里的纬圈上任取一点。南行1公里后到小纬圈，向东恰绕<span class="arithmatex">\(m\)</span>圈回同点，再北行回出发点。每个这样的起点纬圈本身就有无穷多点，所以选项答案“大于3”，实际上无穷多。
+若球半径<span class="arithmatex">\(R\)</span>，小纬圈距南极的角度<span class="arithmatex">\(\alpha\)</span>满足<span class="arithmatex">\(2\pi R \sin \alpha =1/m\)</span>公里，起点距南极的弧长为<span class="arithmatex">\(R\alpha +1\)</span>公里。
 <strong>方法</strong>：把东行位移看作纬圈周长的整数倍，构造整族解，而非只找北极这一个特殊点。</p>
 </details>
 <h3 id="problem-coin-reflection-parity">Q63 · 点反射操作下各点的模二不变量<a class="headerlink" href="#problem-coin-reflection-parity" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：不变量与对称性</p>
-<p><strong>题目</strong>：四枚硬币中心为单位正方形顶点，一步选镜点q，将另一点p移到2q−p。能否通过有限次操作使四点成为边长2的正方形？</p>
+<p><strong>题目</strong>：四枚硬币中心为单位正方形顶点，一步选镜点<span class="arithmatex">\(q\)</span>，将另一点<span class="arithmatex">\(p\)</span>移到<span class="arithmatex">\(2q-p\)</span>。能否通过有限次操作使四点成为边长2的正方形？</p>
 <details class="note">
 <summary>解答</summary>
-<p>令初始顶点为(0,0),(1,0),(0,1),(1,1)。所有后续坐标仍为整数，且每枚币自己的两个坐标模2不变，因为2q−p≡p(mod2)。所以四枚币始终占四种不同的奇偶类。
-若最后是边长2的正方形，其整数边向量(a,b)满足a²+b²=4，只能是(±2,0)或(0,±2)。于是四个顶点在两个坐标上都同奇偶，与原不变量矛盾。因此不能。
+<p>令初始顶点为(0,0),(1,0),(0,1),(1,1)。所有后续坐标仍为整数，且每枚币自己的两个坐标模2不变，因为<span class="arithmatex">\(2q-p\equiv p(\operatorname{mod} 2)\)</span>。所以四枚币始终占四种不同的奇偶类。
+若最后是边长2的正方形，其整数边向量<span class="arithmatex">\((a,b)\)</span>满足<span class="arithmatex">\(a^{2}+b^{2}=4\)</span>，只能是<span class="arithmatex">\((\pm 2,0)\)</span>或<span class="arithmatex">\((0,\pm 2)\)</span>。于是四个顶点在两个坐标上都同奇偶，与原不变量矛盾。因此不能。
 <strong>方法</strong>：对每个有身份的对象追踪模数不变量，并把目标的几何长度转成整数方程，不能只比较总重心。</p>
 </details>
 <h3 id="problem-maximal-packing-cover">Q64 · 极大不重叠配置转化为覆盖<a class="headerlink" href="#problem-maximal-packing-cover" title="Permanent link">&para;</a></h3>
@@ -3951,7 +4005,7 @@
 <details class="note">
 <summary>解答</summary>
 <p>能。极大性意味着桌上任一点离原某圆心至多2，否则可在那里再加一币。因此原100个圆心的半径2圆覆盖整个矩形。
-把桌面和这100个圆心同时缩放为1/2，半径2的覆盖圆变成半径1的圆，故100枚单位圆盘能覆盖一个半长半宽的小矩形。将四份这种配置平移到原桌的四个等大四分之一矩形，每份100枚，共400枚，覆盖全部桌面。币可伸出小矩形和桌边，符合题设。
+把桌面和这100个圆心同时缩放为<span class="arithmatex">\(1/2\)</span>，半径2的覆盖圆变成半径1的圆，故100枚单位圆盘能覆盖一个半长半宽的小矩形。将四份这种配置平移到原桌的四个等大四分之一矩形，每份100枚，共400枚，覆盖全部桌面。币可伸出小矩形和桌边，符合题设。
 <strong>方法</strong>：先用“不能再加”推出倍半径覆盖，再缩放复制；不需要证明单个半径2圆可被4个单位圆覆盖。</p>
 </details>
 
@@ -4060,7 +4114,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>

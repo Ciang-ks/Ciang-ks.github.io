@@ -722,7 +722,7 @@
   <a href="#t-z-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        单系数检验（t 检验 / Z-score）
+        单系数检验（\(t\) 检验 / Z-score）
       
     </span>
   </a>
@@ -733,7 +733,7 @@
   <a href="#f" class="md-nav__link">
     <span class="md-ellipsis">
       
-        成组系数检验（F 统计量）
+        成组系数检验（\(F\) 统计量）
       
     </span>
   </a>
@@ -910,7 +910,7 @@
   <a href="#t" class="md-nav__link">
     <span class="md-ellipsis">
       
-        统计基础（t 检验 / 标准误）
+        统计基础（\(t\) 检验 / 标准误）
       
     </span>
   </a>
@@ -1790,7 +1790,7 @@
   <a href="#t-z-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        单系数检验（t 检验 / Z-score）
+        单系数检验（\(t\) 检验 / Z-score）
       
     </span>
   </a>
@@ -1801,7 +1801,7 @@
   <a href="#f" class="md-nav__link">
     <span class="md-ellipsis">
       
-        成组系数检验（F 统计量）
+        成组系数检验（\(F\) 统计量）
       
     </span>
   </a>
@@ -1978,7 +1978,7 @@
   <a href="#t" class="md-nav__link">
     <span class="md-ellipsis">
       
-        统计基础（t 检验 / 标准误）
+        统计基础（\(t\) 检验 / 标准误）
       
     </span>
   </a>
@@ -2150,27 +2150,31 @@
 
 <h1 id="8">第 8 章 数据科学与量化研究<a class="headerlink" href="#8" title="Permanent link">&para;</a></h1>
 <h2 id="_1">本节要解决的核心问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>量化研究/数据科学面试比重越来越高。核心主题：<strong>回归建模、偏差-方差取舍、正则化与降维、计量视角、真实案例</strong>。素材对应《Elements of Statistical Learning》(ESL) 的核心章节。</p>
+<p>量化研究/数据科学面试比重越来越高。核心主题：<strong>回归建模、偏差-方差取舍、正则化与降维、计量视角、真实案例</strong>。素材对应《Elements of Statistical Learning》<span class="arithmatex">\((\mathbb{E} SL)\)</span> 的核心章节。</p>
 <h2 id="81">8.1 线性模型与最小二乘<a class="headerlink" href="#81" title="Permanent link">&para;</a></h2>
 <p><strong>线性模型</strong>：<span class="arithmatex">\(\hat Y=\hat\beta_0+\sum_iX_i\hat\beta_i\)</span>，表示特征与输出的超平面。</p>
 <p><strong>最小二乘（OLS）</strong>：最小化残差平方和</p>
-<div class="arithmatex">\[RSS(\beta)=\sum_{i=1}^N(y_i-x_i^T\beta)^2\]</div>
+<div class="arithmatex">\[
+RSS(\beta)=\sum_{i=1}^N(y_i-x_i^T\beta)^2
+\]</div>
 <ul>
 <li>RSS 是常用误差度量。若条件均值确为线性且满足外生性等条件，OLS 对线性系数无偏；在 Gauss--Markov 条件下，它是线性无偏估计量中方差最小者。</li>
 </ul>
 <p><strong>近邻（Nearest Neighbors）</strong>：</p>
-<div class="arithmatex">\[\hat Y(x)=\frac1k\sum_{x_i\in N_k(x)}y_i\]</div>
+<div class="arithmatex">\[
+\hat Y(x)=\frac1k\sum_{x_i\in N_k(x)}y_i
+\]</div>
 <ul>
-<li>直接对训练数据取平均，<strong>不拟合模型</strong>，只需记忆训练集。</li>
-<li>1-NN 的决策边界形成 <strong>Voronoi</strong> 镶嵌；k 越大区域越不支离。</li>
-<li>对训练点上的 k-NN 平滑器，有效自由度常近似为 <span class="arithmatex">\(n/k\)</span>，可解释为何 <span class="arithmatex">\(k\)</span> 大时区域更平滑。k-NN 与局部核平滑思想相近：前者对最近的 <span class="arithmatex">\(k\)</span> 个点等权，后者通常让权重随距离平滑递减。</li>
+<li>直接对训练数据取平均，<strong>不拟合模型</strong>，只需记忆训练集。
+<span class="arithmatex">\(- 1-NN\)</span> 的决策边界形成 <strong>Voronoi</strong> 镶嵌；<span class="arithmatex">\(k\)</span> 越大区域越不支离。</li>
+<li>对训练点上的 <span class="arithmatex">\(k-\)</span>NN 平滑器，有效自由度常近似为 <span class="arithmatex">\(n/k\)</span>，可解释为何 <span class="arithmatex">\(k\)</span> 大时区域更平滑。<span class="arithmatex">\(k-\)</span>NN 与局部核平滑思想相近：前者对最近的 <span class="arithmatex">\(k\)</span> 个点等权，后者通常让权重随距离平滑递减。</li>
 </ul>
 <h3 id="_2">两种模型对比<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>线性模型（最小二乘）</th>
-<th>近邻（k-NN）</th>
+<th>近邻（<span class="arithmatex">\(k-\)</span>NN）</th>
 </tr>
 </thead>
 <tbody>
@@ -2196,8 +2200,8 @@
 <h3 id="-">偏差-方差权衡<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>偏差</strong> <span class="arithmatex">\( \approx \)</span> 模型中的假设/约束程度（我们可控）；<strong>方差</strong> <span class="arithmatex">\( \approx \)</span> 模型对数据变化的敏感度（观察到的结果）。</li>
-<li><strong>模型复杂度</strong>（有效自由度 df）与偏差负相关、与方差正相关。df 越高 → 偏差越小、方差越大。</li>
-<li>1-NN 的训练误差通常很低、局部偏差较小，但方差很大（单点扰动即可改变预测区域）。</li>
+<li><strong>模型复杂度</strong>（有效自由度 df）与偏差负相关、与方差正相关。df 越高 → 偏差越小、方差越大。
+<span class="arithmatex">\(- 1-NN\)</span> 的训练误差通常很低、局部偏差较小，但方差很大（单点扰动即可改变预测区域）。</li>
 <li>线性回归假设更强 → 偏差更大、方差更小。</li>
 <li>平方损失下的期望预测误差可分为不可约噪声、偏差平方与方差；当降低方差的收益超过新增偏差时，加约束可降低总误差。</li>
 </ul>
@@ -2208,24 +2212,30 @@
 </ul>
 <h2 id="83">8.3 回归技术细节<a class="headerlink" href="#83" title="Permanent link">&para;</a></h2>
 <p><strong>核心闭式解</strong>（必须背）：</p>
-<div class="arithmatex">\[\hat\beta=(X^TX)^{-1}X^Ty\]</div>
+<div class="arithmatex">\[
+\hat\beta=(X^TX)^{-1}X^Ty
+\]</div>
 <ul>
 <li><strong>Hat 矩阵</strong>：<span class="arithmatex">\(H=X(X^\top X)^{-1}X^\top\)</span>，<span class="arithmatex">\(\hat y=Hy\)</span>，即 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(X\)</span> 列空间上的<strong>正交投影</strong>。</li>
 <li>推导：<span class="arithmatex">\(\partial\operatorname{RSS}/\partial\beta=-2X^\top(y-X\beta)=0\)</span>。</li>
 <li><strong>非满秩</strong>（如 <span class="arithmatex">\(x_2=3x_1\)</span>）：<span class="arithmatex">\(X^\top X\)</span> 奇异，<span class="arithmatex">\(\beta\)</span> 不唯一，但 <span class="arithmatex">\(\hat y\)</span> 仍是投影。</li>
 </ul>
 <p><strong>样本方差</strong>：</p>
-<div class="arithmatex">\[\hat\sigma^2=\frac{1}{N-p-1}\sum_{i=1}^N(y_i-\hat y_i)^2\]</div>
-<h3 id="t-z-score">单系数检验（t 检验 / Z-score）<a class="headerlink" href="#t-z-score" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[z_j=\frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}},\quad v_j=(X^TX)^{-1}_{jj}\]</div>
+<div class="arithmatex">\[
+\hat\sigma^2=\frac{1}{N-p-1}\sum_{i=1}^N(y_i-\hat y_i)^2
+\]</div>
+<h3 id="t-z-score">单系数检验（<span class="arithmatex">\(t\)</span> 检验 / Z-score）<a class="headerlink" href="#t-z-score" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+z_j=\frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}},\quad v_j=(X^TX)^{-1}_{jj}
+\]</div>
 <ul>
-<li>在经典正态误差假设下，<span class="arithmatex">\(z_j\)</span> 服从自由度 <span class="arithmatex">\(N-p-1\)</span> 的 t 分布；大样本时近似标准正态，<span class="arithmatex">\(|z|&gt;2\)</span> 只是经验阈值。单个系数区间写作 <span class="arithmatex">\(\hat\beta_j\pm t_{1-\alpha/2,\,df}\hat\sigma\sqrt{v_j}\)</span>。</li>
+<li>在经典正态误差假设下，<span class="arithmatex">\(z_j\)</span> 服从自由度 <span class="arithmatex">\(N-p-1\)</span> 的 <span class="arithmatex">\(t\)</span> 分布；大样本时近似标准正态，<span class="arithmatex">\(|z|&gt;2\)</span> 只是经验阈值。单个系数区间写作 <span class="arithmatex">\(\hat\beta_j\pm t_{1-\alpha/2,\,df}\hat\sigma\sqrt{v_j}\)</span>。</li>
 </ul>
-<h3 id="f">成组系数检验（F 统计量）<a class="headerlink" href="#f" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[F=\frac{(RSS_0-RSS_1)/(p_1-p_0)}{RSS_1/(N-p_1-1)}\]</div>
-<ul>
-<li>t 检验只能测单个系数；<strong>F 检验能测一组</strong>系数的联合显著性，可检测「单个不显著但成组显著」。</li>
-</ul>
+<h3 id="f">成组系数检验（<span class="arithmatex">\(F\)</span> 统计量）<a class="headerlink" href="#f" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+F=\frac{(RSS_0-RSS_1)/(p_1-p_0)}{RSS_1/(N-p_1-1)}
+\]</div>
+<p><span class="arithmatex">\(- t\)</span> 检验只能测单个系数；<strong><span class="arithmatex">\(F\)</span> 检验能测一组</strong>系数的联合显著性，可检测「单个不显著但成组显著」。</p>
 <h3 id="_3">多元回归 = 逐次正交化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>把 <span class="arithmatex">\(x_j\)</span> 对之前已选变量回归取残差 <span class="arithmatex">\(z_j\)</span>，再对 <span class="arithmatex">\(y\)</span> 回归，<span class="arithmatex">\(\hat\beta_p=\langle z_p,y\rangle/\langle z_p,z_p\rangle\)</span>。</li>
@@ -2240,7 +2250,7 @@
 <h3 id="_4">验证、泄漏与时间序列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>先划分训练/验证/测试，再做标准化、缺失值填补和特征选择；所有预处理参数只能在训练集拟合，避免<strong>数据泄漏</strong>。</li>
-<li>随机交叉验证适用于近似 i.i.d. 数据；金融时间序列应使用 walk-forward / expanding-window 验证，训练窗口必须早于验证窗口。</li>
+<li>随机交叉验证适用于近似 <span class="arithmatex">\(i.i.d\)</span>. 数据；金融时间序列应使用 walk-forward / expanding-window 验证，训练窗口必须早于验证窗口。</li>
 <li>评估指标要匹配目标：回归可用 MSE/MAE/Huber，分类可用 log-loss/AUC；交易策略还要报告换手、交易成本、最大回撤和风险调整收益。</li>
 <li>只在测试集上做一次最终评估；反复看测试结果会把测试集变成训练信号。</li>
 </ul>
@@ -2248,23 +2258,29 @@
 <p><strong>动机</strong>：① 降低测试误差（引入约束减方差的收益 &gt; 增偏差的代价）；② 提高可解释性。</p>
 <h3 id="subset-selection">子集选择（Subset selection / 逐步回归）<a class="headerlink" href="#subset-selection" title="Permanent link">&para;</a></h3>
 <p>基于「逐次正交化」构建，常见三种：
-- <strong>前向（Forward stepwise）</strong>：空模型起，每步加入「最优拟合」的那个参数，再正交化。共 k 步。
-- <strong>后向（Backward stepwise）</strong>：全模型起，每步删除「贡献最小」的参数，再正交化。共 k 步。
+- <strong>前向（Forward stepwise）</strong>：空模型起，每步加入「最优拟合」的那个参数，再正交化。共 <span class="arithmatex">\(k\)</span> 步。
+- <strong>后向（Backward stepwise）</strong>：全模型起，每步删除「贡献最小」的参数，再正交化。共 <span class="arithmatex">\(k\)</span> 步。
 - <strong>前向分段（Forward stagewise）</strong>：零模型起，每步找<strong>与当前残差相关最大</strong>的参数，逐步累加系数。<strong>相比前两种需更多步</strong>，但在极高维度下更精确有效。
 - <strong>leaps-and-bounds</strong>：维度 <span class="arithmatex">\( \le 30 \)</span> 时的子集选择高效算法。</p>
 <h3 id="ridge">岭回归（Ridge）<a class="headerlink" href="#ridge" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[\hat\beta^{ridge}=\arg\min_\beta\Big\{\sum_i(y_i-\beta_0-\sum_jx_{ij}\beta_j)^2+\lambda\sum_j\beta_j^2\Big\}\]</div>
-<div class="arithmatex">\[\hat\beta^{ridge}=(X^TX+\lambda I)^{-1}X^Ty\]</div>
+<div class="arithmatex">\[
+\hat\beta^{ridge}=\arg\min_\beta\Big\{\sum_i(y_i-\beta_0-\sum_jx_{ij}\beta_j)^2+\lambda\sum_j\beta_j^2\Big\}
+\]</div>
+<div class="arithmatex">\[
+\hat\beta^{ridge}=(X^TX+\lambda I)^{-1}X^Ty
+\]</div>
 <ul>
 <li>在特征已中心化、截距不参与惩罚的写法下，<span class="arithmatex">\(\lambda&gt;0\)</span> 时特征系数部分有唯一解；岭惩罚也能缓解共线性导致的病态性。</li>
 <li><strong>对有效自由度 df 的影响</strong>：<span class="arithmatex">\(df(\lambda)\)</span> 是 <span class="arithmatex">\(\lambda\)</span> 的单调递减函数，<span class="arithmatex">\(df(0)=p\)</span>，<span class="arithmatex">\(df(\infty)\to0\)</span>。<span class="arithmatex">\(\lambda\)</span> 越大 → df 越小 → 偏差越大。</li>
 <li>岭回归本质上是<strong>对主成分按比例收缩</strong>（收缩尾部主成分）。</li>
 </ul>
 <h3 id="lasso">套索回归（Lasso）<a class="headerlink" href="#lasso" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[\hat\beta^{lasso}=\arg\min_\beta\Big\{\sum_i(y_i-\beta_0-\sum_jx_{ij}\beta_j)^2+\lambda\sum_j|\beta_j|\Big\}\]</div>
+<div class="arithmatex">\[
+\hat\beta^{lasso}=\arg\min_\beta\Big\{\sum_i(y_i-\beta_0-\sum_jx_{ij}\beta_j)^2+\lambda\sum_j|\beta_j|\Big\}
+\]</div>
 <ul>
-<li>用 <strong>L1 惩罚</strong>替代 L2；一般没有闭式解，可用坐标下降、近端梯度或等价的凸优化形式求解。</li>
-<li><strong>产生稀疏性</strong>：当 L1 约束收紧时，部分系数<strong>恰好归零</strong>（整变量被剔除），ridge 不会。</li>
+<li>用 <strong><span class="arithmatex">\(L1\)</span> 惩罚</strong>替代 <span class="arithmatex">\(L2\)</span>；一般没有闭式解，可用坐标下降、近端梯度或等价的凸优化形式求解。</li>
+<li><strong>产生稀疏性</strong>：当 <span class="arithmatex">\(L1\)</span> 约束收紧时，部分系数<strong>恰好归零</strong>（整变量被剔除），ridge 不会。</li>
 <li><strong>可解释性差异</strong>：lasso 用于<strong>变量选择/稀疏模型</strong>；ridge 用于<strong>压缩但不置零</strong>。</li>
 <li>使用 ridge/lasso 前通常先中心化并标准化特征，否则惩罚会偏向量纲较大的变量；截距一般不惩罚。</li>
 </ul>
@@ -2288,25 +2304,25 @@
 <p>在正交、标准化设计这一便于理解的特殊情形下，best-subset 表现为硬阈值，ridge 为比例收缩，lasso 为软阈值；一般相关设计下不能逐坐标直接套用这些标量公式。</p>
 <h3 id="l_q-elastic-net">广义：<span class="arithmatex">\( L_q \)</span> 正则化与 elastic-net<a class="headerlink" href="#l_q-elastic-net" title="Permanent link">&para;</a></h3>
 <ul>
-<li>lasso/ridge 分别是 <strong>L1/L2</strong>（<span class="arithmatex">\(q=1\)</span> 或 <span class="arithmatex">\(q=2\)</span>）。<span class="arithmatex">\(q\to0\)</span> 可视作变量子集选择的极限；<span class="arithmatex">\(q\in(1,2)\)</span> 是连续的折中惩罚。</li>
+<li>lasso/ridge 分别是 <strong><span class="arithmatex">\(L1/L2\)</span></strong>（<span class="arithmatex">\(q=1\)</span> 或 <span class="arithmatex">\(q=2\)</span>）。<span class="arithmatex">\(q\to0\)</span> 可视作变量子集选择的极限；<span class="arithmatex">\(q\in(1,2)\)</span> 是连续的折中惩罚。</li>
 <li><strong>Elastic-net</strong>：lasso 与 ridge 的加权平均，正则项 <span class="arithmatex">\(\lambda\sum_j(\alpha\beta_j^2+(1-\alpha)|\beta_j|)\)</span>，兼顾稀疏与压缩。</li>
 </ul>
 <h3 id="lar-least-angle-regression">逐角回归（LAR, Least Angle Regression）<a class="headerlink" href="#lar-least-angle-regression" title="Permanent link">&para;</a></h3>
 <ul>
 <li>类似前向，但<strong>系数连续增加</strong>，始终跟踪「与残差相关最高的多个参数」并同步增加。</li>
 <li>贪婪、易算，且<strong>结果与 lasso 几乎一致</strong>（直到某系数跨 0）。在系数跨 0 时丢弃并重算，可得到<strong>完整 lasso 路径</strong>。</li>
-<li>第 k 次迭代后拟合有 k 个自由度。</li>
+<li>第 <span class="arithmatex">\(k\)</span> 次迭代后拟合有 <span class="arithmatex">\(k\)</span> 个自由度。</li>
 </ul>
 <h3 id="pcr-pca">主成分回归（PCR）与 PCA<a class="headerlink" href="#pcr-pca" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>SVD</strong>：对中心化数据矩阵 <span class="arithmatex">\(X=UDV^\top\)</span>，有 <span class="arithmatex">\(X^\top X=VD^2V^\top\)</span>。<span class="arithmatex">\(V\)</span> 的列是特征方向，<span class="arithmatex">\(z_i=Xv_i\)</span> 是第 <span class="arithmatex">\(i\)</span> 个主成分得分，<span class="arithmatex">\(d_i\)</span> 是相应奇异值；若样本协方差按 <span class="arithmatex">\(X^\top X/(n-1)\)</span> 定义，则该主成分的样本方差为 <span class="arithmatex">\(d_i^2/(n-1)\)</span>。</li>
-<li><strong>PCR</strong>：直接在<strong>主成分</strong>上回归（它们正交 → 简化为一个个单变量回归），只用前 M 个主成分，丢弃尾部。</li>
+<li><strong>PCR</strong>：直接在<strong>主成分</strong>上回归（它们正交 → 简化为一个个单变量回归），只用前 <span class="arithmatex">\(M\)</span> 个主成分，丢弃尾部。</li>
 <li><strong>与 ridge 区别</strong>：PCR <strong>直接截断</strong>尾部主成分；ridge <strong>按比例收缩</strong>所有主成分。</li>
 <li><strong>PCA 是更通用的降维</strong>：可在建模前对输入做无监督降维，不限于回归。</li>
 </ul>
 <h2 id="85">8.5 回归脑经急转弯<a class="headerlink" href="#85" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>线性回归的主要假设</strong>：① 目标与输入有线性条件均值（误差条件均值为 0）；② <strong>少多重共线性</strong>（输入间不过度相关）；③ <strong>同方差</strong>（误差方差恒定）；④ <strong>无自相关</strong>（误差间不相关）。误差正态分布并非 OLS 无偏的必需条件，但小样本精确 t/F 推断通常需要它。</li>
+<li><strong>线性回归的主要假设</strong>：① 目标与输入有线性条件均值（误差条件均值为 0）；② <strong>少多重共线性</strong>（输入间不过度相关）；③ <strong>同方差</strong>（误差方差恒定）；④ <strong>无自相关</strong>（误差间不相关）。误差正态分布并非 OLS 无偏的必需条件，但小样本精确 <span class="arithmatex">\(t/F\)</span> 推断通常需要它。</li>
 <li><strong><span class="arithmatex">\( \beta_1 = 1/\beta_2 \)</span> 吗？</strong> 否。两个回归分别最小化<strong>垂直</strong>与<strong>水平</strong>残差，<span class="arithmatex">\( \beta \)</span> 不会恰好互为倒数。</li>
 <li><strong>输入线性相关、设计矩阵不满列秩时？</strong> OLS 系数解不唯一，但拟合值仍由对列空间的投影唯一确定。</li>
 <li><strong>三特征高度相关、其中一个高标准误？</strong> 多重共线性信号。最简：删掉该变量；也可做特征变换（多项式、中心化、线性组合）、或改用 ridge/lasso/PCA。</li>
@@ -2320,17 +2336,17 @@
 <li>直观例子：健康保险 → 健康状况。若直接比较「参保 vs 未参保」人群的平均健康，会混入教育/收入/年龄等混杂因素，即<strong>选择偏差</strong>。</li>
 <li>以二元处理 <span class="arithmatex">\(D\)</span> 为例，观测均值差可分解为处理组平均处理效应与选择偏差：</li>
 </ul>
-<p>$$</p>
-<p>=E[Y_1-Y_0\mid D=1]+{E[Y_0\mid D=1]-E[Y_0\mid D=0]}.</p>
-<p>$$</p>
+<div class="arithmatex">\[
+=E[Y_1-Y_0\mid D=1]+\{E[Y_0\mid D=1]-E[Y_0\mid D=0]\}.
+\]</div>
 <ul>
 <li><strong>随机分配处理/控制组</strong>极大缓解选择偏差（LLN 使两组的其它特征平均趋向相等）。随机化后应<strong>检查平衡</strong>（各特征样本均值是否大致相等）。</li>
 </ul>
-<h3 id="t">统计基础（t 检验 / 标准误）<a class="headerlink" href="#t" title="Permanent link">&para;</a></h3>
+<h3 id="t">统计基础（<span class="arithmatex">\(t\)</span> 检验 / 标准误）<a class="headerlink" href="#t" title="Permanent link">&para;</a></h3>
 <ul>
 <li>样本均值无偏 <span class="arithmatex">\(E[\bar Y]=E[Y_i]\)</span>；抽样方差 <span class="arithmatex">\(\operatorname{Var}(\bar Y)=\sigma_Y^2/n\)</span>，估计 <span class="arithmatex">\(\operatorname{SE}(\bar Y)=S(Y_i)/\sqrt n\)</span>。</li>
-<li><strong>t 统计量</strong> <span class="arithmatex">\(t(\mu)=(\bar Y-\mu)/\operatorname{SE}(\bar Y)\)</span>，CLT 下渐近标准正态；<span class="arithmatex">\(|t|&gt;2\)</span> 常视为显著，也可构造置信区间。</li>
-<li><strong>两独立样本均值检验</strong>：Welch 标准误为 <span class="arithmatex">\(\sqrt{s_1^2/n_1+s_0^2/n_0}\)</span>；等方差假设下可改用合并方差。t 值的绝对值取决于效应相对标准误的大小；绝对值小可能是效应小，也可能是样本不足、估计不精确。</li>
+<li><strong><span class="arithmatex">\(t\)</span> 统计量</strong> <span class="arithmatex">\(t(\mu)=(\bar Y-\mu)/\operatorname{SE}(\bar Y)\)</span>，CLT 下渐近标准正态；<span class="arithmatex">\(|t|&gt;2\)</span> 常视为显著，也可构造置信区间。</li>
+<li><strong>两独立样本均值检验</strong>：Welch 标准误为 <span class="arithmatex">\(\sqrt{s_1^2/n_1+s_0^2/n_0}\)</span>；等方差假设下可改用合并方差。<span class="arithmatex">\(t\)</span> 值的绝对值取决于效应相对标准误的大小；绝对值小可能是效应小，也可能是样本不足、估计不精确。</li>
 </ul>
 <h3 id="cia">回归推断因果与 CIA<a class="headerlink" href="#cia" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2343,7 +2359,9 @@
 <li>回归只能消除「已编码控制变量」上的选择偏差；<strong>控制变量不充分 → OVB 残留</strong>。</li>
 <li><strong>OVB 公式</strong>（短回归 vs 长回归）：</li>
 </ul>
-<div class="arithmatex">\[OVB=\beta^s-\beta^l=\pi_1\times\gamma\]</div>
+<div class="arithmatex">\[
+OVB=\beta^s-\beta^l=\pi_1\times\gamma
+\]</div>
 <p>其中 <span class="arithmatex">\(\pi_1\)</span> = 遗漏控制对处理变量的回归系数，<span class="arithmatex">\(\gamma\)</span> = 遗漏控制在长回归中的系数。
 - 即使无遗漏数据，也可<strong>定性推断</strong> OVB 的符号方向。
 - <strong>稳健性</strong>：若加入新控制变量后处理效应几乎不变（OVB 小），则模型可信。</p>
@@ -2352,14 +2370,16 @@
 <li><strong>CEF 分解</strong>：<span class="arithmatex">\(Y_i=E[Y_i\mid X_i]+\varepsilon_i\)</span>，其中 <span class="arithmatex">\(\varepsilon\)</span> 均值独立于 <span class="arithmatex">\(X\)</span>（<span class="arithmatex">\(E[\varepsilon_i\mid X_i]=0\)</span>）。CEF 是<strong>均方误差最小预测器</strong>。</li>
 <li><strong>ANOVA 定理</strong>：</li>
 </ul>
-<div class="arithmatex">\[Var(Y_i)=Var(E[Y_i|X_i])+E[Var(Y_i|X_i)]\]</div>
+<div class="arithmatex">\[
+Var(Y_i)=Var(E[Y_i|X_i])+E[Var(Y_i|X_i)]
+\]</div>
 <ul>
 <li>若 <span class="arithmatex">\(X\)</span> 表示列向量，总体线性投影系数为 <span class="arithmatex">\(\beta=E[XX^\top]^{-1}E[XY]\)</span>；样本 OLS 为 <span class="arithmatex">\(\hat\beta=(\mathbf X^\top\mathbf X)^{-1}\mathbf X^\top\mathbf y\)</span>。在常规正则条件下，<span class="arithmatex">\(\hat\beta\)</span> 渐近正态。</li>
 <li><strong>分组数据</strong>：只有保留正确组权重和足够统计量时，聚合回归才可能复原微观 OLS；随意对组均值等权回归通常会改变结果。</li>
 </ul>
 <h3 id="_7">抽样权重 / 饱和回归（进阶）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>加权最小二乘</strong>：非随机抽样、抽样权重 w=抽样概率的倒数时使用；宏经济惯例常做不加权聚合分析。</li>
+<li><strong>加权最小二乘</strong>：非随机抽样、抽样权重 <span class="arithmatex">\(w=\)</span>抽样概率的倒数时使用；宏经济惯例常做不加权聚合分析。</li>
 <li><strong>饱和回归</strong>：所有输入为离散时，可为每个联合取值单元设置哑变量（等价于包含所需的全阶交互项），从而完整表示样本中的条件均值；参数量会快速膨胀，稀疏单元的估计噪声也很大。</li>
 </ul>
 <h3 id="vs-ml">计量 vs ML 的视角<a class="headerlink" href="#vs-ml" title="Permanent link">&para;</a></h3>
@@ -2376,18 +2396,18 @@
 <li><strong>相关性 &amp; 共线性诊断</strong>（连续-离散用 Spearman；分类-连续用 point-biserial / logistic）</li>
 <li>选模型（线性 vs 近邻/树）与验证</li>
 <li>处理共线性（子集选择 / ridge / lasso / elastic-net / PCA）</li>
-<li>解释与权衡（t/F 检验、偏差-方差、可解释性）</li>
+<li>解释与权衡（<span class="arithmatex">\(t/F\)</span> 检验、偏差-方差、可解释性）</li>
 </ol>
 <h3 id="871-two-sigma">8.7.1 Two Sigma · 纽约房价<a class="headerlink" href="#871-two-sigma" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>预处理</strong>：sqft/year_built 连续保留；beds/baths 离散；borough 分类 → <strong>one-hot</strong>。</li>
+<li><strong>预处理</strong>：sqft/year<span class="arithmatex">\(_{b}uilt\)</span> 连续保留；beds/baths 离散；borough 分类 → <strong>one-hot</strong>。</li>
 <li><strong>归一化</strong>：先检查 sqft 的分布；若明显右偏且取值为正，可尝试 log 变换，再在训练集上标准化。右偏本身并不能证明变量服从对数正态。</li>
 <li><strong>相关性</strong>：sqft 连续、beds 为有序计数时，可同时查看 Pearson 与 Spearman；后者对单调非线性和异常值更稳健，但不是由变量类型自动决定的唯一选择。</li>
-<li><strong>共线性</strong>：sqft 与 beds/baths 高相关 → 用 ridge/lasso/逐步/正交化；t 检验定哪些显著。</li>
+<li><strong>共线性</strong>：sqft 与 beds/baths 高相关 → 用 ridge/lasso/逐步/正交化；<span class="arithmatex">\(t\)</span> 检验定哪些显著。</li>
 </ul>
 <h3 id="872-quantco">8.7.2 QuantCo · 剧院<a class="headerlink" href="#872-quantco" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>近邻</strong>：席位有 2D/3D 空间关系（距舞台距离、视角），相邻席位应定价相近；可用<strong>核加权</strong>、边界席位加大窗口。</li>
+<li><strong>近邻</strong>：席位有 <span class="arithmatex">\(2D/3D\)</span> 空间关系（距舞台距离、视角），相邻席位应定价相近；可用<strong>核加权</strong>、边界席位加大窗口。</li>
 <li><strong>回归</strong>：row/column/section 作输入；把 row 换成「到舞台的欧氏距离」更贴合；利用左右对称配对。</li>
 <li><strong>共线性</strong>：row/column/section 高度相关 → lasso/子集选择删除，或 ridge/正交化保留。</li>
 <li><strong>进阶（时间与行为因素）</strong>：随时间临近的<strong>需求近似指数增长、供给指数下降</strong> → 价格也指数对应 → 加入 <span class="arithmatex">\(\log(\text{演出日期}-\text{售票日期})\)</span> 作为输入。</li>
@@ -2403,19 +2423,19 @@
 <li><strong>温度/天气</strong>：温度归一化，天气 one-hot；温度-天气高相关可用 point-biserial / logistic、或合并。</li>
 <li><strong>温度-季节共线性</strong>：用「与前一日同时刻的温度差」归一化，去除周期共线性。</li>
 <li><strong>第二批变量</strong>：星期几、节假日、交通、地铁、雨量、空气质量、房价、商业活跃度（处理方式类似）。</li>
-<li><strong>最终调参</strong>：十个变量 → 逐变量算 z-score，对不显著且相关的成组变量算 <strong>F 统计量</strong>；降维用 <strong>lasso/ridge/elastic-net</strong>（高维互相关时 elastic-net 常最有效）；大视角用 <strong>前向/后向逐步</strong>。</li>
+<li><strong>最终调参</strong>：十个变量 → 逐变量算 <span class="arithmatex">\(z-\)</span>score，对不显著且相关的成组变量算 <strong><span class="arithmatex">\(F\)</span> 统计量</strong>；降维用 <strong>lasso/ridge/elastic-net</strong>（高维互相关时 elastic-net 常最有效）；大视角用 <strong>前向/后向逐步</strong>。</li>
 </ul>
 <h2 id="_9">易错点 / 面试提示<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>闭式解 <span class="arithmatex">\((X^\top X)^{-1}X^\top y\)</span> 与 hat 矩阵</strong>是必背。</li>
-<li>分清 t 检验（单系数）与 F 检验（成组）。</li>
+<li>分清 <span class="arithmatex">\(t\)</span> 检验（单系数）与 <span class="arithmatex">\(F\)</span> 检验（成组）。</li>
 <li>ridge（比例收缩、不置零）vs lasso（软阈值、稀疏）vs 子集选择（硬阈值）三者区别要能说清。</li>
-<li>「有效自由度 = <span class="arithmatex">\(n/k\)</span>」是理解 k-NN 复杂度的关键；<span class="arithmatex">\(df(\lambda)\)</span> 单调递减可解释 ridge 的偏差增加。</li>
+<li>「有效自由度 = <span class="arithmatex">\(n/k\)</span>」是理解 <span class="arithmatex">\(k-\)</span>NN 复杂度的关键；<span class="arithmatex">\(df(\lambda)\)</span> 单调递减可解释 ridge 的偏差增加。</li>
 <li>案例题考察<strong>完整流程思维</strong>，缺一步（如共线性诊断、归一化、循环编码）都显得不完整。</li>
 </ul>
 <h2 id="_10">关联题库<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
-<li>题库「按知识点：数据科学」与「按题型：案例分析」节点，对应 bible Ch4/Ch5 全部内容。</li>
+<li>题库「按知识点：数据科学」与「按题型：案例分析」节点，对应 bible <span class="arithmatex">\(Ch4/Ch5\)</span> 全部内容。</li>
 </ul>
 
 
@@ -2523,7 +2543,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>

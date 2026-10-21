@@ -809,7 +809,7 @@
   <a href="#sec-BlackScholes公式带连续股息率y" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Black–Scholes 公式（带连续股息率 y）
+        Black–Scholes 公式（带连续股息率 \(y\)）
       
     </span>
   </a>
@@ -1689,7 +1689,7 @@
   <a href="#sec-BlackScholes公式带连续股息率y" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Black–Scholes 公式（带连续股息率 y）
+        Black–Scholes 公式（带连续股息率 \(y\)）
       
     </span>
   </a>
@@ -1737,58 +1737,60 @@
 </thead>
 <tbody>
 <tr>
-<td>S↑</td>
-<td>↑</td>
-<td>↓</td>
-<td>↑</td>
-<td>↓</td>
+<td><span class="arithmatex">\(S\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
 </tr>
 <tr>
-<td>K↑</td>
-<td>↓</td>
-<td>↑</td>
-<td>↓</td>
-<td>↑</td>
+<td><span class="arithmatex">\(K\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
 </tr>
 <tr>
-<td>τ↑</td>
+<td><span class="arithmatex">\(\tau \uparrow\)</span></td>
 <td>?</td>
 <td>?</td>
-<td>↑</td>
-<td>↑</td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
 </tr>
 <tr>
-<td><span class="arithmatex">\( \sigma \)</span>↑</td>
-<td>↑</td>
-<td>↑</td>
-<td>↑</td>
-<td>↑</td>
+<td><span class="arithmatex">\( \sigma  \uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
 </tr>
 <tr>
-<td>r↑</td>
-<td>↑</td>
-<td>↓</td>
-<td>↑</td>
-<td>↓</td>
+<td><span class="arithmatex">\(r\uparrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
 </tr>
 <tr>
-<td>股息↑</td>
-<td>↓</td>
-<td>↑</td>
-<td>↓</td>
-<td>↑</td>
+<td>股息<span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
+<td><span class="arithmatex">\(\downarrow\)</span></td>
+<td><span class="arithmatex">\(\uparrow\)</span></td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>注：这假设单因素变化。τ 对欧式影响不确定（涉及股息、深度实值 put 等）。</li>
+<li>注：这假设单因素变化。<span class="arithmatex">\(\tau\)</span> 对欧式影响不确定（涉及股息、深度实值 put 等）。</li>
 <li><strong>单调性边界</strong>：看涨 payoff <span class="arithmatex">\(\max(S_T-K,0)\)</span>、看跌 payoff <span class="arithmatex">\(\max(K-S_T,0)\)</span> 均为凸函数，因此波动率升高通常提高两者价值。</li>
 </ul>
 <h2 id="72-put-call-parity">7.2 看跌看涨平价（Put-call parity）<a class="headerlink" href="#72-put-call-parity" title="Permanent link">&para;</a></h2>
-<div class="arithmatex">\[c+Ke^{-r\tau}=p+S-D\]</div>
+<div class="arithmatex">\[
+c+Ke^{-r\tau}=p+S-D
+\]</div>
 <ul>
-<li>证明：组合 A（call + 零息债面值 K）与组合 B（put + 股票）到期 payoff 都是 <span class="arithmatex">\(\max(S_T,K)\)</span>，无套利 <span class="arithmatex">\( \Rightarrow \)</span> 现值相等。</li>
-<li>变形 <span class="arithmatex">\(c-p=S-Ke^{-r\tau}\)</span>：左侧是「看涨多头 + 看跌空头」，payoff 为 <span class="arithmatex">\(S_T-K\)</span>（远期的 payoff）。当 <span class="arithmatex">\(K=S e^{r\tau}\)</span>（远期价）时 call=put。</li>
+<li>证明：组合 <span class="arithmatex">\(A\)</span>（call + 零息债面值 <span class="arithmatex">\(K\)</span>）与组合 <span class="arithmatex">\(B\)</span>（put + 股票）到期 payoff 都是 <span class="arithmatex">\(\max(S_T,K)\)</span>，无套利 <span class="arithmatex">\( \Rightarrow \)</span> 现值相等。</li>
+<li>变形 <span class="arithmatex">\(c-p=S-Ke^{-r\tau}\)</span>：左侧是「看涨多头 + 看跌空头」，payoff 为 <span class="arithmatex">\(S_T-K\)</span>（远期的 payoff）。当 <span class="arithmatex">\(K=S e^{r\tau}\)</span>（远期价）时 call<span class="arithmatex">\(=put\)</span>。</li>
 <li>美式期权不满足欧式平价。对无股息股票有 <span class="arithmatex">\(S-K\le C-P\le S-Ke^{-r\tau}\)</span>；有股息时边界还要按股息时点和现值调整。</li>
 </ul>
 <h2 id="73-vs">7.3 美式 vs 欧式<a class="headerlink" href="#73-vs" title="Permanent link">&para;</a></h2>
@@ -1796,18 +1798,20 @@
 <li><strong>美式可提前行权，通常 <span class="arithmatex">\( \ge \)</span> 欧式</strong>。</li>
 <li><strong>不付股息的股票上，美式 call = 欧式 call</strong>（提前行权从不是最优）。三论证：
   1. <strong>时间价值</strong>：call 含正值的时间价值，卖期比行权更优。
-  2. <strong>替代策略</strong>：不提前行权但「卖空股票 + 贷出（投资）K」，到期现金流更优。
+  2. <strong>替代策略</strong>：不提前行权但「卖空股票 + 贷出（投资）<span class="arithmatex">\(K\)</span>」，到期现金流更优。
   3. <strong>下界论证</strong>：欧式看涨满足 <span class="arithmatex">\(c\ge S-Ke^{-r\tau}&gt;S-K\)</span>，因此立即行权所得 <span class="arithmatex">\(S-K\)</span> 不优于继续持有或卖出期权。</li>
 <li><strong>对 put 不成立</strong>：提前收到行权价具有利息价值，深度实值时美式 put 可能适合提前行权。</li>
 <li>有股息的 call：仅在除息日前一刻可能最优提前行权。</li>
 </ul>
 <h2 id="74-black-scholes-merton">7.4 Black-Scholes-Merton 微分方程<a class="headerlink" href="#74-black-scholes-merton" title="Permanent link">&para;</a></h2>
 <p>假设 <span class="arithmatex">\(dS=\mu S\,dt+\sigma S\,dW(t)\)</span>，导出 <span class="arithmatex">\(V\)</span> 满足的 PDE：</p>
-<div class="arithmatex">\[\frac{\partial V}{\partial t}+rS\frac{\partial V}{\partial S}+\frac12\sigma^2S^2\frac{\partial^2 V}{\partial S^2}=rV\]</div>
+<div class="arithmatex">\[
+\frac{\partial V}{\partial t}+rS\frac{\partial V}{\partial S}+\frac12\sigma^2S^2\frac{\partial^2 V}{\partial S^2}=rV
+\]</div>
 <p><strong>推导思路</strong>：构建<strong>对冲组合</strong> <span class="arithmatex">\(\Pi=V-(\partial V/\partial S)S\)</span>（长 1 单位衍生品 + 空 <span class="arithmatex">\(\partial V/\partial S\)</span> 单位股票），利用 Itô 引理消去 <span class="arithmatex">\(dW\)</span> 项，使组合无风险（获 <span class="arithmatex">\(r\)</span> 收益）。</p>
 <h3 id="_3">假设（面试常问）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>无交易成本、无税、可无限买卖（含卖空）、资产无限可分、无套利、<strong>无风险利率 r 与波动率 <span class="arithmatex">\( \sigma \)</span> 恒定</strong>、连续复利、股价服从几何布朗运动、欧式、不付息/股息可处理。</li>
+<li>无交易成本、无税、可无限买卖（含卖空）、资产无限可分、无套利、<strong>无风险利率 <span class="arithmatex">\(r\)</span> 与波动率 <span class="arithmatex">\( \sigma \)</span> 恒定</strong>、连续复利、股价服从几何布朗运动、欧式、不付息/股息可处理。</li>
 </ul>
 <h3 id="_4">风险中性定价与闭式公式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1853,10 +1857,10 @@
 </tbody>
 </table>
 <p>无股息欧式期权的常用公式：</p>
-<p>$$</p>
-<p>\Gamma=\frac{\phi(d_1)}{S\sigma\sqrt\tau},\quad
-\text{Vega}=S\phi(d_1)\sqrt\tau,</p>
-<p>$$</p>
+<div class="arithmatex">\[
+\Gamma=\frac{\phi(d_1)}{S\sigma\sqrt\tau},\quad
+\text{Vega}=S\phi(d_1)\sqrt\tau,
+\]</div>
 <p>其中 <span class="arithmatex">\(\phi\)</span> 是标准正态密度；看涨/看跌的 Gamma、Vega 相同。实际对冲中，<span class="arithmatex">\(\Delta\)</span> 是一阶近似，Gamma、波动率、跳跃和流动性风险仍需单独管理。</p>
 <ul>
 <li>欧式期权 theta 正负情形：深度实值/持有成本等影响。</li>
@@ -1874,7 +1878,7 @@
 <ul>
 <li><strong>组合优化</strong>：均值-方差、有效前沿、夏普比率最大化。</li>
 <li><strong>风险价值（VaR）</strong>：给定置信度下的最大损失分位数。</li>
-<li><strong>ES/CVaR</strong>：超过 VaR 后损失的条件期望；对尾部更敏感。</li>
+<li><strong><span class="arithmatex">\(\mathbb{E} S/\)</span>CVaR</strong>：超过 VaR 后损失的条件期望；对尾部更敏感。</li>
 <li><strong>久期与凸性</strong>：债券价格对利率的敏感度（一阶/二阶）。</li>
 <li><strong>利率模型</strong>：</li>
 <li>均衡模型：Vasicek、CIR（从经济均衡推出）。</li>
@@ -1883,8 +1887,8 @@
 <h3 id="_5">面试中常用的最小公式集<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>组合收益 <span class="arithmatex">\(\mu_p=w^\top\mu\)</span>、方差 <span class="arithmatex">\(\sigma_p^2=w^\top\Sigma w\)</span>；最小方差问题通常带 <span class="arithmatex">\(\mathbf1^\top w=1\)</span>，若允许做空还要说明约束。</li>
-<li>VaR 是损失分布的分位数；ES 是超过该分位点后的条件平均损失。VaR 可能不满足次可加性，不能替代压力测试。</li>
-<li>债券价格近似：<span class="arithmatex">\(\Delta P/P\approx-D\,\Delta y+\tfrac12C(\Delta y)^2\)</span>；若 <span class="arithmatex">\(D_{\$}=-\partial P/\partial y\)</span>，则 <span class="arithmatex">\(DV01\approx D_{\$}\times10^{-4}\)</span>（收益率上升 1bp 时价格变动约为 <span class="arithmatex">\(-DV01\)</span>）。利率风险题先区分 modified duration、dollar duration 与 DV01。</li>
+<li>VaR 是损失分布的分位数；<span class="arithmatex">\(\mathbb{E} S\)</span> 是超过该分位点后的条件平均损失。VaR 可能不满足次可加性，不能替代压力测试。</li>
+<li>债券价格近似：<span class="arithmatex">\(\Delta P/P\approx-D\,\Delta y+\tfrac12C(\Delta y)^2\)</span>；若 <span class="arithmatex">\(D_{\$}=-\partial P/\partial y\)</span>，则 <span class="arithmatex">\(DV01\approx D_{\$}\times10^{-4}\)</span>（收益率上升 <span class="arithmatex">\(1bp\)</span> 时价格变动约为 <span class="arithmatex">\(-DV01\)</span>）。利率风险题先区分 modified duration、dollar duration 与 <span class="arithmatex">\(DV01\)</span>。</li>
 </ul>
 <h2 id="_6">常见题型与套路<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
@@ -1924,8 +1928,8 @@
 <h2 id="_7">易错点 / 面试提示<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>提前行权差异</strong>：美式 call（不付息）<span class="arithmatex">\( \neq \)</span> 美式 put，务必分清。</li>
-<li><strong>τ 对欧式价差方向不确定</strong>，别背死。</li>
-<li>波动率越高期权越贵（所有方向 <span class="arithmatex">\( \sigma \)</span>↑ 都↑）。</li>
+<li><strong><span class="arithmatex">\(\tau\)</span> 对欧式价差方向不确定</strong>，别背死。</li>
+<li>波动率越高期权越贵（所有方向 <span class="arithmatex">\( \sigma  \uparrow\)</span> 都<span class="arithmatex">\(\uparrow\)</span>）。</li>
 <li>平价是「无套利」的直接推论，证明靠构造组合。</li>
 <li>风险中性概率不是现实世界概率；定价时贴现的是风险中性期望，预测收益时使用真实测度。</li>
 <li>先说明 payoff、到期、股息和行权规则，再判断 Greek 符号，避免把美式/欧式和有无股息混在一起。</li>
@@ -1943,11 +1947,15 @@
 </ul>
 <h2 id="_9">关联题库<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li>题库「按知识点：金融 / 期权」节点，对应 guide Ch6 全部例题（价格方向、平价、美欧差异、B-S 假设、Greeks 正负、价差、VaR、利率模型等）。</li>
+<li>题库「按知识点：金融 / 期权」节点，对应 guide <span class="arithmatex">\(Ch6\)</span> 全部例题（价格方向、平价、美欧差异、<span class="arithmatex">\(B-S\)</span> 假设、Greeks 正负、价差、VaR、利率模型等）。</li>
 </ul>
-<h2 id="sec-BlackScholes公式带连续股息率y">Black–Scholes 公式（带连续股息率 y）<a class="headerlink" href="#sec-BlackScholes公式带连续股息率y" title="Permanent link">&para;</a></h2>
-<div class="arithmatex">\[c = Se^{-y\tau}N(d_1) - Ke^{-r\tau}N(d_2),\qquad p = Ke^{-r\tau}N(-d_2) - Se^{-y\tau}N(-d_1)\]</div>
-<div class="arithmatex">\[d_1 = \frac{\ln(S/K) + (r - y + \sigma^2/2)\tau}{\sigma\sqrt{\tau}},\qquad d_2 = d_1 - \sigma\sqrt{\tau}\]</div>
+<h2 id="sec-BlackScholes公式带连续股息率y">Black–Scholes 公式（带连续股息率 <span class="arithmatex">\(y\)</span>）<a class="headerlink" href="#sec-BlackScholes公式带连续股息率y" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[
+c = Se^{-y\tau}N(d_1) - Ke^{-r\tau}N(d_2),\qquad p = Ke^{-r\tau}N(-d_2) - Se^{-y\tau}N(-d_1)
+\]</div>
+<div class="arithmatex">\[
+d_1 = \frac{\ln(S/K) + (r - y + \sigma^2/2)\tau}{\sigma\sqrt{\tau}},\qquad d_2 = d_1 - \sigma\sqrt{\tau}
+\]</div>
 <p>（标的为期货时 <span class="arithmatex">\( y = r \)</span>；标的为外币时 <span class="arithmatex">\( y = r_f \)</span> 外币无风险利率。）<span class="arithmatex">\( N(x) \)</span> 为标准正态 cdf，<span class="arithmatex">\( N'(x) = (1/\sqrt{2\pi})e^{-x^2/2} \)</span> 为 pdf。</p>
 
 
@@ -2055,7 +2063,7 @@
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
       
     
   </body>
