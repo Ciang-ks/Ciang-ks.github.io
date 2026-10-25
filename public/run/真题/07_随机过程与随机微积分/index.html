@@ -7359,6 +7359,7 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 \]</div>
 <p>十枚骰，若模 7 为零返还 7、入场费 1，净期望 <span class="arithmatex">\(7p_{10}-1=1/6^{9}&gt;0\)</span>，因此风险中性者可接受。</p>
 <p>合并状态需要每个类内状态到其他类的总转移概率相同；一般模余问题不能不加检查地只分“零/非零”。</p>
+<p>合并后的转移矩阵（顺序为零、非零）为 <span class="arithmatex">\(\begin{pmatrix}0&amp;1\\1/6&amp;5/6\end{pmatrix}\)</span>。固定点满足 <span class="arithmatex">\(p_*=(1-p_*)/6\)</span>，得 <span class="arithmatex">\(p_*=1/7\)</span>。相减得到 <span class="arithmatex">\(p_{n+1}-1/7=-(p_n-1/7)/6\)</span>，反复迭代并代 <span class="arithmatex">\(p_0=1\)</span> 得显式公式。十次时 <span class="arithmatex">\(7p_{10}-1=6(-1/6)^{10}=6^{-9}\)</span>，正号来自偶数次；奇数次的同类赌局净期望反而为负。风险中性可接受不代表必盈利，优势大小也须与实际成本比较。</p>
 </details>
 <h3 id="problem-5db979cc1fc6">Q963 · 面数模余的均匀性<a class="headerlink" href="#problem-5db979cc1fc6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：归纳与递推</p>
@@ -7425,6 +7426,15 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <details class="note">
 <summary>解答</summary>
 <p>对称游走在<span class="arithmatex">\(-m\)</span>至<span class="arithmatex">\(m\)</span>，端点越界尝试原地停。绝对值<span class="arithmatex">\(R=|X|\)</span>在0必去1，1至<span class="arithmatex">\(m-1\)</span>各半加减1，<span class="arithmatex">\(m\)</span>处各半去<span class="arithmatex">\(m-1\)</span>或停<span class="arithmatex">\(m\)</span>，转移仅由当前<span class="arithmatex">\(R\)</span>决定故马氏。最大偏离<span class="arithmatex">\(Y_{t}=\max (R1,\ldots ,R_{t})\)</span>单独通常不马氏；跟踪<span class="arithmatex">\((R_{t},Y_{t})\)</span>即可，<span class="arithmatex">\(0\le R\le Y\le m\)</span>，先按<span class="arithmatex">\(R\)</span>转移得<span class="arithmatex">\(R'\)</span>，再确定<span class="arithmatex">\(Y'=\max (Y,R')\)</span>。这给出全部三角状态及转移，无需保留完整历史。</p>
+<p><strong>最大偏离的具体反例。</strong> 取 <span class="arithmatex">\(m\ge3,X_0=0\)</span>。在时刻4比较两种正概率的最大值历史</p>
+<div class="arithmatex">\[
+(Y_1,Y_2,Y_3,Y_4)=(1,2,2,2),\qquad(1,1,1,2).
+\]</div>
+<p>第二种历史确定 <span class="arithmatex">\(R_4=2\)</span>，所以下一步创纪录3的概率为 <span class="arithmatex">\(1/2\)</span>。第一种则确定 <span class="arithmatex">\(R_2=2,R_3=1\)</span>，<span class="arithmatex">\(R_4\)</span> 为0或2且各半，下一步创纪录3的概率只有 <span class="arithmatex">\(1/4\)</span>。两段历史有相同当前 <span class="arithmatex">\(Y_4=2\)</span>，却给不同下一步分布，证明 <span class="arithmatex">\(Y\)</span> 非马氏。联合状态的转移可紧凑写为</p>
+<div class="arithmatex">\[
+P((r,y),(r',y'))=P_R(r,r')\mathbf1_{\{y'=\max(y,r')\}},
+\]</div>
+<p>其中 <span class="arithmatex">\(P_R\)</span> 由上文0、内部、端点三类规则给出。<span class="arithmatex">\(m=1\)</span> 时最大值从第一步起恒1，是退化例外，不应无条件声称任何参数下都非马氏。</p>
 </details>
 <h3 id="problem-4169e9864f76">Q971 · 隔一步采样仍是马尔可夫链<a class="headerlink" href="#problem-4169e9864f76" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链</p>
@@ -7446,7 +7456,26 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <p><strong>题目</strong>：链初始 3；<span class="arithmatex">\(1\to 1\)</span>、2 为 0.4、0.6；<span class="arithmatex">\(2\to 1\)</span>、2 为 0.6、0.4；<span class="arithmatex">\(3\to 2\)</span>、3、4 为 0.5、0.2、0.3；<span class="arithmatex">\(4\to 5\to 6\to 4\)</span> 均为 1。求状态分类、周期、第 <span class="arithmatex">\(n\)</span> 步仍在 3 的概率、首次离 3 的均时、永不进 1 的概率、第十步在 4 的概率，以及给定第十步在 4 时第一步就在 4 的后验。</p>
 <details class="note">
 <summary>解答</summary>
-<p>完整转移：<span class="arithmatex">\(1\to 1 .4\)</span>、<span class="arithmatex">\(1\to 2 .6\)</span>；<span class="arithmatex">\(2\to 1 .6\)</span>、<span class="arithmatex">\(2\to 2 .4\)</span>；<span class="arithmatex">\(3\to 2 .5\)</span>、<span class="arithmatex">\(3\to 3 .2\)</span>、<span class="arithmatex">\(3\to 4 .3\)</span>；<span class="arithmatex">\(4\to 5\to 6\to 4\)</span>各1，初始3。<span class="arithmatex">\((a)\{1,2\}\)</span>闭常返周期1，3瞬态，{4,5,6}闭常返周期3；(b)第<span class="arithmatex">\(n\)</span>步仍3概率.<span class="arithmatex">\(2^{n}\)</span>；(c)首次离3时间<span class="arithmatex">\(\operatorname{Geom} (.8)\)</span>，均值<span class="arithmatex">\(5/4\)</span>；(d)永不进1等于离3进周期类，概率.<span class="arithmatex">\(3/.8=3/8\)</span>；(e)第10步在4，首次进4须<span class="arithmatex">\(k=1,4,7,10\)</span>，概率.<span class="arithmatex">\(3[1+.2^{3}+.2^{6}+.2^{9}]\)</span>；(f)给定第10步4、第1步4后验<span class="arithmatex">\(=1/[1+.2^{3}+.2^{6}+.2^{9}]\)</span>。周期性不能被平稳近似抹去。</p>
+<p>设初始时刻为 0，<span class="arithmatex">\(X_0=3\)</span>，并令 <span class="arithmatex">\(L=\inf\{n\ge1:X_n\ne3\}\)</span>。</p>
+<p><strong>分类和离开时间。</strong> <span class="arithmatex">\(\{1,2\}\)</span> 与 <span class="arithmatex">\(\{4,5,6\}\)</span> 都是有限闭互通类，所以常返；前者有自环，周期为 1，后者只能每隔 3 步返回，周期为 3。状态 3 离开后无法回来，且每步离开概率为 <span class="arithmatex">\(0.8\)</span>，故暂态。留在 3 到第 <span class="arithmatex">\(n\)</span> 步必须连续 <span class="arithmatex">\(n\)</span> 次自环：</p>
+<div class="arithmatex">\[
+P(X_n=3)=(0.2)^n,\qquad
+P(L=k)=(0.2)^{k-1}(0.8),\quad EL=\frac1{0.8}=\frac54.
+\]</div>
+<p><strong>永不进入 1。</strong> 若离开 3 到 2，则有限不可约类 <span class="arithmatex">\(\{1,2\}\)</span> 几乎必然访问 1；若离开到 4，则永远不访问 1。离开方向的条件概率为</p>
+<div class="arithmatex">\[
+P(X_L=4)=\sum_{k\ge1}(0.2)^{k-1}(0.3)=\frac{0.3}{0.8}=\frac38.
+\]</div>
+<p><strong>第十步在 4 及后验。</strong> 若首次到 4 的时刻为 <span class="arithmatex">\(k\)</span>，第十步在 4 当且仅当 <span class="arithmatex">\(10-k\)</span> 是 3 的倍数，即 <span class="arithmatex">\(k=1,4,7,10\)</span>。这些是互斥事件，故</p>
+<div class="arithmatex">\[
+P(X_{10}=4)=0.3[1+(0.2)^3+(0.2)^6+(0.2)^9].
+\]</div>
+<p>事件 <span class="arithmatex">\(X_1=4\)</span> 必然蕴含 <span class="arithmatex">\(X_{10}=4\)</span>，其概率为 <span class="arithmatex">\(0.3\)</span>。用 Bayes，</p>
+<div class="arithmatex">\[
+P(X_1=4\mid X_{10}=4)
+=\frac1{1+(0.2)^3+(0.2)^6+(0.2)^9}.
+\]</div>
+<p>这里周期类的固定相位决定第十步概率，不能把它直接换成类内平稳概率 <span class="arithmatex">\(1/3\)</span>。</p>
 </details>
 <h3 id="problem-4e557e192c03">Q974 · 单向链的首次进入与不进入概率<a class="headerlink" href="#problem-4e557e192c03" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链</p>
@@ -7554,6 +7583,7 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <summary>解答</summary>
 <p>由 <span class="arithmatex">\(\pi(A)=\sum_i\pi_iP(i,A)\)</span> 减去 <span class="arithmatex">\(A\)</span> 内部流得两向流相等。</p>
 <p>记每步跨出 <span class="arithmatex">\(A\)</span> 的平稳流为 <span class="arithmatex">\(f\)</span>，则在按平稳进入事件抽样的条件下，一段 <span class="arithmatex">\(A\)</span> 内连续停留的平均长度为 <span class="arithmatex">\(\pi(A)/f\)</span>，外部为 <span class="arithmatex">\((1-\pi(A))/f\)</span>。例如 <span class="arithmatex">\(\pi(A)=7/16,f=9/32\)</span>，得 <span class="arithmatex">\(14/9\)</span> 与 2。此处 <span class="arithmatex">\(f\)</span> 为每步故障发生频率，不是给定系统处于上态时的条件故障概率。</p>
+<p>在长度 <span class="arithmatex">\(T\)</span> 的平稳轨迹中，处于 <span class="arithmatex">\(A\)</span> 的时刻数除以 <span class="arithmatex">\(T\)</span> 趋于 <span class="arithmatex">\(\pi(A)\)</span>，跨入次数除以 <span class="arithmatex">\(T\)</span> 趋于 <span class="arithmatex">\(f\)</span>。将每次跨入起至下一次跨出的时刻分成连续停留段，除去首尾未完整段后，“总占用时刻数/段数”趋于 <span class="arithmatex">\(\pi(A)/f\)</span>。有限不可约链保证这些段有有限均长，因此边界段不影响极限。这是按进入事件抽一段；在任意平稳时刻观察当前段会产生长度偏倚，不能直接用同一均值。</p>
 </details>
 <h3 id="problem-ae27057fc139">Q988 · 来回带伞的淋湿率<a class="headerlink" href="#problem-ae27057fc139" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链</p>
@@ -7561,6 +7591,8 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <details class="note">
 <summary>解答</summary>
 <p>令状态为出发地伞数。<span class="arithmatex">\(i&gt;0\)</span> 时转到 <span class="arithmatex">\(r-i\)</span>（概率 <span class="arithmatex">\(q=1-p\)</span>）或 <span class="arithmatex">\(r-i+1\)</span>（概率 <span class="arithmatex">\(p\)</span>）；0 必转到 <span class="arithmatex">\(r\)</span>。<span class="arithmatex">\(0&lt;p&lt;1\)</span> 时平稳解为 <span class="arithmatex">\(\pi_0=q/(r+q),\pi_i=1/(r+q),i\ge1\)</span>。淋湿比例为 <span class="arithmatex">\(p\pi_0=p(1-p)/(r+1-p)\)</span>。<span class="arithmatex">\(r=3\)</span> 时求导得最坏 <span class="arithmatex">\(p=4-2\sqrt3\)</span>。</p>
+<p><strong>平稳方程及极值。</strong> 到0只能从状态 <span class="arithmatex">\(r\)</span> 晴天出发，因此 <span class="arithmatex">\(\pi_0=q\pi_r\)</span>。到 <span class="arithmatex">\(j\;(1\le j&lt;r)\)</span> 的流为 <span class="arithmatex">\(q\pi_{r-j}+p\pi_{r-j+1}\)</span>，代入所有正状态相等的候选均成立；到 <span class="arithmatex">\(r\)</span> 的流为 <span class="arithmatex">\(\pi_0+p\pi_1\)</span>，也等于 <span class="arithmatex">\(\pi_r\)</span>。再归一化 <span class="arithmatex">\(\pi_0+\sum_{i=1}^r\pi_i=1\)</span>，得所列解。降雨与当次出发地库存独立，所以淋湿率是 <span class="arithmatex">\(p\pi_0\)</span>。</p>
+<p>对 <span class="arithmatex">\(r=3\)</span>，<span class="arithmatex">\(g(p)=p(1-p)/(4-p)\)</span>，导数分子为 <span class="arithmatex">\(p^2-8p+4\)</span>。两根 <span class="arithmatex">\(4\pm2\sqrt3\)</span> 中只有较小者在 <span class="arithmatex">\((0,1)\)</span>，且导数先正后负；端点雨率趋0或1时淋湿率均趋0，故 <span class="arithmatex">\(4-2\sqrt3\)</span> 是全局最大点。全下雨时雨伞虽始终移动，却不会因晴天被留在另一处，解释了端点结果。</p>
 </details>
 <p><span id="q502"></span></p>
 <h3 id="problem-aa3788d5bbe6">Q989 · 平稳零游程的精确长度概率<a class="headerlink" href="#problem-aa3788d5bbe6" title="Permanent link">&para;</a></h3>
@@ -7593,6 +7625,8 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <summary>解答</summary>
 <p>无向图平稳质量按顶点度数归一化，回返均值为总度数除以角点度数。</p>
 <p>王 <span class="arithmatex">\(D=420,d=3\)</span>，回访 140；象只在同色闭类内移动，<span class="arithmatex">\(D=280,d=7\)</span>，回访 40；后 <span class="arithmatex">\(D=1456,d=21\)</span>，回访 <span class="arithmatex">\(208/3\)</span>；车 <span class="arithmatex">\(D=896,d=14\)</span>，回访 64；马 <span class="arithmatex">\(D=336,d=2\)</span>，回访 168。马右半区域度数和为 168，跨中线无向边 40 条，故每步进入流为 <span class="arithmatex">\(40/336\)</span>，平均停留 <span class="arithmatex">\((1/2)/(40/336)=4.2\)</span>。该结论按平稳进入分布取平均，不代表从右半任一指定格出发都为 4.2。</p>
+<p><strong>度数如何复算。</strong> 王的总度数为4角各3、24个非角边格各5、36内格各8，合420。车每格14，共896。象在每条长度 <span class="arithmatex">\(\ell\)</span> 的对角线给 <span class="arithmatex">\(\ell(\ell-1)\)</span> 条有向移动，两族对角线相加共560，但需限制在角格所属的同色闭类，取280；后把车与象边相加得1456。马的无向边可按绝对位移 <span class="arithmatex">\((1,2)\)</span> 与 <span class="arithmatex">\((2,1)\)</span> 计数，各有 <span class="arithmatex">\(2(8-1)(8-2)=84\)</span> 条，共168条，总度336。</p>
+<p>跨左右半盘的马边，水平跨2有2对列，对应竖直跨1，故 <span class="arithmatex">\(2\times7\times2=28\)</span> 条；水平跨1对应竖直跨2，故 <span class="arithmatex">\(1\times6\times2=12\)</span> 条，合40条。因此进入右半盘的单向平稳流是40/336，而非将两个方向再乘2。</p>
 </details>
 <p><span id="q506"></span></p>
 <h3 id="problem-d0e82aeb28e2">Q993 · 请求后移到表头的平稳排列<a class="headerlink" href="#problem-d0e82aeb28e2" title="Permanent link">&para;</a></h3>
@@ -7616,6 +7650,14 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 \pi(i_1,\ldots,i_n)=Z^{-1}\prod_{k=1}^n\alpha_{i_k}^{n-k}.
 \]</div>
 <p>有限链连通且有自环，故该分布也是极限分布。两种重排规则不可混用。</p>
+<p><strong>验证乘积形式。</strong> 交换前 <span class="arithmatex">\(a,b\)</span> 在位置 <span class="arithmatex">\(k,k+1\)</span>，交换后仅两项改变，故</p>
+<div class="arithmatex">\[
+\frac{\pi(\ldots,b,a,\ldots)}{\pi(\ldots,a,b,\ldots)}
+=\frac{\alpha_b^{n-k}\alpha_a^{n-k-1}}{\alpha_a^{n-k}\alpha_b^{n-k-1}}
+=\frac{\alpha_b}{\alpha_a}
+=\frac{C(1-p_a)p_b}{C(1-p_b)p_a}.
+\]</div>
+<p>这逐边验证 <span class="arithmatex">\(\pi(x)P(x,y)=\pi(y)P(y,x)\)</span>，求和便有 <span class="arithmatex">\(\pi P=\pi\)</span>。归一化常数 <span class="arithmatex">\(Z\)</span> 是对全部 <span class="arithmatex">\(n!\)</span> 个排列的上述正乘积求和，不依赖当前状态。由于 <span class="arithmatex">\(0&lt;p_i&lt;1\)</span>，每个相邻交换都有正概率，而相邻交换能生成任意排列，故不可约；全部失败的概率 <span class="arithmatex">\(\prod_i(1-p_i)&gt;0\)</span>，使每个状态有自环、周期为1。有限不可约非周期链于是从任意初始排列收敛到唯一的 <span class="arithmatex">\(\pi\)</span>。</p>
 </details>
 <p><span id="q509"></span></p>
 <h3 id="problem-0b96cbc80334">Q995 · Ehrenfest两坛移球<a class="headerlink" href="#problem-0b96cbc80334" title="Permanent link">&para;</a></h3>
@@ -7653,6 +7695,8 @@ p_0=1,\quad p_{n+1}=(1-p_n)/6,\quad p_n=1/7+(6/7)(-1/6)^n.
 <details class="note">
 <summary>解答</summary>
 <p>以检验次数为步数，逐检状态为已有连续正品数 <span class="arithmatex">\(0,\ldots,i-1\)</span>，抽样态为 <span class="arithmatex">\(S\)</span>。正品使计数前进或进入 <span class="arithmatex">\(S\)</span>，废品重置到 0，<span class="arithmatex">\(S\)</span> 中正品留在 <span class="arithmatex">\(S\)</span>。令 <span class="arithmatex">\(q=1-p\)</span>，平稳质量 <span class="arithmatex">\(\pi_k=pq^k,\pi_S=q^i\)</span>。每步检验 1 个，处理产品均值 <span class="arithmatex">\(1+(r-1)q^i\)</span>，故检验比例 <span class="arithmatex">\(1/[1+(r-1)q^i]\)</span>，漏检比例 <span class="arithmatex">\((r-1)pq^i/[1+(r-1)q^i]\)</span>。</p>
+<p><strong>从检验步数换成生产件数。</strong> 记 <span class="arithmatex">\(q=1-p\)</span>。每一步恰检验一件，只有抽样态 <span class="arithmatex">\(S\)</span> 一步对应生产 <span class="arithmatex">\(r\)</span> 件，其余状态一步对应生产一件。由于任何状态下一件被检品为废品的概率都为 <span class="arithmatex">\(p\)</span>，平稳时 <span class="arithmatex">\(\pi_0=p\)</span>；再由 <span class="arithmatex">\(\pi_k=q\pi_{k-1}\)</span> 得 <span class="arithmatex">\(\pi_k=pq^k\)</span>。抽样态的流入/流出平衡为 <span class="arithmatex">\(p\pi_S=q\pi_{i-1}\)</span>，所以 <span class="arithmatex">\(\pi_S=q^i\)</span>。检查总质量：<span class="arithmatex">\(p\sum_{k=0}^{i-1}q^k+q^i=1\)</span>。</p>
+<p>长期每检验一步的生产件数为 <span class="arithmatex">\(\sum_{k&lt;i}\pi_k+r\pi_S=1+(r-1)q^i\)</span>。在抽样态，未被抽中的 <span class="arithmatex">\(r-1\)</span> 件与抽到的那件独立，平均漏掉 <span class="arithmatex">\((r-1)p\)</span> 件废品；其他状态没有漏检。以马尔可夫报酬的“每步漏检均数/每步生产均数”求比，得到题中的漏检比例。这样分母按全部生产件数计算，未把每组抽一件误当作每件都抽检。</p>
 </details>
 <h3 id="problem-0d37dde758f4">Q1000 · 按时刻观察与按变动观察<a class="headerlink" href="#problem-0d37dde758f4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链</p>
@@ -7789,6 +7833,13 @@ f(3)=1+f(2).
 <details class="note">
 <summary>解答</summary>
 <p>状态<span class="arithmatex">\(s\)</span>个小、<span class="arithmatex">\(l\)</span>个大，抽小吃掉，抽大吃一半并放回另一半（成为小）。直到大面包全无为止，<span class="arithmatex">\(F(s,0)=0\)</span>，<span class="arithmatex">\(F(s,l)=1+[sF(s-1,l)+lF(s+1,l-1)]/(s+l)\)</span>。按<span class="arithmatex">\(l\)</span>与<span class="arithmatex">\(s\)</span>递推得到<span class="arithmatex">\(F(7,3)=113/12\)</span>。最后吃掉的那一半也已计一次。</p>
+<p><strong>递推为何可算，以及一个独立核验。</strong> 从 <span class="arithmatex">\((s,l)\)</span> 抽小面包后变成 <span class="arithmatex">\((s-1,l)\)</span>，抽大面包后变成 <span class="arithmatex">\((s+1,l-1)\)</span>。先计算较小的 <span class="arithmatex">\(l\)</span>，对固定 <span class="arithmatex">\(l\)</span> 再按 <span class="arithmatex">\(s\)</span> 增加计算；访问范围内只需有限个状态。</p>
+<p>也可用独立速率 1 的指数时钟实现均匀抽取：每个现存面包有一个时钟，最先响者被取；大面包变小后启用新的独立时钟。指数无记忆性使每次选中的面包仍在现存面包中均匀。</p>
+<p>三个原始大面包都必被取一次，贡献 3 次。任意一个原始小面包，在它与三个原始大面包的首次时钟中若不是最晚，就会在停止前被吃；四个时钟等分布，概率 <span class="arithmatex">\(3/4\)</span>，七个共贡献 <span class="arithmatex">\(21/4\)</span>。第一个变小的大面包，其半块时钟要早于剩余两大面包中的最后一个，概率 <span class="arithmatex">\(2/3\)</span>；第二个变小的半块要早于最后一个大面包，概率 <span class="arithmatex">\(1/2\)</span>；最后一个半块不再吃。因此总期望为</p>
+<div class="arithmatex">\[
+3+\frac{21}4+\frac23+\frac12=\boxed{\frac{113}{12}}.
+\]</div>
+<p>这里只用线性期望相加，不要求不同半块的“被吃”事件独立。</p>
 </details>
 <h3 id="problem-4a97e655085d">Q1015 · 方形吸收前回原点<a class="headerlink" href="#problem-4a97e655085d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：归纳与递推</p>
@@ -7876,24 +7927,43 @@ P = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 1/3 &amp; 0 &amp; 2/3 &amp; 0 \
 <p><strong>题目</strong>：盒中有 <span class="arithmatex">\(n\)</span> 个球、<span class="arithmatex">\(n\)</span> 种不同颜色。每次随机取出一对球，把第一只重涂成第二只的颜色，然后放回。期望多少步后盒中所有球同色？</p>
 <details class="note">
 <summary>解答</summary>
-<p>设 <span class="arithmatex">\( N_n \)</span> 为全同色所需步数，<span class="arithmatex">\( F_i \)</span> = 最终全为颜色 <span class="arithmatex">\( i \)</span> 的事件。由全期望公式与<strong>颜色的对称性</strong>（<span class="arithmatex">\( P[F_i] = 1/n \)</span>，<span class="arithmatex">\( E[N_n|F_i] \)</span> 全相等），不妨设最终全为颜色 1，用 <span class="arithmatex">\( E[N_n|F_1] \)</span> 代表 <span class="arithmatex">\( E[N_n] \)</span>。</p>
-<p>在条件 <span class="arithmatex">\( F_1 \)</span> 下，颜色 1 特殊、其余颜色等价：只需以“颜色 1 的球数 <span class="arithmatex">\( i \)</span>”为状态建马尔可夫链；条件链中没有状态 0，否则永远到不了 <span class="arithmatex">\( F_1 \)</span>。<strong>所有转移概率也要以 <span class="arithmatex">\( F_1 \)</span> 为条件</strong>，例如 <span class="arithmatex">\( p_{1,0}|F_1 = 0 \)</span> 而无条件 <span class="arithmatex">\( p_{1,0} = 1/n \)</span>。条件转移概率的推导（以 <span class="arithmatex">\( P(x_{k+1}=i-1 \mid x_k=i, F_1) \)</span> 为例，用贝叶斯定理 + 马氏性 + 对称性 <span class="arithmatex">\( P(F_1|x=i) = i/n \)</span>——<span class="arithmatex">\( i \)</span> 个同色球最终获胜的概率是 <span class="arithmatex">\( i/n \)</span>，因为把它们想象成 <span class="arithmatex">\( i \)</span> 种“子颜色”各占 <span class="arithmatex">\( 1/n \)</span>）：</p>
+<p>设每次均匀选择两个<strong>不同</strong>球的有序对，把第一只涂成第二只颜色；等价地也可先无序选一对，再各半决定涂色方向。<span class="arithmatex">\(n=1\)</span> 无需操作，答案为 0，以下设 <span class="arithmatex">\(n\ge2\)</span>，记 <span class="arithmatex">\(D=n(n-1)\)</span>。</p>
+<p><strong>1. 固定一种颜色，先求其固定概率。</strong> 令该颜色当前有 <span class="arithmatex">\(i\)</span> 只球。增、减一只的无条件概率都为</p>
 <div class="arithmatex">\[
-P(x_{k+1}=i-1\mid x_k=i, F_1) = \frac{P(F_1\mid x_{k+1}=i-1)\,P(x_{k+1}=i-1\mid x_k=i)}{P(F_1\mid x_k=i)} = \frac{\frac{i-1}{n}\times\frac{i(n-i)}{n(n-1)}}{\frac{i}{n}} = \frac{(n-i)(i-1)}{n(n-1)}
+p_i^+=p_i^-=\frac{i(n-i)}D,
+\qquad p_i^0=1-\frac{2i(n-i)}D.
 \]</div>
-<p>（<span class="arithmatex">\( P(x_{k+1}=i-1|x_k=i) = i(n-i)/n(n-1) \)</span>：<span class="arithmatex">\( n(n-1) \)</span> 种有序取球方式中，第二只是颜色 1（<span class="arithmatex">\( i \)</span> 种选择）、第一只是其他颜色（<span class="arithmatex">\( n-i \)</span> 种）。）同理：</p>
+<p>因此它的球数是有界鞅。有限状态中，从每个非同色配置都有正概率经有限步让一种现存颜色覆盖全部球，所以几乎必然最终同色；有限性还给出吸收时间的几何尾。若该颜色最后胜出的事件为 <span class="arithmatex">\(F\)</span>，有界停时期望给</p>
 <div class="arithmatex">\[
-P(i\to i\mid F_1) = \frac{(n-i)\cdot 2i}{n(n-1)},\qquad P(i\to i+1\mid F_1) = \frac{(n-i)(i+1)}{n(n-1)}
+P(F\mid i)=i/n.
 \]</div>
-<p>代入 <span class="arithmatex">\( E[N_i|F_1] = 1 + \sum P\cdot E[N_j|F_1] \)</span>，记 <span class="arithmatex">\( Z_i = E[N_i|F_1] \)</span>，化简得</p>
+<p><strong>2. 条件于它最终胜出。</strong> 以 <span class="arithmatex">\(h_i=i/n\)</span> 作 Bayes 修正，得到条件链</p>
 <div class="arithmatex">\[
-(n-i)\cdot 2i\cdot Z_i = n(n-1) + (n-i)(i+1)Z_{i+1} + (n-i)(i-1)Z_{i-1}
+q_i^- =p_i^-\frac{h_{i-1}}{h_i}=\frac{(n-i)(i-1)}D,
+\quad
+q_i^+=\frac{(n-i)(i+1)}D,
+\quad
+q_i^0=p_i^0=1-\frac{2i(n-i)}D.
 \]</div>
-<p>用递归方程组与边界条件 <span class="arithmatex">\(Z_{n} = 0\)</span> 解得</p>
+<p>三项相加为 1；<span class="arithmatex">\(i=1\)</span> 时向下概率为 0，符合“条件于最终胜出就不可能灭绝”。注意 <span class="arithmatex">\(2i(n-i)/D\)</span> 是离开当前球数的概率，不是自环概率。</p>
+<p>令 <span class="arithmatex">\(Z_i\)</span> 为条件链从 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(n\)</span> 的平均剩余步数，<span class="arithmatex">\(Z_n=0\)</span>。首步递推 <span class="arithmatex">\(Z_i=1+q_i^-Z_{i-1}+q_i^0Z_i+q_i^+Z_{i+1}\)</span>，移去自环并除以 <span class="arithmatex">\((n-i)/D\)</span>，得</p>
 <div class="arithmatex">\[
-\boxed{Z_1 = (n-1)^2}
+2iZ_i=\frac D{n-i}+(i-1)Z_{i-1}+(i+1)Z_{i+1},\qquad1\le i&lt;n.
 \]</div>
-<p>即<strong>期望步数为 <span class="arithmatex">\( (n-1)^2 \)</span></strong>。</p>
+<p><strong>3. 把递推消到 <span class="arithmatex">\(Z_1\)</span>。</strong> 置 <span class="arithmatex">\(U_i=iZ_i\)</span>，并令 <span class="arithmatex">\(U_0=U_n=0\)</span>；<span class="arithmatex">\(U_0=0\)</span> 只是方程中的零系数边界，不是从 0 条件于胜出的期望。则</p>
+<div class="arithmatex">\[
+2U_i-U_{i-1}-U_{i+1}=\frac D{n-i}.
+\]</div>
+<p>再令 <span class="arithmatex">\(\Delta_i=U_i-U_{i-1}\)</span>，便有 <span class="arithmatex">\(\Delta_i-\Delta_{i+1}=D/(n-i)\)</span>。累加并用 <span class="arithmatex">\(\sum_{i=1}^n\Delta_i=U_n-U_0=0\)</span>：</p>
+<div class="arithmatex">\[
+0=n\Delta_1-\sum_{j=1}^{n-1}(n-j)\frac D{n-j}
+=n\Delta_1-(n-1)D.
+\]</div>
+<p>所以 <span class="arithmatex">\(Z_1=U_1=\Delta_1=(n-1)^2\)</span>。</p>
+<p>初始每种颜色各一只，各色胜出的概率均为 <span class="arithmatex">\(1/n\)</span>，且由颜色对称性，条件于任一颜色胜出的平均同色时间相同，都是 <span class="arithmatex">\(Z_1\)</span>。全期望公式于是给</p>
+<div class="arithmatex">\[
+\boxed{E[T]=(n-1)^2}.
+\]</div>
 </details>
 <p><span id="q232"></span></p>
 <h3 id="problem-ed9e224324e3">Q1025 · 八面体上的两只蚂蚁<a class="headerlink" href="#problem-ed9e224324e3" title="Permanent link">&para;</a></h3>
@@ -7952,6 +8022,13 @@ P(\text{A 获胜}) = x_2 = y_1 = \boxed{\frac{2}{5}}
 P=\begin{pmatrix}1&amp;0&amp;0&amp;0&amp;0&amp;0\\1/4&amp;1/2&amp;0&amp;1/4&amp;0&amp;0\\0&amp;0&amp;0&amp;1&amp;0&amp;0\\1/16&amp;1/4&amp;1/8&amp;1/4&amp;1/4&amp;1/16\\0&amp;0&amp;0&amp;1/4&amp;1/2&amp;1/4\\0&amp;0&amp;0&amp;0&amp;0&amp;1\end{pmatrix}.
 \]</div>
 <p>总 <span class="arithmatex">\(A\)</span> 比例 <span class="arithmatex">\((a+b)/4\)</span> 是有界鞅，故吸收到 22 的概率依次为 <span class="arithmatex">\(1,3/4,1/2,1/2,1/4,0\)</span>。时间方程 <span class="arithmatex">\(e=1+Qe\)</span> 给出依次 <span class="arithmatex">\(0,29/6,20/3,17/3,29/6,0\)</span>。这里从已知亲代到子代算一次转移，吸收态时间为 0。</p>
+<p><strong>吸收时间的消元。</strong> 记从状态 21、20、11、10 开始的均时依次为 <span class="arithmatex">\(x,y,z,w\)</span>。交换 <span class="arithmatex">\(A\)</span> 与另一等位基因不改变吸收时间，故 <span class="arithmatex">\(w=x\)</span>。按矩阵逐行列式：</p>
+<div class="arithmatex">\[
+x=1+\tfrac12x+\tfrac14z,\quad y=1+z,\quad
+z=1+\tfrac14x+\tfrac18y+\tfrac14z+\tfrac14w.
+\]</div>
+<p>前两式给 <span class="arithmatex">\(x=2+z/2,y=1+z\)</span>，代入第三式得 <span class="arithmatex">\(3z/8=17/8\)</span>，即 <span class="arithmatex">\(z=17/3,x=w=29/6,y=20/3\)</span>。22、00 本来已吸收，所以均时为 0。</p>
+<p>所有暂态都有正概率在有限步内到 22 或 00；有限状态使这种概率可取统一正下界，从而吸收时间有几何尾。于是有界等位基因比例鞅 <span class="arithmatex">\((a+b)/4\)</span> 在吸收时可取期望；吸收到 22 时值为 1，到 00 时为 0，固定概率恰为初始比例，而不是假定每一种亲代组合同样可能。</p>
 </details>
 <h3 id="problem-simultaneous-shooting-recursion">Q1030 · 多人同时射击的有限递推与非收敛<a class="headerlink" href="#problem-simultaneous-shooting-recursion" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★★｜<strong>题型</strong>：马尔可夫链</p>
@@ -7967,6 +8044,29 @@ P(S=k)=\frac{\binom nk}{(n-1)^n}\sum_{j=0}^{n-k}(-1)^j\binom{n-k}j(n-k-j)^{k+j}(
 <strong>极限答案：不收敛。</strong> 这不是能由有限模拟证明的结论。van de Brug、Kager、Meester 的已发表定理说明无人生还概率<span class="arithmatex">\(p_{n}=1-h_{n}\)</span>在<span class="arithmatex">\(\log n\)</span>尺度趋近一个连续、周期1的非恒定函数，其上确界<span class="arithmatex">\(\ge 0.515428\)</span>、下确界<span class="arithmatex">\(\le 0.477449\)</span>。因此存活概率有<span class="arithmatex">\(\liminf h_{n}\le 0.484572\)</span>、<span class="arithmatex">\(\limsup h_{n}\ge 0.522551\)</span>，严格分开，排除了趋0、1或<span class="arithmatex">\(1/2\)</span>。这里极限部分明确引用该已证定理；上面的有限递推独立推导，可直接计算。
 一次后的期望人数<span class="arithmatex">\(n[(n-2)/(n-1)]^{n-1}\)</span>约为<span class="arithmatex">\(n/e\)</span>，提示相同<span class="arithmatex">\(\log n\)</span>小数部分会进入相近的小人数阶段，解释为何模拟出现波浪而非单调趋近<span class="arithmatex">\(1/2\)</span>；这只是直觉，不能替代非收敛证明。原Brainstellar页面的<span class="arithmatex">\(1/2\)</span>仅为未证猜测，已据此核正。
 <strong>方法</strong>：一轮转移用未被选中集合的容斥，吸收概率用人数递推；渐近结论要区分数值猜测与已证定理。</p>
+<p><strong>把容斥每个因子说清楚。</strong> 先固定一个 <span class="arithmatex">\(k\)</span> 人集合 <span class="arithmatex">\(K\)</span> 要恰好生还。要求没人向 <span class="arithmatex">\(K\)</span> 射击，再对其余 <span class="arithmatex">\(n-k\)</span> 人中“额外没被射击者”容斥。指定其中 <span class="arithmatex">\(j\)</span> 人也不被射击时，合法目标仅剩 <span class="arithmatex">\(r=n-k-j\)</span> 人。每个目标集外的人可选 <span class="arithmatex">\(r\)</span> 个目标，目标集内的人不能射自己、只可选 <span class="arithmatex">\(r-1\)</span> 个，因此有 <span class="arithmatex">\(r^{k+j}(r-1)^r\)</span> 种枪口分配。乘 <span class="arithmatex">\(\binom{n-k}j\)</span> 作容斥，再乘选 <span class="arithmatex">\(K\)</span> 的 <span class="arithmatex">\(\binom nk\)</span>，除全部 <span class="arithmatex">\((n-1)^n\)</span> 种分配，即上式。<span class="arithmatex">\(r=0,1\)</span> 时不可能完成合法分配，所以实际只需 <span class="arithmatex">\(j\le n-k-2\)</span>，避免 <span class="arithmatex">\(0^0\)</span> 或负底数的边界约定。</p>
+<p>每轮不可能仅一人被击中：若全部枪口都指向同一人，那个人自己将无合法目标。故人数至少减少2，有限递推不含 <span class="arithmatex">\(h_n\)</span> 自身，也不存在“某轮无人死亡”的自环。它可用纯整数和有理数完全复算：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">survival_probabilities</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">j</span> <span class="o">*</span> <span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                        <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="p">))</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">h</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">p</span><span class="o">*</span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">)),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">h</span><span class="p">[:</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">assert</span> <span class="n">survival_probabilities</span><span class="p">(</span><span class="mi">6</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="p">[</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">Fraction</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">11704</span><span class="p">,</span><span class="mi">28125</span><span class="p">)]</span>
+</span></code></pre></div>
+<p><strong>非收敛结论的严格使用方式。</strong> 这里引用的是 van de Brug、Kager、Meester，<em>The asymptotics of group Russian roulette</em>，2017，定理1.1及3.1，原文可查 <a href="https://arxiv.org/abs/1507.03805">论文及完整证明</a>。定理针对无人存活概率 <span class="arithmatex">\(p_n\)</span>：存在连续1周期函数 <span class="arithmatex">\(f\)</span>，<span class="arithmatex">\(p_{\lfloor e^x\rfloor}-f(x)\to0\)</span> 于右尾一致成立，且 <span class="arithmatex">\(\sup f\ge0.515428,\inf f\le0.477449\)</span>。因此取 <span class="arithmatex">\(f\)</span> 达到最大、最小的两个相位 <span class="arithmatex">\(\theta_+ ,\theta_-\)</span>，沿 <span class="arithmatex">\(n_k^\pm=\lfloor e^{k+\theta_\pm}\rfloor\)</span> 得到两个不同的子序列极限；再用 <span class="arithmatex">\(h_n=1-p_n\)</span> 得题中的两条界。这明确完成了从已证定理到本题不收敛的论证。定理自身的多尺度耦合及整数误差证书见所链原文，不能把上面的有限递推表或 <span class="arithmatex">\(n/e\)</span> 均值估计冒充为该渐近定理的证明。</p>
+<p>还有一个独立检验：固定某人存活概率是 <span class="arithmatex">\([(n-2)/(n-1)]^{n-1}\)</span>，但各人的存活指标并不独立，不能把一轮人数直接写成 <span class="arithmatex">\(\operatorname{Bin}(n,1/e)\)</span>。例如 <span class="arithmatex">\(n=2\)</span> 两人必同时死亡，而独立近似会错误地产生一人生还的正概率。</p>
 </details>
 <h3 id="problem-absorbing-chain-reward-system">Q1031 · 吸收链的条件时间、截断奖励与规则修改<a class="headerlink" href="#problem-absorbing-chain-reward-system" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：动态规划</p>
@@ -8097,14 +8197,35 @@ e_i=1+\frac1m\sum_{j:\,|j-i|\ne d}e_j,\qquad E[T]=1+\frac1m\sum_i e_i.
 \]</div>
 <p>六面骰可利用反射对称 <span class="arithmatex">\(e_i=e_{7-i}\)</span> 化为三元方程。<span class="arithmatex">\(d=1\)</span> 时，设三类均时 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(C\)</span>，方程为 <span class="arithmatex">\(6A=6+2A+B+2C,6B=6+A+2B+C,6C=6+2A+B+C\)</span>，解得 <span class="arithmatex">\((A,B,C)=(70,58,60)/17\)</span>，故 <span class="arithmatex">\(ET=239/51\)</span>。<span class="arithmatex">\(d=2\)</span> 时解得 <span class="arithmatex">\((A,B,C)=(5,5,4)\)</span>，<span class="arithmatex">\(ET=17/3\)</span>。<strong>方法</strong>：重叠的相邻窗口不是独立试验；用当前末值做状态，而非把单窗口成功率直接取倒数。</p>
 <p><strong>差至多一的数值补全</strong>：取命中集合 <span class="arithmatex">\(|i-j|\le 1\)</span>，六面骰完整方程解得总均时 <span class="arithmatex">\(377/115\)</span>，包含第一掷。它与“恰差 1”的 <span class="arithmatex">\(239/51\)</span> 不同，因为相等的两次也会结束。</p>
+<p><strong>“差至多一”的方程求解。</strong> 按反射对称令 <span class="arithmatex">\(A=e_1=e_6,B=e_2=e_5,C=e_3=e_4\)</span>。下一次差为 0 或 1 都直接停，所以只保留差大于 1 的新末值：</p>
+<div class="arithmatex">\[
+6A=6+A+B+2C,\quad
+6B=6+A+B+C,\quad
+6C=6+2A+B.
+\]</div>
+<p>解得 <span class="arithmatex">\((A,B,C)=(288,246,252)/115\)</span>。第一掷尚未形成一对，须另计一次，因此</p>
+<div class="arithmatex">\[
+ET=1+\frac{2(A+B+C)}6
+=1+\frac{262}{115}=\frac{377}{115}.
+\]</div>
+<p>这也提供核对方式：直接逐行构造“尚未命中”的六状态矩阵 <span class="arithmatex">\(Q\)</span>，求 <span class="arithmatex">\((I-Q)e=\mathbf1\)</span>，不能把命中概率当作独立几何试验。</p>
 </details>
 <h3 id="problem-bb3f76b63c20">Q1040 · 一般相邻命中集合<a class="headerlink" href="#problem-bb3f76b63c20" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：归纳与递推</p>
 <p><strong>题目</strong>：公平六面骰重复独立掷，首次相邻两次点数之差的绝对值不超过 1 即停，含第一掷。建立以末次点数为状态的方程，求总掷数期望，并比较只允许恰差 1 的情形。</p>
 <details class="note">
 <summary>解答</summary>
-<p>若成功条件改为 <span class="arithmatex">\((i,j)\in A\)</span>，只需把递推的继续求和限制改为 <span class="arithmatex">\((i,j)\notin A\)</span>。<span class="arithmatex">\(m=6\)</span>、条件 <span class="arithmatex">\(|i-j|\le 1\)</span> 时，解全状态方程得含第一掷的均时 <span class="arithmatex">\(1+(e_{1}+\cdots +e_{6})/6\)</span>；具体精确数值应由该方程求解，不把成功窗口概率直接取倒数。</p>
+<p>若成功条件改为 <span class="arithmatex">\((i,j)\in A\)</span>，只需把递推的继续求和限制改为 <span class="arithmatex">\((i,j)\notin A\)</span>。<span class="arithmatex">\(m=6\)</span>、条件 <span class="arithmatex">\(|i-j|\le 1\)</span> 时，解全状态方程得含第一掷的均时 <span class="arithmatex">\(1+(e_{1}+\cdots +e_{6})/6\)</span>；下文把方程按反射对称消元，给出精确值；不能把成功窗口概率直接取倒数。</p>
 <p>含第一掷的期望为 <span class="arithmatex">\(377/115\)</span>。</p>
+<p>令 <span class="arithmatex">\(A=e_1=e_6,B=e_2=e_5,C=e_3=e_4\)</span>，命中集合为 <span class="arithmatex">\(|i-j|\le1\)</span>。对当前1，可继续的新点数是3、4、5、6；对当前2，是4、5、6；对当前3，是1、5、6。因此</p>
+<div class="arithmatex">\[
+6A=6+A+B+2C,\quad6B=6+A+B+C,\quad6C=6+2A+B.
+\]</div>
+<p>解得 <span class="arithmatex">\((A,B,C)=(288,246,252)/115\)</span>。第一掷本身花1次，还未形成窗口，所以</p>
+<div class="arithmatex">\[
+ET=1+\frac{A+B+C}{3}=\frac{377}{115}.
+\]</div>
+<p>这是全状态方程消元后的具体值，不是每个窗口成功率 <span class="arithmatex">\(16/36\)</span> 的倒数；相邻窗口共享一次骰子，存在依赖。</p>
 </details>
 <p><span id="q575"></span></p>
 <h3 id="problem-d1f1ae65332f">Q1041 · 等待一个全不重复的滑动窗口<a class="headerlink" href="#problem-d1f1ae65332f" title="Permanent link">&para;</a></h3>
@@ -8204,6 +8325,110 @@ a_S = \tfrac{1}{2}a_T + \tfrac{1}{2}a_H,\quad a_T = \tfrac{1}{2}a_T + \tfrac{1}{
 </tbody>
 </table>
 <p>用两模式所有真前缀的并集作暂态状态；每次追加 <span class="arithmatex">\(H/T\)</span> 后，保留能作为任一模式前缀的最长后缀，完整 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 为吸收态。列 <span class="arithmatex">\(h_s=(h_{\delta(s,H)}+h_{\delta(s,T)})/2\)</span>，边界 <span class="arithmatex">\(h_A=0,h_B=1\)</span>，即可得到表中值。不能用两种模式的单独平均等待时间直接比较竞争胜率。</p>
+<p><strong>补齐八种初选，并验证“最优”。</strong> 交换 H、T 后胜率不变，完整表为：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(A\)</span></th>
+<th>最优应对之一 <span class="arithmatex">\(B\)</span></th>
+<th><span class="arithmatex">\(B\)</span> 胜率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HHH</td>
+<td>THH</td>
+<td><span class="arithmatex">\(7/8\)</span></td>
+</tr>
+<tr>
+<td>HHT</td>
+<td>THH</td>
+<td><span class="arithmatex">\(3/4\)</span></td>
+</tr>
+<tr>
+<td>HTH</td>
+<td>HHT</td>
+<td><span class="arithmatex">\(2/3\)</span></td>
+</tr>
+<tr>
+<td>HTT</td>
+<td>HHT</td>
+<td><span class="arithmatex">\(2/3\)</span></td>
+</tr>
+<tr>
+<td>THH</td>
+<td>TTH</td>
+<td><span class="arithmatex">\(2/3\)</span></td>
+</tr>
+<tr>
+<td>THT</td>
+<td>TTH</td>
+<td><span class="arithmatex">\(2/3\)</span></td>
+</tr>
+<tr>
+<td>TTH</td>
+<td>HTT</td>
+<td><span class="arithmatex">\(3/4\)</span></td>
+</tr>
+<tr>
+<td>TTT</td>
+<td>HTT</td>
+<td><span class="arithmatex">\(7/8\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>例如 <span class="arithmatex">\(A=HTH,B=HHT\)</span>，暂态为 <span class="arithmatex">\(\varnothing,H,HT,HH\)</span>，相应胜率满足</p>
+<div class="arithmatex">\[
+h_0=(h_0+h_H)/2,\quad h_H=(h_{HT}+h_{HH})/2,
+\quad h_{HT}=h_0/2,\quad h_{HH}=(h_{HH}+1)/2.
+\]</div>
+<p>依次得 <span class="arithmatex">\(h_{HH}=1,h_0=h_H,h_{HT}=h_0/2\)</span>，于是 <span class="arithmatex">\(h_0=(1+h_0/2)/2=2/3\)</span>。</p>
+<p>仅计算一个应对还不能证明它最优。下面用有理数方程对每个初选检查其余七个应对；每个模式能在独立的三掷区间内以正概率出现，故几何尾保证吸收，暂态方程有唯一解。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="s1">'HT'</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)]</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">pivot</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">])</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">rows</span><span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">pivot</span><span class="p">],</span> <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">scale</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">col</span><span class="p">:</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                <span class="n">scale</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                <span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="n">scale</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">])]</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">win</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">states</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">w</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)},</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">s</span><span class="p">))</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">)}</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">F</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="n">rhs</span> <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">states</span><span class="p">]</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'HT'</span><span class="p">:</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            <span class="n">t</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">c</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>                <span class="n">rhs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            <span class="k">elif</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>                <span class="n">suffix</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">states</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">index</span><span class="p">[</span><span class="n">suffix</span><span class="p">]]</span> <span class="o">-=</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>    <span class="k">return</span> <span class="n">solve</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)[</span><span class="n">index</span><span class="p">[</span><span class="s1">''</span><span class="p">]]</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="n">responses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'THH'</span><span class="p">,</span> <span class="s1">'THH'</span><span class="p">,</span> <span class="s1">'HHT'</span><span class="p">,</span> <span class="s1">'HHT'</span><span class="p">,</span> <span class="s1">'TTH'</span><span class="p">,</span> <span class="s1">'TTH'</span><span class="p">,</span> <span class="s1">'HTT'</span><span class="p">,</span> <span class="s1">'HTT'</span><span class="p">]</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>          <span class="n">F</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">F</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">)]</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">responses</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>    <span class="k">assert</span> <span class="n">win</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>    <span class="k">assert</span> <span class="nb">max</span><span class="p">(</span><span class="n">win</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">patterns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span>
+</span></code></pre></div>
+<p>所以 <span class="arithmatex">\(A\)</span> 的最优初选是 HTH、HTT、THH、THT 之一，将 <span class="arithmatex">\(B\)</span> 的最优胜率压到 <span class="arithmatex">\(2/3\)</span>，自己仍只有 <span class="arithmatex">\(1/3\)</span>。表中的应对不必唯一，但已达所有应对中的最大值。</p>
 </details>
 <p><span id="q236"></span></p>
 <h3 id="problem-3f761ab04341">Q1045 · 连续 <span class="arithmatex">\(n\)</span> 个正面<a class="headerlink" href="#problem-3f761ab04341" title="Permanent link">&para;</a></h3>
@@ -8236,6 +8461,21 @@ x_i = 2^n + 2^{n-1} + \cdots + 2 = 2^{n+1} - 2 \Rightarrow E[i] = 2^{n+1} - 2
 <details class="note">
 <summary>解答</summary>
 <p>固定<span class="arithmatex">\(0&lt;p&lt;1\)</span>，按当前是否已匹配<span class="arithmatex">\(H\)</span>的两状态首步递推，<span class="arithmatex">\(E T_{HT}=1/[p(1-p)]\)</span>，<span class="arithmatex">\(E T_{HH}=(1+p)/p^{2}\)</span>。若<span class="arithmatex">\(p~\operatorname{Beta} (a,b)\)</span>、<span class="arithmatex">\(a,b&gt;2\)</span>，则积分Beta逆矩：<span class="arithmatex">\(E T_{HT}=(a+b-1)[1/(a-1)+1/(b-1)]\)</span>；<span class="arithmatex">\(E T_{HH}=(a+b-1)(a+b-2)/[(a-1)(a-2)]+(a+b-1)/(a-1)\)</span>。例如<span class="arithmatex">\(E p^{-2}=B(a-2,b)/B(a,b)\)</span>，其余同理。</p>
+<p><strong>固定正面率时的消元。</strong> 令 <span class="arithmatex">\(q=1-p\)</span>，<span class="arithmatex">\(u\)</span> 为未匹配前缀时还需次数，<span class="arithmatex">\(v\)</span> 为末尾已是 H 时还需次数。等 HT 时</p>
+<div class="arithmatex">\[
+u=1+qu+pv,\quad v=1+pv,
+\]</div>
+<p>因为 H 后再来 H 仍保留前缀，来 T 则结束。因此 <span class="arithmatex">\(v=1/q,u=1/p+1/q=1/(pq)\)</span>。等 HH 时，H 后来 T 会丢失前缀，故</p>
+<div class="arithmatex">\[
+u=1+qu+pv,\quad v=1+qu.
+\]</div>
+<p>由 <span class="arithmatex">\(u=1/p+v\)</span> 得 <span class="arithmatex">\(pu=1/p+1\)</span>，即 <span class="arithmatex">\(u=(1+p)/p^2\)</span>。</p>
+<p><strong>先验是在每局开头抽一次。</strong> 整局共享同一个 <span class="arithmatex">\(p\)</span>，所以不能先把它换成均值 <span class="arithmatex">\(a/(a+b)\)</span> 再代入。应先求条件等待再积分。Beta 密度给</p>
+<div class="arithmatex">\[
+E[p^{-j}]=\frac{B(a-j,b)}{B(a,b)}\quad(a&gt;j),
+\qquad E[q^{-1}]=\frac{a+b-1}{b-1}.
+\]</div>
+<p>HT 用 <span class="arithmatex">\(1/(pq)=1/p+1/q\)</span>，HH 用 <span class="arithmatex">\((1+p)/p^2=p^{-2}+p^{-1}\)</span>，逐项代入便得到前述两个答案。假设 <span class="arithmatex">\(a,b&gt;2\)</span> 保证这些逆矩全部有限；若先验在 0 或 1 附近质量过重，平均等待可发散。</p>
 </details>
 <h3 id="problem-301ebb56ced1">Q1048 · 公平硬币模式先后与等待<a class="headerlink" href="#problem-301ebb56ced1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：鞅与停时</p>
@@ -8356,6 +8596,13 @@ P_i = \left[1 + \frac{q}{p} + \cdots + \left(\frac{q}{p}\right)^{i-1}\right]P_1
 <summary>解答</summary>
 <p>首次回到零在<span class="arithmatex">\(2n\)</span>次，正向、负向严格游程各有Catalan数<span class="arithmatex">\(C_{n-1}=\binom{2n-2}{n-1}/n\)</span>，因此<span class="arithmatex">\(P(T=2n)=2C_{n-1}[p(1-p)]^{n}\)</span>。<span class="arithmatex">\(p=1/3\)</span>、<span class="arithmatex">\(n=5\)</span>得<span class="arithmatex">\(896/59049\approx 0.0152\)</span>。有偏时总回返概率可能小于1，不能强行归一化为必返。
 指定在第一次正面多于反面时停止，<span class="arithmatex">\(T=2n+1\)</span>有概率<span class="arithmatex">\(C_{n}/2^{2n+1}\)</span>。最终正面占比为<span class="arithmatex">\(1/2+1/(2T)\)</span>，利用生成函数或积分得<span class="arithmatex">\(\mathbb{E} [1/T]=\pi /2-1\)</span>，所以此指定策略的占比均值为<span class="arithmatex">\(\pi /4\approx 0.785398\)</span>；这不证明它是允许所有停时下的全局最优策略。</p>
+<p><strong>Catalan 计数与积分细节。</strong> 首次回零且先走正向的路径，去掉首个正步和末个负步，再将高度下移1，就与长度 <span class="arithmatex">\(2n-2\)</span> 的非负 Dyck 路径一一对应，共 <span class="arithmatex">\(C_{n-1}\)</span> 条；负向路径取反同数。每条路径恰有 <span class="arithmatex">\(n\)</span> 正 <span class="arithmatex">\(n\)</span> 反，权重 <span class="arithmatex">\(p^n(1-p)^n\)</span>，不是对有偏路径使用公平计数概率。数值为 <span class="arithmatex">\(2\cdot14\cdot(2/9)^5=896/59049\)</span>。</p>
+<p>首次到 <span class="arithmatex">\(+1\)</span> 的长度为 <span class="arithmatex">\(2n+1\)</span> 的路径也由反射原理计为 <span class="arithmatex">\(C_n\)</span> 条。用生成函数 <span class="arithmatex">\(\sum_{n\ge0}C_nz^n=(1-\sqrt{1-4z})/(2z)\)</span>，非负项允许交换积分与求和：</p>
+<div class="arithmatex">\[
+E\frac1T=\sum_{n\ge0}\frac{C_n}{2\cdot4^n(2n+1)}
+=\int_0^1\frac{1-\sqrt{1-x^2}}{x^2}\,dx.
+\]</div>
+<p>分部积分，端点项为 <span class="arithmatex">\(-1\)</span>，剩余 <span class="arithmatex">\(\int_0^1(1-x^2)^{-1/2}dx=\pi/2\)</span>，得 <span class="arithmatex">\(E(1/T)=\pi/2-1\)</span>。公平一维游走几乎必然到 <span class="arithmatex">\(+1\)</span>，所以这里没有漏掉永不停时的概率质量；最后 <span class="arithmatex">\(E[(T+1)/(2T)]=\pi/4\)</span>。</p>
 </details>
 <h3 id="problem-7fe20723c881">Q1060 · 先领先两局的胜率<a class="headerlink" href="#problem-7fe20723c881" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：马尔可夫链</p>
@@ -8406,6 +8653,7 @@ P_i = \left[1 + \frac{q}{p} + \cdots + \left(\frac{q}{p}\right)^{i-1}\right]P_1
 <details class="note">
 <summary>解答</summary>
 <p>对称步从 0 到 <span class="arithmatex">\(+2\)</span> 几乎必到，但均时无穷。在有限区间 <span class="arithmatex">\([-m,2]\)</span> 的退出均时为 <span class="arithmatex">\(2m\)</span>，退出不晚于命中 <span class="arithmatex">\(+2\)</span>，所以原均时<span class="arithmatex">\(\ge 2m\)</span>，对所有 <span class="arithmatex">\(m\)</span> 成立。在 [0,100] 从 17 出发，先到 100 概率为 <span class="arithmatex">\(17/100\)</span>，任一端均时为 <span class="arithmatex">\(17\cdot 83=1411\)</span>。</p>
+<p><strong>有限区间公式的求解。</strong> 对公平游走，命中右端概率 <span class="arithmatex">\(h_i=(h_{i-1}+h_{i+1})/2\)</span>，边界 <span class="arithmatex">\(h_0=0,h_N=1\)</span>，二阶差分为零给 <span class="arithmatex">\(h_i=i/N\)</span>。退出均时 <span class="arithmatex">\(e_i=1+(e_{i-1}+e_{i+1})/2\)</span>，故 <span class="arithmatex">\(e_{i+1}-2e_i+e_{i-1}=-2\)</span>，边界零给 <span class="arithmatex">\(e_i=i(N-i)\)</span>。平移区间到 <span class="arithmatex">\([-m,2]\)</span> 后，从0先到2概率为 <span class="arithmatex">\(m/(m+2)\)</span>，退出均时 <span class="arithmatex">\(m\cdot2\)</span>。命中2的概率至少为 <span class="arithmatex">\(m/(m+2)\)</span>，让 <span class="arithmatex">\(m\to\infty\)</span> 得几乎必达；平均时间却大于任意 <span class="arithmatex">\(2m\)</span>，从而无穷。这分开证明了终止概率和期望，不能把几乎必终止误当成期望有限。</p>
 </details>
 <h3 id="problem-f3bc0a0137f0">Q1067 · 二次入场的资金更新<a class="headerlink" href="#problem-f3bc0a0137f0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：马尔可夫链</p>
@@ -8488,7 +8736,7 @@ p_k=\frac23+\frac13(-1/2)^k.
 <summary>解答</summary>
 <p>答案<span class="arithmatex">\(N^{2}\)</span>。关键不是在固定手牌下声称胜率<span class="arithmatex">\(1/2\)</span>；持最大牌者胜率通常更大。应证明：只观察历轮手牌数量，不观察牌面，则给定当前数量<span class="arithmatex">\(k\)</span>时，第一人的手牌仍在全部<span class="arithmatex">\(k\)</span>子集中均匀。</p>
 <p>初始成立。若本轮从<span class="arithmatex">\(k-1\)</span>增至<span class="arithmatex">\(k\)</span>，给定任何目标<span class="arithmatex">\(k\)</span>集合<span class="arithmatex">\(S\)</span>，将被比过的两张牌选为<span class="arithmatex">\(S\)</span>中任意一对，原第一人持较大者，第二人持较小者；每对恰有一种合法前驱。共有<span class="arithmatex">\(\binom{k}{2}\)</span>种，与<span class="arithmatex">\(S\)</span>内容无关，且每个前驱及抽牌权重相同。若从<span class="arithmatex">\(k+1\)</span>减至<span class="arithmatex">\(k\)</span>，同样从<span class="arithmatex">\(S\)</span>的补集中选两张构造前驱，共<span class="arithmatex">\(\binom{2N-k}{2}\)</span>种，也与<span class="arithmatex">\(S\)</span>无关。归纳证明条件均匀性，并且对整个数量历史仍成立。</p>
-<p>因此在所观察的数量过程中，两位随机被出的牌相对大小对称，转移<span class="arithmatex">\(k\to k\pm 1\)</span>各<span class="arithmatex">\(1/2\)</span>。令<span class="arithmatex">\(e_{k}\)</span>为到0或<span class="arithmatex">\(2N\)</span>的期望步数，<span class="arithmatex">\(e_{k}=1+(e_{k-1}+e_{k+1})/2\)</span>，<span class="arithmatex">\(e_{0}=e2N=0\)</span>，解<span class="arithmatex">\(e_{k}=k(2N-k)\)</span>，代入<span class="arithmatex">\(k=N\)</span>得<span class="arithmatex">\(N^{2}\)</span>。若初始牌面固定且已知，则不能套用这个对称论证。</p>
+<p>因此在所观察的数量过程中，两位随机被出的牌相对大小对称，转移<span class="arithmatex">\(k\to k\pm 1\)</span>各<span class="arithmatex">\(1/2\)</span>。令<span class="arithmatex">\(e_{k}\)</span>为到0或<span class="arithmatex">\(2N\)</span>的期望步数，<span class="arithmatex">\(e_{k}=1+(e_{k-1}+e_{k+1})/2\)</span>，<span class="arithmatex">\(e_0=e_{2N}=0\)</span>，解<span class="arithmatex">\(e_{k}=k(2N-k)\)</span>，代入<span class="arithmatex">\(k=N\)</span>得<span class="arithmatex">\(N^{2}\)</span>。若初始牌面固定且已知，则不能套用这个对称论证。</p>
 </details>
 <h3 id="problem-5d21cf86eda0">Q1074 · 允许持平与必须严格领先的票数<a class="headerlink" href="#problem-5d21cf86eda0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：鞅与停时｜<strong>副题型</strong>：随机游走</p>
@@ -8525,7 +8773,6 @@ p_k=\frac23+\frac13(-1/2)^k.
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(P(S_{2n}=0)=\binom{2n}n4^{-n}\)</span>，奇数步概率为 0。转移生成函数 <span class="arithmatex">\(U(z)=\sum_{n\ge0}P(S_n=0)z^n=(1-z^2)^{-1/2}\)</span>。首回分解给出 <span class="arithmatex">\(U=1+FU\)</span>，故 <span class="arithmatex">\(F(z)=1-\sqrt{1-z^2}\)</span>。<span class="arithmatex">\(F(1)=1\)</span> 说明常返，<span class="arithmatex">\(F\prime(1^-)=\infty\)</span> 说明平均回访时间无穷。另从平稳方程 <span class="arithmatex">\(2\pi_i=\pi_{i-1}+\pi_{i+1}\)</span> 得 <span class="arithmatex">\(\pi_i=A+Bi\)</span>，在全整数上非负迫使 <span class="arithmatex">\(B=0\)</span>，常数无法归一化。因此是零常返；有限闭类的正常返结论不能搬到无限状态链。</p>
-<p><strong>数值计算</strong>：包含起点的 <span class="arithmatex">\(G\approx 1.393203929686\)</span>，故返回率<span class="arithmatex">\(\approx 0.282229989\)</span>。可令<span class="arithmatex">\(a_{0}=1\)</span>、<span class="arithmatex">\(a_{n}=a_{n-1}(2n-1)/(2n)\)</span>，求<span class="arithmatex">\(\sum a_{n}^{3}\)</span>，再用尾项界<span class="arithmatex">\(2/[\pi ^{3/2}\sqrt{N+1.5}]\)</span>至<span class="arithmatex">\(2/[\pi ^{3/2}\sqrt{N}]\)</span>控制误差。</p>
 </details>
 <h3 id="problem-5e01206e8e95">Q1078 · 二维格点游走返回原点<a class="headerlink" href="#problem-5e01206e8e95" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：马尔可夫链</p>
@@ -8533,6 +8780,7 @@ p_k=\frac23+\frac13(-1/2)^k.
 <details class="note">
 <summary>解答</summary>
 <p>在<span class="arithmatex">\(Z^{2}\)</span>上每步独立等概率向四个坐标方向走，问从原点出发正时间会否再次返回。只有偶数时刻可返回，<span class="arithmatex">\(u_{2n}=\binom{2n}{n}^2/4^{2n}\sim1/(\pi n)\)</span>，所以<span class="arithmatex">\(\sum u_{2n}\)</span>发散。若最终返回概率为<span class="arithmatex">\(f&lt;1\)</span>，由每次返回后重新开始，原点访问总次数均值为<span class="arithmatex">\(1/(1-f)\)</span>，将有限，与前式矛盾。因此<span class="arithmatex">\(f=1\)</span>。二维对角四方向走法也给相同返回序列，但需先交代具体一步的定义。</p>
+<p><strong>二维返回概率的计数。</strong> 令新坐标 <span class="arithmatex">\(U=X+Y,V=X-Y\)</span>。每个东、西、北、南步在新坐标分别为 <span class="arithmatex">\((1,1),(-1,-1),(1,-1),(-1,1)\)</span>，四者均匀，所以 <span class="arithmatex">\(U,V\)</span> 成为两个独立的一维公平游走。原点返回等价于两个新坐标同时为零，每个在 <span class="arithmatex">\(2n\)</span> 步回零的概率 <span class="arithmatex">\(\binom{2n}n/2^{2n}\)</span>，相乘即上式。这同时给出了坐标轴走法与对角走法返回序列相同的准确原因，无需把原来的 <span class="arithmatex">\(X,Y\)</span> 坐标错误当成独立。</p>
 </details>
 <h3 id="problem-1e4cc50447e6">Q1079 · 每步各坐标同时<span class="arithmatex">\(\pm 1\)</span>的二维与三维回返<a class="headerlink" href="#problem-1e4cc50447e6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：马尔可夫链</p>
@@ -8541,6 +8789,14 @@ p_k=\frac23+\frac13(-1/2)^k.
 <summary>解答</summary>
 <p>若<span class="arithmatex">\(d\)</span>个坐标每步各自独立公平<span class="arithmatex">\(\pm 1\)</span>，则在第<span class="arithmatex">\(2n\)</span>步回原点概率<span class="arithmatex">\(u_{2n}=[\binom{2n}{n}/4^{n}]^{d}\)</span>，奇数时0。令<span class="arithmatex">\(G=\sum _{n\ge 0}u_{2n}\)</span>，按每次回返后的重启，回返概率<span class="arithmatex">\(f\)</span>满足<span class="arithmatex">\(G=1+fG\)</span>；<span class="arithmatex">\(G\)</span>有限时<span class="arithmatex">\(f=1-1/G\)</span>，<span class="arithmatex">\(G\)</span>发散则<span class="arithmatex">\(f=1\)</span>。</p>
 <p>Stirling给<span class="arithmatex">\(u_{2n}\)</span>约<span class="arithmatex">\((\pi n)^{-d/2}\)</span>。<span class="arithmatex">\(d=2\)</span>级数发散，最终回返概率1，但均首次回返时间无穷；<span class="arithmatex">\(d=3\)</span>级数收敛，最终回返概率约0.282229989。这个三维模型有8个立方体角方向，不是每步仅沿一个轴的6方向模型，后者约0.340537。</p>
+<p><strong>回返判据和平均时间。</strong> 定义 <span class="arithmatex">\(T=\inf\{t\ge1:X_t=0\}\)</span>，<span class="arithmatex">\(f_j=P(T=j)\)</span>。按首次回返分解得到更新方程 <span class="arithmatex">\(u_t=\mathbf1_{t=0}+\sum_{j=1}^tf_ju_{t-j}\)</span>。对 <span class="arithmatex">\(0\le z&lt;1\)</span> 求和有 <span class="arithmatex">\(U(z)=1/[1-F(z)]\)</span>，再令 <span class="arithmatex">\(z\uparrow1\)</span> 就严格得到上述常返判据，避免在 <span class="arithmatex">\(G=\infty\)</span> 时直接操纵无穷数。</p>
+<p>二维虽几乎必返，却没有有限平均回返时间：若 <span class="arithmatex">\(ET&lt;\infty\)</span>，更新定理会给 <span class="arithmatex">\(u_{2n}\to2/ET&gt;0\)</span>（回返周期2），但 Stirling 给 <span class="arithmatex">\(u_{2n}\sim1/(\pi n)\to0\)</span>，矛盾。三维 <span class="arithmatex">\(P(T=\infty)=1-f&gt;0\)</span>，因此把未返回记为无穷时同样有 <span class="arithmatex">\(ET=\infty\)</span>。甚至条件于回返的平均时间也无穷：<span class="arithmatex">\(U'(1)=\sum_ttu_t=\infty\)</span>，而 <span class="arithmatex">\(F'=U'/U^2\)</span>，三维 <span class="arithmatex">\(U(1)&lt;\infty\)</span>，故 <span class="arithmatex">\(\sum_jjf_j=\infty\)</span>。</p>
+<p>三维可直接计算</p>
+<div class="arithmatex">\[
+G_3=1+\sum_{n=1}^{\infty}\left[\binom{2n}{n}4^{-n}\right]^3,
+\qquad f_3=1-G_3^{-1}.
+\]</div>
+<p>数值求和可递推 <span class="arithmatex">\(c_0=1,c_{n+1}=c_n(2n+1)/(2n+2)\)</span>。尾部主项由 <span class="arithmatex">\(c_n^3\sim(\pi n)^{-3/2}\)</span> 给出 <span class="arithmatex">\(2/(\pi^{3/2}\sqrt M)\)</span>，须对截断尾部作控制或加速后才报告高精度数字；直接截断得到的 <span class="arithmatex">\(f_3\)</span> 是下界。</p>
 </details>
 <p><span id="q530"></span></p>
 <h3 id="problem-4a9105665bcc">Q1080 · 圆周覆盖与最后访问顶点<a class="headerlink" href="#problem-4a9105665bcc" title="Permanent link">&para;</a></h3>
@@ -8557,6 +8813,16 @@ P= p\frac{1-r}{1-r^n}+q\frac{1-r^{-1}}{1-r^{-n}}=\frac{(p-q)(1+r^n)}{1-r^n}.
 P(i\text{ 最后访问})=\frac{(1-r)r^{m-i}}{1-r^m},\quad1\le i\le m.
 \]</div>
 <p><span class="arithmatex">\(m=1\)</span> 单独为 1；公平极限为 <span class="arithmatex">\(1/m\)</span>。12 点钟表的回访前覆盖概率由第一问取 <span class="arithmatex">\(n=11\)</span>，为 <span class="arithmatex">\(1/11\)</span>。</p>
+<p><strong>先推导所用破产概率。</strong> 在整数区间 <span class="arithmatex">\([0,N]\)</span>，令 <span class="arithmatex">\(h_j=P_j(T_N&lt;T_0)\)</span>，则 <span class="arithmatex">\(h_0=0,h_N=1\)</span>、<span class="arithmatex">\(h_j=ph_{j+1}+qh_{j-1}\)</span>。特征根为1和 <span class="arithmatex">\(r=q/p\)</span>，解为 <span class="arithmatex">\(h_j=(1-r^j)/(1-r^N)\)</span>；公平时二阶差分为零，得 <span class="arithmatex">\(j/N\)</span>。首次回0前覆盖圆环，若第一步到1，就须在回0前到n；若第一步到n，则反向到1。两事件按第一步互斥，加权即原第一式。注意闭环顶点共 <span class="arithmatex">\(n+1\)</span> 个，展开后的破产区间长度为 <span class="arithmatex">\(n\)</span>，不是 <span class="arithmatex">\(n+1\)</span>。</p>
+<p><strong>最后访问指定点的分步条件化。</strong> 先删去目标 <span class="arithmatex">\(i\)</span>，把剩下 <span class="arithmatex">\(m\)</span> 点排成坐标0至 <span class="arithmatex">\(m-1\)</span>，从圆环原起点0对应的 <span class="arithmatex">\(x=m-i\)</span> 出发。要在碰 <span class="arithmatex">\(i\)</span> 前遍历剩余线段，先到一端，再穿过整段到另一端；第一阶段尚未碰任何端点时，不可能已碰到 <span class="arithmatex">\(i\)</span>。先到右端的概率 <span class="arithmatex">\(H=(1-r^x)/(1-r^{m-1})\)</span>。</p>
+<p>若先到右端，要在踏入相邻目标点前到左端，等价于区间 <span class="arithmatex">\([0,m]\)</span> 从 <span class="arithmatex">\(m-1\)</span> 先到0，概率
+<span class="arithmatex">\(A=r^{m-1}(1-r)/(1-r^m)\)</span>。若先到左端，区间 <span class="arithmatex">\([-1,m-1]\)</span> 从0先到 <span class="arithmatex">\(m-1\)</span>，概率 <span class="arithmatex">\(B=(1-r)/(1-r^m)\)</span>。于是</p>
+<div class="arithmatex">\[
+P_i=HA+(1-H)B
+=\frac{1-r}{1-r^m}[1-H(1-r^{m-1})]
+=\frac{(1-r)r^{m-i}}{1-r^m}.
+\]</div>
+<p>对 <span class="arithmatex">\(i=1,\ldots,m\)</span> 求和是等比级数1，核对了这些事件恰好构成最后访问点的分割。<span class="arithmatex">\(r\to1\)</span> 时分子分母同时趋零，用等比和表示 <span class="arithmatex">\(P_i=r^{m-i}/\sum_{j=0}^{m-1}r^j\)</span> 可稳定得到 <span class="arithmatex">\(1/m\)</span>。偏置时各点不再均匀，<span class="arithmatex">\(p\to1\)</span> 则最后点趋向顺时针的最后一个顶点，符合确定性绕行的极限。</p>
 </details>
 <p><span id="q531"></span></p>
 <h3 id="problem-077dcb649bb7">Q1081 · 带停留与反射边界的首达时间<a class="headerlink" href="#problem-077dcb649bb7" title="Permanent link">&para;</a></h3>
@@ -8823,6 +9089,11 @@ E[N]=\frac{M}{P_1-P_2}\frac{1-r^M}{1+r^M}.
 <summary>解答</summary>
 <p>有序到达时刻联合密度为 <span class="arithmatex">\(n!/t^n\)</span>，<span class="arithmatex">\(0&lt;s_1&lt;\cdots&lt;s_n&lt;t\)</span>，即 <span class="arithmatex">\(n\)</span> 个独立 <span class="arithmatex">\(U(0,t)\)</span> 的次序统计量；第 <span class="arithmatex">\(j\)</span> 个时刻除以 <span class="arithmatex">\(t\)</span> 为 <span class="arithmatex">\(\mathrm{Beta}(j,n+1-j)\)</span>。</p>
 <p>令 <span class="arithmatex">\(\Lambda(t)=\int_0^t\lambda(u)du\)</span>，计数为 <span class="arithmatex">\(\mathrm{Poisson}(\Lambda(t))\)</span>，首达生存函数 <span class="arithmatex">\(e^{-\Lambda(t)}\)</span>。条件于 <span class="arithmatex">\(n\)</span> 次到达，时刻是密度 <span class="arithmatex">\(\lambda(u)/\Lambda(t)\)</span> 的独立样本的次序统计量。时间变换到 <span class="arithmatex">\(\Lambda\)</span> 时钟后才是齐次；一般不能套用均匀时刻。</p>
+<p><strong>条件密度的来源。</strong> 在小区间 <span class="arithmatex">\(ds_1,\ldots,ds_n\)</span> 各发生一次到达、其余无到达的概率密度为 <span class="arithmatex">\(e^{-\lambda t}\lambda^n\)</span>。除以 <span class="arithmatex">\(P(N(t)=n)=e^{-\lambda t}(\lambda t)^n/n!\)</span>，得 <span class="arithmatex">\(n!/t^n\)</span>。第 <span class="arithmatex">\(j\)</span> 个边际可把其他时刻分别积分到 <span class="arithmatex">\((0,s)\)</span> 和 <span class="arithmatex">\((s,t)\)</span>，给</p>
+<div class="arithmatex">\[
+f_{T_j\mid N(t)=n}(s)=\frac{n!}{(j-1)!(n-j)!}\frac{s^{j-1}(t-s)^{n-j}}{t^n},\quad0&lt;s&lt;t.
+\]</div>
+<p>非齐次过程的对应联合密度为 <span class="arithmatex">\(n!\prod_{i=1}^n\lambda(s_i)/\Lambda(t)^n\)</span>，按累计强度变化时钟才恢复均匀次序统计量。这里是条件于区间总数的分布，与无条件第 <span class="arithmatex">\(j\)</span> 次到达的 Gamma 分布不同。</p>
 </details>
 <h3 id="problem-e796b5b4d984">Q1103 · 一类第<span class="arithmatex">\(r\)</span>次前的另一类次数<a class="headerlink" href="#problem-e796b5b4d984" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：分布与矩</p>
@@ -8932,6 +9203,17 @@ P_{k,k-1}=a_0kp(1-p)^{k-1},\quad P_{kk}=a_0[1-kp(1-p)^{k-1}]+a_1(1-p)^k.
 \frac{E[V(X_{n+1})\mid X_n=k]}{V(k)}=E[e^{-cA}]+(e^c-1)E[e^{-cA}\mathbf1_{\{A+R_k=1\}}].
 \]</div>
 <p>第二项趋于 0，而第一项严格小于 1；故存在有限 <span class="arithmatex">\(K\)</span> 与 <span class="arithmatex">\(r&lt;1\)</span>，在 <span class="arithmatex">\(k&gt;K\)</span> 时 <span class="arithmatex">\(E[V(X_{n+1})\mid k]\le rV(k)\)</span>。停于返回 <span class="arithmatex">\(\{0,\ldots,K\}\)</span> 后求和，得任一高区间游程的 <span class="arithmatex">\(\sum V(X_n)\)</span> 期望有限；超鞅最大不等式还给出从充分高处返回低集合的概率小于 1。因为 <span class="arithmatex">\(P(A\ge2)&gt;0\)</span>，从低集合能以统一正概率经有限次多到达跳至充分高处并永不返回。因此低集合只被访问有限次，且最终高区间游程的 <span class="arithmatex">\(\sum V(X_n)&lt;\infty\)</span> 几乎必然。每时隙成功概率为 <span class="arithmatex">\(a_0kp(1-p)^{k-1}+a_1(1-p)^k\le C V(k)\)</span>。条件 Borel–Cantelli 因而推出成功次数几乎必然有限。该论证针对固定重传概率，不能外推到自适应退避协议。</p>
+<p><strong>从局部漂移到几乎必然有限成功的细节。</strong> 写 <span class="arithmatex">\(q=1-p\)</span>，积压 <span class="arithmatex">\(k\)</span> 时成功概率确为 <span class="arithmatex">\(s(k)=a_0kpq^{k-1}+a_1q^k\to0\)</span>。选上文 <span class="arithmatex">\(c&lt; -\log q\)</span>，则 <span class="arithmatex">\(s(k)/e^{-ck}\)</span> 有界，因为其主要因子为 <span class="arithmatex">\(k(qe^c)^k\)</span>，底数小于1。</p>
+<p>令 <span class="arithmatex">\(\tau=\inf\{n:X_n\le K\}\)</span>。在 <span class="arithmatex">\(\tau\)</span> 前 <span class="arithmatex">\(V(X_{n\wedge\tau})\)</span> 为非负超鞅；从 <span class="arithmatex">\(x&gt;K\)</span> 出发，由停时截断和 Fatou 引理，</p>
+<div class="arithmatex">\[
+P_x(\tau&lt;\infty)\le e^{-c(x-K)}.
+\]</div>
+<p>同时令 <span class="arithmatex">\(b_n=E_x[V(X_n)\mathbf1_{\{\tau&gt;n\}}]\)</span>。因删去已退出高区间的非负项只会减小期望，<span class="arithmatex">\(b_{n+1}\le rb_n\)</span>，所以</p>
+<div class="arithmatex">\[
+E_x\sum_{n&lt;\tau}V(X_n)\le V(x)/(1-r)&lt;\infty.
+\]</div>
+<p>取 <span class="arithmatex">\(H\)</span> 足够大使回返上界小于 <span class="arithmatex">\(1/2\)</span>。从任一 <span class="arithmatex">\(k\le K\)</span> 开始，连续 <span class="arithmatex">\(H\)</span> 次出现 <span class="arithmatex">\(A\ge2\)</span> 会每步至少增加2（总尝试至少2，不会成功），到达 <span class="arithmatex">\(H\)</span> 以上；其概率至少 <span class="arithmatex">\(P(A\ge2)^H&gt;0\)</span>。之后至少一半概率永不回低集合。因此每次低集合访问后，都有统一正概率在至多 <span class="arithmatex">\(H\)</span> 步内开始永久逃离。以至少间隔 <span class="arithmatex">\(H\)</span> 步的低集合访问作为试验时刻，强马尔可夫性给逃离失败次数的几何尾界，故访问低集合总次数几乎必然有限。</p>
+<p>对每个确定时刻 <span class="arithmatex">\(m\)</span> 应用高区间游程的期望界，便知从该时刻到下一低集合访问前的 <span class="arithmatex">\(\sum V(X_n)\)</span> 几乎必然有限。对所有 <span class="arithmatex">\(m\)</span> 取可数交，再取最后一次离开低集合的实际时刻，即得 <span class="arithmatex">\(\sum_ns(X_n)&lt;\infty\)</span> 几乎必然。成功指示量的条件概率可求和，条件 Borel–Cantelli 才推出成功仅有限次。单凭 <span class="arithmatex">\(s(k)\to0\)</span> 或正漂移，都不足以得出这一结论。</p>
 </details>
 <p><span id="q514"></span></p>
 <h3 id="problem-5bb29e0d4511">Q1117 · CTMC 生成元、嵌入链与两状态协方差<a class="headerlink" href="#problem-5bb29e0d4511" title="Permanent link">&para;</a></h3>
@@ -8960,6 +9242,11 @@ Q=\begin{pmatrix}-\lambda_1-\lambda_2&amp;\lambda_1&amp;\lambda_2&amp;0\\\mu_1&a
 <details class="note">
 <summary>解答</summary>
 <p>从细致平衡 <span class="arithmatex">\(\pi_i\lambda_i=\pi_{i+1}\mu_{i+1}\)</span> 得 <span class="arithmatex">\(w_0=1,w_n=\prod_{i=0}^{n-1}\lambda_i/\prod_{i=1}^n\mu_i\)</span>，若总和有限且链非爆炸，可归一化为平稳分布。注意若 0 吸收，不可将它与不可约生灭的公式混用。线性分枝灭绝概率为 <span class="arithmatex">\(u_m=1\)</span>（<span class="arithmatex">\(\lambda\le\mu\)</span>），或 <span class="arithmatex">\((\mu/\lambda)^m\)</span>（<span class="arithmatex">\(\lambda&gt;\mu\)</span>），取递推的最小非负解。从 1 出发，首次死亡之前共有 <span class="arithmatex">\(K\)</span> 人时发生死亡，则 <span class="arithmatex">\(P(K=k)=[\lambda/(\lambda+\mu)]^{k-1}\mu/(\lambda+\mu),k\ge1\)</span>。死亡后人口是 <span class="arithmatex">\(K-1\)</span>，其均值为 <span class="arithmatex">\(\lambda/\mu\)</span>；死亡前均值为 <span class="arithmatex">\(1+\lambda/\mu\)</span>。</p>
+<p><strong>灭绝概率为何取这个根。</strong> 一个个体的首次事件：概率 <span class="arithmatex">\(\mu/(\lambda+\mu)\)</span> 死亡无后代，概率 <span class="arithmatex">\(\lambda/(\lambda+\mu)\)</span> 变为两个独立后续谱系。令单谱系灭绝率为 <span class="arithmatex">\(u\)</span>，则</p>
+<div class="arithmatex">\[
+u=\frac\mu{\lambda+\mu}+\frac\lambda{\lambda+\mu}u^2,
+\]</div>
+<p>根为1与 <span class="arithmatex">\(\mu/\lambda\)</span>。从有限代灭绝事件的概率迭代，从0开始单调上升，极限才是最小 <span class="arithmatex">\([0,1]\)</span> 根；从 <span class="arithmatex">\(m\)</span> 个独立谱系出发便为 <span class="arithmatex">\(u^m\)</span>。首次死亡之前，在人口 <span class="arithmatex">\(j\)</span> 时出生和死亡率同乘 <span class="arithmatex">\(j\)</span>，下一事件类型的出生概率仍为 <span class="arithmatex">\(\lambda/(\lambda+\mu)\)</span>，所以此前出生数为几何失败数，推出上述 <span class="arithmatex">\(K\)</span> 分布，不能将增长的人口误当成改变事件类型概率。</p>
 </details>
 <p><span id="q517"></span></p>
 <h3 id="problem-e1e46cbbbe0d">Q1120 · Yule纯生种群的分布<a class="headerlink" href="#problem-e1e46cbbbe0d" title="Permanent link">&para;</a></h3>
@@ -9068,6 +9355,16 @@ q^2&amp;2q(1-q)&amp;(1-q)^2
 <details class="note">
 <summary>解答</summary>
 <p>更新报酬定理使用“每周期期望报酬/每周期期望长度”，不是期望中的随机比。低费率占比为最近 <span class="arithmatex">\(s\)</span> 内无理赔的概率 <span class="arithmatex">\(e^{-\lambda s}\)</span>，平均费率 <span class="arithmatex">\(r_0e^{-\lambda s}+r_1(1-e^{-\lambda s})\)</span>。连续高/低费率阶段的均长分别为 <span class="arithmatex">\((e^{\lambda s}-1)/\lambda\)</span>、<span class="arithmatex">\(1/\lambda\)</span>。</p>
+<p><strong>连续高费率阶段为何不是简单的指数时间。</strong> 从一次理赔刚发生开始，令到下次理赔的时间 <span class="arithmatex">\(X\sim\mathrm{Exp}(\lambda)\)</span>，高费率阶段平均时长记为 <span class="arithmatex">\(h\)</span>。若 <span class="arithmatex">\(X\ge s\)</span>，经过 <span class="arithmatex">\(s\)</span> 后转低；若 <span class="arithmatex">\(X&lt;s\)</span>，先经过 <span class="arithmatex">\(X\)</span>，新理赔又把高费率计时重置。因此</p>
+<div class="arithmatex">\[
+h=E\min(X,s)+P(X&lt;s)h
+=\frac{1-e^{-\lambda s}}\lambda+(1-e^{-\lambda s})h,
+\]</div>
+<p>解得 <span class="arithmatex">\(h=(e^{\lambda s}-1)/\lambda\)</span>。低费率阶段从连续无理赔满 <span class="arithmatex">\(s\)</span> 的时刻开始，到下次理赔结束；由无记忆性平均为 <span class="arithmatex">\(\ell=1/\lambda\)</span>。交替阶段可作更新周期，低费率占比</p>
+<div class="arithmatex">\[
+\frac\ell{h+\ell}=e^{-\lambda s},
+\]</div>
+<p>加权两种费率即得题中的长期平均。这与“观察时刻之前 <span class="arithmatex">\(s\)</span> 内没有理赔”的平稳概率相互核验。</p>
 </details>
 <h3 id="problem-752dcc301d97">Q1133 · 双部件全部失效后的更新费用<a class="headerlink" href="#problem-752dcc301d97" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：期望与线性性</p>
@@ -9075,6 +9372,7 @@ q^2&amp;2q(1-q)&amp;(1-q)^2
 <details class="note">
 <summary>解答</summary>
 <p>令 <span class="arithmatex">\(a=1/(\lambda_1+\lambda_2),b=1/\lambda_1+1/\lambda_2-a\)</span>。周期均长 <span class="arithmatex">\(b\)</span>，均费 <span class="arithmatex">\(c_2a+c_1(b-a)+K\)</span>，费用率为其除以 <span class="arithmatex">\(b\)</span>。</p>
+<p><strong>周期长度与奖励分解。</strong> 记两寿命为 <span class="arithmatex">\(X_1,X_2\)</span>，一轮从整机全新到两件都坏，长度为 <span class="arithmatex">\(\max(X_1,X_2)\)</span>。两个都工作的时长是 <span class="arithmatex">\(\min(X_1,X_2)\)</span>，均值 <span class="arithmatex">\(a=1/(\lambda_1+\lambda_2)\)</span>；恰一个工作的时长是 <span class="arithmatex">\(\max-\min\)</span>，其均值为 <span class="arithmatex">\(b-a\)</span>。利用 <span class="arithmatex">\(\max+\min=X_1+X_2\)</span>，得 <span class="arithmatex">\(b=1/\lambda_1+1/\lambda_2-a\)</span>。因此期望周期成本为 <span class="arithmatex">\(c_2a+c_1(b-a)+K\)</span>，由更新报酬定理除以期望周期 <span class="arithmatex">\(b\)</span>。替换瞬时完成所以没有额外停机时段，也不能对每轮的随机成本/随机周期直接取均值代替比值。</p>
 </details>
 <h3 id="problem-3e6eae7e6e08">Q1134 · 限期修车与首次超期换车<a class="headerlink" href="#problem-3e6eae7e6e08" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：期望与线性性</p>
@@ -9082,6 +9380,16 @@ q^2&amp;2q(1-q)&amp;(1-q)^2
 <details class="note">
 <summary>解答</summary>
 <p>假设修复、换车耗时忽略。周期均长 <span class="arithmatex">\(T+e^{-\lambda T}/\lambda+(1-e^{-\lambda T})/\mu\)</span>，均修复次数 <span class="arithmatex">\(1-e^{-\lambda T}+(\mu/\lambda)(\lambda T-1+e^{-\lambda T})\)</span>，费用率 <span class="arithmatex">\((C+rE[\text{修复次数}])/E[\text{周期}]\)</span>。<span class="arithmatex">\(\mu&gt;\lambda\)</span> 表示修复后更频繁故障。</p>
+<p>令首次故障 <span class="arithmatex">\(X\sim\operatorname{Exp}(\lambda)\)</span>。若 <span class="arithmatex">\(X&gt;T\)</span>，无需修复，周期为 <span class="arithmatex">\(X\)</span>，该分支的加权均长 <span class="arithmatex">\(E[X\mathbf1_{X&gt;T}]=e^{-\lambda T}(T+1/\lambda)\)</span>。若 <span class="arithmatex">\(X=x\le T\)</span>，先修一次，此后在剩余 <span class="arithmatex">\(T-x\)</span> 时间内以率 <span class="arithmatex">\(\mu\)</span> 继续故障修复，到 <span class="arithmatex">\(T\)</span> 后再等独立 <span class="arithmatex">\(\operatorname{Exp}(\mu)\)</span> 故障才换新。于是</p>
+<div class="arithmatex">\[
+E[L]=e^{-\lambda T}(T+1/\lambda)+(1-e^{-\lambda T})(T+1/\mu),
+\]</div>
+<p>化简得到上文周期式。修复数条件均值是 <span class="arithmatex">\(1+\mu(T-x)\)</span>，因此</p>
+<div class="arithmatex">\[
+E[R]=\int_0^T[1+\mu(T-x)]\lambda e^{-\lambda x}dx
+=1-e^{-\lambda T}+\mu[T-(1-e^{-\lambda T})/\lambda].
+\]</div>
+<p><span class="arithmatex">\(T=0\)</span> 时没有修复、费用率为 <span class="arithmatex">\(C\lambda\)</span>，与“首次故障就买新车”的边界一致；这也校验了没有把最后换车的故障算成一次修复。</p>
 </details>
 <p><span id="q525"></span></p>
 <h3 id="problem-bd318b155f6d">Q1135 · 依年龄替换的更新周期<a class="headerlink" href="#problem-bd318b155f6d" title="Permanent link">&para;</a></h3>
@@ -9090,6 +9398,17 @@ q^2&amp;2q(1-q)&amp;(1-q)^2
 <details class="note">
 <summary>解答</summary>
 <p>记 <span class="arithmatex">\(A_i=P(T&gt;i)\)</span>。当前年龄 <span class="arithmatex">\(i\)</span> 表示已存活超过 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(P_{i,i+1}=A_{i+1}/A_i,P_{i,0}=a_{i+1}/A_i\)</span>，仅对 <span class="arithmatex">\(A_i&gt;0\)</span> 定义。计划周期 <span class="arithmatex">\(\min(T,N)\)</span> 均长为 <span class="arithmatex">\(\sum_{i=0}^{N-1}A_i\)</span>。连续寿命的依龄替换费用率相应为 <span class="arithmatex">\([C_fF(T)+C_p\bar F(T)]/\int_0^T\bar F(u)du\)</span>。</p>
+<p><strong>分母、边界及连续模型的阈值记号。</strong> 离散模型中 <span class="arithmatex">\(A_i=P(T&gt;i)\)</span>，年龄为 <span class="arithmatex">\(i\)</span> 的前提是本件仍存活；下期失效的条件概率是 <span class="arithmatex">\(P(T=i+1\mid T&gt;i)=a_{i+1}/A_i\)</span>，继续存活的条件概率是 <span class="arithmatex">\(A_{i+1}/A_i\)</span>，两者和为 1。实行年龄 <span class="arithmatex">\(N\)</span> 强制替换时，在年龄 <span class="arithmatex">\(N-1\)</span> 的下一步都转到新件年龄 0。</p>
+<p>用尾和公式，周期 <span class="arithmatex">\(L=\min(T,N)\)</span> 满足 <span class="arithmatex">\(EL=\sum_{i=0}^{N-1}P(T&gt;i)\)</span>。连续寿命时，另用 <span class="arithmatex">\(t\)</span> 表示计划替换年龄以免与随机寿命混淆，则</p>
+<div class="arithmatex">\[
+E\min(T,t)=\int_0^t\bar F(u)du,\qquad
+E[\text{每周期费用}]=C_fF(t)+C_p\bar F(t),
+\]</div>
+<p>所以长期费用率为</p>
+<div class="arithmatex">\[
+g(t)=\frac{C_fF(t)+C_p\bar F(t)}{\int_0^t\bar F(u)du}.
+\]</div>
+<p>此式按连续 <span class="arithmatex">\(F\)</span> 写，失效与计划替换同时发生的概率为零；若有原子，应规定恰在阈值失效如何计费。选择最优阈值时最小化 <span class="arithmatex">\(g(t)\)</span>，并比较有限阈值与 <span class="arithmatex">\(t\to\infty\)</span> 的“只在失效时换新”策略，不能只最小化每周期费用而忽略周期长度。</p>
 </details>
 <h3 id="problem-de2813af3117">Q1136 · 灯泡整批替换的最优周期<a class="headerlink" href="#problem-de2813af3117" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：动态规划</p>
@@ -9168,6 +9487,12 @@ P(K=k)=\left[\prod_{j=0}^{k-1}\frac\lambda{\lambda+(j+1)\mu}\right]\frac{(k+1)\m
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(\rho=\lambda/\mu&lt;1\)</span>。一人的服务期间到达数 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(\operatorname{Poisson} -\)</span>指数混合，<span class="arithmatex">\(EA=\rho,\operatorname{Var}(A)=\rho(1+\rho)\)</span>。分枝分解 <span class="arithmatex">\(B\overset d=1+\sum_{j=1}^A B_j\)</span> 给出 <span class="arithmatex">\(EB=1/(1-\rho)\)</span>、<span class="arithmatex">\(\operatorname{Var}(B)=\rho(1+\rho)/(1-\rho)^3\)</span>。忙期“人数”与忙期“持续时间”必须区分。</p>
+<p><strong>分枝矩的计算。</strong> 给定服务时间 <span class="arithmatex">\(S=s\)</span>，<span class="arithmatex">\(A\mid S=s\sim\operatorname{Poisson}(\lambda s)\)</span>。用全期望和全方差，<span class="arithmatex">\(EA=\lambda ES=\rho\)</span>，<span class="arithmatex">\(\operatorname{Var}A=\lambda ES+\lambda^2\operatorname{Var}S=\rho+\rho^2\)</span>。服务完初始顾客后，每个服务期间到达者及其后续到达谱系构成独立的同分布子忙期。</p>
+<p>令 <span class="arithmatex">\(m=EB,v=\operatorname{Var}B\)</span>，由 <span class="arithmatex">\(B=1+\sum_{j=1}^AB_j\)</span> 得 <span class="arithmatex">\(m=1+\rho m\)</span>，又由条件方差</p>
+<div class="arithmatex">\[
+v=E[Av]+\operatorname{Var}(Am)=\rho v+\rho(1+\rho)m^2.
+\]</div>
+<p>解得所列均值及方差。<span class="arithmatex">\(\rho&lt;1\)</span> 保证次临界分枝的这两个矩有限；临界时虽可几乎必然结束，均值已发散，超临界还可能永不结束。</p>
 </details>
 <p><span id="q526"></span></p>
 <h3 id="problem-fdf38c20b676">Q1145 · 独立卫星系统的数量与忙期<a class="headerlink" href="#problem-fdf38c20b676" title="Permanent link">&para;</a></h3>
@@ -9176,6 +9501,8 @@ P(K=k)=\left[\prod_{j=0}^{k-1}\frac\lambda{\lambda+(j+1)\mu}\right]\frac{(k+1)\m
 <details class="note">
 <summary>解答</summary>
 <p>从空系统出发，时刻 <span class="arithmatex">\(t\)</span> 在轨数为 Poisson，均值 <span class="arithmatex">\(\lambda\int_0^t\bar F(u)du\)</span>。若时刻 0 额外指定一颗新卫星，则应再加一个独立 <span class="arithmatex">\(\mathrm{Bernoulli}(\bar F(t))\)</span>，不能仍把总数写成纯 Poisson。平稳数量为 <span class="arithmatex">\(\mathrm{Poisson}(\lambda m)\)</span>，空闲比例 <span class="arithmatex">\(e^{-\lambda m}\)</span>。交替更新的空闲均长为 <span class="arithmatex">\(1/\lambda\)</span>，故 <span class="arithmatex">\(e^{-\lambda m}=(1/\lambda)/(E[B]+1/\lambda)\)</span>，<span class="arithmatex">\(E[B]=(e^{\lambda m}-1)/\lambda\)</span>。这是并行运行的 <span class="arithmatex">\(M/G/\infty\)</span>，不是 <span class="arithmatex">\(M/G/1\)</span>。</p>
+<p><strong>为什么是 Poisson。</strong> 发射时刻 <span class="arithmatex">\(s\in[0,t]\)</span> 的卫星到 <span class="arithmatex">\(t\)</span> 仍存活的概率为 <span class="arithmatex">\(\bar F(t-s)\)</span>。对 Poisson 点过程按独立寿命作非齐次稀疏化，存活点仍为 Poisson，均值为 <span class="arithmatex">\(\lambda\int_0^t\bar F(t-s)ds\)</span>。利用 <span class="arithmatex">\(m=\int_0^\infty\bar F(u)du\)</span>，让 <span class="arithmatex">\(t\to\infty\)</span> 得均值 <span class="arithmatex">\(\lambda m\)</span>。从无限过去发射的平稳构造也直接给这个分布。</p>
+<p><strong>忙期公式的依据。</strong> 空系统的下一次发射等待时间 <span class="arithmatex">\(I\sim\operatorname{Exp}(\lambda)\)</span>，首次发射之后到再空为忙期 <span class="arithmatex">\(B\)</span>。这些“空闲加忙碌”周期由独立增量与独立寿命再生；长期空闲占比是 <span class="arithmatex">\(EI/E(I+B)\)</span>，又由平稳 Poisson 分布等于 <span class="arithmatex">\(P(N=0)=e^{-\lambda m}\)</span>。解此等式即得所列 <span class="arithmatex">\(EB\)</span>。有限 <span class="arithmatex">\(m\)</span> 保证该再生系统的空闲有正稳态概率与有限均值周期。一般寿命不是无记忆的，所以单独记录在轨数通常不是连续时间马尔可夫链，分布和再生论证不依赖这个额外性质。</p>
 </details>
 <p><span id="q536"></span></p>
 <h3 id="problem-0ce3de3c27b8">Q1146 · 三个指数任务的双处理器最优调度<a class="headerlink" href="#problem-0ce3de3c27b8" title="Permanent link">&para;</a></h3>
@@ -9277,6 +9604,7 @@ P_{100,50} = \frac{1}{99}
 <details class="note">
 <summary>解答</summary>
 <p>末次总得分在 <span class="arithmatex">\(1,\ldots ,99\)</span> 上均匀，故均数为 50。等价地，命中比例的条件均值不变，首两投后的比例为 <span class="arithmatex">\(1/2\)</span>，最终 100 投均分为 50；这不意味着得分服从 <span class="arithmatex">\(\operatorname{Bin} (100,1/2)\)</span>。</p>
+<p>完整分布可直接引用同章 <a href="#problem-ac4d499ea6c7">Q1152 · 篮球罚球</a> 的归纳证明：<span class="arithmatex">\(P(S_n=k)=1/(n-1),1\le k&lt;n\)</span>。具体地到 <span class="arithmatex">\(k\)</span> 的两种前驱贡献为 <span class="arithmatex">\((1-k/n)/(n-1)\)</span> 和 <span class="arithmatex">\(((k-1)/n)/(n-1)\)</span>，相加为 <span class="arithmatex">\(1/n\)</span>，端点按不存在的前驱贡献零。因此100投后恰中66次的概率为 <span class="arithmatex">\(1/99\)</span>，支持是1至99，不包含0和100；前两投固定为一中一失已排除这两个端点。</p>
 </details>
 <p><span id="q551"></span></p>
 <h3 id="problem-2375948fadbb">Q1154 · 强化抽样的均匀状态与较小份额<a class="headerlink" href="#problem-2375948fadbb" title="Permanent link">&para;</a></h3>
@@ -9349,6 +9677,17 @@ E[Y] = N\left[1-\left(\frac{N-1}{N}\right)^n\right]
 E T=53\left(\frac4{14}-\frac6{27}+\frac4{40}-\frac1{53}\right)\approx7.665079.
 \]</div>
 <p>这里用到<span class="arithmatex">\(\sum_{t\ge0}\binom{52-j13}{t}/\binom{52}{t}=53/(13j+1)\)</span>。两种抽样机制需区分。</p>
+<p><strong>不放回公式的推导。</strong> 令 <span class="arithmatex">\(T\)</span> 为集齐时间，<span class="arithmatex">\(T&gt;t\)</span> 表示前 <span class="arithmatex">\(t\)</span> 张至少缺一种花色。固定 <span class="arithmatex">\(j\)</span> 种花色都未出现的概率为 <span class="arithmatex">\(\binom{52-13j}{t}/\binom{52}{t}\)</span>，所以容斥给</p>
+<div class="arithmatex">\[
+P(T&gt;t)=\sum_{j=1}^4(-1)^{j+1}\binom4j
+\frac{\binom{52-13j}{t}}{\binom{52}{t}},\qquad 0\le t\le52.
+\]</div>
+<p>越界的组合数按零计，<span class="arithmatex">\(t=0\)</span> 也包含在尾和里。对固定的 <span class="arithmatex">\(13j\)</span> 张“特殊牌”，其最早位置 <span class="arithmatex">\(M_j\)</span> 满足同样的尾概率，因此</p>
+<div class="arithmatex">\[
+\sum_{t=0}^{52}\frac{\binom{52-13j}{t}}{\binom{52}{t}}
+=EM_j=\frac{53}{13j+1}.
+\]</div>
+<p>最后一个等式可由把 <span class="arithmatex">\(52-13j\)</span> 张普通牌分配到特殊牌前、后和相邻之间的 <span class="arithmatex">\(13j+1\)</span> 个空隙得到：各空隙期望普通牌数相同，最早位置为第一空隙数加 1。把上式代回 <span class="arithmatex">\(ET=\sum_{t\ge0}P(T&gt;t)\)</span> 就得到前面的有限结果。独立抽牌模型则分四个集齐阶段，阶段成功率依次 <span class="arithmatex">\(1,3/4,1/2,1/4\)</span>，期望之和才是 <span class="arithmatex">\(25/3\)</span>。</p>
 </details>
 <h3 id="problem-24d63979fef2">Q1158 · 两骰一轮的两个口径<a class="headerlink" href="#problem-24d63979fef2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期望与线性性</p>
@@ -9434,6 +9773,11 @@ ET=\sum_{k=0}^{N}P(T&gt;k)=\sum_{k=0}^{N}\frac{(N)_k}{N^k}.
 <details class="note">
 <summary>解答</summary>
 <p>各新卡等待阶段独立为几何分布，<span class="arithmatex">\(ET=NH_N\)</span>、<span class="arithmatex">\(\operatorname{Var}(T)=N^2H_N^{(2)}-NH_N\sim\pi^2N^2/6\)</span>，完整均值法见 <a href="#problem-cba917b27288">Q1155 · 集邮问题</a>。</p>
+<p>还缺 <span class="arithmatex">\(j\)</span> 种卡时，下一抽获得新品种的概率为 <span class="arithmatex">\(p_j=j/N\)</span>，到下一新品种的等待 <span class="arithmatex">\(G_j\)</span> 是取值1、2、…的几何变量。独立试验在每个新品种出现时重新开始，强马尔可夫性使各阶段等待独立。故</p>
+<div class="arithmatex">\[
+EG_j=N/j,\qquad\operatorname{Var}G_j=(1-p_j)/p_j^2=N^2/j^2-N/j.
+\]</div>
+<p>对 <span class="arithmatex">\(j=1,\ldots,N\)</span> 相加便得 <span class="arithmatex">\(ET=NH_N\)</span>、<span class="arithmatex">\(\operatorname{Var}T=N^2H_N^{(2)}-NH_N\)</span>。<span class="arithmatex">\(H_N^{(2)}\to\pi^2/6\)</span>，且 <span class="arithmatex">\(H_N=O(\log N)\)</span>，所以次项 <span class="arithmatex">\(NH_N=o(N^2)\)</span>，给出所要求的渐近式；<span class="arithmatex">\(N=1\)</span> 时总数恒1、方差零，也与公式吻合。</p>
 </details>
 <h3 id="problem-506f1299a656">Q1166 · 随机下降链的访问指标<a class="headerlink" href="#problem-506f1299a656" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：分布与矩</p>
@@ -9479,6 +9823,21 @@ ET=\sum_{k=0}^{N}P(T&gt;k)=\sum_{k=0}^{N}\frac{(N)_k}{N^k}.
 <details class="note">
 <summary>解答</summary>
 <p>两色牌各四张，翻红得 1、翻黑失 1，可在任一时刻停止。最优新增收益 <span class="arithmatex">\(F(r,b)\)</span> 满足 <span class="arithmatex">\(F(0,0)=0\)</span>，<span class="arithmatex">\(F(r,b)=\max \{0,[r(1+F(r-1,b))+b(-1+F(r,b-1))]/(r+b)\}\)</span>，缺失颜色项取零。从小到大填表得 <span class="arithmatex">\(F(4,4)=1\)</span>；继续当括号内值为正即可，零时停或继续等价。它不是“停止后猜下一张颜色”的同一游戏。</p>
+<p><strong>完整计算与两红三黑追问。</strong> 边界 <span class="arithmatex">\(F(r,0)=r\)</span>、<span class="arithmatex">\(F(0,b)=0\)</span>，因为全红应继续、全黑应立刻停止。按总剩余张数递增，先求两个后继状态的价值，再比较继续和立即停止的新增收益0：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">F</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">for</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">b</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="n">r</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="n">F</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="k">continue</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">cont</span> <span class="o">=</span> <span class="p">((</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">F</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="p">])</span> <span class="k">if</span> <span class="n">r</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="n">F</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">b</span> <span class="k">else</span> <span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">total</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="n">F</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">cont</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">F</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</span></code></pre></div>
+<p>每个状态只依赖更少的牌，所以倒推覆盖全部可用策略，证明给出的策略最优；<span class="arithmatex">\(F(r,b)\)</span> 是从现在起的新增收益，实际累计收益在比较两动作时同加同减，无需另作状态。计算得到 <span class="arithmatex">\(F(4,4)=1,F(2,3)=1/5\)</span>。每次翻牌后重算继续项，正则继续、负则停，零时两者等价。</p>
 </details>
 <h3 id="problem-c02486edaa9a">Q1172 · 清零风险下的兑现阈值<a class="headerlink" href="#problem-c02486edaa9a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：鞅与停时｜<strong>副题型</strong>：分布与矩</p>
@@ -9568,7 +9927,7 @@ f(i,j) = \frac{f(i+1,j) + f(i,j+1)}{2},\qquad y = \frac{f(i+1,j) - f(i,j+1)}{2}
 <div class="arithmatex">\[
 \frac{1}{6}(n+1) + \frac{1}{6}(n+2) + \cdots + \frac{1}{6}(n+5) + \frac{1}{6}\times 0 = \frac{5}{6}n + 2.5
 \]</div>
-<p>当 <span class="arithmatex">\( (5/6)n + 2.5 &gt; n \)</span> 即 <span class="arithmatex">\( n \le 14 \)</span> 时继续掷；<span class="arithmatex">\( n \ge 15 \)</span> 时拿钱走人（游戏最大收益 19：在 <span class="arithmatex">\( n = 14 \)</span> 时掷出 5）。</p>
+<p>当 <span class="arithmatex">\( (5/6)n + 2.5 &gt; n \)</span> 即 <span class="arithmatex">\( n \le 14 \)</span> 时继续掷；<span class="arithmatex">\( n \ge 15 \)</span> 时拿钱走人（按此停止策略最大收益 19：在 <span class="arithmatex">\( n = 14 \)</span> 时掷出 5）。</p>
 <p>边界：<span class="arithmatex">\( f(19)=19, f(18)=18, f(17)=17, f(16)=16, f(15)=15 \)</span>；<span class="arithmatex">\( n \le 14 \)</span> 时 <span class="arithmatex">\( E[f(n)] = (1/6)\sum_{i=1}^{5}E[f(n+i)] \)</span>，从 14 倒推到 0（表 5.2 节选）：</p>
 <table>
 <thead>
@@ -9615,6 +9974,16 @@ f(i,j) = \frac{f(i+1,j) + f(i,j+1)}{2},\qquad y = \frac{f(i+1,j) - f(i,j+1)}{2}
 </tbody>
 </table>
 <p><strong>最多愿付 $6.15。</strong></p>
+<p><strong>为什么一步比较给出的阈值也是全策略最优。</strong> 当 <span class="arithmatex">\(n&lt;15\)</span>，仅再掷一次后停的期望 <span class="arithmatex">\((5n+15)/6\)</span> 已严格大于 <span class="arithmatex">\(n\)</span>，所以立即收钱不可能最优。当 <span class="arithmatex">\(n\ge15\)</span>，继续存活的累计钱数始终至少为 15，而每掷一次的条件平均钱数不增。把归零或主动停下后收入保持不变，就得到非负超鞅；有界停止后取期望，再用 Fatou 引理可知任意策略的期望收入均不超过当前 <span class="arithmatex">\(n\)</span>。每次还有 <span class="arithmatex">\(1/6\)</span> 概率掷 6，结束时间有几何尾。因此阈值 15 确实最优；15 处也可与再掷一次后停无差异。</p>
+<p>倒推只需保存 <span class="arithmatex">\(V(15),\ldots,V(19)\)</span>，因为从小于 15 的状态一次最多增加 5。精确计算如下：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">V</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">F</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">)}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="o">/</span> <span class="mi">6</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">assert</span> <span class="n">F</span><span class="p">(</span><span class="mi">614</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">F</span><span class="p">(</span><span class="mi">616</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></code></pre></div>
+<p>初始价格取 <span class="arithmatex">\(V(0)\)</span>；题面给出的 6.15 是保留两位小数的结果。这里的收入是本次游戏最终带走的钱，不能再加上已在累计状态中的历史点数。</p>
 </details>
 <p><span id="q240"></span></p>
 <h3 id="problem-4cd87a56038c">Q1176 · 动态纸牌博弈<a class="headerlink" href="#problem-4cd87a56038c" title="Permanent link">&para;</a></h3>
@@ -9699,6 +10068,11 @@ f_{\tau_x}(t) = \frac{dP(\tau_x\le t)}{dt} = 2N'(x/\sqrt t)\times\frac{x}{2}t^{-
 \]</div>
 <p>（列维分布/逆高斯型的密度：长尾、高度偏斜。）</p>
 <p><strong>期望</strong>：由 <a href="#problem-86f5857b8293">Q1086 · 桥上的醉汉</a> 的公式，到达 <span class="arithmatex">\( +\alpha \)</span> 或 <span class="arithmatex">\( -\beta \)</span> 的期望时间为 <span class="arithmatex">\( \alpha\beta \)</span>。首达 <span class="arithmatex">\( +x \)</span> 相当于到达 <span class="arithmatex">\( x \)</span> 或 <span class="arithmatex">\( -\infty \)</span>，故 <span class="arithmatex">\( E[\tau_x] = x \times \infty = \infty \)</span>！虽然 <span class="arithmatex">\( P(\tau_x &lt; \infty) = 1 \)</span>（几乎必然到达），期望首达时间却是无穷大。</p>
+<p><strong>严格说明均时发散。</strong> 从反射公式，<span class="arithmatex">\(P(\tau_x&gt;t)=2\Phi(x/\sqrt t)-1\)</span>。由 <span class="arithmatex">\(\Phi(u)-1/2\sim u/\sqrt{2\pi}\)</span>（<span class="arithmatex">\(u\downarrow0\)</span>），</p>
+<div class="arithmatex">\[
+P(\tau_x&gt;t)\sim \sqrt{\frac2\pi}\,\frac x{\sqrt t}.
+\]</div>
+<p>故尾积分 <span class="arithmatex">\(E\tau_x=\int_0^\infty P(\tau_x&gt;t)dt\)</span> 发散，因为 <span class="arithmatex">\(\int_1^\infty t^{-1/2}dt=\infty\)</span>。另一方面 CDF 随 <span class="arithmatex">\(t\to\infty\)</span> 趋 1，说明 <span class="arithmatex">\(\tau_x&lt;\infty\)</span> 几乎必然。这避免把有限区间的均时公式直接写成含“无穷远边界”的代数式；该密度是 Lévy 首达分布，没有有限均值。</p>
 </details>
 <p><span id="q244"></span></p>
 <h3 id="problem-08d02ec19fef">Q1182 · 先到 3 还是先到 <span class="arithmatex">\(-5\)</span><a class="headerlink" href="#problem-08d02ec19fef" title="Permanent link">&para;</a></h3>
@@ -9706,7 +10080,7 @@ f_{\tau_x}(t) = \frac{dP(\tau_x\le t)}{dt} = 2N'(x/\sqrt t)\times\frac{x}{2}t^{-
 <p><strong>题目</strong>：设 <span class="arithmatex">\( X \)</span> 是无漂移布朗运动 <span class="arithmatex">\( dX(t) = dW(t) \)</span>，<span class="arithmatex">\( X(0) = 0 \)</span>。<span class="arithmatex">\( X \)</span> 先到达 3（在 <span class="arithmatex">\( -5 \)</span> 之前）的概率是多少？若 <span class="arithmatex">\( X \)</span> 有漂移 <span class="arithmatex">\( m \)</span>，即 <span class="arithmatex">\( dX(t) = m\,dt + dW(t) \)</span> 呢？</p>
 <details class="note">
 <summary>解答</summary>
-<p><strong>无漂移</strong>：布朗运动是鞅，停止在停时仍是鞅。设 <span class="arithmatex">\( p_3 = P(\text{先到 }3) \)</span>：<span class="arithmatex">\( 3p_3 + (-5)(1 - p_3) = 0 \Rightarrow p_3 = 5/8 \)</span>。（与对称游走公式一致：<span class="arithmatex">\( p_\alpha = \beta/(\alpha+\beta) = 5/8 \)</span>；且期望停止时间 <span class="arithmatex">\( \alpha\beta = 15 \)</span>。）</p>
+<p><strong>无漂移</strong>：布朗运动是鞅，停止在两边界后过程有界，可应用可选停止。设 <span class="arithmatex">\( p_3 = P(\text{先到 }3) \)</span>：<span class="arithmatex">\( 3p_3 + (-5)(1 - p_3) = 0 \Rightarrow p_3 = 5/8 \)</span>。（与对称游走公式一致：<span class="arithmatex">\( p_\alpha = \beta/(\alpha+\beta) = 5/8 \)</span>；且期望停止时间 <span class="arithmatex">\( \alpha\beta = 15 \)</span>。）</p>
 <p><strong>有漂移 <span class="arithmatex">\( m \)</span></strong>：<span class="arithmatex">\( X \)</span> 不再是鞅（但仍是马氏过程）。设 <span class="arithmatex">\( P(t,x) \)</span> 为 <span class="arithmatex">\( t \)</span> 时刻处于 <span class="arithmatex">\( x \)</span> 时先到 3 的概率；由时齐性 <span class="arithmatex">\( P(t,x) = P(x) \)</span> 与 <span class="arithmatex">\( t \)</span> 无关。由 <strong>Feynman-Kac 方程</strong>：</p>
 <div class="arithmatex">\[
 mP_x(x) + \frac{1}{2}P_{xx}(x) = 0,\qquad -5 &lt; x &lt; 3
@@ -9720,6 +10094,7 @@ P(0) = \frac{e^{10m} - 1}{e^{10m} - e^{-6m}}
 p_3 e^{-2m\times 3} + (1-p_3)e^{-2m\times(-5)} = 1 \Rightarrow p_3 = \frac{e^{10m}-1}{e^{10m}-e^{-6m}}
 \]</div>
 <p>当<span class="arithmatex">\( m \to 0 \)</span> 时，上式极限为 <span class="arithmatex">\( 5/8 \)</span>；<span class="arithmatex">\( m &gt; 0 \)</span> 时 <span class="arithmatex">\( p_3 &gt; 5/8 \)</span>（正漂移利于到达上方边界）。</p>
+<p><strong>可选停止的适用条件。</strong> 令 <span class="arithmatex">\(\tau=\inf\{t:X_t\in\{-5,3\}\}\)</span>。对每个 <span class="arithmatex">\(t\)</span>，先在有界停时 <span class="arithmatex">\(t\wedge\tau\)</span> 使用鞅公式。无漂移时 <span class="arithmatex">\(X_{t\wedge\tau}\in[-5,3]\)</span>，有漂移时用 <span class="arithmatex">\(e^{-2mX_{t\wedge\tau}}\)</span>，它在这个固定区间也有统一有限上界。布朗增量每个单位时间都有统一正概率越出长度为 8 的区间，因此 <span class="arithmatex">\(\tau\)</span> 有几何尾，特别是几乎必然有限。支配收敛便可令 <span class="arithmatex">\(t\to\infty\)</span>，得到所用终点期望等式。这里依赖停后过程有界，不能泛化为“任何鞅在任意停时都保持期望”。</p>
 </details>
 <p><span id="q245"></span></p>
 <h3 id="problem-8ed4a3e406d8">Q1183 · 广义维纳过程触界<a class="headerlink" href="#problem-8ed4a3e406d8" title="Permanent link">&para;</a></h3>
@@ -9874,6 +10249,17 @@ d(X_{t}Y_{t})=X_{t}d Y_{t}+Y_{t}d X_{t}+d X_{t}d Y_{t}.
 <details class="note">
 <summary>解答</summary>
 <p>条件于 <span class="arithmatex">\(Z_t=z\)</span>，乘积为 <span class="arithmatex">\(N(0,tz^2)\)</span>。密度为 <span class="arithmatex">\(\int_{\mathbb R}\frac{\exp[-(z^2+x^2/z^2)/(2t)]}{2\pi t|z|}\,dz\)</span>。合并正、负半轴，得到 <span class="arithmatex">\(f(x)=K_0(|x|/t)/(\pi t)\)</span>，其中 <span class="arithmatex">\(K_0(u)=\int_0^\infty e^{-u\cosh v}\,dv\)</span>，<span class="arithmatex">\(x\ne0\)</span>；零处可取无穷密度，仍可积。也可将上面的实积分作为无需特殊函数的确定表达。独立性给 <span class="arithmatex">\(\mathbb E[W_tZ_t]=0\)</span>、<span class="arithmatex">\(\operatorname{Var}(W_tZ_t)=t^2\)</span>。乘积Itô公式且 <span class="arithmatex">\(dW\,dZ=0\)</span>，给出 <span class="arithmatex">\(d(WZ)=W\,dZ+Z\,dW\)</span>。</p>
+<p><strong>从混合密度到 <span class="arithmatex">\(K_0\)</span> 的换元。</strong> 对 <span class="arithmatex">\(x\ne0\)</span>，先合并正负 <span class="arithmatex">\(z\)</span> 得</p>
+<div class="arithmatex">\[
+f(x)=\frac1{\pi t}\int_0^\infty
+e^{-(z^2+x^2/z^2)/(2t)}\frac{dz}{z}.
+\]</div>
+<p>令 <span class="arithmatex">\(z^2=|x|e^v\)</span>，则 <span class="arithmatex">\(dz/z=dv/2\)</span>，<span class="arithmatex">\(v\)</span> 从 <span class="arithmatex">\(-\infty\)</span> 到 <span class="arithmatex">\(\infty\)</span>，且</p>
+<div class="arithmatex">\[
+\frac{z^2+x^2/z^2}{2t}=\frac{|x|}{t}\cosh v.
+\]</div>
+<p>利用被积函数为偶函数，得 <span class="arithmatex">\(f(x)=(\pi t)^{-1}\int_0^\infty e^{-(|x|/t)\cosh v}dv\)</span>，即所述结果。它是两个概率密度的非负混合，归一化由 Tonelli 定理保证，不受零点的无穷尖峰影响。</p>
+<p>过程 <span class="arithmatex">\(U_t=W_tZ_t\)</span> 的漂移为零，且 <span class="arithmatex">\(d[U]_t=(W_t^2+Z_t^2)dt\)</span>；因此它虽是鞅，却不是标准布朗运动，不能仅凭均值零就当成一个方差为 <span class="arithmatex">\(t\)</span> 的高斯过程。</p>
 </details>
 <h3 id="problem-a0f2c02fd4db">Q1189 · 布朗运动半径与平方半径<a class="headerlink" href="#problem-a0f2c02fd4db" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：布朗运动</p>
@@ -9881,6 +10267,16 @@ d(X_{t}Y_{t})=X_{t}d Y_{t}+Y_{t}d X_{t}+d X_{t}d Y_{t}.
 <details class="note">
 <summary>解答</summary>
 <p>在 <span class="arithmatex">\(x\ne 0\)</span>，<span class="arithmatex">\(\nabla \Vert x\Vert =x/\Vert x\Vert\)</span>，<span class="arithmatex">\(\Delta \Vert x\Vert =(d-1)/\Vert x\Vert\)</span>。Itô 给 <span class="arithmatex">\(dR=(d-1)dt/(2R)+\sum(B_{i}/R)dW_{i}\)</span>。噪声积分 <span class="arithmatex">\(\beta\)</span> 的二次变差为 <span class="arithmatex">\(\int \sum(B_{i}/R)^{2}dt=t\)</span>，故 <span class="arithmatex">\(\beta\)</span> 为一维布朗运动；<span class="arithmatex">\(d\ge 2\)</span> 从非零点开始不命中原点，上式可延续所有有限时刻。再对 <span class="arithmatex">\(X=R^{2}\)</span> 用 Itô：<span class="arithmatex">\(dX=2R dR+dt=d dt+2\sqrt{X} d\beta\)</span>。直接从 <span class="arithmatex">\(X=\sum B_{i}^{2}\)</span> 也得到 <span class="arithmatex">\(dX=d dt+2\sum B_{i} dW_{i}\)</span>，与前式一致。三维半径按构造非负，且起点正时命中单点原点概率为零；靠近零时的向外漂移 <span class="arithmatex">\(1/R\)</span> 与径向结构共同解释其不可穿越零的边界行为。</p>
+<p><strong>为什么径向公式不会在零点失效。</strong> 先把过程停在半径环带 <span class="arithmatex">\(\epsilon&lt;R_t&lt;L\)</span>，此时范数函数光滑，Itô 公式与径向噪声积分都合法。对 <span class="arithmatex">\(\epsilon&lt;r_0&lt;L\)</span>，调和函数给出先碰内圈的概率</p>
+<div class="arithmatex">\[
+P_{r_0}(T_\epsilon&lt;T_L)=
+\begin{cases}
+\dfrac{\log(L/r_0)}{\log(L/\epsilon)},&amp;d=2,\\[6pt]
+\dfrac{r_0^{2-d}-L^{2-d}}{\epsilon^{2-d}-L^{2-d}},&amp;d&gt;2.
+\end{cases}
+\]</div>
+<p>它们分别来自径向调和函数 <span class="arithmatex">\(\log r\)</span>、<span class="arithmatex">\(r^{2-d}\)</span> 在环带出口的有界停时期望。固定 <span class="arithmatex">\(L\)</span>，令 <span class="arithmatex">\(\epsilon\downarrow0\)</span>，概率趋零，说明不可能在离开外圈前命中原点。再取整数 <span class="arithmatex">\(L\to\infty\)</span>，任意有限时间的连续路径都有有限上界，所以整个过程都不命中原点。</p>
+<p>因此可去掉上述局部化。定义 <span class="arithmatex">\(\beta_t=\sum_i\int_0^t(B_s^i/R_s)dW_s^i\)</span>，它是连续局部鞅且 <span class="arithmatex">\([\beta]_t=t\)</span>，由 Lévy 刻画为一维布朗运动。平方半径的 <span class="arithmatex">\(dt\)</span> 项有两部分：<span class="arithmatex">\(2R\times(d-1)/(2R)\)</span> 给 <span class="arithmatex">\(d-1\)</span>，而 <span class="arithmatex">\(d[R]_t=dt\)</span> 再给 1，共为 <span class="arithmatex">\(d\)</span>，这一步不能漏掉二次变差修正。</p>
 </details>
 <p><span id="q250"></span></p>
 <h3 id="problem-077f62a96735">Q1190 · 求 <span class="arithmatex">\( E(W_s W_t) \)</span><a class="headerlink" href="#problem-077f62a96735" title="Permanent link">&para;</a></h3>
@@ -9930,6 +10326,16 @@ d(X_{t}Y_{t})=X_{t}d Y_{t}+Y_{t}d X_{t}+d X_{t}d Y_{t}.
 \]</div>
 <p>故 <span class="arithmatex">\(W_s\mid W_t=x\)</span> 服从均值 <span class="arithmatex">\((s/t)x\)</span>、方差 <span class="arithmatex">\(s(t-s)/t\)</span> 的正态分布。</p>
 <p>联合正态条件公式给 <span class="arithmatex">\(\mathbb{E} [X_{s}|X_{T}=x]=z+\mu s+(s/T)(x-z-\mu T)=z+(s/T)(x-z)\)</span>，方差为 <span class="arithmatex">\(s-s^{2}/T=s(T-s)/T\)</span>。常漂移被终点条件消除。桥过程 <span class="arithmatex">\(Y_{0}=z\)</span>，满足 <span class="arithmatex">\(dY_{s}=(x-Y_{s})/(T-s)ds+dB_{s}\)</span>，<span class="arithmatex">\(s&lt;T\)</span>；将该线性方程乘积分因子 <span class="arithmatex">\(1/(T-s)\)</span> 即可验证终点趋于 <span class="arithmatex">\(x\)</span> 且具有上述均值、协方差。</p>
+<p><strong>桥 SDE 的显式核验。</strong> 对 <span class="arithmatex">\(s&lt;T\)</span>，线性方程的解为</p>
+<div class="arithmatex">\[
+Y_s=z+\frac sT(x-z)+(T-s)\int_0^s\frac{dB_u}{T-u}.
+\]</div>
+<p>乘 <span class="arithmatex">\(1/(T-s)\)</span> 后用乘积法则即可得到该式。随机积分核是确定函数，所以解是高斯；均值为 <span class="arithmatex">\(z+s(x-z)/T\)</span>，方差为</p>
+<div class="arithmatex">\[
+(T-s)^2\int_0^s\frac{du}{(T-u)^2}
+=(T-s)^2\left(\frac1{T-s}-\frac1T\right)=\frac{s(T-s)}T.
+\]</div>
+<p>对 <span class="arithmatex">\(s\le v&lt;T\)</span>，同样算得协方差 <span class="arithmatex">\(s(T-v)/T=\min(s,v)-sv/T\)</span>，这与条件高斯过程一致，故验证了整个桥过程，而不只是某一个时点的边际分布。其连续版本在 <span class="arithmatex">\(T\)</span> 接到终点 <span class="arithmatex">\(x\)</span>，漂移项虽然在 <span class="arithmatex">\(T\)</span> 形式上奇异，解仍有良好终点。</p>
 </details>
 <h3 id="problem-71193ceda14f">Q1192 · 布朗桥的高斯条件均值<a class="headerlink" href="#problem-71193ceda14f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：布朗运动</p>
@@ -10019,7 +10425,7 @@ S_{t}=S_{0}\exp\left\{\left(\mu-\frac{\sigma^{2}}{2}\right)t+\sigma W_{t}\right\
 <p><span id="q256"></span></p>
 <h3 id="problem-7535877451ad">Q1197 · 标的平方的看涨期权方程<a class="headerlink" href="#problem-7535877451ad" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：期权定价基础</p>
-<p><strong>题目</strong>：不分红可交易股票在风险中性测度下 <span class="arithmatex">\(dS=\)</span>rSdt<span class="arithmatex">\(+\sigma SdW\)</span>，<span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(\sigma\)</span> 常数。到期支付 <span class="arithmatex">\((S_{T}^{2}-K)^+\)</span>，<span class="arithmatex">\(K&gt;0\)</span>。写价格 <span class="arithmatex">\(\binom{t}{S}\)</span> 的 PDE 与终值，再以 <span class="arithmatex">\(V=S^{2}\)</span> 换元求 <span class="arithmatex">\(U(t,V)\)</span> 的 PDE，展示链式求导。</p>
+<p><strong>题目</strong>：不分红可交易股票在风险中性测度下 <span class="arithmatex">\(dS=\)</span>rSdt<span class="arithmatex">\(+\sigma SdW\)</span>，<span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(\sigma\)</span> 常数。到期支付 <span class="arithmatex">\((S_{T}^{2}-K)^+\)</span>，<span class="arithmatex">\(K&gt;0\)</span>。写价格 <span class="arithmatex">\(C(t,S)\)</span> 的 PDE 与终值，再以 <span class="arithmatex">\(V=S^{2}\)</span> 换元求 <span class="arithmatex">\(U(t,V)\)</span> 的 PDE，展示链式求导。</p>
 <details class="note">
 <summary>解答</summary>
 <p>该价格仍满足 Black–Scholes 方程。推导中并不依赖收益函数的具体形式，只要求价格是当前时刻与股价的函数；变化的只是边界条件。</p>
@@ -10029,7 +10435,7 @@ S_{t}=S_{0}\exp\left\{\left(\mu-\frac{\sigma^{2}}{2}\right)t+\sigma W_{t}\right\
 \]</div>
 <p>这只是原 Black–Scholes 方程的变量代换。</p>
 <p>注意 <span class="arithmatex">\(S_t^2\)</span> 不是可交易资产的价格过程，不能把它当作 <span class="arithmatex">\(S_t\)</span> 那样处理；特别是在风险中性测度下，它的漂移并不为 <span class="arithmatex">\(r\)</span>。</p>
-<p>原价格满足 <span class="arithmatex">\(C_{t}+(\sigma ^{2}S^{2}/2)C_{SS}+rSC_{S}-rC=0\)</span>，<span class="arithmatex">\(\binom{T}{S}=(S^{2}-K)^+\)</span>。<span class="arithmatex">\(\binom{t}{S}=U(t,S^{2})\)</span> 时 <span class="arithmatex">\(C_{S}=2SU_{V}\)</span>、<span class="arithmatex">\(C_{SS}=2U_{V}+4S^{2}U_{VV}\)</span>，代入得 <span class="arithmatex">\(U_{t}+2\sigma ^{2}V^{2}U_{VV}+(2r+\sigma ^{2})VU_{V}-rU=0\)</span>，终值 <span class="arithmatex">\(U(T,V)=(V-K)^+\)</span>。</p>
+<p>原价格满足 <span class="arithmatex">\(C_{t}+(\sigma ^{2}S^{2}/2)C_{SS}+rSC_{S}-rC=0\)</span>，<span class="arithmatex">\(C(T,S)=(S^{2}-K)^+\)</span>。<span class="arithmatex">\(C(t,S)=U(t,S^{2})\)</span> 时 <span class="arithmatex">\(C_{S}=2SU_{V}\)</span>、<span class="arithmatex">\(C_{SS}=2U_{V}+4S^{2}U_{VV}\)</span>，代入得 <span class="arithmatex">\(U_{t}+2\sigma ^{2}V^{2}U_{VV}+(2r+\sigma ^{2})VU_{V}-rU=0\)</span>，终值 <span class="arithmatex">\(U(T,V)=(V-K)^+\)</span>。</p>
 </details>
 <p><span id="q257"></span></p>
 <h3 id="problem-aeef43cf8e68">Q1198 · 均值回归 SDE 的定性行为<a class="headerlink" href="#problem-aeef43cf8e68" title="Permanent link">&para;</a></h3>
@@ -10037,9 +10443,21 @@ S_{t}=S_{0}\exp\left\{\left(\mu-\frac{\sigma^{2}}{2}\right)t+\sigma W_{t}\right\
 <p><strong>题目</strong>：<span class="arithmatex">\(S_{0}&gt;0\)</span>，<span class="arithmatex">\(dS=\alpha (m-S)dt+\sigma SdW\)</span>，<span class="arithmatex">\(\alpha ,m,\sigma &gt;0\)</span>。解释均值回归与参数作用，推导 <span class="arithmatex">\(X=S^{2}\)</span> 的 SDE。假设该不分红股票可交易且存在等价风险中性定价测度，无风险利率 <span class="arithmatex">\(r\)</span> 恒定，说明其欧式看涨价格如何依赖物理漂移参数。再比较 <span class="arithmatex">\(dY=\mu Ydt+\sigma YdW\)</span> 中 <span class="arithmatex">\(\mu\)</span>、<span class="arithmatex">\(\sigma\)</span> 的作用。</p>
 <details class="note">
 <summary>解答</summary>
-<p>这是均值回归过程：高于 <span class="arithmatex">\(\mu\)</span> 时漂移为负，低于 <span class="arithmatex">\(\mu\)</span> 时漂移为正，都会拉回均值 <span class="arithmatex">\(\mu\)</span>。<span class="arithmatex">\(\alpha\)</span> 决定偏离给定幅度时的漂移大小，即回归速度。</p>
+<p>这是均值回归过程：高于 <span class="arithmatex">\(m\)</span> 时漂移为负，低于 <span class="arithmatex">\(m\)</span> 时漂移为正，都会拉回水平 <span class="arithmatex">\(m\)</span>。<span class="arithmatex">\(\alpha\)</span> 决定偏离给定幅度时的漂移大小，即回归速度。</p>
 <p>漂移不影响看涨期权价格：正确的定价测度下贴现股价漂移为零，测度变换会消除原始漂移的影响。</p>
 <p>Itô 给 <span class="arithmatex">\(dX=[2\alpha mS+(\sigma ^{2}-2\alpha )S^{2}]dt+2\sigma S^{2}dW\)</span>。<span class="arithmatex">\(S\)</span> 保持正时可写漂移 <span class="arithmatex">\(2\alpha m\sqrt{X}+(\sigma ^{2}-2\alpha )X\)</span>，扩散 <span class="arithmatex">\(2\sigma X\)</span>。风险中性下股票漂移转为 <span class="arithmatex">\(rS\)</span>，给定相同 <span class="arithmatex">\(S_{0}\)</span>、<span class="arithmatex">\(\sigma\)</span>、<span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(K\)</span>、<span class="arithmatex">\(T\)</span> 后，欧式价格为 Black–Scholes 价格，<span class="arithmatex">\(\alpha\)</span>、<span class="arithmatex">\(m\)</span> 不另行进入。几何布朗运动中的 <span class="arithmatex">\(\mu\)</span> 决定 <span class="arithmatex">\(\mathbb{E} [Y_{t}]=Y_{0}e^{\mu t}\)</span> 的增长率；<span class="arithmatex">\(\sigma\)</span> 决定局部相对波动率，且 <span class="arithmatex">\(\log Y\)</span> 的漂移是 <span class="arithmatex">\(\mu -\sigma ^{2}/2\)</span>。</p>
+<p><strong>正性与均值的具体依据。</strong> 线性 SDE 的积分因子为</p>
+<div class="arithmatex">\[
+H_t=\exp[(-\alpha-\sigma^2/2)t+\sigma W_t],\qquad
+S_t=H_t\left(S_0+\alpha m\int_0^tH_s^{-1}ds\right)&gt;0.
+\]</div>
+<p>所以从正起点不会穿过零。取期望，漂移给 <span class="arithmatex">\(dES_t/dt=\alpha(m-ES_t)\)</span>，解为 <span class="arithmatex">\(ES_t=m+(S_0-m)e^{-\alpha t}\)</span>。回归中心是题中的 <span class="arithmatex">\(m\)</span>，不是另一个几何布朗模型里的 <span class="arithmatex">\(\mu\)</span>；<span class="arithmatex">\(\sigma\)</span> 决定给定 <span class="arithmatex">\(S\)</span> 时的瞬时标准差 <span class="arithmatex">\(\sigma S\)</span>。</p>
+<p>令 <span class="arithmatex">\(X=S^2\)</span>，Itô 的二阶项为 <span class="arithmatex">\((dS)^2=\sigma^2S^2dt\)</span>，故</p>
+<div class="arithmatex">\[
+dX=2S[\alpha(m-S)dt+\sigma S dW]+\sigma^2S^2dt,
+\]</div>
+<p>整理即得前述漂移及扩散。因 <span class="arithmatex">\(S&gt;0\)</span>，代换 <span class="arithmatex">\(S=\sqrt X\)</span> 没有符号歧义。</p>
+<p>定价部分使用题设“存在等价风险中性测度”：在其下不分红股票必须有漂移 <span class="arithmatex">\(rS\)</span>，扩散仍为 <span class="arithmatex">\(\sigma S\)</span>，所以条件终值分布与标准 BS 相同。形式上的市场风险价格为 <span class="arithmatex">\([\alpha(m-S)-rS]/(\sigma S)\)</span>，但把它写出来本身并不能保证换测度密度为真鞅；这里依赖题设的存在性，不能对任意漂移模型无条件宣称等价测度存在。</p>
 </details>
 <p><span id="q258"></span></p>
 <h3 id="problem-a8a84e2320db">Q1199 · <span class="arithmatex">\( \log(S_t) \)</span> 的 SDE<a class="headerlink" href="#problem-a8a84e2320db" title="Permanent link">&para;</a></h3>
@@ -10226,6 +10644,8 @@ H_{\Pi}=\sum_{j=0}^{n-1}(W_{t_{j+1}}-W_{t_{j}})^{2},
 \]</div>
 <p>当 <span class="arithmatex">\( ||\Pi|| \to 0 \)</span> 时它收敛到零。</p>
 <p>中心正态密度偶对称，奇阶矩积分为零；<span class="arithmatex">\(MGF \exp (\sigma ^{2}u^{2}/2)\)</span> 的 <span class="arithmatex">\(u^{4}\)</span> 系数为 <span class="arithmatex">\(\sigma ^{4}/8\)</span>，乘 4! 得 <span class="arithmatex">\(E Z^{4}=3\sigma ^{4}\)</span>。时间平方变差 <span class="arithmatex">\(\sum \Delta t^{2}\le T\Vert \pi \Vert \to 0\)</span>；交叉和 <span class="arithmatex">\(\sum \Delta W\Delta t\)</span> 的均值零、方差 <span class="arithmatex">\(\sum \Delta t^{3}\le T\Vert \pi \Vert ^{2}\to 0\)</span>，故也趋零，记作 <span class="arithmatex">\(dt\cdot dt=dt\cdot dW=0\)</span>。对连续有限一次变差 <span class="arithmatex">\(f\)</span>，<span class="arithmatex">\(\sum(\Delta f)^{2}\le \max |\Delta f|\cdot TV(f)\to 0\)</span>。<span class="arithmatex">\(W\)</span> 的平方和却沿二进网格几乎必然趋 <span class="arithmatex">\(T\)</span>（方差界的几何可和性配合 Chebyshev、Borel–Cantelli），所以其一次变差不可能有限。一般确定网格趋零给 <span class="arithmatex">\(L^{2}\)</span>、进而依概率收敛，不等于宣称对依路径任意选择的全部分割都逐点收敛。</p>
+<p><strong>从固定总区间推广到任意非零区间。</strong> 对每个有理端点 <span class="arithmatex">\(a&lt;b\)</span>，把上面的方差估计用于 <span class="arithmatex">\(W_{a+t}-W_a\)</span> 的二进分割。取误差 <span class="arithmatex">\(\epsilon&gt;0\)</span>，Chebyshev 界为 <span class="arithmatex">\(2(b-a)^2\,2^{-n}/\epsilon^2\)</span>，对层数 <span class="arithmatex">\(n\)</span> 可求和，Borel–Cantelli 给平方增量和几乎必然趋 <span class="arithmatex">\(b-a&gt;0\)</span>。在所有有理 <span class="arithmatex">\(a&lt;b\)</span> 上取可数交，仍是概率1事件。若某条这样的路径在任意实端点非零区间上有有限一次变差，其内部某个有理子区间也应有有限变差，平方和必趋0，产生矛盾。所以“任意非零区间上变差无穷”也已证明，而非仅证明 <span class="arithmatex">\([0,T]\)</span> 一段。</p>
+<p>还需注意，<span class="arithmatex">\((\Delta W)^2\)</span> 的均值是 <span class="arithmatex">\(\Delta t\)</span>，但方差为 <span class="arithmatex">\(2(\Delta t)^2\)</span>，所以单个平方增量并不等于时间增量；只有大量增量求和后的随机误差才消失。<span class="arithmatex">\((dW)^2=dt\)</span> 是二次变差/随机积分的运算记法，不是对每个样本点的普通微分等式。若把随机有噪的单步恒等式当作逐步精确式，会错误地删除 Itô 公式之外的随机波动。</p>
 </details>
 <p><span id="q263"></span></p>
 <h3 id="problem-32284b412bd8">Q1204 · 为什么 Itô 引理成立<a class="headerlink" href="#problem-32284b412bd8" title="Permanent link">&para;</a></h3>
@@ -10233,31 +10653,29 @@ H_{\Pi}=\sum_{j=0}^{n-1}(W_{t_{j+1}}-W_{t_{j}})^{2},
 <p><strong>题目</strong>：设 <span class="arithmatex">\(dX=b(t,X)dt+a(t,X)dW\)</span>，<span class="arithmatex">\(f\in\mathbb{C}^{1,2}\)</span>，说明 Itô 公式的二阶项来源，给出经停止局部化与余项控制的证明步骤。定义对平方可积适应简单过程的 Itô 积分并证明等距，解释如何延拓、其基本性质，以及一般可相对于哪些过程积分。</p>
 <details class="note">
 <summary>解答</summary>
-<p>严格证明需要较多随机分析工具；这里给出面试足够的 Itô 引理非严格推导。</p>
-<p>先陈述引理。设 <span class="arithmatex">\(X_t\)</span> 满足</p>
+<p>假设 <span class="arithmatex">\(X=X_0+A+M\)</span>，<span class="arithmatex">\(A_t=\int_0^tb_sds\)</span>，<span class="arithmatex">\(M_t=\int_0^ta_sdW_s\)</span>，其中 <span class="arithmatex">\(b,a\)</span> 可预测且局部满足 <span class="arithmatex">\(\int|b_s|ds+\int a_s^2ds&lt;\infty\)</span>。对 <span class="arithmatex">\(f\in C^{1,2}\)</span>，结论是</p>
 <div class="arithmatex">\[
-d X_{t}=\mu(t,X_{t})d t+\sigma(t,X_{t})d W_{t},
+f(t,X_t)-f(0,X_0)=\int_0^t(f_t+b_sf_x+\tfrac12a_s^2f_{xx})(s,X_s)ds
++\int_0^ta_sf_x(s,X_s)dW_s.
 \]</div>
-<p>其中 <span class="arithmatex">\(W_t\)</span> 是布朗运动。设 <span class="arithmatex">\(f(t,x)\)</span> 对 <span class="arithmatex">\(t\)</span> 一阶连续可导、对 <span class="arithmatex">\(x\)</span> 二阶连续可导，则 <span class="arithmatex">\(Y_t=f(t,X_t)\)</span> 满足</p>
+<p>证明不能对只有二阶导数的 <span class="arithmatex">\(f\)</span> 直接宣称三阶 Taylor 余项为 <span class="arithmatex">\(O((\Delta X)^3)\)</span>。</p>
+<p><strong>1. 先定义积分并证明等距。</strong> 对 <span class="arithmatex">\(H_s=\sum_iH_i\mathbf1_{(t_i,t_{i+1}]}(s)\)</span>，其中 <span class="arithmatex">\(H_i\)</span> 为 <span class="arithmatex">\(\mathcal F_{t_i}\)</span>-可测、平方可积，定义 <span class="arithmatex">\(\int_0^TH_sdW_s=\sum_iH_i(W_{t_{i+1}}-W_{t_i})\)</span>。当 <span class="arithmatex">\(i&lt;j\)</span>，前一项与 <span class="arithmatex">\(H_j\)</span> 均为 <span class="arithmatex">\(\mathcal F_{t_j}\)</span>-可测，而 <span class="arithmatex">\(E[\Delta W_j\mid\mathcal F_{t_j}]=0\)</span>，所以交叉期望零。同项利用未来增量独立性得</p>
 <div class="arithmatex">\[
-d Y_{t}=\frac{\partial f}{\partial t}(t,X_{t})d t+\frac{\partial f}{\partial x}(t,X_{t})d X_{t}+\frac{1}{2}\frac{\partial^{2}f}{\partial x^{2}}(t,X_{t})(d X_{t})^{2}.
+E[H_i^2(\Delta W_i)^2]=EH_i^2\Delta t_i,
+\quad E\left|\int H,dW\right|^2=E\int H^2ds.
 \]</div>
-<p>使用随机微积分规则</p>
+<p>可预测简单过程在 <span class="arithmatex">\(L^2(\Omega\times[0,T])\)</span> 中稠密，等距使其积分构成 Cauchy 列，从而唯一延拓到所有 <span class="arithmatex">\(E\int H^2ds&lt;\infty\)</span> 的可预测过程。Doob 不等式还给
+<span class="arithmatex">\(E\sup_{t\le T}|\int_0^t(H-H^{(n)})dW|^2\le4E\int_0^T|H-H^{(n)}|^2ds\)</span>，故可选连续版本，且积分是均值零的平方可积鞅。</p>
+<p><strong>2. 局部化。</strong> 先停在 <span class="arithmatex">\(|X|\)</span>、<span class="arithmatex">\(\int|b|ds\)</span>、<span class="arithmatex">\(\int a^2ds\)</span> 等达到给定上界之前，并将 <span class="arithmatex">\(a,b\)</span> 作有界逼近。<span class="arithmatex">\(f\)</span> 的导数在相应紧集有界、一致连续。先证明有界情形，再用积分等距、有限变差积分收敛和停止时刻递增去掉这些截断；不需要假定原系数在全空间有界。</p>
+<p><strong>3. 正确的 Taylor 拆分。</strong> 沿确定分割逐段先对时间、再对空间展开，利用一致连续性可写</p>
 <div class="arithmatex">\[
-(d W_{t})^{2}=d t,\qquad(d t)^{2}=d W_{t}d t=0,
+\Delta f_i=f_t(t_i,X_i)\Delta t_i+f_x(t_i,X_i)\Delta X_i
++\tfrac12f_{xx}(t_i,X_i)(\Delta X_i)^2+R_i,
 \]</div>
-<p>化为</p>
-<div class="arithmatex">\[
-\begin{align*}dY_{t}=\left(\frac{\partial f}{\partial t}(t,X_{t})+\mu(t,X_{t})\frac{\partial f}{\partial x}(t,X_{t})+\frac{1}{2}\sigma^{2}(t,X_{t})\frac{\partial^{2}f}{\partial x^{2}}(t,X_{t})\right)dt\\+\sigma(t,X_{t})\frac{\partial f}{\partial x}(t,X_{t})dW_{t}.\end{align*}
-\]</div>
-<p>用 Taylor 展开作非严格推导。为简洁起见省略函数自变量：</p>
-<div class="arithmatex">\[
-d f=\frac{\partial f}{\partial t}d t+\frac{\partial f}{\partial x}d x+\frac{1}{2}\frac{\partial^{2}f}{\partial x^{2}}(d x)^{2}+\mathcal{O}\left((d t)^{2}\right)+\mathcal{O}\left((d x)^{3}\right).
-\]</div>
-<p>再以 <span class="arithmatex">\(X_t\)</span> 的微分替换 <span class="arithmatex">\(dx\)</span>；按上述规则，高阶项消失，立即得到式 (3.1)。</p>
-<p>随机微积分规则的依据见 <a href="#problem-0d9a8ceeb390">Q1203 · <span class="arithmatex">\( dt=(dW_t)^2 \)</span> 的含义</a>。</p>
-<p>该“证明”省略了严格技术细节，但说明了核心思想；</p>
-<p>将分割上的 <span class="arithmatex">\(\Delta f\)</span> 展开为 <span class="arithmatex">\(f_t\Delta t+f_x\Delta X+\tfrac12f_{xx}(\Delta X)^2\)</span> 与余项之和。先在系数和导数有界的停止区域内工作；平方增量和收敛到 <span class="arithmatex">\(\int a^2\,ds\)</span>，时间交叉项与高阶余项依概率趋零，一阶随机项按Itô积分定义收敛。再令停止区域扩大，得 <span class="arithmatex">\(df=(f_t+bf_x+\tfrac12a^2f_{xx})\,dt+af_x\,dW\)</span>。对简单适应过程 <span class="arithmatex">\(H=\sum_iH_i\mathbf1_{(t_i,t_{i+1}]}\)</span>，积分定义为 <span class="arithmatex">\(\sum_iH_i\Delta W_i\)</span>。不同增量项的交叉期望因条件均值零而消失；同项 <span class="arithmatex">\(\mathbb E[H_i^2(\Delta W_i)^2]=\mathbb E[H_i^2]\Delta t_i\)</span>，故 <span class="arithmatex">\(\mathbb E[(\int H\,dW)^2]=\mathbb E\int H^2\,dt\)</span>。利用这一等距，对满足 <span class="arithmatex">\(\mathbb E\int H^2\,dt&lt;\infty\)</span> 的可预测过程以简单过程作 <span class="arithmatex">\(L^2\)</span> 逼近，积分极限存在且不依赖逼近。所得积分是均值零的平方可积连续鞅，具有线性和增量可加性。更一般可对局部鞅及半鞅定义随机积分；有限变差积分部分用Lebesgue–Stieltjes积分处理，普通Brownian路径不能直接当作有界变差积分器。</p>
+<p>并有 <span class="arithmatex">\(\sum_i|R_i|\le\omega(\max_i(\Delta t_i+|\Delta X_i|))[T+\sum_i(\Delta X_i)^2]\)</span>，其中 <span class="arithmatex">\(\omega(\delta)\to0\)</span>。连续路径使前一因子趋零，平方增量和依概率有界，所以余项总和依概率趋零；不需要 <span class="arithmatex">\(f_{xxx}\)</span> 存在。</p>
+<p><strong>4. 平方项与交叉项。</strong> <span class="arithmatex">\(A\)</span> 连续有限变差，<span class="arithmatex">\(\sum(\Delta A)^2\le\max|\Delta A|\operatorname{TV}(A)\to0\)</span>。Cauchy–Schwarz 又使 <span class="arithmatex">\(\sum\Delta A\Delta M\to0\)</span>。对简单 <span class="arithmatex">\(a\)</span>，在每个固定系数区间使用 Brownian 平方增量和的收敛，可得 <span class="arithmatex">\(\sum(\Delta M)^2\to\int a^2ds\)</span>；一般 <span class="arithmatex">\(a\)</span> 用前述 <span class="arithmatex">\(L^2\)</span> 逼近及局部化延拓。乘以连续有界权重 <span class="arithmatex">\(f_{xx}(t_i,X_i)\)</span>，先把权重按粗分割近似为常数，再利用一致连续性控制误差，得到加权极限 <span class="arithmatex">\(\int f_{xx}a^2ds\)</span>。</p>
+<p><strong>5. 一阶项并合。</strong> 时间项和 <span class="arithmatex">\(f_x\Delta A\)</span> 为通常积分和；<span class="arithmatex">\(f_x\Delta M\)</span> 由积分等距趋于 <span class="arithmatex">\(\int f_xa,dW\)</span>。望远镜求和后代入这些极限，得到公式。先对每个确定 <span class="arithmatex">\(t\)</span> 证明，再用连续版本在有理时刻上取可数交，得到所有 <span class="arithmatex">\(t\)</span> 同时成立。最后令局部化停止时刻趋无穷。</p>
+<p><strong>6. 可以相对什么积分。</strong> 对 <span class="arithmatex">\(M\)</span> 为连续局部鞅，可在 <span class="arithmatex">\(\int H^2d[M]&lt;\infty\)</span> 的局部条件下积分；对半鞅 <span class="arithmatex">\(X=M+A\)</span>，定义为局部鞅积分与有限变差的 Lebesgue–Stieltjes 积分之和（相应可积条件仍需检查）。含跳半鞅的 Itô 公式还要加跳跃修正项。Brownian 路径没有有限一次变差，不能把该积分当成普通逐路径 Riemann–Stieltjes 积分。</p>
 </details>
 
 

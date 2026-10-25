@@ -7953,6 +7953,23 @@ EY=\frac13,\quad EZ=\frac23,\quad EY^2=\frac16,\quad EZ^2=\frac12,
 <details class="note">
 <summary>解答</summary>
 <p>独立标准正态<span class="arithmatex">\(X,Y\)</span>，<span class="arithmatex">\(S=X+Y\)</span>与<span class="arithmatex">\(D=X-Y\)</span>独立且都<span class="arithmatex">\(N(0,2)\)</span>。<span class="arithmatex">\(M=(S+|D|)/2\)</span>，<span class="arithmatex">\(L=(S-|D|)/2\)</span>，<span class="arithmatex">\(E|D|=2/\sqrt{\pi }\)</span>、<span class="arithmatex">\(\operatorname{Var} |D|=2-4/\pi\)</span>。故<span class="arithmatex">\(\operatorname{Var} M=\operatorname{Var} L=1-1/\pi\)</span>，<span class="arithmatex">\(\operatorname{Cov} (M,L)=1/\pi\)</span>，相关<span class="arithmatex">\(1/(\pi -1)\)</span>。</p>
+<p>为补全均值及中间计算：<span class="arithmatex">\(S,D\)</span> 是联合高斯，且 <span class="arithmatex">\(\operatorname{Cov}(S,D)=\operatorname{Var}X-\operatorname{Var}Y=0\)</span>，所以独立，<span class="arithmatex">\(S\)</span> 也与 <span class="arithmatex">\(|D|\)</span> 独立。对 <span class="arithmatex">\(D\sim N(0,2)\)</span>，</p>
+<div class="arithmatex">\[
+E|D|=2\int_0^\infty\frac{d}{2\sqrt\pi}e^{-d^2/4}\,dd=\frac2{\sqrt\pi},
+\quad E|D|^2=ED^2=2.
+\]</div>
+<p>因此</p>
+<div class="arithmatex">\[
+EM=\frac1{\sqrt\pi},\qquad EL=-\frac1{\sqrt\pi},\qquad
+\operatorname{Var}M=\operatorname{Var}L
+=\frac{2+(2-4/\pi)}4=1-\frac1\pi.
+\]</div>
+<p>交叉协方差项因独立为零，故</p>
+<div class="arithmatex">\[
+\operatorname{Cov}(M,L)=\frac{\operatorname{Var}S-\operatorname{Var}|D|}4=\frac1\pi,
+\qquad \operatorname{Corr}(M,L)=\frac1{\pi-1}.
+\]</div>
+<p>亦可用逐点恒等式 <span class="arithmatex">\(ML=XY\)</span> 检验：<span class="arithmatex">\(E(ML)=0\)</span>，减去 <span class="arithmatex">\(EM\,EL=-1/\pi\)</span> 后得到相同协方差。</p>
 </details>
 <h3 id="problem-6095d96314b2">Q682 · 最大最小的恒等式不能乱换协方差<a class="headerlink" href="#problem-6095d96314b2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：分布与矩</p>
@@ -8719,6 +8736,12 @@ P(K=k)=\frac a{a+b}\left(\frac b{a+b}\right)^k,\quad k\ge0,\qquad EK=b/a.
 <details class="note">
 <summary>解答</summary>
 <p>忽略非{4,5,6}，首个4或6前的5数<span class="arithmatex">\(G_{1}\)</span>为成功率<span class="arithmatex">\(2/3\)</span>的几何失败数，之后首次见另一目标前的5数<span class="arithmatex">\(G_{2}\)</span>为成功率<span class="arithmatex">\(1/2\)</span>的几何失败数；按重新开始独立。<span class="arithmatex">\(P(G_{1}+G_{2}=2)=19/108\)</span>。</p>
+<p>第一次见到4或6前，相关序列每次5的概率1/3，出现目标的概率2/3，所以 <span class="arithmatex">\(P(G_1=i)=(2/3)(1/3)^i\)</span>。已见一种目标后，忽略该种重复出现及原本中性点数，只看5和另一目标，它们各半，故 <span class="arithmatex">\(P(G_2=j)=2^{-(j+1)}\)</span>。两阶段由独立序列的停止后重启独立。因此</p>
+<div class="arithmatex">\[
+P(G_1+G_2=2)=\sum_{i=0}^2\frac23\left(\frac13\right)^i\left(\frac12\right)^{3-i}
+=\frac1{12}+\frac1{18}+\frac1{27}=\frac{19}{108}.
+\]</div>
+<p>忽略无关点数只改变等待时间，不改变在停止前5的次数分布。</p>
 </details>
 <h3 id="problem-9ca5fc3f4d0b">Q768 · 两次五先于四和六都出现<a class="headerlink" href="#problem-9ca5fc3f4d0b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：分布与矩</p>
@@ -9115,6 +9138,21 @@ L'(a)=\frac83a^2-4a-\frac52+\frac1{3a}+(a^2+4a)\log(2/a).
 \]</div>
 <p>在[1,2]上<span class="arithmatex">\(L''&gt;0\)</span>（直接求导检查），且<span class="arithmatex">\(L'(1)&lt;0\)</span>、<span class="arithmatex">\(L'(2)&gt;0\)</span>，故唯一零点为全局最小。二分得到<span class="arithmatex">\(a\approx 1.177141416815504\)</span>，十位小数1.1771414168。
 <strong>方法</strong>：先求一次相遇的损失，再用相遇机会的时空面积加权；行程等长与行驶时间等长会产生不同权重。</p>
+<p><strong>相遇权重与凸性展开。</strong> 固定慢车起点为时空原点，若相遇时两车分别已走 <span class="arithmatex">\(x,y\in[0,N]\)</span>，相遇时刻为 <span class="arithmatex">\(x/u\)</span>，快车出发时刻为 <span class="arithmatex">\(s=x/u-y/v\)</span>，快车出发位置为 <span class="arithmatex">\(z=x-y\)</span>。故</p>
+<div class="arithmatex">\[
+\left|\det\frac{\partial(z,s)}{\partial(x,y)}\right|=1/u-1/v,
+\]</div>
+<p>积分才得到相遇起点面积 <span class="arithmatex">\(N^2(1/u-1/v)\)</span>。减速所需时间为 <span class="arithmatex">\(u-b\)</span>，减速段相对匀速的路程损失为 <span class="arithmatex">\((u-b)^2/2\)</span>，加速段相同，合计 <span class="arithmatex">\((u-b)^2\)</span>。稀疏极限先取使多次相遇互相干扰的高阶项消失，之后才可取长行程极限，不能倒置两极限。</p>
+<p>先对 <span class="arithmatex">\(v\)</span> 积分，目标化为</p>
+<div class="arithmatex">\[
+L(a)=\int_1^a u^2[a/u-1-\log(a/u)]du
++\int_a^2(u-a)^2[2/u-1-\log(2/u)]du.
+\]</div>
+<p>慢道项求导含外边界项，但 <span class="arithmatex">\(u=a\)</span> 处方括号为零；快道同样因 <span class="arithmatex">\((u-a)^2\)</span> 无下边界项。继续积分即给上文 <span class="arithmatex">\(L'\)</span>。再求导有</p>
+<div class="arithmatex">\[
+L''(a)=\frac{13a}{3}-8-\frac1{3a^2}+(2a+4)\log(2/a).
+\]</div>
+<p>对 <span class="arithmatex">\(1\le a\le2\)</span>，使用 <span class="arithmatex">\(\log x\ge2(x-1)/(x+1)\;(x\ge1)\)</span>，得 <span class="arithmatex">\(L''(a)\ge(a-a^{-2})/3\ge0\)</span>；在 <span class="arithmatex">\(a=1\)</span> 对数不等式严格，在 <span class="arithmatex">\(a&gt;1\)</span> 最后一项严格，故全区间严格凸。<span class="arithmatex">\(L'(1)=5\log2-7/2&lt;0\)</span>、<span class="arithmatex">\(L'(2)=1/3&gt;0\)</span>，唯一驻点确为全局极小。</p>
 </details>
 <h3 id="problem-side-bet-changes-edge">Q815 · 主赌局与附加赌约的净期望<a class="headerlink" href="#problem-side-bet-changes-edge" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期望与线性性｜<strong>副题型</strong>：分布与矩</p>
@@ -9202,6 +9240,13 @@ E = \frac{3}{6}\times 3.5 + \frac{1}{6}\times(4+5+6) = 1.75 + 2.5 = 4.25
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(U(0,1)\)</span>可持续抽并保留最大值，每次额外抽样费用<span class="arithmatex">\(c=0.02\)</span>。阈值<span class="arithmatex">\(b\)</span>由<span class="arithmatex">\(\mathbb{E} [(U-b)_+]=(1-b)^{2}/2=c\)</span>给<span class="arithmatex">\(b=0.8\)</span>。<span class="arithmatex">\(V(x)=\max (x,b)\)</span>满足Bellman方程且边界匹配；第一抽免费时净均值<span class="arithmatex">\(E \max (U,b)=(1+b^{2})/2=41/50\)</span>。终止毛均值为<span class="arithmatex">\((1+b)/2=9/10\)</span>，额外抽样均数<span class="arithmatex">\(b/(1-b)=4\)</span>，扣0.08正好为0.82。报价时须分别写净值与毛回款。</p>
+<p><strong>Bellman 验证及最优性。</strong> 当前历史最大值为 <span class="arithmatex">\(x\)</span>，停得 <span class="arithmatex">\(x\)</span>，继续的净价值为 <span class="arithmatex">\(-c+\int_0^1V(\max\{x,u\})du\)</span>。候选 <span class="arithmatex">\(V(x)=\max(x,b)\)</span> 在 <span class="arithmatex">\(x\le b\)</span> 时的继续值为</p>
+<div class="arithmatex">\[
+-c+\int_0^b b\,du+\int_b^1u\,du
+=-c+\frac{1+b^2}{2}=b,
+\]</div>
+<p>最后用 <span class="arithmatex">\(c=(1-b)^2/2\)</span>。在 <span class="arithmatex">\(x\ge b\)</span> 时继续值为 <span class="arithmatex">\(-c+(1+x^2)/2=x+(1-x)^2/2-c\le x\)</span>。所以低于 <span class="arithmatex">\(b\)</span> 继续、达到 <span class="arithmatex">\(b\)</span> 停符合所有状态的最优性不等式。</p>
+<p>按此策略，成功抽到超过 <span class="arithmatex">\(b\)</span> 的值所需次数有几何尾，故费用与停止价值可积，候选值可以由实际策略达到。对任何其他策略，一步不等式给“已扣费用加剩余候选价值”的超鞅上界，截断后取极限不能超过 <span class="arithmatex">\(V\)</span>。这补全了只解无差异方程还欠缺的最优性论证。</p>
 </details>
 <h3 id="problem-91f5c02f5107">Q822 · 双方一次重抽的赢率均衡<a class="headerlink" href="#problem-91f5c02f5107" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：动态规划</p>
@@ -9355,6 +9400,22 @@ V=\frac16\sum_{k=1}^{5}\max(k,V).
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(1,\ldots ,4\)</span>累加，5收当前分数、6归零，且允许随时停。<span class="arithmatex">\(V(s)=\max \{s,[\sum _{i=1}^{4}V(s+i)+s]/6\}\)</span>。<span class="arithmatex">\(s\ge 10\)</span>时继续的上界<span class="arithmatex">\((5s+10)/6\le s\)</span>，故可设<span class="arithmatex">\(V(s)=s\)</span>并向下递推。初始<span class="arithmatex">\(V(0)=183324769/60466176\approx 3.03\)</span>；若不允许主动停则为<span class="arithmatex">\(5/2\)</span>。</p>
+<p><strong>停止边界为何是 10，且没有循环论证。</strong> 对当前分数 <span class="arithmatex">\(s\)</span>，若只再掷一次并在 <span class="arithmatex">\(1,\ldots,4\)</span> 后立即停下，期望为</p>
+<div class="arithmatex">\[
+\frac{(s+1)+(s+2)+(s+3)+(s+4)+s+0}{6}=\frac{5s+10}{6}.
+\]</div>
+<p>当 <span class="arithmatex">\(s&lt;10\)</span> 时它严格大于 <span class="arithmatex">\(s\)</span>，所以立即停绝非最优。</p>
+<p>当 <span class="arithmatex">\(s\ge10\)</span> 时，只要游戏继续存活，分数仍至少为 10，上式给出每一步的条件期望不超过当前分数。把在 5、6 或主动停止时的最终收入作为此后保持不变的值，就得到非负超鞅。对任意有界停止策略，收入期望不超过 <span class="arithmatex">\(s\)</span>；一般策略经截断并用 Fatou 引理仍不超过 <span class="arithmatex">\(s\)</span>。此外每次掷出 5 或 6 的概率为 <span class="arithmatex">\(1/3\)</span>，游戏结束时间由几何尾控制，不存在靠永远不结束增加收入的策略。因此 <span class="arithmatex">\(s\ge10\)</span> 立即停止最优，<span class="arithmatex">\(s=10\)</span> 时“再掷一次后停”也与立即停同值。</p>
+<p>取 <span class="arithmatex">\(V(s)=s\)</span>（<span class="arithmatex">\(s\ge10\)</span>），依次从 <span class="arithmatex">\(s=9\)</span> 向下算</p>
+<div class="arithmatex">\[
+V(s)=\frac{V(s+1)+V(s+2)+V(s+3)+V(s+4)+s}{6},
+\]</div>
+<p>即得 <span class="arithmatex">\(V(9)=55/6\)</span>，最终</p>
+<div class="arithmatex">\[
+V(0)=\frac{183324769}{60466176}\approx3.03186.
+\]</div>
+<p>最优策略可选“分数小于 10 就继续，达到或超过 10 就停”。</p>
+<p><strong>不能主动停。</strong> 每次掷出 <span class="arithmatex">\(1,\ldots,4\)</span> 的无条件平均增分是 <span class="arithmatex">\(10/6\)</span>，终止概率为 <span class="arithmatex">\(1/3\)</span>，所以终止前平均累计增分为 <span class="arithmatex">\((10/6)/(1/3)=5\)</span>。终止点数为 5 或 6 各半，且其类型与之前的增分序列独立，只有 5 才保留分数，故初始价值是 <span class="arithmatex">\(5/2\)</span>。若从 <span class="arithmatex">\(s\)</span> 开始则为 <span class="arithmatex">\(s/2+5/2\)</span>，也可直接代入对应的一步递推验证。</p>
 </details>
 <h3 id="problem-a5e2ac12cf5e">Q836 · 相邻重复作废的累计停止<a class="headerlink" href="#problem-a5e2ac12cf5e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：归纳与递推</p>
@@ -9362,6 +9423,25 @@ V=\frac16\sum_{k=1}^{5}\max(k,V).
 <details class="note">
 <summary>解答</summary>
 <p>若公平 d6 的点数累计入总分 <span class="arithmatex">\(s\)</span>，但与上次点数 <span class="arithmatex">\(j\)</span> 相同就全失，状态必须是 <span class="arithmatex">\((s,j)\)</span>。价值满足 <span class="arithmatex">\(V(s,j)=\max \{s,(1/6)\sum _{i\ne j}V(s+i,i)\}\)</span>。当 <span class="arithmatex">\(s\ge 20\)</span>，继续即便所有未失败结果随后立刻收分，条件均值不超过 <span class="arithmatex">\(s\)</span>；函数 <span class="arithmatex">\(s\)</span> 对继续是超调和上界，有限步倒推再取极限证明应停止。因点数正，<span class="arithmatex">\(s&lt;20\)</span> 可按 <span class="arithmatex">\(s\)</span> 递减计算，边界 <span class="arithmatex">\(V(s,j)=s(s\ge 20)\)</span>。首次期望为 <span class="arithmatex">\((1/6)\sum _{i=1}^{6}V(i,i)=678747596227/78364164096\approx 8.66145\)</span>，落在 [8,9]。只保留总分会漏掉决定失败点数的上次结果。</p>
+<p><strong>停止边界为什么有效。</strong> 令 <span class="arithmatex">\(g(s,j)=s\)</span>。选择继续一步且未爆掉的即收均值为 <span class="arithmatex">\([5s+(21-j)]/6\)</span>，其与 <span class="arithmatex">\(s\)</span> 之差为 <span class="arithmatex">\((21-j-s)/6\le0\)</span>（<span class="arithmatex">\(s\ge20\)</span>）。未失败时总分只增不减，所以一旦进入 <span class="arithmatex">\(s\ge20\)</span> 区域以后永远留在该区域，<span class="arithmatex">\(g\)</span> 在此是继续算子的超调和上界。反复条件期望可界住任意有限策略的收益；任意长策略的非负终值再由 Fatou 引理界住。因此这不是只比较“再掷一次就收”的局部判断。</p>
+<p><strong>如何输出完整策略。</strong> 下面用有理数从19向下倒推每个 <span class="arithmatex">\((s,j)\)</span>，比较停止值和继续值；状态中不可能实际到达的组合也可计算，不影响可达状态。它同时给出初始价值和全部继续状态，等价时选择停。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">V</span><span class="p">,</span> <span class="n">go</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="n">go</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="k">continue</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="n">cont</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="mi">6</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">cont</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="n">go</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cont</span> <span class="o">&gt;</span> <span class="n">s</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">initial</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="mi">6</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">go</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]])</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">initial</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">initial</span><span class="p">))</span>
+</span></code></pre></div>
+<p>这里不是用“掷出重复的概率始终1/6”就删掉上次点数：虽然爆掉概率相同，未爆掉时可加的五种分数随 <span class="arithmatex">\(j\)</span> 改变，继续价值也就不同。</p>
 </details>
 <h3 id="problem-e208290de1e9">Q837 · 十面骰的作废重掷<a class="headerlink" href="#problem-e208290de1e9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：归纳与递推</p>
@@ -9376,20 +9456,20 @@ V=\frac16\sum_{k=1}^{5}\max(k,V).
 <details class="note">
 <summary>解答</summary>
 <p>状态为双方占位掩码 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 及轮次。终局己方赢取值 1，对手赢或棋盘已满取 0；己方节点取子节点最大值，对手节点取所有合法子节点平均。每步少一个空格，递推必终止，记忆化可精确求有理数。初始最大胜率为 <span class="arithmatex">\(191/192\)</span>；策略在每个己方状态取实现最大值的空格即可。
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">292</span><span class="p">,</span> <span class="mi">273</span><span class="p">,</span> <span class="mi">84</span><span class="p">)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">wins</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">w</span> <span class="o">==</span> <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">)</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nd">@cache</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">turn</span><span class="p">):</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">if</span> <span class="n">wins</span><span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">if</span> <span class="n">wins</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">511</span><span class="p">:</span> <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">),</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>               <span class="k">else</span> <span class="n">value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># 191/192</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">F</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">292</span><span class="p">,</span> <span class="mi">273</span><span class="p">,</span> <span class="mi">84</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">wins</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">w</span> <span class="o">==</span> <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nd">@cache</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">turn</span><span class="p">):</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">if</span> <span class="n">wins</span><span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">if</span> <span class="n">wins</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">511</span><span class="p">:</span> <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">),</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>               <span class="k">else</span> <span class="n">value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># 191/192</span>
 </span></code></pre></div>
 <strong>方法</strong>：随机对手节点求均值；最坏对手才取最小值，两种目标不能混淆。</p>
 </details>
@@ -9398,11 +9478,11 @@ V=\frac16\sum_{k=1}^{5}\max(k,V).
 <p><strong>题目</strong>：一叠两类牌，余下 <span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(b\)</span> 张。每次先猜类别再无放回翻一张，猜中得 1，所有牌都会翻完。求最优策略及三张对三张时均值。</p>
 <details class="note">
 <summary>解答</summary>
-<p>猜测不改变之后的牌序或状态转移，所以每一步选择数量较多的类别即可最大化当前成功率，不会损害未来。令 <span class="arithmatex">\(\binom{r}{b}\)</span> 为余下可得均分，<span class="arithmatex">\(\binom{0}{0}=0\)</span>：</p>
+<p>猜测不改变之后的牌序或状态转移，所以每一步选择数量较多的类别即可最大化当前成功率，不会损害未来。令 <span class="arithmatex">\(C(r,b)\)</span> 为余下可得均分，<span class="arithmatex">\(C(0,0)=0\)</span>：</p>
 <div class="arithmatex">\[
 C(r,b)=\frac{\max(r,b)}{r+b}+\frac r{r+b}C(r-1,b)+\frac b{r+b}C(r,b-1).
 \]</div>
-<p>边界 <span class="arithmatex">\(\binom{r}{0}=r\)</span>、<span class="arithmatex">\(\binom{0}{b}=b\)</span>。逐层填表得到 <span class="arithmatex">\(\binom{3}{3}=41/10\)</span>。<span class="arithmatex">\(r=b\)</span> 时两种猜测等价。该游戏不允许看完再猜，也不是决定何时停止的红黑累加博弈。
+<p>边界 <span class="arithmatex">\(C(r,0)=r\)</span>、<span class="arithmatex">\(C(0,b)=b\)</span>。逐层填表得到 <span class="arithmatex">\(C(3,3)=41/10\)</span>。<span class="arithmatex">\(r=b\)</span> 时两种猜测等价。该游戏不允许看完再猜，也不是决定何时停止的红黑累加博弈。
 <strong>方法</strong>：先判断行动是否影响后续分布；若不影响，逐步最大化当前条件收益即可，再以递推计算总收益。</p>
 </details>
 <h3 id="problem-unknown-offset-relative-stop">Q840 · 未知整体平移下的相对比较停止<a class="headerlink" href="#problem-unknown-offset-relative-stop" title="Permanent link">&para;</a></h3>
@@ -9444,6 +9524,11 @@ P_r=\sum_{k=r+1}^n\frac1n\frac r{k-1}=\frac rn\sum_{j=r}^{n-1}\frac1j.
 \]</div>
 <p>比较<span class="arithmatex">\(P_{r+1}-P_{r}=(\sum _{j=r+1}^{n-1}1/j-1)/n\)</span>，得到唯一阈值或相邻并列阈值。<span class="arithmatex">\(n=100\)</span>枚举整数<span class="arithmatex">\(r\)</span>得最优37，成功率约.371042779；<span class="arithmatex">\(n\)</span>大时<span class="arithmatex">\(r/n\to 1/e\)</span>、成功率<span class="arithmatex">\(\to 1/e\)</span>。没有后续纪录时只能失败或取末项，不能倒回选观察区中的最大。
 <strong>方法</strong>：相对名次的对称性把每个终值位置条件化，再用谐和和求最优观察长度。</p>
+<p><strong>为什么全策略最优也具有一个观察阈值。</strong> 令 <span class="arithmatex">\(v_i\)</span> 为已经拒绝前 <span class="arithmatex">\(i\)</span> 人后，从其余人中选中全局最大的最优概率，<span class="arithmatex">\(v_n=0\)</span>。随机排列的相对名次码独立，第 <span class="arithmatex">\(i\)</span> 人成为纪录的概率为 <span class="arithmatex">\(1/i\)</span>；给定他是纪录及之前的相对名次，接受他成功的概率为 <span class="arithmatex">\(i/n\)</span>，拒绝则仍有价值 <span class="arithmatex">\(v_i\)</span>。非纪录不能成功，直接拒绝。因此倒推</p>
+<div class="arithmatex">\[
+v_{i-1}=v_i+\frac1i\max\left(\frac in-v_i,0\right).
+\]</div>
+<p>从这式直接有 <span class="arithmatex">\(v_{i-1}\ge v_i\)</span>：继续机会的最优成功率随时间推进不增；接受纪录的成功率 <span class="arithmatex">\(i/n\)</span> 则严格递增。两者至多交叉一次，所以最优策略确实是先观察若干人，再接受第一个纪录。这样先证明阈值结构，再对 <span class="arithmatex">\(P_r\)</span> 作一维优化，就不是只在预先假定的阈值策略里寻找最优。</p>
 </details>
 <h3 id="problem-full-information-secretary">Q843 · 已知均匀分布的纪录阈值选择<a class="headerlink" href="#problem-full-information-secretary" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：归纳与递推</p>
@@ -9457,6 +9542,22 @@ P_r=\sum_{k=r+1}^n\frac1n\frac r{k-1}=\frac rn\sum_{j=r}^{n-1}\frac1j.
 <p>在第<span class="arithmatex">\(i\)</span>次观察，若它是纪录且<span class="arithmatex">\(X_{i}\ge a_{100-i}\)</span>就接受，否则继续；最后一项若仍是纪录则接受。<span class="arithmatex">\(a_{1}=1/2\)</span>，<span class="arithmatex">\(a_{2}=1/(\sqrt{6}-1)\)</span>，<span class="arithmatex">\(a_{r}\)</span>随<span class="arithmatex">\(r\)</span>增加而增加，各根可用二分。
 方程的来由：在阈值处<span class="arithmatex">\(x=a_{r}\)</span>，若拒绝，未来一旦有值大于<span class="arithmatex">\(x\)</span>，因为余下阈值更低，就应取这个首次超越值。它在第<span class="arithmatex">\(k\)</span>个未来位置出现并最终为最大，概率积分为<span class="arithmatex">\(x^{k-1}\int _{x}^{1}t^{r-k}dt\)</span>。把<span class="arithmatex">\(k=1,\ldots ,r\)</span>相加，得<span class="arithmatex">\(x^{r}\sum _{j=1}^{r}(x^{-j}-1)/j\)</span>，与立即接受的<span class="arithmatex">\(x^{r}\)</span>相等即上式。左右收益比较和未来阈值单调性验证停止区域为<span class="arithmatex">\(x\ge a_{r}\)</span>。
 <strong>方法</strong>：明确有无分布信息，写“取当前纪录成功概率”与“首次未来超越”的价值比较，不把保留历史最大值可回看模型混入。</p>
+<p><strong>用 Bellman 方程补齐阈值最优性的证明。</strong> 设 <span class="arithmatex">\(W_r(x)\)</span> 为已经永久拒绝最大值 <span class="arithmatex">\(x\)</span>、还剩 <span class="arithmatex">\(r\)</span> 个观测时，未来选中全局最大值的最优概率。<span class="arithmatex">\(W_0(x)=0\)</span>，下一观测低于 <span class="arithmatex">\(x\)</span> 时无资格选，高于 <span class="arithmatex">\(x\)</span> 时才比较立即选与继续：</p>
+<div class="arithmatex">\[
+W_r(x)=xW_{r-1}(x)+\int_x^1\max\{y^{r-1},W_{r-1}(y)\}dy.
+\]</div>
+<p>当前观测是纪录 <span class="arithmatex">\(x\)</span>、后面还剩 <span class="arithmatex">\(r\)</span> 个时，停止值是 <span class="arithmatex">\(x^r\)</span>，继续值就是 <span class="arithmatex">\(W_r(x)\)</span>。非纪录值赢得全局最大概率为零，故无需考虑在它上面停。</p>
+<p>对 <span class="arithmatex">\(x&gt;0\)</span> 令 <span class="arithmatex">\(w_r(x)=W_r(x)/x^r\)</span>。递推变成</p>
+<div class="arithmatex">\[
+w_r(x)=w_{r-1}(x)+x^{-r}\int_x^1y^{r-1}\max\{1,w_{r-1}(y)\}dy.
+\]</div>
+<p>从 <span class="arithmatex">\(w_0=0\)</span> 归纳，<span class="arithmatex">\(w_r\)</span> 连续且严格递减：前项不增，后项的正积分区间缩小、分母增大，严格减小。同时 <span class="arithmatex">\(w_r(1)=0\)</span>、<span class="arithmatex">\(w_r(0+)=\infty\)</span>，所以 <span class="arithmatex">\(w_r(x)=1\)</span> 有唯一根 <span class="arithmatex">\(a_r\)</span>，且停止区域恰为 <span class="arithmatex">\([a_r,1]\)</span>。又 <span class="arithmatex">\(w_r\ge w_{r-1}\)</span>，故 <span class="arithmatex">\(a_r\ge a_{r-1}\)</span>。这先独立建立单阈值和单调性，避免用尚未证明的阈值性质反过来推阈值。</p>
+<p>在 <span class="arithmatex">\(x=a_r\)</span> 拒绝后，第一个超越 <span class="arithmatex">\(x\)</span> 的未来纪录 <span class="arithmatex">\(y\)</span> 一定高于所有后续较低阈值，所以它会被接受。它出现在第 <span class="arithmatex">\(k\)</span> 个未来位置且最终为最大，须前 <span class="arithmatex">\(k-1\)</span> 个均不超过 <span class="arithmatex">\(x\)</span>、后 <span class="arithmatex">\(r-k\)</span> 个均不超过 <span class="arithmatex">\(y\)</span>，概率是 <span class="arithmatex">\(x^{k-1}\int_x^1y^{r-k}dy\)</span>。逐项积分、令 <span class="arithmatex">\(j=r-k+1\)</span>，得到</p>
+<div class="arithmatex">\[
+W_r(x)=\sum_{k=1}^r\frac{x^{k-1}(1-x^{r-k+1})}{r-k+1}
+=x^r\sum_{j=1}^r\frac{x^{-j}-1}{j}.
+\]</div>
+<p>与 <span class="arithmatex">\(x^r\)</span> 相等便是题中的阈值方程。比如 <span class="arithmatex">\(r=2\)</span> 时为 <span class="arithmatex">\(x^{-1}-1+(x^{-2}-1)/2=1\)</span>，即 <span class="arithmatex">\(5x^2-2x-1=0\)</span>，正根 <span class="arithmatex">\((1+\sqrt6)/5=1/(\sqrt6-1)\)</span>。每次接受的是当下可观察值，算法不需要知道未来最大值。</p>
 </details>
 <h2 id="sec-积分递推与累计越界">积分递推与累计越界<a class="headerlink" href="#sec-积分递推与累计越界" title="Permanent link">&para;</a></h2>
 <p>以剩余空间、累计值或阈值为状态，对首个连续增量积分，并写清边界条件。</p>
@@ -9494,6 +9595,11 @@ f(1) = e
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(f(x)\)</span> 表示独立 <span class="arithmatex">\(U(0,1)\)</span> 累计首次超过 <span class="arithmatex">\(x\)</span> 的均时。<span class="arithmatex">\(0\le x\le 1\)</span> 时 <span class="arithmatex">\(f(x)=e^{x}\)</span>；<span class="arithmatex">\(1&lt;x\le 2\)</span> 时首步积分式给 <span class="arithmatex">\(f'(x)=f(x)-f(x-1)\)</span>。乘 <span class="arithmatex">\(e^{-x}\)</span> 后导数为 <span class="arithmatex">\(-1/e\)</span>，结合 <span class="arithmatex">\(f(1)=e\)</span>，得 <span class="arithmatex">\(f(x)=e^{x}[1-(x-1)/e]\)</span>，故 <span class="arithmatex">\(f(2)=e^{2}-e\)</span>。超过 1 与超过 2 不可只按门槛倍数缩放。</p>
+<p>首步抽到 <span class="arithmatex">\(u\in(0,1)\)</span>，无论如何已花1次；若 <span class="arithmatex">\(u\le x\)</span> 还需 <span class="arithmatex">\(f(x-u)\)</span> 次，故</p>
+<div class="arithmatex">\[
+f(x)=1+\int_0^{\min(x,1)}f(x-u)du.
+\]</div>
+<p><span class="arithmatex">\(0\le x\le1\)</span> 时为 <span class="arithmatex">\(1+\int_0^xf(v)dv\)</span>，得到 <span class="arithmatex">\(f'=f,f(0)=1\)</span>，所以 <span class="arithmatex">\(f=e^x\)</span>。<span class="arithmatex">\(1&lt;x\le2\)</span> 时积分区间为 <span class="arithmatex">\([x-1,x]\)</span>，Leibniz 法则得 <span class="arithmatex">\(f'=f(x)-f(x-1)\)</span>，由前一区间已知值闭合。<span class="arithmatex">\(f(\log2)=2,f(1)=e,f(2)=e^2-e\)</span>。<span class="arithmatex">\(f(0)=1\)</span> 是因为严格超过0仍需抽一次，并非零次。期望有限可由每两次连续抽到大于1/2的增量作几何尾界控制，积分方程的期望操作合法。</p>
 </details>
 <h3 id="problem-continuous-blackjack">Q847 · 连续累加博弈的阈值积分方程<a class="headerlink" href="#problem-continuous-blackjack" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：归纳与递推</p>
@@ -9511,6 +9617,17 @@ W'(\alpha)=e^\alpha[(3-2\alpha)e^\alpha-e-\alpha].
 \]</div>
 <p>最优满足 <span class="arithmatex">\(e^{\alpha }=(e+\alpha )/(3-2\alpha )\)</span>，唯一根 <span class="arithmatex">\(\alpha \approx 0.5705565283\)</span>。括号在 0 为正、1 为负，导数 <span class="arithmatex">\((1-2\alpha )e^{\alpha }-1\)</span> 在 <span class="arithmatex">\(\alpha &gt;0\)</span> 严负，保证只有一次由升到降。若题目写分母 <span class="arithmatex">\(x+y\alpha\)</span>，则 <span class="arithmatex">\(x=3\)</span>、<span class="arithmatex">\(y=-2\)</span>，平方和 13。
 <strong>方法</strong>：先解对手的继续概率，再求先手停止值的密度；不能把首越值当成恰好 <span class="arithmatex">\(\alpha\)</span>。</p>
+<p><strong>积分方程的求解细节。</strong> 后手当前 <span class="arithmatex">\(t\le s\)</span> 时，新和落在 <span class="arithmatex">\((s,1]\)</span> 就让先手输，这段不贡献；新和超过1的增量区间长为 <span class="arithmatex">\(t\)</span>，贡献1。因此 <span class="arithmatex">\(h_s(t)=t+\int_t^sh_s(u)du\)</span>。微分得 <span class="arithmatex">\(h_s'=1-h_s\)</span>，边界 <span class="arithmatex">\(h_s(s)=s\)</span>，解为 <span class="arithmatex">\(h_s(t)=1+(s-1)e^{s-t}\)</span>，于是 <span class="arithmatex">\(g(s)=h_s(0)\)</span>。</p>
+<p>对先手，任意 <span class="arithmatex">\(0&lt;t&lt;1\)</span> 的潜在累计和更新密度是</p>
+<div class="arithmatex">\[
+q(t)=\sum_{n\ge1}\frac{t^{n-1}}{(n-1)!}=e^t;
+\]</div>
+<p>第 <span class="arithmatex">\(n\)</span> 项来自 <span class="arithmatex">\(n\)</span> 个均匀变量和在 <span class="arithmatex">\(t&lt;1\)</span> 上的单纯形密度。因增量皆正，在 <span class="arithmatex">\(\alpha\)</span> 以下出现的累计和自动尚未停止。最后一跳若落在 <span class="arithmatex">\(s\in(\alpha,1)\)</span>，其密度是首跳直接到达的1，加所有前驱 <span class="arithmatex">\(t&lt;\alpha\)</span> 的 <span class="arithmatex">\(\int_0^\alpha q(t)dt\)</span>，故确为 <span class="arithmatex">\(e^\alpha\)</span>。该无条件密度总质量为 <span class="arithmatex">\((1-\alpha)e^\alpha\)</span>，缺少的质量就是先手爆掉，不能把它重新归一化。</p>
+<p>用原函数 <span class="arithmatex">\(\int[1+(s-1)e^s]ds=s+(s-2)e^s\)</span>，得</p>
+<div class="arithmatex">\[
+W(\alpha)=e^\alpha[1-e-\alpha+(2-\alpha)e^\alpha].
+\]</div>
+<p>求导才得到上文方程。令括号 <span class="arithmatex">\(B(\alpha)=(3-2\alpha)e^\alpha-e-\alpha\)</span>，<span class="arithmatex">\(B'= (1-2\alpha)e^\alpha-1\)</span>，而 <span class="arithmatex">\(B''=(-1-2\alpha)e^\alpha&lt;0\)</span>、<span class="arithmatex">\(B'(0)=0\)</span>，所以 <span class="arithmatex">\(B'&lt;0\)</span> 于 <span class="arithmatex">\((0,1]\)</span>。再核对 <span class="arithmatex">\(B(0)=3-e&gt;0,B(1)=-1&lt;0\)</span>，唯一零点必为全局最优。结论优化的是题设限定的阈值策略族，不由此直接宣称所有依历史策略都已比较。</p>
 </details>
 <h3 id="problem-alternating-pull-equations">Q848 · 轮流均匀拉动的双状态积分方程<a class="headerlink" href="#problem-alternating-pull-equations" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：动态规划</p>
@@ -9527,6 +9644,18 @@ F(x)=A\cos(x+1/2)+\sin(x+1/2),\quad A=\frac{1-\sin1}{\cos1}.
 \]</div>
 <p><span class="arithmatex">\(F'\)</span>在此区间为正，故<span class="arithmatex">\(F(c)=1/2\)</span>只有一个解。二分或反三角求得<span class="arithmatex">\(c\approx -0.285000121786\)</span>，七位有效数字为<span class="arithmatex">\(-0.2850001\)</span>。
 <strong>方法</strong>：轮到谁会改变下一步方向，必须保留两个状态；积分方程微分后用原始边界恢复常数。</p>
+<p><strong>从解恢复边界并确认唯一根。</strong> 令 <span class="arithmatex">\(z=x+1/2\in[0,1]\)</span>，一般解 <span class="arithmatex">\(F=A\cos z+B\sin z\)</span>。<span class="arithmatex">\(G(-1/2)=0\)</span> 与 <span class="arithmatex">\(F'=1-G\)</span> 给 <span class="arithmatex">\(F'(-1/2)=1\)</span>，故 <span class="arithmatex">\(B=1\)</span>；<span class="arithmatex">\(F(1/2)=1\)</span> 给 <span class="arithmatex">\(A=(1-\sin1)/\cos1\)</span>。再定义 <span class="arithmatex">\(G=1-F'\)</span>，有 <span class="arithmatex">\(G'=F,G(-1/2)=0\)</span>，所以微分后的解确实满足原第二积分方程；第一式由 <span class="arithmatex">\(F'=1-G\)</span> 及右边界恢复，没有因微分引入多余解。</p>
+<p>写 <span class="arithmatex">\(A=\tan(\pi/4-1/2)\)</span>，并令 <span class="arithmatex">\(\phi=\pi/4-1/2\)</span>，则</p>
+<div class="arithmatex">\[
+F(x)=\frac{\sin(x+1/2+\phi)}{\cos\phi},\qquad
+F'(x)=\frac{\cos(x+1/2+\phi)}{\cos\phi}&gt;0.
+\]</div>
+<p>在题给 <span class="arithmatex">\(-1/2&lt;c&lt;0\)</span> 内，正弦的角度落在单调支上，所以可直接求</p>
+<div class="arithmatex">\[
+c=\arcsin\!\left(\frac{\cos\phi}{2}\right)-\phi-\frac12
+\approx-0.285000121786.
+\]</div>
+<p>每两步的退出概率为 <span class="arithmatex">\(x+1/2+\int_x^{1/2}(1/2-y)dy=x+1/2+(1/2-x)^2/2\ge1/2\)</span>，所以吸收几乎必然；积分解代表最终胜率，而非容许无限拖延产生的任意有界解。</p>
 </details>
 <h3 id="problem-discrete-random-parking">Q849 · 两格停车的首步分解与剩余空间<a class="headerlink" href="#problem-discrete-random-parking" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：期望与线性性</p>
@@ -9553,6 +9682,14 @@ F_n=\sum_{j=0}^{n-1}\frac{(-2)^j(n-j)}{j!}.
 f(x)=1+\frac{2}{x-1}\int_0^{x-1}f(t)\,dt.
 \]</div>
 <p>逐个单位区间积分即可得到任意所需精度。设 <span class="arithmatex">\(I(x)=\int_0^xf(t)\,dt\)</span>，则 <span class="arithmatex">\(I(x)=0\)</span>（<span class="arithmatex">\(x\le1\)</span>），<span class="arithmatex">\(x&gt;1\)</span> 时 <span class="arithmatex">\(I\prime(x)=1+\frac{2I(x-1)}{x-1}\)</span>，右端仅依赖前一区间已求出的函数。从 <span class="arithmatex">\([1,2]\)</span> 上的 <span class="arithmatex">\(I(x)=x-1\)</span> 开始逐段积分，最后 <span class="arithmatex">\(f(50)=1+\frac{2I(49)}{49}\approx37.1274939329\)</span>。有限街道不宜直接用无限长度停车常数乘50。</p>
+<p><strong>为什么可以把左右两段分别计算。</strong> 给每个当前可停区间独立放一个按其长度为速率的指数时钟，最早响的区间被选中的概率恰等于其可停位置长度占比；响后在该区间均匀停车。这与“全体可停位置中均匀选点”同分布。首车停下后，左右时钟可独立运行，两个子问题的停车顺序即使交错也不改变各自最终车辆数，所以条件期望为 <span class="arithmatex">\(1+f(U)+f(x-1-U)\)</span>。这证明了递推所需的分解，而非假定左右下一辆各半选择。</p>
+<p><strong>从边界实际算前几段。</strong> <span class="arithmatex">\(1&lt;x\le2\)</span> 时两子段几乎必都短于1，所以 <span class="arithmatex">\(f(x)=1\)</span>。<span class="arithmatex">\(2&lt;x\le3\)</span> 时 <span class="arithmatex">\(I(x-1)=x-2\)</span>，得到</p>
+<div class="arithmatex">\[
+f(x)=3-\frac2{x-1},\quad
+I(x)=3x-5-2\log(x-1)\quad(2\le x\le3).
+\]</div>
+<p>特别地 <span class="arithmatex">\(f(2)=1,f(3)=2\)</span>。恰好长度1的区间可放一辆，即 <span class="arithmatex">\(f(1)=1\)</span>，但单点对积分无贡献，故 <span class="arithmatex">\(I(1)=0\)</span> 并不矛盾；<span class="arithmatex">\(x&gt;1\)</span> 时首车落在恰产生长1子段的位置概率为零。</p>
+<p><strong>逐段数值方法。</strong> 在区间 <span class="arithmatex">\([k,k+1]\)</span> 求 <span class="arithmatex">\(I'\)</span> 时，仅调用已经算好的 <span class="arithmatex">\([k-1,k]\)</span> 的 <span class="arithmatex">\(I\)</span>，以已求 <span class="arithmatex">\(I(k)\)</span> 作初值。需要保存前段的连续插值而不是只保存整数点值。这样依次到49后用 <span class="arithmatex">\(1+2I(49)/49\)</span> 得 <span class="arithmatex">\(f(50)\)</span>，过程不存在未知的同段函数耦合。仓库的 <code>tools/probability/course_numerics.py</code> 用此方法及 DOP853 连续输出，以两组容差重复计算核对稳定数字；结果约37.1274939329。容差对比是数值收敛检查，若要求严格区间误差证书，还需区间积分或带证明的误差界，不能只因两次近似一致就声称每一位已严格认证。</p>
 </details>
 <h2 id="sec-对称性与不变量">对称性与不变量<a class="headerlink" href="#sec-对称性与不变量" title="Permanent link">&para;</a></h2>
 <p><span id="sec-六对称性不变量与概率界"></span></p>
@@ -9658,10 +9795,18 @@ P(\text{你坐到 100 号}) = 0.5
 <p><strong>题目</strong>：500 只蚂蚁被随机放在一根 1 英尺长的细绳上（每只独立均匀分布于 0 与 1 之间）。每只蚂蚁随机朝绳的一端（左右等概率）以恒定速度 1 英尺/分钟爬行，直到从绳端掉落。蚂蚁尺寸无穷小。两只蚂蚁迎面相撞时，双方立即掉头并继续以 1 英尺/分钟爬行。所有蚂蚁都掉下绳子的期望时间是多少？</p>
 <details class="note">
 <summary>解答</summary>
-<p>此题常被认为很难，难点有三：位置随机、方向随机、碰撞掉头。逐一化解。</p>
-<p><strong>碰撞无害</strong>：<span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 相撞后都掉头。但若<strong>交换两只蚂蚁的标签</strong>，画面与"两蚁互相穿过、继续原方向"完全一样。由于标签本来就是随机的，碰撞对结果没有影响——可以假设<strong>相遇时各自继续原方向前进</strong>。</p>
-<p><strong>方向也无关</strong>：碰撞被消除后，由对称性，蚂蚁朝哪个方向走都不影响结果。位置在 <span class="arithmatex">\( x \)</span> 英尺处的蚂蚁期望在 <span class="arithmatex">\( x \)</span> 分钟掉落（若朝另一端走则用 <span class="arithmatex">\( 1-x \)</span>）。</p>
-<p>于是原问题等价于：<strong>500 个 iid <span class="arithmatex">\( U(0,1) \)</span> 随机变量最大值的期望是多少？</strong> 由 <a href="../04_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%BA%8C/#problem-a28e3ccae86a">Q581 · max 与 min 的分布与期望</a>，<span class="arithmatex">\( E[\max] = n/(n+1) = 499/500 \)</span> 分钟。</p>
+<p>把两只碰撞蚂蚁的标签交换，则“相撞后掉头”的位置轨迹与“两只互相穿过、保持方向”的位置轨迹完全相同。最后一只蚂蚁何时离开只依赖位置集合，不依赖标签，因此可以改算互不相撞的虚拟蚂蚁。这个等价是逐条路径成立的，无需标签随机。</p>
+<p>记第 <span class="arithmatex">\(i\)</span> 只虚拟蚂蚁的初始位置为 <span class="arithmatex">\(X_i\sim U(0,1)\)</span>。朝左时离开时间 <span class="arithmatex">\(T_i=X_i\)</span>，朝右时 <span class="arithmatex">\(T_i=1-X_i\)</span>，速度为 1。两种条件分布都是 <span class="arithmatex">\(U(0,1)\)</span>，所以方向混合后仍是均匀分布；由于各蚂蚁的初始位置和方向独立，<span class="arithmatex">\(T_1,\ldots,T_{500}\)</span> 也独立。注意：给定位置 <span class="arithmatex">\(x\)</span> 后的平均离开时间是 <span class="arithmatex">\((x+1-x)/2=1/2\)</span>，并不是 <span class="arithmatex">\(x\)</span>。</p>
+<p>全部离开时间为 <span class="arithmatex">\(M=\max_iT_i\)</span>，故对 <span class="arithmatex">\(0\le t\le1\)</span>，</p>
+<div class="arithmatex">\[
+P(M\le t)=\prod_{i=1}^{500}P(T_i\le t)=t^{500}.
+\]</div>
+<p>用非负随机变量的尾积分公式，</p>
+<div class="arithmatex">\[
+EM=\int_0^1(1-t^{500})\,dt
+=1-\frac1{501}=\boxed{\frac{500}{501}\text{ 分钟}}.
+\]</div>
+<p>一般 <span class="arithmatex">\(n\)</span> 只的结果是 <span class="arithmatex">\(n/(n+1)\)</span>；本题代入 <span class="arithmatex">\(n=500\)</span>，不是 <span class="arithmatex">\(499/500\)</span>。</p>
 </details>
 <h3 id="problem-0d584c99a27f">Q860 · 两端相向进入的碰撞次数<a class="headerlink" href="#problem-0d584c99a27f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：不变量与对称性</p>
@@ -9751,6 +9896,21 @@ A-x+\frac{x}{x+y}(x+y)=A.
 <details class="note">
 <summary>解答</summary>
 <p>重抛不是定向翻面，奇偶不再不变。剩 <span class="arithmatex">\(k\)</span> 个反面时，重抛后反面数为 <span class="arithmatex">\(k-2+\operatorname{Bin} (2,1/2)\)</span>，每步耗两次硬币投掷。<span class="arithmatex">\(e_{0}=e_{1}=0\)</span>，<span class="arithmatex">\(e_{k}=2+e_{k-2}/4+e_{k-1}/2+e_{k}/4\)</span>，解得 <span class="arithmatex">\(e_{2}=8/3\)</span>、<span class="arithmatex">\(e_{3}=40/9\)</span>、<span class="arithmatex">\(e_{4}=176/27\)</span>。初始四币已随机抛出，反面数 <span class="arithmatex">\(\operatorname{Bin} (4,1/2)\)</span>，额外平均投掷数为 <span class="arithmatex">\(\sum \binom{4}{k}e_{k}/16=68/27\)</span>；含最初四次则为 <span class="arithmatex">\(176/27\)</span>。若按“每次抛一对”计轮数，额外为 <span class="arithmatex">\(34/27\)</span>。</p>
+<p><strong>终止时全正面的概率。</strong> 令 <span class="arithmatex">\(p_k\)</span> 为当前有 <span class="arithmatex">\(k\)</span> 个反面时，最终反面数为 0 的概率。边界 <span class="arithmatex">\(p_0=1,p_1=0\)</span>；选哪两枚反面不影响反面总数的转移。重抛后分别以 <span class="arithmatex">\(1/4,1/2,1/4\)</span> 的概率减少 2、减少 1、保持不变，因此</p>
+<div class="arithmatex">\[
+p_k=\tfrac14p_{k-2}+\tfrac12p_{k-1}+\tfrac14p_k,
+\qquad p_k=\frac{p_{k-2}+2p_{k-1}}3.
+\]</div>
+<p>逐项算得 <span class="arithmatex">\(p_2=1/3,p_3=2/9,p_4=7/27\)</span>。按初始 <span class="arithmatex">\(K\sim\operatorname{Bin}(4,1/2)\)</span> 混合，</p>
+<div class="arithmatex">\[
+P(\text{终止全正})=\frac1{16}\left(1+6\cdot\frac13+4\cdot\frac29+\frac7{27}\right)
+=\boxed{\frac7{27}}.
+\]</div>
+<p>终止时只有两种可能：4 个正面，或 3 个正面。所以正面数 <span class="arithmatex">\(H\)</span> 的期望为</p>
+<div class="arithmatex">\[
+EH=4\cdot\frac7{27}+3\cdot\frac{20}{27}=\boxed{\frac{88}{27}}.
+\]</div>
+<p>每个非吸收状态在每轮有 <span class="arithmatex">\(3/4\)</span> 的概率严格减少反面数，至多需要四次这样的减少，因此几乎必然终止且期望轮数有限；上面的递推没有遗漏不终止的质量。</p>
 </details>
 <h2 id="sec-随机数构造与拒绝采样">随机数构造与拒绝采样<a class="headerlink" href="#sec-随机数构造与拒绝采样" title="Permanent link">&para;</a></h2>
 <p>明确随机源和目标分布，用配对、拒绝或逐步保留构造正确抽样并计算开销。</p>
@@ -9834,7 +9994,7 @@ P(HH) = p_H^2,\quad P(HT) = p_Hp_T,\quad P(TH) = p_Tp_H,\quad P(TT) = p_T^2
 <details class="note">
 <summary>解答</summary>
 <p><strong>(a)</strong> 至少掷两次，产生 4 种等可能结果：把其中 3 种（如 HH、HT、TH）指派给三个输出；第 4 种（TT）作废——出现则重新掷。</p>
-<p><strong>(b)</strong> <span class="arithmatex">\( k \)</span> 次投掷产生 <span class="arithmatex">\( 2^k \)</span> 个等可能结果，需要 <span class="arithmatex">\( 2^k \ge n \)</span>，即<strong>最少 <span class="arithmatex">\( \lceil \log_2 n \rceil \)</span> 次</strong>投掷（再配合作废重来）。</p>
+<p><strong>(b)</strong> 固定长度的一次尝试至少需 <span class="arithmatex">\(k=\lceil\log_2n\rceil\)</span> 位；拒绝部分结果再重来可以精确抽样。但这不是总次数的有限保证，也不一定最小化期望次数。三种准则的完整答案见下文。</p>
 <p><strong>(c)</strong> 在 (a) 的基础上可以合并部分剩余结果空间以减少期望次数。约定 TT 作废、TH 作为唯一的"成功"输出（代表 <span class="arithmatex">\( 1/3 \)</span> 事件），则 HH 与 HT 都属于"失败"输出，而这两者恰好在<strong>第一次投掷为 <span class="arithmatex">\(H\)</span></strong> 时即可判定。策略：</p>
 <ol>
 <li>掷第一次：若 <span class="arithmatex">\(H\)</span>（概率 <span class="arithmatex">\( 1/2 \)</span>）——输出"失败"（非 <span class="arithmatex">\( 1/3 \)</span> 事件），共用 1 次投掷；</li>
@@ -9843,7 +10003,14 @@ P(HH) = p_H^2,\quad P(HT) = p_Hp_T,\quad P(TH) = p_Tp_H,\quad P(TT) = p_T^2
 <div class="arithmatex">\[
 E = \frac{1}{2}\times 1 + \frac{1}{4}\times 2 + \frac{1}{4}(2+E) \Rightarrow \frac{3}{4}E = \frac{3}{2} \Rightarrow E = 2
 \]</div>
-<p><strong>最小期望投掷次数为 2 次</strong>（对照朴素策略"掷两次、TT 重来"的期望 <span class="arithmatex">\( 8/3 \approx 2.67 \)</span>；信息论下界 <span class="arithmatex">\( \log_2 3 \approx 1.585 \)</span>）。</p>
+<p><strong>最小期望投掷次数为 2 次</strong>（对照朴素策略"掷两次、TT 重来"的期望 <span class="arithmatex">\( 8/3 \approx 2.67 \)</span>；三类输出问题的熵为 <span class="arithmatex">\( \log_2 3 \approx 1.585 \)</span>，并非单个 Bernoulli 事件的熵）。</p>
+<p><strong>“最少次数”的三种含义必须区分。</strong> <span class="arithmatex">\(\lceil\log_2n\rceil\)</span> 只是一次尝试能容纳 <span class="arithmatex">\(n\)</span> 个输出的最低深度，不是总投掷次数上界。若最多投 <span class="arithmatex">\(m\)</span> 次，给每条较短路径补齐无用投掷，则每个输出概率都是整数乘 <span class="arithmatex">\(2^{-m}\)</span>。等概率 <span class="arithmatex">\(1/n\)</span> 因而要求 <span class="arithmatex">\(n\mid2^m\)</span>，即 <span class="arithmatex">\(n\)</span> 是2的幂；此时 <span class="arithmatex">\(\log_2n\)</span> 次足够。其他 <span class="arithmatex">\(n\)</span> 不存在有限的确定总次数上界，但拒绝采样几乎必然结束。</p>
+<p>令 <span class="arithmatex">\(k=\lceil\log_2n\rceil\)</span>，每批 <span class="arithmatex">\(k\)</span> 次产生 <span class="arithmatex">\(J\in\{0,\ldots,2^k-1\}\)</span>，<span class="arithmatex">\(J&lt;n\)</span> 就输出，否则重来。每个输出的最终概率为 <span class="arithmatex">\(2^{-k}/(n2^{-k})=1/n\)</span>，总期望次数为 <span class="arithmatex">\(k2^k/n\)</span>。它简单可行，但一般不是最小期望算法。若允许逐位读取、回收尚未决定的概率空间，则均匀 <span class="arithmatex">\(n\)</span> 输出的最小期望为</p>
+<div class="arithmatex">\[
+E_{\min}=\sum_{m=0}^{\infty}\frac{2^m\bmod n}{2^m}.
+\]</div>
+<p>理由是深度 <span class="arithmatex">\(m\)</span> 每个输出至多能分到 <span class="arithmatex">\(\lfloor2^m/n\rfloor\)</span> 个叶格，至少余下 <span class="arithmatex">\(2^m\bmod n\)</span> 格必须继续；分层分配新叶格的二进制概率树能同时达到这些尾概率。<span class="arithmatex">\(n=3\)</span> 时该式为 <span class="arithmatex">\(8/3\)</span>。</p>
+<p><strong>单个 <span class="arithmatex">\(1/3\)</span> 事件的最优性证明。</strong> 对任何在至多 <span class="arithmatex">\(m\)</span> 次确定输出的路径补齐到深度 <span class="arithmatex">\(m\)</span>，已确定“成功”与“失败”的概率都是二进制分数。因 <span class="arithmatex">\(1/3\)</span> 不是这样的分数，深度 <span class="arithmatex">\(m\)</span> 至少仍有一个未决定节点，所以 <span class="arithmatex">\(P(T&gt;m)\ge2^{-m}\)</span>。尾和公式给 <span class="arithmatex">\(ET\ge\sum_{m\ge0}2^{-m}=2\)</span>。前述提前识别失败的算法恰有该尾概率，故期望2严格最优。三类等概率输出与一个 Bernoulli 事件的最优期望不同，不能混用熵下界。</p>
 </details>
 <p><span id="q542"></span></p>
 <h3 id="problem-5fa3f43ff226">Q879 · 一个随机比特的确定变换与额外随机性<a class="headerlink" href="#problem-5fa3f43ff226" title="Permanent link">&para;</a></h3>
@@ -9867,6 +10034,11 @@ E = \frac{1}{2}\times 1 + \frac{1}{4}\times 2 + \frac{1}{4}(2+E) \Rightarrow \fr
 <details class="note">
 <summary>解答</summary>
 <p>给定两个不同金额<span class="arithmatex">\(0&lt;a&lt;b\)</span>，若<span class="arithmatex">\(a&lt;T&lt;b\)</span>，不论先开哪一个都能选到<span class="arithmatex">\(b\)</span>；若阈值在区间外则只有随机初选的一半成功。故条件胜率<span class="arithmatex">\(1/2+[P(a&lt;T&lt;b)]/2=1/2+(e^{-a}-e^{-b})/2&gt; 1/2\)</span>。对任意非退化连续正金额分布平均仍严格<span class="arithmatex">\(&gt;1/2\)</span>，但没有对所有分布统一为正的优势下界。随机阈值给出的正优势来自区间命中，并不需要知道金额CDF。</p>
+<p><strong>没有统一优势下界的反例族。</strong> 取金额分布为 <span class="arithmatex">\(U(M,M+1)\)</span>，它对每个 <span class="arithmatex">\(M&gt;0\)</span> 都连续且非退化。任意两个实现值 <span class="arithmatex">\(a&lt;b\)</span> 都在该区间内，条件优势不超过</p>
+<div class="arithmatex">\[
+\tfrac12(e^{-M}-e^{-(M+1)})\longrightarrow0\quad(M\to\infty).
+\]</div>
+<p>所以每个固定分布上的优势虽严格为正，却不存在独立于金额分布的常数 <span class="arithmatex">\(\epsilon&gt;0\)</span> 使所有胜率都至少 <span class="arithmatex">\(1/2+\epsilon\)</span>。也可将分布挤进任意很窄的正区间得到同样结论。</p>
 </details>
 <h3 id="problem-monte-carlo-hit-integral">Q882 · 面积命中的蒙特卡洛积分<a class="headerlink" href="#problem-monte-carlo-hit-integral" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：期望与线性性</p>
@@ -9995,6 +10167,9 @@ P((A\cup B)^c) = 1 - P(A\cup B) = 1 - \big(P(A)+P(B)-P(AB)\big)
 <details class="note">
 <summary>解答</summary>
 <p>令 <span class="arithmatex">\(L(t)=\log E[e^{t(Y-p)}]\)</span>。<span class="arithmatex">\(L(0)=L\prime(0)=0\)</span>，指数倾斜后仍为 Bernoulli，故 <span class="arithmatex">\(L\prime\prime(t)\le1/4\)</span>；积分得 <span class="arithmatex">\(L(t)\le t^2/8\)</span>。一般 <span class="arithmatex">\(X\in[a,b]\)</span> 用凸性以端点分布控制 MGF，得 <span class="arithmatex">\(E e^{t(X-EX)}\le e^{t^2(b-a)^2/8}\)</span>。独立乘积、Markov 界并优化参数得 <span class="arithmatex">\(P(\sum(X_i-EX_i)\ge u)\le\exp[-2u^2/\sum(b_i-a_i)^2]\)</span>。占箱题用更合适的稀疏尾界：固定箱 <span class="arithmatex">\(B\sim\mathrm{Bin}(n,1/n)\)</span>，<span class="arithmatex">\(P(B\ge k)\le\binom nk n^{-k}\le(e/k)^k\)</span>。并集界得 <span class="arithmatex">\(P(\max B_j\ge k)\le n(e/k)^k\)</span>。取 <span class="arithmatex">\(k=\lceil c\log n/\log\log n\rceil,c&gt;1\)</span>，对数上界为 <span class="arithmatex">\((1-c+o(1))\log n\to-\infty\)</span>。</p>
+<p><strong>引理的积分和 Chernoff 参数。</strong> 对 Bernoulli，倾斜后成功率 <span class="arithmatex">\(p_t=pe^t/(1-p+pe^t)\)</span>，所以 <span class="arithmatex">\(L''(t)=p_t(1-p_t)\le1/4\)</span>。Taylor 积分形式 <span class="arithmatex">\(L(t)=t^2\int_0^1(1-u)L''(ut)du\le t^2/8\)</span>，对负 <span class="arithmatex">\(t\)</span> 也成立。一般 <span class="arithmatex">\(X\in[a,b]\)</span>，凸性给 <span class="arithmatex">\(e^{tX}\le[(b-X)e^{ta}+(X-a)e^{tb}]/(b-a)\)</span>，取期望后化成具有同均值的两点分布，就可应用缩放后的 Bernoulli 引理。</p>
+<p>令 <span class="arithmatex">\(D=\sum_i(b_i-a_i)^2\)</span>，独立性使中心化和的 MGF 不超过 <span class="arithmatex">\(e^{t^2D/8}\)</span>。对 <span class="arithmatex">\(t&gt;0\)</span>，Markov 给上界 <span class="arithmatex">\(e^{-tu+t^2D/8}\)</span>，最优 <span class="arithmatex">\(t=4u/D\)</span> 得 <span class="arithmatex">\(e^{-2u^2/D}\)</span>；下尾对负变量使用同式，双尾再乘2。</p>
+<p>固定箱的负载至少 <span class="arithmatex">\(k\)</span>，就存在某个 <span class="arithmatex">\(k\)</span> 球子集全进此箱；对 <span class="arithmatex">\(\binom nk\)</span> 个子集取并集界得到 <span class="arithmatex">\(\binom nk n^{-k}\)</span>，再用 <span class="arithmatex">\(k!\ge(k/e)^k\)</span>。最大负载时箱之间并不独立，但并集界不需要这项独立性。取上述 <span class="arithmatex">\(k\)</span> 后，<span class="arithmatex">\(\log k=\log\log n-\log\log\log n+O(1)\)</span>，所以 <span class="arithmatex">\(\log[n(e/k)^k]=(1-c+o(1))\log n\)</span>，清楚给出了“高概率”的失败上界趋零过程。</p>
 </details>
 <p><span id="q496"></span></p>
 <h3 id="problem-5f3bfa9b0144">Q896 · 总变差距离与耦合不等式<a class="headerlink" href="#problem-5f3bfa9b0144" title="Permanent link">&para;</a></h3>
@@ -10094,6 +10269,16 @@ P((A\cup B)^c) = 1 - P(A\cup B) = 1 - \big(P(A)+P(B)-P(AB)\big)
 <details class="note">
 <summary>解答</summary>
 <p>立方是实数上的一一映射，只重命名可能值，不改变各质量，所以<span class="arithmatex">\(H(X^{3})=H(X)\)</span>。平方会把<span class="arithmatex">\(\pm x\)</span>合并，例如<span class="arithmatex">\(X\)</span>公平取<span class="arithmatex">\(\pm 1\)</span>，<span class="arithmatex">\(H(X)=1\)</span>而<span class="arithmatex">\(X^{2}\)</span>恒1、熵0。若所有<span class="arithmatex">\(p_{i}&gt;0\)</span>，令随机<span class="arithmatex">\(Y\)</span>在<span class="arithmatex">\(X=a_{i}\)</span>时取<span class="arithmatex">\(p_{i}\)</span>，则<span class="arithmatex">\(H=\)</span>Elog<span class="arithmatex">\(_{2}(1/Y)\le \log _{2} \mathbb{E} (1/Y)=\log _{2}n\)</span>，由ln凹的Jensen得到；等号须<span class="arithmatex">\(p_{i}\)</span>相同。若有零概率先删掉它们，得到有效支持数<span class="arithmatex">\(m\le n\)</span>的<span class="arithmatex">\(\log _{2}m\)</span>界。</p>
+<p><strong>平方后的熵不能增加：完整论证和等号。</strong> 把 <span class="arithmatex">\(X\)</span> 的有效支持按平方值分组。对每个平方值 <span class="arithmatex">\(y\)</span>，记 <span class="arithmatex">\(q_y=\sum_{a_i^2=y}p_i&gt;0\)</span>，组内条件概率 <span class="arithmatex">\(r_{i|y}=p_i/q_y\)</span>。代入 <span class="arithmatex">\(p_i=q_yr_{i|y}\)</span> 得</p>
+<div class="arithmatex">\[
+\begin{aligned}
+H(X)&amp;=-\sum_y\sum_{a_i^2=y}q_yr_{i|y}\log_2(q_yr_{i|y})\\
+&amp;=-\sum_yq_y\log_2q_y
++\sum_yq_y\left[-\sum_{a_i^2=y}r_{i|y}\log_2r_{i|y}\right]\\
+&amp;=H(X^2)+H(X\mid X^2)\ge H(X^2).
+\end{aligned}
+\]</div>
+<p>条件熵中的每一项非负。等号当且仅当每个正质量的组都只有一个可能值，即平方映射在有效支持上一一对应：对每个 <span class="arithmatex">\(a&gt;0\)</span>，不能同时有 <span class="arithmatex">\(P(X=a)&gt;0\)</span> 与 <span class="arithmatex">\(P(X=-a)&gt;0\)</span>。并不要求 <span class="arithmatex">\(X\)</span> 全非负。综合得到 <span class="arithmatex">\(H(X^2)\le H(X)=H(X^3)\)</span>；最大熵为 <span class="arithmatex">\(\log_2n\)</span>，等号要求题中这 <span class="arithmatex">\(n\)</span> 个不同值全部以 <span class="arithmatex">\(1/n\)</span> 的概率出现。</p>
 </details>
 <h2 id="sec-概率方法与存在性">概率方法与存在性<a class="headerlink" href="#sec-概率方法与存在性" title="Permanent link">&para;</a></h2>
 <p>构造随机对象；用期望、并集界或随机平移证明至少存在一个满足要求的确定对象。</p>
@@ -10111,6 +10296,11 @@ P((A\cup B)^c) = 1 - P(A\cup B) = 1 - \big(P(A)+P(B)-P(AB)\big)
 <details class="note">
 <summary>解答</summary>
 <p>固定集合 <span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(v\notin V\)</span>，<span class="arithmatex">\(v\)</span> 全胜概率为 <span class="arithmatex">\(2^{-k}\)</span>。不同 <span class="arithmatex">\(v\)</span> 用到的边不重叠，故无人全胜的概率为 <span class="arithmatex">\((1-2^{-k})^{n-k}\)</span>。对所有集合取并集界，失败概率不超过 <span class="arithmatex">\(\binom nk(1-2^{-k})^{n-k}\le n^k e^{-(n-k)/2^k}\)</span>。取 <span class="arithmatex">\(n=16k^2 2^k\)</span>，有 <span class="arithmatex">\((n-k)/2^k&gt;k\log n\)</span>，上界小于 1，因此存在所需赛果。概率法只需证明正概率存在，无需显式构造赛程。</p>
+<p><strong>常数选择的核验。</strong> 使用自然对数，<span class="arithmatex">\(n=16k^2 2^k\)</span> 时</p>
+<div class="arithmatex">\[
+k\log n=k(\log16+2\log k+k\log2).
+\]</div>
+<p><span class="arithmatex">\(k\ge1\)</span> 时 <span class="arithmatex">\(\log k\le k-1\)</span>，<span class="arithmatex">\(\log16&lt;3\)</span>、<span class="arithmatex">\(\log2&lt;1\)</span>，故右侧小于 <span class="arithmatex">\(k+3k^2\le4k^2\)</span>。另一方面 <span class="arithmatex">\((n-k)/2^k=16k^2-k/2^k\ge15k^2\)</span>，所以失败上界严格小于1。坏事件共有 <span class="arithmatex">\(\binom nk\)</span> 个，避免它们就同时满足所有集合；不要求这些坏事件彼此独立。所用独立性仅是固定集合外不同候选人的相关比赛边互不重叠。</p>
 </details>
 <h3 id="problem-ce00ab802403">Q912 · 所有队胜场互异<a class="headerlink" href="#problem-ce00ab802403" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：概率界｜<strong>副题型</strong>：组合计数与数论</p>
@@ -10132,6 +10322,8 @@ P((A\cup B)^c) = 1 - P(A\cup B) = 1 - \big(P(A)+P(B)-P(AB)\big)
 <details class="note">
 <summary>解答</summary>
 <p>以硬币半径为内切圆半径作蜂巢六边形铺砌，每格内放一枚内切硬币，圆互不重叠。均匀随机平移整个铺砌，一个指定点被覆盖概率等于面积占比<span class="arithmatex">\(\pi /(2\sqrt{3})&gt;0.9\)</span>；十点覆盖数期望<span class="arithmatex">\(&gt;9\)</span>，因此存在平移覆盖全部十点。只保留实际覆盖点的至多十枚硬币，多余硬币可放到远处。</p>
+<p>设半径为 <span class="arithmatex">\(r\)</span>。内切圆半径为 <span class="arithmatex">\(r\)</span> 的正六边形边长 <span class="arithmatex">\(2r/\sqrt3\)</span>，面积 <span class="arithmatex">\(2\sqrt3r^2\)</span>，故密度确为 <span class="arithmatex">\(\pi r^2/(2\sqrt3r^2)=\pi/(2\sqrt3)\)</span>。平移随机量取蜂巢晶格的一个基本平行四边形内均匀；给定任一点，其相对于该周期配置的相位均匀，所以被圆覆盖的概率等于密度，与点的位置无关。</p>
+<p>令 <span class="arithmatex">\(I_i\)</span> 表示第 <span class="arithmatex">\(i\)</span> 点覆盖，<span class="arithmatex">\(X=\sum_{i=1}^{10}I_i\)</span>。即使十个指标高度相关，线性期望仍给 <span class="arithmatex">\(EX=10\pi/(2\sqrt3)&gt;9\)</span>。若所有平移最多只覆盖9点，必有 <span class="arithmatex">\(EX\le9\)</span>，矛盾；因 <span class="arithmatex">\(X\)</span> 为不超过10的整数，存在覆盖10点的配置。覆盖十点所需圆至多10枚；同一圆可以盖多个点，剩余圆放远处即可恰好十枚且不重叠。</p>
 </details>
 <h3 id="problem-3a711ed16fa1">Q915 · 红色圆周上的正方形<a class="headerlink" href="#problem-3a711ed16fa1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：概率界｜<strong>副题型</strong>：概率构造</p>

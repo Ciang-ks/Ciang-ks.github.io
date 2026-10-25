@@ -2879,6 +2879,18 @@ E[Y\mid D{=}1]-E[Y\mid D{=}0] = E[Y_1-Y_0\mid D{=}1] + \big(E[Y_0\mid D{=}1]-E[Y
 E[1/S]=\sum_j\frac{s_j}{N}\frac1{s_j}=\frac MN.
 \]</div>
 <p>故可用 <span class="arithmatex">\(\widehat\theta=1/(n^{-1}\sum_{i=1}^n1/S_i)\)</span> 一致估计 <span class="arithmatex">\(N/M\)</span>。这是调和平均式校正，不保证有限样本无偏。独立放回抽人不等于均匀抽群体；若实际抽样有非应答或不同入样概率，还需加权建模。</p>
+<p><strong>一致性、偏差和误差条。</strong> 记 <span class="arithmatex">\(Y_i=1/S_i\)</span>，<span class="arithmatex">\(\mu=EY_i=M/N&gt;0\)</span>，<span class="arithmatex">\(\tau^2=\operatorname{Var}Y_i\)</span>。由于 <span class="arithmatex">\(0&lt;Y_i\le1\)</span>，强大数定律给出 <span class="arithmatex">\(\bar Y_n\to\mu\)</span> 几乎处处；<span class="arithmatex">\(y\mapsto1/y\)</span> 在 <span class="arithmatex">\(\mu\)</span> 连续，因此 <span class="arithmatex">\(1/\bar Y_n\to1/\mu=N/M\)</span>。普通平均 <span class="arithmatex">\(\bar S\)</span> 的极限与目标的差为</p>
+<div class="arithmatex">\[
+\frac{\sum_js_j^2}{N}-\frac NM
+=\frac{M\sum_js_j^2-(\sum_js_j)^2}{MN}\ge0,
+\]</div>
+<p>由 Cauchy–Schwarz，只有所有群体同样大时取等号。</p>
+<p>另一方面 <span class="arithmatex">\(1/y\)</span> 是凸函数，Jensen 给 <span class="arithmatex">\(E(1/\bar Y_n)\ge1/\mu\)</span>，所以调和估计量有限样本仍通常向上偏。若 <span class="arithmatex">\(\tau^2&gt;0\)</span>，CLT 与 Delta 方法给</p>
+<div class="arithmatex">\[
+\sqrt n\left(\widehat\theta-\frac1\mu\right)
+\Rightarrow N\left(0,\frac{\tau^2}{\mu^4}\right).
+\]</div>
+<p>以 <span class="arithmatex">\(Y_i\)</span> 的样本标准差 <span class="arithmatex">\(s_Y\)</span> 代入，可估计标准误为 <span class="arithmatex">\(s_Y/(\sqrt n\,\bar Y_n^2)\)</span>。这要求题设的独立放回抽人；若是同一家族成批抽样或不放回抽样，需要相应调整方差。</p>
 </details>
 <h3 id="problem-ecc2a9823238">Q933 · 随机学生与随机司机的大巴规模<a class="headerlink" href="#problem-ecc2a9823238" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
@@ -2894,6 +2906,15 @@ E[1/S]=\sum_j\frac{s_j}{N}\frac1{s_j}=\frac MN.
 <summary>解答</summary>
 <p>50人各抽名字形成排列环。环数<span class="arithmatex">\(K\)</span>的均值<span class="arithmatex">\(H_{50}\approx 4.4992\)</span>。对每次座次先算平均组大小<span class="arithmatex">\(50/K\)</span>再跨座次平均，值为<span class="arithmatex">\(50\sum _{k=1}^{50}c(50,k)/(k\cdot 50!)\approx 13.32348\)</span>（13.3）；无符号Stirling数满足<span class="arithmatex">\(c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)\)</span>。随机抽一个人，其环长在<span class="arithmatex">\(1,\ldots ,50\)</span>均匀，均值25.5。若把大量座次的全部组汇在一起再随机抽组，则均大小趋<span class="arithmatex">\(50/H_{50}\approx 11.1\)</span>。这三者不能混称同一“平均组大小”。</p>
 <p>每个长度<span class="arithmatex">\(k\)</span>环的期望个数<span class="arithmatex">\(1/k\)</span>，因此组数均值<span class="arithmatex">\(H_{50}\approx 4.4992\)</span>，最近一位小数为4.5。</p>
+<p><strong>三种平均值的计数依据。</strong> 对 <span class="arithmatex">\(n\)</span> 人排列，固定一个含 <span class="arithmatex">\(k\)</span> 人的集合，这些人恰组成一个环的排列数为 <span class="arithmatex">\((k-1)!(n-k)!\)</span>。把所有 <span class="arithmatex">\(\binom nk\)</span> 个集合相加并除以 <span class="arithmatex">\(n!\)</span>，长度 <span class="arithmatex">\(k\)</span> 的环数 <span class="arithmatex">\(C_k\)</span> 满足</p>
+<div class="arithmatex">\[
+EC_k=\binom nk\frac{(k-1)!(n-k)!}{n!}=\frac1k,
+\quad EK=\sum_{k=1}^nEC_k=H_n.
+\]</div>
+<p>固定某个人，其环长为 <span class="arithmatex">\(k\)</span> 的排列数则为
+<span class="arithmatex">\(\binom{n-1}{k-1}(k-1)!(n-k)!=(n-1)!\)</span>，对每个 <span class="arithmatex">\(k\)</span> 都一样，所以该人的环长均匀分布，均值 <span class="arithmatex">\((n+1)/2\)</span>。</p>
+<p>将第 <span class="arithmatex">\(n\)</span> 人加入排列时，或者独自成环（对应 <span class="arithmatex">\(c(n-1,k-1)\)</span>），或者插在已有的 <span class="arithmatex">\(n-1\)</span> 个人之后（对应 <span class="arithmatex">\((n-1)c(n-1,k)\)</span>），得到上面的 Stirling 数递推，边界为 <span class="arithmatex">\(c(0,0)=1\)</span>。它给出 <span class="arithmatex">\(P(K=k)=c(n,k)/n!\)</span>，从而能有限求和计算 <span class="arithmatex">\(E(n/K)\)</span>，不能替换为 <span class="arithmatex">\(n/EK\)</span>。</p>
+<p>最后，把 <span class="arithmatex">\(m\)</span> 个独立排列中的所有环汇总，总人数为 <span class="arithmatex">\(mn\)</span>，总环数为 <span class="arithmatex">\(\sum_{j=1}^mK_j\)</span>，故汇总后的组均值为 <span class="arithmatex">\(mn/\sum K_j\to n/H_n\)</span>。这里是先汇总再求比，而第一种是先在每个排列求比再平均；随机选人又按环大小加权，这解释了三个答案不同。</p>
 </details>
 <h2 id="sec-极限定理与渐近近似">极限定理与渐近近似<a class="headerlink" href="#sec-极限定理与渐近近似" title="Permanent link">&para;</a></h2>
 <p><span id="sec-统计基础要点LLNCLT置信区间"></span></p>
@@ -2917,14 +2938,27 @@ E[1/S]=\sum_j\frac{s_j}{N}\frac1{s_j}=\frac MN.
 </ul>
 <details class="note">
 <summary>解答</summary>
-<p>中心极限定理有多种形式，本质上是概率弱收敛结论。这里给出最常用的形式。</p>
-<p>对具有有限二阶矩的独立同分布随机变量，随着样本量增加，适当标准化的和趋于正态分布；这一结论不依赖于原始分布的具体形状。</p>
-<p>更严格地，设 <span class="arithmatex">\(X_1,\ldots,X_n\)</span> 独立同分布，均值为 <span class="arithmatex">\(\mu\)</span>、方差为 <span class="arithmatex">\(\sigma^2&lt;\infty\)</span>，记 <span class="arithmatex">\(S_n=\sum_{i=1}^nX_i\)</span>。则</p>
+<p><strong>1. 定理与适用条件。</strong> 设 <span class="arithmatex">\(X_i\)</span> 独立同分布，<span class="arithmatex">\(EX_i=\mu\)</span>，<span class="arithmatex">\(0&lt;\operatorname{Var}X_i=\sigma^2&lt;\infty\)</span>。则</p>
 <div class="arithmatex">\[
-Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}}
+Z_n=\frac{\sum_{i=1}^nX_i-n\mu}{\sigma\sqrt n}\Rightarrow N(0,1).
 \]</div>
-<p>依分布收敛到标准正态分布。</p>
-<p>还有其他形式；Lindeberg 给出了独立但不同分布变量的中心极限定理。</p>
+<p>若方差为零，变量几乎处处为常数，不能用上述分母标准化；无限方差也不在此定理范围内。</p>
+<p><strong>2. 收敛概念。</strong> <span class="arithmatex">\(Z_n\Rightarrow Z\)</span> 指在 <span class="arithmatex">\(F_Z\)</span> 的每个连续点 <span class="arithmatex">\(x\)</span>，<span class="arithmatex">\(P(Z_n\le x)\to F_Z(x)\)</span>。它不要求变量在同一概率空间逐样本接近。几乎处处收敛指 <span class="arithmatex">\(P(\lim Z_n=Z)=1\)</span>；依概率收敛指每个 <span class="arithmatex">\(\epsilon&gt;0\)</span> 都有 <span class="arithmatex">\(P(|Z_n-Z|&gt;\epsilon)\to0\)</span>；<span class="arithmatex">\(L^p\)</span> 收敛指 <span class="arithmatex">\(E|Z_n-Z|^p\to0\)</span>。几乎处处收敛和 <span class="arithmatex">\(L^p\)</span> 收敛都推出依概率收敛，后者推出依分布收敛；反向一般不成立。</p>
+<p><strong>3. 特征函数证明。</strong> 令 <span class="arithmatex">\(Y=(X_1-\mu)/\sigma\)</span>，<span class="arithmatex">\(\phi(u)=Ee^{iuY}\)</span>。有限二阶矩允许在零点作二阶展开：</p>
+<div class="arithmatex">\[
+\phi(u)=1+iuEY-\tfrac12u^2EY^2+o(u^2)=1-u^2/2+o(u^2).
+\]</div>
+<p>这里可把指数展开的余项除以 <span class="arithmatex">\(u^2\)</span>，用常数乘 <span class="arithmatex">\(Y^2\)</span> 控制，再由支配收敛得到 <span class="arithmatex">\(o(u^2)\)</span>；不需要三阶矩。独立性于是给</p>
+<div class="arithmatex">\[
+Ee^{itZ_n}=\phi(t/\sqrt n)^n
+=[1-t^2/(2n)+o(1/n)]^n\longrightarrow e^{-t^2/2}.
+\]</div>
+<p>极限是标准正态的特征函数且在零点连续，Lévy 连续性定理推出所需弱收敛。</p>
+<p><strong>4. Lindeberg 条件。</strong> 对每行独立、中心化的三角阵 <span class="arithmatex">\(Y_{n,k}\)</span>，令 <span class="arithmatex">\(s_n^2=\sum_k EY_{n,k}^2&gt;0\)</span>。若每个 <span class="arithmatex">\(\epsilon&gt;0\)</span> 满足</p>
+<div class="arithmatex">\[
+\frac1{s_n^2}\sum_kE[Y_{n,k}^2\mathbf1_{\{|Y_{n,k}|&gt;\epsilon s_n\}}]\to0,
+\]</div>
+<p>则 <span class="arithmatex">\(\sum_kY_{n,k}/s_n\Rightarrow N(0,1)\)</span>。它排除少数大跳跃贡献不可忽略的方差。i.i.d. 情形该式化为 <span class="arithmatex">\(E[Y^2\mathbf1_{\{|Y|&gt;\epsilon\sqrt n\}}]\to0\)</span>，由二阶矩有限成立，所以包含前述版本。</p>
 </details>
 <h3 id="problem-236ecdc6d623">Q936 · 每日产量的和与首次越界<a class="headerlink" href="#problem-236ecdc6d623" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断</p>
@@ -3053,6 +3087,11 @@ Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}}
 <p>似然为<span class="arithmatex">\(P(M=m|N)=\binom{m-1}{k-1}/\binom{N}{k}\)</span>，<span class="arithmatex">\(N\ge m\)</span>。分母随<span class="arithmatex">\(N\)</span>增加，所以MLE为<span class="arithmatex">\(m\)</span>，两例都给60。这是最可能参数，并非无偏修正。
 由均匀顺序统计量的间隔对称性，<span class="arithmatex">\(\mathbb{E} [M]=k(N+1)/(k+1)\)</span>，所以无偏估计<span class="arithmatex">\(\hat{N}=(k+1)M/k-1\)</span>。<span class="arithmatex">\(k=1,m=60\)</span>给119；<span class="arithmatex">\(k=5\)</span>给71。若用连续均匀端点近似而忽略整数<span class="arithmatex">\(-1\)</span>修正，会得到120与72，须标明是近似。</p>
 <p><strong>方法</strong>：用最大观察序号的精确分布写似然，再区分估计准则和整数偏差修正。</p>
+<p><strong>极大值均值中的整数修正从何而来。</strong> 将样本排序为 <span class="arithmatex">\(X_{(1)}&lt;\cdots&lt;X_{(k)}=M\)</span>，定义 <span class="arithmatex">\(k+1\)</span> 个空隙：最小值前未抽中的数量 <span class="arithmatex">\(G_0=X_{(1)}-1\)</span>，相邻样本间 <span class="arithmatex">\(G_i=X_{(i+1)}-X_{(i)}-1\)</span>，以及最大值后 <span class="arithmatex">\(G_k=N-M\)</span>。它们非负且总和为 <span class="arithmatex">\(N-k\)</span>。每个 <span class="arithmatex">\(k\)</span> 元样本子集与一组这样的空隙一一对应，均匀抽样使各空隙交换对称，所以 <span class="arithmatex">\(EG_i=(N-k)/(k+1)\)</span>。于是</p>
+<div class="arithmatex">\[
+EM=N-EG_k=N-\frac{N-k}{k+1}=\frac{k(N+1)}{k+1}.
+\]</div>
+<p>解这个期望恒等式得到 <span class="arithmatex">\((k+1)M/k-1\)</span>，并直接验证其期望为 <span class="arithmatex">\(N\)</span>。这与连续均匀次序统计的 <span class="arithmatex">\(kN/(k+1)\)</span> 只差一个整数间距项，却会使本题两例的修正各少 1。</p>
 </details>
 <h3 id="problem-iid-likelihood-estimation">Q953 · Poisson率的极大似然<a class="headerlink" href="#problem-iid-likelihood-estimation" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：分布与矩</p>
@@ -3095,8 +3134,16 @@ Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}}
 <p><strong>题目</strong>：独立一秒光子计数<span class="arithmatex">\(K\)</span>的PMF正比<span class="arithmatex">\(\exp (-k/\theta )\)</span>，<span class="arithmatex">\(k\ge 0\)</span>、温度参数<span class="arithmatex">\(\theta &gt;0\)</span>。求归一化、矩、MLE和<span class="arithmatex">\(1\%\)</span>相对标准误需要的样本数。</p>
 <details class="note">
 <summary>解答</summary>
-<p>设<span class="arithmatex">\(r=e^{-1}\)</span>ᐟ<span class="arithmatex">\(\theta\)</span>，<span class="arithmatex">\(Z(\theta )=1/(1-r)\)</span>。<span class="arithmatex">\(K\)</span>为从0起、成功率<span class="arithmatex">\(1-r\)</span>的几何分布，<span class="arithmatex">\(\mu =r/(1-r)=1/(e^{1/\theta }-1)\)</span>，<span class="arithmatex">\(\sigma ^{2}=r/(1-r)^{2}=\mu (1+\mu )\)</span>。独立<span class="arithmatex">\(n\)</span>次样本均值<span class="arithmatex">\(s_{n}\)</span>，MLE满足<span class="arithmatex">\(\mu (\hat{\theta })=s_{n}\)</span>，所以<span class="arithmatex">\(\hat{\theta }=1/\ln (1+1/s_{n})\)</span>；<span class="arithmatex">\(s_{n}=0\)</span>时最优边界<span class="arithmatex">\(\theta \to 0\)</span>。高温<span class="arithmatex">\(\theta \gg 1\)</span>时<span class="arithmatex">\(\mu \approx \theta\)</span>，<span class="arithmatex">\(\hat{\theta }\approx s_{n}\)</span>。</p>
+<p>设<span class="arithmatex">\(r=e^{-1/\theta}\)</span>，<span class="arithmatex">\(Z(\theta )=1/(1-r)\)</span>。<span class="arithmatex">\(K\)</span>为从0起、成功率<span class="arithmatex">\(1-r\)</span>的几何分布，<span class="arithmatex">\(\mu =r/(1-r)=1/(e^{1/\theta }-1)\)</span>，<span class="arithmatex">\(\sigma ^{2}=r/(1-r)^{2}=\mu (1+\mu )\)</span>。独立<span class="arithmatex">\(n\)</span>次样本均值<span class="arithmatex">\(s_{n}\)</span>，MLE满足<span class="arithmatex">\(\mu (\hat{\theta })=s_{n}\)</span>，所以<span class="arithmatex">\(\hat{\theta }=1/\ln (1+1/s_{n})\)</span>；<span class="arithmatex">\(s_{n}=0\)</span>时最优边界<span class="arithmatex">\(\theta \to 0\)</span>。高温<span class="arithmatex">\(\theta \gg 1\)</span>时<span class="arithmatex">\(\mu \approx \theta\)</span>，<span class="arithmatex">\(\hat{\theta }\approx s_{n}\)</span>。</p>
 <p>样本均值标准差/均值<span class="arithmatex">\(=\sqrt{(1+\mu )/(n\mu )}\)</span>，要求<span class="arithmatex">\(\le .01\)</span>需<span class="arithmatex">\(n\ge 10000(1+1/\mu )=10000e^{1/\theta }\)</span>，高温约10000。<span class="arithmatex">\(95\%\)</span>正态置信区间可用<span class="arithmatex">\(s_{n}\pm 1.96\sqrt{s_{n}(1+s_{n})/n}\)</span>；达到<span class="arithmatex">\(1\%\)</span>相对标准误时近似为观测均值的<span class="arithmatex">\(\pm 1.96\%\)</span>。这只是大样本置信近似，不是确定误差保证。</p>
+<p><strong>MLE 的计算和精度对象。</strong> 规范记号应为 <span class="arithmatex">\(r=e^{-1/\theta}\)</span>。总计数 <span class="arithmatex">\(S=\sum K_i\)</span> 的对数似然是 <span class="arithmatex">\(n\log(1-r)+S\log r\)</span>，对 <span class="arithmatex">\(r\)</span> 求导为 <span class="arithmatex">\(-n/(1-r)+S/r\)</span>，所以 <span class="arithmatex">\(\hat r=S/(n+S)\)</span>，再变换得上述 <span class="arithmatex">\(\hat\theta\)</span>。用生成函数 <span class="arithmatex">\(G(z)=(1-r)/(1-rz)\)</span> 求 <span class="arithmatex">\(G'(1),G''(1)\)</span>，即可得到所列均值与方差。</p>
+<p>上文 <span class="arithmatex">\(10000e^{1/\theta}\)</span> 保证的是计数均值 <span class="arithmatex">\(\mu\)</span> 的1%相对标准误。若问题问温度 <span class="arithmatex">\(\theta\)</span> 的1%相对标准误，须用 Delta 方法：<span class="arithmatex">\(d\theta/d\mu=\theta^2/[\mu(1+\mu)]\)</span>，因此</p>
+<div class="arithmatex">\[
+\operatorname{Var}(\hat\theta)\approx\frac{\theta^4}{n\mu(1+\mu)},\qquad
+\frac{\operatorname{SE}(\hat\theta)}\theta\approx
+\frac{\theta}{\sqrt{n\mu(1+\mu)}}.
+\]</div>
+<p>所需 <span class="arithmatex">\(n\gtrsim10000\theta^2/[\mu(1+\mu)]\)</span>，高温时同样约10000，但低温时与估计 <span class="arithmatex">\(\mu\)</span> 的要求不同。未知温度时可先作试验估计，再规划样本量。</p>
 </details>
 <h3 id="problem-gaussian-linear-quadratic-fit">Q959 · 高斯噪声下线性与平方特征的似然拟合<a class="headerlink" href="#problem-gaussian-linear-quadratic-fit" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：统计推断</p>
@@ -3116,6 +3163,17 @@ Y_{n}=\frac{S_{n}-\mu n}{\sigma\sqrt{n}}
 <p>单次<span class="arithmatex">\(0&lt;x&lt;1\)</span>，似然<span class="arithmatex">\(\theta ^{-1}1_{x\le \theta \le 1}\)</span>，边际<span class="arithmatex">\(f_{X}(x)=-\ln x=L\)</span>，后验<span class="arithmatex">\(f(\theta |x)=1/(L\theta )\)</span>，<span class="arithmatex">\(x\le \theta \le 1\)</span>。多次条件独立观察，<span class="arithmatex">\(a=\max x_{i}\)</span>，后验正比<span class="arithmatex">\(\theta ^{-n}1_{a\le \theta \le 1}\)</span>；<span class="arithmatex">\(n&gt;1\)</span>归一化常数<span class="arithmatex">\((n-1)/(a^{1-n}-1)\)</span>，<span class="arithmatex">\(n=1\)</span>为<span class="arithmatex">\(1/(-\ln a)\)</span>。</p>
 <p>单次<span class="arithmatex">\(MAP=x\)</span>；后验一、二阶矩<span class="arithmatex">\(m=(1-x)/L\)</span>、<span class="arithmatex">\(v_{2}=(1-x^{2})/(2L)\)</span>，均方损失最优估计<span class="arithmatex">\(m\)</span>。条件于<span class="arithmatex">\(x\)</span>的MSE对任意估计<span class="arithmatex">\(b\)</span>为<span class="arithmatex">\(v_{2}-2bm+b^{2}=(v_{2}-m^{2})+(b-m)^{2}\)</span>，所以MAP的<span class="arithmatex">\(MSE=v_{2}-2xm+x^{2}\)</span>，均方估计<span class="arithmatex">\(MSE=v_{2}-m^{2}\)</span>，后者最小。</p>
 <p>最佳线性估计利用<span class="arithmatex">\(E\Theta =1/2\)</span>、<span class="arithmatex">\(\mathbb{E} X=1/4\)</span>、<span class="arithmatex">\(\operatorname{Cov} (\Theta ,X)=1/24\)</span>、<span class="arithmatex">\(\operatorname{Var} X=7/144\)</span>，得到<span class="arithmatex">\(\ell (x)=2/7+6x/7\)</span>。其条件<span class="arithmatex">\(MSE=v_{2}-2\ell m+\ell ^{2}\)</span>，仍至少<span class="arithmatex">\(v_{2}-m^{2}\)</span>；它和MAP的条件误差谁小取决于<span class="arithmatex">\(x\)</span>。整体线性<span class="arithmatex">\(MSE=1/12-(1/24)^{2}/(7/144)=1/21\)</span>。纯经典MLE不带先验上界时同样是<span class="arithmatex">\(\hat{\theta }=\max x_{i}\)</span>，因为<span class="arithmatex">\(\theta ^{-n}\)</span>在可行<span class="arithmatex">\(\theta\)</span>上递减。端点<span class="arithmatex">\(x=0\)</span>、1是边际零概率观测，应以条件密度版本或极限处理。</p>
+<p><strong>多次观察的估计也可显式写出。</strong> 令 <span class="arithmatex">\(a=\max_i x_i\)</span>、<span class="arithmatex">\(Z_n(a)=\int_a^1\theta^{-n}d\theta\)</span>，并定义</p>
+<div class="arithmatex">\[
+I_j(a)=\begin{cases}(1-a^{j-n+1})/(j-n+1),&amp;j-n+1\ne0,\\-\log a,&amp;j-n+1=0.\end{cases}
+\]</div>
+<p>则 <span class="arithmatex">\(Z_n=I_0\)</span>，<span class="arithmatex">\(m_n=I_1/I_0\)</span>、<span class="arithmatex">\(v_{2,n}=I_2/I_0\)</span>，MAP为 <span class="arithmatex">\(a\)</span>，平方损失最优为 <span class="arithmatex">\(m_n\)</span>。任意估计 <span class="arithmatex">\(b\)</span> 的条件 MSE 均为 <span class="arithmatex">\(v_{2,n}-m_n^2+(b-m_n)^2\)</span>，直接代入即可比较。</p>
+<p>若“线性估计”指全部 <span class="arithmatex">\(n\)</span> 次观测的最佳仿射函数，在先验联合分布下 <span class="arithmatex">\(\operatorname{Var}X_i=7/144\)</span>、<span class="arithmatex">\(\operatorname{Cov}(X_i,X_j)=1/48\;(i\ne j)\)</span>、<span class="arithmatex">\(\operatorname{Cov}(\Theta,X_i)=1/24\)</span>。对称性与正交投影方程给所有斜率相同，故</p>
+<div class="arithmatex">\[
+\ell_n=\frac{2+6\sum_i x_i}{3n+4},\qquad
+E(\Theta-\ell_n)^2=\frac1{3(3n+4)}.
+\]</div>
+<p>这是在所有仿射函数中最优，并非对每个观测值都达到最小条件 MSE；后者仍是非线性的后验均值。</p>
 </details>
 <h3 id="problem-geometric-parameter-estimation">Q961 · 几何等待的Bayes、极大似然与线性预测<a class="headerlink" href="#problem-geometric-parameter-estimation" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：条件概率与贝叶斯</p>

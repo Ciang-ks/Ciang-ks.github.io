@@ -8086,6 +8086,7 @@ f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}},
 <details class="note">
 <summary>解答</summary>
 <p>均匀三角形内点的三个子三角面积比例是均匀单纯形坐标；至少一个<span class="arithmatex">\(\le 1/4\)</span>的概率为<span class="arithmatex">\(1-(1-3/4)^{2}=15/16\)</span>。</p>
+<p>记三比例为 <span class="arithmatex">\(u,v,w\ge0,u+v+w=1\)</span>。到三个顶点连线给出的面积比就是重心坐标，平面点均匀意味着在这个二维单纯形上密度恒定。反事件为三者都大于1/4。令 <span class="arithmatex">\(u'=u-1/4,v'=v-1/4,w'=w-1/4\)</span>，它变成非负且和为1/4的相似单纯形，线性尺度缩小1/4，所以面积缩小 <span class="arithmatex">\((1/4)^2=1/16\)</span>。补集为15/16；指数2来自区域二维，并非三个坐标独立，三个坐标实际上受总和1约束。</p>
 </details>
 <p><span id="q144"></span>
 <span id="problem-8ef1cf3c662e"></span></p>
@@ -8145,6 +8146,20 @@ P(S_{n+1}\le 1) = \int_0^1\frac{(1-X_{n+1})^n}{n!}dX_{n+1} = \frac{1}{n!}\left[-
 <details class="note">
 <summary>解答</summary>
 <p>原图等价完整密度：<span class="arithmatex">\(0&lt;x&lt;1\)</span>、<span class="arithmatex">\(0&lt;y&lt;x\)</span>时<span class="arithmatex">\(f=1/2\)</span>；<span class="arithmatex">\(1&lt;x&lt;2\)</span>、<span class="arithmatex">\(0&lt;y&lt;2-x\)</span>时<span class="arithmatex">\(f=3/2\)</span>，外为0。(a)支持非矩形且给定<span class="arithmatex">\(X\)</span>改变<span class="arithmatex">\(Y\)</span>上界，故不独立。<span class="arithmatex">\((b)f_{X}=x/2\)</span>（<span class="arithmatex">\(0&lt;x&lt;1\)</span>），<span class="arithmatex">\(=3(2-x)/2\)</span>（<span class="arithmatex">\(1&lt;x&lt;2\)</span>）；<span class="arithmatex">\(Y|X=.5\)</span>在(0,.5)密度2；<span class="arithmatex">\(X|Y=.5\)</span>在(.5,1)密度<span class="arithmatex">\(1/2\)</span>、在(1,1.5)密度<span class="arithmatex">\(3/2\)</span>，外0，这些分段值即为标轴绘图所需高度。<span class="arithmatex">\((c)A=\{X&lt;.5\}\)</span>内<span class="arithmatex">\(Y|X\)</span>均匀<span class="arithmatex">\((0,X)\)</span>，故<span class="arithmatex">\(\mathbb{E} (XY|A)=\mathbb{E} (X^{2}|A)/2=1/16\)</span>。<span class="arithmatex">\((d)W=Y-X\)</span>的CDF：<span class="arithmatex">\(w\le -2\)</span>为0；<span class="arithmatex">\(-2&lt;w\le -1\)</span>为<span class="arithmatex">\(3(w+2)^{2}/8\)</span>；<span class="arithmatex">\(-1&lt;w\le 0\)</span>为<span class="arithmatex">\((-w^{2}+4w+8)/8\)</span>；<span class="arithmatex">\(w&gt;0\)</span>为1。对直线<span class="arithmatex">\(y=x+w\)</span>下方的两块面积分别乘密度可得，各接点连续。</p>
+<p><strong>差值分布的积分分段。</strong> 令 <span class="arithmatex">\(w=y-x\)</span>，变换 <span class="arithmatex">\((x,y)\mapsto(x,w)\)</span> 的 Jacobian 为 1。第一块区域要求 <span class="arithmatex">\(0&lt;x&lt;1\)</span>、<span class="arithmatex">\(x&gt;-w\)</span>、<span class="arithmatex">\(w&lt;0\)</span>，所以仅在 <span class="arithmatex">\(-1&lt;w&lt;0\)</span> 有贡献</p>
+<div class="arithmatex">\[
+f_W^{(1)}(w)=\int_{-w}^1\tfrac12\,dx=\tfrac12(1+w).
+\]</div>
+<p>第二块要求 <span class="arithmatex">\(1&lt;x&lt;2\)</span>、<span class="arithmatex">\(x&gt;-w\)</span>、<span class="arithmatex">\(x&lt;1-w/2\)</span>，于是</p>
+<div class="arithmatex">\[
+f_W^{(2)}(w)=
+\begin{cases}
+\frac32\int_{-w}^{1-w/2}dx=\frac34(w+2),&amp;-2&lt;w&lt;-1,\\
+\frac32\int_1^{1-w/2}dx=-\frac34w,&amp;-1\le w&lt;0,\\
+0,&amp;\text{其他}.
+\end{cases}
+\]</div>
+<p>两部分相加得 <span class="arithmatex">\(f_W(w)=3(w+2)/4\)</span>（<span class="arithmatex">\(-2&lt;w&lt;-1\)</span>）、<span class="arithmatex">\((2-w)/4\)</span>（<span class="arithmatex">\(-1&lt;w&lt;0\)</span>）。从左端积分得到上述 CDF；在 <span class="arithmatex">\(-1\)</span> 两段都为 <span class="arithmatex">\(3/8\)</span>，在 0 为 1，故没有遗漏质量或引入跳跃。密度在 <span class="arithmatex">\(-1\)</span> 可以跳变，不影响 CDF 连续。</p>
 </details>
 <h3 id="problem-862d7281a721">Q430 · 三角资本分布与赌场收益<a class="headerlink" href="#problem-862d7281a721" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：几何概率</p>
@@ -8252,6 +8267,31 @@ f(D)=\frac4\pi\int_0^{\pi/4}[p_1(D\cos\theta)p_0(D\sin\theta)+p_0(D\cos\theta)p_
 <span class="arithmatex">\(2&lt;D&lt;\sqrt{5}\)</span> 时积分下界还须 arccos<span class="arithmatex">\((2/D)\)</span>，导数为 <span class="arithmatex">\(4[2\sqrt{D^2-1}+\sqrt{D^2-4}-D^2]/(\pi D)\)</span>，非正：令 <span class="arithmatex">\(u=\sqrt{D^{2}-4}\in (0,1)\)</span>，平方差 <span class="arithmatex">\((u^{2}-u+4)^{2}-4(u^{2}+3)=(u-1)^{2}(u^{2}+4)\ge 0\)</span>，即得括号非正。<span class="arithmatex">\(D\ge \sqrt{5}\)</span> 时两个坐标投影不可能同时满足“一坐标跨一条、另一坐标零条”的范围，概率为零。
 所以全局最佳长度 <span class="arithmatex">\(D=1\)</span>，最大概率 <span class="arithmatex">\(2/\pi\)</span>。网格角点和恰在线上的零概率情况不影响结论。
 <strong>方法</strong>：先对给定方向求起点相位概率，再积分；跨线次数不能只用平均交点数代替。</p>
+<p><strong>为什么一维相位概率是三角形。</strong> 投影长度 <span class="arithmatex">\(t\ge0\)</span>，起点相位 <span class="arithmatex">\(U\sim U(0,1)\)</span>，跨线数几乎必为 <span class="arithmatex">\(\lfloor U+t\rfloor\)</span>。零条要求 <span class="arithmatex">\(U&lt;1-t\)</span>，给 <span class="arithmatex">\((1-t)_+\)</span>；一条要求 <span class="arithmatex">\(1-t\le U&lt;2-t\)</span>，与 <span class="arithmatex">\([0,1]\)</span> 相交后的长度即 <span class="arithmatex">\((1-|t-1|)_+\)</span>。两坐标的相位独立，所以只有“一条竖线加零条横线”或相反这两个互斥情形。</p>
+<p><strong>把分段积分的区间列全。</strong> 在 <span class="arithmatex">\(0\le\theta\le\pi/4\)</span> 内设 <span class="arithmatex">\(x=D\cos\theta\ge y=D\sin\theta\)</span>，定义两种被积函数</p>
+<div class="arithmatex">\[
+A_D(\theta)=D(\cos\theta+\sin\theta)-2D^2\sin\theta\cos\theta,
+\quad B_D(\theta)=(2-D\cos\theta)(1-D\sin\theta).
+\]</div>
+<p>若 <span class="arithmatex">\(x\le1\)</span> 用 <span class="arithmatex">\(A_D\)</span>；若 <span class="arithmatex">\(1&lt;x&lt;2,y&lt;1\)</span> 用 <span class="arithmatex">\(B_D\)</span>；其余为零。设 <span class="arithmatex">\(a=\arccos(1/D),b=\arcsin(1/D),c=\arccos(2/D)\)</span>，只在各自实数定义区间使用，则</p>
+<div class="arithmatex">\[
+\frac\pi4f(D)=
+\begin{cases}
+\int_0^{\pi/4}A_Dd\theta,&amp;0&lt;D\le1,\\
+\int_0^aB_Dd\theta+\int_a^{\pi/4}A_Dd\theta,&amp;1&lt;D&lt;\sqrt2,\\
+\int_0^bB_Dd\theta,&amp;\sqrt2\le D\le2,\\
+\int_c^bB_Dd\theta,&amp;2&lt;D&lt;\sqrt5,\\
+0,&amp;D\ge\sqrt5.
+\end{cases}
+\]</div>
+<p>可直接使用原函数</p>
+<div class="arithmatex">\[
+\int A_Dd\theta=D(\sin\theta-\cos\theta)-D^2\sin^2\theta,
+\quad
+\int B_Dd\theta=2\theta-D\sin\theta+2D\cos\theta+\tfrac12D^2\sin^2\theta.
+\]</div>
+<p>代上下限再求导就得到上文三段导数；<span class="arithmatex">\(x=1\)</span> 处两被积函数相等，<span class="arithmatex">\(x=2\)</span> 或 <span class="arithmatex">\(y=1\)</span> 处 <span class="arithmatex">\(B_D=0\)</span>，因此 Leibniz 边界项会抵消或消失，不能遗漏分界点的移动。</p>
+<p><span class="arithmatex">\(1&lt;D&lt;\sqrt2\)</span> 时负导数所需 <span class="arithmatex">\(D-1&lt;\sqrt{1-D^{-2}}\)</span>，两边非负可平方，化为 <span class="arithmatex">\((D-1)(D^3-D^2-D-1)&lt;0\)</span>，后一个多项式在该区间小于0；也可直接由上面原函数作比较。<span class="arithmatex">\(D\ge\sqrt5\)</span> 时要恰过一线必须 <span class="arithmatex">\(x&lt;2,y&lt;1\)</span> 或相反，平方和便小于5，不可能。这解释了最后概率恰为零，而非只在无穷远趋零。</p>
 </details>
 <h3 id="problem-4dd74fe8a08e">Q444 · Buffon针的概率与交线数<a class="headerlink" href="#problem-4dd74fe8a08e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：几何概率｜<strong>副题型</strong>：微积分</p>
@@ -8300,7 +8340,9 @@ P\left(\bigcup_{i=1}^{N}E_i\right) = \sum_{i=1}^{N}P(E_i) = \frac{N}{2^{N-1}}
 <p><strong>题目</strong>：圆桌边缘独立均匀装三只支脚，圆心为重心。求重心在三脚支撑三角形内的概率。</p>
 <details class="note">
 <summary>解答</summary>
-<p>(b)圆周三独立均匀脚位支撑圆心，当且仅当它们不全落入某半圆；三个互斥的“从指定脚起半圆含其余两脚”事件总概率<span class="arithmatex">\(3/4\)</span>，故站稳概率<span class="arithmatex">\(1/4\)</span>。两问模型不同，数值恰相同。</p>
+<p>忽略概率为零的直径、重合等退化情形。圆心在三角形外，当且仅当存在过圆心的直线使三点位于同一侧，也就是三点都在某个半圆内。可以从凸集分离理解这个等价；反过来，同处开半圆的三点的凸包显然不含圆心。</p>
+<p>固定一个脚位 <span class="arithmatex">\(i\)</span>，考虑从它沿顺时针方向长半周的弧。另两脚独立均匀，各落入该半圆的概率为 <span class="arithmatex">\(1/2\)</span>，所以“该半圆包含其余两脚”的概率为 <span class="arithmatex">\(1/4\)</span>。若三点都能放入半圆，排序后的三个圆周间隙中恰有一个大于半周；紧接这个大间隙的脚位是唯一可作上述半圆起点的脚。因此三个起点事件在去掉退化情形后互斥，不会多重计数。</p>
+<p>不稳定概率为 <span class="arithmatex">\(3\times1/4=3/4\)</span>，圆心在支撑三角形内的概率为 <span class="arithmatex">\(\boxed{1/4}\)</span>。</p>
 </details>
 <p><span id="q145"></span></p>
 <h3 id="problem-5d589fd88796">Q449 · 圆上弦相交<a class="headerlink" href="#problem-5d589fd88796" title="Permanent link">&para;</a></h3>
@@ -8421,6 +8463,9 @@ P(Y &gt; 3X\mid X&gt;0) = \frac{\arctan(1/3)}{\pi} \approx \frac{0.3217}{\pi} \a
 七个法向量给出七条过球心的大圆，几乎必处于一般位置。<span class="arithmatex">\(n\)</span> 条大圆将球面切成 <span class="arithmatex">\(R_{n}=n^{2}-n+2\)</span> 个开区域：<span class="arithmatex">\(R_{1}=2\)</span>，第 <span class="arithmatex">\(n\)</span> 条与之前大圆交于 <span class="arithmatex">\(2(n-1)\)</span> 个不同点，分成同样多段，各增加一个区域。每区对应一组可实现内积符号。给定七条无向大圆，每个法向量朝向独立等概率，全部正号在 <span class="arithmatex">\(2^{7}\)</span> 种符号中均匀；恰有 <span class="arithmatex">\(R_{7}=44\)</span> 种符号可实现，因此 <span class="arithmatex">\(P(E)=44/128=11/32\)</span>，条件概率为 <span class="arithmatex">\(1/44\)</span>。
 若原问题要求六个天体在地平线上方且恒星在下方，将恒星方向取反，仍是七个独立均匀方向，得到同一数学模型。半径不影响方向事件。
 <strong>方法</strong>：把“存在某个观察点”与“固定随机点满足”分开，用区域计数求前者，再作条件化。</p>
+<p><strong>随机观察方向和存在性事件的条件关系。</strong> 令 <span class="arithmatex">\(U\)</span> 为另取的独立均匀观察方向，<span class="arithmatex">\(A=\{U\cdot X_j&gt;0,1\le j\le7\}\)</span>，<span class="arithmatex">\(E=\{\exists u:\ u\cdot X_j&gt;0,\forall j\}\)</span>。因 <span class="arithmatex">\(A\subseteq E\)</span>，<span class="arithmatex">\(P(A\mid E)=P(A)/P(E)\)</span>。先给定 <span class="arithmatex">\(U\)</span>，七个方向仍独立且正半球概率各1/2，故 <span class="arithmatex">\(P(A)=2^{-7}\)</span>。不是在事件 <span class="arithmatex">\(E\)</span> 发生后“均匀选一个可行方向”，后者成功率当然为1。</p>
+<p><strong>区域与符号模式为何一一对应。</strong> <span class="arithmatex">\(n\)</span> 条无向大圆一般位置下，每新增一条与旧圆有 <span class="arithmatex">\(2(n-1)\)</span> 个不同交点，分成同样多段，每段把一个已有区域分成两个，所以 <span class="arithmatex">\(R_n=R_{n-1}+2(n-1)\)</span>，从 <span class="arithmatex">\(R_1=2\)</span> 累加得 <span class="arithmatex">\(n^2-n+2\)</span>。一个固定严格符号模式定义若干开半空间的交，其与球面的非空交是球面凸区域，因而连通；故不同区域不会重复同一模式。</p>
+<p>条件于无向法向轴 <span class="arithmatex">\(\{\pm X_j\}\)</span>，每根轴正负取向仍独立各半，因此随机指定的“全正模式”在 <span class="arithmatex">\(2^n\)</span> 种模式中均匀。可实现模式恰有 <span class="arithmatex">\(R_n\)</span> 种，故 <span class="arithmatex">\(P(E)=R_n/2^n\)</span>。取 <span class="arithmatex">\(n=7\)</span> 得44/128，最终比值1/44。一般位置失败、内积恰零等边界事件在连续均匀抽样下概率零；严格正号和开区域的使用在此一致。</p>
 </details>
 <h3 id="problem-gaussian-two-targets">Q463 · 两个对称目标的高斯瞄准<a class="headerlink" href="#problem-gaussian-two-targets" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：几何概率｜<strong>副题型</strong>：分布与矩</p>
@@ -8463,6 +8508,8 @@ x+(y-x) &gt; 1-y \Rightarrow y &gt; \frac{1}{2},\qquad x+(1-y) &gt; y-x \Rightar
 <details class="note">
 <summary>解答</summary>
 <p>“每次均匀切”必须说明在哪段切：两点在原棍独立均匀，成三角形概率<span class="arithmatex">\(1/4\)</span>；首切后等概率选一段再在其中均匀切，概率<span class="arithmatex">\(\int _{1/2}^{1}(1-x)/x dx=\ln 2-1/2\)</span>；总切较长段则为<span class="arithmatex">\(2\ln 2-1\)</span>。三个答案对应不同生成机制。</p>
+<p>三段成三角形等价于每段都小于1/2。机制(a)的有序切点 <span class="arithmatex">\(0&lt;x&lt;y&lt;1\)</span> 密度2，合法约束 <span class="arithmatex">\(x&lt;1/2,y&gt;1/2,y-x&lt;1/2\)</span> 在这个面积1/2的大三角中留下面积1/8，概率1/4。</p>
+<p>对机制(b)，设首刀位置为 <span class="arithmatex">\(x\)</span>。当 <span class="arithmatex">\(x&gt;1/2\)</span>，只有选择长度 <span class="arithmatex">\(x\)</span> 的较长段再切才可能成功，选中概率1/2；再切位置 <span class="arithmatex">\(u\)</span> 须满足 <span class="arithmatex">\(u&lt;1/2,x-u&lt;1/2\)</span>，可选长度为 <span class="arithmatex">\(1-x\)</span>，条件概率 <span class="arithmatex">\((1-x)/x\)</span>。<span class="arithmatex">\(x&lt;1/2\)</span> 的对称一半贡献相同，因此总率是 <span class="arithmatex">\(2\cdot(1/2)\int_{1/2}^1(1-x)/x\,dx=\log2-1/2\)</span>。机制(c)总选较长段，不再乘1/2，所以结果翻倍为 <span class="arithmatex">\(2\log2-1\)</span>。</p>
 </details>
 <h3 id="problem-eacc7c7fcc37">Q467 · 半棒各取一点的间距<a class="headerlink" href="#problem-eacc7c7fcc37" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：几何概率</p>
@@ -8508,6 +8555,8 @@ P=\int_0^1\int_0^{1-a}(1-a-b)\,db\,da=1/6.
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(n\)</span>段各由两个独立均匀端点构成。全部有共同交集，当且仅当排序后前<span class="arithmatex">\(n\)</span>个端点恰含每段一个端点；在<span class="arithmatex">\(\binom{2n}{n}\)</span>个等可能前<span class="arithmatex">\(n\)</span>标签集合中有<span class="arithmatex">\(2^{n}\)</span>个，故概率<span class="arithmatex">\(2^{n}/\binom{2n}{n}\)</span>。<span class="arithmatex">\(n=5\)</span>为<span class="arithmatex">\(8/63\)</span>。</p>
+<p>令每段左右端点为 <span class="arithmatex">\(L_i&lt;R_i\)</span>。共同交集非空等价于 <span class="arithmatex">\(\max_iL_i\le\min_iR_i\)</span>。端点连续所以无并列；此时所有左端点必排在所有右端点之前，恰有每段一个端点落入最小的 <span class="arithmatex">\(n\)</span> 个。反过来若最小的 <span class="arithmatex">\(n\)</span> 个每段恰占一个，它必是该段左端点，后半则全为右端点，于是中间两排序端点之间就是公共交集。</p>
+<p>在 <span class="arithmatex">\(2n\)</span> 个可区分端点中，最小 <span class="arithmatex">\(n\)</span> 个的身份集合均匀，共 <span class="arithmatex">\(\binom{2n}n\)</span> 种；每段任选其中一个端点组成集合，共 <span class="arithmatex">\(2^n\)</span> 种，故所列公式。这里只需一维区间的排序结构，不可推广到一般二维图形的“两两相交”条件。</p>
 </details>
 <h3 id="problem-29c592162f6c">Q472 · 直线上的随机两区间<a class="headerlink" href="#problem-29c592162f6c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：几何概率｜<strong>副题型</strong>：条件概率与贝叶斯</p>
@@ -8665,6 +8714,13 @@ P(\text{圆周交对角线})=
 1-\left(1-\frac{2D}{LW}\right)_+^2-\frac C{LW}.
 \]</div>
 <p>特别地<span class="arithmatex">\(D\le 1\)</span>时整条对角线始终在单位圆盘内，概率0；<span class="arithmatex">\(D\ge 2\)</span>时<span class="arithmatex">\(C=0\)</span>，圆周与圆盘答案一致。这样小矩形也有可直接代入的完整解，不必留待外部图形积分。</p>
+<p><strong>补集四个三角形的面积推导。</strong> 把矩形中心移到原点，半边长 <span class="arithmatex">\(a=L/2,b=W/2\)</span>，令 <span class="arithmatex">\(d=\sqrt{a^2+b^2}=D/2\)</span>。两对角线为 <span class="arithmatex">\(bx\pm ay=0\)</span>，圆心不碰任何对角线等价于 <span class="arithmatex">\(|bx-ay|&gt;d\)</span> 且 <span class="arithmatex">\(|bx+ay|&gt;d\)</span>。靠近下边的补集三角形由 <span class="arithmatex">\(ay&lt;-d-b|x|\)</span>、<span class="arithmatex">\(y\ge-b\)</span> 界定，底长 <span class="arithmatex">\(2(a-d/b)\)</span>、高 <span class="arithmatex">\(b-d/a\)</span>，面积</p>
+<div class="arithmatex">\[
+(a-d/b)(b-d/a)=\frac{(ab-d)^2}{ab}.
+\]</div>
+<p>其余三块面积相同。若 <span class="arithmatex">\(ab\le d\)</span>，三角形已消失，覆盖概率为1；否则四块面积除总面积 <span class="arithmatex">\(4ab\)</span>，给 <span class="arithmatex">\((1-d/(ab))^2=(1-2D/(LW))^2\)</span>，因此必须使用正部截断。</p>
+<p><strong>圆周额外扣除项如何分段。</strong> 若四顶点都在圆盘内，整个矩形（其凸包）也在内，所以两对角线都没有圆周交点。反之，圆盘碰到某对角线且圆周没交点，则该对角线全在圆内，矩形中心亦在圆内；另一条对角线穿过此内部点，若圆周也没交点，它也全在圆内。因此恰好需扣除四顶点全被覆盖的圆心区域。</p>
+<p>在圆心第一象限 <span class="arithmatex">\(u,v\ge0\)</span>，最远顶点为 <span class="arithmatex">\((-a,-b)\)</span>，覆盖条件 <span class="arithmatex">\((a+u)^2+(b+v)^2\le1\)</span>，且 <span class="arithmatex">\(u\le a,v\le b\)</span>。令 <span class="arithmatex">\(t=a+u\)</span>，允许 <span class="arithmatex">\(v\)</span> 长度就是 <span class="arithmatex">\(\min\{b,(\sqrt{1-t^2}-b)_+\}\)</span>。上界 <span class="arithmatex">\(U\)</span> 是该长度首次变零或碰矩形边界的位置，分界 <span class="arithmatex">\(V\)</span> 则由 <span class="arithmatex">\(\sqrt{1-t^2}=2b\)</span> 求得；在 <span class="arithmatex">\([a,V]\)</span> 高为 <span class="arithmatex">\(b\)</span>，在 <span class="arithmatex">\([V,U]\)</span> 高为 <span class="arithmatex">\(\sqrt{1-t^2}-b\)</span>，积分正好给上文 <span class="arithmatex">\(C\)</span>。这说明各个 min/max 的几何来源，而不只是留下难以解释的闭式。</p>
 </details>
 <p><span id="q148"></span></p>
 <h3 id="problem-c84bb348e0f4">Q487 · 排队异性别对数<a class="headerlink" href="#problem-c84bb348e0f4" title="Permanent link">&para;</a></h3>
@@ -9045,6 +9101,18 @@ E[X_n]=n\sum_{m=2}^{n-1}\frac{1-2^{1-m}}{(m+1)!}.
 \]</div>
 <p>这是两侧局部链的计数推导；可对照Eriksen 的纸巾问题论文。
 <strong>方法</strong>：用唯一的局部致因结构计算指定人的失败概率，再用期望线性性汇总；无须先求缺纸巾总数的整个分布。</p>
+<p><strong>局部链为什么能唯一选取。</strong> 先把每个人的左右偏好独立抽好：有两张时按偏好，有一张时无论偏好都拿剩余，等价于原过程。若第 <span class="arithmatex">\(k\)</span> 人左右纸巾都已被取走，从她身边的取纸者向外追溯：只要该人本来想拿另一侧但那张更早被拿走，就继续向外；第一次主动按偏好向内拿的人为该侧链的端点。沿链每个内侧人到达都晚于其外侧前驱，否则不会被迫向内拿。左右两条链在她到来前结束，端点按“最近主动向内拿者”选定，所以每次落空对应唯一的 <span class="arithmatex">\((m,j)\)</span>，无需对所有可能强制链再重复相加。</p>
+<p><strong>把排列系数化为期望公式。</strong> 给定第 <span class="arithmatex">\(k\)</span> 人，选链上 <span class="arithmatex">\(m\)</span> 个较早到者 <span class="arithmatex">\(\binom{k-1}m\)</span>，选 <span class="arithmatex">\(j\)</span> 人在左 <span class="arithmatex">\(\binom mj\)</span>；左右链内部顺序都被外早内晚锁定，其余 <span class="arithmatex">\(n-m-1\)</span> 人自由排列。每位链上偏好被指定，独立权重 <span class="arithmatex">\(2^{-m}\)</span>。对两边都非空的 <span class="arithmatex">\(j=1,\ldots,m-1\)</span> 求和，</p>
+<div class="arithmatex">\[
+2^{-m}\sum_{j=1}^{m-1}\binom mj=1-2^{1-m}.
+\]</div>
+<p>再对 <span class="arithmatex">\(k=m+1,\ldots,n\)</span> 用曲棍球棒恒等式，排列权重变成</p>
+<div class="arithmatex">\[
+\frac{(n-m-1)!}{(n-1)!}\binom n{m+1}
+=\frac n{(m+1)!}.
+\]</div>
+<p>所以 <span class="arithmatex">\(EX_n/n\)</span> 为原级数的有限截断。所有项非负，可用单调收敛取极限。</p>
+<p>最后分别求和：<span class="arithmatex">\(\sum_{m\ge2}1/(m+1)!=e-5/2\)</span>，而令 <span class="arithmatex">\(j=m+1\)</span> 后 <span class="arithmatex">\(\sum_{m\ge2}2^{1-m}/(m+1)!=4\sum_{j\ge3}(1/2)^j/j!=4\sqrt e-13/2\)</span>。相减为 <span class="arithmatex">\(e+4-4\sqrt e=(2-\sqrt e)^2\)</span>。只求极限也必须先解释局部事件的计数权重，不能把不同人到达后的剩余纸巾状态当成独立。</p>
 </details>
 <h3 id="problem-bubble-inversions-comparison">Q527 · 随机排列的逆序对与冒泡比较界<a class="headerlink" href="#problem-bubble-inversions-comparison" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期望与线性性｜<strong>副题型</strong>：排序与搜索</p>
@@ -9306,6 +9374,8 @@ P=\int_0^1a x^{a-1}(1-x^b)(1-x^c)dx=1-\frac a{a+b}-\frac a{a+c}+\frac a{a+b+c}.
 <details class="note">
 <summary>解答</summary>
 <p>连续独立同分布成绩的纪录指标相互独立：每个前缀末项的相对名次均匀且各前缀名次编码独立。纪录数方差 <span class="arithmatex">\(\sum_{j=1}^n\frac1j(1-\frac1j)=H_n-\sum_{j=1}^n\frac1{j^2}\to\infty\)</span>。相邻双纪录的期望 <span class="arithmatex">\(\sum_{j=2}^n\frac1{j(j-1)}=1-1/n\to1\)</span>；此处不需双纪录指标独立。</p>
+<p><strong>纪录指标独立的依据。</strong> 设 <span class="arithmatex">\(R_j\in\{1,\ldots,j\}\)</span> 是第 <span class="arithmatex">\(j\)</span> 项在前 <span class="arithmatex">\(j\)</span> 项中的从小到大名次。无并列时，前 <span class="arithmatex">\(n\)</span> 项的 <span class="arithmatex">\(n!\)</span> 种相对次序等可能；而每个相对次序与一组名次码 <span class="arithmatex">\((R_1,\ldots,R_n)\)</span> 一一对应。可倒序重建：先在全部排序位置中取第 <span class="arithmatex">\(R_n\)</span> 个给第 <span class="arithmatex">\(n\)</span> 项，删掉它，再取第 <span class="arithmatex">\(R_{n-1}\)</span> 个，依此类推。名次码共有 <span class="arithmatex">\(\prod_{j=1}^nj=n!\)</span> 个，故联合分布分解为 <span class="arithmatex">\(\prod_j1/j\)</span>，各 <span class="arithmatex">\(R_j\)</span> 独立均匀。</p>
+<p>第 <span class="arithmatex">\(j\)</span> 项为纪录当且仅当 <span class="arithmatex">\(R_j=j\)</span>，所以指标 <span class="arithmatex">\(I_j\)</span> 独立，<span class="arithmatex">\(EI_j=1/j\)</span>，纪录数方差为各 Bernoulli 方差之和。相邻双纪录数是 <span class="arithmatex">\(\sum_{j=2}^nI_{j-1}I_j\)</span>，其均值由独立的 <span class="arithmatex">\(I_{j-1},I_j\)</span> 给出；但这些乘积彼此共享指标，不能再宣称双纪录事件也相互独立。</p>
 </details>
 <h3 id="problem-7fce3e966a94">Q553 · 跳高纪录的独立性<a class="headerlink" href="#problem-7fce3e966a94" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：分布与矩｜<strong>副题型</strong>：期望与线性性</p>
@@ -10042,6 +10112,8 @@ f_Y(x)=f_X\!\left(g^{-1}(x)\right)\left|\frac{d}{dx}g^{-1}(x)\right|.
 <details class="note">
 <summary>解答</summary>
 <p><span class="arithmatex">\(Z=Y/X\)</span>，<span class="arithmatex">\(X,Y\)</span>独立<span class="arithmatex">\(U(0,1)\)</span>。<span class="arithmatex">\(\operatorname{ceil} (Z)=1\)</span>概率<span class="arithmatex">\(1/2\)</span>；对<span class="arithmatex">\(k\ge 2\)</span>，落在(<span class="arithmatex">\(k^{2}-1,k^{2}\)</span>]的概率为<span class="arithmatex">\(1/[2(k^{2}-1)]-1/(2k^{2})\)</span>。用<span class="arithmatex">\(\sum _{k\ge 2}1/(k^{2}-1)=3/4\)</span>、<span class="arithmatex">\(\sum _{k\ge 2}1/k^{2}=\pi ^{2}/6-1\)</span>，得总概率<span class="arithmatex">\(11/8-\pi ^{2}/12\)</span>。</p>
+<p>对 <span class="arithmatex">\(t\ge1\)</span>，<span class="arithmatex">\(P(Y/X&gt;t)=\int_0^{1/t}(1-tx)dx=1/(2t)\)</span>，这是单位正方形内直线 <span class="arithmatex">\(y=tx\)</span> 上方的面积。因此整数 <span class="arithmatex">\(k\ge2\)</span> 对应区间 <span class="arithmatex">\((k^2-1,k^2]\)</span> 的概率是两个尾概率之差；<span class="arithmatex">\(k=1\)</span> 则覆盖 <span class="arithmatex">\(0&lt;Y/X\le1\)</span>，面积为1/2。</p>
+<p>级数可直接拆分：<span class="arithmatex">\(1/(k^2-1)=\tfrac12[1/(k-1)-1/(k+1)]\)</span>，从2开始求和留下 <span class="arithmatex">\(\tfrac12(1+1/2)=3/4\)</span>。所以总率 <span class="arithmatex">\(1/2+\tfrac12[3/4-(\pi^2/6-1)]=11/8-\pi^2/12\)</span>。<span class="arithmatex">\(X=0\)</span> 与区间端点都是零概率，不影响上取整的边界约定。</p>
 </details>
 <h3 id="problem-927921ae54af">Q628 · 正方形点的方位角<a class="headerlink" href="#problem-927921ae54af" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：分布与矩</p>

@@ -2926,8 +2926,8 @@
 <p>不要被"你说、他说"绕晕，只需把每个人每句话背后的逻辑翻译成信息。</p>
 <p>设生日日期为 <span class="arithmatex">\( D \)</span>，则 <span class="arithmatex">\( D \in \{1, 2, 4, 5, 7, 8\} \)</span>。若日期在清单中只出现一次，<span class="arithmatex">\(C\)</span> 立刻就能知道生日。这里唯一出现的日期是 <strong>2 和 7</strong>，分别只对应 12 月 2 日与 6 月 7 日。</p>
 <ul>
-<li>你敢肯定"<span class="arithmatex">\(C\)</span> 不知道"，说明 <span class="arithmatex">\(C\)</span> 拿到的日期不是 2 或 7；而这又要求<strong>月份不是 6 月也不是 12 月</strong>（否则日期可能是 2 或 7，你就无法断定 <span class="arithmatex">\(C\)</span> 不知道）。结论：月份是 3 月或 9 月。
-<span class="arithmatex">\(- C\)</span> 听懂了这一点，立即知道了生日，说明日期在"3 月与 9 月的清单"中唯一——排除 <span class="arithmatex">\(3/5\)</span> 与 <span class="arithmatex">\(9/5\)</span>。结论：生日是 <strong><span class="arithmatex">\(3/4\)</span>、<span class="arithmatex">\(3/8\)</span> 或 <span class="arithmatex">\(9/1\)</span></strong>。</li>
+<li>你敢肯定"<span class="arithmatex">\(C\)</span> 不知道"，说明 <span class="arithmatex">\(C\)</span> 拿到的日期不是 2 或 7；而这又要求<strong>月份不是 6 月也不是 12 月</strong>（否则日期可能是 2 或 7，你就无法断定 <span class="arithmatex">\(C\)</span> 不知道）。结论：月份是 3 月或 9 月。</li>
+<li><span class="arithmatex">\(C\)</span> 听懂了这一点，立即知道了生日，说明日期在"3 月与 9 月的清单"中唯一——排除 <span class="arithmatex">\(3/5\)</span> 与 <span class="arithmatex">\(9/5\)</span>。结论：生日是 <strong><span class="arithmatex">\(3/4\)</span>、<span class="arithmatex">\(3/8\)</span> 或 <span class="arithmatex">\(9/1\)</span></strong>。</li>
 <li>这三个可能中，<span class="arithmatex">\(3/4\)</span> 与 <span class="arithmatex">\(3/8\)</span> 同月。若你拿到的月份是 3 月，你仍然无法确定；既然你确定了，<strong>生日必是 9 月 1 日</strong>。</li>
 </ul>
 <p>助理写下的是 <strong>9 月 1 日</strong>。</p>
@@ -2977,6 +2977,9 @@
 <p><strong>一般规律</strong>：
 - 若<strong>已知</strong>坏球偏重还是偏轻，最多 <span class="arithmatex">\( 3^n \)</span> 个球可用不超过 <span class="arithmatex">\( n \)</span> 次称量找出（每次称量把问题规模缩为 <span class="arithmatex">\( 1/3 \)</span>）。
 - 若<strong>不知</strong>轻重，最多 <span class="arithmatex">\( (3^n-3)/2 \)</span> 个球可用不超过 <span class="arithmatex">\( n \)</span> 次。</p>
+<p><strong>三次为何最少，及12球上限的直接检查。</strong> 每球有偏轻/偏重两种候选，共24种。一次称量最多给轻、平、重三种结果，两次最多9条结果路径，无法区分24种，所以至少三次；上面的分支表达到三次。</p>
+<p>第一称若两边各 <span class="arithmatex">\(a\)</span> 球，则不平衡的每个方向有 <span class="arithmatex">\(2a\)</span> 种候选（重盘某球偏重或轻盘某球偏轻）；平衡分支有 <span class="arithmatex">\(2(N-2a)\)</span> 种。剩两次各分支最多9种，故必须 <span class="arithmatex">\(2a\le9\)</span>、<span class="arithmatex">\(2(N-2a)\le9\)</span>，即 <span class="arithmatex">\(a\le4,N-2a\le4\)</span>，推出 <span class="arithmatex">\(N\le12\)</span>。这比单纯 <span class="arithmatex">\(2N\le27\)</span> 的信息界更强，排除了13球。</p>
+<p>每个末端候选都带“偏轻/偏重”符号；第三次应与已知正常球比较或在两个候选间比较，不能只报坏球而忘了坏的方向。例如第一称平衡、第二称也平衡时，9、10、11均正常，第三称12对8，直接给出12的轻重。第一次不平衡而第二称平衡时，候选4轻、7重、8重，称7对8的三种结果恰对应8重、4轻、7重，覆盖所有情况。</p>
 </details>
 <p><span id="q8"></span></p>
 <h3 id="problem-978a31476ef9">Q8 · 阶乘尾零<a class="headerlink" href="#problem-978a31476ef9" title="Permanent link">&para;</a></h3>
@@ -3000,6 +3003,8 @@
 <p><strong>第二轮（1 场）</strong>：让 1、6、11、16、21 五匹组冠军同赛。不妨设名次为 1、6、11、16、21。于是立即排除：<span class="arithmatex">\(4-5\)</span>、<span class="arithmatex">\(8-10\)</span>、<span class="arithmatex">\(12-15\)</span>、<span class="arithmatex">\(16-20\)</span>、<span class="arithmatex">\(21-25\)</span>。1 号是全场最快，直接入选。剩下只需在 <strong>2、3、6、7、11</strong> 中确定前二三名。</p>
 <p><strong>第三轮（1 场）</strong>：这 5 匹再赛一场，取前两名。</p>
 <p><strong>结论：共需 7 场（3 轮）</strong>。</p>
+<p><strong>七场的下界不能只由“所有马都参赛”得到。</strong> 用对抗回答：在每场中让此前未输过的马都排在已输过的马之前。此前从未输过的马仍可能是全局最快，一场至多让4匹失去这个资格；要从25个可能冠军缩到1个，至少6场。若恰只用6场，每场都必须有5匹此前未输过的马，且一次消去4个冠军候选，任何重复比较已败者都会使总消去数不足24。</p>
+<p>因此六场比较结构是一棵有6个内部节点的五叉胜者树，败者不会再得到新的比较。对抗者在每场可优先令已有获胜历史的参赛马获胜，使最终冠军至少赢过两场。冠军在最后一场的第二名，与它此前最近一场的第二名都只曾输给冠军；两者从未交手，也无经过其他马的比较链确定其顺序，交换二者的真实速度仍符合所有已见赛果。因此第二名都尚不能唯一确定，更不可能确定前三。六场不能保证，结合七场构造，最少确为七场。这里冠军资格是比较证据中的“尚未输过”，不是预先知道的真实名次。</p>
 </details>
 <p><span id="q10"></span></p>
 <h3 id="problem-01a4391d8775">Q10 · 无穷幂塔<a class="headerlink" href="#problem-01a4391d8775" title="Permanent link">&para;</a></h3>
@@ -3034,6 +3039,8 @@ x^{2} = 2 \Rightarrow x = \sqrt{2}
 <p>沿任一坐标轴，颜色每隔 2 个单位交替一次。任意一块轴对齐的 <span class="arithmatex">\( 1\times1\times4 \)</span> 砖沿长边连续跨过 4 个单位，恰好在黑色区域和白色区域中各占 2 个单位体积；即使它跨过三个 <span class="arithmatex">\( 2\times2\times2 \)</span> 分块，这个结论仍成立。因此每块砖都消耗两种颜色各 2 个单位体积，而较少的一色只有 104 个单位体积，至多支持 <span class="arithmatex">\(104/2=52\)</span> 块砖。</p>
 <p>所以 <strong>第 53 块砖无论如何都放不下</strong>。</p>
 <p><strong>结论：不能。</strong></p>
+<p><strong>摆放方向的假设及错位问题。</strong> 上述是轴平行装箱的染色证明：砖的长边沿某一箱体坐标轴，位置可任意错开，不要求砖端点都为整数。若允许任意三维斜放，不能直接断言砖对两色各占一半，此证明只覆盖轴平行模型；题目应按这一标准装箱约定理解，不能悄悄将额外自由度也包含在结论内。</p>
+<p>要严格验证错位也无碍，沿砖长轴设带符号颜色函数 <span class="arithmatex">\(s(t)\)</span> 每两单位变号，周期为4，故对任意起点 <span class="arithmatex">\(q\)</span>，<span class="arithmatex">\(\int_q^{q+4}s(t)dt=0\)</span>。固定砖横截面上一个点，另两坐标只会整体翻转此符号，所以沿长边黑白长度仍各2；再对单位横截面积分，整砖黑白体积各2。箱中两色总量112、104，不重叠摆放意味着所有砖消耗的较少色体积至多104，所以最多52块。位置错开不会突破这个体积不变量。</p>
 </details>
 <p><span id="q12"></span></p>
 <h3 id="problem-240fb90d884b">Q12 · 日历方块<a class="headerlink" href="#problem-240fb90d884b" title="Permanent link">&para;</a></h3>
@@ -3206,7 +3213,8 @@ x^{2} = 2 \Rightarrow x = \sqrt{2}
 <p><strong>策略</strong>：
 - 其余 49 位智者：<strong>每个人第一次看到杯口朝下时，把杯子翻成口朝上</strong>（此后若杯子已口朝上、或自己已翻过一次，则什么都不做）。每人一生只翻一次。
 - 发言人：每次看到杯口朝上，就把杯子翻回<strong>口朝下</strong>，并计数；若杯口已朝下则什么都不做。<strong>当他完成第 49 次翻回时，说明其余 49 人都已各翻过一次（即都被召唤过），即可宣布"所有人都被召唤过"。</strong></p>
-<p>为什么正确？杯子每被翻成"口朝上"一次，就对应一位新的智者完成了他的唯一一次翻杯；发言人只负责归零和计数，49 次计数恰好对应 49 位不同的人（每人只贡献一次）。无论召唤顺序如何随机，该策略必然在有限时间内宣布成功。</p>
+<p>为什么正确？杯子每被翻成"口朝上"一次，就对应一位新的智者完成了他的唯一一次翻杯；发言人只负责归零和计数，49 次计数恰好对应 49 位不同的人（每人只贡献一次）。在每人都反复被召唤的调度条件下，该策略最终会宣布成功；独立均匀随机召唤时以概率1成立。</p>
+<p>终止需要将“永不误报”与“最终会报”分开：唯一信号机制证明了前者；后者依赖每人会反复被召唤的调度条件。只要所有人都无限次进入，任何尚未发送信号者最终会在发言人清零后发送信号，发言人又最终将它收走，有限个信号因此全部完成。独立均匀召唤满足该条件的概率为1，但没有对所有可能随机序列都成立的确定时间上界。不能将“无论召唤顺序”理解为允许某人永久不被选中。</p>
 </details>
 <p><span id="q21"></span></p>
 <h3 id="problem-074276d1934e">Q21 · 钟表碎片<a class="headerlink" href="#problem-074276d1934e" title="Permanent link">&para;</a></h3>
@@ -3376,8 +3384,10 @@ N + (N-1) + \cdots + 1 = \frac{N(N+1)}{2}
 <p><strong>三色版本</strong>：若帽子有红、绿、白三种颜色呢？答案仍是至少救 99 人，只是第一人生存概率降为 <span class="arithmatex">\( 1/3 \)</span>。</p>
 <p>评分系统：红 <span class="arithmatex">\(= 0\)</span>，绿 <span class="arithmatex">\(= 1\)</span>，蓝 <span class="arithmatex">\(= 2\)</span>。第一人数出其余 99 人的总得分 <span class="arithmatex">\( s \)</span>，计算 <span class="arithmatex">\( s \% 3 \)</span>：余 0 宣布红，余 1 宣布绿，余 2 宣布蓝。他 <span class="arithmatex">\( 1/3 \)</span> 概率活命，但<strong>其余所有人</strong>都能确定自己的颜色。</p>
 <p>为什么？任一囚徒 <span class="arithmatex">\( i \)</span> 可以算出除第一人和自己外 98 人的总得分 <span class="arithmatex">\( x \)</span>。因为 <span class="arithmatex">\( (x+0) \% 3 \)</span>、<span class="arithmatex">\( (x+1) \% 3 \)</span>、<span class="arithmatex">\( (x+2) \% 3 \)</span> 互不相同，而第一人宣布的是"包含 <span class="arithmatex">\( i \)</span> 在内的 99 人总分 <span class="arithmatex">\( \bmod 3 \)</span>"，所以 <span class="arithmatex">\( i \)</span> 由差值唯一确定自己的得分（颜色）。</p>
-<p>例：囚徒 <span class="arithmatex">\( i \)</span> 看到那 98 人中有 32 红、29 绿、37 蓝，总分 103。若第一人宣布余数为 2（绿），则由于 103、104、105 中只有 <span class="arithmatex">\( 104 \% 3 = 2 \)</span>，囚徒 <span class="arithmatex">\( i \)</span> 知道自己总分为 104，即绿色（1）。</p>
+<p>例：囚徒 <span class="arithmatex">\( i \)</span> 看到那 98 人中有 32 红、29 绿、37 蓝，总分 103。若第一人宣布余数为 2（蓝），则由于 103、104、105 中只有 <span class="arithmatex">\( 104 \% 3 = 2 \)</span>，囚徒 <span class="arithmatex">\( i \)</span> 知道自己总分为 104，即绿色（1）。</p>
 <p>理论上类似策略可推广到任意多种颜色（当然要求囚徒有超强的记忆和计算能力）。</p>
+<p><strong>最多99人的上界。</strong> 第一个发言者所见的其余99顶帽子固定时，他的回答已经确定；改变他自己的帽色不改变所见与回答，因此总存在一种配置使第一人猜错。即使采用随机规则，也不能对每个配置保证第一人正确，故不可能保证救全100人。前述99人的构造达到上界。</p>
+<p>三色编码应统一为红0、绿1、蓝2（若第三色叫白则统一改名）。余数2应宣布蓝，后面的示例中，看到其他98人的总分103，已知整体余数2时，自己补1使104模3等于2，所以自己的帽为绿。发言人的“余数颜色”与被推知者自己的帽色是两个不同量。</p>
 </details>
 <h3 id="problem-d7246e8746ce">Q31 · 无限囚徒的有限错误猜帽<a class="headerlink" href="#problem-d7246e8746ce" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：逻辑推理</p>
@@ -3386,6 +3396,9 @@ N + (N-1) + \cdots + 1 = \frac{N(N+1)}{2}
 <summary>解答</summary>
 <p>囚徒按正整数编号，每人看到所有更大编号的黑白帽，不能听他人答案；允许事先约定任意非构造规则。把无限二进制串按“只差有限位”分为等价类，借助选择公理每类固定一代表。第<span class="arithmatex">\(i\)</span>人把看不到的有限前缀任意填上，所得串与真实串同类，所以每人找出的都是同一代表<span class="arithmatex">\(R\)</span>，猜自己的帽为<span class="arithmatex">\(R_{i}\)</span>。真实串与<span class="arithmatex">\(R\)</span>只差有限位，故总共只错有限人。
 该答案依赖允许选择公理下的非构造约定；若要求有限存储、有限观察或可计算策略，这个构造不满足那些额外限制。原有限帽题的奇偶校验也不能直接移到无限和。</p>
+<p><strong>等价关系和每个人的可用信息。</strong> 对 <span class="arithmatex">\(x,y\in\{0,1\}^{\mathbb N}\)</span>，定义 <span class="arithmatex">\(x\sim y\iff\{j:x_j\ne y_j\}\)</span> 有限。自身差集为空给自反，对称显然；若 <span class="arithmatex">\(x\sim y,y\sim z\)</span>，<span class="arithmatex">\(x,z\)</span> 的差集包含在两个有限差集的并中，故传递。这才可将所有帽色串分成互不相交的类，并事先从每类选一个代表 <span class="arithmatex">\(R([x])\)</span>。</p>
+<p>第 <span class="arithmatex">\(i\)</span> 人只见 <span class="arithmatex">\(x_{i+1},x_{i+2},\ldots\)</span>，把前 <span class="arithmatex">\(i\)</span> 位全填0就得到可由其观测确定的串 <span class="arithmatex">\(y^{(i)}\)</span>。它与真实串只可能在前 <span class="arithmatex">\(i\)</span> 位不同，故 <span class="arithmatex">\([y^{(i)}]=[x]\)</span>。所以每个人虽填入不同长度的前缀，却确实选中同一个预定代表；猜测规则 <span class="arithmatex">\(g_i=R([y^{(i)}])_i\)</span> 不依赖自己的未知帽色，也没有听取其他人的回答。</p>
+<p>错误集合恰为 <span class="arithmatex">\(\{i:x_i\ne R([x])_i\}\)</span>，按等价类定义有限。该有限数依配置而变，没有统一的常数上界；也不保证能算出最后一名错误者的编号。选择公理在这里用于同时给所有等价类选代表，不是对无限帽色求一个未定义的奇偶和。</p>
 </details>
 <p><span id="q31"></span></p>
 <h3 id="problem-afdf169542c9">Q32 · 被 9 整除<a class="headerlink" href="#problem-afdf169542c9" title="Permanent link">&para;</a></h3>
@@ -3408,14 +3421,13 @@ b = a_n(10^n - 1) + a_{n-1}(10^{n-1} - 1) + \cdots + a_1(10 - 1) = a - 9x
 <p><strong>题目</strong>：遥远的小岛上有三种变色龙：红 13 只、绿 15 只、蓝 17 只。每次两种<strong>不同</strong>颜色的变色龙相遇，都会同时变成第三种颜色。例如绿遇红，双双变蓝。是否有可能所有变色龙变成同一种颜色？为什么？</p>
 <details class="note">
 <summary>解答</summary>
-<p>不可能。给出两种证法。</p>
-<p><strong>方法一（化简 + 状态图）</strong>：13、15、17 是"大"数，可先化简为 0、2、4。（理由：若组合 <span class="arithmatex">\( (m+1, n+1, p+1) \)</span> 能变成同色，则 <span class="arithmatex">\( (m, n, p) \)</span> 也能。）组合 <span class="arithmatex">\( (0, 2, 4) \)</span> 能否变成 <span class="arithmatex">\( (0, 0, 6) \)</span>？答案是不能：实际组合 <span class="arithmatex">\( (1,2,3) \)</span> 等价于 <span class="arithmatex">\( (0,1,2) \)</span>，它只能变回另一个 <span class="arithmatex">\( (0,1,2) \)</span> 型（即两两之差不变），永远到不了 <span class="arithmatex">\( (0,0,3) \)</span> 型。</p>
-<p><strong>方法二（模 3 不变量，更根本）</strong>：要让所有变色龙同色，在某个中间阶段必有两种颜色的<strong>数量相等</strong>（想象最终一步前的状态必为 <span class="arithmatex">\( (1, 1, x) \)</span> 型）。而两种不同颜色的数量要相等，它们 <span class="arithmatex">\( \bmod 3 \)</span> 必须同余。</p>
-<p>初始：绿 <span class="arithmatex">\( 15 = 3x \)</span>，红 <span class="arithmatex">\( 13 = 3y+1 \)</span>，蓝 <span class="arithmatex">\( 17 = 3z+2 \)</span>，即三种颜色 <span class="arithmatex">\( \bmod 3 \)</span> 分别为 0、1、2，两两不同。每次相遇有三种情形：</p>
+<p>不可能。令三种颜色的数量为 <span class="arithmatex">\((r,g,b)\)</span>。一次相遇只可能使数量变化为</p>
 <div class="arithmatex">\[
-(3x,\ 3y+1,\ 3z+2) \Rightarrow \begin{cases} (3x+2,\ 3y,\ 3z+1) &amp; \text{（一绿遇一红）} \\ (3(x-1)+2,\ 3(y+1),\ 3z+1) &amp; \text{（一蓝遇一红）} \\ (3(x-1)+2,\ 3y,\ 3(z+1)+1) &amp; \text{（一蓝遇一绿）} \end{cases}
+(-1,-1,2),\quad(-1,2,-1),\quad(2,-1,-1).
 \]</div>
-<p>每种情形的结果仍是一个数 <span class="arithmatex">\( \equiv 0 \)</span>、一个数 <span class="arithmatex">\( \equiv 1 \)</span>、一个数 <span class="arithmatex">\( \equiv 2 \pmod 3 \)</span>。<strong>模式被保持</strong>——任何两种颜色的数量差 <span class="arithmatex">\( \bmod 3 \)</span> 永远不变（相对变化只能是 <span class="arithmatex">\( 0 \)</span> 或 <span class="arithmatex">\( \pm 3 \)</span>），因此永远无法使两种颜色数量相等，也就无法全部变成同一种颜色。<span class="arithmatex">\(\square\)</span></p>
+<p>这三种变化的三个分量模 3 都等于 <span class="arithmatex">\(-1\)</span>。所以任意两种颜色的<strong>数量差模 3</strong>保持不变；数量差本身并不保持不变。</p>
+<p>初态 <span class="arithmatex">\((13,15,17)\)</span> 中，三个数模 3 分别为 <span class="arithmatex">\(1,0,2\)</span>，两两不同。因此今后任何两种颜色的数量都不可能相等：相等会使它们的差模 3 为零，与初态矛盾。</p>
+<p>若所有变色龙最终同色，另外两种颜色的数量就都为零，必然相等。这已与不变量冲突。也可看最后一步：它之前必有两种颜色各剩一只，同样不可能。无需把大数量“约去”或假定小状态之间可互相化简。</p>
 </details>
 <p><span id="q33"></span></p>
 <h3 id="problem-a9c3cc3632f9">Q34 · 硬币拆分求和<a class="headerlink" href="#problem-a9c3cc3632f9" title="Permanent link">&para;</a></h3>
@@ -3467,14 +3479,16 @@ f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{
 <p><strong>题目</strong>：7 名囚徒获得明天获释的机会。行刑者将在每人头上放一顶帽子，帽子可以是彩虹七色中的任意一种，颜色完全由行刑者随意决定。每名囚徒能看到其他 6 人的帽色，但看不到自己的。他们之间不得以任何形式交流，否则立即处死。然后每名囚徒写下对自己帽色的猜测。<strong>若至少一人猜对</strong>，所有人立即获释；否则全部处死。他们有一晚上商量策略。存在保证他们获释的策略吗？</p>
 <details class="note">
 <summary>解答</summary>
-<p>此题常被认为比前面"囚徒与帽子"更难：那题中囚徒能听到别人的宣布，一人宣布即可提供所有人所需的信息；而这题里囚徒不知道别人的猜测。解它确实需要"aha moment"。</p>
-<p><strong>关键</strong>：把七种颜色编码为 <span class="arithmatex">\(0-6\)</span>，则 <span class="arithmatex">\(\left(\sum_{i=1}^{7} x_i\right) \% 7\)</span> 必是 <span class="arithmatex">\(0-6\)</span> 之一（<span class="arithmatex">\( x_i \)</span> 为各囚徒帽色编码）。给囚徒也编号 <span class="arithmatex">\(0-6\)</span>，让囚徒 <span class="arithmatex">\( i \)</span> 给出猜测 <span class="arithmatex">\( g_i \)</span>，使得 <span class="arithmatex">\( g_i \)</span> 与其余 6 人帽色编码之和除以 7 的余数恰为 <span class="arithmatex">\( i \)</span>——这样的 <span class="arithmatex">\( g_i \)</span> 是 <span class="arithmatex">\(0-6\)</span> 中唯一的数。例如囚徒 0 的猜测满足</p>
+<p>给七种颜色和七名囚徒都编号 <span class="arithmatex">\(0,1,\ldots,6\)</span>，记第 <span class="arithmatex">\(i\)</span> 人的实际帽色为 <span class="arithmatex">\(x_i\)</span>。约定第 <span class="arithmatex">\(i\)</span> 人写下</p>
 <div class="arithmatex">\[
-\left(g_0 + \sum_{k \neq 0} x_k\right) \% 7 = 0
+g_i=\left(i-\sum_{k\ne i}x_k\right)\bmod7,
 \]</div>
-<p>这样，7 个人的猜测分别"押注"总和解 <span class="arithmatex">\(\operatorname{mod} 7\)</span> 的 7 种可能取值，而真实总和的余数必是其中之一。</p>
-<p><strong>用反证法证明至少一人猜对</strong>：若对某个 <span class="arithmatex">\( i \)</span> 有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq i\)</span>（因为 <span class="arithmatex">\(\left(g_i + \sum_{k\neq i} x_k\right) \% 7 \neq i\)</span>，且 <span class="arithmatex">\( g_i \)</span>、<span class="arithmatex">\( x_i \)</span> 都在 <span class="arithmatex">\(0-6\)</span> 之间）。但若对所有 <span class="arithmatex">\( i = 0,\ldots,6 \)</span> 都有 <span class="arithmatex">\( g_i \neq x_i \)</span>，则 <span class="arithmatex">\(\left(\sum x_i\right) \% 7 \neq 0, 1, 2, 3, 4, 5, 6\)</span>——显然不可能。所以至少有一个 <span class="arithmatex">\( g_i = x_i \)</span>。<span class="arithmatex">\(\square\)</span></p>
-<p><strong>结论：该策略保证至少一人猜对，全员获释</strong>（策略是确定性的，与行刑者如何选颜色无关）。</p>
+<p>其中余数取 <span class="arithmatex">\(0,\ldots,6\)</span>。这个计算只用他看得见的六顶帽子，因而可以独立完成。</p>
+<p>令实际帽色总和的余数为 <span class="arithmatex">\(s=(\sum_kx_k)\bmod7\)</span>。对编号恰为 <span class="arithmatex">\(s\)</span> 的人，</p>
+<div class="arithmatex">\[
+g_s\equiv s-\sum_{k\ne s}x_k\equiv x_s\pmod7.
+\]</div>
+<p>两个颜色编码都在 <span class="arithmatex">\(0,\ldots,6\)</span>，所以 <span class="arithmatex">\(g_s=x_s\)</span>。反过来，若第 <span class="arithmatex">\(i\)</span> 人猜对，则总和必满足 <span class="arithmatex">\(s=i\)</span>。所以该策略实际上保证<strong>恰有一人猜对</strong>，从而全员获释；不需要帽色随机，也不需要任何现场交流。</p>
 </details>
 <h2 id="sec-逻辑与脑筋急转弯">逻辑与脑筋急转弯<a class="headerlink" href="#sec-逻辑与脑筋急转弯" title="Permanent link">&para;</a></h2>
 <p>本节题目考察观察、建模、逆向推理、不变量和对称性。先删去故事背景中的无关信息，再从最小规模、最后一步或守恒量入手；确认规律后给出构造或归纳证明。</p>
@@ -3651,6 +3665,9 @@ f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{
 \]</div>
 <p>此时形状会影响可行性：如果某一块已经只有一个小方格，就无法继续掰开。</p>
 <p>例如，<span class="arithmatex">\(2\times2\)</span> 正方形可用两次掰断完成；但若三格排成一行且中间格下方再接一格，第一次掰断必然只分离一块，至少需要 3 次。</p>
+<p><strong>叠放时的可达性与三维。</strong> 块数翻倍只给 <span class="arithmatex">\(\lceil\log_2n\rceil\)</span> 下界，并不对所有形状自动达到。若是一维 <span class="arithmatex">\(n\)</span> 格条带、允许重排并对齐多块，每轮把所有尚未成单格的条带尽量对半掰，再叠齐下一轮，<span class="arithmatex">\(k\)</span> 轮后最长剩余段不超过 <span class="arithmatex">\(\lceil n/2^k\rceil\)</span>，所以恰可达到该下界。对于 <span class="arithmatex">\(a\times b\)</span> 矩形，沿两轴分别对半分割可给 <span class="arithmatex">\(\lceil\log_2a\rceil+\lceil\log_2b\rceil\)</span> 次的构造；它是可行上界，不能未经证明当作所有几何规则下的最优值。</p>
+<p>三维时，若一次只把一块分成两块，体块计数同样每次加1，拆成 <span class="arithmatex">\(n\)</span> 个单元恰需 <span class="arithmatex">\(n-1\)</span> 次，前提是每次沿允许的分界确实产生两块。允许叠放的 <span class="arithmatex">\(a\times b\times c\)</span> 长方体，可沿三轴分别分割，得到 <span class="arithmatex">\(\lceil\log_2a\rceil+\lceil\log_2b\rceil+\lceil\log_2c\rceil\)</span> 的上界，块数给 <span class="arithmatex">\(\lceil\log_2(abc)\rceil\)</span> 下界，两者可能不同。若一次平面切割能产生超过两块，原计数模型就改变了。</p>
+<p>三角柱形巧克力是横截面为三角形、沿长度挤出的柱体（如常见分节三角巧克力），并不是由题面唯一确定的三角格阵。要给它的精确最少次数，必须说明分节数量、可掰面、能否旋转叠放及一次动作可分几块；仅给“三角柱形”无法推出唯一数字。</p>
 </details>
 <p><span id="q45"></span></p>
 <h3 id="problem-2822ed2df47c">Q46 · 轮流喝半品脱啤酒<a class="headerlink" href="#problem-2822ed2df47c" title="Permanent link">&para;</a></h3>
@@ -3699,6 +3716,8 @@ f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{
 <p>每个砝码只有“使用或不使用”两种状态，本质上是二进制表示。因此选用</p>
 <p>1、2、4、8、16、32。</p>
 <p>5 个砝码只有 <span class="arithmatex">\(2^5=32\)</span> 种组合，不足以表示 1 到 40 的 40 个不同重量，所以至少需要 6 个。</p>
+<p><strong>其余范围、两侧放置及算法。</strong> 仅放物体对侧时，<span class="arithmatex">\(k\)</span> 个砝码至多形成 <span class="arithmatex">\(2^k\)</span> 个子集和，含零必须覆盖 <span class="arithmatex">\(N+1\)</span> 个数，所以 <span class="arithmatex">\(k\ge\lceil\log_2(N+1)\rceil\)</span>。1至64需7个，可用1、2、4、8、16、32、64，称64时只用64。算法是反复取 <span class="arithmatex">\(n\bmod2\)</span> 决定当前二进制砝码是否使用，再令 <span class="arithmatex">\(n\leftarrow\lfloor n/2\rfloor\)</span>。</p>
+<p>可放两侧时，每个砝码有不用、正放、反放三种状态，正负结果配对，最多能覆盖 <span class="arithmatex">\((3^k-1)/2\)</span> 个正整数。1至40需4个，用1、3、9、27恰好达到；1至64需5个，用1、3、9、27、81，其中 <span class="arithmatex">\(64=81-27+9+1\)</span>。算法为平衡三进制：令 <span class="arithmatex">\(r=n\bmod3\)</span>，若 <span class="arithmatex">\(r=2\)</span> 改成 <span class="arithmatex">\(-1\)</span>，记录当前砝码系数 <span class="arithmatex">\(r\)</span>，再置 <span class="arithmatex">\(n=(n-r)/3\)</span>，直到零。系数负表示把该砝码放在物体一侧，正表示放在另一侧。这同时给构造、下界与可执行解码。</p>
 </details>
 <p><span id="q47"></span></p>
 <h3 id="problem-42c104322400">Q48 · 用 <span class="arithmatex">\( \pm \)</span> 凑出 <span class="arithmatex">\(1-40\)</span> 的最小子集<a class="headerlink" href="#problem-42c104322400" title="Permanent link">&para;</a></h3>
@@ -3740,6 +3759,7 @@ f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{
 \mathbf{-13},\mathbf{-12},\mathbf{-11},\mathbf{-10},\ldots,\mathbf{10},\mathbf{11},\mathbf{12},\mathbf{13}.
 \]</div>
 <p>再加入 27，即可覆盖从 <span class="arithmatex">\(-40\)</span> 到 40 的所有整数，因此 1 到 40 均可表示。</p>
+<p>1至50时 <span class="arithmatex">\(3^4=81&lt;101\)</span>，至少5个数；1、3、9、27、81足够覆盖 <span class="arithmatex">\([-121,121]\)</span>。若每个数允许使用两次，净系数可为 <span class="arithmatex">\(-2,-1,0,1,2\)</span>，<span class="arithmatex">\(k\)</span> 个数至多有 <span class="arithmatex">\(5^k\)</span> 个系数组合，因此必须 <span class="arithmatex">\(5^k\ge2N+1\)</span>。使用1、5、25、…的平衡五进制可达到此界：加入 <span class="arithmatex">\(5^j\)</span> 后五个平移区间首尾相接，覆盖半径 <span class="arithmatex">\((5^{j+1}-1)/2\)</span>。所以1至40和1至50都只需3种数1、5、25；例如 <span class="arithmatex">\(40=2\cdot25-2\cdot5\)</span>。若“两次”指必须同号使用，也仍可选择上述净系数。实际应用是可双侧放置的天平砝码设计与有符号数位编码。</p>
 </details>
 <p><span id="q48"></span></p>
 <h3 id="problem-a31b4c8d7aaa">Q49 · 多米诺铺 <span class="arithmatex">\( 2\times n \)</span> 网格<a class="headerlink" href="#problem-a31b4c8d7aaa" title="Permanent link">&para;</a></h3>
@@ -3771,6 +3791,17 @@ F(n)=F(n-1)+F(n-2).
 F(0)=1,\quad F(1)=1.
 \]</div>
 <p>所以在 <span class="arithmatex">\(\operatorname{Fib}(1)=\operatorname{Fib}(2)=1\)</span> 的约定下，<span class="arithmatex">\(F(n)\)</span> 是第 <span class="arithmatex">\(n+1\)</span> 个 Fibonacci 数。</p>
+<p><strong>空铺法与快速计算。</strong> 空区域恰有一种“不放任何块”的铺法，所以 <span class="arithmatex">\(F(0)=1\)</span> 是乘法/递推中的单位元，而不是零。用</p>
+<div class="arithmatex">\[
+\binom{F(n)}{F(n-1)}=\begin{pmatrix}1&amp;1\\1&amp;0\end{pmatrix}^{n-1}\binom11
+\]</div>
+<p>快速幂，只需 <span class="arithmatex">\(O(\log n)\)</span> 次大整数矩阵运算；计算 <span class="arithmatex">\(F(10000)\)</span> 必须用任意精度整数，固定宽度整数会溢出。亦可用 Fibonacci 倍增公式 <span class="arithmatex">\(f_{2k}=f_k(2f_{k+1}-f_k),f_{2k+1}=f_k^2+f_{k+1}^2\)</span>。</p>
+<p><strong><span class="arithmatex">\(3\times n\)</span> 铺法。</strong> 奇数 <span class="arithmatex">\(n\)</span> 总格数奇，铺法零。记偶数宽度铺法 <span class="arithmatex">\(A_n\)</span>，按最左侧能被一条竖线截开的完整块分解，最小块宽2有3种，宽4、6、…各有2种，故 <span class="arithmatex">\(A_n=3A_{n-2}+2\sum_{j=0,2,\ldots,n-4}A_j\)</span>。与 <span class="arithmatex">\(n-2\)</span> 的等式相减得到</p>
+<div class="arithmatex">\[
+A_0=1,\ A_2=3,\quad A_n=4A_{n-2}-A_{n-4}\quad(n\ge4\text{ 偶数}).
+\]</div>
+<p>也可用三位轮廓掩码逐列递推，枚举填满当前列的竖/横骨牌，横骨牌把对应位传到下一列，终态掩码零。</p>
+<p>多连块若平移、旋转、镜像都视为同一种，则三格有2种（直条和L），四格有5种（I、O、T、L、S）；若镜像不同，则四格为7种。计数前必须规定等价关系，不能把固定朝向数量混入。</p>
 </details>
 <p><span id="q49"></span></p>
 <h3 id="problem-ab36a5f10712">Q50 · 四张卡片检验命题<a class="headerlink" href="#problem-ab36a5f10712" title="Permanent link">&para;</a></h3>
@@ -3861,6 +3892,16 @@ F(0)=1,\quad F(1)=1.
 <p>4 头狮子：都不吃。</p>
 <p>5 头狮子：最近的一头吃。</p>
 <p>因此，狮子数为偶数时无人吃肉，为奇数时最近的一头吃肉。</p>
+<p><strong>海盗追问：先固定投票偏好。</strong> 这里按题意把“得到同样多”视为赞成，并采用通常的生存优先假设：会在否决后死亡的人愿意接受让自己活下来的方案。这与“金币相同仍偏好杀死提案者”的海盗题规则不同，必须重新逆推。以下向量按当前提案者至最年轻者排列。</p>
+<p>严格多数通过时：</p>
+<ul>
+<li>只剩 1 人，他留下 1000。</li>
+<li>剩 2 人需要两票。年轻者否决后可得 1000，所以提案者必须给他全部金币，方案是 <span class="arithmatex">\((0,1000)\)</span>。提案者虽得零，但能够活命。</li>
+<li>剩 3 人需要两票。若否决，下轮分配为 <span class="arithmatex">\((0,1000)\)</span>，所以中间那人下轮也只能得零。提案者提出 <span class="arithmatex">\((1000,0,0)\)</span>，自己和中间那人赞成，方案通过。</li>
+<li>对 <span class="arithmatex">\(m=4,5,6\)</span>，否决后的 <span class="arithmatex">\(m-1\)</span> 人方案均由下一个提案者拿走 1000，其余为零。当前提案者也提出自己拿 1000、别人为零，获得自己的票和后面 <span class="arithmatex">\(m-2\)</span> 个零收益者的票，共 <span class="arithmatex">\(m-1&gt;m/2\)</span> 票，归纳成立。</li>
+</ul>
+<p>因此 6 人的最终分配为 <span class="arithmatex">\((1000,0,0,0,0,0)\)</span>。</p>
+<p>平票也通过时，2 人局面中提案者仅凭自己的一票就能留下全部金币。此后同样归纳：每轮自己加上否决后拿零的人足以达到至少半数，所以 6 人结果仍为 <span class="arithmatex">\((1000,0,0,0,0,0)\)</span>。改变的是 2 人子博弈，6 人结果不变。若另加“相同收益时反对”的偏好，答案会改变，不能套用这里的零金币买票。</p>
 </details>
 <p><span id="q52"></span></p>
 <h3 id="problem-b3a098b3f011">Q53 · 抛锚与游泳池水位<a class="headerlink" href="#problem-b3a098b3f011" title="Permanent link">&para;</a></h3>
@@ -3913,6 +3954,39 @@ F(0)=1,\quad F(1)=1.
 <p>要证明最优，可设两个袋子中的白球和黑球数量为一般变量，写出获胜概率并优化；极值恰好在单白球袋的方案处取得。</p>
 <p><strong>最优性的补全</strong>：设较小袋共 <span class="arithmatex">\(t\le 50\)</span> 球，其中 <span class="arithmatex">\(w\)</span> 个好球。胜率为 <span class="arithmatex">\(P=\tfrac12[w/t+(50-w)/(100-t)]\)</span>。固定 <span class="arithmatex">\(t\)</span> 时，<span class="arithmatex">\(w\)</span> 的系数非负，故取 <span class="arithmatex">\(w=t\)</span>（小袋全好）；于是 <span class="arithmatex">\(P=\tfrac12[1+(50-t)/(100-t)]\)</span>，随整数 <span class="arithmatex">\(t\ge 1\)</span> 递减，最大值在 <span class="arithmatex">\(t=1\)</span>，等于 <span class="arithmatex">\(74/99\)</span>。两袋均须非空。</p>
 <p><strong>等量好坏对象的通式</strong>：好坏各 <span class="arithmatex">\(m\)</span> 件、两盒都非空，沿用小盒大小 <span class="arithmatex">\(t\le m\)</span> 的最优性证明，最优为一枚好物单放。成功率 <span class="arithmatex">\(\frac12+\frac{m-1}{2(2m-1)}\)</span>，<span class="arithmatex">\(m=5\)</span> 时为 <span class="arithmatex">\(13/18\)</span>。</p>
+<p><strong>三个袋子与两次抽样。</strong> 以下默认均匀选非空袋、袋内均匀抽球。三袋时两袋各单放一白，余袋48白50黑，胜率 <span class="arithmatex">\((1+1+48/98)/3=122/147\)</span>。若两次独立、每次重新选袋并放回球，则两次均白的概率是单次概率平方，仍用原两袋最优方案，值 <span class="arithmatex">\((74/99)^2\)</span>。</p>
+<p>若先随机选同一个袋再抽两球，必须进一步区分放回与否。放回时成功概率为 <span class="arithmatex">\(\tfrac12[(w/t)^2+((50-w)/(100-t))^2]\)</span>，其对固定 <span class="arithmatex">\(t\)</span> 的 <span class="arithmatex">\(w\)</span> 是凸二次函数，故只需检查可行端点；最优仍是单白袋，值 <span class="arithmatex">\(\tfrac12[1+(49/99)^2]\)</span>。不放回且要求两袋均能抽两球，则最优是2白单放，另一袋48白50黑，概率为 <span class="arithmatex">\(\tfrac12[1+48\cdot47/(98\cdot97)]\)</span>。若允许单球袋、抽不足两球视失败，仍不优于这个方案。</p>
+<p>这些有限整数结论可不用连续优化假设，直接完整枚举核验。下列递推同时证明三袋最优，并可枚举两球版本：每次选定袋中的白黑数，未来仍是更小规模子问题，最后一袋被总量唯一确定。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span> <span class="k">as</span> <span class="n">Q</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@cache</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">best</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">bags</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span> <span class="ow">or</span> <span class="p">(</span><span class="n">draw</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">replace</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="k">return</span> <span class="kc">None</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">if</span> <span class="n">draw</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="k">return</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="k">return</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">return</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">if</span> <span class="n">bags</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">return</span> <span class="n">value</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">a</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                <span class="k">continue</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="n">c</span> <span class="o">=</span> <span class="n">best</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">bags</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">replace</span><span class="p">)</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                <span class="n">candidate</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">c</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                <span class="n">ans</span> <span class="o">=</span> <span class="n">candidate</span> <span class="k">if</span> <span class="n">ans</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="k">return</span> <span class="n">ans</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c1"># best 返回各袋条件成功率之和，最终除袋数。</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="k">assert</span> <span class="n">best</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="o">==</span> <span class="n">Q</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span><span class="mi">147</span><span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">assert</span> <span class="n">best</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">Q</span><span class="p">(</span><span class="mi">48</span><span class="o">*</span><span class="mi">47</span><span class="p">,</span><span class="mi">98</span><span class="o">*</span><span class="mi">97</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+</span></code></pre></div>
 </details>
 <p><span id="q54"></span></p>
 <h3 id="problem-1a0fad54c04c">Q55 · 蓝眼睛岛民<a class="headerlink" href="#problem-1a0fad54c04c" title="Permanent link">&para;</a></h3>
@@ -3925,13 +3999,18 @@ F(0)=1,\quad F(1)=1.
 <p>若达到 <span class="arithmatex">\(p\%\)</span> 的把握就必须自杀，且所有人最初对自己眼睛颜色有相同先验概率，结论如何变化？</p>
 <details class="note">
 <summary>解答</summary>
-<p>应从“没有蓝眼睛的人”这一基例开始归纳。</p>
-<p>若没有人是蓝眼睛，外来者的公开陈述就是假，因此至少有一人是蓝眼睛。</p>
+<p>以诚实公开声明为前提，从“恰有一名蓝眼睛者”开始归纳。</p>
+<p>诚实公开声明排除了零蓝世界，归纳应从恰有1名蓝眼睛者开始；零蓝而声明虚假的情形另行讨论。</p>
 <p>若恰有 1 人蓝眼睛，他看到其余 49 人都是棕眼睛，并根据“至少一人蓝眼睛”推断自己就是那个人，于第一晚午夜自杀。</p>
 <p>若恰有 2 人蓝眼睛，每个蓝眼睛者看到另一个蓝眼睛者，并考虑两种可能：</p>
 <p>若自己是棕眼睛，则另一个蓝眼睛者会按上一基例在第一晚自杀；</p>
 <p>若自己也是蓝眼睛，则另一个人不会在第一晚自杀。</p>
 <p>第一晚没有人自杀，于是两人都知道自己必须是蓝眼睛，第二晚同时自杀。归纳可知，若有 <span class="arithmatex">\(n\)</span> 个蓝眼睛者，他们会在第 <span class="arithmatex">\(n\)</span> 晚同时自杀。</p>
+<p><strong>归纳步骤与公共知识。</strong> 假设 <span class="arithmatex">\(n-1\)</span> 人时第 <span class="arithmatex">\(n-1\)</span> 晚离岛的结论已成为所有人的共同推理。真实有 <span class="arithmatex">\(n\)</span> 个蓝眼睛时，每个蓝眼睛者都看见 <span class="arithmatex">\(n-1\)</span> 人；若自己不是蓝眼睛，那些人应按归纳假设离开。前 <span class="arithmatex">\(n-1\)</span> 晚无人离开就排除了该可能，故第 <span class="arithmatex">\(n\)</span> 晚一起行动。棕眼睛者看见全部 <span class="arithmatex">\(n\)</span> 人，他们离开后也可推知自己为棕色，但规则不要求棕眼睛者行动。</p>
+<p>九个蓝眼睛者原先各自都知道“至少一个”，但这不等于任意层级的“每个人都知道每个人都知道……”：沿着“假设我不是蓝眼睛”的嵌套推理最终会抵达零人的可能世界。公开声明把零人世界同时从所有层级中排除，提供归纳起点；每晚公开无人行动再提供一次新信息。</p>
+<p><strong>虚假声明。</strong> 在题设中唯一能使“至少一个”成为假话的真实配置是零个蓝眼睛。若50人仍把声明当作绝对可靠，每人看见49个棕眼睛，便会推断自己是唯一蓝眼睛，第一晚全部行动。这些信念不与真实世界一致，因而不能再声称其结论在真实世界中必然正确。</p>
+<p><strong>概率阈值追问的模型。</strong> 仅说“相同先验概率”尚不足以给出唯一答案，还要说明眼色是否独立、先验联合分布、声明如何产生以及 <span class="arithmatex">\(p\)</span> 的取值。若补充独立 <span class="arithmatex">\(\operatorname{Bernoulli}(q)\)</span>、<span class="arithmatex">\(0&lt;q&lt;1\)</span>，记 <span class="arithmatex">\(\theta=p/100\)</span>，并规定后验达到 <span class="arithmatex">\(\theta\)</span> 即行动，则可给完整递推：对所有 <span class="arithmatex">\(2^{50}\)</span> 种配置赋先验权 <span class="arithmatex">\(q^k(1-q)^{50-k}\)</span>，公开声明后删除零蓝世界；每天每人在与其所见49顶眼色及公开历史一致的世界中计算自己为蓝的条件概率，判断当晚动作；听到实际动作集合后，删掉所有预测动作不一致的世界，再进入下一天。</p>
+<p>在该独立模型中，若 <span class="arithmatex">\(\theta\le q\)</span>，凡看见至少一蓝者的后验仍是 <span class="arithmatex">\(q\)</span>，看不见蓝者因声明后验为1，所以所有人第一晚都会行动（包括棕眼睛者）。若 <span class="arithmatex">\(q&lt;\theta\le1\)</span>，看到至少一蓝者在其“自己为棕”的世界尚未被排除前后验仍为 <span class="arithmatex">\(q\)</span>，被排除后跳到1；于是仍按 <span class="arithmatex">\(n\)</span> 蓝第 <span class="arithmatex">\(n\)</span> 晚的归纳进行。若眼色先验相关，观察别人的眼色即可改变自己的后验，不能套用这两种结论。</p>
 </details>
 <p><span id="q55"></span></p>
 <h3 id="problem-8c6abbcf065f">Q56 · 22 名囚犯与两个开关<a class="headerlink" href="#problem-8c6abbcf065f" title="Permanent link">&para;</a></h3>
@@ -3952,6 +4031,34 @@ F(0)=1,\quad F(1)=1.
 <p><span class="arithmatex">\((i)\)</span> 进入房间时，若至少一个开关向下且自己过去从未拨过开关，就把一个开关拨向上；每个人最多执行一次。</p>
 <p><span class="arithmatex">\((ii)\)</span> 若两个开关都向上，则什么也不做。</p>
 <p>队长每次进入时统计向上的开关数，然后把向上的开关全部拨下。累计数达到 21 时，队长即可确认所有人都来过并通知狱警。</p>
+<p><strong>为什么保证最终获释。</strong> 每次向上拨动代表一个不同的非队长发出的唯一信号，队长清零时才计入，故绝不会重复计数。累计21个信号时，21名非队长确实都进过房间，队长当然也来过。假定每天独立等概率选择一人，每个人几乎必然被无限次选中：信号满了队长终会清空，未报到者终会在有空位时进入，因而所有信号最终被收齐。这里“保证”是永不误报且以概率1终止，不是对恶意调度也有有限期限。</p>
+<p><strong>期望天数。</strong> 令 <span class="arithmatex">\(r\)</span> 为尚未发送信号的人数，<span class="arithmatex">\(s\in\{0,1,2\}\)</span> 为当前向上开关数，<span class="arithmatex">\(E(r,s)\)</span> 为到宣布还需天数。虽囚犯不知道全局状态，分析者可以用它求期望。边界为 <span class="arithmatex">\(E(0,0)=0\)</span>、<span class="arithmatex">\(E(0,1)=E(0,2)=22\)</span>：最后信号仍须等队长查看。对 <span class="arithmatex">\(r\ge1\)</span>，首步分析给</p>
+<div class="arithmatex">\[
+\begin{aligned}
+E(r,0)&amp;=22/r+E(r-1,1),\\
+E(r,1)&amp;=\frac{22+rE(r-1,2)+E(r,0)}{r+1},\\
+E(r,2)&amp;=22+E(r,0).
+\end{aligned}
+\]</div>
+<p>例如 <span class="arithmatex">\(s=1\)</span> 时，<span class="arithmatex">\(r/22\)</span> 概率新信号变成 <span class="arithmatex">\((r-1,2)\)</span>，<span class="arithmatex">\(1/22\)</span> 概率队长清零，其余保持原态；把自环项移到左边即第二式。按 <span class="arithmatex">\(r\)</span> 递增计算，初态为</p>
+<div class="arithmatex">\[
+E(21,0)=133577456/440895\approx302.9688611\text{ 天}.
+\]</div>
+<p><strong>更充分利用两开关。</strong> 两个开关有四个状态，可以约定 <span class="arithmatex">\(00,01,10,11\)</span> 分别编码待收信号数0、1、2、3。非队长尚未报到且计数小于3时将计数加1并永久记住已报到；队长把编码整数加到个人总数并清零。允许一次拨动两个开关是题设的“可拨动开关”，无需每次只能拨一个。它把缓存容量从2提高到3；安全性证明相同，不声称已在所有可能协议中全局最优。一般容量 <span class="arithmatex">\(c\)</span> 的精确计算如下：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">expected_days</span><span class="p">(</span><span class="n">capacity</span><span class="p">):</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">E</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">)}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">22</span><span class="p">):</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">capacity</span><span class="p">]</span> <span class="o">=</span> <span class="mi">22</span> <span class="o">+</span> <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">capacity</span><span class="p">):</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">22</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">return</span> <span class="n">E</span><span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></code></pre></div>
+<p>容量3得到 <span class="arithmatex">\(157888813/705432\approx223.8186147\)</span> 天。模拟时每次独立生成0至21的编号（0为队长），维护每人是否报到、缓存值及队长总数，直到总数21；重复独立实验，报告样本均值以及 <span class="arithmatex">\(\bar T\pm1.96s_T/\sqrt R\)</span> 的大样本置信区间。它应与对应容量的上述精确均值一致，单次模拟不能代替期望。</p>
 </details>
 <p><span id="q56"></span></p>
 <h3 id="problem-4ab27fe26d03">Q57 · 平分大矩形减小矩形<a class="headerlink" href="#problem-4ab27fe26d03" title="Permanent link">&para;</a></h3>
@@ -3987,6 +4094,9 @@ F(0)=1,\quad F(1)=1.
 \]</div>
 <p>根（<span class="arithmatex">\(j\)</span> 为非负整数）的局面；若无法做到，对手采取最优策略时我方必败。</p>
 <p>若取最后一根者获胜，则必败位置是 4 的倍数，应把 <span class="arithmatex">\(4j\)</span> 根留给对手。</p>
+<p><strong>随机初始根数。</strong> 若在知道 <span class="arithmatex">\(n\)</span> 后选先后手，<span class="arithmatex">\(n\equiv1\pmod4\)</span> 选后手，其余正整数选先手；若先选角色才随机给 <span class="arithmatex">\(n\)</span>，则比较 <span class="arithmatex">\(P(n\equiv1\pmod4)\)</span> 与其余概率，前者大于一半选后手，反之选先手，无分布就没有唯一答案。</p>
+<p><strong>多堆 Nim。</strong> 普通规则下令 <span class="arithmatex">\(X=h_1\oplus\cdots\oplus h_m\)</span>。<span class="arithmatex">\(X=0\)</span> 为必败态；<span class="arithmatex">\(X\ne0\)</span> 时选含 <span class="arithmatex">\(X\)</span> 最高位的一堆，把 <span class="arithmatex">\(h_i\)</span> 减至 <span class="arithmatex">\(h_i\oplus X&lt;h_i\)</span>，使异或为零。零异或局面任何一步都会改成非零，因此配对证明策略有效。</p>
+<p>反常规则（取最后一根输）下：若全是大小1的非空堆，则奇数堆必败，偶数堆必胜；若至少两堆大于1，按普通 Nim 的零异或策略走；若恰一堆大于1，则把它减为0或1，使留给对手的大小1堆总数为奇数。最后这一转换步骤是反常 Nim 与普通 Nim 的差别，不能全程机械维持异或零。</p>
 </details>
 <p><span id="q58"></span></p>
 <h3 id="problem-0bbd5d1db968">Q59 · 圆桌放硬币必胜策略<a class="headerlink" href="#problem-0bbd5d1db968" title="Permanent link">&para;</a></h3>
@@ -4063,6 +4173,8 @@ F(0)=1,\quad F(1)=1.
 <p>能。极大性意味着桌上任一点离原某圆心至多2，否则可在那里再加一币。因此原100个圆心的半径2圆覆盖整个矩形。
 把桌面和这100个圆心同时缩放为<span class="arithmatex">\(1/2\)</span>，半径2的覆盖圆变成半径1的圆，故100枚单位圆盘能覆盖一个半长半宽的小矩形。将四份这种配置平移到原桌的四个等大四分之一矩形，每份100枚，共400枚，覆盖全部桌面。币可伸出小矩形和桌边，符合题设。
 <strong>方法</strong>：先用“不能再加”推出倍半径覆盖，再缩放复制；不需要证明单个半径2圆可被4个单位圆覆盖。</p>
+<p><strong>极大性所需的边界条件。</strong> 若桌内点 <span class="arithmatex">\(x\)</span> 到所有原圆心都大于2，以它为心放一枚单位圆，与原每枚圆的内部都不相交，且新圆心仍在桌内，违反“不能再添”。所以每个桌面点都至少被一个半径2闭圆覆盖。这里新圆只要求圆心在桌内，允许伸出边界；若原题另要求整个圆盘必须留在桌上，则靠近桌边的点未必可作为新圆心，不能直接使用这一步。</p>
+<p>设桌为 <span class="arithmatex">\([0,L]\times[0,W]\)</span>，原圆心 <span class="arithmatex">\(c_i\)</span>。由上面覆盖，对任意 <span class="arithmatex">\(y\in[0,L/2]\times[0,W/2]\)</span>，有 <span class="arithmatex">\(|2y-c_i|\le2\)</span>，即 <span class="arithmatex">\(|y-c_i/2|\le1\)</span>。因此缩放圆心 <span class="arithmatex">\(c_i/2\)</span> 的100个单位圆覆盖左下小矩形。再给这些圆心分别加上 <span class="arithmatex">\((L/2,0),(0,W/2),(L/2,W/2)\)</span> 三种平移量，四份覆盖四个小矩形，联合就是整个桌面。后续覆盖圆允许重叠、伸出桌边，所以它们无须保持原来的不重叠性。</p>
 </details>
 
 

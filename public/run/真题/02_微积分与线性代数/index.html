@@ -2859,10 +2859,10 @@ V_{\text{sphere}} = \frac{4}{3}\pi r^3 = \frac{\pi}{4}V_{\text{intersection}} \;
 <p><span id="q67"></span></p>
 <h3 id="problem-b0b093ac05a5">Q71 · 扫雪机问题<a class="headerlink" href="#problem-b0b093ac05a5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：微分方程</p>
-<p><strong>题目</strong>：正午之前某时刻开始下雪，雪以恒定速率降落。剑桥市正午派出一辆扫雪车沿 Massachusetts Avenue 从 MIT 清扫到哈佛。扫雪车每分钟按恒定的体积速率除雪。下午 1 点它扫过了 2 英里，下午 2 点又扫过了 3 英里。问雪是什么时候开始下的？</p>
+<p><strong>题目</strong>：正午之前某时刻开始下雪，雪以恒定速率降落。剑桥市正午派出一辆扫雪车沿 Massachusetts Avenue 从 MIT 清扫到哈佛。扫雪车每分钟按恒定的体积速率除雪。下午 1 点累计扫过 2 英里，下午 2 点累计扫过 3 英里。问雪是什么时候开始下的？</p>
 <details class="note">
 <summary>解答</summary>
-<p>把正午记为时刻 0，设雪在正午前 <span class="arithmatex">\(T\)</span> 小时开始下。</p>
+<p>本题的3英里指到下午2点的累计里程；若理解为第二小时又新增3英里，则与雪越厚速度越慢矛盾，无此模型下的解。把正午记为时刻0，设雪在正午前 <span class="arithmatex">\(T\)</span> 小时开始下。</p>
 <p>扫雪车速度与雪的竖直截面积成反比：<span class="arithmatex">\( v = c_1/A(t) \)</span>，其中 <span class="arithmatex">\( c_1 \)</span> 是扫雪车每小时能除掉的雪的体积（常数），<span class="arithmatex">\( A(t) \)</span> 是雪的截面积。由于雪以恒定速率降落，<span class="arithmatex">\( A(t) = c_2(t + T) \)</span>，<span class="arithmatex">\( c_2 \)</span> 是截面积每小时的增长率。于是</p>
 <div class="arithmatex">\[
 v = \frac{c_1}{c_2(t+T)} = \frac{c}{t+T},\qquad c = \frac{c_1}{c_2}
@@ -3220,18 +3220,24 @@ x_1 = z_1,\qquad x_2 = \rho z_1 + \sqrt{1-\rho^2}\,z_2
 <p><strong>题目</strong>：相关矩阵必须满足什么条件？用该条件说明：任意三个随机变量的两两相关系数不能任意取值（例如 <span class="arithmatex">\( \rho(x,y) = \rho(x,z) = 0.8 \)</span> 时 <span class="arithmatex">\( \rho(y,z) \)</span> 的取值范围）。</p>
 <details class="note">
 <summary>解答</summary>
-<p>协方差/相关矩阵是<strong>对称半正定矩阵</strong>；若随机变量间无完全线性相关，则为对称<strong>正定</strong>矩阵。等价判据（对半正定）：</p>
-<ol>
-<li><span class="arithmatex">\( x^\top A x \ge 0 \)</span> 对任意向量 <span class="arithmatex">\( x \)</span> 成立；</li>
-<li>所有特征值非负（对称阵的特征值全为实数，且属于不同特征值的特征向量相互正交）；</li>
-<li>所有主子式非负。对正定矩阵可以使用更简洁的 Sylvester 判据：所有顺序主子式严格为正。</li>
-</ol>
-<p>（正定时三条均改为严格为正。）</p>
-<p>以 <span class="arithmatex">\(\rho (x,y) = \rho (x,z) = 0.8\)</span> 为例，相关矩阵的行列式必须非负（三阶主子式）：</p>
+<p>设三个随机变量方差有限且严格为正，标准化为 <span class="arithmatex">\(Z_i=(X_i-EX_i)/\sqrt{\operatorname{Var}X_i}\)</span>。其相关矩阵 <span class="arithmatex">\(R\)</span> 满足</p>
 <div class="arithmatex">\[
-\det P = -\rho^2 + 1.28\rho - 0.28 \geq 0 \;\Rightarrow\; 0.28 \leq \rho(y,z) \leq 1
+a^TRa=E\left(\sum_i a_iZ_i\right)^2
+=\operatorname{Var}\left(\sum_i a_iZ_i\right)\ge0.
 \]</div>
-<p>同时二阶主子式要求 <span class="arithmatex">\( 1 - 0.8^2 = 0.36 &gt; 0 \)</span>（自动满足）。所以三个随机变量的两两相关系数被半正定性约束在一系列不等式内，<strong>不能任意取值</strong>。这一条件在金融中随处可见：构建多资产协方差矩阵、验证风险模型参数是否合理时，都必须先通过半正定性检验。</p>
+<p>这同时说明对称性、对角元为 1、半正定性是必要条件；反过来，任意这样的矩阵都可作 <span class="arithmatex">\(LL^T\)</span> 分解，以独立标准正态向量 <span class="arithmatex">\(G\)</span> 构造 <span class="arithmatex">\(Z=LG\)</span>，故也是某个随机向量的相关矩阵。</p>
+<p>正定要求对<strong>每个非零向量</strong> <span class="arithmatex">\(a\)</span>，上述方差严格为正，即不存在几乎处处成立的非平凡线性关系 <span class="arithmatex">\(\sum a_iZ_i=0\)</span>。仅检查每一对相关系数都小于 1 并不足够，例如独立 <span class="arithmatex">\(U,V\)</span> 与 <span class="arithmatex">\(U+V\)</span> 的三元协方差矩阵仍然奇异。</p>
+<p>本题令 <span class="arithmatex">\(\rho=\rho(Y,Z)\)</span>，有</p>
+<div class="arithmatex">\[
+\det R=1-0.8^2-0.8^2-\rho^2+2(0.8)^2\rho
+=(1-\rho)(\rho-0.28).
+\]</div>
+<p>结合二阶主子式，得到 <span class="arithmatex">\(0.28\le\rho\le1\)</span>。区间内每个值都能实现：取独立标准正态 <span class="arithmatex">\(U,V,W\)</span>，令</p>
+<div class="arithmatex">\[
+X=U,\quad Y=0.8U+0.6V,\quad
+Z=0.8U+0.6\left(cV+\sqrt{1-c^2}W\right),\quad -1\le c\le1.
+\]</div>
+<p>于是 <span class="arithmatex">\(\rho(X,Y)=\rho(X,Z)=0.8\)</span>，而 <span class="arithmatex">\(\rho(Y,Z)=0.64+0.36c\)</span>，恰好扫过所求区间。端点允许零特征值；若额外要求正定，则取开区间 <span class="arithmatex">\((0.28,1)\)</span>。对半正定必须检查所有主子式；正定才可用所有顺序主子式严格为正的 Sylvester 判据。</p>
 </details>
 <h2 id="sec-数学基础进阶">数学基础进阶<a class="headerlink" href="#sec-数学基础进阶" title="Permanent link">&para;</a></h2>
 <p>本节覆盖微积分、级数、复分析、矩阵和线性代数。基础题要求计算准确，高阶题要求说明定理条件、收敛性和数值稳定性。</p>
@@ -3373,8 +3379,14 @@ f(n)=\frac{1}{\sqrt{5}}(x_{1}^{n}-x_{2}^{n})=\frac{(1+\sqrt{5})^{n}-(1-\sqrt{5})
 <p>请用算术—几何平均不等式完成证明。</p>
 <details class="note">
 <summary>解答</summary>
-<p>本题本质是凸性。函数严格凸当且仅当二阶导数为正；等价地，图像上两点连线位于图像上方。本题只需证明中点情形。</p>
-<p>令 <span class="arithmatex">\(f(x)=e^x\)</span>，有 <span class="arithmatex">\(f''(x)&gt;0\)</span>，结论立即成立。</p>
+<p>应先修正严格不等号的条件：对实数 <span class="arithmatex">\(a,b\)</span>，</p>
+<div class="arithmatex">\[
+\frac{e^a+e^b}{2}-e^{(a+b)/2}
+=\frac12(e^{a/2}-e^{b/2})^2\ge0,
+\]</div>
+<p>且仅当 <span class="arithmatex">\(a=b\)</span> 等号成立。因此 <span class="arithmatex">\(a\ne b\)</span> 时才严格大于。这也就是对正数 <span class="arithmatex">\(e^a,e^b\)</span> 应用 AM–GM；平方恒等式本身给出了该情形的证明。</p>
+<p><strong>凸性追问。</strong> 凸函数不一定处处可导，例如 <span class="arithmatex">\(|x|\)</span> 在零点不可导。定义在开区间上、取有限实值的凸函数在区间内部连续，证明可用邻近点的弦斜率单调性给局部 Lipschitz 界；闭区间端点未必连续，例如 <span class="arithmatex">\(f(0)=1,f(x)=0\;(0&lt;x\le1)\)</span> 凸而在零点不连续。</p>
+<p>若只知中点凸性 <span class="arithmatex">\(f((x+y)/2)\le[f(x)+f(y)]/2\)</span>，反复二分只先得到二进制有理权重的凸性。再有连续性、可测性或适当局部有界性，才可取极限推出任意权重的凸性。没有正则条件可用不连续的 Cauchy 可加函数构造反例。最后，<span class="arithmatex">\(f''&gt;0\)</span> 是二阶可导函数严格凸的充分条件，并非必要条件，例如 <span class="arithmatex">\(x^4\)</span> 严格凸但 <span class="arithmatex">\(f''(0)=0\)</span>；原来的“当且仅当”不能使用。</p>
 </details>
 <p><span id="q90"></span></p>
 <h3 id="problem-b340917513a4">Q95 · 求无穷连分数的值<a class="headerlink" href="#problem-b340917513a4" title="Permanent link">&para;</a></h3>
@@ -3610,6 +3622,14 @@ odd\times odd=odd,\qquad odd\times even=even,\qquad even\times even=even.
 |f^{\prime}(z_{0})|=0.
 \]</div>
 <p>该结论对所有 <span class="arithmatex">\(z_0\)</span> 成立，故 <span class="arithmatex">\(f'(z)=0\)</span>，<span class="arithmatex">\(f\)</span> 为常数。</p>
+<p><strong>补齐所用复分析工具。</strong> 全纯指函数在某开集内每一点复可微；整函数指在整个 <span class="arithmatex">\(\mathbb C\)</span> 上全纯。写 <span class="arithmatex">\(f=u+iv,z=x+iy\)</span>，复可微要求 Cauchy–Riemann 方程 <span class="arithmatex">\(u_x=v_y,u_y=-v_x\)</span>；若一阶偏导在邻域连续且满足它们，则足以推出全纯。只在孤立一点满足方程而没有正则性不足以证明全纯。</p>
+<p>若 <span class="arithmatex">\(f\)</span> 在闭圆盘及其邻域全纯，正向圆周 <span class="arithmatex">\(\gamma:|\zeta-z_0|=r\)</span>，Cauchy 积分公式及其导数形式为</p>
+<div class="arithmatex">\[
+f(z_0)=\frac1{2\pi i}\oint_\gamma\frac{f(\zeta)}{\zeta-z_0}d\zeta,\qquad
+f^{(n)}(z_0)=\frac{n!}{2\pi i}\oint_\gamma\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta.
+\]</div>
+<p>设圆周上 <span class="arithmatex">\(|f|\le M\)</span>，对后式取模，以圆周长 <span class="arithmatex">\(2\pi r\)</span> 估计：<span class="arithmatex">\(|f^{(n)}(z_0)|\le n!M(2\pi r)/(2\pi r^{n+1})=n!M/r^n\)</span>，即上文所用 Cauchy 估计。</p>
+<p>留数定理：若 <span class="arithmatex">\(f\)</span> 在正向简单闭曲线及其内部除有限个孤立奇点 <span class="arithmatex">\(z_j\)</span> 外全纯，曲线上无奇点，则 <span class="arithmatex">\(\oint_\gamma f(z)dz=2\pi i\sum_j\operatorname{Res}(f,z_j)\)</span>，留数是 Laurent 展开的 <span class="arithmatex">\((z-z_j)^{-1}\)</span> 系数。Liouville 的证明用整函数的全平面条件让半径趋无穷；只在单位盘上解析有界并不强制常数。</p>
 </details>
 <p><span id="q96"></span></p>
 <h3 id="problem-27cdb10c9a64">Q101 · sin 与 cos 的傅里叶变换<a class="headerlink" href="#problem-27cdb10c9a64" title="Permanent link">&para;</a></h3>
@@ -3691,6 +3711,20 @@ F_{s}(t)=i\sqrt{2\pi}\frac{\delta(t+1)-\delta(t-1)}{2}.
 F_{c}(t)=\sqrt{2\pi}\frac{\delta(t-1)+\delta(t+1)}{2},
 \]</div>
 <p>其中 <span class="arithmatex">\(F_c(t)\)</span> 表示 <span class="arithmatex">\(\cos x\)</span> 的 Fourier 变换。</p>
+<p><strong>变换存在的意义。</strong> <span class="arithmatex">\(\sin x,\cos x,1\)</span> 不可积，上文积分不是普通绝对收敛积分，结果应在温和分布意义下理解。若随机变量密度为 <span class="arithmatex">\(p\)</span>，特征函数采用 <span class="arithmatex">\(\varphi(t)=\int e^{itx}p(x)dx\)</span>，则按本题约定 <span class="arithmatex">\(\varphi(t)=\sqrt{2\pi}\widehat p(-t)\)</span>，正负号和归一化都要对应。</p>
+<p><strong>高斯变换证明。</strong> 令 <span class="arithmatex">\(I(t)=\int e^{-\alpha x^2}e^{-itx}dx\)</span>。高斯衰减允许求导入积分，且 <span class="arithmatex">\(xe^{-\alpha x^2}=-(2\alpha)^{-1}(e^{-\alpha x^2})'\)</span>。分部积分、边界项为零，得 <span class="arithmatex">\(I'(t)=-tI(t)/(2\alpha)\)</span>。结合 <span class="arithmatex">\(I(0)=\sqrt{\pi/\alpha}\)</span>，解得 <span class="arithmatex">\(I(t)=\sqrt{\pi/\alpha}e^{-t^2/(4\alpha)}\)</span>，再乘 <span class="arithmatex">\((2\pi)^{-1/2}\)</span> 就是题面结果。</p>
+<p><strong>导数变换证明。</strong> 若 <span class="arithmatex">\(f\)</span> 是 Schwartz 函数（光滑且所有导数快速衰减），则</p>
+<div class="arithmatex">\[
+\widehat{f'}(t)=\frac1{\sqrt{2\pi}}[e^{-itx}f(x)]_{-\infty}^{\infty}+it\widehat f(t)=it\widehat f(t).
+\]</div>
+<p>重复 <span class="arithmatex">\(n\)</span> 次得到 <span class="arithmatex">\(\widehat{f^{(n)}}=(it)^n\widehat f\)</span>。较弱的充分条件是相关导数绝对连续、<span class="arithmatex">\(f,\ldots,f^{(n)}\)</span> 可积并使分部积分边界项消失；或者统一在分布意义下表达，不能省略存在性条件。</p>
+<p><strong>卷积定理证明。</strong> 若 <span class="arithmatex">\(f_1,f_2\in L^1\)</span>，绝对可积性允许 Fubini 交换积分，令 <span class="arithmatex">\(y=x-s\)</span>，</p>
+<div class="arithmatex">\[
+\widehat{f_1*f_2}(t)=\frac1{\sqrt{2\pi}}
+\int f_1(s)e^{-its}ds\int f_2(y)e^{-ity}dy
+=\sqrt{2\pi}\widehat f_1(t)\widehat f_2(t).
+\]</div>
+<p>常数来自本题的对称归一化；换定义时不能沿用不匹配的系数。</p>
 </details>
 <p><span id="q97"></span></p>
 <h3 id="problem-b705070819f7">Q102 · 解析有界必为常数<a class="headerlink" href="#problem-b705070819f7" title="Permanent link">&para;</a></h3>
@@ -3698,7 +3732,16 @@ F_{c}(t)=\sqrt{2\pi}\frac{\delta(t-1)+\delta(t+1)}{2},
 <p><strong>题目</strong>：若 <span class="arithmatex">\(f(z)\)</span> 解析且有界，证明 <span class="arithmatex">\(f\)</span> 是常数。</p>
 <details class="note">
 <summary>解答</summary>
-<p>这只是 Liouville 定理的另一种表述，证明见 <a href="#problem-3210dfe31eb0">Q100 · 证明刘维尔定理</a>。</p>
+<p>题意必须补上定义域：<span class="arithmatex">\(f\)</span> 在<strong>整个复平面</strong>解析，且存在与 <span class="arithmatex">\(z\)</span> 无关的常数 <span class="arithmatex">\(M\)</span>，使 <span class="arithmatex">\(|f(z)|\le M\)</span>。仅在某个有界区域解析且有界不足以推出常数，例如单位圆盘内的 <span class="arithmatex">\(f(z)=z\)</span>。</p>
+<p>固定任意 <span class="arithmatex">\(z_0\in\mathbb C\)</span>。由于函数是整函数，对任意半径 <span class="arithmatex">\(R&gt;0\)</span> 均可用 Cauchy 导数公式：</p>
+<div class="arithmatex">\[
+f'(z_0)=\frac1{2\pi i}\int_{|z-z_0|=R}\frac{f(z)}{(z-z_0)^2}\,dz.
+\]</div>
+<p>圆周长为 <span class="arithmatex">\(2\pi R\)</span>，故</p>
+<div class="arithmatex">\[
+|f'(z_0)|\le\frac1{2\pi}\frac{M}{R^2}(2\pi R)=\frac MR.
+\]</div>
+<p>令 <span class="arithmatex">\(R\to\infty\)</span>，得 <span class="arithmatex">\(f'(z_0)=0\)</span>。因 <span class="arithmatex">\(z_0\)</span> 任意，<span class="arithmatex">\(f'\equiv0\)</span>，在连通的复平面上 <span class="arithmatex">\(f\)</span> 为常数。这就是 Liouville 定理。</p>
 </details>
 <p><span id="q98"></span></p>
 <h3 id="problem-29da4b4f78ac">Q103 · 近似计算 exp 与 ln<a class="headerlink" href="#problem-29da4b4f78ac" title="Permanent link">&para;</a></h3>
@@ -3817,39 +3860,47 @@ g(x)=\frac{1}{\lfloor x\rfloor},\qquad x&gt;1,
 </ul>
 <details class="note">
 <summary>解答</summary>
-<p>设 <span class="arithmatex">\(C\)</span> 为时刻 <span class="arithmatex">\(t\)</span>、当前股价为 <span class="arithmatex">\(S\)</span> 的看涨期权价格，股价满足随机微分方程</p>
+<p>设不分红、<span class="arithmatex">\(K&gt;0,\sigma&gt;0\)</span>，<span class="arithmatex">\(\tau=T-t\)</span>，并记 <span class="arithmatex">\(c=r-\sigma^2/2\)</span>。需同时处理方程、终值和空间边界。</p>
+<p><strong>1. 原方程与边界。</strong></p>
 <div class="arithmatex">\[
-d S_{t}=\mu S_{t}d t+\sigma S_{t}d W_{t},
+C_t+rSC_S+\tfrac12\sigma^2S^2C_{SS}-rC=0,\quad C(T,S)=(S-K)^+.
 \]</div>
-<p>其中 <span class="arithmatex">\(W_t\)</span> 为布朗运动。若无风险利率 <span class="arithmatex">\(r\)</span> 为常数，则 Black–Scholes 方程为</p>
+<p>零股价为吸收态，所以 <span class="arithmatex">\(C(t,0)=0\)</span>。高股价的正确渐近是 <span class="arithmatex">\(C(t,S)-(S-Ke^{-r\tau})\to0\)</span>，不是 <span class="arithmatex">\(S-K\)</span>：行权价要在到期才支付。</p>
+<p><strong>2. 逐步换元。</strong> 令 <span class="arithmatex">\(z=\log S\)</span>，<span class="arithmatex">\(v(\tau,z)=C(T-\tau,e^z)\)</span>。链式法则给</p>
 <div class="arithmatex">\[
-\frac{\partial C}{\partial t}+r S\frac{\partial C}{\partial S}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}C}{\partial S^{2}}=r C,
+SC_S=v_z,\quad S^2C_{SS}=v_{zz}-v_z,\quad C_t=-v_\tau,
 \]</div>
-<p>其中 <span class="arithmatex">\(C\)</span> 及其偏导数均视为 <span class="arithmatex">\(S,t\)</span> 的函数。为化为热方程，注意 <span class="arithmatex">\(S_t\)</span> 的解具有指数形式，令 <span class="arithmatex">\(S=e^Z\)</span>，即 <span class="arithmatex">\(Z=\log S\)</span>，于是</p>
+<p>因此 <span class="arithmatex">\(v_\tau=\tfrac12\sigma^2v_{zz}+cv_z-rv\)</span>。再令 <span class="arithmatex">\(D(\tau,z)=e^{r\tau}v(\tau,z)\)</span>，得到 <span class="arithmatex">\(D_\tau=\tfrac12\sigma^2D_{zz}+cD_z\)</span>。最后定义</p>
 <div class="arithmatex">\[
-\begin{aligned}\frac{\partial C}{\partial S}&amp;=\frac{\partial C}{\partial\overrightarrow{Z}}\cdot\frac{\partial Z}{\partial S}\\&amp;=\frac{\partial C}{\partial\overrightarrow{Z}}\cdot\frac{1}{S},\end{aligned}
+y=z+c\tau,\qquad u(\tau,y)=D(\tau,y-c\tau).
 \]</div>
-<p>and</p>
+<p>在固定 <span class="arithmatex">\(y\)</span> 下求导，<span class="arithmatex">\(u_\tau=D_\tau-cD_z\)</span>，故</p>
 <div class="arithmatex">\[
-\begin{aligned}\frac{\partial^{2}C}{\partial S^{2}}&amp;=\frac{\partial}{\partial S}\left(\frac{\partial C}{\partial S}\right)=\frac{\partial}{\partial S}\left(\frac{\partial C}{\partial Z}\cdot\frac{1}{S}\right)\\&amp;=\frac{1}{S^{2}}\left(\frac{\partial^{2}C}{\partial Z^{2}}-\frac{\partial C}{\partial Z}\right).\end{aligned}
+u_\tau=\tfrac12\sigma^2u_{yy}.
 \]</div>
-<p>把它代入原方程得到</p>
+<p>“同一个符号对不同坐标求偏导”容易漏掉 <span class="arithmatex">\(-cD_z\)</span>，以上定义消除了这种歧义。</p>
+<p><strong>3. 变换后的数据。</strong> 当 <span class="arithmatex">\(\tau=0\)</span>，<span class="arithmatex">\(u(0,y)=(e^y-K)^+\)</span>。当 <span class="arithmatex">\(y\to-\infty\)</span>，<span class="arithmatex">\(u\to0\)</span>；当 <span class="arithmatex">\(y\to\infty\)</span>，</p>
 <div class="arithmatex">\[
-\frac{\partial C}{\partial t}+\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial C}{\partial Z}+\frac{1}{2}\sigma^{2}\frac{\partial^{2}C}{\partial Z^{2}}=r C.
+u(\tau,y)-[e^{y+\sigma^2\tau/2}-K]\to0.
 \]</div>
-<p>此时方程已是常系数形式。定价真正相关的是到期剩余时间 <span class="arithmatex">\(\tau=T-t\)</span>，代换后得到</p>
+<p>这是将 <span class="arithmatex">\(e^{r\tau}[S-Ke^{-r\tau}]\)</span> 及 <span class="arithmatex">\(S=e^{y-c\tau}\)</span> 代入得到的边界，不是简单复制原股价边界。</p>
+<p><strong>4. 热核求解并完成积分。</strong> 在至多指数增长的解类中，热核卷积给唯一解</p>
 <div class="arithmatex">\[
-\frac{\partial C}{\partial\tau}-\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial C}{\partial Z}-\frac{1}{2}\sigma^{2}\frac{\partial^{2}C}{\partial Z^{2}}=-r C.
+u(\tau,y)=\frac1{\sigma\sqrt{2\pi\tau}}
+\int_{\log K}^{\infty}(e^\xi-K)
+e^{-(\xi-y)^2/(2\sigma^2\tau)}d\xi.
 \]</div>
-<p>看涨期权价格是未来现金流的贴现值。令现金流为 <span class="arithmatex">\(D\)</span>，写成 <span class="arithmatex">\(C=e^{-r\tau}D\)</span>，得到</p>
+<p>配方恒等式</p>
 <div class="arithmatex">\[
-\frac{\partial D}{\partial\tau}-\left(r-\frac{1}{2}\sigma^{2}\right)\frac{\partial D}{\partial Z}-\frac{1}{2}\sigma^{2}\frac{\partial^{2}D}{\partial Z^{2}}=0.
+e^\xi e^{-(\xi-y)^2/(2v)}
+=e^{y+v/2}e^{-(\xi-y-v)^2/(2v)},\qquad v=\sigma^2\tau,
 \]</div>
-<p>最后，时刻 <span class="arithmatex">\(t\)</span> 的 <span class="arithmatex">\(Z\)</span> 均值为 <span class="arithmatex">\(Z_0+(r-\frac12\sigma^2)t\)</span>。令 <span class="arithmatex">\(y=Z+(r-\frac12\sigma^2)\tau\)</span> 平移坐标，计算新偏导数得到</p>
+<p>使两个积分分别为 <span class="arithmatex">\(e^{y+v/2}\Phi((y+v-\log K)/\sqrt v)\)</span> 和 <span class="arithmatex">\(K\Phi((y-\log K)/\sqrt v)\)</span>。于是</p>
 <div class="arithmatex">\[
-\frac{\partial D}{\partial\tau}=\frac{1}{2}\sigma^{2}\frac{\partial^{2}D}{\partial y^{2}},
+u=e^{y+v/2}\Phi(d_1)-K\Phi(d_2),\quad
+C=e^{-r\tau}u=S\Phi(d_1)-Ke^{-r\tau}\Phi(d_2),
 \]</div>
-<p>这正是一维热传导方程。</p>
+<p>其中 <span class="arithmatex">\(d_1=[\log(S/K)+(r+\sigma^2/2)\tau]/(\sigma\sqrt\tau)\)</span>、<span class="arithmatex">\(d_2=d_1-\sigma\sqrt\tau\)</span>。此式满足所列终值及两端边界；<span class="arithmatex">\(\tau=0\)</span> 取连续极限。<span class="arithmatex">\(\sigma=0\)</span> 时应单独用确定性收益 <span class="arithmatex">\((S-Ke^{-r\tau})^+\)</span>，不能除以零。</p>
 </details>
 <p><span id="q101"></span></p>
 <h3 id="problem-2f886e7f9b56">Q106 · 求导 <span class="arithmatex">\( f(x)=x^x \)</span><a class="headerlink" href="#problem-2f886e7f9b56" title="Permanent link">&para;</a></h3>
@@ -4085,69 +4136,36 @@ e^{\cos(x+h)-\cos(x)}-1=\cos(x+h)-\cos(x)+\mathcal{O}(h^{2}).
 \]</div>
 <details class="note">
 <summary>解答</summary>
-<p>先考虑更一般的积分</p>
+<p><strong>主积分先检查收敛。</strong> 在零点 <span class="arithmatex">\(|\log x|\)</span> 可积，无穷远为 <span class="arithmatex">\(O(\log x/x^2)\)</span>，故积分绝对收敛。实变量替换 <span class="arithmatex">\(x=1/u\)</span> 可直接核验 <span class="arithmatex">\(I=-I\)</span>，所以 <span class="arithmatex">\(I=0\)</span>。下面给题目要求的围道证明及四个追问。</p>
+<p><strong>主积分的钥匙孔围道。</strong> 取主支 <span class="arithmatex">\(-\pi&lt;\arg z&lt;\pi\)</span>，在负实轴割开，令</p>
 <div class="arithmatex">\[
-\int_{0}^{\infty}\log(x)Q(x)d x,
+f(z)=\frac{(\operatorname{Log}z)^2}{1-z+z^2}.
 \]</div>
-<p>其中 <span class="arithmatex">\(Q(x)\)</span> 为有理函数。为保证积分收敛，设分母次数为 <span class="arithmatex">\(n\)</span>、分子次数为 <span class="arithmatex">\(m\)</span>，且 <span class="arithmatex">\(n\ge m+2\)</span>；同时分母在非负实轴上不为零。</p>
-<p>取围绕负实轴分支割线的钥匙孔围道 <span class="arithmatex">\(C\)</span>，内圆半径为 <span class="arithmatex">\(\epsilon\)</span>、外圆半径为 <span class="arithmatex">\(R\)</span>。</p>
-<p>于是考虑积分</p>
+<p>正向围道沿割线上侧从 <span class="arithmatex">\(-R\)</span> 走到 <span class="arithmatex">\(-\epsilon\)</span>，小圆顺时针，下侧返回 <span class="arithmatex">\(-R\)</span>，外圆逆时针闭合。两条直边的和为</p>
 <div class="arithmatex">\[
-\oint(\log z)^{2}Q(-z)d z=\int_{{t o p}}+\int_{{b o t t o m}}+\int_{{s m a l l~c i r c l e}}+\int_{{b i g~c i r c l e}},
+\int_\epsilon^R\frac{(\log x+i\pi)^2-(\log x-i\pi)^2}{1+x+x^2}dx
+=4\pi i\int_\epsilon^R\frac{\log x}{1+x+x^2}dx.
 \]</div>
-<p>其中 top、bottom 分别表示分支割线上方和下方的直线。上侧取 <span class="arithmatex">\(z=te^{i\pi}\)</span>（<span class="arithmatex">\(t\)</span> 从 <span class="arithmatex">\(\epsilon\)</span> 到 <span class="arithmatex">\(R\)</span>），下侧取 <span class="arithmatex">\(z=te^{-i\pi}\)</span>；内外圆分别取 <span class="arithmatex">\(z=\epsilon e^{i\theta}\)</span>、<span class="arithmatex">\(z=Re^{i\theta}\)</span>，<span class="arithmatex">\(-\pi\le\theta\le\pi\)</span>，从而</p>
+<p>小圆积分为 <span class="arithmatex">\(O(\epsilon\log^2\epsilon)\)</span>，大圆为 <span class="arithmatex">\(O(\log^2R/R)\)</span>，均趋零。两个极点 <span class="arithmatex">\(a=e^{i\pi/3},b=e^{-i\pi/3}\)</span>，留数分别为 <span class="arithmatex">\((i\pi/3)^2/(a-b)\)</span> 和 <span class="arithmatex">\((-i\pi/3)^2/(b-a)\)</span>，相加为零。留数定理给 <span class="arithmatex">\(4\pi i I=0\)</span>，故 <span class="arithmatex">\(I=0\)</span>。统一围道方向后无需再靠口头改变正负号。</p>
+<p><strong>(1) 二阶极点。</strong> 对 <span class="arithmatex">\(1/(z^2+1)^2\)</span> 取上半圆围道，大圆积分 <span class="arithmatex">\(O(R^{-3})\)</span>。上半平面只有 <span class="arithmatex">\(i\)</span>，其留数是</p>
 <div class="arithmatex">\[
-\int_{t o p}=\int_{\epsilon}^{R}(\log(t e^{i\pi}))^{2}Q(-t e^{i\pi})e^{i\pi}d t=-\int_{\epsilon}^{R}(\log(t)+i\pi)^{2}Q(t)d t
+\left.\frac d{dz}\frac1{(z+i)^2}\right|_{z=i}
+=\frac1{4i}.
 \]</div>
+<p>实轴积分等于 <span class="arithmatex">\(2\pi i/(4i)=\pi/2\)</span>。</p>
+<p><strong>(2) 带指数的半圆。</strong> <span class="arithmatex">\(t&gt;0\)</span>，上半平面 <span class="arithmatex">\(|e^{itz}|=e^{-t\operatorname{Im}z}\le1\)</span>，所以 <span class="arithmatex">\(e^{itz}/(z^2+1)\)</span> 的大圆积分至少可用 <span class="arithmatex">\(O(R^{-1})\)</span> 直接界至零。极点 <span class="arithmatex">\(i\)</span> 的留数为 <span class="arithmatex">\(e^{-t}/(2i)\)</span>，故实轴积分为 <span class="arithmatex">\(\pi e^{-t}\)</span>。选择下半平面会使指数增长，不能照搬同一估计。</p>
+<p><strong>(3) 宽度 <span class="arithmatex">\(2\pi i\)</span> 的矩形。</strong> 设 <span class="arithmatex">\(s=a+ib,0&lt;a&lt;1\)</span>，对 <span class="arithmatex">\(f(z)=e^{sz}/(1+e^z)\)</span> 取顶点 <span class="arithmatex">\(-R,R,R+2\pi i,-R+2\pi i\)</span> 的正向矩形。两竖边分别按 <span class="arithmatex">\(e^{-(1-a)R}\)</span>、<span class="arithmatex">\(e^{-aR}\)</span> 衰减，<span class="arithmatex">\(b\)</span> 对高度有界区间只产生固定常数。顶边反向，且 <span class="arithmatex">\(f(x+2\pi i)=e^{2\pi is}f(x)\)</span>。矩形内唯一极点 <span class="arithmatex">\(\pi i\)</span>，留数为 <span class="arithmatex">\(-e^{\pi is}\)</span>。因此</p>
 <div class="arithmatex">\[
-\int_{{bottom}}=\int_{R}^{\epsilon}(\log(t e^{-i\pi}))^{2}Q(-t e^{-i\pi})e^{-i\pi}d t=\int_{\epsilon}^{R}(\log(t)-i\pi)^{2}Q(t)d t
+(1-e^{2\pi is})J=-2\pi i e^{\pi is},\qquad
+J=\frac{-2\pi i e^{\pi is}}{-2i e^{\pi is}\sin\pi s}
+=\frac\pi{\sin\pi s}.
 \]</div>
+<p>给定实部范围既保证两端积分收敛，也保证 <span class="arithmatex">\(\sin\pi s\ne0\)</span>。</p>
+<p><strong>(4) 绕过零点的小半圆。</strong> 对 <span class="arithmatex">\(e^{iz}/z\)</span> 在上半平面作围道，在零点上方挖去半径 <span class="arithmatex">\(\epsilon\)</span> 小半圆；它从 <span class="arithmatex">\(-\epsilon\)</span> 顺时针走向 <span class="arithmatex">\(\epsilon\)</span>，积分趋 <span class="arithmatex">\(-i\pi\)</span>。大半圆用 Jordan 引理趋零，域内无极点，故</p>
 <div class="arithmatex">\[
-\int_{{small\ circle}}=\int_{\pi}^{-\pi}(\log(\epsilon e^{i\theta}))^{2}Q(-\epsilon e^{i\theta})i\epsilon e^{i\theta}d t=\mathcal{O}(\epsilon\log^{2}\epsilon),\quad \epsilon\to0
+\operatorname{PV}\int_{-\infty}^{\infty}\frac{e^{ix}}x dx=i\pi.
 \]</div>
-<div class="arithmatex">\[
-\begin{aligned}\int_{big~circle}=\int_{\pi}^{-\pi}(\log(Re^{i\theta}))^{2}Q(-Re^{i\theta})iRe^{i\theta}dt\\=\mathcal{O}(R^{m-n+1}\log^{2}R),\quad R\to\infty.\end{aligned}
-\]</div>
-<p>注意我们的围道取顺时针方向，于是当 <span class="arithmatex">\( \epsilon \to 0 \)</span> 且 <span class="arithmatex">\( R \to \infty \)</span> 时（因为 <span class="arithmatex">\( m - n + 1 \leq -1 \)</span>），</p>
-<div class="arithmatex">\[
-\begin{aligned}\int_{0}^{\infty}\big((\log t+i\pi)^{2}-(\log t-i\pi)^{2}\big)Q(t)dt\\=2\pi i\sum\mathbf{Residues}\left\{(\log z)^{2}Q(-z)\right\},\end{aligned}
-\]</div>
-<p>or</p>
-<div class="arithmatex">\[
-\int_{0}^{\infty}\log t Q(t)d t=\frac{1}{2}\sum\mathbf{R e s i d u e s}\left\{(\log z)^{2}Q(-z)\right\},
-\]</div>
-<p>其中求和遍历 <span class="arithmatex">\(Q(-z)\)</span> 的全部奇点。</p>
-<p>现在回到本题所考虑的函数</p>
-<div class="arithmatex">\[
-Q(-z)=\frac{1}{1-z+z^{2}}.
-\]</div>
-<p>该函数的奇点为 <span class="arithmatex">\(z=\tfrac12(1\pm\sqrt3 i)\)</span>。记</p>
-<div class="arithmatex">\[
-a=\frac{1}{2}(1+\sqrt{3}i)=e^{i\frac{\pi}{3}},
-\]</div>
-<div class="arithmatex">\[
-b=\frac{1}{2}(1-\sqrt{3}i)=e^{-i\frac{\pi}{3}},
-\]</div>
-<p>则函数</p>
-<div class="arithmatex">\[
-(\log(z))^{2}Q(-z)=\frac{(\log(z))^{2}}{(z-a)(z-b)}
-\]</div>
-<p>在 <span class="arithmatex">\(a\)</span> 点的留数为</p>
-<div class="arithmatex">\[
-\frac{(\log a)^{2}}{a-b}=\frac{-\frac{\pi^{2}}{9}}{a-b},
-\]</div>
-<p><span class="arithmatex">\(b\)</span> 点的留数为</p>
-<div class="arithmatex">\[
-\frac{(\log b)^{2}}{b-a}=-\frac{-\frac{\pi^{2}}{9}}{a-b}.
-\]</div>
-<p>因此</p>
-<div class="arithmatex">\[
-\sum{\mathrm{Residues}\left\{(\log z)^{2}Q(-z)\right\}}=0,
-\]</div>
-<p>最终</p>
-<div class="arithmatex">\[
-\int_{0}^{\infty}\frac{\log(x)}{\left(1+x+x^{2}\right)}dx=0.
-\]</div>
+<p>取虚部，<span class="arithmatex">\(\sin x/x\)</span> 是偶函数，且在零点有可去奇点；在无穷远按 Dirichlet 判别法收敛，因此得到通常的反常积分 <span class="arithmatex">\(2\int_0^\infty\sin x/x\,dx=\pi\)</span>。它不是绝对收敛积分，不能省略尾端收敛条件。</p>
 </details>
 <p><span id="q211"></span></p>
 <h3 id="problem-b7614c559a2a">Q113 · 三相关系数的界<a class="headerlink" href="#problem-b7614c559a2a" title="Permanent link">&para;</a></h3>
@@ -4166,9 +4184,14 @@ P = \begin{bmatrix} 1 &amp; 0.9 &amp; c \\ 0.9 &amp; 1 &amp; 0.8 \\ c &amp; 0.8 
 \]</div>
 <p>解二次不等式：<span class="arithmatex">\( c = (1.44 \pm \sqrt{1.44^2 - 4\times0.45})/2 = (1.44 \pm 0.523)/2 \)</span>，得</p>
 <div class="arithmatex">\[
-\boxed{0.46 \le \rho(X,Z) \le 0.98}
+\boxed{0.72-\sqrt{0.0684}\le\rho(X,Z)\le0.72+\sqrt{0.0684}}
 \]</div>
 <p>（用几何视角也可联系 <a href="#problem-ee054874c580">Q83 · 二阶非齐次线性 ODE</a>/<a href="#problem-eeec849e271b">Q86 · 特征值与特征向量</a>/<a href="#problem-b07670f46e38">Q88 · 生成相关正态随机变量</a> 同源——那里是 <span class="arithmatex">\( \rho = 0.8 \)</span> 的版本，答案 <span class="arithmatex">\( [0.28, 1] \)</span>。）</p>
+<p><strong>精确界与可达到性。</strong> 上述保留两位小数的区间仅是近似，严格界为</p>
+<div class="arithmatex">\[
+0.72-\sqrt{0.19\cdot0.36}\le c\le0.72+\sqrt{0.19\cdot0.36},
+\]</div>
+<p>即约 <span class="arithmatex">\([0.4584660634,0.9815339366]\)</span>。为证明两端确能达到，取独立标准正态 <span class="arithmatex">\(U,V\)</span>，令 <span class="arithmatex">\(Y=U\)</span>、<span class="arithmatex">\(X=0.9U+\sqrt{0.19}V\)</span>、<span class="arithmatex">\(Z=0.8U\pm0.6V\)</span>。这三个变量都标准化，给出已知两相关及两个端点。将 <span class="arithmatex">\(Z\)</span> 的残差改为与 <span class="arithmatex">\(V\)</span> 相关系数在 <span class="arithmatex">\([-1,1]\)</span> 内任取的标准正态，可覆盖全部中间值，所以是最佳界。</p>
 </details>
 <p><span id="q212"></span></p>
 <h3 id="problem-6be914d71044">Q114 · 相关系数 0.9、0.8 与 0.1<a class="headerlink" href="#problem-6be914d71044" title="Permanent link">&para;</a></h3>
@@ -4186,6 +4209,11 @@ M=\left(\begin{array}{ccc}1&amp;0.9&amp;0.1\\0.9&amp;1&amp;0.8\\0.1&amp;0.8&amp;
 \]</div>
 <p>是否正定（见 <a href="#problem-c9c13a3c7149">Q115 · 协方差矩阵的正定性</a>）。可用<a href="#problem-fea888359199">Q97 · 正定矩阵及其性质</a> 的方法判断。取顺序主子式：左上 <span class="arithmatex">\(1\times1\)</span> 子式行列式为正，左上 <span class="arithmatex">\(2\times2\)</span> 子式行列式为 0.19，也为正；但 <span class="arithmatex">\(M\)</span> 的行列式为 <span class="arithmatex">\(-0.316&lt;0\)</span>，故矩阵不正定。</p>
 <p>所以它不是有效的协方差矩阵或相关矩阵，给出的三个相关系数不能同时成立。</p>
+<p>一般令 <span class="arithmatex">\(c=\rho(A,C)\)</span>，相关矩阵的行列式展开为</p>
+<div class="arithmatex">\[
+1+2xyc-x^2-y^2-c^2=(1-x^2)(1-y^2)-(c-xy)^2\ge0.
+\]</div>
+<p>所以完整区间为 <span class="arithmatex">\(xy\pm\sqrt{(1-x^2)(1-y^2)}\)</span>。正半定是有效性的条件，不要求严格正定；端点对应完全线性依赖，仍是合法相关矩阵。取独立标准化 <span class="arithmatex">\(U,V\)</span>，令 <span class="arithmatex">\(B=U,A=xU+\sqrt{1-x^2}V,C=yU\pm\sqrt{1-y^2}V\)</span>，可分别达到上下界。代入0.9和0.8得约 <span class="arithmatex">\([0.458466,0.981534]\)</span>，故0.1被排除。</p>
 </details>
 <p><span id="q214"></span></p>
 <h3 id="problem-c9c13a3c7149">Q115 · 协方差矩阵的正定性<a class="headerlink" href="#problem-c9c13a3c7149" title="Permanent link">&para;</a></h3>
@@ -4271,7 +4299,7 @@ a=(a_{1},a_{2},\ldots,a_{n}).
 <details class="note">
 <summary>解答</summary>
 <p>能。时刻<span class="arithmatex">\(t\)</span>的所有可能潜艇位置在半径vt的圆上。飞机先直飞<span class="arithmatex">\(O\)</span>方向，经过<span class="arithmatex">\(t_{0}=d/(3v)\)</span>时，其离<span class="arithmatex">\(O\)</span>距离为<span class="arithmatex">\(d-2vt_{0}=vt_{0}\)</span>，首次到达这个可能位置圆；若同向潜艇此时就被捕。
-否则飞机从此保持半径<span class="arithmatex">\(r(t)=vt\)</span>，沿圆绕行。径向速度为<span class="arithmatex">\(v\)</span>，总速<span class="arithmatex">\(2v\)</span>，故切向速度<span class="arithmatex">\(\sqrt{3v}\)</span>，角速度<span class="arithmatex">\(\theta '=\sqrt{3}/t\)</span>。于是<span class="arithmatex">\(\theta (t)-\theta (t_{0})=\sqrt{3} \log (t/t_{0})\)</span>。在<span class="arithmatex">\(T=t_{0} \exp (2\pi /\sqrt{3})\approx 12.54078885\cdot d/v\)</span>之前完成<span class="arithmatex">\(2\pi\)</span>方向扫描。潜艇始终在自己固定方向的同一扩张圆上，扫描到该方向时必重合。
+否则飞机从此保持半径<span class="arithmatex">\(r(t)=vt\)</span>，沿圆绕行。径向速度为<span class="arithmatex">\(v\)</span>，总速<span class="arithmatex">\(2v\)</span>，故切向速度<span class="arithmatex">\(\sqrt{3}\,v\)</span>，角速度<span class="arithmatex">\(\theta '=\sqrt{3}/t\)</span>。于是<span class="arithmatex">\(\theta (t)-\theta (t_{0})=\sqrt{3} \log (t/t_{0})\)</span>。在<span class="arithmatex">\(T=t_{0} \exp (2\pi /\sqrt{3})\approx 12.54078885\cdot d/v\)</span>之前完成<span class="arithmatex">\(2\pi\)</span>方向扫描。潜艇始终在自己固定方向的同一扩张圆上，扫描到该方向时必重合。
 因此给出确定的最迟捕获时间<span class="arithmatex">\(T=[d/(3v)]e^{2\pi /\sqrt{3}}\)</span>。这是该构造的保证时间；只需回答能否保证时，有限的上界已足够，无须声称所有可行航线中都最优。
 <strong>方法</strong>：先描述随时间变化的可能位置集合，再沿集合以足够的切向速度覆盖全部未知方向。</p>
 </details>
@@ -4280,14 +4308,25 @@ a=(a_{1},a_{2},\ldots,a_{n}).
 <p><strong>题目</strong>：半径1米圆树两侧相反位置，各有一人距树心10米。你沿径向直奔树边、恒速<span class="arithmatex">\(u\)</span>；对手可任意移动、速度5米/秒。树为不可穿越的闭圆盘，视线与树相切也视为被遮挡；求你能在始终不被看见下到树边的最小速度。</p>
 <details class="note">
 <summary>解答</summary>
-<p>树心原点，你当前在<span class="arithmatex">\(P=(-x,0)\)</span>、<span class="arithmatex">\(x\)</span>从10降到1，对手初位<span class="arithmatex">\(Q=(10,0)\)</span>。从<span class="arithmatex">\(P\)</span>作树的上切线，单位法向<span class="arithmatex">\(n=(-1/x,\sqrt{1-1/x^{2}})\)</span>，切线为<span class="arithmatex">\(n\cdot X=1\)</span>。对手从<span class="arithmatex">\(Q\)</span>到该可见区域边界的最短路长为<span class="arithmatex">\(d(x)=1-n\cdot Q=1+10/x\)</span>；垂足在线的远端射线上，<span class="arithmatex">\(Q\)</span>至垂足的直线不穿树，所以此距离可达。下切线对称。
-你到距离<span class="arithmatex">\(x\)</span>时已经过<span class="arithmatex">\(t=(10-x)/u\)</span>。要让对手尚不能越过可见边界，须<span class="arithmatex">\(5t\le d(x)\)</span>，对全部<span class="arithmatex">\(1\le x\le 10\)</span>成立。因此</p>
+<p>设你在 <span class="arithmatex">\(P=(-x,0)\)</span>，<span class="arithmatex">\(1\le x\le10\)</span>，对手从 <span class="arithmatex">\(Q=(10,0)\)</span> 出发。关键要区分到可见边界直线的欧氏距离，与绕开树干后能实际到达的路长。</p>
+<p><strong>1. 给所有时刻一个安全下界。</strong> 从 <span class="arithmatex">\(P\)</span> 向树作上切线，单位法向
+<span class="arithmatex">\(n=(-1/x,\sqrt{1-1/x^2})\)</span>，切线方程 <span class="arithmatex">\(n\cdot X=1\)</span>。对手要进入上方可见区，必须越过该切线的相应远端射线。到整条直线的最短欧氏距离是</p>
 <div class="arithmatex">\[
-u\ge\max_{1\le x\le10}\frac{5x(10-x)}{x+10}.
+d_0(x)=1-n\cdot Q=1+10/x.
 \]</div>
-<p>求导的分子为<span class="arithmatex">\(100-20x-x^{2}\)</span>，唯一极大点<span class="arithmatex">\(x=10(\sqrt{2}-1)\)</span>，代入得<span class="arithmatex">\(u_{\min} =50(3-2\sqrt{2})\approx 8.578643763\)</span>米/秒。任何更慢速度，在该时刻对手能沿最短直线跨到可见侧；达到此速度时至多恰到切线，树仍挡住视线。
-如果题设把仅仅相切的视线也算“已看见”，则该值是严格可行速度的下确界，需<span class="arithmatex">\(u\)</span>略大于它；通常把闭圆树视为遮挡体时可取等号。
-<strong>方法</strong>：对每个可能暴露时刻求对手到可见区域的最短距离，再取全时程的最坏约束。</p>
+<p>到射线、再加避开树干的要求，只会使真正需要的路长更大，所以始终有“实际最短路长 <span class="arithmatex">\(\ge d_0(x)\)</span>”。不应对接近 <span class="arithmatex">\(x=1\)</span> 的所有时刻都断言垂直线段可行，因为它可能穿树。</p>
+<p>你到该 <span class="arithmatex">\(x\)</span> 的时刻 <span class="arithmatex">\(t=(10-x)/u\)</span>，对手至多走 <span class="arithmatex">\(5t\)</span>。因此只要对全部 <span class="arithmatex">\(x\)</span> 满足 <span class="arithmatex">\(5t\le d_0(x)\)</span>，就能保证尚未越过可见边界。等价地，以下速度足够：</p>
+<div class="arithmatex">\[
+u\ge \max_{1\le x\le10}g(x),\qquad g(x)=\frac{5x(10-x)}{x+10}.
+\]</div>
+<p>下切线对称，无需另加更强约束。</p>
+<p><strong>2. 求出这个充分速度。</strong></p>
+<div class="arithmatex">\[
+g'(x)=\frac{5(100-20x-x^2)}{(x+10)^2}.
+\]</div>
+<p>唯一内点最大值在 <span class="arithmatex">\(x_*=10(\sqrt2-1)\)</span>，代入得 <span class="arithmatex">\(u_*=50(3-2\sqrt2)\approx8.578643763\)</span> 米/秒。</p>
+<p><strong>3. 证明更慢必失败。</strong> 在关键位置 <span class="arithmatex">\(x_*\)</span>，对手到切线的垂足 <span class="arithmatex">\(R=Q+d_0(x_*)n\)</span> 确在切点以外的远端射线上。直线 <span class="arithmatex">\(QR\)</span> 到树心的距离为 <span class="arithmatex">\(10\sqrt{1-x_*^{-2}}&gt;1\)</span>，所以整条追击线段避开树干，长度 <span class="arithmatex">\(d_0(x_*)\)</span> 实际可达。若 <span class="arithmatex">\(u&lt;u_*\)</span>，你到 <span class="arithmatex">\(x_*\)</span> 时对手有时间先到 <span class="arithmatex">\(R\)</span> 再向可见侧移动一小段，届时视线不再被挡。因此这个充分上界同时是必要下界，证明了最小速度。</p>
+<p>题设将相切视线算遮挡，所以 <span class="arithmatex">\(u=u_*\)</span> 时可取等号。若相切也算被看见，则 <span class="arithmatex">\(u_*\)</span> 只是可行速度的下确界，必须略大。这个证明只需在决定最优值的 <span class="arithmatex">\(x_*\)</span> 处验证欧氏最短路可行，避免把错误的全程可达性假设带入结论。</p>
 </details>
 
 
