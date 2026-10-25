@@ -1680,8 +1680,8 @@
    - 例：极度做多一只值 0.50 的资产，可报价 <code>0.43@0.53</code>（更愿卖、价差偏向）。flat 时应<strong>对称</strong>报价。</li>
 </ol>
 <h3 id="_2">把成交事件纳入估值<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>对某事件结算 1 的合约，在明确风险与资金假设后，可从 <span class="arithmatex">\(P(A)\)</span> 建立基础估值；互斥完备事件的合约合起来支付常数，可检查价格一致性（<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-53445a6803c0">Q1389 · 事件合约与一致价格</a>）。报出数量与价格之后，对方选择是否以及按哪个方向成交，本身就携带信息。因此应计算 <span class="arithmatex">\(E[V\mid\text{我的买单/卖单成交}]\)</span>，而非只盯先验 <span class="arithmatex">\(EV\)</span>。<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-cd70d830c75e">Q1394 · 知情对手成交后的条件估值</a> 给出可直接积分检验的例子。</p>
-<p>对含选择权的随机支付，先确认谁控制选择、何时看到信息、是否能撤回。持有人控制重掷用 max，卖方控制用 min（<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-86a0178153f6">Q1397 · 重掷权属于谁的合约定价</a>）；不能先假设有一个固定“重掷价值”再报价。</p>
+<p>对某事件结算 1 的合约，在明确风险与资金假设后，可从 <span class="arithmatex">\(P(A)\)</span> 建立基础估值；互斥完备事件的合约合起来支付常数，可检查价格一致性（<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-53445a6803c0">Q1372 · 事件合约与一致价格</a>）。报出数量与价格之后，对方选择是否以及按哪个方向成交，本身就携带信息。因此应计算 <span class="arithmatex">\(E[V\mid\text{我的买单/卖单成交}]\)</span>，而非只盯先验 <span class="arithmatex">\(EV\)</span>。<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-cd70d830c75e">Q1377 · 知情对手成交后的条件估值</a> 给出可直接积分检验的例子。</p>
+<p>对含选择权的随机支付，先确认谁控制选择、何时看到信息、是否能撤回。持有人控制重掷用 max，卖方控制用 min（<a href="../../%E7%9C%9F%E9%A2%98/10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-86a0178153f6">Q1380 · 重掷权属于谁的合约定价</a>）；不能先假设有一个固定“重掷价值”再报价。</p>
 <h2 id="93">9.3 置信区间<a class="headerlink" href="#93" title="Permanent link">&para;</a></h2>
 <ul>
 <li>置信区间是由估计量构造的随机区间：重复抽样时约 <span class="arithmatex">\(95\%\)</span> 的区间覆盖参数真值；单次观测后不要说“真值有 <span class="arithmatex">\(95\%\)</span> 概率在区间内”。若讨论的是随机结果而非未知参数，例如 <span class="arithmatex">\(X\sim N(100,10^2)\)</span>，<span class="arithmatex">\([80,120]\)</span> 是约 <span class="arithmatex">\(95\%\)</span> 的中央覆盖区间，不是参数置信区间。</li>
