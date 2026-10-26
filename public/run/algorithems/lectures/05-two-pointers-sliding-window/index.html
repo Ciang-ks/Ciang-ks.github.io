@@ -10,27 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://ciang-ks.github.io/run/research/sources/external/text/industry_workflow_notes/">
+        <link rel="canonical" href="https://ciang-ks.github.io/run/algorithems/lectures/05-two-pointers-sliding-window/">
       
       
+        <link rel="prev" href="../04-linked-lists/">
+      
+      
+        <link rel="next" href="../06-binary-search/">
       
       
         
       
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Man AHL、AQR、WorldQuant BRAIN 与 Quant Wiki：选择性阅读笔记 - Run</title>
+        <title>05 双指针与滑动窗口 - Run</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -43,9 +47,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#man-ahlaqrworldquant-brain-quant-wiki" class="md-skip">
+        <a href="#5" class="md-skip">
           跳转至
         </a>
       
@@ -86,7 +90,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../../../../.." title="Run" class="md-header__button md-logo" aria-label="Run" data-md-component="logo">
+    <a href="../../.." title="Run" class="md-header__button md-logo" aria-label="Run" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Man AHL、AQR、WorldQuant BRAIN 与 Quant Wiki：选择性阅读笔记
+              05 双指针与滑动窗口
             
           </span>
         </div>
@@ -213,7 +217,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -234,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../" class="md-tabs__link">
+        <a href="../../../research/" class="md-tabs__link">
           
   
   
@@ -252,11 +256,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../../../algorithems/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
   
@@ -278,7 +284,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../../vault/" class="md-tabs__link">
+        <a href="../../../vault/" class="md-tabs__link">
           
   
   
@@ -320,7 +326,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../.." title="Run" class="md-nav__button md-logo" aria-label="Run" data-md-component="logo">
+    <a href="../../.." title="Run" class="md-nav__button md-logo" aria-label="Run" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -350,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -410,7 +416,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../" class="md-nav__link ">
+            <a href="../../../research/" class="md-nav__link ">
               
   
   
@@ -454,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../roadmap/" class="md-nav__link">
+      <a href="../../../research/roadmap/" class="md-nav__link">
         
   
   
@@ -523,7 +529,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../lectures/" class="md-nav__link ">
+            <a href="../../../research/lectures/" class="md-nav__link ">
               
   
   
@@ -567,14 +573,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/01-markets-assets/" class="md-nav__link">
+      <a href="../../../research/lectures/01-markets-assets/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    市场、资产与交易对象
+    01 市场与资产
   
 
     
@@ -595,14 +601,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/02-returns-risk/" class="md-nav__link">
+      <a href="../../../research/lectures/02-returns-risk/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第二章：收益、风险、组合与绩效
+    02 收益与风险
   
 
     
@@ -623,14 +629,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/03-probability-statistics/" class="md-nav__link">
+      <a href="../../../research/lectures/03-probability-statistics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第三章：概率、统计推断与回归
+    03 概率统计与回归
   
 
     
@@ -651,14 +657,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/04-data-pipeline/" class="md-nav__link">
+      <a href="../../../research/lectures/04-data-pipeline/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第四章：数据、偏差与量化研究管线
+    04 数据与研究管线
   
 
     
@@ -679,14 +685,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/05-strategies-alpha/" class="md-nav__link">
+      <a href="../../../research/lectures/05-strategies-alpha/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第五章：策略、Alpha 与信号研究
+    05 策略与 Alpha
   
 
     
@@ -707,14 +713,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/06-portfolio-execution/" class="md-nav__link">
+      <a href="../../../research/lectures/06-portfolio-execution/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第六章：组合构建、执行与风险控制
+    06 组合、执行与风险
   
 
     
@@ -735,14 +741,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/07-machine-learning/" class="md-nav__link">
+      <a href="../../../research/lectures/07-machine-learning/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第七章：机器学习用于量化研究
+    07 机器学习
   
 
     
@@ -763,14 +769,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/08-language-models/" class="md-nav__link">
+      <a href="../../../research/lectures/08-language-models/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第八章：LLM4Quant 与文本研究
+    08 语言模型与文本研究
   
 
     
@@ -791,14 +797,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../lectures/09-research-communication/" class="md-nav__link">
+      <a href="../../../research/lectures/09-research-communication/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第九章：全链路项目、岗位能力与面试表达
+    09 研究表达
   
 
     
@@ -827,14 +833,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../projects/alpha_research/" class="md-nav__link">
+      <a href="../../../research/projects/alpha_research/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    项目 A：跨资产 Alpha 与组合研究
+    项目 A · Alpha 与组合
   
 
     
@@ -855,14 +861,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../projects/ml_llm_research/" class="md-nav__link">
+      <a href="../../../research/projects/ml_llm_research/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    项目 B：ML/LLM 增量研究
+    项目 B · ML/LLM 研究
   
 
     
@@ -883,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../downloads/" class="md-nav__link">
+      <a href="../../../research/downloads/" class="md-nav__link">
         
   
   
@@ -915,6 +921,8 @@
       
   
   
+    
+  
   
   
     
@@ -932,20 +940,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../algorithems/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -963,13 +974,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -986,6 +997,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1057,18 +1070,21 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../algorithems/lectures/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -1086,13 +1102,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1112,14 +1128,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/01-algorithmic-thinking/" class="md-nav__link">
+      <a href="../01-algorithmic-thinking/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 1 讲 · 从会写循环，到会分析算法
+    01 算法思维
   
 
     
@@ -1140,14 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/02-arrays-amortization/" class="md-nav__link">
+      <a href="../02-arrays-amortization/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 2 讲 · 数组为什么好查，却不好插
+    02 数组与摊销分析
   
 
     
@@ -1168,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/03-hashing/" class="md-nav__link">
+      <a href="../03-hashing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 3 讲 · 哈希表
+    03 哈希表
   
 
     
@@ -1196,14 +1212,211 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/04-linked-lists/" class="md-nav__link">
+      <a href="../04-linked-lists/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 4 讲 · 链表、栈与队列
+    04 链表、栈与队列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 双指针与滑动窗口
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 双指针与滑动窗口
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从有序数组里找一对数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三种形态
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个“移动依据”的例子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从"找一对"到"找一段"：滑动窗口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="从&#34;找一对&#34;到&#34;找一段&#34;：滑动窗口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        更新答案时，窗口必须符合当前题目的要求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3sum-two-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        选读：固定一个数，把 3Sum 化为 Two Sum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从讲义走到代码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-binary-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 二分查找
   
 
     
@@ -1224,14 +1437,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/05-stacks-queues/" class="md-nav__link">
+      <a href="../07-insertion-merge-sort/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 5 讲 · 双指针与滑动窗口
+    07 归并排序与分治
   
 
     
@@ -1252,14 +1465,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/06-recursion/" class="md-nav__link">
+      <a href="../08-quick-sort/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 6 讲 · 二分：每次排除一半，凭什么安全
+    08 快速排序与随机化
   
 
     
@@ -1280,14 +1493,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/07-insertion-merge-sort/" class="md-nav__link">
+      <a href="../09-linear-time-sorting/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 7 讲 · 归并排序与分治
+    09 线性时间排序
   
 
     
@@ -1308,14 +1521,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/08-quick-sort/" class="md-nav__link">
+      <a href="../10-selection/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 8 讲 · 快速排序与随机化
+    10 选择与中位数
   
 
     
@@ -1336,14 +1549,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/09-linear-time-sorting/" class="md-nav__link">
+      <a href="../11-search-balanced-trees/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 9 讲 · 线性时间排序
+    11 搜索树与平衡树
   
 
     
@@ -1364,14 +1577,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/10-selection/" class="md-nav__link">
+      <a href="../12-heaps-priority-queues/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 10 讲 · 选择与中位数
+    12 堆与优先队列
   
 
     
@@ -1392,14 +1605,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/11-binary-trees/" class="md-nav__link">
+      <a href="../13-tries/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 11 讲 · 二叉搜索树与平衡树
+    13 Trie 与前缀结构
   
 
     
@@ -1420,14 +1633,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/12-search-trees/" class="md-nav__link">
+      <a href="../14-tree-algorithms/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 12 讲 · 二叉堆与优先队列
+    14 树上算法
   
 
     
@@ -1448,14 +1661,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/13-balanced-trees/" class="md-nav__link">
+      <a href="../15-graph-traversal/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 13 讲 · Trie 与前缀结构
+    15 图搜索
   
 
     
@@ -1476,14 +1689,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/14-heaps/" class="md-nav__link">
+      <a href="../16-strongly-connected-components/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 14 讲 · 树上的算法
+    16 强连通分量
   
 
     
@@ -1504,14 +1717,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/15-graph-traversal/" class="md-nav__link">
+      <a href="../17-union-find-minimum-spanning-trees/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 15 讲 · 图与图搜索
+    17 并查集与最小生成树
   
 
     
@@ -1532,14 +1745,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/16-topological-sort/" class="md-nav__link">
+      <a href="../18-shortest-paths/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 16 讲 · 强连通分量
+    18 最短路径
   
 
     
@@ -1560,14 +1773,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/17-shortest-paths/" class="md-nav__link">
+      <a href="../19-eulerian-paths-network-flow/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 17 讲 · 并查集与最小生成树
+    19 欧拉路径与网络流
   
 
     
@@ -1588,14 +1801,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/18-all-pairs-shortest-paths/" class="md-nav__link">
+      <a href="../20-dynamic-programming/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 18 讲 · 最短路径
+    20 动态规划入门
   
 
     
@@ -1616,14 +1829,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/19-minimum-spanning-trees/" class="md-nav__link">
+      <a href="../21-subsequence-dp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 19 讲 · 欧拉路径与网络流
+    21 子序列 DP
   
 
     
@@ -1644,14 +1857,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/20-dynamic-programming/" class="md-nav__link">
+      <a href="../22-knapsack/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 20 讲 · 动态规划入门
+    22 背包 DP
   
 
     
@@ -1672,14 +1885,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/21-subsequence-dp/" class="md-nav__link">
+      <a href="../23-interval-string-dp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 21 讲 · 子序列 DP
+    23 区间与字符串 DP
   
 
     
@@ -1700,14 +1913,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/22-knapsack/" class="md-nav__link">
+      <a href="../24-greedy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 22 讲 · 背包 DP
+    24 贪心算法
   
 
     
@@ -1728,14 +1941,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/23-interval-string-dp/" class="md-nav__link">
+      <a href="../25-intervals/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 23 讲 · 区间与字符串 DP
+    25 区间调度与合并
   
 
     
@@ -1756,14 +1969,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/24-greedy/" class="md-nav__link">
+      <a href="../26-math-geometry/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 24 讲 · 贪心
+    26 数学与几何
   
 
     
@@ -1784,14 +1997,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/25-intervals/" class="md-nav__link">
+      <a href="../27-bit-manipulation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 25 讲 · 区间调度与合并
+    27 位运算
   
 
     
@@ -1812,70 +2025,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/26-math-geometry/" class="md-nav__link">
+      <a href="../28-complexity/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    第 26 讲 · 数学与几何
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/27-bit-manipulation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    第 27 讲 · 位运算
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../../algorithems/lectures/28-complexity/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    第 28 讲 · 计算复杂度与 NP
+    28 计算复杂度与 NP
   
 
     
@@ -1952,10 +2109,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -1963,7 +2123,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../algorithems/problems/" class="md-nav__link ">
+            <a href="../../problems/" class="md-nav__link ">
               
   
   
@@ -1981,7 +2141,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2054,7 +2214,7 @@
   <span class="md-ellipsis">
     
   
-    Arrays & Hashing · 解题手册
+    01 数组与哈希
   
 
     
@@ -2070,7 +2230,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Arrays & Hashing · 解题手册
+    01 数组与哈希
   
 
           </label>
@@ -2083,7 +2243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/00-guide/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/00-guide/" class="md-nav__link">
         
   
   
@@ -2111,14 +2271,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/01-contains-duplicate/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/01-contains-duplicate/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    217. Contains Duplicate · 存在重复元素
+    217 存在重复元素
   
 
     
@@ -2139,14 +2299,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/02-valid-anagram/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/02-valid-anagram/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    242. Valid Anagram · 有效的字母异位词
+    242 有效的字母异位词
   
 
     
@@ -2167,14 +2327,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/03-two-sum/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/03-two-sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1. Two Sum · 两数之和
+    1 两数之和
   
 
     
@@ -2195,14 +2355,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/04-group-anagrams/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/04-group-anagrams/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    49. Group Anagrams · 字母异位词分组
+    49 字母异位词分组
   
 
     
@@ -2223,14 +2383,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/05-top-k-frequent-elements/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/05-top-k-frequent-elements/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    347. Top K Frequent Elements · 前 K 个高频元素
+    347 前 K 个高频元素
   
 
     
@@ -2251,14 +2411,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/06-product-of-array-except-self/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/06-product-of-array-except-self/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    238. Product of Array Except Self · 除自身以外数组的乘积
+    238 除自身以外数组的乘积
   
 
     
@@ -2279,14 +2439,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/07-valid-sudoku/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/07-valid-sudoku/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    36. Valid Sudoku · 有效的数独
+    36 有效的数独
   
 
     
@@ -2307,14 +2467,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/08-encode-and-decode-strings/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/08-encode-and-decode-strings/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    271. Encode and Decode Strings · 字符串的编码与解码
+    271 字符串的编码与解码
   
 
     
@@ -2335,14 +2495,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/09-longest-consecutive-sequence/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/09-longest-consecutive-sequence/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    128. Longest Consecutive Sequence · 最长连续序列
+    128 最长连续序列
   
 
     
@@ -2363,7 +2523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/01-arrays-and-hashing/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/01-arrays-and-hashing/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -2438,7 +2598,7 @@
   <span class="md-ellipsis">
     
   
-    Two Pointers · 解题手册
+    02 双指针
   
 
     
@@ -2454,7 +2614,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Two Pointers · 解题手册
+    02 双指针
   
 
           </label>
@@ -2467,7 +2627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/00-guide/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/00-guide/" class="md-nav__link">
         
   
   
@@ -2495,14 +2655,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/01-valid-palindrome/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/01-valid-palindrome/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    125. Valid Palindrome · 验证回文串
+    125 验证回文串
   
 
     
@@ -2523,14 +2683,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/02-two-sum-ii-input-array-is-sorted/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/02-two-sum-ii-input-array-is-sorted/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    167. Two Sum II - Input Array Is Sorted · 两数之和 II
+    167 两数之和 II
   
 
     
@@ -2551,14 +2711,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/03-3sum/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/03-3sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    15. 3Sum · 三数之和
+    15 三数之和
   
 
     
@@ -2579,14 +2739,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/04-container-with-most-water/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/04-container-with-most-water/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    11. Container With Most Water · 盛最多水的容器
+    11 盛最多水的容器
   
 
     
@@ -2607,14 +2767,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/05-trapping-rain-water/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/05-trapping-rain-water/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    42. Trapping Rain Water · 接雨水
+    42 接雨水
   
 
     
@@ -2635,7 +2795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/02-two-pointers/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/02-two-pointers/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -2712,7 +2872,7 @@
   <span class="md-ellipsis">
     
   
-    Sliding Window · 解题手册
+    03 滑动窗口
   
 
     
@@ -2728,7 +2888,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Sliding Window · 解题手册
+    03 滑动窗口
   
 
           </label>
@@ -2741,7 +2901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/00-guide/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/00-guide/" class="md-nav__link">
         
   
   
@@ -2769,14 +2929,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/01-best-time-to-buy-and-sell-stock/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/01-best-time-to-buy-and-sell-stock/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    121. Best Time to Buy and Sell Stock · 买卖股票的最佳时机
+    121 买卖股票的最佳时机
   
 
     
@@ -2797,14 +2957,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/02-longest-substring-without-repeating-characters/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/02-longest-substring-without-repeating-characters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    3. Longest Substring Without Repeating Characters · 无重复字符的最长子串
+    3 无重复字符的最长子串
   
 
     
@@ -2825,14 +2985,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/03-longest-repeating-character-replacement/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/03-longest-repeating-character-replacement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    424. Longest Repeating Character Replacement · 替换后的最长重复字符
+    424 替换后的最长重复字符
   
 
     
@@ -2853,14 +3013,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/04-permutation-in-string/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/04-permutation-in-string/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    567. Permutation in String · 字符串的排列
+    567 字符串的排列
   
 
     
@@ -2881,14 +3041,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/05-minimum-window-substring/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/05-minimum-window-substring/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    76. Minimum Window Substring · 最小覆盖子串
+    76 最小覆盖子串
   
 
     
@@ -2909,14 +3069,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/06-sliding-window-maximum/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/06-sliding-window-maximum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    239. Sliding Window Maximum · 滑动窗口最大值
+    239 滑动窗口最大值
   
 
     
@@ -2937,7 +3097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/03-sliding-window/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/03-sliding-window/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -3016,7 +3176,7 @@
   <span class="md-ellipsis">
     
   
-    Stack · 解题手册
+    04 栈
   
 
     
@@ -3032,7 +3192,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Stack · 解题手册
+    04 栈
   
 
           </label>
@@ -3045,7 +3205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/00-guide/" class="md-nav__link">
+      <a href="../../problems/04-stack/00-guide/" class="md-nav__link">
         
   
   
@@ -3073,14 +3233,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/01-valid-parentheses/" class="md-nav__link">
+      <a href="../../problems/04-stack/01-valid-parentheses/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    20. Valid Parentheses · 有效的括号
+    20 有效的括号
   
 
     
@@ -3101,14 +3261,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/02-min-stack/" class="md-nav__link">
+      <a href="../../problems/04-stack/02-min-stack/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    155. Min Stack · 最小栈
+    155 最小栈
   
 
     
@@ -3129,14 +3289,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/03-evaluate-reverse-polish-notation/" class="md-nav__link">
+      <a href="../../problems/04-stack/03-evaluate-reverse-polish-notation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    150. Evaluate Reverse Polish Notation · 逆波兰表达式求值
+    150 逆波兰表达式求值
   
 
     
@@ -3157,14 +3317,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/04-generate-parentheses/" class="md-nav__link">
+      <a href="../../problems/04-stack/04-generate-parentheses/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    22. Generate Parentheses · 括号生成
+    22 括号生成
   
 
     
@@ -3185,14 +3345,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/05-daily-temperatures/" class="md-nav__link">
+      <a href="../../problems/04-stack/05-daily-temperatures/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    739. Daily Temperatures · 每日温度
+    739 每日温度
   
 
     
@@ -3213,14 +3373,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/06-car-fleet/" class="md-nav__link">
+      <a href="../../problems/04-stack/06-car-fleet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    853. Car Fleet · 车队
+    853 车队
   
 
     
@@ -3241,14 +3401,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/07-largest-rectangle-in-histogram/" class="md-nav__link">
+      <a href="../../problems/04-stack/07-largest-rectangle-in-histogram/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    84. Largest Rectangle in Histogram · 柱状图中最大的矩形
+    84 柱状图中最大的矩形
   
 
     
@@ -3269,7 +3429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/04-stack/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/04-stack/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -3348,7 +3508,7 @@
   <span class="md-ellipsis">
     
   
-    Binary Search · 解题手册
+    05 二分查找
   
 
     
@@ -3364,7 +3524,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Binary Search · 解题手册
+    05 二分查找
   
 
           </label>
@@ -3377,7 +3537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/00-guide/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/00-guide/" class="md-nav__link">
         
   
   
@@ -3405,14 +3565,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/01-binary-search/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/01-binary-search/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    704. Binary Search · 二分查找
+    704 二分查找
   
 
     
@@ -3433,14 +3593,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/02-search-a-2d-matrix/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/02-search-a-2d-matrix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    74. Search a 2D Matrix · 搜索二维矩阵
+    74 搜索二维矩阵
   
 
     
@@ -3461,14 +3621,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/03-koko-eating-bananas/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/03-koko-eating-bananas/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    875. Koko Eating Bananas · 爱吃香蕉的珂珂
+    875 爱吃香蕉的珂珂
   
 
     
@@ -3489,14 +3649,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/04-find-minimum-in-rotated-sorted-array/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/04-find-minimum-in-rotated-sorted-array/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    153. Find Minimum in Rotated Sorted Array · 寻找旋转排序数组中的最小值
+    153 寻找旋转排序数组中的最小值
   
 
     
@@ -3517,14 +3677,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/05-search-in-rotated-sorted-array/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/05-search-in-rotated-sorted-array/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    33. Search in Rotated Sorted Array · 搜索旋转排序数组
+    33 搜索旋转排序数组
   
 
     
@@ -3545,14 +3705,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/06-time-based-key-value-store/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/06-time-based-key-value-store/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    981. Time Based Key-Value Store · 基于时间的键值存储
+    981 基于时间的键值存储
   
 
     
@@ -3573,14 +3733,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/07-median-of-two-sorted-arrays/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/07-median-of-two-sorted-arrays/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    4. Median of Two Sorted Arrays · 寻找两个正序数组的中位数
+    4 寻找两个正序数组的中位数
   
 
     
@@ -3601,7 +3761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/05-binary-search/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/05-binary-search/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -3688,7 +3848,7 @@
   <span class="md-ellipsis">
     
   
-    Linked List · 解题手册
+    06 链表
   
 
     
@@ -3704,7 +3864,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Linked List · 解题手册
+    06 链表
   
 
           </label>
@@ -3717,7 +3877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/00-guide/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/00-guide/" class="md-nav__link">
         
   
   
@@ -3745,14 +3905,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/01-reverse-linked-list/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/01-reverse-linked-list/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    206. Reverse Linked List · 反转链表
+    206 反转链表
   
 
     
@@ -3773,14 +3933,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/02-merge-two-sorted-lists/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/02-merge-two-sorted-lists/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    21. Merge Two Sorted Lists · 合并两个有序链表
+    21 合并两个有序链表
   
 
     
@@ -3801,14 +3961,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/03-linked-list-cycle/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/03-linked-list-cycle/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    141. Linked List Cycle · 环形链表
+    141 环形链表
   
 
     
@@ -3829,14 +3989,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/04-reorder-list/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/04-reorder-list/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    143. Reorder List · 重排链表
+    143 重排链表
   
 
     
@@ -3857,14 +4017,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/05-remove-nth-node-from-end-of-list/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/05-remove-nth-node-from-end-of-list/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    19. Remove Nth Node From End of List · 删除链表的倒数第 N 个节点
+    19 删除链表的倒数第 N 个节点
   
 
     
@@ -3885,14 +4045,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/06-copy-list-with-random-pointer/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/06-copy-list-with-random-pointer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    138. Copy List with Random Pointer · 复制带随机指针的链表
+    138 复制带随机指针的链表
   
 
     
@@ -3913,14 +4073,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/07-add-two-numbers/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/07-add-two-numbers/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    2. Add Two Numbers · 两数相加
+    2 两数相加
   
 
     
@@ -3941,14 +4101,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/08-find-the-duplicate-number/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/08-find-the-duplicate-number/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    287. Find the Duplicate Number · 寻找重复数
+    287 寻找重复数
   
 
     
@@ -3969,14 +4129,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/09-lru-cache/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/09-lru-cache/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    146. LRU Cache · LRU 缓存
+    146 LRU 缓存
   
 
     
@@ -3997,14 +4157,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/10-merge-k-sorted-lists/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/10-merge-k-sorted-lists/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    23. Merge k Sorted Lists · 合并 K 个升序链表
+    23 合并 K 个升序链表
   
 
     
@@ -4025,14 +4185,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/11-reverse-nodes-in-k-group/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/11-reverse-nodes-in-k-group/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    25. Reverse Nodes in k-Group · K 个一组翻转链表
+    25 K 个一组翻转链表
   
 
     
@@ -4053,7 +4213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/06-linked-list/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/06-linked-list/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -4148,7 +4308,7 @@
   <span class="md-ellipsis">
     
   
-    Trees · 解题手册
+    07 树
   
 
     
@@ -4164,7 +4324,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Trees · 解题手册
+    07 树
   
 
           </label>
@@ -4177,7 +4337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/00-guide/" class="md-nav__link">
+      <a href="../../problems/07-trees/00-guide/" class="md-nav__link">
         
   
   
@@ -4205,14 +4365,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/01-invert-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/01-invert-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    226. Invert Binary Tree · 翻转二叉树
+    226 翻转二叉树
   
 
     
@@ -4233,14 +4393,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/02-maximum-depth-of-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/02-maximum-depth-of-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    104. Maximum Depth of Binary Tree · 二叉树的最大深度
+    104 二叉树的最大深度
   
 
     
@@ -4261,14 +4421,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/03-diameter-of-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/03-diameter-of-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    543. Diameter of Binary Tree · 二叉树的直径
+    543 二叉树的直径
   
 
     
@@ -4289,14 +4449,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/04-balanced-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/04-balanced-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    110. Balanced Binary Tree · 平衡二叉树
+    110 平衡二叉树
   
 
     
@@ -4317,14 +4477,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/05-same-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/05-same-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    100. Same Tree · 相同的树
+    100 相同的树
   
 
     
@@ -4345,14 +4505,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/06-subtree-of-another-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/06-subtree-of-another-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    572. Subtree of Another Tree · 另一棵树的子树
+    572 另一棵树的子树
   
 
     
@@ -4373,14 +4533,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/07-lowest-common-ancestor-of-a-binary-search-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/07-lowest-common-ancestor-of-a-binary-search-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    235. Lowest Common Ancestor of a BST · 二叉搜索树的最近公共祖先
+    235 二叉搜索树的最近公共祖先
   
 
     
@@ -4401,14 +4561,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/08-binary-tree-level-order-traversal/" class="md-nav__link">
+      <a href="../../problems/07-trees/08-binary-tree-level-order-traversal/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    102. Binary Tree Level Order Traversal · 二叉树的层序遍历
+    102 二叉树的层序遍历
   
 
     
@@ -4429,14 +4589,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/09-binary-tree-right-side-view/" class="md-nav__link">
+      <a href="../../problems/07-trees/09-binary-tree-right-side-view/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    199. Binary Tree Right Side View · 二叉树的右视图
+    199 二叉树的右视图
   
 
     
@@ -4457,14 +4617,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/10-count-good-nodes-in-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/10-count-good-nodes-in-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1448. Count Good Nodes in Binary Tree · 统计二叉树中好节点的数目
+    1448 统计二叉树中好节点的数目
   
 
     
@@ -4485,14 +4645,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/11-validate-binary-search-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/11-validate-binary-search-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    98. Validate Binary Search Tree · 验证二叉搜索树
+    98 验证二叉搜索树
   
 
     
@@ -4513,14 +4673,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/12-kth-smallest-element-in-a-bst/" class="md-nav__link">
+      <a href="../../problems/07-trees/12-kth-smallest-element-in-a-bst/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    230. Kth Smallest Element in a BST · 二叉搜索树中第 K 小的元素
+    230 二叉搜索树中第 K 小的元素
   
 
     
@@ -4541,14 +4701,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/13-construct-binary-tree-from-preorder-and-inorder-traversal/" class="md-nav__link">
+      <a href="../../problems/07-trees/13-construct-binary-tree-from-preorder-and-inorder-traversal/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    105. Construct Binary Tree from Preorder and Inorder Traversal · 从前序与中序遍历序列构造二叉树
+    105 从前序与中序遍历序列构造二叉树
   
 
     
@@ -4569,14 +4729,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/14-binary-tree-maximum-path-sum/" class="md-nav__link">
+      <a href="../../problems/07-trees/14-binary-tree-maximum-path-sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    124. Binary Tree Maximum Path Sum · 二叉树中的最大路径和
+    124 二叉树中的最大路径和
   
 
     
@@ -4597,14 +4757,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/15-serialize-and-deserialize-binary-tree/" class="md-nav__link">
+      <a href="../../problems/07-trees/15-serialize-and-deserialize-binary-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    297. Serialize and Deserialize Binary Tree · 二叉树的序列化与反序列化
+    297 二叉树的序列化与反序列化
   
 
     
@@ -4625,7 +4785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/07-trees/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/07-trees/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -4696,7 +4856,7 @@
   <span class="md-ellipsis">
     
   
-    Tries
+    08 Trie
   
 
     
@@ -4712,7 +4872,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tries
+    08 Trie
   
 
           </label>
@@ -4725,7 +4885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/08-tries/00-guide/" class="md-nav__link">
+      <a href="../../problems/08-tries/00-guide/" class="md-nav__link">
         
   
   
@@ -4753,14 +4913,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/08-tries/01-implement-trie-prefix-tree/" class="md-nav__link">
+      <a href="../../problems/08-tries/01-implement-trie-prefix-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    208. Implement Trie (Prefix Tree) · 实现 Trie
+    208 实现 Trie
   
 
     
@@ -4781,14 +4941,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/08-tries/02-design-add-and-search-words-data-structure/" class="md-nav__link">
+      <a href="../../problems/08-tries/02-design-add-and-search-words-data-structure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    211. Design Add and Search Words Data Structure · 添加与搜索单词
+    211 添加与搜索单词
   
 
     
@@ -4809,14 +4969,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/08-tries/03-word-search-ii/" class="md-nav__link">
+      <a href="../../problems/08-tries/03-word-search-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    212. Word Search II · 单词搜索 II
+    212 单词搜索 II
   
 
     
@@ -4837,7 +4997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/08-tries/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/08-tries/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -4916,7 +5076,7 @@
   <span class="md-ellipsis">
     
   
-    Heap / Priority Queue · 解题手册
+    09 堆与优先队列
   
 
     
@@ -4932,7 +5092,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Heap / Priority Queue · 解题手册
+    09 堆与优先队列
   
 
           </label>
@@ -4945,7 +5105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/00-guide/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/00-guide/" class="md-nav__link">
         
   
   
@@ -4973,14 +5133,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/01-kth-largest-element-in-a-stream/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/01-kth-largest-element-in-a-stream/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    703. Kth Largest Element in a Stream · 数据流中的第 K 大元素
+    703 数据流中的第 K 大元素
   
 
     
@@ -5001,14 +5161,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/02-last-stone-weight/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/02-last-stone-weight/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1046. Last Stone Weight · 最后一块石头的重量
+    1046 最后一块石头的重量
   
 
     
@@ -5029,14 +5189,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/03-k-closest-points-to-origin/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/03-k-closest-points-to-origin/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    973. K Closest Points to Origin · 最接近原点的 K 个点
+    973 最接近原点的 K 个点
   
 
     
@@ -5057,14 +5217,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    215. Kth Largest Element in an Array · 数组中的第 K 个最大元素
+    215 数组中的第 K 个最大元素
   
 
     
@@ -5085,14 +5245,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/05-task-scheduler/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/05-task-scheduler/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    621. Task Scheduler · 任务调度器
+    621 任务调度器
   
 
     
@@ -5113,14 +5273,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/06-design-twitter/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/06-design-twitter/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    355. Design Twitter · 设计推特
+    355 设计推特
   
 
     
@@ -5141,14 +5301,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/07-find-median-from-data-stream/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/07-find-median-from-data-stream/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    295. Find Median from Data Stream · 数据流的中位数
+    295 数据流的中位数
   
 
     
@@ -5169,7 +5329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/09-heap-priority-queue/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/09-heap-priority-queue/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -5252,7 +5412,7 @@
   <span class="md-ellipsis">
     
   
-    Backtracking · 解题手册
+    10 回溯
   
 
     
@@ -5268,7 +5428,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Backtracking · 解题手册
+    10 回溯
   
 
           </label>
@@ -5281,7 +5441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/00-guide/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/00-guide/" class="md-nav__link">
         
   
   
@@ -5309,14 +5469,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/01-subsets/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/01-subsets/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    78. Subsets · 子集
+    78 子集
   
 
     
@@ -5337,14 +5497,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/02-combination-sum/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/02-combination-sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    39. Combination Sum · 组合总和
+    39 组合总和
   
 
     
@@ -5365,14 +5525,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/03-permutations/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/03-permutations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    46. Permutations · 全排列
+    46 全排列
   
 
     
@@ -5393,14 +5553,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/04-subsets-ii/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/04-subsets-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    90. Subsets II · 子集 II
+    90 子集 II
   
 
     
@@ -5421,14 +5581,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/05-combination-sum-ii/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/05-combination-sum-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    40. Combination Sum II · 组合总和 II
+    40 组合总和 II
   
 
     
@@ -5449,14 +5609,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/06-word-search/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/06-word-search/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    79. Word Search · 单词搜索
+    79 单词搜索
   
 
     
@@ -5477,14 +5637,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/07-palindrome-partitioning/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/07-palindrome-partitioning/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    131. Palindrome Partitioning · 分割回文串
+    131 分割回文串
   
 
     
@@ -5505,14 +5665,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/08-letter-combinations-of-a-phone-number/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/08-letter-combinations-of-a-phone-number/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    17. Letter Combinations of a Phone Number · 电话号码的字母组合
+    17 电话号码的字母组合
   
 
     
@@ -5533,14 +5693,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/09-n-queens/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/09-n-queens/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    51. N-Queens · N 皇后
+    51 N 皇后
   
 
     
@@ -5561,7 +5721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/10-backtracking/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/10-backtracking/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -5652,7 +5812,7 @@
   <span class="md-ellipsis">
     
   
-    Graphs · 解题手册
+    11 图
   
 
     
@@ -5668,7 +5828,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Graphs · 解题手册
+    11 图
   
 
           </label>
@@ -5681,7 +5841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/00-guide/" class="md-nav__link">
+      <a href="../../problems/11-graphs/00-guide/" class="md-nav__link">
         
   
   
@@ -5709,14 +5869,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/01-number-of-islands/" class="md-nav__link">
+      <a href="../../problems/11-graphs/01-number-of-islands/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    200. Number of Islands · 岛屿数量
+    200 岛屿数量
   
 
     
@@ -5737,14 +5897,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/02-clone-graph/" class="md-nav__link">
+      <a href="../../problems/11-graphs/02-clone-graph/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    133. Clone Graph · 克隆图
+    133 克隆图
   
 
     
@@ -5765,14 +5925,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/03-max-area-of-island/" class="md-nav__link">
+      <a href="../../problems/11-graphs/03-max-area-of-island/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    695. Max Area of Island · 岛屿的最大面积
+    695 岛屿的最大面积
   
 
     
@@ -5793,14 +5953,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/04-pacific-atlantic-water-flow/" class="md-nav__link">
+      <a href="../../problems/11-graphs/04-pacific-atlantic-water-flow/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    417. Pacific Atlantic Water Flow · 太平洋大西洋水流问题
+    417 太平洋大西洋水流问题
   
 
     
@@ -5821,14 +5981,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/05-surrounded-regions/" class="md-nav__link">
+      <a href="../../problems/11-graphs/05-surrounded-regions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    130. Surrounded Regions · 被围绕的区域
+    130 被围绕的区域
   
 
     
@@ -5849,14 +6009,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/06-rotting-oranges/" class="md-nav__link">
+      <a href="../../problems/11-graphs/06-rotting-oranges/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    994. Rotting Oranges · 腐烂的橘子
+    994 腐烂的橘子
   
 
     
@@ -5877,14 +6037,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/07-walls-and-gates/" class="md-nav__link">
+      <a href="../../problems/11-graphs/07-walls-and-gates/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    286. Walls and Gates · 墙与门
+    286 墙与门
   
 
     
@@ -5905,14 +6065,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/08-course-schedule/" class="md-nav__link">
+      <a href="../../problems/11-graphs/08-course-schedule/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    207. Course Schedule · 课程表
+    207 课程表
   
 
     
@@ -5933,14 +6093,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/09-course-schedule-ii/" class="md-nav__link">
+      <a href="../../problems/11-graphs/09-course-schedule-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    210. Course Schedule II · 课程表 II
+    210 课程表 II
   
 
     
@@ -5961,14 +6121,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/10-redundant-connection/" class="md-nav__link">
+      <a href="../../problems/11-graphs/10-redundant-connection/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    684. Redundant Connection · 冗余连接
+    684 冗余连接
   
 
     
@@ -5989,14 +6149,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/11-number-of-connected-components-in-an-undirected-graph/" class="md-nav__link">
+      <a href="../../problems/11-graphs/11-number-of-connected-components-in-an-undirected-graph/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    323. Number of Connected Components in an Undirected Graph · 无向图中连通分量的数目
+    323 无向图中连通分量的数目
   
 
     
@@ -6017,14 +6177,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/12-graph-valid-tree/" class="md-nav__link">
+      <a href="../../problems/11-graphs/12-graph-valid-tree/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    261. Graph Valid Tree · 以图判树
+    261 以图判树
   
 
     
@@ -6045,14 +6205,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/13-word-ladder/" class="md-nav__link">
+      <a href="../../problems/11-graphs/13-word-ladder/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    127. Word Ladder · 单词接龙
+    127 单词接龙
   
 
     
@@ -6073,7 +6233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/11-graphs/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/11-graphs/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -6150,7 +6310,7 @@
   <span class="md-ellipsis">
     
   
-    Advanced Graphs · 解题手册
+    12 进阶图
   
 
     
@@ -6166,7 +6326,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Advanced Graphs · 解题手册
+    12 进阶图
   
 
           </label>
@@ -6179,7 +6339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/00-guide/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/00-guide/" class="md-nav__link">
         
   
   
@@ -6207,14 +6367,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/01-min-cost-to-connect-all-points/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/01-min-cost-to-connect-all-points/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1584. Min Cost to Connect All Points · 连接所有点的最小费用
+    1584 连接所有点的最小费用
   
 
     
@@ -6235,14 +6395,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/02-network-delay-time/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/02-network-delay-time/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    743. Network Delay Time · 网络延迟时间
+    743 网络延迟时间
   
 
     
@@ -6263,14 +6423,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/03-cheapest-flights-within-k-stops/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/03-cheapest-flights-within-k-stops/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    787. Cheapest Flights Within K Stops · K 站中转内最便宜的航班
+    787 K 站中转内最便宜的航班
   
 
     
@@ -6291,14 +6451,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/04-reconstruct-itinerary/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/04-reconstruct-itinerary/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    332. Reconstruct Itinerary · 重新安排行程
+    332 重新安排行程
   
 
     
@@ -6319,14 +6479,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/05-swim-in-rising-water/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/05-swim-in-rising-water/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    778. Swim in Rising Water · 水位上升的泳池中游泳
+    778 水位上升的泳池中游泳
   
 
     
@@ -6347,14 +6507,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/06-alien-dictionary/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/06-alien-dictionary/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    269. Alien Dictionary · 火星词典
+    269 火星词典
   
 
     
@@ -6375,7 +6535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/12-advanced-graphs/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/12-advanced-graphs/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -6464,7 +6624,7 @@
   <span class="md-ellipsis">
     
   
-    1-D Dynamic Programming · 解题手册
+    13 一维动态规划
   
 
     
@@ -6480,7 +6640,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    1-D Dynamic Programming · 解题手册
+    13 一维动态规划
   
 
           </label>
@@ -6493,7 +6653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/00-guide/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/00-guide/" class="md-nav__link">
         
   
   
@@ -6521,14 +6681,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/01-climbing-stairs/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/01-climbing-stairs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    70. Climbing Stairs · 爬楼梯
+    70 爬楼梯
   
 
     
@@ -6549,14 +6709,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/02-min-cost-climbing-stairs/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/02-min-cost-climbing-stairs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    746. Min Cost Climbing Stairs · 使用最小花费爬楼梯
+    746 使用最小花费爬楼梯
   
 
     
@@ -6577,14 +6737,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/03-house-robber/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/03-house-robber/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    198. House Robber · 打家劫舍
+    198 打家劫舍
   
 
     
@@ -6605,14 +6765,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/04-house-robber-ii/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/04-house-robber-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    213. House Robber II · 打家劫舍 II
+    213 打家劫舍 II
   
 
     
@@ -6633,14 +6793,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/05-longest-palindromic-substring/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/05-longest-palindromic-substring/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    5. Longest Palindromic Substring · 最长回文子串
+    5 最长回文子串
   
 
     
@@ -6661,14 +6821,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/06-palindromic-substrings/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/06-palindromic-substrings/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    647. Palindromic Substrings · 回文子串
+    647 回文子串
   
 
     
@@ -6689,14 +6849,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/07-decode-ways/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/07-decode-ways/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    91. Decode Ways · 解码方法
+    91 解码方法
   
 
     
@@ -6717,14 +6877,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/08-coin-change/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/08-coin-change/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    322. Coin Change · 零钱兑换
+    322 零钱兑换
   
 
     
@@ -6745,14 +6905,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/09-maximum-product-subarray/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/09-maximum-product-subarray/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    152. Maximum Product Subarray · 乘积最大子数组
+    152 乘积最大子数组
   
 
     
@@ -6773,14 +6933,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/10-word-break/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/10-word-break/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    139. Word Break · 单词拆分
+    139 单词拆分
   
 
     
@@ -6801,14 +6961,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/11-longest-increasing-subsequence/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/11-longest-increasing-subsequence/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    300. Longest Increasing Subsequence · 最长递增子序列
+    300 最长递增子序列
   
 
     
@@ -6829,14 +6989,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/12-partition-equal-subset-sum/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/12-partition-equal-subset-sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    416. Partition Equal Subset Sum · 分割等和子集
+    416 分割等和子集
   
 
     
@@ -6857,7 +7017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/13-1d-dp/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/13-1d-dp/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -6944,7 +7104,7 @@
   <span class="md-ellipsis">
     
   
-    2-D Dynamic Programming · 解题手册
+    14 二维动态规划
   
 
     
@@ -6960,7 +7120,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    2-D Dynamic Programming · 解题手册
+    14 二维动态规划
   
 
           </label>
@@ -6973,7 +7133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/00-guide/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/00-guide/" class="md-nav__link">
         
   
   
@@ -7001,14 +7161,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/01-unique-paths/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/01-unique-paths/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    62. Unique Paths · 不同路径
+    62 不同路径
   
 
     
@@ -7029,14 +7189,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/02-longest-common-subsequence/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/02-longest-common-subsequence/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1143. Longest Common Subsequence · 最长公共子序列
+    1143 最长公共子序列
   
 
     
@@ -7057,14 +7217,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/03-best-time-to-buy-and-sell-stock-with-cooldown/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/03-best-time-to-buy-and-sell-stock-with-cooldown/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    309. Best Time to Buy and Sell Stock with Cooldown · 最佳买卖股票时机含冷冻期
+    309 最佳买卖股票时机含冷冻期
   
 
     
@@ -7085,14 +7245,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/04-coin-change-ii/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/04-coin-change-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    518. Coin Change II · 零钱兑换 II
+    518 零钱兑换 II
   
 
     
@@ -7113,14 +7273,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/05-target-sum/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/05-target-sum/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    494. Target Sum · 目标和
+    494 目标和
   
 
     
@@ -7141,14 +7301,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/06-edit-distance/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/06-edit-distance/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    72. Edit Distance · 编辑距离
+    72 编辑距离
   
 
     
@@ -7169,14 +7329,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/07-interleaving-string/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/07-interleaving-string/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    97. Interleaving String · 交错字符串
+    97 交错字符串
   
 
     
@@ -7197,14 +7357,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/08-longest-increasing-path-in-a-matrix/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/08-longest-increasing-path-in-a-matrix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    329. Longest Increasing Path in a Matrix · 矩阵中的最长递增路径
+    329 矩阵中的最长递增路径
   
 
     
@@ -7225,14 +7385,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/09-distinct-subsequences/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/09-distinct-subsequences/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    115. Distinct Subsequences · 不同的子序列
+    115 不同的子序列
   
 
     
@@ -7253,14 +7413,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/10-burst-balloons/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/10-burst-balloons/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    312. Burst Balloons · 戳气球
+    312 戳气球
   
 
     
@@ -7281,14 +7441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/11-regular-expression-matching/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/11-regular-expression-matching/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    10. Regular Expression Matching · 正则表达式匹配
+    10 正则表达式匹配
   
 
     
@@ -7309,7 +7469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/14-2d-dp/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/14-2d-dp/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -7390,7 +7550,7 @@
   <span class="md-ellipsis">
     
   
-    Greedy · 解题手册
+    15 贪心
   
 
     
@@ -7406,7 +7566,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Greedy · 解题手册
+    15 贪心
   
 
           </label>
@@ -7419,7 +7579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/00-guide/" class="md-nav__link">
+      <a href="../../problems/15-greedy/00-guide/" class="md-nav__link">
         
   
   
@@ -7447,14 +7607,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/01-maximum-subarray/" class="md-nav__link">
+      <a href="../../problems/15-greedy/01-maximum-subarray/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    53. Maximum Subarray · 最大子数组和
+    53 最大子数组和
   
 
     
@@ -7475,14 +7635,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/02-jump-game/" class="md-nav__link">
+      <a href="../../problems/15-greedy/02-jump-game/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    55. Jump Game · 跳跃游戏
+    55 跳跃游戏
   
 
     
@@ -7503,14 +7663,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/03-jump-game-ii/" class="md-nav__link">
+      <a href="../../problems/15-greedy/03-jump-game-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    45. Jump Game II · 跳跃游戏 II
+    45 跳跃游戏 II
   
 
     
@@ -7531,14 +7691,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/04-gas-station/" class="md-nav__link">
+      <a href="../../problems/15-greedy/04-gas-station/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    134. Gas Station · 加油站
+    134 加油站
   
 
     
@@ -7559,14 +7719,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/05-hand-of-straights/" class="md-nav__link">
+      <a href="../../problems/15-greedy/05-hand-of-straights/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    846. Hand of Straights · 一手顺子
+    846 一手顺子
   
 
     
@@ -7587,14 +7747,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/06-merge-triplets-to-form-target-triplet/" class="md-nav__link">
+      <a href="../../problems/15-greedy/06-merge-triplets-to-form-target-triplet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1899. Merge Triplets to Form Target Triplet · 合并若干三元组以形成目标三元组
+    1899 合并若干三元组以形成目标三元组
   
 
     
@@ -7615,14 +7775,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/07-partition-labels/" class="md-nav__link">
+      <a href="../../problems/15-greedy/07-partition-labels/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    763. Partition Labels · 划分字母区间
+    763 划分字母区间
   
 
     
@@ -7643,14 +7803,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/08-valid-parenthesis-string/" class="md-nav__link">
+      <a href="../../problems/15-greedy/08-valid-parenthesis-string/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    678. Valid Parenthesis String · 有效的括号字符串
+    678 有效的括号字符串
   
 
     
@@ -7671,7 +7831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/15-greedy/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/15-greedy/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -7748,7 +7908,7 @@
   <span class="md-ellipsis">
     
   
-    Intervals · 解题手册
+    16 区间
   
 
     
@@ -7764,7 +7924,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Intervals · 解题手册
+    16 区间
   
 
           </label>
@@ -7777,7 +7937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/00-guide/" class="md-nav__link">
+      <a href="../../problems/16-intervals/00-guide/" class="md-nav__link">
         
   
   
@@ -7805,14 +7965,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/01-meeting-rooms/" class="md-nav__link">
+      <a href="../../problems/16-intervals/01-meeting-rooms/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    252. Meeting Rooms · 会议室
+    252 会议室
   
 
     
@@ -7833,14 +7993,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/02-insert-interval/" class="md-nav__link">
+      <a href="../../problems/16-intervals/02-insert-interval/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    57. Insert Interval · 插入区间
+    57 插入区间
   
 
     
@@ -7861,14 +8021,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/03-merge-intervals/" class="md-nav__link">
+      <a href="../../problems/16-intervals/03-merge-intervals/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    56. Merge Intervals · 合并区间
+    56 合并区间
   
 
     
@@ -7889,14 +8049,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/04-non-overlapping-intervals/" class="md-nav__link">
+      <a href="../../problems/16-intervals/04-non-overlapping-intervals/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    435. Non-overlapping Intervals · 无重叠区间
+    435 无重叠区间
   
 
     
@@ -7917,14 +8077,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/05-meeting-rooms-ii/" class="md-nav__link">
+      <a href="../../problems/16-intervals/05-meeting-rooms-ii/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    253. Meeting Rooms II · 会议室 II
+    253 会议室 II
   
 
     
@@ -7945,14 +8105,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/06-minimum-interval-to-include-each-query/" class="md-nav__link">
+      <a href="../../problems/16-intervals/06-minimum-interval-to-include-each-query/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1851. Minimum Interval to Include Each Query · 包含每个查询的最小区间
+    1851 包含每个查询的最小区间
   
 
     
@@ -7973,7 +8133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/16-intervals/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/16-intervals/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -8054,7 +8214,7 @@
   <span class="md-ellipsis">
     
   
-    Math & Geometry · 解题手册
+    17 数学与几何
   
 
     
@@ -8070,7 +8230,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Math & Geometry · 解题手册
+    17 数学与几何
   
 
           </label>
@@ -8083,7 +8243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/00-guide/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/00-guide/" class="md-nav__link">
         
   
   
@@ -8111,14 +8271,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/01-happy-number/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/01-happy-number/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    202. Happy Number · 快乐数
+    202 快乐数
   
 
     
@@ -8139,14 +8299,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/02-plus-one/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/02-plus-one/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    66. Plus One · 加一
+    66 加一
   
 
     
@@ -8167,14 +8327,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/03-rotate-image/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/03-rotate-image/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Rotate Image · 旋转图像
+    48 旋转图像
   
 
     
@@ -8195,14 +8355,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/04-spiral-matrix/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/04-spiral-matrix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    54. Spiral Matrix · 螺旋矩阵
+    54 螺旋矩阵
   
 
     
@@ -8223,14 +8383,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/05-set-matrix-zeroes/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/05-set-matrix-zeroes/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    73. Set Matrix Zeroes · 矩阵置零
+    73 矩阵置零
   
 
     
@@ -8251,14 +8411,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/06-powx-n/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/06-powx-n/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    50. Pow(x, n) · Pow(x, n)
+    50 Pow(x, n)
   
 
     
@@ -8279,14 +8439,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/07-multiply-strings/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/07-multiply-strings/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    43. Multiply Strings · 字符串相乘
+    43 字符串相乘
   
 
     
@@ -8307,14 +8467,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/08-detect-squares/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/08-detect-squares/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    2013. Detect Squares · 检测正方形
+    2013 检测正方形
   
 
     
@@ -8335,7 +8495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/17-math-and-geometry/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/17-math-and-geometry/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -8414,7 +8574,7 @@
   <span class="md-ellipsis">
     
   
-    Bit Manipulation · 解题手册
+    18 位运算
   
 
     
@@ -8430,7 +8590,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Bit Manipulation · 解题手册
+    18 位运算
   
 
           </label>
@@ -8443,7 +8603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/00-guide/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/00-guide/" class="md-nav__link">
         
   
   
@@ -8471,14 +8631,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/01-single-number/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/01-single-number/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    136. Single Number · 只出现一次的数字
+    136 只出现一次的数字
   
 
     
@@ -8499,14 +8659,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/02-number-of-1-bits/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/02-number-of-1-bits/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    191. Number of 1 Bits · 位 1 的个数
+    191 位 1 的个数
   
 
     
@@ -8527,14 +8687,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/03-counting-bits/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/03-counting-bits/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    338. Counting Bits · 比特位计数
+    338 比特位计数
   
 
     
@@ -8555,14 +8715,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/04-reverse-bits/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/04-reverse-bits/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    190. Reverse Bits · 颠倒二进制位
+    190 颠倒二进制位
   
 
     
@@ -8583,14 +8743,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/05-missing-number/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/05-missing-number/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    268. Missing Number · 丢失的数字
+    268 丢失的数字
   
 
     
@@ -8611,14 +8771,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/06-sum-of-two-integers/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/06-sum-of-two-integers/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    371. Sum of Two Integers · 两整数之和
+    371 两整数之和
   
 
     
@@ -8639,14 +8799,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/07-reverse-integer/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/07-reverse-integer/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    7. Reverse Integer · 整数反转
+    7 整数反转
   
 
     
@@ -8667,7 +8827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../algorithems/problems/18-bit-manipulation/99-extra-practice/" class="md-nav__link">
+      <a href="../../problems/18-bit-manipulation/99-extra-practice/" class="md-nav__link">
         
   
   
@@ -8747,7 +8907,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../vault/" class="md-nav__link ">
+            <a href="../../../vault/" class="md-nav__link ">
               
   
   
@@ -8791,7 +8951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/roadmap/" class="md-nav__link">
+      <a href="../../../vault/roadmap/" class="md-nav__link">
         
   
   
@@ -8868,7 +9028,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../vault/lectures/" class="md-nav__link ">
+            <a href="../../../vault/lectures/" class="md-nav__link ">
               
   
   
@@ -8912,14 +9072,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/01-interview-principles/" class="md-nav__link">
+      <a href="../../../vault/lectures/01-interview-principles/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    面试总原则、行为举证与金融常识
+    01 面试原则
   
 
     
@@ -8940,14 +9100,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/02-brainteasers/" class="md-nav__link">
+      <a href="../../../vault/lectures/02-brainteasers/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    脑筋急转弯：把故事转成结构
+    02 脑筋急转弯
   
 
     
@@ -8968,14 +9128,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/03-calculus-linear-algebra/" class="md-nav__link">
+      <a href="../../../vault/lectures/03-calculus-linear-algebra/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    微积分与线性代数：识别结构，再做运算
+    03 微积分与线性代数
   
 
     
@@ -8996,14 +9156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/04-1-probability-counting/" class="md-nav__link">
+      <a href="../../../vault/lectures/04-1-probability-counting/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    概率论一：计数、抽样与信息
+    04.1 计数与条件概率
   
 
     
@@ -9024,14 +9184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/04-2-probability-expectation/" class="md-nav__link">
+      <a href="../../../vault/lectures/04-2-probability-expectation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    概率论二：随机变量、期望与分布变换
+    04.2 随机变量与期望
   
 
     
@@ -9052,14 +9212,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/04-3-probability-distributions/" class="md-nav__link">
+      <a href="../../../vault/lectures/04-3-probability-distributions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    概率论三：分布、等待与决策
+    04.3 分布、等待与决策
   
 
     
@@ -9080,14 +9240,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/05-statistics/" class="md-nav__link">
+      <a href="../../../vault/lectures/05-statistics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    统计基础：从观测机制到估计与预测 {#statistics}
+    05 统计基础
   
 
     
@@ -9108,14 +9268,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/06-1-stochastic-processes/" class="md-nav__link">
+      <a href="../../../vault/lectures/06-1-stochastic-processes/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    随机过程一：状态、长期行为与停止 {#discrete-processes}
+    06.1 离散随机过程
   
 
     
@@ -9136,14 +9296,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/06-2-stochastic-calculus/" class="md-nav__link">
+      <a href="../../../vault/lectures/06-2-stochastic-calculus/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    随机过程二：连续时间与随机微积分 {#continuous-processes}
+    06.2 随机微积分
   
 
     
@@ -9164,14 +9324,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/07-derivatives/" class="md-nav__link">
+      <a href="../../../vault/lectures/07-derivatives/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    金融衍生品：从现金流到定价、对冲与风险
+    07 衍生品定价
   
 
     
@@ -9192,14 +9352,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/08-data-science/" class="md-nav__link">
+      <a href="../../../vault/lectures/08-data-science/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    数据科学与量化研究：从预测目标到可检验的决策
+    08 数据科学与量化研究
   
 
     
@@ -9220,14 +9380,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/09-market-making/" class="md-nav__link">
+      <a href="../../../vault/lectures/09-market-making/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    做市、交易与决策：从信息和现金流到策略
+    09 做市与交易
   
 
     
@@ -9248,14 +9408,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/lectures/10-algorithms-numerics/" class="md-nav__link">
+      <a href="../../../vault/lectures/10-algorithms-numerics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    算法与数值方法：状态、不变量、误差与接口
+    10 算法与数值方法
   
 
     
@@ -9331,7 +9491,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../vault/questions/" class="md-nav__link ">
+            <a href="../../../vault/questions/" class="md-nav__link ">
               
   
   
@@ -9375,14 +9535,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/01-brainteasers/" class="md-nav__link">
+      <a href="../../../vault/questions/01-brainteasers/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 脑筋急转弯
+    01 脑筋急转弯
   
 
     
@@ -9403,14 +9563,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/02-calculus-linear-algebra/" class="md-nav__link">
+      <a href="../../../vault/questions/02-calculus-linear-algebra/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 微积分与线性代数
+    02 微积分与线性代数
   
 
     
@@ -9431,14 +9591,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/03-probability-counting/" class="md-nav__link">
+      <a href="../../../vault/questions/03-probability-counting/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 概率论 一
+    03 概率论 一
   
 
     
@@ -9459,14 +9619,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/04-probability-expectation/" class="md-nav__link">
+      <a href="../../../vault/questions/04-probability-expectation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 概率论 二
+    04 概率论 二
   
 
     
@@ -9487,14 +9647,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/05-probability-distributions/" class="md-nav__link">
+      <a href="../../../vault/questions/05-probability-distributions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 概率论 三
+    05 概率论 三
   
 
     
@@ -9515,14 +9675,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/06-statistics-regression/" class="md-nav__link">
+      <a href="../../../vault/questions/06-statistics-regression/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 统计与回归
+    06 统计与回归
   
 
     
@@ -9543,14 +9703,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/07-stochastic-processes/" class="md-nav__link">
+      <a href="../../../vault/questions/07-stochastic-processes/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 随机过程与随机微积分
+    07 随机过程与随机微积分
   
 
     
@@ -9571,14 +9731,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/08-derivatives/" class="md-nav__link">
+      <a href="../../../vault/questions/08-derivatives/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 金融衍生品
+    08 金融衍生品
   
 
     
@@ -9599,14 +9759,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/09-algorithms-numerics/" class="md-nav__link">
+      <a href="../../../vault/questions/09-algorithms-numerics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 算法与数值方法
+    09 算法与数值方法
   
 
     
@@ -9627,14 +9787,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/10-cases-market-making/" class="md-nav__link">
+      <a href="../../../vault/questions/10-cases-market-making/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 案例与做市
+    10 案例与做市
   
 
     
@@ -9655,14 +9815,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/11-games-decisions/" class="md-nav__link">
+      <a href="../../../vault/questions/11-games-decisions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 博弈与决策
+    11 博弈与决策
   
 
     
@@ -9683,14 +9843,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../vault/questions/12-behavioral-finance/" class="md-nav__link">
+      <a href="../../../vault/questions/12-behavioral-finance/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    真题 · 行为面试与金融常识
+    12 行为面试与金融常识
   
 
     
@@ -9746,10 +9906,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-man-ahl" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Man AHL：把研究问题放进可交付的系统
+        从有序数组里找一对数
       
     </span>
   </a>
@@ -9757,10 +9917,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-aqr" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. AQR：跨资产结构比单市场漂亮曲线更重要
+        三种形态
       
     </span>
   </a>
@@ -9768,10 +9928,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-worldquant-brain-alpha-expression" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. WorldQuant BRAIN：把 alpha expression 当成实验配置
+        三个“移动依据”的例子
       
     </span>
   </a>
@@ -9779,10 +9939,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-quant-wiki" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Quant Wiki：回测的最低诚实标准
+        从"找一对"到"找一段"：滑动窗口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="从&#34;找一对&#34;到&#34;找一段&#34;：滑动窗口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        更新答案时，窗口必须符合当前题目的要求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3sum-two-sum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        选读：固定一个数，把 3Sum 化为 Two Sum
       
     </span>
   </a>
@@ -9790,10 +9978,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 研究流程中的概念
+        从讲义走到代码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习
       
     </span>
   </a>
@@ -9820,96 +10019,192 @@
   
 
 
-<h1 id="man-ahlaqrworldquant-brain-quant-wiki">Man AHL、AQR、WorldQuant BRAIN 与 Quant Wiki：选择性阅读笔记<a class="headerlink" href="#man-ahlaqrworldquant-brain-quant-wiki" title="Permanent link">&para;</a></h1>
-<p>下载/阅读日期：2026-10-04（Asia/Singapore）。这些笔记是对公开页面和公开论文的研究摘要，不是对任何公司的内部流程或业绩承诺。原文中的数值、样本区间和策略定义不能直接当作可投资结论。</p>
-<h2 id="1-man-ahl">1. Man AHL：把研究问题放进可交付的系统<a class="headerlink" href="#1-man-ahl" title="Permanent link">&para;</a></h2>
-<p>来源：Man AHL 官方页面 <a href="https://www.man.com/ahl">https://www.man.com/ahl</a>。</p>
-<p>页面明确把 Man AHL 描述为 researchers、developers、traders 的协作，并强调四个与初学者最相关的工作事实：</p>
-<ol>
-<li><strong>Diversification（分散化）</strong> 不只是在组合层面买很多资产，也包括研究更多市场、更多信号和不同的模型时间尺度。页面提到 momentum 方案覆盖 800+ markets；这说明“一个股票上的一个信号”只是研究起点。</li>
-<li><strong>Risk control is built into models（风险控制内置于模型）</strong>。风险团队、独立风险系统、仓位和组合限制与 alpha 同时设计，而不是回测结束后才加一个止损。</li>
-<li><strong>Research-to-production technology</strong> 横跨 market-data acquisition、initial research、model implementation 和 trade execution。研究代码、数据平台和生产代码的边界需要可追溯，而不是一份孤立 notebook。</li>
-<li><strong>Execution is a research object（执行也是研究对象）</strong>。页面提到 order netting、自动化 flow、多个 counterparties、备用交易中心和多条执行路线；这对应教学中的 turnover、TCA、容量和故障切换。</li>
-</ol>
-<p>因此本课程只吸收一个流程模板：<code>hypothesis → point-in-time data → signal diagnostics → portfolio/risk → cost-aware replay → paper/shadow → production gate → monitoring</code>。它不意味着学生要复刻 Man AHL 的基础设施。</p>
-<h2 id="2-aqr">2. AQR：跨资产结构比单市场漂亮曲线更重要<a class="headerlink" href="#2-aqr" title="Permanent link">&para;</a></h2>
-<p>来源：</p>
-<ul>
-<li>Hurst, Ooi, Pedersen, <em>A Century of Evidence on Trend-Following Investing</em>（公开论文 PDF，AQR 作者版本/镜像）；DOI <a href="https://doi.org/10.2139/ssrn.2993026">https://doi.org/10.2139/ssrn.2993026</a>。</li>
-<li>Asness, Moskowitz, Pedersen, <em>Value and Momentum Everywhere</em>（作者/NBER 公开 PDF）；DOI <a href="https://doi.org/10.2139/ssrn.2174501">https://doi.org/10.2139/ssrn.2174501</a>。</li>
-</ul>
-<p>只保留三条对研究流程有直接帮助的结论：</p>
-<ol>
-<li>趋势研究的核心不是“某个 lookback 最优”，而是定义<strong>时间序列动量（time-series momentum）</strong>、跨股票指数/债券/商品/货币分散、逐市场波动缩放、组合目标波动，并把交易成本和费用扣除。AQR 的长期研究把 <code>signal → volatility scaling → portfolio aggregation → net returns</code> 写成一条可复核链。</li>
-<li>Value 与 momentum 在多个资产类别上都可定义；同类信号跨市场往往相关，而 value 与 momentum 在很多组合中呈负相关。研究者应先画信号相关矩阵和危机状态表现，再决定是否把两个信号合并，而不是只比较单策略 Sharpe。</li>
-<li>长样本、跨资产和成本假设改变了证据强度。论文中的历史证据支持“值得研究的结构”，不保证今天仍有同样收益；应把样本外、容量、流动性状态和参数自由度写进结论。</li>
-</ol>
-<p>在讲义中，这些材料被转译为 <strong>breadth、signal correlation、alpha decay、risk budget、cost sensitivity</strong> 五个可计算诊断。</p>
-<h2 id="3-worldquant-brain-alpha-expression">3. WorldQuant BRAIN：把 alpha expression 当成实验配置<a class="headerlink" href="#3-worldquant-brain-alpha-expression" title="Permanent link">&para;</a></h2>
-<p>来源：WorldQuant BRAIN 公开平台 <a href="https://platform.worldquantbrain.com/">https://platform.worldquantbrain.com/</a>。平台是 JavaScript 应用；本地保存的入口和公开静态 bundle 只用于核对页面上可见的配置/指标名称：<code>sources/external/html/worldquant/worldquant_brain.html</code>、<code>sources/external/html/worldquant/index.js</code>。没有把需要登录的接口或内部阈值当作公开文档。</p>
-<p>公开界面能观察到的研究对象包括：</p>
-<ul>
-<li><strong>expression / data field / universe / region / delay</strong>：一个 alpha 不是只有公式，还绑定数据字段、资产宇宙、地区和信息延迟；这些字段必须进入实验配置。</li>
-<li><strong>decay、truncation、neutralization、pasteurization、NaN/unit handling</strong>：同一表达式在不同衰减、极值截断、行业/市场中性化和缺失值规则下是不同的策略。</li>
-<li><strong>coverage、turnover、Sharpe、fitness、drawdown、margin、correlation</strong>：平台同时展示预测/收益、可交易性和与已有 alpha 的相关性；单一 Sharpe 不能决定是否保留表达式。</li>
-</ul>
-<p>课程只借用一个面试级别的启发式：把每个表达式视为<strong>可审计实验</strong>，固定原始字段、变换、延迟、截断、中性化、成本和评价窗口，并把复杂度、换手、覆盖率和与已有信号的相关性一起记录。<code>fitness</code> 是平台特定的复合诊断，不能在课程中随意宣称一个通用公式。</p>
-<h2 id="4-quant-wiki">4. Quant Wiki：回测的最低诚实标准<a class="headerlink" href="#4-quant-wiki" title="Permanent link">&para;</a></h2>
-<p>来源：<a href="https://quant-wiki.com/start/">https://quant-wiki.com/start/</a>；官方网站在本次网络环境返回 403，因此通过其公开 GitHub 仓库 <code>LLMQuant/quant-wiki</code> 的原始 Markdown 核对内容：<a href="https://github.com/LLMQuant/quant-wiki">https://github.com/LLMQuant/quant-wiki</a>。</p>
-<p>只采用以下必要提醒：</p>
-<ul>
-<li>回测应保留样本外/前瞻纸面交易；真实可交易的历史宇宙需要考虑退市、清算和幸存者偏差。</li>
-<li>成本必须进入回测；大量尝试后选择最高 Sharpe 是数据挖掘，不能把它称为验证。</li>
-<li>多因子组合可以采用独立组合后合并、顺序筛选或交叉排序；选择哪一种会改变暴露、换手和解释，应作为 ablation 而不是隐含实现细节。</li>
-</ul>
-<h2 id="5">5. 研究流程中的概念<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h1 id="5">第 5 讲 · 双指针与滑动窗口<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<p><strong>阅读起点</strong>：第 2 讲：数组下标与前缀和；第 3 讲：字典与集合。</p>
+<p><strong>首读范围</strong>：先掌握有序 Two Sum 与不重复子串；接雨水和 3Sum 选读。</p>
+<p>第 3 讲用字典加速寻找配对值。如果数组已经有序，或问题要求处理连续的一段，还可以用两个整数下标标记扫描位置，这就是本讲的“双指针”。它们的移动利用了某种只朝一个方向变化的关系，例如有序数组向右数值不会变小。每次移动都遵守一条规则：<strong>每次移动指针，都必须能说清"被我丢掉的那个候选，为什么不可能出现在答案里"。</strong></p>
+<h2 id="_1">从有序数组里找一对数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><img alt="对撞指针每一步排除掉一个候选" src="../images/05-two-pointers.svg" /></p>
+<p>给定升序数组 <code>A</code> 和目标 <code>t</code>，找一对下标使两数之和为 <code>t</code>，要求只允许 O(1) 额外空间。</p>
+<p>暴力枚举所有对是 <code>Θ(n²)</code>，瓶颈很清楚：内层在"找一个特定的值"。通常我们会用哈希表把每次补数查询降到期望 O(1)——但哈希表要 <code>Θ(n)</code> 空间，<strong>违反了 O(1) 的约束</strong>。</p>
+<p>关键在于题目多给了一个条件：<strong>数组是有序的</strong>。这个条件必须用上。</p>
+<p>让两个指针从两端出发：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">two_sum_sorted</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">s</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="k">return</span> <span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">elif</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">t</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>          <span class="c1"># 和太小，需要更大的数</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>          <span class="c1"># 和太大，需要更小的数</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="p">[]</span>
+</span></code></pre></div>
+<p>本函数返回从0开始的下标；LeetCode Two Sum II的题面要求从1开始，提交时要对两个结果各加1。这只是接口差别，移动与证明不变。</p>
+<p>凭什么可以这样移动？假设 <code>A[l] + A[r] &lt; t</code>。因为数组升序，对任意 <code>j ≤ r</code> 都有 <code>A[j] ≤ A[r]</code>，所以 <code>A[l] + A[j] ≤ A[l] + A[r] &lt; t</code>。也就是说 <strong><code>A[l]</code> 和 <code>l..r</code> 里任何元素搭配都太小</strong>，而小于 <code>l</code> 的下标在之前的迭代里已经被同样的论证排除了。<strong>所以 <code>A[l]</code> 可以安全地永久丢弃。</strong></p>
+<p>对称地，<code>A[l] + A[r] &gt; t</code> 时 <code>A[r]</code> 可以丢弃。</p>
+<p>这就是双指针的证明模板：<strong>每一步都说明被丢掉的那个候选，它的所有可能搭配都不满足条件。</strong> 面试里把这句话说出来，比代码写得漂亮更有价值。</p>
+<h2 id="_2">三种形态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>对撞指针</strong>：两个指针从两端往中间走。前提是数组有序，或问题有"两端向中间收缩"的性质。</p>
+<p><strong>快慢指针</strong>：一个负责扫描、一个负责写入。例如给定数组 A 和待删除值 val，要把所有不等于 val 的元素移到数组前部，保持原顺序，并返回保留下来的元素个数。允许修改 A，但不额外创建同样长的数组。这里两个“指针”就是两个整数下标：fast 逐个读取，slow 标出下一次写入的位置。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">remove_element</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">slow</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">for</span> <span class="n">fast</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="n">A</span><span class="p">[</span><span class="n">slow</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="n">slow</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">return</span> <span class="n">slow</span>          <span class="c1"># slow 就是新长度</span>
+</span></code></pre></div>
+<p><strong><code>slow</code> 的语义是"下一个待写位置"</strong>——想清这一点，所有"原地删除/压缩"的题都是同一个模板。</p>
+<p>这个函数返回有效前缀的长度，不会真的缩短列表。例如 A=[3,2,2,3]、val=3，返回 2；只读取 A[:2]，它等于 [2,2]，后面残留值无需清理。fast 扫过的每个保留值恰好被写一次，时间 O(n)、额外空间 O(1)。</p>
+<p><strong>分离指针</strong>：两个序列各一个，用于归并，第 7 讲会给出完整实现。</p>
+<h2 id="_3">三个“移动依据”的例子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>先区分两个容易混淆的水量问题。<strong>盛最多水的容器（Container With Most Water）</strong>给定非负高度数组 height，下标是横坐标，每个值是一条竖线的高度；选择两条线与横轴围成容器，返回最大面积。端点 l、r 围成的面积是 <code>(r−l)×min(height[l],height[r])</code>。例如 <code>[1,2,1]</code> 选两端，面积为 2。</p>
+<p><strong>接雨水（Trapping Rain Water）</strong>则把每个值看成宽度为 1 的柱子，问雨后所有柱子之间总共能积多少水。例如 <code>[2,0,2]</code> 中间能积 2 单位水。这里要逐格求水量并相加，不能只选两根柱子算一个容器。</p>
+<p>两题都能从两端向内扫描，但每次移动的理由不同：</p>
 <table>
 <thead>
 <tr>
-<th>概念</th>
-<th>最小定义</th>
-<th>对应章节/项目</th>
+<th>题目</th>
+<th>移动规则</th>
+<th>为什么安全</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Alpha decay / half-life</td>
-<td>信号预测不同持有期的 IC 或 spread 如何衰减</td>
-<td>第 05 章、项目 A Milestone 2</td>
+<td>Two Sum II</td>
+<td>和偏小右移左指针</td>
+<td>左指针与任何更小的右端搭配只会更小</td>
 </tr>
 <tr>
-<td>Breadth / ICIR</td>
-<td>独立下注数量与 IC 稳定度；<code>IR≈IC√Breadth</code> 只是有条件的近似</td>
-<td>第 05 章、项目 A Milestone 4</td>
+<td>Container With Most Water</td>
+<td>移动<strong>较矮</strong>的一边</td>
+<td>移动高的一边时高度上限不变、宽度变小，面积只会更小</td>
 </tr>
 <tr>
-<td>Signal correlation / crowding</td>
-<td>信号之间的相关性、共同暴露和危机时相关性上升</td>
-<td>第 05–06 章、项目 A Milestone 4</td>
-</tr>
-<tr>
-<td>Turnover-aware portfolio</td>
-<td>优化目标中加入旧仓位距离或交易成本惩罚</td>
-<td>第 06 章、项目 A Milestone 3</td>
-</tr>
-<tr>
-<td>TCA / implementation shortfall</td>
-<td>把 spread、fee、impact、delay/opportunity cost 分开</td>
-<td>第 06 章、项目 A Milestone 3</td>
-</tr>
-<tr>
-<td>Expression audit</td>
-<td>记录 field、universe、delay、decay、neutralization、coverage 与复杂度</td>
-<td>第 05、07 章、项目 B Milestone 4</td>
-</tr>
-<tr>
-<td>Research-to-production gate</td>
-<td>paper/shadow、监控、回滚条件和版本/数据 lineage</td>
-<td>第 09 章、两个项目最终验收</td>
+<td>Trapping Rain Water</td>
+<td>比较已扫描的 left_max 与 right_max，处理较小一侧</td>
+<td>需要的是两侧最高墙，而不是把容器题的当前柱高直接照搬</td>
 </tr>
 </tbody>
 </table>
-<p>其余名词暂不扩展，避免把课程变成不具备练习入口的术语列表。</p>
+<p>第二个值得展开一句。设 <code>height[l] &lt; height[r]</code>。考虑所有以 <code>l</code> 为左端点的容器：宽度最大就是当前的 <code>r − l</code>（右端点不能再右移），高度上限是 <code>height[l]</code>（<code>min</code> 被较矮的左线锁死）。<strong>所以当前这个已经是以 <code>l</code> 为左端点时的最优解</strong>，<code>l</code> 可以永久丢弃。</p>
+<p>对接雨水，某一格的水位受两侧最高柱子中较矮的那个限制；该格水量是这个水位减去自身高度，最低为 0。先设 l、r 之间尚未结算，left_max、right_max 分别记录两端已经扫描到的最高柱子。若 left_max&lt;right_max，就向右读下一根左侧柱子：它比 left_max 低时，右侧已有更高柱子，水量可确定；它比 left_max 高时，这一格本身不能积水，只需更新左侧最高值。两种情况统一写成“移动 l、更新 left_max、累加 left_max−height[l]”。另一侧对称。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trap</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">height</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="mi">0</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">left_max</span><span class="p">,</span> <span class="n">right_max</span> <span class="o">=</span> <span class="n">height</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">height</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">water</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">if</span> <span class="n">left_max</span> <span class="o">&lt;</span> <span class="n">right_max</span><span class="p">:</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="n">left_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">left_max</span><span class="p">,</span> <span class="n">height</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            <span class="n">water</span> <span class="o">+=</span> <span class="n">left_max</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            <span class="n">right_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">right_max</span><span class="p">,</span> <span class="n">height</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">water</span> <span class="o">+=</span> <span class="n">right_max</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="k">return</span> <span class="n">water</span>
+</span></code></pre></div>
+<p>本实现的判断与结算是一套：比较已扫描最高墙，再移动并更新该侧最高墙。还存在比较当前柱高的正确实现，但它们配有相应不变量；不能抽换这一行而沿用未验证的说明。</p>
+<h2 id="_4">从"找一对"到"找一段"：滑动窗口<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><img alt="滑动窗口的扩大与收缩" src="../images/05-sliding-window.svg" /></p>
+<p>换个问题：给定字符串 <code>s</code>，求不含重复字符的最长<strong>连续子串</strong>的长度。</p>
+<p>暴力做法是枚举所有子串再检查，瓶颈在于"每次都重新检查整段"。改成维护一个窗口 <code>[l, r]</code>：<code>r</code> 一路向右扩张，一旦窗口里出现重复字符，就移动 <code>l</code> 直到重新合法。</p>
+<p>这里 <code>set()</code> 创建空集合，<code>window.add(c)</code> 加入字符，<code>window.remove(c)</code> 删除已存在的字符。不能把空集合写成 <code>{}</code>，那会创建没有 add 方法的字典。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">window</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">while</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">window</span><span class="p">:</span>            <span class="c1"># 不合法：收缩</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">window</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">window</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">return</span> <span class="n">best</span>
+</span></code></pre></div>
+<p>先区分“集合”和“待加入字符”：每轮开始，window 恰好装着无重复的 <code>s[l:r]</code>，<strong>还不含</strong>当前字符 c。若 c 已存在，就删除左端直到旧 c 被删掉，再加入新 c；此时 window 才对应闭区间 <code>[l,r]</code>。</p>
+<p>为什么不会漏掉最长答案？已被丢弃的某个左端 k，之前必因窗口出现重复而不合法；在右端继续扩张时，那两个重复字符仍在，k 不会重新合法。因此左端不必回退。修复结束后 l 是当前 r 下最靠左的合法起点，<code>r−l+1</code> 就是以 r 结尾的最长合法长度；遍历全部 r 并取最大，才覆盖全局最优。</p>
+<p>手推 <code>abba</code>：r=0 得 <code>[0,0]='a'</code>；r=1 得 <code>[0,1]='ab'</code>；r=2 要加入 b，先删 a 仍有旧 b，必须再删 b，最终 <code>[2,2]='b'</code>；r=3 得 <code>[2,3]='ba'</code>。这也解释 while 为什么不能改成只缩一次的 if。</p>
+<p>右端走n次、左端总共最多n次，集合操作按期望 O(1) 计，总时间期望 O(n)，空间 O(min(n,字符种类数))。图采用同一个 abba 例子。</p>
+<h3 id="_5">更新答案时，窗口必须符合当前题目的要求<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>先把第二个任务说完整：给定<strong>正数数组</strong> nums 和正目标 target，找和至少为 target 的最短非空连续子数组，返回长度；不存在则返回 0。连续意味着不能跳过中间元素。因为元素为正，右端加入元素只会增大和，左端移除元素只会减小和，这才允许逐步收缩。</p>
+<p>对于这里两种常见模板，目标和收缩条件都不同：最长无重复子串在“重复时”缩；正数数组的最短达标和在“仍达标时”缩。更新位置必须和该时刻的合法性配套，不能只挪一行就变成另一题。</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>更新答案的位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最长</td>
+<td><code>while</code> <strong>之后</strong>（此时窗口一定合法）</td>
+</tr>
+<tr>
+<td>最短</td>
+<td><code>while</code> <strong>内部</strong>（收缩过程本身在产生合法窗口）</td>
+</tr>
+</tbody>
+</table>
+<p>例如 target=7、nums=[2,3,4]，加入4后和为9，先记录长度3；删2后和为7，仍合法，记录长度2；再删3后和为4才停止。答案必须在丢弃一个合法窗口之前记录。</p>
+<p>反过来，<strong>如果数组含负数，不能直接套“和太大就缩小”的可变窗口模板</strong>——加一个负数会让和变小，"和太大就移左指针"的推理不再保证不漏解。固定长度窗口仍可以滚动求和；“和恰好为 k”的计数可以用前缀和加哈希。要按具体目标选择工具。</p>
+<h2 id="3sum-two-sum">选读：固定一个数，把 3Sum 化为 Two Sum<a class="headerlink" href="#3sum-two-sum" title="Permanent link">&para;</a></h2>
+<p>3Sum 的输入是整数数组，要求选三个不同下标，使数值之和为 0，返回所有不同的<strong>数值三元组</strong>，不返回下标。输入可以有重复值，例如 <code>[-1,-1,2]</code> 可选两个不同位置的 −1；但同样的 <code>[-1,-1,2]</code> 在答案里只能出现一次。思路是<strong>排序 + 固定第一个数 + 对剩下的做 Two Sum II</strong>。<code>nums.sort()</code> 会直接把传入列表改成升序；排序后相同值必然相邻，因此与前一个值比较就能跳过重复候选，不需要再搜索它是否已经处理过。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">three_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[],</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>                          <span class="c1"># 最小的数已是正数，剪枝</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="k">break</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>     <span class="c1"># 去重 1：跳过重复的固定值</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="k">continue</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="n">s</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]])</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>   <span class="c1"># 去重 2</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                    <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                    <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="k">elif</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>                <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="k">return</span> <span class="n">res</span>
+</span></code></pre></div>
+<p>本代码在固定值和命中后的左右值两处去重。其他实现也可只跳一侧的重复并另行保证唯一性；要说明自己的版本如何避免重复。 第一处防"相同的固定值重复开分支"，第二处防"命中后左右指针停在相同值上"。另外注意去重判断写的是 <code>nums[i] == nums[i-1]</code>——和<strong>前一个已选值</strong>比，不是和后一个比。</p>
+<p>走一遍 <code>[-1,0,1,2,-1,-4]</code>（排序后 <code>[-4,-1,-1,0,1,2]</code>）：<code>i = 0</code> 时固定 <code>-4</code>，需要凑 4，双指针够不到；<code>i = 1</code> 固定第一个 <code>-1</code>，能凑出 <code>(-1,0,1)</code> 和 <code>(-1,-1,2)</code>；<code>i = 2</code> 又是 <code>-1</code>，被去重跳过；<code>i = 3</code> 固定 <code>0</code>，只剩 <code>[1,2]</code> 和为 3，不行。答案两组。</p>
+<h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>一段连续事件中不允许 ID 重复时，可以用左右边界维护当前合法片段。</p>
+<p>先写有序 two_sum_sorted([1,3,5,8,11,15],13)，结果应为 [2,3]。再做 <a href="../../problems/03-sliding-window/02-longest-substring-without-repeating-characters/">Longest Substring Without Repeating Characters</a>，给窗口中的集合写一句定义：它在加入当前字符前包含 s[l:r]。</p>
+<p>手推 abba→2、bbbbb→1、空串→0；第二个 b 到来时应删两次。最后试正数最短达标窗口 [2,3,4]、目标 7，答案 2，比较两个问题更新答案的时刻。</p>
+<h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>1.</strong> 为什么无序的 Two Sum 用哈希，而有序的 Two Sum II 用双指针？</p>
+<p>无序时"谁是补数"没有任何可利用的顺序信息，直接扫描每次查找要 O(n)，用哈希把单次查询降到期望 O(1)，代价是 O(n) 空间。有序时"和偏小就右移左指针"这个推理成立，于是空间降到 O(1)。<strong>关键在于题目给的"有序"是一个信息，必须用掉。</strong></p>
+<p><strong>2.</strong> Container With Most Water 里如果两边一样高，移动哪一边？</p>
+<p>都行。两边等高时，无论丢弃哪一边，新指针处的柱子可能更高，但被保留的旧端点仍限制着“固定这一旧端点”的所有更窄容器，而宽度一定变小，所以当前容器已经是这一侧的最优解。</p>
+<p><strong>3.</strong> 为什么"和为 k 的子数组计数"在数组含负数时不能用滑动窗口？</p>
+<p>这里按和收缩的模板要求窗口和有相应的单调性。含负数时加入一个负数会让和变小，"和太大就移左指针"不再保证不漏解。改用前缀和 + 哈希：若 pre[r+1]−pre[l]=k，则查先前的 pre[l]=pre[r+1]−k。</p>
+<p><strong>4.</strong> 实现 <code>min_subarray_len(target, nums)</code>：找出和 ≥ target 的最短连续子数组长度，不存在返回 0。</p>
+<p>这是“最短窗口”模板，答案要在 <code>while</code> <strong>内部</strong>更新。<code>float('inf')</code> 表示正无穷，比任何有限长度都大，用来代表“尚未找到答案”；一旦遇到合法窗口，min 就会把它换成有限长度。若扫描结束仍为无穷，就返回 0。后面的 <code>float('-inf')</code> 对称地表示负无穷，比任何有限值都小。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_subarray_len</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">l</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">best</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">cur</span> <span class="o">+=</span> <span class="n">x</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="k">while</span> <span class="n">cur</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="n">best</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">cur</span> <span class="o">-=</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">best</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span> <span class="k">else</span> <span class="n">best</span>
+</span></code></pre></div>
+<p>题目保证元素是正数，这正是滑动窗口能用的前提。</p>
 
 
 
@@ -9941,6 +10236,44 @@
         <footer class="md-footer">
   
     
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../04-linked-lists/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 04 链表、栈与队列">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                04 链表、栈与队列
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06-binary-search/" class="md-footer__link md-footer__link--next" aria-label="下一页: 06 二分查找">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                06 二分查找
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -9967,14 +10300,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../../../../javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
-        <script src="../../../../../javascripts/vendor/mathjax/tex-chtml.js"></script>
+        <script src="../../../javascripts/vendor/mathjax/tex-chtml.js"></script>
       
     
   </body>
