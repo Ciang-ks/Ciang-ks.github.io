@@ -10073,7 +10073,7 @@
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="k">return</span> <span class="mi">0</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：代价是 <code>max</code> 而不是加法；<code>dist</code> 数组用来剪枝（避免重复处理）。</p>
-<p><strong>复杂度</strong>：时间 O(mn log(mn))，空间 O(mn)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(mn \log (mn))\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <hr />
 <h2 id="2-1334-find-the-city-with-the-smallest-number-of-neighbors">2. 1334 Find the City With the Smallest Number of Neighbors<a class="headerlink" href="#2-1334-find-the-city-with-the-smallest-number-of-neighbors" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/">LeetCode 1334</a> ｜ <strong>Medium</strong></p>
@@ -10081,13 +10081,13 @@
 <p><strong>为什么放这里</strong>：<strong>多源最短路</strong>问题。它和前面几题的区别是"要所有点之间的最短距离"，所以适合 <strong>Floyd-Warshall</strong>（或者对每个点跑一次 Dijkstra）。</p>
 <p><strong>思路提示</strong></p>
 <ul>
-<li><strong>Floyd-Warshall</strong>：<code>O(n³)</code>，代码只有 5 行，适合节点较少且三重循环能满足时限的场景；</li>
-<li><strong>对每个点跑 Dijkstra</strong>：<code>O(n · E log V)</code>，在稀疏图上更快。</li>
+<li><strong>Floyd-Warshall</strong>：<span class="arithmatex">\(\mathcal{O}(n^{3})\)</span>，代码只有 5 行，适合节点较少且三重循环能满足时限的场景；</li>
+<li><strong>对每个点跑 Dijkstra</strong>：<span class="arithmatex">\(\mathcal{O}(n \cdot E \log V)\)</span>，在稀疏图上更快。</li>
 </ul>
 <p><strong>什么时候用哪个？</strong> 记住这个判断：</p>
 <ul>
 <li><strong>只需要一个源点</strong> → Dijkstra</li>
-<li><strong>所有点对</strong> + <strong>n 较小且 O(n³) 可接受</strong> → Floyd-Warshall（代码最短）</li>
+<li><strong>所有点对</strong> + <strong>n 较小且 <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span> 可接受</strong> → Floyd-Warshall（代码最短）</li>
 <li><strong>所有点对</strong> + <strong>n 较大 + 稀疏图</strong> → 对每个点跑 Dijkstra</li>
 </ul>
 <p><strong>方法辨析</strong>：要比较每个城市在阈值内可达的邻居数，所以需要所有源点的最短距离。Floyd 的中转点 k 必须在最外层，让每轮只允许新增一个中转候选；计数通常排除城市自身，平局按题目选择较大编号。</p>
@@ -10118,8 +10118,8 @@
 </span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="k">return</span> <span class="n">best_city</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：Floyd-Warshall 的三重循环<strong>顺序不能变</strong>（k 必须在最外层）；<code>dist[u][v] = min(...)</code> 处理平行边；<code>cnt &lt;= best_count</code> 用 <code>&lt;=</code> 才能在并列时取到编号更大的城市。</p>
-<p><strong>复杂度</strong>：时间 O(n³)，空间 O(n²)。</p>
+<p><strong>易错点</strong>：Floyd-Warshall 的三重循环<strong>顺序不能变</strong>（k 必须在最外层）；<code>dist[u][v] = min(...)</code> 处理平行边；<code>cnt &lt;= best_count</code> 用 <span class="arithmatex">\(\le\)</span> 才能在并列时取到编号更大的城市。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</p>
 <hr />
 <h2 id="3-1514-path-with-maximum-probability">3. 1514 Path with Maximum Probability<a class="headerlink" href="#3-1514-path-with-maximum-probability" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/path-with-maximum-probability/">LeetCode 1514</a> ｜ <strong>Medium</strong></p>
@@ -10157,16 +10157,16 @@
 </span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
 </span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="k">return</span> <span class="mf">0.0</span>                            <span class="c1"># 不可达</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：用大顶堆（负数）；比较是 <code>&gt;</code> 而不是 <code>&lt;</code>；不可达返回 0。</p>
-<p><strong>复杂度</strong>：时间 O(E log V)，空间 O(V + E)。</p>
+<p><strong>易错点</strong>：用大顶堆（负数）；比较是 <span class="arithmatex">\(&gt;\)</span> 而不是 <span class="arithmatex">\(&lt;\)</span>；不可达返回 0。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(E \log V)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(V + E)\)</span>。</p>
 <hr />
 <h2 id="4-1976-number-of-ways-to-arrive-at-destination">4. 1976 Number of Ways to Arrive at Destination<a class="headerlink" href="#4-1976-number-of-ways-to-arrive-at-destination" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/">LeetCode 1976</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：求从 0 到 n-1 的<strong>最短路径的条数</strong>（对 10⁹+7 取模）。</p>
+<p><strong>题目</strong>：求从 0 到 n-1 的<strong>最短路径的条数</strong>（对 <span class="arithmatex">\(10^9+7\)</span> 取模）。</p>
 <p><strong>为什么放这里</strong>：<strong>Dijkstra + 计数</strong>的组合。它说明 Dijkstra 不只能求"距离"，还能顺带维护"到达方式的数量"。</p>
 <p><strong>思路提示</strong>：在 Dijkstra 的松弛过程中额外维护 <code>ways[]</code>：</p>
 <ul>
-<li>如果找到<strong>更短</strong>的路径 → 更新距离，<code>ways[v] = ways[u]</code>（继承来源的数量）；</li>
+<li>如果找到<strong>更短</strong>的路径 → 更新距离，<span class="arithmatex">\(\mathrm{ways}[v] = \mathrm{ways}[u]\)</span>（继承来源的数量）；</li>
 <li>如果找到<strong>等长</strong>的另一条路径 → <code>ways[v] += ways[u]</code>（累加）。</li>
 <li>等长更新只累加 ways，不必再次入堆；过期距离条目跳过。本题边权严格为正，最短路前驱距离都更小，因此 v 的最短距离弹出时，所有前驱的计数都已汇总。若允许零权环，路径计数语义和处理顺序需要重新定义。</li>
 </ul>
@@ -10206,7 +10206,7 @@
 </span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="k">return</span> <span class="n">ways</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：用 <code>done</code> 数组保证每个节点只被"结算"一次（否则等长路径会被重复累加）；取模。</p>
-<p><strong>复杂度</strong>：时间 O(E log V)，空间 O(V + E)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(E \log V)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(V + E)\)</span>。</p>
 <hr />
 <h2 id="5-1928-minimum-cost-to-reach-destination-in-time">5. 1928 Minimum Cost to Reach Destination in Time<a class="headerlink" href="#5-1928-minimum-cost-to-reach-destination-in-time" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/">LeetCode 1928</a> ｜ <strong>Hard</strong></p>
@@ -10246,7 +10246,7 @@
 </span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：堆的排序键是"花费"；状态必须包含 <code>(节点, 时间)</code> 两个维度；起点的时间为 0、费用为 <code>passingFees[0]</code>。</p>
-<p><strong>复杂度</strong>：时间 O(V · maxTime · log(...))，空间 O(V · maxTime)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(V \cdot maxTime \cdot \log (...))\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(V \cdot maxTime)\)</span>。</p>
 <hr />
 <h2 id="6-2097-valid-arrangement-of-pairs">6. 2097 Valid Arrangement of Pairs<a class="headerlink" href="#6-2097-valid-arrangement-of-pairs" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/valid-arrangement-of-pairs/">LeetCode 2097</a> ｜ <strong>Hard</strong></p>
@@ -10258,7 +10258,7 @@
 <li>如果没有这样的节点（欧拉回路），任选一个有出边的节点作为起点；</li>
 <li>用 Hierholzer 算法沿着边 DFS，记录<strong>边</strong>（而不是节点），最后反转。</li>
 </ol>
-<p><strong>方法辨析</strong>：本题起点不固定，需要优先选 out−in=1 的节点；全为零时可从任一有出边节点开始。输出的是边对，可由欧拉节点序列相邻两项重建，或后序直接记录边；重复边实例仍需各消费一次。</p>
+<p><strong>方法辨析</strong>：本题起点不固定，需要优先选 out-in=1 的节点；全为零时可从任一有出边节点开始。输出的是边对，可由欧拉节点序列相邻两项重建，或后序直接记录边；重复边实例仍需各消费一次。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10290,7 +10290,7 @@
 </span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：起点的选择（<code>out - in == 1</code>，没有则任选）；记录的是<strong>边</strong> <code>[node, nxt]</code> 而不是节点；用 <code>appendleft</code> 省掉显式反转。</p>
-<p><strong>复杂度</strong>：时间 O(E)，空间 O(E)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(E)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(E)\)</span>。</p>
 <blockquote>
 <p><strong>和 332 的对照</strong>：332 记录的是<strong>节点</strong>（因为要的是行程顺序），本题记录的是<strong>边</strong>（因为要的是数对的排列）。<strong>同一个 Hierholzer 算法，输出物不同而已。</strong></p>
 </blockquote>

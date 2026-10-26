@@ -10162,8 +10162,8 @@
 <p>这里的 break 依赖后续候选不小于当前候选，所以先排序；仅跳过当前过大候选的 continue 则不依赖此顺序。</p>
 <h3 id="_4">递归的两种结束条件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>remaining == 0</code> → 找到一个解，记录；</li>
-<li><code>remaining &lt; 0</code> → 这条路径无效（如果用了 break 剪枝，这个分支不会被走到）。</li>
+<li><span class="arithmatex">\(\mathrm{remaining} = 0\)</span> → 找到一个解，记录；</li>
+<li><span class="arithmatex">\(\mathrm{remaining} &lt; 0\)</span> → 这条路径无效（如果用了 break 剪枝，这个分支不会被走到）。</li>
 </ul>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>状态 (start,remaining) 表示：后续只可从 start 及其右边选择，还需凑 remaining。选候选 i 后继续传 i，允许同一个值再次使用；下标不下降使每个多重组合只有一种生成顺序。例如 [2,3] 凑 7 可走 2→2→3，不再走 3→2→2。</p>
@@ -10241,16 +10241,16 @@
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <h2 id="_10">复杂度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<p>时间：O(n^(target/min)) 量级（由解的数量与搜索树规模决定），最坏情况下是指数级的。
-空间：O(target / min(candidates))（递归深度）。</p>
+<p>时间：<span class="arithmatex">\(\mathcal{O}(n^{\mathrm{target}/\min })\)</span> 量级（由解的数量与搜索树规模决定），最坏情况下是指数级的。
+空间：<span class="arithmatex">\(\mathcal{O}(\mathrm{target} / \min (candidates))\)</span>（递归深度）。</p>
 <p><strong>面试时说明"复杂度由搜索树规模决定，与解的个数同阶"即可</strong>，不需要给出精确的紧界。</p>
 <h2 id="_11">易错点与面试追问<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>递归传 <code>i</code> 而不是 <code>i + 1</code></strong>，这是本题的核心（可重复选取）。</li>
+<li><strong>递归传 <code>i</code> 而不是 <span class="arithmatex">\(i + 1\)</span></strong>，这是本题的核心（可重复选取）。</li>
 <li><strong>剪枝前的 <code>break</code> 必须在排序之后</strong>，否则会漏解。</li>
 <li>记录结果时要 <code>path[:]</code> 切片。</li>
 <li>题目保证候选数是<strong>正整数</strong>，所以 <code>remaining</code> 会单调减小，不会死循环。<strong>如果允许 0 或负数，递归就不会终止了</strong>——这是一个很好的边界讨论点。</li>
-<li><strong>追问：如果每个数只能用一次？</strong> → <a href="../05-combination-sum-ii/">40 Combination Sum II</a>，传 <code>i + 1</code> 并加去重。</li>
+<li><strong>追问：如果每个数只能用一次？</strong> → <a href="../05-combination-sum-ii/">40 Combination Sum II</a>，传 <span class="arithmatex">\(i + 1\)</span> 并加去重。</li>
 <li><strong>追问：如果要求返回解的个数而不只是列表？</strong> → 那就是 <a href="https://leetcode.com/problems/combination-sum-iv/">377 Combination Sum IV</a>，改用 DP，因为"顺序不同算不同"时方案数会爆炸。</li>
 <li><strong>追问：为什么 39 用回溯而 377 用 DP？</strong> → 39 要枚举<strong>具体组合</strong>（输出规模本身很大），377 只要求<strong>计数</strong>（可以用 DP 压缩状态）。</li>
 </ul>

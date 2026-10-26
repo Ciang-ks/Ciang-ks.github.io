@@ -2996,10 +2996,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#matches-o1" class="md-nav__link">
+  <a href="#matches-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：差量数组 + matches（每次滑动 O(1) 更新）
+        解法二：差量数组 + matches（每次滑动 \(\mathcal{O}(1)\) 更新）
       
     </span>
   </a>
@@ -9998,10 +9998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#matches-o1" class="md-nav__link">
+  <a href="#matches-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：差量数组 + matches（每次滑动 O(1) 更新）
+        解法二：差量数组 + matches（每次滑动 \(\mathcal{O}(1)\) 更新）
       
     </span>
   </a>
@@ -10088,12 +10088,12 @@
 <p><strong>关键转换</strong>：<code>s2</code> 的某个长度 <code>len(s1)</code> 的子串是 <code>s1</code> 的排列，<strong>当且仅当两者的字符频率表完全相同</strong>。（这就是 <a href="../../01-arrays-and-hashing/02-valid-anagram/">242 Valid Anagram</a> 的判据。）</p>
 <p>所以问题变成：<strong>在 <code>s2</code> 上滑动一个固定长度为 <code>len(s1)</code> 的窗口，检查是否有窗口的频率表与 <code>s1</code> 相同。</strong></p>
 <p>两种实现思路：</p>
-<p><strong>写法 A（两个计数数组，每轮比较）</strong>：每次比较 26 个槽位，总代价 O(26n) = O(n)，常数可接受，代码最短。</p>
+<p><strong>写法 A（两个计数数组，每轮比较）</strong>：每次比较 26 个槽位，总代价 <span class="arithmatex">\(\mathcal{O}(26n)\)</span> = <span class="arithmatex">\(\mathcal{O}(n)\)</span>，常数可接受，代码最短。</p>
 <p><strong>写法 B（差量数组 + matches 计数）</strong>：维护一个 <code>diff</code> 数组表示"当前窗口与 <code>s1</code> 的频次差"，再用 <code>matches</code> 记录<strong>有多少个字符已经差值为 0</strong>。当 <code>matches == 26</code> 时窗口就是答案。</p>
-<p>写法 B 每次滑动只需要 O(1) 时间更新 <code>diff</code> 和 <code>matches</code>（加入右端字符、移出左端字符各影响一个字符）。它是本题的"标准优雅解"，也是 76 题技巧的前置版本。</p>
+<p>写法 B 每次滑动只需要 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 时间更新 <code>diff</code> 和 <code>matches</code>（加入右端字符、移出左端字符各影响一个字符）。它是本题的"标准优雅解"，也是 76 题技巧的前置版本。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>排列比较的是重数，不是原顺序；“子串”又要求连续。因此把异位词判据放进长度固定为 len(s1) 的窗口，恰好同时满足两个要求，完全不需要枚举 s1 的所有排列。</p>
-<p>以 s1="aab"、s2="caba" 为例，窗口 cab 中 a 少一个、c 多一个；右移到 aba 后频次一致即命中。长度固定很关键：只检查 window[c]≥need[c] 会把更长的覆盖串也接受，变成 Minimum Window Substring 的条件。差量计数的优化只需在某一槽跨过 0 时更新 matches，不能每次加入字符就把 matches 加 1。</p>
+<p>以 s1="aab"、s2="caba" 为例，窗口 cab 中 a 少一个、c 多一个；右移到 aba 后频次一致即命中。长度固定很关键：只检查 window[c]不小于need[c] 会把更长的覆盖串也接受，变成 Minimum Window Substring 的条件。差量计数的优化只需在某一槽跨过 0 时更新 matches，不能每次加入字符就把 matches 加 1。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：固定窗口 + 计数比较（最直观）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10115,7 +10115,7 @@
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                <span class="k">return</span> <span class="kc">True</span>
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></code></pre></div>
-<h3 id="matches-o1">解法二：差量数组 + matches（每次滑动 O(1) 更新）<a class="headerlink" href="#matches-o1" title="Permanent link">&para;</a></h3>
+<h3 id="matches-mathcalo1">解法二：差量数组 + matches（每次滑动 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 更新）<a class="headerlink" href="#matches-mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkInclusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
@@ -10184,27 +10184,27 @@
 <tbody>
 <tr>
 <td>计数数组比较</td>
-<td>O(26n) = O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(26n)\)</span> = <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>差量 + matches</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Counter 比较</td>
-<td>O(n)（哈希比较，常数较大）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（哈希比较，常数较大）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
-<li>长度检查 <code>n1 &gt; n2</code> 要放在最前面，否则后续窗口逻辑会出问题。</li>
+<li>长度检查 <span class="arithmatex">\(n1 &gt; n2\)</span> 要放在最前面，否则后续窗口逻辑会出问题。</li>
 <li>窗口大小必须是 <code>len(s1)</code>，不是 <code>len(s2)</code>。</li>
 <li>在固定窗口写法里，<strong>加入右端和移出左端都发生在同一轮</strong>，顺序是：先加入 <code>s2[r]</code>，再判断是否移除 <code>s2[r - n1]</code>。</li>
-<li><code>matches</code> 的更新用的是"差值为 0 的字符个数"，所以加入时看 <code>== 0</code>，移除时也看 <code>== 0</code>，很容易写反。建议对着小例子手推一遍。</li>
+<li><code>matches</code> 的更新用的是"差值为 0 的字符个数"，所以加入时看 <span class="arithmatex">\(= 0\)</span>，移除时也看 <span class="arithmatex">\(= 0\)</span>，很容易写反。建议对着小例子手推一遍。</li>
 <li>用 <code>Counter</code> 时务必删除零计数的键。</li>
 <li><strong>追问：如果要求返回所有匹配的起始下标？</strong> → <a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/">438 Find All Anagrams in a String</a>，把 <code>return True</code> 改成收集下标。</li>
 <li><strong>追问：如果 <code>s1</code> 里有重复字符？</strong> → 计数法天然支持，用集合则不行——这是"计数 vs 集合"的关键区别。</li>

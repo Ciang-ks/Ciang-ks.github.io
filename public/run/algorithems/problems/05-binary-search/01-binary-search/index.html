@@ -3559,10 +3559,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#olog-n" class="md-nav__link">
+  <a href="#mathcalolog-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：递归（教学用途，空间 O(log n)）
+        解法三：递归（教学用途，空间 \(\mathcal{O}(\log n)\)）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#olog-n" class="md-nav__link">
+  <a href="#mathcalolog-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：递归（教学用途，空间 O(log n)）
+        解法三：递归（教学用途，空间 \(\mathcal{O}(\log n)\)）
       
     </span>
   </a>
@@ -10080,24 +10080,24 @@
 <h1 id="704-binary-search">704. Binary Search · 二分查找<a class="headerlink" href="#704-binary-search" title="Permanent link">&para;</a></h1>
 <p><code>Easy</code> ｜ <code>Binary Search</code> ｜ <a href="https://leetcode.com/problems/binary-search/">LeetCode 704</a> ｜ <a href="https://neetcode.io/problems/binary-search">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定<strong>升序</strong>整数数组 <code>nums</code> 和目标值 <code>target</code>，返回其下标，不存在返回 -1。要求 O(log n)。</p>
+<p>给定<strong>升序</strong>整数数组 <code>nums</code> 和目标值 <code>target</code>，返回其下标，不存在返回 -1。要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [-1,0,3,5,9,12], target = 9     输出: 4
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: nums = [-1,0,3,5,9,12], target = 2     输出: -1
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>二分的核心不变式：<strong>答案如果存在，一定在当前区间 <code>[lo, hi]</code> 内</strong>。</p>
+<p>二分的核心不变式：<strong>答案如果存在，一定在当前区间 <span class="arithmatex">\([\mathrm{lo}, \mathrm{hi}]\)</span> 内</strong>。</p>
 <p>每次取中点 <code>mid</code>：</p>
 <ul>
-<li><code>nums[mid] == target</code> → 找到；</li>
-<li><code>nums[mid] &lt; target</code> → 由于数组有序，<code>mid</code> 及其左侧都不可能是答案，<code>lo = mid + 1</code>；</li>
-<li><code>nums[mid] &gt; target</code> → <code>mid</code> 及其右侧都不可能是答案，<code>hi = mid - 1</code>。</li>
+<li><span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] = \mathrm{target}\)</span> → 找到；</li>
+<li><span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{target}\)</span> → 由于数组有序，<code>mid</code> 及其左侧都不可能是答案，<span class="arithmatex">\(lo = \mathrm{mid} + 1\)</span>；</li>
+<li><span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &gt; \mathrm{target}\)</span> → <code>mid</code> 及其右侧都不可能是答案，<span class="arithmatex">\(hi = \mathrm{mid} - 1\)</span>。</li>
 </ul>
-<p>每轮区间长度减半，所以最多 <code>log₂n</code> 轮。</p>
+<p>每轮区间长度减半，所以最多 <span class="arithmatex">\(\log _{2}n\)</span> 轮。</p>
 <p><strong>这个模板是所有二分的基础</strong>，务必能闭着眼睛写对，包括：</p>
 <ul>
 <li><code>while lo &lt;= hi</code>（闭区间，两个指针相遇时还要比较一次）；</li>
 <li><code>mid = (lo + hi) // 2</code>；</li>
-<li>两个分支分别是 <code>mid + 1</code> 和 <code>mid - 1</code>（不能写成 <code>mid</code>，否则死循环）。</li>
+<li>两个分支分别是 <span class="arithmatex">\(\mathrm{mid} + 1\)</span> 和 <code>mid - 1</code>（不能写成 <code>mid</code>，否则死循环）。</li>
 </ul>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>这是“在有序位置中找一个命中值”，区间保存未排除的实际元素，所以 lo=hi 时仍要读最后一个候选。mid 已确认不是答案后，两边更新必须越过它；这与 lower_bound 在条件为真时仍保留 mid 的语义不同。</p>
@@ -10132,7 +10132,7 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
 <p>两种写法都对，<strong>关键是不要在同一个函数里混用两套约定</strong>。</p>
-<h3 id="olog-n">解法三：递归（教学用途，空间 O(log n)）<a class="headerlink" href="#olog-n" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalolog-n">解法三：递归（教学用途，空间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>）<a class="headerlink" href="#mathcalolog-n" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">lo</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10159,26 +10159,26 @@
 <tbody>
 <tr>
 <td>迭代二分</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归二分</td>
-<td>O(log n)</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>while lo &lt;= hi</code> 写成 <code>&lt;</code> 会漏掉"区间只剩一个元素"的情况（这是最经典的 off-by-one）。</li>
-<li>更新时写 <code>lo = mid</code> 会死循环，必须是 <code>mid + 1</code>。</li>
+<li><code>while lo &lt;= hi</code> 写成 <span class="arithmatex">\(&lt;\)</span> 会漏掉"区间只剩一个元素"的情况（这是最经典的 off-by-one）。</li>
+<li>更新时写 <span class="arithmatex">\(lo = \mathrm{mid}\)</span> 会死循环，必须是 <span class="arithmatex">\(\mathrm{mid} + 1\)</span>。</li>
 <li>空数组时 <code>hi = -1</code>，循环不执行，直接返回 -1，天然正确。</li>
 <li>数组里有重复元素时，本题返回<strong>任意一个</strong>匹配的下标即可；若要返回第一个/最后一个，需要改成边界模板（见下方追问）。</li>
 <li><strong>追问：如果数组是降序的？</strong> → 把两个分支的判断反过来。</li>
 <li><strong>追问：如何找第一个等于 target 的位置？</strong> → <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34 Find First and Last Position</a>，用"找左边界"模板。</li>
-<li><strong>追问：C++/Java 里为什么要写 <code>lo + (hi - lo) / 2</code>？</strong> → 避免 <code>lo + hi</code> 溢出。Python 无此问题，但面试提到这一点能体现细节意识。</li>
-<li><strong>追问：如果数据量大到放不进内存？</strong> → 在<strong>有序的外部存储</strong>上二分（比如磁盘文件、有序日志），每次寻道读一块，寻道次数是 O(log n)。</li>
+<li><strong>追问：C++/Java 里为什么要写 <span class="arithmatex">\(lo + (hi - lo) / 2\)</span>？</strong> → 避免 <span class="arithmatex">\(lo + hi\)</span> 溢出。Python 无此问题，但面试提到这一点能体现细节意识。</li>
+<li><strong>追问：如果数据量大到放不进内存？</strong> → 在<strong>有序的外部存储</strong>上二分（比如磁盘文件、有序日志），每次寻道读一块，寻道次数是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

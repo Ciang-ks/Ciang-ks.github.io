@@ -10091,9 +10091,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>"传 <code>i</code> 还是 <code>i + 1</code>" 决定元素能不能复用；"有没有那行 continue" 决定结果会不会重复。</strong> 手写时应分别核对这两个条件，并用重复值的例子检查是否漏解。</p>
+<p><strong>"传 <code>i</code> 还是 <span class="arithmatex">\(i + 1\)</span>" 决定元素能不能复用；"有没有那行 continue" 决定结果会不会重复。</strong> 手写时应分别核对这两个条件，并用重复值的例子检查是否漏解。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>给两个相同值标上下标能看清限制：[1₀,1₁,2] 凑 2 时，[1₀,1₁] 与 [2] 都合法，反复选 1₀ 不合法；单选 1₀ 和单选 1₁ 再接同样后缀，会形成重复分支。于是递归进 i+1 管“位置只用一次”，同层跳过等值管“答案按值去重”。</p>
+<p>给两个相同值标上下标能看清限制：[<span class="arithmatex">\(1_a\)</span>,<span class="arithmatex">\(1_b\)</span>,2] 凑 2 时，[<span class="arithmatex">\(1_a\)</span>,<span class="arithmatex">\(1_b\)</span>] 与 [2] 都合法，反复选 <span class="arithmatex">\(1_a\)</span> 不合法；单选 <span class="arithmatex">\(1_a\)</span> 和单选 <span class="arithmatex">\(1_b\)</span> 再接同样后缀，会形成重复分支。于是递归进 i+1 管“位置只用一次”，同层跳过等值管“答案按值去重”。</p>
 <p>只有 remaining==0 才记录结果，不能照搬子集题“每个节点都收集”。排序和正数条件还支持当候选过大时结束本层循环。尝试手写前，可先列清状态三项：已选 path、剩余目标、下一个可用起点，再将它们分别对应到修改、递归参数和撤销动作。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：排序 + 同层去重 + 剪枝（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10143,17 +10143,17 @@
 </span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p>用 <code>prev</code> 变量记录"本层上次用过的值"，效果和 <code>nums[i] == nums[i-1]</code> 完全一致，但<strong>更容易理解"去重是发生在同一层"这个事实</strong>。</p>
+<p>用 <code>prev</code> 变量记录"本层上次用过的值"，效果和 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span> 完全一致，但<strong>更容易理解"去重是发生在同一层"这个事实</strong>。</p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>时间：O(2ⁿ) 量级（与搜索树规模同阶）。
-空间：O(n)（递归栈 + path）。</p>
+<p>时间：<span class="arithmatex">\(\mathcal{O}(2^{n})\)</span> 量级（与搜索树规模同阶）。
+空间：<span class="arithmatex">\(\mathcal{O}(n)\)</span>（递归栈 + path）。</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>递归必须传 <code>i + 1</code></strong>。误传 <code>i</code> 就变成"可以重复使用元素"，会跑出 <code>[2,2,2,2]</code> 这类错误组合。</li>
-<li><strong>去重条件必须是 <code>i &gt; start</code></strong>（同层去重），不能用 <code>i &gt; 0</code>。</li>
+<li><strong>递归必须传 <span class="arithmatex">\(i + 1\)</span></strong>。误传 <code>i</code> 就变成"可以重复使用元素"，会跑出 <code>[2,2,2,2]</code> 这类错误组合。</li>
+<li><strong>去重条件必须是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span></strong>（同层去重），不能用 <span class="arithmatex">\(i &gt; 0\)</span>。</li>
 <li><strong><code>break</code> 必须在排序之后</strong>，而且应该放在去重判断之前——因为 <code>candidates[i] &gt; remaining</code> 一旦成立，后面的都不行。</li>
 <li>题目中 <code>candidates</code> 可能含重复，所以<strong>不能假设元素互不相同</strong>。</li>
-<li><strong>追问：39 和 40 的代码差几行？</strong> → 差两处：递归传参 <code>i</code> vs <code>i+1</code>，以及有没有那行去重 <code>continue</code>。<strong>能一眼说出这两点，说明你真正理解了回溯的参数设计。</strong></li>
+<li><strong>追问：39 和 40 的代码差几行？</strong> → 差两处：递归传参 <code>i</code> vs <span class="arithmatex">\(i+1\)</span>，以及有没有那行去重 <code>continue</code>。<strong>能一眼说出这两点，说明你真正理解了回溯的参数设计。</strong></li>
 <li><strong>追问：如果要求返回组合的个数？</strong> → 计数问题一般用 DP（背包），详见 <a href="../../13-1d-dp/12-partition-equal-subset-sum/">416 Partition Equal Subset Sum</a>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

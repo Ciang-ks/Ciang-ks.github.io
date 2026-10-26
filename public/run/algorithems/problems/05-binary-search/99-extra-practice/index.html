@@ -10072,9 +10072,9 @@
 <h2 id="1-35-search-insert-position">1. 35 Search Insert Position<a class="headerlink" href="#1-35-search-insert-position" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/search-insert-position/">LeetCode 35</a> ｜ <strong>Easy</strong></p>
 <p><strong>题目</strong>：在升序数组中找 <code>target</code>，存在则返回下标；不存在则返回它应该被插入的位置。</p>
-<p><strong>为什么放这里</strong>：这就是"找左边界"的最简形式——<strong>插入位置 = 第一个 ≥ target 的位置</strong>。</p>
+<p><strong>为什么放这里</strong>：这就是"找左边界"的最简形式——<strong>插入位置 = 第一个 不小于 target 的位置</strong>。</p>
 <p><strong>思路提示</strong>：用左边界模板，<code>hi</code> 取 <code>n</code>（因为答案可能是"插到末尾"）。</p>
-<p><strong>方法辨析</strong>：插入位置是首个≥target 的边界，可能等于 n，表示所有元素都较小。即使命中一个相等值，若接口允许重复仍应继续找左边界；这与只判断是否存在的二分有不同停止条件。</p>
+<p><strong>方法辨析</strong>：插入位置是首个不小于target 的边界，可能等于 n，表示所有元素都较小。即使命中一个相等值，若接口允许重复仍应继续找左边界；这与只判断是否存在的二分有不同停止条件。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">searchInsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -10087,14 +10087,14 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>hi</code> 必须是 <code>len(nums)</code> 而不是 <code>len(nums) - 1</code>，否则无法返回"插到末尾"的答案。</p>
-<p><strong>复杂度</strong>：时间 O(log n)，空间 O(1)。等价于 <code>bisect_left(nums, target)</code>。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。等价于 <code>bisect_left(nums, target)</code>。</p>
 <hr />
 <h2 id="2-69-sqrtx">2. 69 Sqrt(x)<a class="headerlink" href="#2-69-sqrtx" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/sqrtx/">LeetCode 69</a> ｜ <strong>Easy</strong></p>
 <p><strong>题目</strong>：计算非负整数 <code>x</code> 的平方根的整数部分（向下取整），不能用 <code>pow</code> 或 <code>sqrt</code>。</p>
-<p><strong>为什么放这里</strong>：二分答案的入门题——答案空间是 <code>[0, x]</code>，可行性条件 <code>mid * mid &lt;= x</code> 单调。</p>
-<p><strong>思路提示</strong>：要找"最大的 <code>r</code> 使 <code>r² &lt;= x</code>"，用右边界模板（<code>lo = mid</code> 配 <code>(lo + hi + 1) // 2</code>）。</p>
-<p><strong>方法辨析</strong>：整数平方根是最后一个满足 r²≤x 的整数，判定从真到假。保留 mid 作为左端时要向上取中点，保证两项区间也能缩短；固定宽度语言还需防 mid² 溢出，可在 mid&gt;0 时改比较 mid≤x//mid。</p>
+<p><strong>为什么放这里</strong>：二分答案的入门题——答案空间是 <code>[0, x]</code>，可行性条件 <span class="arithmatex">\(\mathrm{mid} * \mathrm{mid} \le x\)</span> 单调。</p>
+<p><strong>思路提示</strong>：要找"最大的 <code>r</code> 使 <span class="arithmatex">\(r^{2} \le x\)</span>"，用右边界模板（<span class="arithmatex">\(lo = \mathrm{mid}\)</span> 配 <code>(lo + hi + 1) // 2</code>）。</p>
+<p><strong>方法辨析</strong>：整数平方根是最后一个满足 <span class="arithmatex">\(r^{2}\)</span>不大于x 的整数，判定从真到假。保留 mid 作为左端时要向上取中点，保证两项区间也能缩短；固定宽度语言还需防 <span class="arithmatex">\(\mathrm{mid}^{2}\)</span> 溢出，可在 mid&gt;0 时改比较 mid不大于x//mid。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">mySqrt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span>
@@ -10106,18 +10106,18 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：必须向上取整，否则 <code>lo = mid</code> 会死循环；<code>x = 0</code> 和 <code>x = 1</code> 要能正确返回。</p>
-<p><strong>复杂度</strong>：时间 O(log x)，空间 O(1)。</p>
+<p><strong>易错点</strong>：必须向上取整，否则 <span class="arithmatex">\(lo = \mathrm{mid}\)</span> 会死循环；<code>x = 0</code> 和 <code>x = 1</code> 要能正确返回。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(\log x)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/valid-perfect-square/">367 Valid Perfect Square</a> 判断是否是完全平方数；<a href="../../17-math-and-geometry/06-powx-n/">50 Pow(x, n)</a> 用快速幂而非二分。</p>
 </blockquote>
 <hr />
 <h2 id="3-34-find-first-and-last-position">3. 34 Find First and Last Position<a class="headerlink" href="#3-34-find-first-and-last-position" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">LeetCode 34</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：在升序数组中找出 <code>target</code> 第一次和最后一次出现的下标，不存在返回 <code>[-1, -1]</code>。要求 O(log n)。</p>
+<p><strong>题目</strong>：在升序数组中找出 <code>target</code> 第一次和最后一次出现的下标，不存在返回 <code>[-1, -1]</code>。要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <p><strong>为什么放这里</strong>：左右边界模板的正面教材。<strong>本题决定了你必须真正掌握两套边界模板</strong>，因为直接二分只能找到"某一个"位置。</p>
-<p><strong>思路提示</strong>：分别求"第一个 ≥ target"和"第一个 &gt; target"，后者减一就是最后一个 ≤ target。</p>
-<p><strong>方法辨析</strong>：先找到第一个≥target，再找到第一个&gt;target，两个边界夹住所有等值项。左边界若到达 n 或对应值不等于 target，说明完全不存在，不能直接将两个边界减一后当成有效范围。</p>
+<p><strong>思路提示</strong>：分别求"第一个 不小于 target"和"第一个 &gt; target"，后者减一就是最后一个 不大于 target。</p>
+<p><strong>方法辨析</strong>：先找到第一个不小于target，再找到第一个&gt;target，两个边界夹住所有等值项。左边界若到达 n 或对应值不等于 target，说明完全不存在，不能直接将两个边界减一后当成有效范围。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">bisect</span><span class="w"> </span><span class="kn">import</span> <span class="n">bisect_left</span><span class="p">,</span> <span class="n">bisect_right</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10144,17 +10144,17 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">lower</span><span class="p">(</span><span class="n">target</span><span class="p">),</span> <span class="n">lower</span><span class="p">(</span><span class="n">target</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span> <span class="k">else</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：手写版本里 <code>lower(target + 1)</code> 依赖整数特性（更通用的写法是分别实现 <code>lower_bound</code> 和 <code>upper_bound</code>）；结果需要验证 <code>nums[l] == target</code>。</p>
-<p><strong>复杂度</strong>：时间 O(log n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：手写版本里 <code>lower(target + 1)</code> 依赖整数特性（更通用的写法是分别实现 <code>lower_bound</code> 和 <code>upper_bound</code>）；结果需要验证 <span class="arithmatex">\(\mathrm{nums}[l] = \mathrm{target}\)</span>。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="4-162-find-peak-element">4. 162 Find Peak Element<a class="headerlink" href="#4-162-find-peak-element" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/find-peak-element/">LeetCode 162</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：数组相邻元素互不相等，找出任意一个"峰值"（大于左右邻居）的下标。可以认为数组两端外是 <code>-inf</code>。要求 O(log n)。</p>
+<p><strong>题目</strong>：数组相邻元素互不相等，找出任意一个"峰值"（大于左右邻居）的下标。可以认为数组两端外是 <code>-inf</code>。要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <p><strong>为什么放这里</strong>：<strong>数组无序也可以二分</strong>的最好例子——只要目标具有"局部单调性"。</p>
-<p><strong>思路提示</strong>：比较 <code>nums[mid]</code> 与 <code>nums[mid + 1]</code>：</p>
+<p><strong>思路提示</strong>：比较 <code>nums[mid]</code> 与 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid} + 1]\)</span>：</p>
 <ul>
-<li>若 <code>nums[mid] &lt; nums[mid + 1]</code>，说明处于上升段，峰值一定在右边 → <code>lo = mid + 1</code>；</li>
-<li>否则处于下降段，峰值在左边或就是 mid → <code>hi = mid</code>。</li>
+<li>若 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{nums}[\mathrm{mid} + 1]\)</span>，说明处于上升段，峰值一定在右边 → <span class="arithmatex">\(lo = \mathrm{mid} + 1\)</span>；</li>
+<li>否则处于下降段，峰值在左边或就是 mid → <span class="arithmatex">\(hi = \mathrm{mid}\)</span>。</li>
 </ul>
 <p><strong>方法辨析</strong>：峰值存在性不要求数组整体单调：中间若向右上升，向右走最终要么下降形成峰，要么在右端凭虚拟负无穷形成峰，所以右半至少有一个答案。二分保留的是“含某个峰”的区间，不是在一个全局真假单调数组中找边界。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10168,14 +10168,14 @@
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>            <span class="c1"># 下坡，往左走</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：访问 <code>nums[mid + 1]</code> 时必须保证 <code>mid &lt; hi</code>，而 <code>lo &lt; hi</code> 且 <code>mid = (lo+hi)//2 &lt; hi</code> 恰好保证这一点。</p>
-<p><strong>复杂度</strong>：时间 O(log n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：访问 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid} + 1]\)</span> 时必须保证 <span class="arithmatex">\(\mathrm{mid} &lt; hi\)</span>，而 <span class="arithmatex">\(lo &lt; hi\)</span> 且 <code>mid = (lo+hi)//2 &lt; hi</code> 恰好保证这一点。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="5-852-peak-index-in-a-mountain-array">5. 852 Peak Index in a Mountain Array<a class="headerlink" href="#5-852-peak-index-in-a-mountain-array" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/peak-index-in-a-mountain-array/">LeetCode 852</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：给定"山峰数组"（先严格递增后严格递减），返回峰顶下标。要求 O(log n)。</p>
+<p><strong>题目</strong>：给定"山峰数组"（先严格递增后严格递减），返回峰顶下标。要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <p><strong>为什么放这里</strong>：与第 4 题同源，但条件更强（保证是山峰），所以判据也更简单。</p>
-<p><strong>思路提示</strong>：比较 <code>nums[mid]</code> 与 <code>nums[mid + 1]</code>，上升则往右、下降则往左。和 162 的代码几乎一致。</p>
+<p><strong>思路提示</strong>：比较 <code>nums[mid]</code> 与 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid} + 1]\)</span>，上升则往右、下降则往左。和 162 的代码几乎一致。</p>
 <p><strong>方法辨析</strong>：山脉约束保证严格上升后严格下降且峰在内部，斜率正负只改变一次；因此既能用峰存在性论证，也能用单调分界论证。普通 Find Peak 不保证唯一峰，不能把山脉条件擅自加给它。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">peakIndexInMountainArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10189,7 +10189,7 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：不要用"和左邻居比较"的写法，容易在边界出错；统一用"和中点右侧比较"最稳。</p>
-<p><strong>复杂度</strong>：时间 O(log n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="6-1011-capacity-to-ship-packages-within-d-days">6. 1011 Capacity To Ship Packages Within D Days<a class="headerlink" href="#6-1011-capacity-to-ship-packages-within-d-days" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/">LeetCode 1011</a> ｜ <strong>Medium</strong></p>
@@ -10198,7 +10198,7 @@
 <p><strong>思路提示</strong></p>
 <ul>
 <li>二分范围：<code>lo = max(weights)</code>（必须能装下最重的一件），<code>hi = sum(weights)</code>（一天装完）；</li>
-<li><code>feasible(cap)</code>：贪心地按顺序装，装满一天就换下一天，最后看天数是否 ≤ d；</li>
+<li><code>feasible(cap)</code>：贪心地按顺序装，装满一天就换下一天，最后看天数是否 不大于 d；</li>
 <li>单调性：<code>cap</code> 越大所需天数越少。</li>
 </ul>
 <p><strong>方法辨析</strong>：给定容量，按顺序尽量装满一天会使每天已运前缀不短于任何其他合法安排，因此用天数最少。容量增大不会增加所需天数，二分才成立；若能任意重排包裹，判定问题也会改变。</p>
@@ -10224,7 +10224,7 @@
 </span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：下界必须是 <code>max(weights)</code>（否则最重的一件永远装不下）；天数从 1 开始计数；每件货物不可拆分。</p>
-<p><strong>复杂度</strong>：时间 O(n log(sum))，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log (\mathrm{sum}))\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="7-410-split-array-largest-sum">7. 410 Split Array Largest Sum<a class="headerlink" href="#7-410-split-array-largest-sum" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/split-array-largest-sum/">LeetCode 410</a> ｜ <strong>Hard</strong></p>
@@ -10233,11 +10233,11 @@
 <p>能看穿这一点，说明你已经真正掌握二分答案的抽象能力：同一套骨架可以套在完全不同的问题描述上。</p>
 <p><strong>思路提示</strong></p>
 <ul>
-<li>二分范围：<code>lo = max(nums)</code>，<code>hi = sum(nums)</code>；</li>
-<li><code>feasible(cap)</code>：贪心划分，尽量把每段填满到不超过 <code>cap</code>，统计段数是否 ≤ k；</li>
+<li>二分范围：<span class="arithmatex">\(lo = \max (\mathrm{nums})\)</span>，<span class="arithmatex">\(hi = \mathrm{sum}(\mathrm{nums})\)</span>；</li>
+<li><code>feasible(cap)</code>：贪心划分，尽量把每段填满到不超过 <code>cap</code>，统计段数是否 不大于 k；</li>
 <li>单调性：<code>cap</code> 越大所需段数越少。</li>
 </ul>
-<p><strong>方法辨析</strong>：非负元素保证贪心判定及容量界限有效。二分检查得到的是至多 k 段；因为 k≤n，且拆分非负段不增加段和，可继续拆成恰好 k 个非空段，所以与题目要求等价。负数会破坏这种简单容量判定。</p>
+<p><strong>方法辨析</strong>：非负元素保证贪心判定及容量界限有效。二分检查得到的是至多 k 段；因为 k不大于n，且拆分非负段不增加段和，可继续拆成恰好 k 个非空段，所以与题目要求等价。负数会破坏这种简单容量判定。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">splitArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">needed_segments</span><span class="p">(</span><span class="n">cap</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10260,7 +10260,7 @@
 </span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：必须"连续"分段，所以是贪心扫描而不是任意选；<code>k</code> 大于 <code>len(nums)</code> 时题目保证不会出现。</p>
-<p><strong>复杂度</strong>：时间 O(n log(sum))，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log (\mathrm{sum}))\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p><strong>三题对照记忆</strong>：875（吃香蕉）、1011（装船）、410（切数组）的代码结构完全一致，区别只在 <code>feasible</code> 的实现。把这三题放在一起刷，能一次性吃透"二分答案"。</p>
 </blockquote>

@@ -10168,7 +10168,7 @@
 <h1 id="312-burst-balloons">312. Burst Balloons · 戳气球<a class="headerlink" href="#312-burst-balloons" title="Permanent link">&para;</a></h1>
 <p><code>Hard</code> ｜ <code>2-D DP</code> / 区间 DP ｜ <a href="https://leetcode.com/problems/burst-balloons/">LeetCode 312</a> ｜ <a href="https://neetcode.io/problems/burst-balloons">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>有 <code>n</code> 个气球，戳破第 <code>i</code> 个气球能获得 <code>nums[i-1] × nums[i] × nums[i+1]</code> 枚硬币（越界时视为 1）。被戳破的气球会消失，相邻关系随之改变。求能获得的最大硬币数。</p>
+<p>有 <code>n</code> 个气球，戳破第 <code>i</code> 个气球能获得 <span class="arithmatex">\(\mathrm{nums}[i-1] \times \mathrm{nums}[i] \times \mathrm{nums}[i+1]\)</span> 枚硬币（越界时视为 1）。被戳破的气球会消失，相邻关系随之改变。求能获得的最大硬币数。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [3,1,5,8]
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: 167
 </span></code></pre></div>
@@ -10182,71 +10182,71 @@
 </blockquote>
 <p>如果 <code>k</code> 是区间 <code>(i, j)</code> 中<strong>最后一个</strong>被戳破的气球，那么在戳破 <code>k</code> 之前，区间 <code>(i, k)</code> 和 <code>(k, j)</code> 里的气球<strong>已经全部被戳破了</strong>。而此时 <code>k</code> 的左右邻居正好是 <code>i</code> 和 <code>j</code>（因为它们始终没被戳破）！</p>
 <p>于是可以写出转移：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dp[i][j] = max over k in (i, j) of:
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    dp[i][k] + dp[k][j] + nums[i] * nums[k] * nums[j]
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{dp}[i][j]=\max_{i&lt;k&lt;j}\{\mathrm{dp}[i][k]+\mathrm{dp}[k][j]+\mathrm{nums}[i]\,\mathrm{nums}[k]\,\mathrm{nums}[j]\}
+\]</div>
 <p>其中 <code>dp[i][j]</code> 表示"<strong>戳破开区间 <code>(i, j)</code> 内所有气球</strong>能获得的最大收益"（注意 <code>i</code> 和 <code>j</code> 本身不戳）。</p>
 <p><strong>"最后一个被戳破"这个视角让子问题变得独立</strong>——这正是本题最需要理解的地方。</p>
 <h3 id="1">哨兵：在两端加上 1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>因为题目规定"越界视为 1"，所以在数组两端各加一个值为 1 的虚拟气球：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>new_nums = [1] + nums + [1]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>new_nums = [1] + nums + [1]
 </span></code></pre></div>
 <p>这样所有真实的戳破操作都发生在某个开区间 <code>(i, j)</code> 内，边界统一，不用特判。</p>
 <h3 id="_5">遍历顺序：按区间长度递增<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p><code>dp[i][j]</code> 依赖 <code>dp[i][k]</code> 和 <code>dp[k][j]</code>（<code>i &lt; k &lt; j</code>），也就是<strong>更短的区间</strong>。所以要按区间长度从小到大遍历：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>for length in range(2, n + 2):        # 端点下标差 j-i
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    for i in range(0, n + 2 - length):
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        j = i + length
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        for k in range(i + 1, j):     # 枚举"最后一个戳破"的位置
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j])
+<p><code>dp[i][j]</code> 依赖 <code>dp[i][k]</code> 和 <code>dp[k][j]</code>（<span class="arithmatex">\(i &lt; k &lt; j\)</span>），也就是<strong>更短的区间</strong>。所以要按区间长度从小到大遍历：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>for length in range(2, n + 2):        # 端点下标差 j-i
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    for i in range(0, n + 2 - length):
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        j = i + length
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        for k in range(i + 1, j):     # 枚举"最后一个戳破"的位置
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j])
 </span></code></pre></div>
-<p><strong>答案就是 <code>dp[0][n+1]</code></strong>（戳破左右哨兵之间的所有气球）。</p>
+<p><strong>答案就是 <span class="arithmatex">\(dp[0][n+1]\)</span></strong>（戳破左右哨兵之间的所有气球）。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>定义开区间时，端点 i、j 都暂时保留，提供固定的外部邻居；选 k 最后戳后，左右区间的所有收益只依赖各自边界，可独立求最优。若先戳 k，左右会直接相邻，后续收益互相影响，单独保存一个前缀最优数值不够。</p>
-<p>例如原数组 [3,1,5]，两端补 1 后，假设 5 最后戳，则先处理其左侧 (左哨兵,5)，再加最后的 1×5×1。不同 k 都要尝试，不能贪心先戳最小值。表中 length 实际是端点下标差 j−i，不是内部气球数；差为 1 的区间没有气球，收益 0，是整个递推的基线。</p>
+<p>例如原数组 [3,1,5]，两端补 1 后，假设 5 最后戳，则先处理其左侧 (左哨兵,5)，再加最后的 <span class="arithmatex">\(1\times5\times1\)</span>。不同 k 都要尝试，不能贪心先戳最小值。表中 length 实际是端点下标差 j-i，不是内部气球数；差为 1 的区间没有气球，收益 0，是整个递推的基线。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="dp">解法一：区间 DP + 哨兵（推荐）<a class="headerlink" href="#dp" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxCoins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>              <span class="c1"># 两端加哨兵</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>           <span class="c1"># 区间长度递增</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">length</span><span class="p">):</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">length</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>    <span class="c1"># k 是"最后一个被戳破"的气球</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                                   <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxCoins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>              <span class="c1"># 两端加哨兵</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>           <span class="c1"># 区间长度递增</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">length</span><span class="p">):</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">length</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>    <span class="c1"># k 是"最后一个被戳破"的气球</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                                   <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
 <h3 id="_8">解法二：记忆化搜索（自顶向下，思路更直观）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxCoins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">dp</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>       <span class="c1"># 戳破开区间 (i, j) 的最大收益</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>                   <span class="c1"># 中间没有气球</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>                <span class="k">return</span> <span class="mi">0</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>        <span class="c1"># k 是最后一个被戳破的</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>                <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                           <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>            <span class="k">return</span> <span class="n">best</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxCoins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">dp</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>       <span class="c1"># 戳破开区间 (i, j) 的最大收益</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>                   <span class="c1"># 中间没有气球</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                <span class="k">return</span> <span class="mi">0</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>        <span class="c1"># k 是最后一个被戳破的</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                           <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="k">return</span> <span class="n">best</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div>
 <p>记忆化版<strong>不需要考虑遍历顺序</strong>，写起来更轻松，是理解本题的首选。</p>
 <h3 id="_9">为什么必须"倒着想"：正向枚举会失败<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>自然的第一反应是：定义 <code>dp[i][j]</code> 为"戳破区间 <code>[i, j]</code> 内所有气球能获得的最大收益"，然后枚举<strong>第一个</strong>戳破的气球 <code>k</code>。</p>
+<p>自然的第一反应是：定义 <code>dp[i][j]</code> 为"戳破区间 <span class="arithmatex">\([i, j]\)</span> 内所有气球能获得的最大收益"，然后枚举<strong>第一个</strong>戳破的气球 <code>k</code>。</p>
 <p><strong>这个定义会失效</strong>，原因有两点：</p>
 <ul>
 <li>戳破 <code>k</code> 之后，原本在 <code>k</code> 左右两侧的气球<strong>变成了相邻关系</strong>，它们后续的收益会互相影响；</li>
-<li>于是 <code>dp[i][k-1]</code> 与 <code>dp[k+1][j]</code> 这两段子问题的收益<strong>不再互相独立</strong>——而"子问题独立"是 DP 能成立的前提。</li>
+<li>于是 <code>dp[i][k-1]</code> 与 <span class="arithmatex">\(dp[k+1][j]\)</span> 这两段子问题的收益<strong>不再互相独立</strong>——而"子问题独立"是 DP 能成立的前提。</li>
 </ul>
 <p>改成"枚举<strong>最后</strong>戳破的气球"之后，麻烦就消失了：戳破 <code>k</code> 之前，区间两端的 <code>i</code> 和 <code>j</code> 一直存在，所以 <code>k</code> 的左右邻居始终是 <code>i</code> 和 <code>j</code>，收益可以确定地算出；而 <code>k</code> 左右两段内部的戳破过程互不影响。</p>
 <p>区间 DP 的关键是选出能使子问题独立的分割方式：气球选最后戳破的位置；切木棍却选当前段第一次切的位置；多边形则选贴着固定边的三角形。状态形式相似，操作时刻和独立性证明必须分别说明。</p>
@@ -10262,13 +10262,13 @@
 <tbody>
 <tr>
 <td>区间 DP</td>
-<td>O(n³)</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{3})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 <tr>
 <td>记忆化</td>
-<td>O(n³)</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{3})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10277,10 +10277,10 @@
 <li><strong>必须"倒着想"</strong>：枚举的是"<strong>最后一个</strong>被戳破的气球"，不是第一个。<strong>这是本题的核心，没有之一。</strong></li>
 <li><strong>哨兵要加在两端</strong>（值都为 1），否则边界处理会非常繁琐。</li>
 <li><strong>区间 DP 必须按长度递增遍历</strong>（因为依赖更短的区间）。</li>
-<li><code>dp[i][j]</code> 表示的是<strong>开区间 <code>(i, j)</code></strong>（不戳 <code>i</code> 和 <code>j</code>），所以 <code>k</code> 的范围是 <code>i+1</code> 到 <code>j-1</code>。</li>
+<li><code>dp[i][j]</code> 表示的是<strong>开区间 <code>(i, j)</code></strong>（不戳 <code>i</code> 和 <code>j</code>），所以 <code>k</code> 的范围是 <span class="arithmatex">\(i+1\)</span> 到 <code>j-1</code>。</li>
 <li><strong>追问：为什么"最后一个戳破"就能拆分子问题？</strong> → 因为在戳破 <code>k</code> 之前，<code>i</code> 和 <code>j</code> 一直存在，所以 <code>k</code> 的邻居始终是 <code>i</code> 和 <code>j</code>，收益可以确定地算出来；而左右两边的戳破过程<strong>互不影响</strong>。</li>
 <li><strong>追问：区间 DP 的通用特征是什么？</strong> → <strong>"枚举最后一步"+"子问题互不影响"</strong>。同样的结构还出现在 <a href="https://leetcode.com/problems/minimum-score-triangulation-of-a-polygon/">1039 Minimum Score Triangulation</a>、<a href="https://leetcode.com/problems/minimum-cost-to-cut-a-stick/">1547 Minimum Cost to Cut a Stick</a>。</li>
-<li><strong>追问：<code>n</code> 很大时怎么办？</strong> → O(n³) 无法优化到多项式更低阶，这类"区间合并"问题通常有 O(n³) 的下界。</li>
+<li><strong>追问：<code>n</code> 很大时怎么办？</strong> → <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span> 无法优化到多项式更低阶，这类"区间合并"问题通常有 <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span> 的下界。</li>
 </ul>
 <h2 id="_12">相关题目<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>

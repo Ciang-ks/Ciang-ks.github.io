@@ -4112,10 +4112,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2on-log-k" class="md-nav__link">
+  <a href="#2mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        思路 2：最小堆（直观，O(N log k)）
+        思路 2：最小堆（直观，\(\mathcal{O}(N \log k)\)）
       
     </span>
   </a>
@@ -4123,10 +4123,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3on-log-k" class="md-nav__link">
+  <a href="#3mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        思路 3：分治归并（最优雅，O(N log k)，不需要堆）
+        思路 3：分治归并（最优雅，\(\mathcal{O}(N \log k)\)，不需要堆）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2on-log-k" class="md-nav__link">
+  <a href="#2mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        思路 2：最小堆（直观，O(N log k)）
+        思路 2：最小堆（直观，\(\mathcal{O}(N \log k)\)）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3on-log-k" class="md-nav__link">
+  <a href="#3mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        思路 3：分治归并（最优雅，O(N log k)，不需要堆）
+        思路 3：分治归并（最优雅，\(\mathcal{O}(N \log k)\)，不需要堆）
       
     </span>
   </a>
@@ -10153,23 +10153,23 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="1">思路 1：逐个合并（朴素）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>把第 1 条和第 2 条合并，结果再和第 3 条合并……共 k-1 次两两合并。</p>
-<p>设所有节点总数为 <code>N</code>，每次合并的代价是 O(当前结果长度)。最坏情况（各链长度都为 N/k）复杂度是 O(kN)。<strong>当 k 很大时很慢。</strong></p>
-<h3 id="2on-log-k">思路 2：最小堆（直观，O(N log k)）<a class="headerlink" href="#2on-log-k" title="Permanent link">&para;</a></h3>
+<p>设所有节点总数为 <code>N</code>，每次合并的代价是 <span class="arithmatex">\(\mathcal{O}(当前结果长度)\)</span>。最坏情况（各链长度都为 N/k）复杂度是 <span class="arithmatex">\(\mathcal{O}(kN)\)</span>。<strong>当 k 很大时很慢。</strong></p>
+<h3 id="2mathcalon-log-k">思路 2：最小堆（直观，<span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>）<a class="headerlink" href="#2mathcalon-log-k" title="Permanent link">&para;</a></h3>
 <p>维护一个最小堆，初始放入 <code>k</code> 条链表的头节点。每次弹出最小的节点接到结果上，再把它所在链表的下一个节点压入堆。</p>
-<p>因为堆的大小始终 ≤ k，所以每次操作是 O(log k)，总复杂度 O(N log k)。</p>
-<p><strong>Python 的坑</strong>：<code>heapq</code> 比较元组时会依次比较各元素，如果第一个元素（值）相同就会去比较第二个元素（<code>ListNode</code> 对象），而 <code>ListNode</code> 没有实现 <code>&lt;</code>，会抛 <code>TypeError</code>。解决办法是在元组中间插入一个<strong>唯一递增的计数器</strong>：</p>
+<p>因为堆的大小始终 不大于 k，所以每次操作是 <span class="arithmatex">\(\mathcal{O}(\log k)\)</span>，总复杂度 <span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>。</p>
+<p><strong>Python 的坑</strong>：<code>heapq</code> 比较元组时会依次比较各元素，如果第一个元素（值）相同就会去比较第二个元素（<code>ListNode</code> 对象），而 <code>ListNode</code> 没有实现 <span class="arithmatex">\(&lt;\)</span>，会抛 <code>TypeError</code>。解决办法是在元组中间插入一个<strong>唯一递增的计数器</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="3on-log-k">思路 3：分治归并（最优雅，O(N log k)，不需要堆）<a class="headerlink" href="#3on-log-k" title="Permanent link">&para;</a></h3>
+<h3 id="3mathcalon-log-k">思路 3：分治归并（最优雅，<span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>，不需要堆）<a class="headerlink" href="#3mathcalon-log-k" title="Permanent link">&para;</a></h3>
 <p>把所有链表两两配对合并，一轮之后链表数量减半，重复 log k 轮。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>第 1 轮：L1+L2, L3+L4, L5+L6, ...
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>第 2 轮：把上轮结果再两两合并
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>...
 </span></code></pre></div>
-<p>每一轮的合并总量都是 O(N)，共 log k 轮，所以 O(N log k)。代码短、常数小、不需要处理堆的比较问题，<strong>是本题最推荐的解法</strong>。</p>
+<p>每一轮的合并总量都是 <span class="arithmatex">\(\mathcal{O}(N)\)</span>，共 log k 轮，所以 <span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>。代码短、常数小、不需要处理堆的比较问题，<strong>是本题最推荐的解法</strong>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>堆法保存每条非空链的当前头，它们是各自未输出部分的最小值，所以全体最小值一定在这些候选里。弹出哪一路，就只补那一路的后继；其余候选仍然有效。这里是对讲义多路归并的节点版本迁移，不是把所有 N 个节点先压入堆。</p>
-<p>分治法换的是合并日程：逐条接入会让早期节点被反复扫描，而成对平衡合并使每个节点最多参与约 log k 轮。即使某条链为空或某轮落单，也只需直接进入下一轮。两版都改接输入节点；若 k 很大但多数链为空，初始化仍要扫描 k 个入口，严谨成本应保留 O(k) 这一项。</p>
+<p>分治法换的是合并日程：逐条接入会让早期节点被反复扫描，而成对平衡合并使每个节点最多参与约 log k 轮。即使某条链为空或某轮落单，也只需直接进入下一轮。两版都改接输入节点；若 k 很大但多数链为空，初始化仍要扫描 k 个入口，严谨成本应保留 <span class="arithmatex">\(\mathcal{O}(k)\)</span> 这一项。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：分治归并（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10254,18 +10254,18 @@
 <tbody>
 <tr>
 <td>分治归并（当前分轮列表版）</td>
-<td>O(k+N log(k+1))</td>
-<td>O(k)（每轮新建头节点列表）</td>
+<td><span class="arithmatex">\(\mathcal{O}(k+N \log (k+1))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span>（每轮新建头节点列表）</td>
 </tr>
 <tr>
 <td>最小堆（当前逐项压入初始化）</td>
-<td>O(k log(k+1)+N log(k+1)) 上界</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(k \log (k+1)+N \log (k+1))\)</span> 上界</td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 <tr>
 <td>逐个合并</td>
-<td>最坏 O(kN)</td>
-<td>O(1)</td>
+<td>最坏 <span class="arithmatex">\(\mathcal{O}(kN)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10276,9 +10276,9 @@
 <li>空数组 <code>[]</code>、数组中含 <code>None</code>、只有一个链表等情况都要处理。</li>
 <li>分治写法里"落单的链表"要直接进下一轮，不能丢。</li>
 <li>复用节点即可，不需要新建节点。</li>
-<li><strong>追问：为什么分治是 O(N log k) 而不是 O(N log N)？</strong> → 每一轮的合并总量是 N，共 log k 轮。</li>
+<li><strong>追问：为什么分治是 <span class="arithmatex">\(\mathcal{O}(N \log k)\)</span> 而不是 <span class="arithmatex">\(\mathcal{O}(N \log N)\)</span>？</strong> → 每一轮的合并总量是 N，共 log k 轮。</li>
 <li><strong>追问：如果 k = 2？</strong> → 退化成 <a href="../02-merge-two-sorted-lists/">21 Merge Two Sorted Lists</a>。</li>
-<li><strong>追问：如果链表数量极大（比如 k = 10⁶）？</strong> → 分治法的内存开销小（不需要维护 O(k) 的堆），更有优势。</li>
+<li><strong>追问：如果链表数量极大（比如 k = <span class="arithmatex">\(10^{6}\)</span>）？</strong> → 分治法的内存开销小（不需要维护 <span class="arithmatex">\(\mathcal{O}(k)\)</span> 的堆），更有优势。</li>
 <li><strong>追问：如果用 <code>heapq.merge</code>？</strong> → 它是针对<strong>迭代器</strong>的，对链表需要自己写生成器，实际不如手写堆清晰。</li>
 </ul>
 <h2 id="_10">相关题目<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>

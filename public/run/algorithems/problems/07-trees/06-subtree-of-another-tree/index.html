@@ -4488,10 +4488,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-m" class="md-nav__link">
+  <a href="#mathcalon-m" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：序列化 + 字符串匹配（O(n + m)）
+        解法二：序列化 + 字符串匹配（\(\mathcal{O}(n + m)\)）
       
     </span>
   </a>
@@ -9987,10 +9987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-m" class="md-nav__link">
+  <a href="#mathcalon-m" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：序列化 + 字符串匹配（O(n + m)）
+        解法二：序列化 + 字符串匹配（\(\mathcal{O}(n + m)\)）
       
     </span>
   </a>
@@ -10082,7 +10082,7 @@
 </span></code></pre></div>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>这里同时存在“枚举候选根”与“从候选根精确比对”两个过程，不能把精确比对中的不匹配理解为继续在更深处搜索。isSameTree 一旦某个对应位置不等，这个候选就失败；只有外层 isSubtree 可以换下一处候选根。</p>
-<p>若主树含重复值，多个候选可能先匹配很长一段才失败，因此朴素最坏时间为 O(nm)，不是两次线性遍历。要改成序列匹配，可用带空标记且带数值边界的序列化，再使用线性字符串匹配；只拼数字或省略空位，会把不同值、不同树形误认为子串。</p>
+<p>若主树含重复值，多个候选可能先匹配很长一段才失败，因此朴素最坏时间为 <span class="arithmatex">\(\mathcal{O}(nm)\)</span>，不是两次线性遍历。要改成序列匹配，可用带空标记且带数值边界的序列化，再使用线性字符串匹配；只拼数字或省略空位，会把不同值、不同树形误认为子串。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：双重递归（推荐，最直观）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10103,7 +10103,7 @@
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isSameTree</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
 </span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isSameTree</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
 </span></code></pre></div>
-<h3 id="on-m">解法二：序列化 + 字符串匹配（O(n + m)）<a class="headerlink" href="#on-m" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon-m">解法二：序列化 + 字符串匹配（<span class="arithmatex">\(\mathcal{O}(n + m)\)</span>）<a class="headerlink" href="#mathcalon-m" title="Permanent link">&para;</a></h3>
 <p>把两棵树按相同规则序列化（用特殊标记表示空节点），然后判断 <code>subRoot</code> 的序列是否是 <code>root</code> 序列的子串。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isSubtree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">],</span> <span class="n">subRoot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -10130,13 +10130,13 @@
 <tbody>
 <tr>
 <td>双重递归</td>
-<td>O(n·m)，最坏 O(n²)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n\cdot m)\)</span>，最坏 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>序列化 + 匹配</td>
-<td>O(n + m)（用 KMP）/ 实践上接近线性</td>
-<td>O(n + m)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span>（用 KMP）/ 实践上接近线性</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10146,8 +10146,8 @@
 <li>序列化时<strong>空节点必须被标记</strong>，否则会出现假阳性。</li>
 <li><code>subRoot</code> 为 <code>None</code> 时通常约定返回 <code>True</code>（空树是任意树的子树），但题目保证 <code>subRoot</code> 非空。</li>
 <li><strong>追问：<code>isSubtree</code> 和"子结构"（substructure）有什么区别？</strong> → 子树要求完整匹配；子结构允许 <code>subRoot</code> 是 <code>root</code> 的<strong>一部分</strong>（末尾可以直接截断）。这是一道常见的变体题。</li>
-<li><strong>追问：如何优化到 O(n + m)？</strong> → 序列化 + KMP（或哈希 + 滚动窗口）。</li>
-<li><strong>追问：为什么双重递归最坏是 O(n²)？</strong> → 当 <code>subRoot</code> 很小而 <code>root</code> 是一条链时，每个节点都要做一次 O(1) 的比较，但如果 <code>root</code> 和 <code>subRoot</code> 的值大量重复，每次 <code>isSameTree</code> 都要深入很多层，总代价接近 O(n·m)。</li>
+<li><strong>追问：如何优化到 <span class="arithmatex">\(\mathcal{O}(n + m)\)</span>？</strong> → 序列化 + KMP（或哈希 + 滚动窗口）。</li>
+<li><strong>追问：为什么双重递归最坏是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>？</strong> → 当 <code>subRoot</code> 很小而 <code>root</code> 是一条链时，每个节点都要做一次 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 的比较，但如果 <code>root</code> 和 <code>subRoot</code> 的值大量重复，每次 <code>isSameTree</code> 都要深入很多层，总代价接近 <span class="arithmatex">\(\mathcal{O}(n\cdot m)\)</span>。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

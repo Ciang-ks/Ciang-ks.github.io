@@ -10116,7 +10116,7 @@
 <h3 id="dijkstra">Dijkstra 的三个关键点<a class="headerlink" href="#dijkstra" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>优先队列里存 <code>(当前距离, 节点)</code></strong>；</li>
-<li><strong>弹出时如果 <code>d &gt; dist[u]</code> 就跳过</strong>（这是"过期条目"，因为同一个节点可能被多次入堆）；</li>
+<li><strong>弹出时如果 <span class="arithmatex">\(d &gt; \mathrm{dist}[u]\)</span> 就跳过</strong>（这是"过期条目"，因为同一个节点可能被多次入堆）；</li>
 <li><strong>只适用于非负权边</strong>（本题边权为非负时间，满足条件）。</li>
 </ol>
 <h3 id="dfs-bfs">为什么不能用 DFS 或普通 BFS<a class="headerlink" href="#dfs-bfs" title="Permanent link">&para;</a></h3>
@@ -10183,13 +10183,13 @@
 <tbody>
 <tr>
 <td>Dijkstra（二叉堆）</td>
-<td>O(E log V)</td>
-<td>O(V + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(E \log V)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
 </tr>
 <tr>
 <td>Bellman-Ford</td>
-<td>O(V · E)</td>
-<td>O(V)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V \cdot E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10197,7 +10197,7 @@
 <ul>
 <li><strong>答案是最大值，不是所有距离之和</strong>（信号并行传播）。</li>
 <li><strong>有节点不可达时要返回 -1</strong>，注意检查 <code>max(dist.values())</code> 是否为 <code>inf</code>。</li>
-<li>节点编号是 <strong>1..n</strong>，不是 0..n-1。用字典或开 <code>n+1</code> 大小的数组来避免下标混乱。</li>
+<li>节点编号是 <strong>1..n</strong>，不是 0..n-1。用字典或开 <span class="arithmatex">\(n+1\)</span> 大小的数组来避免下标混乱。</li>
 <li><code>if d &gt; dist[u]: continue</code> 不能省，否则同一个节点会被反复处理。</li>
 <li>有向图！<strong>建图时只加一个方向</strong>（无向图才需要加两条边）。</li>
 <li><strong>追问：如果边权可能为负？</strong> → 必须改用 Bellman-Ford。</li>

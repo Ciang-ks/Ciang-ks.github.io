@@ -10140,68 +10140,69 @@
 </ol>
 <p>因为"第一间"和"最后一间"不可能同时被偷（它们在环上相邻），所以最优解<strong>必然落在</strong>这两种情况之一里。</p>
 <p>于是：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>答案 = max( rob(nums[1:]), rob(nums[:-1]) )
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{ans}=\max\{\operatorname{rob}(\mathrm{nums}[1:]),\operatorname{rob}(\mathrm{nums}[:-1])\}
+\]</div>
 <p>其中 <code>rob</code> 就是 198 题的线性解法。</p>
 <p><strong>这个"环拆链"的技巧非常通用</strong>——凡是"首尾有额外约束的环形 DP"，都可以尝试"固定首尾的某个状态，拆成线性问题"。</p>
 <h3 id="_4">边界处理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>n == 1</code>：只有一个房子，返回 <code>nums[0]</code>（<code>nums[1:]</code> 和 <code>nums[:-1]</code> 都是空数组，需要特判）；</li>
-<li><code>n == 2</code>：两间房子相邻，返回 <code>max(nums[0], nums[1])</code>；</li>
-<li><code>n == 3</code>：<code>nums[1:]</code> 是 2 个元素，<code>nums[:-1]</code> 也是 2 个元素，<code>rob</code> 能正确处理。</li>
+<li><span class="arithmatex">\(n = 1\)</span>：只有一个房子，返回 <code>nums[0]</code>（<code>nums[1:]</code> 和 <code>nums[:-1]</code> 都是空数组，需要特判）；</li>
+<li><span class="arithmatex">\(n = 2\)</span>：两间房子相邻，返回 <code>max(nums[0], nums[1])</code>；</li>
+<li><span class="arithmatex">\(n = 3\)</span>：<code>nums[1:]</code> 是 2 个元素，<code>nums[:-1]</code> 也是 2 个元素，<code>rob</code> 能正确处理。</li>
 </ul>
-<p><strong><code>n == 1</code> 必须特判</strong>，否则两个子问题都是空数组，会返回 0。</p>
+<p><strong><span class="arithmatex">\(n = 1\)</span> 必须特判</strong>，否则两个子问题都是空数组，会返回 0。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>两个线性子问题不是互斥分类：既不偷首间也不偷末间的方案会同时出现，但目标是取 max，重复候选不影响答案。若本题改为统计方案数，就不能直接把两个结果相加，因为交集会被算两次。</p>
-<p>拆开后仍必须对各链求整体最优，不能先求整条链的最优再删掉冲突的首尾之一；后者可能已选出不适合替换的中间房子。当前代码 nums[1:] 和 nums[:-1] 各复制一条长度 O(n) 的列表，因此滚动 DP 虽只用常数状态，完整实现仍有 O(n) 额外空间；传原数组的左右边界才可避免切片占用。</p>
+<p>拆开后仍必须对各链求整体最优，不能先求整条链的最优再删掉冲突的首尾之一；后者可能已选出不适合替换的中间房子。当前代码 nums[1:] 和 nums[:-1] 各复制一条长度 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的列表，因此滚动 DP 虽只用常数状态，完整实现仍有 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间；传原数组的左右边界才可避免切片占用。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="dp">解法一：拆成两次线性 DP（推荐）<a class="headerlink" href="#dp" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_line</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="sd">"""198 题的线性版本"""</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="n">prev2</span> <span class="o">=</span> <span class="n">prev1</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">prev1</span><span class="p">,</span> <span class="n">prev2</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="k">return</span> <span class="n">prev1</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</span></code></pre></div>
+<p><strong>注意 <code>rob_line</code> 里 <code>prev2 = prev1 = 0</code> 的初始化</strong>：这里相当于 <span class="arithmatex">\(dp[-1] = dp[-2] = 0\)</span>，对空数组和单元素数组都能正确工作（空数组返回 0，单元素返回该元素）。这个初始化比 198 题里显式处理 <span class="arithmatex">\(n \le 2\)</span> 更简洁。</p>
+<h3 id="_7">解法二：用下标区间避免切片（省内存）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_line</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="sd">"""198 题的线性版本"""</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_range</span><span class="p">(</span><span class="n">lo</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="sd">"""偷 nums[lo..hi]（闭区间）的最大金额"""</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">prev2</span> <span class="o">=</span> <span class="n">prev1</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">prev1</span><span class="p">,</span> <span class="n">prev2</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">prev1</span><span class="p">,</span> <span class="n">prev2</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="k">return</span> <span class="n">prev1</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">rob_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 </span></code></pre></div>
-<p><strong>注意 <code>rob_line</code> 里 <code>prev2 = prev1 = 0</code> 的初始化</strong>：这里相当于 <code>dp[-1] = dp[-2] = 0</code>，对空数组和单元素数组都能正确工作（空数组返回 0，单元素返回该元素）。这个初始化比 198 题里显式处理 <code>n &lt;= 2</code> 更简洁。</p>
-<h3 id="_7">解法二：用下标区间避免切片（省内存）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_8">解法三：双状态写法（偷 / 不偷，显式处理首尾）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_range</span><span class="p">(</span><span class="n">lo</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="sd">"""偷 nums[lo..hi]（闭区间）的最大金额"""</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="n">prev2</span> <span class="o">=</span> <span class="n">prev1</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">prev1</span><span class="p">,</span> <span class="n">prev2</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="k">return</span> <span class="n">prev1</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">rob_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></div>
-<h3 id="_8">解法三：双状态写法（偷 / 不偷，显式处理首尾）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_line</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">rob_cur</span> <span class="o">=</span> <span class="n">skip_cur</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                <span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span> <span class="o">=</span> <span class="n">skip_cur</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span><span class="p">)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span><span class="p">)</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">rob_line</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">rob_cur</span> <span class="o">=</span> <span class="n">skip_cur</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                <span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span> <span class="o">=</span> <span class="n">skip_cur</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_cur</span><span class="p">,</span> <span class="n">skip_cur</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rob_line</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
 </span></code></pre></div>
 <h2 id="_9">复杂度<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <table>
@@ -10215,21 +10216,21 @@
 <tbody>
 <tr>
 <td>拆成两次线性 DP</td>
-<td>O(n)</td>
-<td>O(1)（不计切片）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计切片）</td>
 </tr>
 <tr>
 <td>下标区间版</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>n == 1</code> 必须特判</strong>，否则会返回 0。</li>
+<li><strong><span class="arithmatex">\(n = 1\)</span> 必须特判</strong>，否则会返回 0。</li>
 <li><strong>两条链的区间不能弄错</strong>：一条是 <code>nums[0..n-2]</code>（不偷最后一间），另一条是 <code>nums[1..n-1]</code>（不偷第一间）。</li>
-<li>切片版 <code>nums[1:]</code> 会额外复制数组，空间是 O(n)；<strong>追求极致可以用下标区间版</strong>。</li>
+<li>切片版 <code>nums[1:]</code> 会额外复制数组，空间是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；<strong>追求极致可以用下标区间版</strong>。</li>
 <li><strong>追问：为什么不直接"在环上做 DP"？</strong> → 因为环上每个节点有两个邻居，状态需要"第一间是否被偷"这个额外维度，写起来更绕。<strong>拆成两条链是更清晰的等价转化。</strong></li>
 <li><strong>追问：如果房子排成树？</strong> → <a href="https://leetcode.com/problems/house-robber-iii/">337 House Robber III</a>，树形 DP 返回 <code>(偷, 不偷)</code> 二元组。</li>
 <li><strong>追问：这个"固定首尾状态再拆"的技巧还能用在哪？</strong> → 很多环形问题：环形加油站（134 用另一种思路）、环形最大子数组和（918），都是同一个套路。</li>

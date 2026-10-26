@@ -3994,10 +3994,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：三步法（推荐，O(1) 空间）
+        解法一：三步法（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -4005,10 +4005,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：用数组存节点再做（O(n) 空间，最易懂）
+        解法二：用数组存节点再做（\(\mathcal{O}(n)\) 空间，最易懂）
       
     </span>
   </a>
@@ -10042,10 +10042,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：三步法（推荐，O(1) 空间）
+        解法一：三步法（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：用数组存节点再做（O(n) 空间，最易懂）
+        解法二：用数组存节点再做（\(\mathcal{O}(n)\) 空间，最易懂）
       
     </span>
   </a>
@@ -10147,10 +10147,10 @@
 </span></code></pre></div>
 <p>注意<strong>从前半段开始</strong>（题目要求以 <code>L0</code> 开头），且合并时后半段可能更短或等长，所以循环条件是 <code>while second</code>。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>目标顺序 1、n、2、n−1 提示两条消费方向：前半段从左向右，后半段从右向左。单链表不能直接从尾部往前读，因此先找中点，再反转后半段，让两边都能沿 next 前进，最后交替取节点。</p>
+<p>目标顺序 1、n、2、n-1 提示两条消费方向：前半段从左向右，后半段从右向左。单链表不能直接从尾部往前读，因此先找中点，再反转后半段，让两边都能沿 next 前进，最后交替取节点。</p>
 <p>例如 1→2→3→4→5 拆成 1→2→3 与 4→5，后者反转为 5→4，然后交替接成 1→5→2→4→3。断开中点的 next 是为了让两条待合并链独立，否则旧连接可能把结果接成环。交叉连接前必须分别保存两边的下一节点；这里改变的是读取顺序，不是按值排序，所以不能照搬比较大小的有序归并。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：三步法（推荐，O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：三步法（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reorderList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
@@ -10181,7 +10181,7 @@
 </span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>            <span class="n">second</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt1</span>
 </span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>            <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="n">nxt1</span><span class="p">,</span> <span class="n">nxt2</span>
 </span></code></pre></div>
-<h3 id="on">解法二：用数组存节点再做（O(n) 空间，最易懂）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法二：用数组存节点再做（<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间，最易懂）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reorderList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -10214,13 +10214,13 @@
 <tbody>
 <tr>
 <td>三步法</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>数组法</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10236,7 +10236,7 @@
   顺序颠倒会丢节点。</li>
 <li>用法二（数组法）时，<strong>最后一定要把末尾节点的 <code>next</code> 置为 <code>None</code></strong>，否则会形成环，LeetCode 会报"链表有环"。</li>
 <li>链表长度为 0、1、2 时都要能正确处理。</li>
-<li><strong>追问：能不能不找中点，直接用栈？</strong> → 可以：把后半段压栈，再逐个弹出插入。时间 O(n)，空间 O(n)，不如三步法。</li>
+<li><strong>追问：能不能不找中点，直接用栈？</strong> → 可以：把后半段压栈，再逐个弹出插入。时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不如三步法。</li>
 <li><strong>追问：这题考的是什么？</strong> → 它把"找中点""反转""合并"三个模板串在一起，是链表综合能力的检验题。</li>
 <li><strong>追问：这题在工程里有什么用？</strong> → 本质是"把链表按 z 字形交错"，在音乐播放列表洗牌、页面布局交错等场景有类似需求。</li>
 </ul>

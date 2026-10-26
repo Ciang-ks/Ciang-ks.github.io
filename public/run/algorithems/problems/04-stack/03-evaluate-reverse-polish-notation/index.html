@@ -10080,7 +10080,7 @@
 <h1 id="150-evaluate-reverse-polish-notation">150. Evaluate Reverse Polish Notation · 逆波兰表达式求值<a class="headerlink" href="#150-evaluate-reverse-polish-notation" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Stack</code> ｜ <a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/">LeetCode 150</a> ｜ <a href="https://neetcode.io/problems/evaluate-reverse-polish-notation">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定一个<strong>后缀表达式</strong>（逆波兰表示法）字符串数组 <code>tokens</code>，求它的值。合法运算符为 <code>+ - * /</code>，除法向零截断。</p>
+<p>给定一个<strong>后缀表达式</strong>（逆波兰表示法）字符串数组 <code>tokens</code>，求它的值。合法运算符为 <span class="arithmatex">\(+ - * /\)</span>，除法向零截断。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: tokens = ["2","1","+","3","*"]        输出: 9        # (2 + 1) * 3
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: tokens = ["4","13","5","/","+"]       输出: 6        # 4 + (13 / 5)
 </span></code></pre></div>
@@ -10094,15 +10094,15 @@
 </ol>
 <h3 id="_3">两个必须注意的细节<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><strong>细节 1：操作数顺序。</strong> 先弹出的是<strong>右操作数</strong> <code>b</code>，后弹出的是<strong>左操作数</strong> <code>a</code>，计算必须是 <code>a op b</code>。
-对于 <code>+</code> 和 <code>*</code> 无所谓，但 <code>-</code> 和 <code>/</code> 顺序写反就会得到完全错误的结果。</p>
-<p><strong>细节 2：除法的截断方向。</strong> <code>-7 / 2</code> 在 C++/Java 里是 <code>-3</code>（向零截断），而 Python 的 <code>//</code> 是<strong>向下取整</strong>，得到 <code>-4</code>。所以要用 <code>int(a / b)</code>。Python 3 的 <code>/</code> 返回浮点，对大整数可能有精度问题，稳妥写法是：</p>
+对于 <span class="arithmatex">\(+\)</span> 和 <span class="arithmatex">\(*\)</span> 无所谓，但 <code>-</code> 和 <span class="arithmatex">\(/\)</span> 顺序写反就会得到完全错误的结果。</p>
+<p><strong>细节 2：除法的截断方向。</strong> <span class="arithmatex">\(-7 / 2\)</span> 在 C++/Java 里是 <code>-3</code>（向零截断），而 Python 的 <code>//</code> 是<strong>向下取整</strong>，得到 <code>-4</code>。所以要用 <code>int(a / b)</code>。Python 3 的 <span class="arithmatex">\(/\)</span> 返回浮点，对大整数可能有精度问题，稳妥写法是：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">int</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>                          <span class="c1"># 简洁，注意大数精度</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span>   <span class="c1"># 精确的向零截断</span>
 </span></code></pre></div>
 <p>本题测试数据范围内 <code>int(a / b)</code> 是安全的，但被追问时能说出这个区别是加分项。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>栈内每个值代表已经完整求出的一个子表达式。读到运算符时，最近两个完整子表达式正好是左右操作数；用结果替换它们，相当于把语法树的一棵子树压成一个值。输入保证是合法后缀表达式，所以不需要像处理中缀表达式那样另设运算符优先级。</p>
-<p>例如 ["2","3","4","*","-"]：先把 3、4 归约成 12，栈变为 [2,12]，再算 2−12=−10。若先弹出的 12 被当成左操作数，就错成 10。这个模式迁移到表达式求值时，应先确认输入格式；中缀的 2−3×4 需要括号和优先级规则，不能直接套同一轮扫描。</p>
+<p>例如 ["2","3","4","*","-"]：先把 3、4 归约成 12，栈变为 [2,12]，再算 2-12=-10。若先弹出的 12 被当成左操作数，就错成 10。这个模式迁移到表达式求值时，应先确认输入格式；中缀的 2-<span class="arithmatex">\(3\times4\)</span> 需要括号和优先级规则，不能直接套同一轮扫描。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：栈 + 运算符映射（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10142,7 +10142,7 @@
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="k">return</span> <span class="n">stack</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
-<p>注意 <code>+</code> 和 <code>*</code> 可以偷懒直接两次 <code>pop()</code> 相加相乘（交换律），但 <code>-</code> 和 <code>/</code> 必须显式区分左右操作数。<strong>为了统一和可读，建议全部写成显式版本。</strong></p>
+<p>注意 <span class="arithmatex">\(+\)</span> 和 <span class="arithmatex">\(*\)</span> 可以偷懒直接两次 <code>pop()</code> 相加相乘（交换律），但 <code>-</code> 和 <span class="arithmatex">\(/\)</span> 必须显式区分左右操作数。<strong>为了统一和可读，建议全部写成显式版本。</strong></p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10155,8 +10155,8 @@
 <tbody>
 <tr>
 <td>栈</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>

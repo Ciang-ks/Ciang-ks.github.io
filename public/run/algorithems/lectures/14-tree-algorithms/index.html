@@ -10035,7 +10035,7 @@
 <p>第 11 讲用 BST、第 13 讲用 Trie 建立索引。这一讲换个视角：<strong>把树当成"递归的数据结构"本身</strong>，讨论在它上面做计算的一整套方法。</p>
 <p>树题的代码通常只有十几行，但很容易写错。原因几乎总是同一个：<strong>没想清楚"递归函数返回什么"。</strong> 所以这一讲的核心不是算法清单，而是给你一套判断流程。</p>
 <h2 id="_1">先亲手算一棵树的深度<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>本讲的 <code>depth</code> 按<strong>节点个数</strong>计：空树0，叶子1。第11讲AVL高度按边数计：空树−1，叶子0，二者相差1。直径仍按边数计，不要把三个单位混在一起。</p>
+<p>本讲的 <code>depth</code> 按<strong>节点个数</strong>计：空树0，叶子1。第11讲AVL高度按边数计：空树-1，叶子0，二者相差1。直径仍按边数计，不要把三个单位混在一起。</p>
 <p>先用和 LeetCode 一致的 val 字段准备节点。这个类与第 11 讲的 BSTNode 表示相同的左右连接，但本讲的普通二叉树不要求左小右大：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TreeNode</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
@@ -10053,7 +10053,7 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">right</span> <span class="o">=</span> <span class="n">max_depth</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
 </span></code></pre></div>
-<p>根1、左叶2、右叶3：计算根之前，先调用左叶，叶子向两个空孩子分别得到0，返回1；右叶同样返回1；根最后返回 <code>1+max(1,1)=2</code>。函数里左右两个调用都要返回之后，父调用才能继续。这叫自底向上汇总。</p>
+<p>根1、左叶2、右叶3：计算根之前，先调用左叶，叶子向两个空孩子分别得到0，返回1；右叶同样返回1；根最后返回 <span class="arithmatex">\(1+\max (1,1)=2\)</span>。函数里左右两个调用都要返回之后，父调用才能继续。这叫自底向上汇总。</p>
 <p>遍历就是按某种顺序访问每个节点一次。图中的前/中/后序，是把“记录当前节点”放在递归左、右调用之前/之间/之后；这些都沿一条分支深入再返回，称为深度优先遍历（DFS）。层序则先访问近的一层，再访问下一层，属于广度优先遍历（BFS），后面会用队列实现。</p>
 <h2 id="_2">两类递归<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="同一棵树的四种访问顺序" src="../images/14-tree-traversal.svg" /></p>
@@ -10079,7 +10079,7 @@
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p>为什么公式里没有再加2？l 是左子树的节点深度，已经等于“从当前节点沿左边走到最深叶子”的边数：l=1表示只有一个左孩子，对应1条边。根1与两个叶子2、3有 l=r=1，穿根直径就是2，而向父节点返回的深度是2。这两个2在此碰巧相同，一条更长的双叉树就会不同。</p>
-<p><code>nonlocal best</code> 表示内部函数修改外层的同一个 best，不是创建自己的局部变量。每个节点被处理一次，时间O(n)；未返回的递归调用最多h+1个，辅助空间O(h+1)。</p>
+<p><code>nonlocal best</code> 表示内部函数修改外层的同一个 best，不是创建自己的局部变量。每个节点被处理一次，时间<span class="arithmatex">\(\mathcal{O}(n)\)</span>；未返回的递归调用最多h+1个，辅助空间<span class="arithmatex">\(\mathcal{O}(h+1)\)</span>。</p>
 <p><strong><code>depth</code> 返回的是"单边量"</strong>——高度只能沿一条路往上传；<strong><code>best</code> 是"双边量"</strong>——路径可以在这里同时用两条腿。把这两个东西混为一谈，这道题就写不出来。</p>
 <p>最大路径和也用这个合并结构，但统计的是节点值之和。本题约定树非空，路径至少含一个节点；与直径的边数是不同单位。允许负值时，需决定是否接入某一侧。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_path_sum</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -10097,7 +10097,7 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><code>max(0, ...)</code> 有两个作用：<strong>截断负数子树</strong>（走那边只会更差），以及<strong>把空节点统一成 0</strong>。而 <code>best</code> 必须初始化成 <code>-inf</code> 而不是 0——<strong>路径至少要包含一个节点</strong>，如果树里全是负数，正确答案是最大的那个负数。</p>
-<p>用简写 <code>节点值(左子树,右子树)</code> 描述一棵树：<code>-10(9,20(15,7))</code> 表示根为 −10，左孩子为 9，右孩子为 20，而 20 的左右孩子分别为 15、7。按递归实际返回次序走一遍：</p>
+<p>用简写 <code>节点值(左子树,右子树)</code> 描述一棵树：<code>-10(9,20(15,7))</code> 表示根为 -10，左孩子为 9，右孩子为 20，而 20 的左右孩子分别为 15、7。按递归实际返回次序走一遍：</p>
 <table>
 <thead>
 <tr>
@@ -10138,7 +10138,7 @@
 <td>35</td>
 </tr>
 <tr>
-<td>−10</td>
+<td>-10</td>
 <td>9</td>
 <td>35</td>
 <td>42</td>
@@ -10160,7 +10160,7 @@
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'-inf'</span><span class="p">))</span>
 </span></code></pre></div>
-<p>初始值用 <code>-inf</code>，这样根节点必然被计入。判断用 <code>&gt;=</code>——题目说"没有比它更大的值"，所以相等也是好节点。</p>
+<p>初始值用 <code>-inf</code>，这样根节点必然被计入。判断用 <span class="arithmatex">\(\ge\)</span>——题目说"没有比它更大的值"，所以相等也是好节点。</p>
 <p>验证 BST 是同一套写法，只是传的是<strong>上下界</strong>（第 11 讲展开过）：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_bst</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">valid</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
@@ -10193,7 +10193,7 @@
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><code>for _ in range(len(q))</code> 是层序的核心：它在循环开始时把这一层的节点数固定下来，<strong>因为 <code>range</code> 在循环开始时就求值了，内层的 <code>append</code> 不会影响循环次数</strong>——这正是这个技巧能工作的原因。</p>
-<p>同一件事也可以用 DFS 做：把从根起算的层号 depth 当参数传下去，根为 0。第一次遇到新层时先执行 <code>if depth==len(res): res.append([])</code>，创建这一层的列表，再执行 <code>res[depth].append(node.val)</code>，然后按左、右顺序递归孩子，层号加 1。前序遍历天然保证同层从左到右，所以结果完全一致，辅助遍历空间为 O(树高)，BFS 队列为 O(最宽层)；两者输出都要 O(n)，链状树的 DFS 栈反而可能更大。<strong>对完全二叉树这类"最宽层远大于树高"的树，这是明显改进。</strong></p>
+<p>同一件事也可以用 DFS 做：把从根起算的层号 depth 当参数传下去，根为 0。第一次遇到新层时先执行 <code>if depth==len(res): res.append([])</code>，创建这一层的列表，再执行 <code>res[depth].append(node.val)</code>，然后按左、右顺序递归孩子，层号加 1。前序遍历天然保证同层从左到右，所以结果完全一致，辅助遍历空间为 <span class="arithmatex">\(\mathcal{O}(树高)\)</span>，BFS 队列为 <span class="arithmatex">\(\mathcal{O}(最宽层)\)</span>；两者输出都要 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，链状树的 DFS 栈反而可能更大。<strong>对完全二叉树这类"最宽层远大于树高"的树，这是明显改进。</strong></p>
 <h2 id="_6">序列化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>把树编码成一个字符串再还原，难点在于<strong>空节点必须显式记录</strong>——否则 <code>[1,2]</code> 和 <code>[1,null,2]</code> 会生成同一个序列。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">serialize</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -10223,10 +10223,11 @@
 <p><strong>为什么序列化和反序列化都用前序？</strong> 因为前序把根放在最前面，反序列化时"先消费到的就是根"，两者天然对齐。</p>
 <h2 id="_7">树上证明的模板<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>树的递归定义给了一种通用证明结构：<strong>先证空树满足性质，再假设左右子树都满足、推出整棵树满足。</strong></p>
-<p>拿高度举例。设 <code>f(T)</code> 是函数返回值、<code>h(T)</code> 是真实最大深度。空树时 <code>f = 0 = h</code>。归纳步：真实深度 <code>h(T) = 1 + max(h(T_L), h(T_R))</code>（根到最远叶子的路径必然先落到某个子树里），而 <code>f(T) = 1 + max(f(T_L), f(T_R))</code>，两者相等。∎</p>
-<p>拿直径举例，就能看清"返回值不等于答案"：穿过根的最长路径是 <code>depth(T_L) + depth(T_R)</code>，不穿过根的完全落在某个子树里，所以</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>best(T) = max(depth(T_L) + depth(T_R), best(T_L), best(T_R))
-</span></code></pre></div>
+<p>拿高度举例。设 <span class="arithmatex">\(f(T)\)</span> 是函数返回值、<span class="arithmatex">\(h(T)\)</span> 是真实最大深度。空树时 <span class="arithmatex">\(f = 0 = h\)</span>。归纳步：真实深度 <span class="arithmatex">\(h(T)=1+\max(h(T_L),h(T_R))\)</span>（根到最远叶子的路径必然先落到某个子树里），而 <span class="arithmatex">\(f(T)=1+\max(f(T_L),f(T_R))\)</span>，两者相等。</p>
+<p>拿直径举例，就能看清"返回值不等于答案"：穿过根的最长路径是 <span class="arithmatex">\(\operatorname{depth}(T_L)+\operatorname{depth}(T_R)\)</span>，不穿过根的完全落在某个子树里，所以</p>
+<div class="arithmatex">\[
+\operatorname{best}(T)=\max\{\operatorname{depth}(T_L)+\operatorname{depth}(T_R),\operatorname{best}(T_L),\operatorname{best}(T_R)\}
+\]</div>
 <p><code>depth</code> 只能沿一条路往上传播，<code>best</code> 可以在任意节点合并两条路——这就是这两类量的形式化差别。</p>
 <h2 id="_8">从讲义走到代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>统计目录的最大嵌套层数可以自底向上汇总子树深度。</p>
@@ -10234,31 +10235,31 @@
 <p>然后做 <a href="../../problems/07-trees/03-diameter-of-binary-tree/">Diameter of Binary Tree</a>：求任意两节点之间最长路径的边数。先前两棵树的直径分别为 2、3，但根返回的深度碰巧也为 2、3，尚不能区分这两个量。再给第二棵树的右孩子 3 加右叶 5：路径 4→2→1→3→5 的直径为 4，而 max_depth(root) 仍为 3。用这棵两边各延伸一层的树，才能检查是否误把返回深度当成直径。</p>
 <h2 id="_9">练习<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 下面这段求直径的代码逻辑对吗？代价是多少？</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="k">return</span> <span class="mi">0</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="n">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">),</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>               <span class="n">max_depth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">max_depth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        <span class="k">return</span> <span class="mi">0</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="n">diameter_wrong</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">),</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>               <span class="n">max_depth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">max_depth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
 </span></code></pre></div>
-<p><strong>逻辑对，但复杂度是 <code>O(n²)</code></strong>——<code>max_depth</code> 会对每棵子树反复计算，链状树累计扫描 n+(n−1)+…+1 个节点。改成"一次后序同时算高度和直径"即可降到 <code>O(n)</code>。</p>
+<p><strong>逻辑对，但复杂度是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></strong>——<code>max_depth</code> 会对每棵子树反复计算，链状树累计扫描 n+(n-1)+…+1 个节点。改成"一次后序同时算高度和直径"即可降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>2.</strong> 最大路径和里 <code>best</code> 为什么必须初始化成 <code>-inf</code>？而 <code>gain</code> 里用 <code>max(0, ...)</code> 又是为什么？</p>
 <p>前者因为路径必须包含至少一个节点，全负数时答案是最大的那个负数；后者是"是否向那一侧延伸"的选择，返回 0 表示不延伸。<strong>两个 0 的含义完全不同。</strong></p>
 <p><strong>3.</strong> 层序遍历能不能用 DFS 写？空间有什么变化？</p>
-<p>能。DFS 按 depth 收集，额外调用栈 O(h)，BFS 队列 O(w)，输出均 O(n)；哪个更省取决于树形。</p>
+<p>能。DFS 按 depth 收集，额外调用栈 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，BFS 队列 <span class="arithmatex">\(\mathcal{O}(w)\)</span>，输出均 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；哪个更省取决于树形。</p>
 <p><strong>4.</strong> 实现 <code>is_symmetric(root)</code> 判断轴对称。</p>
 <p>判断 <code>root.left</code> 与 <code>root.right</code> 是否互为镜像：<code>a.val == b.val</code> 且 <code>mirror(a.left, b.right)</code>、<code>mirror(a.right, b.left)</code>。<strong>注意是交叉比较，不是同侧比较</strong>——写成同侧就成了 Same Tree。</p>
 <p><strong>5.</strong> 实现 <code>has_path_sum(root, target)</code>：是否存在一条从根到<strong>叶子</strong>的路径，其和等于目标值。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>      <span class="c1"># 必须到叶子</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">return</span> <span class="n">target</span> <span class="o">==</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">rest</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">return</span> <span class="n">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span> <span class="ow">or</span> <span class="n">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>      <span class="c1"># 必须到叶子</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="k">return</span> <span class="n">target</span> <span class="o">==</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">rest</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="n">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span> <span class="ow">or</span> <span class="n">has_path_sum</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>"必须到叶子"这个条件不能省。</strong></p>
 <p><strong>6.</strong> n 个节点的树有多少条边？这对判断"一个无向图是不是树"有什么用？</p>
-<p>恰好 <code>n − 1</code> 条。判据可以写成"边数 = <code>n − 1</code> 且连通"或"边数 = <code>n − 1</code> 且无环"。<strong>只检查边数不够</strong>：三角形加一个孤立点也有 3 条边，但不是树。</p>
+<p>恰好 <span class="arithmatex">\(n-1\)</span> 条。判据可以写成"边数 = <span class="arithmatex">\(n-1\)</span> 且连通"或"边数 = <span class="arithmatex">\(n-1\)</span> 且无环"。<strong>只检查边数不够</strong>：三角形加一个孤立点也有 3 条边，但不是树。</p>
 
 
 

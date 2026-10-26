@@ -10176,7 +10176,7 @@
 <p><strong>这是区间合并的母题</strong>，也是最经典的"排序 + 线性扫描"。</p>
 <h3 id="_3">第一步：按左端点排序<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>排序之后，同一个合并连通段的成员可以被连续处理，于是<strong>只需要依次和"上一个合并后的区间"比较</strong>。</p>
-<p><strong>为什么要按左端点排序？</strong> 因为这样处理后，当前区间的起点一定不小于之前所有区间的起点——"起点递增"这个性质让"判断是否重叠"变得简单：只需要看"当前起点是否 ≤ 上一个合并区间的终点"。</p>
+<p><strong>为什么要按左端点排序？</strong> 因为这样处理后，当前区间的起点一定不小于之前所有区间的起点——"起点递增"这个性质让"判断是否重叠"变得简单：只需要看"当前起点是否 不大于 上一个合并区间的终点"。</p>
 <h3 id="_4">第二步：一次扫描，边合并边构建结果<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>维护一个结果列表 res（res[-1] 是最近的一个合并区间）
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>对每个区间 [start, end]：
@@ -10188,12 +10188,12 @@
 <h3 id="max">最关键的一个细节：终点要取 <code>max</code><a class="headerlink" href="#max" title="Permanent link">&para;</a></h3>
 <p>考虑 <code>[[1,10],[2,3]]</code>：</p>
 <ul>
-<li>如果写成 <code>res[-1][1] = end</code>，结果会变成 <code>[[1,3]]</code>——<strong>错</strong>；</li>
-<li>正确写法是 <code>res[-1][1] = max(res[-1][1], end)</code>，结果是 <code>[[1,10]]</code>。</li>
+<li>如果写成 <span class="arithmatex">\(\mathrm{res}[-1][1] = \mathrm{end}\)</span>，结果会变成 <code>[[1,3]]</code>——<strong>错</strong>；</li>
+<li>正确写法是 <span class="arithmatex">\(\mathrm{res}[-1][1] = \max (\mathrm{res}[-1][1], \mathrm{end})\)</span>，结果是 <code>[[1,10]]</code>。</li>
 </ul>
 <p><strong>因为后一个区间可能完全被前一个包含，此时终点不能变小。</strong> 这是本题最容易漏的一行。</p>
 <h3 id="_5">边界约定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>判断用 <code>start &lt;= res[-1][1]</code>（带等号）：因为题目把"首尾相接"的区间（如 <code>[1,3]</code> 和 <code>[3,5]</code>）也视为可以合并。<strong>面试中要确认这个约定。</strong></p>
+<p>判断用 <span class="arithmatex">\(\mathrm{start} \le \mathrm{res}[-1][1]\)</span>（带等号）：因为题目把"首尾相接"的区间（如 <code>[1,3]</code> 和 <code>[3,5]</code>）也视为可以合并。<strong>面试中要确认这个约定。</strong></p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>res 已保存所有处理过区间的并集，且内部互不重叠；最新区间只有可能碰到 res 的最后一段，因为更早各段都在它之前结束。比较对象必须是“已经合并后的最后一段”，不能只看排序后的前一个原区间。</p>
 <p>例如 [[1,10],[2,3],[4,5]]，最后的 [4,5] 与前一个原区间不相交，却仍在 [1,10] 内。新段起点若越过 res[-1].end，后面起点只会更大，这个合并段就能永久定稿。该题输出并集覆盖范围，不是在相互冲突的输入中保留尽量多项；后者需另一种排序目标。</p>
@@ -10261,13 +10261,13 @@
 <tbody>
 <tr>
 <td>排序 + 扫描</td>
-<td>O(n log n)</td>
-<td>O(n)（输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（输出）</td>
 </tr>
 <tr>
 <td>扫描线</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10275,13 +10275,13 @@
 <ul>
 <li><strong>合并时必须 <code>max(res[-1][1], end)</code></strong>，不能直接赋值。<strong>这是本题最经典的错误。</strong></li>
 <li><strong>必须先排序</strong>（按左端点）。</li>
-<li>判断条件是 <code>start &lt;= res[-1][1]</code>（带等号，首尾相接也算重叠）。</li>
+<li>判断条件是 <span class="arithmatex">\(\mathrm{start} \le \mathrm{res}[-1][1]\)</span>（带等号，首尾相接也算重叠）。</li>
 <li>空数组返回 <code>[]</code>；单区间直接返回它自己。</li>
 <li>返回的是<strong>二维数组</strong>，注意不要返回成区间数量的数组。</li>
 <li><strong>追问：如果区间数量极大、不能一次性载入内存？</strong> → 需要外部排序 + 流式合并。</li>
-<li><strong>追问：如果要求"合并后区间的总长度"？</strong> → 把 <code>end - start + 1</code> 累加即可。</li>
+<li><strong>追问：如果要求"合并后区间的总长度"？</strong> → 把 <span class="arithmatex">\(\mathrm{end} - \mathrm{start} + 1\)</span> 累加即可。</li>
 <li><strong>追问：如果要求"合并后剩下的区间数最少/最多"？</strong> → 合并的结果是唯一的（对于给定的重叠定义），所以不存在最优化问题。</li>
-<li><strong>追问：这题和 57 Insert Interval 的关系？</strong> → <strong>56 需要排序，57 的输入已经有序所以能做到 O(n)</strong>。</li>
+<li><strong>追问：这题和 57 Insert Interval 的关系？</strong> → <strong>56 需要排序，57 的输入已经有序所以能做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>。</li>
 <li><strong>追问：扫描线写法和排序写法哪个更好？</strong> → 排序写法更短更快；<strong>扫描线写法的优势是可以直接推广到"同时最多有几个区间重叠"（253 题）</strong>。</li>
 </ul>
 <h2 id="_12">相关题目<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>

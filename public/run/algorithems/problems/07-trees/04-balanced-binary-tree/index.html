@@ -4393,10 +4393,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        朴素做法（O(n²)，会被追问）
+        朴素做法（\(\mathcal{O}(n^{2})\)，会被追问）
       
     </span>
   </a>
@@ -4404,10 +4404,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-1-on" class="md-nav__link">
+  <a href="#-1-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优化做法：一遍后序，用 -1 表示"已经不平衡"（O(n)）
+        优化做法：一遍后序，用 -1 表示"已经不平衡"（\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -4443,10 +4443,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：后序 + 哨兵值（推荐，O(n)）
+        解法一：后序 + 哨兵值（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -4454,10 +4454,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2_1" class="md-nav__link">
+  <a href="#mathcalon2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：自顶向下（O(n²)，思路直观）
+        解法二：自顶向下（\(\mathcal{O}(n^{2})\)，思路直观）
       
     </span>
   </a>
@@ -9981,10 +9981,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        朴素做法（O(n²)，会被追问）
+        朴素做法（\(\mathcal{O}(n^{2})\)，会被追问）
       
     </span>
   </a>
@@ -9992,10 +9992,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#-1-on" class="md-nav__link">
+  <a href="#-1-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优化做法：一遍后序，用 -1 表示"已经不平衡"（O(n)）
+        优化做法：一遍后序，用 -1 表示"已经不平衡"（\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：后序 + 哨兵值（推荐，O(n)）
+        解法一：后序 + 哨兵值（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10042,10 +10042,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2_1" class="md-nav__link">
+  <a href="#mathcalon2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：自顶向下（O(n²)，思路直观）
+        解法二：自顶向下（\(\mathcal{O}(n^{2})\)，思路直观）
       
     </span>
   </a>
@@ -10140,13 +10140,13 @@
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    4   4                  输出: false
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="on2">朴素做法（O(n²)，会被追问）<a class="headerlink" href="#on2" title="Permanent link">&para;</a></h3>
-<p>对每个节点调用一次"求高度"，检查 <code>|左高 - 右高| &lt;= 1</code>，再递归检查左右子树。这样每个节点的子树高度会被反复计算，重复严重。</p>
-<h3 id="-1-on">优化做法：一遍后序，用 -1 表示"已经不平衡"（O(n)）<a class="headerlink" href="#-1-on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon2">朴素做法（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，会被追问）<a class="headerlink" href="#mathcalon2" title="Permanent link">&para;</a></h3>
+<p>对每个节点调用一次"求高度"，检查 <span class="arithmatex">\(\vert 左高 - 右高\vert \le 1\)</span>，再递归检查左右子树。这样每个节点的子树高度会被反复计算，重复严重。</p>
+<h3 id="-1-mathcalon">优化做法：一遍后序，用 -1 表示"已经不平衡"（<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#-1-mathcalon" title="Permanent link">&para;</a></h3>
 <p>关键思想：<strong>在求高度的同时顺便判断平衡性</strong>，一旦发现不平衡就短路，把结果一路传上去。</p>
 <p>递归函数返回：</p>
 <ul>
-<li>子树高度（≥ 0），表示这棵子树平衡；</li>
+<li>子树高度（不小于 0），表示这棵子树平衡；</li>
 <li><strong>-1</strong>，表示这棵子树不平衡。</li>
 </ul>
 <p>父节点收到 -1 就直接返回 -1，不再继续计算。这就是"提前退出"。</p>
@@ -10163,12 +10163,12 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
 </span></code></pre></div>
-<p>这是"自底向上 + 短路优化"的标准写法，非常适合用来展示"如何把 O(n²) 优化到 O(n)"。</p>
+<p>这是"自底向上 + 短路优化"的标准写法，非常适合用来展示"如何把 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 优化到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>"。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>“高度平衡”要求每个节点的两侧高度差都≤1，只检查根会漏掉更深处的长链。后序函数一次返回两类信息之一：合法高度或不平衡标记。这相当于将 (是否平衡,高度) 压进一个返回值，−1 因为不是任何合法节点深度而可作为标记。</p>
-<p>接收到 −1 时先返回，不能继续用它与另一侧高度做减法，把“不平衡”误当成一个很矮的子树。与直径题相同，两者都复用求高度过程；区别在于本题是全称约束，只要一处失败就整体失败，直径则需要比较所有候选的最大值。</p>
+<p>“高度平衡”要求每个节点的两侧高度差都不大于1，只检查根会漏掉更深处的长链。后序函数一次返回两类信息之一：合法高度或不平衡标记。这相当于将 (是否平衡,高度) 压进一个返回值，-1 因为不是任何合法节点深度而可作为标记。</p>
+<p>接收到 -1 时先返回，不能继续用它与另一侧高度做减法，把“不平衡”误当成一个很矮的子树。与直径题相同，两者都复用求高度过程；区别在于本题是全称约束，只要一处失败就整体失败，直径则需要比较所有候选的最大值。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="on">解法一：后序 + 哨兵值（推荐，O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法一：后序 + 哨兵值（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isBalanced</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">height</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10186,7 +10186,7 @@
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="k">return</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
-<h3 id="on2_1">解法二：自顶向下（O(n²)，思路直观）<a class="headerlink" href="#on2_1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon2_1">解法二：自顶向下（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，思路直观）<a class="headerlink" href="#mathcalon2_1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isBalanced</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">height</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
@@ -10224,27 +10224,27 @@
 <tbody>
 <tr>
 <td>后序 + 短路</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>自顶向下</td>
-<td>O(n²)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>返回元组</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>用 -1 当哨兵时，所有用到高度的地方都要先检查 <code>== -1</code></strong>，不能把它当成普通高度参与比较。</li>
-<li>高度差的条件是 <code>&gt; 1</code>（即允许 0 或 1）。</li>
+<li><strong>用 -1 当哨兵时，所有用到高度的地方都要先检查 <span class="arithmatex">\(= -1\)</span></strong>，不能把它当成普通高度参与比较。</li>
+<li>高度差的条件是 <span class="arithmatex">\(&gt; 1\)</span>（即允许 0 或 1）。</li>
 <li>空树、单节点都是平衡的。</li>
-<li><strong>追问：为什么自顶向下是 O(n²)？</strong> → 每个节点的子树高度被重复计算：根一次 O(n)，两个孩子各一次 O(n/2)……链状树退化到 O(n²)。</li>
+<li><strong>追问：为什么自顶向下是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>？</strong> → 每个节点的子树高度被重复计算：根一次 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，两个孩子各一次 <span class="arithmatex">\(\mathcal{O}(n/2)\)</span>……链状树退化到 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
 <li><strong>追问：什么是 AVL 树？</strong> → 严格定义的 AVL 树要求每个节点高度差不超过 1，并且通过旋转<strong>动态维护</strong>平衡。本题只要求判断，不要求维护。</li>
 <li><strong>追问：这题和 104 的关系？</strong> → 本题的解法就是"在 104 的框架里加上平衡检查和短路"。</li>
 </ul>

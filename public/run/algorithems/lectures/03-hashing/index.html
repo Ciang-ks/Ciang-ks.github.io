@@ -10032,7 +10032,7 @@
 <h1 id="3">第 3 讲 · 哈希表<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 2 讲：数组槽位与摊销；本讲再引入期望。</p>
 <p><strong>首读范围</strong>：先用字典写 Two Sum，再看冲突小例子，再选读随机哈希函数族。</p>
-<p>第 2 讲用下标读取数组元素，但很多查询给出的并不是下标。例如学生名单按录入顺序保存时，已知学号、想查姓名，就不能直接知道该读第几格；逐条核对学号需要 O(n) 时间。我们希望建立“学号到姓名”的对应关系，直接按学号查询。</p>
+<p>第 2 讲用下标读取数组元素，但很多查询给出的并不是下标。例如学生名单按录入顺序保存时，已知学号、想查姓名，就不能直接知道该读第几格；逐条核对学号需要 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间。我们希望建立“学号到姓名”的对应关系，直接按学号查询。</p>
 <p><strong>键、值、集合先分清。</strong> 字典 <code>{学号: 姓名}</code> 的键是查询时提供的标识，值是找到后返回的资料。对同一个键再次赋值，会更新它的值。集合只记录一个值在不在，适合“这个学号是否已经出现过”这种不需要取出附加资料的问题。下面先学会调用它们，再解释内部如何实现。</p>
 <p>先熟悉 Python 的字典与集合接口：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">students</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20210001</span><span class="p">:</span> <span class="s1">'小林'</span><span class="p">}</span>
@@ -10046,8 +10046,8 @@
 <p>空集合要写 <code>set()</code>，<code>{}</code> 是空字典。<code>seen.remove(3)</code> 删除集合里的 3（要求它已存在）。字典的 <code>students.get(学号, 默认值)</code> 在键不存在时返回默认值，已有键则返回对应资料；这让后面的计数可以从 0 起步。</p>
 <h2 id="_1">用字典解决“两数之和”<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>回到第 1 讲的 Two Sum：输入整数数组 nums 和目标值 target，返回两个<strong>不同下标</strong>，使对应数值之和等于 target。例如 <code>[2,7,11,15]</code>、target=9 返回 <code>[0,1]</code>，而不是返回数值 <code>[2,7]</code>。有多组时返回任意一组；本函数约定无解时返回 <code>[]</code>。</p>
-<p>暴力枚举的是<strong>所有不同的下标对</strong>：先试下标 0 与 1、2、3，再试下标 1 与 2、3，最后试 2 与 3；每次检查两个数的和。长度为 n 时，最多检查 <code>n(n−1)/2</code> 对。</p>
-<p>为了减少这些检查，换成从左往右扫描。扫描到当前值 x 时，另一个数必须是 <code>target−x</code>，我们把它叫作补数。例如扫描到 7 时，目标是 9，就只需要知道前面有没有 2，无须再与前面的每个值分别相加。</p>
+<p>暴力枚举的是<strong>所有不同的下标对</strong>：先试下标 0 与 1、2、3，再试下标 1 与 2、3，最后试 2 与 3；每次检查两个数的和。长度为 n 时，最多检查 <span class="arithmatex">\(n(n-1)/2\)</span> 对。</p>
+<p>为了减少这些检查，换成从左往右扫描。扫描到当前值 x 时，另一个数必须是 <span class="arithmatex">\(\mathrm{target}-x\)</span>，我们把它叫作补数。例如扫描到 7 时，目标是 9，就只需要知道前面有没有 2，无须再与前面的每个值分别相加。</p>
 <p>因此用字典 <code>seen</code> 保存“之前出现的数值 → 它的下标”。键用来判断补数是否存在，值用来构造题目要求的下标答案：</p>
 <table>
 <thead>
@@ -10086,10 +10086,10 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">seen</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>                 <span class="c1"># 后写</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">return</span> <span class="p">[]</span>
 </span></code></pre></div>
-<p>这里 <code>seen={}</code> 创建的是字典，用来保存数值和下标；若只想判断某个值出现过没有，可以像开头那样用集合。<code>enumerate(nums)</code> 依次给出下标 i 和数值 x；<code>need in seen</code> 检查键是否存在，<code>seen[need]</code> 取出对应下标。先按“单次字典查询或写入的平均成本为常数”估算：每轮固定几次字典操作，整段扫描的时间期望为 O(n)，最多保存 n 个键，空间为 O(n)。这里的期望是平均保证，不保证每次操作都很快；下面会说明这个平均依赖什么条件。</p>
+<p>这里 <code>seen={}</code> 创建的是字典，用来保存数值和下标；若只想判断某个值出现过没有，可以像开头那样用集合。<code>enumerate(nums)</code> 依次给出下标 i 和数值 x；<code>need in seen</code> 检查键是否存在，<code>seen[need]</code> 取出对应下标。先按“单次字典查询或写入的平均成本为常数”估算：每轮固定几次字典操作，整段扫描的时间期望为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，最多保存 n 个键，空间为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。这里的期望是平均保证，不保证每次操作都很快；下面会说明这个平均依赖什么条件。</p>
 <h2 id="_2">字典内部怎样按键定位<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>刚才只用了字典的接口。Python 字典通过哈希表组织键，下面从一个更简单的数组方案开始，逐步理解为什么需要哈希表。</p>
-<p>要在 100 万条记录里反复查询"学号是 20210001 的学生叫什么"，我们希望查找、插入、删除都接近 O(1)。</p>
+<p>要在 100 万条记录里反复查询"学号是 20210001 的学生叫什么"，我们希望查找、插入、删除都接近 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>最直接的方案是<strong>直接访问数组</strong>：把键当数组下标。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DirectAccessArray</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">):</span>
@@ -10099,84 +10099,85 @@
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </span></code></pre></div>
-<p>三个操作全是 O(1)，很理想。但它有两个毛病：键必须是非负整数且不能太大；而且<strong>空间的规模等于键的取值范围</strong>。如果键是 9 位学号，就要开十亿个格子，哪怕只存 100 个学生。</p>
+<p>三个操作全是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，很理想。但它有两个毛病：键必须是非负整数且不能太大；而且<strong>空间的规模等于键的取值范围</strong>。如果键是 9 位学号，就要开十亿个格子，哪怕只存 100 个学生。</p>
 <h2 id="_3">把大键压到小范围里<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>既然是"键太大放不下"，那就用一个函数把大键压缩到一个小范围：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>h(k) = k mod m
-</span></code></pre></div>
+<div class="arithmatex">\[
+h(k)=k\bmod m
+\]</div>
 <p><code>m</code> 是表的槽位数，mod 表示取余，对应 Python 的 <code>%</code>。压缩必然会撞车——<code>m = 10</code> 时 <code>17</code> 和 <code>27</code> 都落到 7。冲突处理解决“挤在同一个槽里怎么办”；分布假设与扩缩容解决“会不会挤得太厉害”。三者要一起考虑。</p>
 <p>不同键可以同槽，但“哈希位置相同”不表示“键相同”，查找时仍须比较原键。</p>
 <p>最自然的处理方式是"撞了就排队"：每个槽位挂一条链，所有映射到该槽位的键都挂在同一条链上。这就是<strong>链式哈希</strong>。</p>
-<p>设表长 <code>m</code>、元素数 <code>n</code>，<strong>装载因子</strong> <code>α=n/m</code> 是每个槽平均分到的元素数。它不是每条链长度的上限：4 个元素、4 个槽也可能全挤在同一个槽。</p>
+<p>设表长 <code>m</code>、元素数 <code>n</code>，<strong>装载因子</strong> <span class="arithmatex">\(\alpha =n/m\)</span> 是每个槽平均分到的元素数。它不是每条链长度的上限：4 个元素、4 个槽也可能全挤在同一个槽。</p>
 <p>例如 n=4、m=8，平均每槽只有 0.5 个键，但仍可能有某一槽装 4 个。“平均分配量小”本身不能排除拥挤，还需要哈希分布的保证。</p>
 <p>先看查询实际做什么：算出槽位，随后逐个比较该槽中的键。沿用 m=10、h(k)=k mod 10，例如槽 7 存着 <code>[(17,"甲"),(27,"乙")]</code>，查 27 就先跳过 17，再返回“乙”；查 37 则要看完整个槽才知道不存在。下面用列表保存每个槽中的记录，变量 chain 指的就是这份列表，尚不需要手写第 4 讲的链表。</p>
-<p>查询成本因此等于“定位槽位的固定开销 + 检查该槽的记录数”。若不同键的碰撞概率至多 <code>1/m</code>，一次查询的期望代价是 <code>O(1+α)</code>。这里的期望来自随机哈希函数的选择，不保证每次查询都快。代码的 <code>insert</code> 先查重再写入，因此也要扫描链；扩容还需重新分配全部键。维持 <code>m=Θ(n)</code> 时，查询期望 O(1)，连续插入可做到<strong>期望摊销 O(1)</strong>，单次最坏仍可为 O(n)。</p>
+<p>查询成本因此等于“定位槽位的固定开销 + 检查该槽的记录数”。若不同键的碰撞概率至多 <span class="arithmatex">\(1/m\)</span>，一次查询的期望代价是 <span class="arithmatex">\(\mathcal{O}(1+\alpha )\)</span>。这里的期望来自随机哈希函数的选择，不保证每次查询都快。代码的 <code>insert</code> 先查重再写入，因此也要扫描链；扩容还需重新分配全部键。维持 <span class="arithmatex">\(m=\Theta (n)\)</span> 时，查询期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，连续插入可做到<strong>期望摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span></strong>，单次最坏仍可为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p>下面建表时用普通循环，每轮 <code>append([])</code> 都新建一条独立的空链。<code>_</code> 只是一个合法变量名，表示这轮不需要使用它的值。Python 内建的 <code>hash(key)</code> 把可哈希的键（如整数、字符串）变成整数，再对 m 取余得到槽位；它不是前文漏写的函数。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ChainedHashTable</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">chain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                <span class="k">return</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">])</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">:</span>                      <span class="c1"># 装载因子超过 2 就扩容</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash</span><span class="p">(</span><span class="n">key</span><span class="p">)]:</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>                <span class="k">return</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="k">return</span> <span class="kc">None</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_m</span><span class="p">):</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>        <span class="n">old</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>            <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>                <span class="n">old</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">new_m</span><span class="p">,</span> <span class="mi">0</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">new_m</span><span class="p">):</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">old</span><span class="p">:</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>                  <span class="c1"># 容量变了，必须重新哈希</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ChainedHashTable</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="n">chain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>                <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                <span class="k">return</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">])</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">:</span>                      <span class="c1"># 装载因子超过 2 就扩容</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash</span><span class="p">(</span><span class="n">key</span><span class="p">)]:</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>                <span class="k">return</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="k">return</span> <span class="kc">None</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_m</span><span class="p">):</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>        <span class="n">old</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>            <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>                <span class="n">old</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">new_m</span><span class="p">,</span> <span class="mi">0</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">new_m</span><span class="p">):</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">old</span><span class="p">:</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>                  <span class="c1"># 容量变了，必须重新哈希</span>
 </span></code></pre></div>
 <p>后续会遇到同一建表过程的简写：<code>table=[[] for _ in range(m)]</code>，叫作<strong>列表推导式</strong>。方括号中的 <code>for</code> 仍按顺序循环，每轮把前面的表达式 <code>[]</code> 算一次并收进结果，所以每条链仍是独立列表。它与上面的循环含义相同。若写成 <code>[[]] * m</code>，却会重复引用同一条链，修改一个槽会影响其他槽。</p>
 <p>这份教学实现用 None 表示“没找到”，因此约定不存值为 None 的记录，构造时 m 必须为正。<code>hash(key) % m</code> 用来演示分桶流程，本身不保证对任意输入均匀分布。</p>
-<p><strong>“期望”不是每次保证。</strong> 若掷公平骰子，长期平均点数为 <code>(1+2+3+4+5+6)/6=3.5</code>，但没有哪次真掷出3.5。哈希表的期望分析也在对可能的随机选择取加权平均；第2讲摊销则把一串操作的总成本平摊，不必掷骰子。这两种平均不能互换。</p>
+<p><strong>“期望”不是每次保证。</strong> 若掷公平骰子，长期平均点数为 <span class="arithmatex">\((1+2+3+4+5+6)/6=3.5\)</span>，但没有哪次真掷出3.5。哈希表的期望分析也在对可能的随机选择取加权平均；第2讲摊销则把一串操作的总成本平摊，不必掷骰子。这两种平均不能互换。</p>
 <h2 id="_4">选读：怎样保证期望查找成本<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>前面用到了“碰撞概率至多 1/m”。下面说明这项概率保证从哪里来，以及它能推出什么。</p>
 <blockquote>
 <p><strong>简单均匀哈希假设（SUHA）</strong>：每个键被独立、等概率地映射到 m 个槽位中的任意一个，与其他键无关。</p>
 </blockquote>
-<p>先解释“不成功查询”：查一个不在表内的键 q，若它落到某条链，要逐个比较该链全部键。每个已有键与 q 同槽的概率为 <code>1/m</code>，加起来期望为 <code>n/m=α</code>，再加定位槽的常数开销。</p>
-<p>成功查询要区分两个量。独立均匀分桶时，一个随机已存键所在链的期望长度是 <code>1+(n−1)/m</code>，其中 1 是它自己。<strong>查找不会总走到链尾</strong>：若每个已存键等概率被查询，且链顺序与哈希结果无关，期望比较次数为 <code>1+(n−1)/(2m)</code>。不要把“链有多长”直接当成“找到它走了多远”。</p>
-<p>现实中的确定性取模不自带随机保证。即使用素数 m，键 <code>m,2m,3m</code> 仍全撞在槽 0。取素数能缓解某些规律输入，不能证明最坏 O(1)。<strong>全域哈希</strong>则是在输入固定、且输入不依赖所抽函数的前提下，随机抽函数，使任意不同键碰撞的概率不超过 <code>1/m</code>；这足够推出期望查询界。若攻击者可观察函数后自适应构造输入，需要另行分析。</p>
+<p>先解释“不成功查询”：查一个不在表内的键 q，若它落到某条链，要逐个比较该链全部键。每个已有键与 q 同槽的概率为 <span class="arithmatex">\(1/m\)</span>，加起来期望为 <span class="arithmatex">\(n/m=\alpha\)</span>，再加定位槽的常数开销。</p>
+<p>成功查询要区分两个量。独立均匀分桶时，一个随机已存键所在链的期望长度是 <span class="arithmatex">\(1+(n-1)/m\)</span>，其中 1 是它自己。<strong>查找不会总走到链尾</strong>：若每个已存键等概率被查询，且链顺序与哈希结果无关，期望比较次数为 <span class="arithmatex">\(1+(n-1)/(2m)\)</span>。不要把“链有多长”直接当成“找到它走了多远”。</p>
+<p>现实中的确定性取模不自带随机保证。即使用素数 m，键 <code>m,2m,3m</code> 仍全撞在槽 0。取素数能缓解某些规律输入，不能证明最坏 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。<strong>全域哈希</strong>则是在输入固定、且输入不依赖所抽函数的前提下，随机抽函数，使任意不同键碰撞的概率不超过 <span class="arithmatex">\(1/m\)</span>；这足够推出期望查询界。若攻击者可观察函数后自适应构造输入，需要另行分析。</p>
 <p>第一次阅读可以先掌握 Python <code>dict</code> 的键值接口和 Two Sum，把随机函数族作为选读。</p>
 <h2 id="_5">不用链表的另一种活法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><img alt="冲突处理：链地址法与开放寻址" src="../images/03-hashing.svg" /></p>
 <p>链式哈希要额外维护链表。<strong>开放寻址</strong>换个思路：所有元素直接存在数组里，冲突了就往后找空位。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>insert(k, v):
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    i = h(k)
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    while A[i] is not None and A[i][0] != k:
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        i = (i + 1) mod m
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    A[i] = (k, v)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>insert(k, v):
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    i = h(k)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    while A[i] is not None and A[i][0] != k:
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        i = (i + 1) mod m
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    A[i] = (k, v)
 </span></code></pre></div>
 <p>上面的伪代码只演示<strong>尚未发生删除</strong>时的插入或更新，假定至少有一个空槽；槽里存 <code>(键,值)</code>，所以用 <code>[0]</code> 比较键。若还要支持删除，下面就会遇到一个新问题。比如 m=5，键 5、10 都从槽 0 开始探测，分别占槽 0、1；删除 5 后若把槽 0 直接当成“从未用过”，查 10 就会在槽 0 提前停止。墓碑表示“这里删过元素，查找还要继续”，插入时又可复用。</p>
-<p>它采用连续槽位，通常有利于局部访问；代价是需要墓碑、预留空位与及时扩容来维持探测过程。适合的阈值取决于探测策略；线性探测还会出现一长串相邻占用槽的“聚集”，不能用统一的 <code>1/(1−α)</code> 公式估计所有查询。</p>
-<p>空间上，链式哈希要 <code>Θ(n + m)</code> 个格子（含指针），开放寻址只要 <code>Θ(m)</code>，开放寻址通常省掉了逐节点指针，但实际内存还取决于预留容量和实现。</p>
+<p>它采用连续槽位，通常有利于局部访问；代价是需要墓碑、预留空位与及时扩容来维持探测过程。适合的阈值取决于探测策略；线性探测还会出现一长串相邻占用槽的“聚集”，不能用统一的 <span class="arithmatex">\(1/(1-\alpha )\)</span> 公式估计所有查询。</p>
+<p>空间上，链式哈希要 <span class="arithmatex">\(\Theta (n + m)\)</span> 个格子（含指针），开放寻址只要 <span class="arithmatex">\(\Theta (m)\)</span>，开放寻址通常省掉了逐节点指针，但实际内存还取决于预留容量和实现。</p>
 <h2 id="_6">一个具体的小例子<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p><code>m = 7</code>，<code>h(k) = k mod 7</code>，依次插入 <code>50, 700, 76, 85, 92, 73, 101</code>：</p>
+<p><code>m = 7</code>，<span class="arithmatex">\(h(k)=k\bmod 7\)</span>，依次插入 <code>50, 700, 76, 85, 92, 73, 101</code>：</p>
 <table>
 <thead>
 <tr>
@@ -10223,23 +10224,23 @@
 </tr>
 </tbody>
 </table>
-<p>表的样子是 <code>0:[700] 1:[50,85,92] 2:[] 3:[73,101] 4:[] 5:[] 6:[76]</code>。此时 <code>n = m = 7</code>，<code>α = 1</code>。查找 <code>92</code> 要走三步（50 → 85 → 92）——这说明 α=1 也不表示每次查询只比较一次。</p>
+<p>表的样子是 <code>0:[700] 1:[50,85,92] 2:[] 3:[73,101] 4:[] 5:[] 6:[76]</code>。此时 <span class="arithmatex">\(n = m = 7\)</span>，<span class="arithmatex">\(\alpha = 1\)</span>。查找 <code>92</code> 要走三步（50 → 85 → 92）——这说明 <span class="arithmatex">\(\alpha=1\)</span> 也不表示每次查询只比较一次。</p>
 <h2 id="_7">字符串的哈希函数怎么写<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>字符串不是一个可直接取余的整数，需要先把字符变成数。Python 的 <code>ord(c)</code> 返回单个字符的编码，例如 ord('a')=97、ord('b')=98。把所有字符编码相加可以作为哈希函数，但分布可能很差：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">hash_by_sum</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">return</span> <span class="n">total</span>                 <span class="c1"># "ab" 和 "ba" 必碰撞，仍须比较原键</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">hash_by_sum</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">return</span> <span class="n">total</span>                 <span class="c1"># "ab" 和 "ba" 必碰撞，仍须比较原键</span>
 </span></code></pre></div>
 <p>一种更能区分字符位置的做法是<strong>多项式哈希</strong>（也可用于滚动更新）：让每个字符参与运算，且位置影响权重。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">hash_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">131</span><span class="p">,</span> <span class="n">mod</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">61</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">return</span> <span class="n">h</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">hash_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">131</span><span class="p">,</span> <span class="n">mod</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">61</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">return</span> <span class="n">h</span>
 </span></code></pre></div>
-<p><code>p=131</code> 是示例基数，不比所有 Unicode 字符编码都大。对 <code>"ab"</code>，结果在取模前是 <code>ord('a')×131+ord('b')</code>；换成 <code>"ba"</code> 权重不同。但取模后仍可能碰撞，必须保留原键并比较。字符串长度为 L 时，首次计算这类哈希需 O(L)，不能把所有字符串操作当 O(1)。示例用 Python 大整数计算，中间乘积也不保证装得进 64 位。</p>
+<p><code>p=131</code> 是示例基数，不比所有 Unicode 字符编码都大。对 <code>"ab"</code>，结果在取模前是 <code>ord('a')*131+ord('b')</code>；换成 <code>"ba"</code> 权重不同。但取模后仍可能碰撞，必须保留原键并比较。字符串长度为 L 时，首次计算这类哈希需 <span class="arithmatex">\(\mathcal{O}(L)\)</span>，不能把所有字符串操作当 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。示例用 Python 大整数计算，中间乘积也不保证装得进 64 位。</p>
 <p>读懂后续代码的一种简写：<code>sum(ord(c) for c in s)</code> 与前面的循环累加相同，表示逐个取字符、算编码，再交给 sum 相加。<code>表达式 for 变量 in 序列</code> 放在这种括号里叫生成器表达式，它按需逐个给出结果，不先建完整列表。类似地，<code>any(条件 for x in A)</code> 逐项检查，遇到一个真就停止；<code>[表达式 for x in A if 条件]</code> 则只把符合条件的结果收进新列表。可以先写成普通循环理解，再使用这些简写。</p>
 <h2 id="_8">从讲义走到代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>用用户 ID 查记录是按键查询，哈希表直接匹配这种需求。</p>
@@ -10254,7 +10255,7 @@
 <p><strong>2.</strong> 改成每个球独立、均匀选 m 个桶，重算这两个量。后者等于成功查找比较次数吗？</p>
 <details>
 <summary>解答</summary>
-<p>分别为 <code>n/m</code> 与 <code>1+(n−1)/m</code>。第二个数是整条链的长度，查询未必要走完整条链；正文解释了均匀选择已存键时的期望查找位置。</p>
+<p>分别为 <span class="arithmatex">\(n/m\)</span> 与 <span class="arithmatex">\(1+(n-1)/m\)</span>。第二个数是整条链的长度，查询未必要走完整条链；正文解释了均匀选择已存键时的期望查找位置。</p>
 </details>
 <p><strong>3.</strong> 取模的 m 为素数就不会退化吗？</p>
 <details>
@@ -10262,10 +10263,10 @@
 <p>仍会。m=7，键 7、14、21 都落到槽 0。选素数不是对任意输入的分布保证。</p>
 </details>
 <p><strong>4.</strong> 为什么扩容时必须重新哈希所有元素，而不能直接把旧表的内容搬过去？</p>
-<p>因为 <code>h(k) = k mod m</code> 依赖 <code>m</code>，m 改变后，键的目标槽位可能改变，必须逐键重算。例如键 10 在表长 5 时落槽 0，在表长 8 时落槽 2；键 1 则都落槽 1。</p>
-<p><strong>5.</strong> 手写 Two Sum：给定数组和目标值，返回两个数的下标，要求 O(n)。</p>
+<p>因为 <span class="arithmatex">\(h(k)=k\bmod m\)</span> 依赖 <code>m</code>，m 改变后，键的目标槽位可能改变，必须逐键重算。例如键 10 在表长 5 时落槽 0，在表长 8 时落槽 2；键 1 则都落槽 1。</p>
+<p><strong>5.</strong> 手写 Two Sum：给定数组和目标值，返回两个数的下标，要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p>遮住上面的实现，从“遍历当前值→查补数→记录当前下标”三步重写，再用 <code>[3,3]</code> 与 <code>[3]</code> 检查是否重复使用同一位置。</p>
-<p><strong>"先查后写"是这套模板的要点。</strong> 如果先写再查，当 <code>target = 2x</code> 且数组里只有一个 <code>x</code> 时，会把同一个元素配给自己，返回 <code>[i, i]</code>。</p>
+<p><strong>"先查后写"是这套模板的要点。</strong> 如果先写再查，当 <span class="arithmatex">\(\mathrm{target} = 2x\)</span> 且数组里只有一个 <code>x</code> 时，会把同一个元素配给自己，返回 <code>[i, i]</code>。</p>
 
 
 

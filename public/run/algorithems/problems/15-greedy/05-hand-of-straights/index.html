@@ -10147,7 +10147,7 @@
 </ol>
 <p><strong>为什么这样贪心是对的？</strong> 因为"当前最小值必须当起点"这个约束是<strong>强制</strong>的，没有选择的余地。所以这一步牌面选择是强制的；重复应用后即可判断能否全部分组。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>这是可行性判断，没有“得分最大”的目标。最小剩余牌 x 不可能充当某组中间值，因为那将要求仍有小于 x 的剩余牌，所以它所在组的牌面被强制确定为 x..x+groupSize−1。移除这组后，对剩余牌应用同样论证即可。</p>
+<p>这是可行性判断，没有“得分最大”的目标。最小剩余牌 x 不可能充当某组中间值，因为那将要求仍有小于 x 的剩余牌，所以它所在组的牌面被强制确定为 x..x+groupSize-1。移除这组后，对剩余牌应用同样论证即可。</p>
 <p>重复牌应通过计数保留，例如 [1,1,2,2,3,3]、组长 3 必须构造两组，而集合会误丢数量。先处理最小剩余值可防止把本该接在低值后面的牌提前消耗。若某张必要牌缺失，换个组装顺序也救不回来；但若规则允许组内有缺口，这份强制选择依据就不成立。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">解法一：计数 + 按牌面顺序分组（推荐）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -10227,13 +10227,13 @@
 <tbody>
 <tr>
 <td>计数 + 分组</td>
-<td>O(n log n + n · groupSize)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n + n \cdot groupSize)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>解法三（批量扣减）</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10241,7 +10241,7 @@
 <ul>
 <li><strong><code>len(hand) % groupSize != 0</code> 要提前返回 <code>False</code></strong>。</li>
 <li><strong>必须用 <code>while</code> 而不是 <code>if</code></strong>（同一个值可能要开多组）。</li>
-<li><strong><code>count[k] &lt;= 0</code> 而不是 <code>k not in count</code></strong>：因为用 <code>Counter</code> 访问不存在的键会返回 0，但 <code>count.get(k, 0)</code> 更明确。</li>
+<li><strong><span class="arithmatex">\(\mathrm{count}[k] \le 0\)</span> 而不是 <code>k not in count</code></strong>：因为用 <code>Counter</code> 访问不存在的键会返回 0，但 <code>count.get(k, 0)</code> 更明确。</li>
 <li>题目<strong>不保证</strong>手牌是有序的，所以必须排序。</li>
 <li><strong>追问：为什么不能反着来（从最大的牌开始）？</strong> → 也可以，但"最小值必须当起点"这个约束让正向更自然。</li>
 <li><strong>追问：如果 groupSize = 1？</strong> → 永远返回 <code>True</code>（每张牌自成一组）。</li>

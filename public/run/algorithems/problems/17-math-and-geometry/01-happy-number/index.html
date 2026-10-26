@@ -8237,10 +8237,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bfloyd-o1" class="md-nav__link">
+  <a href="#bfloyd-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：快慢指针（Floyd 判圈，O(1) 空间）
+        方案 B：快慢指针（Floyd 判圈，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -8287,10 +8287,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：快慢指针（O(1) 空间）
+        解法二：快慢指针（\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bfloyd-o1" class="md-nav__link">
+  <a href="#bfloyd-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：快慢指针（Floyd 判圈，O(1) 空间）
+        方案 B：快慢指针（Floyd 判圈，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10064,10 +10064,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：快慢指针（O(1) 空间）
+        解法二：快慢指针（\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10153,12 +10153,12 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">核心观察：过程一定会进入循环<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>因为每一位数字平方后的和会<strong>迅速变小</strong>（对一个三位数来说，最大是 <code>3 × 9² = 243</code>），所以这个序列会很快进入一个有限范围内，<strong>必然出现循环</strong>。</p>
+<p>因为每一位数字平方后的和会<strong>迅速变小</strong>（对一个三位数来说，最大是 <span class="arithmatex">\(3 \times 9^{2} = 243\)</span>），所以这个序列会很快进入一个有限范围内，<strong>必然出现循环</strong>。</p>
 <p>于是问题变成：<strong>判断这个序列是循环到 1，还是循环到别的数字？</strong></p>
 <h3 id="a">方案 A：哈希集合记录出现过的数<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
 <p>一边计算一边把数字存入集合；如果遇到 1 → 返回 <code>True</code>；如果遇到已经出现过的数 → 说明进入循环，返回 <code>False</code>。</p>
-<p>时间 O(log n)，空间 O(log n)。</p>
-<h3 id="bfloyd-o1">方案 B：快慢指针（Floyd 判圈，O(1) 空间）<a class="headerlink" href="#bfloyd-o1" title="Permanent link">&para;</a></h3>
+<p>时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
+<h3 id="bfloyd-mathcalo1">方案 B：快慢指针（Floyd 判圈，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#bfloyd-mathcalo1" title="Permanent link">&para;</a></h3>
 <p>把"计算下一个数"看作链表上的 <code>next</code>，那么这个问题就是<strong>判断链表是否有环 + 环的入口是不是 1</strong>：</p>
 <ul>
 <li>快指针每次走两步，慢指针走一步；</li>
@@ -10166,7 +10166,7 @@
 </ul>
 <p><strong>这是 141 Linked List Cycle 的"函数版"</strong>——链表的 <code>next</code> 变成了"平方和函数"。<strong>能把两个不同领域的问题识别为同一个数学模型，是这道题最大的收获。</strong></p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>平方和函数为每个正整数指定唯一后继，所以能把数列看成一条函数图路径。d 位十进制数的后继最多为 81d，而 d≥4 时 81d&lt;10^(d−1)，因此大数会逐步变短；进入三位数范围后，下次至多 243，此后不会再离开一个固定有限范围。有限状态加确定后继，才保证最终重复。</p>
+<p>平方和函数为每个正整数指定唯一后继，所以能把数列看成一条函数图路径。d 位十进制数的后继最多为 81d，而 <span class="arithmatex">\(d\ge4\)</span> 时 <span class="arithmatex">\(81d&lt;10^{d-1}\)</span>，因此大数会逐步变短；进入三位数范围后，下次至多 243，此后不会再离开一个固定有限范围。有限状态加确定后继，才保证最终重复。</p>
 <p>1 的后继仍是 1，所以快乐路径最终落入自环 {1}；非快乐路径进入其他环。这解释了快慢指针相遇后只查是否为 1 就够，不必再另找入口。集合版更容易展示具体路径，快慢指针版节省保存历史的空间；两者利用的都是相同的函数图结构，而非数字题特有的模板。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：哈希集合（推荐，最直观）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -10186,7 +10186,7 @@
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="n">n</span> <span class="o">=</span> <span class="n">next_num</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="k">return</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>
 </span></code></pre></div>
-<h3 id="o1">解法二：快慢指针（O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法二：快慢指针（<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isHappy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">next_num</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10229,13 +10229,13 @@
 <tbody>
 <tr>
 <td>哈希集合</td>
-<td>O(log n)</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>快慢指针</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10244,7 +10244,7 @@
 <li><strong><code>n = 1</code> 时直接返回 <code>True</code></strong>。</li>
 <li><strong>取各位数字的循环 <code>while x:</code> 在 <code>x = 0</code> 时不执行</strong>，这对本题来说是正确的（0 不是快乐数）。</li>
 <li>快慢指针的写法里，<code>fast</code> 的初值是 <code>next_num(n)</code>，循环条件要包含 <code>fast != 1</code>（提前退出）。</li>
-<li><strong>追问：为什么一定会进入循环？</strong> → 因为平方和函数把数映射到有限范围内（比如 32 位整数最多映射到 <code>10 × 81 = 810</code>），<strong>有限集合上的迭代必然出现重复</strong>。<strong>这个论证很关键。</strong></li>
+<li><strong>追问：为什么一定会进入循环？</strong> → 因为平方和函数把数映射到有限范围内（比如 32 位整数最多映射到 <span class="arithmatex">\(10 \times 81 = 810\)</span>），<strong>有限集合上的迭代必然出现重复</strong>。<strong>这个论证很关键。</strong></li>
 <li><strong>追问：这题和 141 Linked List Cycle 的关系？</strong> → 完全同一个问题，只是 <code>next</code> 函数不同。<strong>"把问题抽象成函数迭代 + 判环"是本题的思维价值。</strong></li>
 <li><strong>追问：如果要求返回这个循环里所有的数？</strong> → 用哈希集合记录路径，遇到重复时输出从首次出现到当前的部分。</li>
 </ul>

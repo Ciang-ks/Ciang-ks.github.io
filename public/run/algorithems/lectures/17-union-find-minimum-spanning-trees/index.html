@@ -9991,10 +9991,10 @@
 <p>这一讲有两个看起来无关的问题。</p>
 <p><strong>问题一（动态连通性）</strong>：有一张图，边一条一条加进来。每加一条之后，快速回答"某两个点现在连通吗"。</p>
 <p><strong>问题二（最小生成树）</strong>：给定带权连通无向图，选择一棵覆盖全部顶点的树，使它的<strong>边权总和最小</strong>。边权可表示铺设一条线路的费用；树要求连通且无环。例如三个地点之间的费用为 A—B=1、B—C=2、A—C=4，只铺前两条就能连通全部地点，总费用为 3。</p>
-<p>生成树先要求覆盖全部顶点、连通且无环，因此恰有 |V|−1 条边。<strong>最小</strong>是在所有生成树中比较边权总和，并不是边数更少。形式定义为：<code>V_T = V</code>、<code>E_T ⊆ E</code>、无环连通、<code>Σ w_e</code> 最小。在看算法之前值得自己先脑暴一下：<strong>能不能贪心？取边还是取顶点？怎么取？</strong> 这里没有标准答案，好几种做法都对。</p>
+<p>生成树先要求覆盖全部顶点、连通且无环，因此恰有 |V|-1 条边。<strong>最小</strong>是在所有生成树中比较边权总和，并不是边数更少。形式定义为：<span class="arithmatex">\(V_T=V\)</span>、<span class="arithmatex">\(E_T\subseteq E\)</span>、无环连通、<span class="arithmatex">\(\sum_{e\in E_T}w_e\)</span> 最小。在看算法之前值得自己先脑暴一下：<strong>能不能贪心？取边还是取顶点？怎么取？</strong> 这里没有标准答案，好几种做法都对。</p>
 <p>这两个问题会在下面合流：<strong>Kruskal 求 MST 时的核心判断正是"这条边的两个端点是否已经连通"——那就是问题一要解决的事。</strong></p>
 <h2 id="_1">让“合并”也变快<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>先给动态连通性准备三个操作。<code>DSU(n)</code> 让编号 0..n−1 的点各自成组；<code>find(x)</code> 返回 x 所在组的代表编号，比较两个代表是否相同就能判断同组；<code>union(a,b)</code> 把两组并成一组，已经同组则不动。例如加入边 0—1、1—2 后，0、1、2 应在同一组，即使原图没有直接边 0—2，它们仍然连通。这里仅处理加边，暂不处理删边。</p>
+<p>先给动态连通性准备三个操作。<code>DSU(n)</code> 让编号 0..n-1 的点各自成组；<code>find(x)</code> 返回 x 所在组的代表编号，比较两个代表是否相同就能判断同组；<code>union(a,b)</code> 把两组并成一组，已经同组则不动。例如加入边 0—1、1—2 后，0、1、2 应在同一组，即使原图没有直接边 0—2，它们仍然连通。这里仅处理加边，暂不处理删边。</p>
 <p><img alt="并查集：按大小合并与路径压缩" src="../images/17-union-find.svg" /></p>
 <p>维护动态连通性，最直接的想法是用数组 group 给每个元素记一个组号，初始 <code>group=list(range(n))</code>。下面的合并片段假定这个数组保存在 self.group 中；合并时，把第二组所有成员的组号改成第一组：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">union_naive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -10006,21 +10006,21 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ga</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p>查找是 O(1)，但合并是 <code>O(n)</code>。n 次合并就是 <code>O(n²)</code>。</p>
+<p>查找是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，但合并是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。n 次合并就是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</p>
 <p>改成维护一棵<strong>代表树</strong>——每个元素指向父节点，一直往上找就到达"根"，根代表这一组：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>   （组 1）           （组 2）
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      a                  d
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     / \                /
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    b   c              e
 </span></code></pre></div>
-<p>已经拿到两个根时，挂接只需 O(1)；完整 union 还包含两次 find，必须把找根的成本算进去。这就是并查集。</p>
+<p>已经拿到两个根时，挂接只需 <span class="arithmatex">\(\mathcal{O}(1)\)</span>；完整 union 还包含两次 find，必须把找根的成本算进去。这就是并查集。</p>
 <p>但还有隐患：如果总是"把大树挂到小树下面"，树会越来越高。于是要两个优化一起用：</p>
 <ul>
 <li><strong>按大小合并</strong>：小集合的根挂到大集合的根；按秩是另一种规则，把秩小的根挂到秩大的根。两者都能控制高度，但“大小”不等于“高度”；</li>
 <li><strong>路径压缩</strong>：<code>find</code> 的过程中顺手把路径上的节点直接挂到根上。</li>
 </ul>
-<p><strong>只用按大小合并时树高是 <code>O(log n)</code></strong>：对任意节点，它所在集合的大小在根被挂到另一根、导致它的深度增加时至少翻倍，所以每个节点最多被挂 <code>O(log n)</code> 次。</p>
-<p><strong>选读：两个优化一起用，单次操作的摊销代价为 O(α(n))</strong>。α 是增长极慢的反阿克曼函数，在通常使用的数据规模下可以看作很小的数；它并非数学上的固定常数。完整摊销证明超出本讲范围。首读时，先用上面已经证明的“按大小合并使树高 O(log n)”来理解操作上界，再观察路径压缩如何减少后续查找的步数。</p>
+<p><strong>只用按大小合并时树高是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span></strong>：对任意节点，它所在集合的大小在根被挂到另一根、导致它的深度增加时至少翻倍，所以每个节点最多被挂 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 次。</p>
+<p><strong>选读：两个优化一起用，单次操作的摊销代价为 <span class="arithmatex">\(\mathcal{O}(\alpha (n))\)</span></strong>。<span class="arithmatex">\(\alpha\)</span> 是增长极慢的反阿克曼函数，在通常使用的数据规模下可以看作很小的数；它并非数学上的固定常数。完整摊销证明超出本讲范围。首读时，先用上面已经证明的“按大小合并使树高 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>”来理解操作上界，再观察路径压缩如何减少后续查找的步数。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DSU</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
@@ -10056,11 +10056,11 @@
 <p><strong>环性质</strong>：对任意环，环上<strong>权重最大的边</strong>一定不属于任何 MST（假设权重互不相同）。</p>
 </blockquote>
 <p>先解释“割”：把所有顶点分成非空两组 S 与其余顶点，连接两组的边叫跨割边。生成树要连通，必得跨过去。</p>
-<p><strong>割性质为什么对？</strong> 取跨割最轻边 e 和一棵 MST T。若 T 已含 e，无须修改；否则给 T 加 e 会形成唯一一个环，环上必有另一条跨割边 f。因为 <code>w(e)≤w(f)</code>，用 e 换掉 f 后仍是生成树且不更贵，所以仍为 MST。</p>
+<p><strong>割性质为什么对？</strong> 取跨割最轻边 e 和一棵 MST T。若 T 已含 e，无须修改；否则给 T 加 e 会形成唯一一个环，环上必有另一条跨割边 f。因为 <span class="arithmatex">\(w(e)\le w(f)\)</span>，用 e 换掉 f 后仍是生成树且不更贵，所以仍为 MST。</p>
 <p>但“每条边各属于某棵 MST”还不保证选出来的全部边能共同属于一棵 MST。贪心需要更强的保证：<strong>存在一棵包含当前全部已选边 F 的 MST</strong>。若割没有切断 F 中的边，替换掉的跨割边 f 就不在 F 中，因此交换保留了 F，这才允许再加入 e。</p>
 <p>环性质也可用交换理解：严格最重边 e 若在生成树里，去掉后分成两块，原环上存在更轻的跨块边可替换它，总重下降，所以不可能最优。相同权重时不能说“每条最重边都不在任何 MST”。</p>
 <h2 id="kruskal">Kruskal：按边贪心<a class="headerlink" href="#kruskal" title="Permanent link">&para;</a></h2>
-<p>先把所有边按费用升序排列，从空边集开始检查：两端已连通的边会产生环，跳过；否则选入，并用并查集合并两组。输入 n≥1、顶点编号 0..n−1，边表中的一项为 <code>(权重,起点,终点)</code>。函数返回总权重、已选边表和“是否连通全部顶点”的布尔值；输出边项则写成 <code>(起点,终点,权重)</code>。</p>
+<p>先把所有边按费用升序排列，从空边集开始检查：两端已连通的边会产生环，跳过；否则选入，并用并查集合并两组。输入 n不小于1、顶点编号 0..n-1，边表中的一项为 <code>(权重,起点,终点)</code>。函数返回总权重、已选边表和“是否连通全部顶点”的布尔值；输出边项则写成 <code>(起点,终点,权重)</code>。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">kruskal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># 与 prim 的 (u,v,w) 不同，这里为方便排序，输入是 (w,u,v)。</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
@@ -10076,7 +10076,7 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">return</span> <span class="n">total</span><span class="p">,</span> <span class="n">chosen</span><span class="p">,</span> <span class="n">dsu</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span>
 </span></code></pre></div>
 <p>Kruskal 的已选边 F 是森林。若新边两端已连通，加入就成环；若未连通，取其中一个端点的整个连通块为 S。没有 F 中的边跨这个割，而当前边是跨割最轻的候选：更轻的跨割边若曾处理，早会把块连在一起，分量又不会拆开。由上面的安全交换，仍有一棵 MST 包含 F 加新边。</p>
-<p>排序 O(E log E)，并查集操作共 O(Eα(V))，还需 O(V) 初始化。图不连通时得到的是最小生成森林，返回值中的布尔量会标出这一点。</p>
+<p>排序 <span class="arithmatex">\(\mathcal{O}(E \log E)\)</span>，并查集操作共 <span class="arithmatex">\(\mathcal{O}(E\alpha (V))\)</span>，还需 <span class="arithmatex">\(\mathcal{O}(V)\)</span> 初始化。图不连通时得到的是最小生成森林，返回值中的布尔量会标出这一点。</p>
 <h2 id="prim">Prim：从一个点逐步长成树<a class="headerlink" href="#prim" title="Permanent link">&para;</a></h2>
 <p>Prim 从一个起点开始，每次找“已在树中的点到树外点”的最轻边，选它并把新点加入树。最小堆保存这些候选边的 <code>(权重,终点)</code>；一条边入堆时，它的起点已经在树中，因此不必再保存起点。若弹出的终点也已经加入，就跳过这条旧候选。</p>
 <p>下面输入边项为 <code>(起点,终点,权重)</code>，返回 MST 的总权重；无法覆盖全部顶点则返回 None。最初 <code>(0,start)</code> 表示零成本纳入起点，不是一条原图中的边。</p>
@@ -10102,7 +10102,7 @@
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="k">return</span> <span class="n">total</span> <span class="k">if</span> <span class="n">used</span> <span class="o">==</span> <span class="n">n</span> <span class="k">else</span> <span class="kc">None</span>   <span class="c1"># None 表示图不连通</span>
 </span></code></pre></div>
-<p>本实现从 start 开始，只把图的一块连起来；n≥1 且 start 必须为合法顶点。每条无向边至多贡献两份堆候选，每份最多进出一次，在简单图上时间 O((V+E)log(V+1))，建图与堆共需 O(V+E) 空间。</p>
+<p>本实现从 start 开始，只把图的一块连起来；n不小于1 且 start 必须为合法顶点。每条无向边至多贡献两份堆候选，每份最多进出一次，在简单图上时间 <span class="arithmatex">\(\mathcal{O}((V+E)\log (V+1))\)</span>，建图与堆共需 <span class="arithmatex">\(\mathcal{O}(V+E)\)</span> 空间。</p>
 <p>正确性来自不变式"当前已选边集是某棵 MST 的子集"：每轮把"已访问顶点集合"与其余顶点看作一个割，先丢弃终点已访问的过期记录，再取跨割最轻边；该割没有切开已有树边，由安全交换可保留此前所有选择。</p>
 <p><strong>第 18 讲学到 Dijkstra 后，可以回看两者堆项的差别：</strong></p>
 <table>
@@ -10124,7 +10124,7 @@
 </tbody>
 </table>
 <p>这个区别决定了它们解决完全不同的问题。<strong>另外别忘了 MST 与最短路是两回事</strong>：MST 最小化总权重，不保证任意两点间路径最短。反例是等边三角形（三条边权重都是 1），MST 只取两条边，被排除那条边所连的两点在 MST 上的距离是 2，而图中最短是 1。</p>
-<p>选型：<strong>边以列表给出、图稀疏用 Kruskal</strong>（排序 <code>O(E log E)</code>）；<strong>顶点是坐标、边要现算，或者图很稠密，用 Prim</strong>但本节的堆实现仍接收显式边表。坐标完全图若想省 O(V²) 边空间，应改用数组记录每个点到当前树的最小边权，做 O(V²) 时间、O(V) 空间的 Prim；不能直接照搬这里的建图。</p>
+<p>选型：<strong>边以列表给出、图稀疏用 Kruskal</strong>（排序 <span class="arithmatex">\(\mathcal{O}(E \log E)\)</span>）；<strong>顶点是坐标、边要现算，或者图很稠密，用 Prim</strong>但本节的堆实现仍接收显式边表。坐标完全图若想省 <span class="arithmatex">\(\mathcal{O}(V^{2})\)</span> 边空间，应改用数组记录每个点到当前树的最小边权，做 <span class="arithmatex">\(\mathcal{O}(V^{2})\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(V)\)</span> 空间的 Prim；不能直接照搬这里的建图。</p>
 <h2 id="_2">走一遍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>四个顶点，边按“起点、终点、权重”记为 <code>(A,B,5), (A,C,4), (B,D,2), (C,D,3), (B,C,6)</code>。这行是配图的文字记法；实际调用时将 A、B、C、D 编号为 0、1、2、3。Kruskal 还要求权重在前，因此这组输入应写成 <code>kruskal(4,[(5,0,1),(4,0,2),(2,1,3),(3,2,3),(6,1,2)])</code>，总权重为 9；Prim 则保持 <code>(u,v,w)</code> 的输入顺序。</p>
 <p>图的割为S={A}，跨割边只有A—C(4)、A—B(5)，最轻的是4。图与下表都使用这四点五边；Kruskal代码选满3条边就停止，下表后两行仅供继续验证“为何会成环”，不表示代码仍会运行。</p>
@@ -10218,15 +10218,15 @@
 </tbody>
 </table>
 <p><strong>2.</strong> 为什么"每次删除最重的边"也对？</p>
-<p>由环性质，任何环上最重的边都可以安全删除。反复执行"删掉某个环上最重的边"直到剩下 <code>n−1</code> 条边，剩下的必然是一棵 MST。<strong>它和 Kruskal 用的是同一个性质的两面。</strong></p>
+<p>由环性质，任何环上最重的边都可以安全删除。反复执行"删掉某个环上最重的边"直到剩下 <span class="arithmatex">\(n-1\)</span> 条边，剩下的必然是一棵 MST。<strong>它和 Kruskal 用的是同一个性质的两面。</strong></p>
 <p><strong>3.</strong> 如果图里有权重相同的边，MST 唯一吗？Kruskal 会输出什么？</p>
 <p><strong>MST 可能不唯一</strong>（正方形四条边权重都为 1，任取三条都是 MST），Kruskal 会输出其中一棵，具体哪棵取决于排序与输入顺序。<strong>但总权重是唯一的。</strong></p>
 <p><strong>4.</strong> 如果存在负权边，MST 会包含它们吗？</p>
 <p>可以包含负边，算法无需改动；但不保证所有负边都入树。例如负边组成环时，仍得舍弃一条。<strong>注意这与最短路不同</strong>：最短路在负权下会遇到"负环"的麻烦，而 MST 完全不受影响。</p>
 <p><strong>5.（选读）</strong> 并查集能不能用来求"瓶颈路径"（最小化路径上的最大边权）？</p>
-<p>能。<strong>MST 有一个重要性质：树上任意两点之间路径的最大边权，等于原图中这两点之间所有路径里"最大边权"的最小值。</strong> 为何成立？删掉MST路径中最重边e，把树分成S/T，起终点分居两侧。原图任意连接它们的路径都得跨此割；若存在跨割边比e轻，就能替换e得到更轻生成树，矛盾。因此任何路径的最大边权≥w(e)，而MST路径恰达到它。这也正是 <code>Swim in Rising Water</code> 可以用"按高度升序激活 + 并查集"解决的原因。</p>
+<p>能。<strong>MST 有一个重要性质：树上任意两点之间路径的最大边权，等于原图中这两点之间所有路径里"最大边权"的最小值。</strong> 为何成立？删掉MST路径中最重边e，把树分成S/T，起终点分居两侧。原图任意连接它们的路径都得跨此割；若存在跨割边比e轻，就能替换e得到更轻生成树，矛盾。因此任何路径的最大边权不小于w(e)，而MST路径恰达到它。这也正是 <code>Swim in Rising Water</code> 可以用"按高度升序激活 + 并查集"解决的原因。</p>
 <p><strong>6.</strong> 实现 <code>equations_possible(equations)</code>：输入一组形如 <code>"a==b"</code>、<code>"a!=b"</code> 的约束，变量用小写字母表示，问能否给它们赋整数值，使所有约束同时成立。例如 <code>["a==b","b==c","a!=c"]</code> 应返回 False；<code>["a!=b"]</code> 可以令 a=0、b=1，返回 True。</p>
-<p><strong>第一步只处理所有 <code>==</code></strong>（用并查集合并），<strong>第二步再检查所有 <code>!=</code></strong>（若两端在同一集合则矛盾）。<strong>顺序不能反</strong>——这是本题的关键。</p>
+<p><strong>第一步只处理所有 <span class="arithmatex">\(=\)</span></strong>（用并查集合并），<strong>第二步再检查所有 <span class="arithmatex">\(\ne\)</span></strong>（若两端在同一集合则矛盾）。<strong>顺序不能反</strong>——这是本题的关键。</p>
 
 
 

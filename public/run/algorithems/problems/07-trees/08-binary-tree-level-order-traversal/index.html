@@ -10123,7 +10123,7 @@
 <p>把层号一起入队，在弹出时根据层号决定放到结果的哪一行。写法稍长，但<strong>不依赖 <code>len(q)</code> 的求值时机</strong>，逻辑更"显式"。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>外层每轮开始，队列只包含当前层；取出本层固定数量节点时，新入队孩子只能归到下一层。这个保证让输出可以按层分组，同时同层保持父节点的从左到右顺序。</p>
-<p>循环体不能一边追加孩子一边用不断变化的 len(q) 作本层终点，否则会把两层混在一起。可以保存 level_size=len(q)，也可以利用 range 在开始时固定次数。DFS 按深度收集也能得到相同结果，但首次遇到某层要先创建 res[depth]；它的调用栈 O(h)，BFS 队列 O(w)，哪种更省取决于树形。</p>
+<p>循环体不能一边追加孩子一边用不断变化的 len(q) 作本层终点，否则会把两层混在一起。可以保存 level_size=len(q)，也可以利用 range 在开始时固定次数。DFS 按深度收集也能得到相同结果，但首次遇到某层要先创建 res[depth]；它的调用栈 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，BFS 队列 <span class="arithmatex">\(\mathcal{O}(w)\)</span>，哪种更省取决于树形。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="bfs-lenq">解法一：BFS + <code>len(q)</code> 分层（推荐）<a class="headerlink" href="#bfs-lenq" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
@@ -10198,18 +10198,18 @@
 <tbody>
 <tr>
 <td>BFS</td>
-<td>O(n)</td>
-<td>O(w)（w 为最大层宽）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span>（w 为最大层宽）</td>
 </tr>
 <tr>
 <td>带层号 BFS</td>
-<td>O(n)</td>
-<td>O(w)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span></td>
 </tr>
 <tr>
 <td>DFS</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10217,11 +10217,11 @@
 <ul>
 <li><strong><code>for _ in range(len(q))</code> 不能写成 <code>for node in q</code></strong>：后者无法区分层，而且遍历中修改队列会出错。</li>
 <li>空树返回 <code>[]</code> 而不是 <code>[[]]</code>。</li>
-<li>用 <code>deque</code> 而不是 <code>list</code>：<code>list.pop(0)</code> 是 O(n)，会让复杂度退化到 O(n²)。</li>
+<li>用 <code>deque</code> 而不是 <code>list</code>：<code>list.pop(0)</code> 是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，会让复杂度退化到 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
 <li><strong>追问：如何实现"之字形层序遍历"？</strong> → <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">103 Zigzag Level Order</a>，偶数层反转 <code>level</code> 或用双端队列交替从两端插入。</li>
 <li><strong>追问：如何取每层的最右节点？</strong> → <a href="../09-binary-tree-right-side-view/">199 Right Side View</a>，取 <code>level[-1]</code>。</li>
 <li><strong>追问：如何求树的最小深度？</strong> → BFS 遇到第一个叶子节点时返回当前层号，这是 BFS 相对 DFS 的优势。</li>
-<li><strong>追问：如果树非常大放不下？</strong> → BFS 的空间是最大层宽，链状树时是 O(1)，但完全二叉树的最底层是 O(n/2)；DFS 的空间是 O(h)，链状树时是 O(n)。两者各有适用场景。</li>
+<li><strong>追问：如果树非常大放不下？</strong> → BFS 的空间是最大层宽，链状树时是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，但完全二叉树的最底层是 <span class="arithmatex">\(\mathcal{O}(n/2)\)</span>；DFS 的空间是 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，链状树时是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。两者各有适用场景。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

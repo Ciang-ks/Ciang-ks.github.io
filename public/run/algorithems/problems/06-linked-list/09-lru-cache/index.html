@@ -10129,7 +10129,7 @@
 <li><code>get(key)</code>：存在则返回值（并标记为"最近使用"），否则返回 -1；</li>
 <li><code>put(key, value)</code>：写入或更新；若容量超限，淘汰<strong>最久未使用</strong>的那个 key。</li>
 </ul>
-<p><strong>要求：两个操作都是 O(1)。</strong></p>
+<p><strong>要求：两个操作都是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LRUCache(2)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>put(1,1), put(2,2)      cache: {1, 2}
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>get(1) → 1              cache 顺序变为 {2, 1}（1 变成最近使用）
@@ -10148,27 +10148,27 @@
 <tbody>
 <tr>
 <td>普通按键哈希索引</td>
-<td>期望 O(1)</td>
+<td>期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>还需维护访问次序与常数时间淘汰接口</td>
 </tr>
 <tr>
 <td>数组 / 列表</td>
-<td>无额外索引时 O(n) 定位</td>
-<td>中间删除、移动需 O(n)</td>
+<td>无额外索引时 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 定位</td>
+<td>中间删除、移动需 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>双向链表</td>
-<td>❌ O(n) 查找</td>
-<td>O(1) 插入 / 删除 / 移动</td>
+<td>❌ <span class="arithmatex">\(\mathcal{O}(n)\)</span> 查找</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span> 插入 / 删除 / 移动</td>
 </tr>
 </tbody>
 </table>
 <p>于是答案是<strong>两者结合</strong>：</p>
 <ul>
-<li><strong>哈希表</strong> <code>key → 链表节点</code>，负责 O(1) 定位；</li>
+<li><strong>哈希表</strong> <code>key → 链表节点</code>，负责 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 定位；</li>
 <li><strong>双向链表</strong>维护使用顺序：<strong>头部 = 最近使用，尾部 = 最久未使用</strong>。</li>
 </ul>
-<p>为什么必须是<strong>双向</strong>链表？因为我们要 O(1) 删除任意一个节点，而单向链表删除某个节点需要它的前驱；双向链表自带前驱指针，所以 O(1)。</p>
+<p>为什么必须是<strong>双向</strong>链表？因为我们要 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 删除任意一个节点，而单向链表删除某个节点需要它的前驱；双向链表自带前驱指针，所以 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h3 id="_4">三个核心操作<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
 <li><code>get(key)</code>：查哈希表；命中后把该节点<strong>移到链表头部</strong>（表示最近使用）；</li>
@@ -10275,13 +10275,13 @@
 <tbody>
 <tr>
 <td><code>get</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>—</td>
 </tr>
 <tr>
 <td><code>put</code></td>
-<td>O(1)</td>
-<td>O(capacity)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\mathrm{capacity})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10294,8 +10294,8 @@
 <li><strong>追问：如果要求支持 TTL（过期时间）？</strong> → 在每个节点存过期时间戳，并在 <code>get</code> 时检查；还可以用最小堆按过期时间淘汰。</li>
 <li><strong>追问：如果要求线程安全？</strong> → 加锁；更高效的方案是分段锁（把缓存分成多段，各自独立加锁）。</li>
 <li><strong>追问：LFU 怎么实现？</strong> → <a href="https://leetcode.com/problems/lfu-cache/">460 LFU Cache</a>，需要"频率 → 双向链表"的哈希表 + 最小频率指针。</li>
-<li><strong>追问：为什么不用单链表 + 哈希表？</strong> → 删除任意节点需要前驱，单链表只能 O(n) 找前驱。</li>
-<li><strong>追问：为什么不用数组？</strong> → 从中间删除/移动元素是 O(n)。</li>
+<li><strong>追问：为什么不用单链表 + 哈希表？</strong> → 删除任意节点需要前驱，单链表只能 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 找前驱。</li>
+<li><strong>追问：为什么不用数组？</strong> → 从中间删除/移动元素是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 </ul>
 <h2 id="_11">相关题目<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>

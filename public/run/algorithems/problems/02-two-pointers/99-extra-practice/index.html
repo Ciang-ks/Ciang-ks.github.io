@@ -10071,7 +10071,7 @@
 <hr />
 <h2 id="1-26-remove-duplicates-from-sorted-array">1. 26 Remove Duplicates from Sorted Array<a class="headerlink" href="#1-26-remove-duplicates-from-sorted-array" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">LeetCode 26</a> ｜ <strong>Easy</strong></p>
-<p><strong>题目</strong>：给定已排序数组，原地删除重复元素，使每个元素只出现一次，返回新的长度。要求 O(1) 额外空间。</p>
+<p><strong>题目</strong>：给定已排序数组，原地删除重复元素，使每个元素只出现一次，返回新的长度。要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。</p>
 <p><strong>为什么放这里</strong>：快慢指针最纯粹的形态——<code>slow</code> 指向"下一个可写位置"。</p>
 <p><strong>思路提示</strong>：数组已排序，所以重复元素一定相邻。<code>slow</code> 指向"已去重部分的末尾 + 1"，<code>fast</code> 一路扫描；当 <code>nums[fast]</code> 与"最后一个被保留的值"不同时，把它写到 <code>slow</code> 位置。</p>
 <p><strong>方法辨析</strong>：有序保证所有相同值相邻，因此只需与已保留前缀的最后一项比较。写指针后面的内容不属于有效结果，返回的是前缀长度；若输入无序，同值可能隔开，此判断就不足以全局去重。</p>
@@ -10087,7 +10087,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">slow</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：比较对象是 <code>nums[slow - 1]</code>（上一个保留值），不是 <code>nums[fast - 1]</code>；<code>slow</code> 从 1 开始，因为第一个元素一定保留。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/">80 Remove Duplicates from Sorted Array II</a> 允许每个元素最多出现两次，只需把判断改成 <code>slow &lt; 2 or nums[fast] != nums[slow - 2]</code>。</p>
 </blockquote>
@@ -10108,7 +10108,7 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="k">return</span> <span class="n">slow</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：题目说"元素顺序可以改变"，所以也可以用"与末尾元素交换"的写法减少赋值次数——面试时提一句说明你在读题。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="3-283-move-zeroes">3. 283 Move Zeroes<a class="headerlink" href="#3-283-move-zeroes" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/move-zeroes/">LeetCode 283</a> ｜ <strong>Easy</strong></p>
@@ -10127,7 +10127,7 @@
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：不能只做"压缩"而忘记补 0；题目要求原地修改，不要返回新数组。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="4-977-squares-of-a-sorted-array">4. 977 Squares of a Sorted Array<a class="headerlink" href="#4-977-squares-of-a-sorted-array" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/squares-of-a-sorted-array/">LeetCode 977</a> ｜ <strong>Easy</strong></p>
@@ -10150,13 +10150,13 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：结果必须从后往前填（拿到的是当前最大值）；比较的是绝对值，而不是平方前的原值。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)（输出）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（输出）。</p>
 <hr />
 <h2 id="5-680-valid-palindrome-ii">5. 680 Valid Palindrome II<a class="headerlink" href="#5-680-valid-palindrome-ii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/valid-palindrome-ii/">LeetCode 680</a> ｜ <strong>Easy</strong></p>
 <p><strong>题目</strong>：给定字符串 <code>s</code>，判断最多删除一个字符后能否变成回文串。</p>
 <p><strong>为什么放这里</strong>：Valid Palindrome 的容错版本，考察"遇到不匹配时如何分支"。</p>
-<p><strong>思路提示</strong>：依然左右对撞。当 <code>s[l] != s[r]</code> 时只有两种可能——删掉左字符后检查 <code>s[l+1..r]</code>，或删掉右字符后检查 <code>s[l..r-1]</code>；任一成立即可。不需要真的删字符，用区间上的回文检查即可。</p>
+<p><strong>思路提示</strong>：依然左右对撞。当 <span class="arithmatex">\(s[l] \ne s[r]\)</span> 时只有两种可能——删掉左字符后检查 <code>s[l+1..r]</code>，或删掉右字符后检查 <code>s[l..r-1]</code>；任一成立即可。不需要真的删字符，用区间上的回文检查即可。</p>
 <p><strong>方法辨析</strong>：第一次失配后，保留两端字符不可能使它们互相匹配，所以若只删一个，必须删这两端之一。分别检查两个剩余区间已穷尽可能，不必在整串每个位置尝试；后续不能再允许删除，否则就改变了预算。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">validPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -10176,8 +10176,8 @@
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：不能用"不匹配的字符对数量 ≤ 2"这种简化判断来代替真正的区间检查，否则会在 <code>"abc"</code> 这类用例上出错。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：不能用"不匹配的字符对数量 不大于 2"这种简化判断来代替真正的区间检查，否则会在 <code>"abc"</code> 这类用例上出错。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="6-16-3sum-closest">6. 16 3Sum Closest<a class="headerlink" href="#6-16-3sum-closest" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/3sum-closest/">LeetCode 16</a> ｜ <strong>Medium</strong></p>
@@ -10205,7 +10205,7 @@
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>best</code> 用真实存在的三元组初始化，比用 <code>inf</code> 更容易推理；<code>cur == target</code> 时可以直接返回。</p>
-<p><strong>复杂度</strong>：时间 O(n²)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <hr />
 <h2 id="7-18-4sum">7. 18 4Sum<a class="headerlink" href="#7-18-4sum" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/4sum/">LeetCode 18</a> ｜ <strong>Medium</strong></p>
@@ -10242,10 +10242,10 @@
 </span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>                        <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：内层去重条件是 <code>j &gt; i + 1</code>（不是 <code>j &gt; 0</code>），因为 <code>j</code> 的第一项是 <code>i + 1</code>，必须允许它取到。</p>
-<p><strong>复杂度</strong>：时间 O(n³)，辅助空间 O(n)（Python 排序，输出另计）。</p>
+<p><strong>易错点</strong>：内层去重条件是 <span class="arithmatex">\(j &gt; i + 1\)</span>（不是 <span class="arithmatex">\(j &gt; 0\)</span>），因为 <code>j</code> 的第一项是 <span class="arithmatex">\(i + 1\)</span>，必须允许它取到。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序，输出另计）。</p>
 <blockquote>
-<p>通用写法：写一个 <code>kSum(nums, target, k, start)</code> 递归函数，当 <code>k == 2</code> 时切换成双指针，这样 4Sum、5Sum 可以共用一份代码。</p>
+<p>通用写法：写一个 <code>kSum(nums, target, k, start)</code> 递归函数，当 <span class="arithmatex">\(k = 2\)</span> 时切换成双指针，这样 4Sum、5Sum 可以共用一份代码。</p>
 </blockquote>
 
 

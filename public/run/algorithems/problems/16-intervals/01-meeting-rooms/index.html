@@ -10117,10 +10117,10 @@
 </span></code></pre></div>
 <p><strong>为什么只需要检查"相邻"的两个？</strong> 因为排序之后，如果区间 <code>i</code> 和更早的区间 <code>j</code> 重叠，那么 <code>i</code> 一定也和某个相邻区间重叠（中间那些区间的开始时间介于两者之间）。所以检查相邻就够了。</p>
 <h3 id="_3">边界约定（本题唯一的坑）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>题目约定区间是<strong>半开区间</strong> <code>[start, end)</code>——所以"上一场 10 点结束，下一场 10 点开始"是<strong>允许</strong>的。</p>
-<p>因此判断条件是 <strong><code>start &lt; prev_end</code>（严格小于）</strong>，而不是 <code>&lt;=</code>。<strong>面试中务必先确认这个约定。</strong></p>
+<p>题目约定区间是<strong>半开区间</strong> <span class="arithmatex">\([\mathrm{start}, \mathrm{end})\)</span>——所以"上一场 10 点结束，下一场 10 点开始"是<strong>允许</strong>的。</p>
+<p>因此判断条件是 <strong><code>start &lt; prev_end</code>（严格小于）</strong>，而不是 <span class="arithmatex">\(\le\)</span>。<strong>面试中务必先确认这个约定。</strong></p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>如果按起点排序后所有相邻对都不冲突，则前一场 end≤后一场 start；沿这条有序链递推，更早的会议也都在当前会议开始前结束，因此任意非相邻对也不会冲突。这是“没发现相邻冲突即可接受”的完整理由，不是说任意重叠区间在排序后必然挨着。</p>
+<p>如果按起点排序后所有相邻对都不冲突，则前一场 end不大于后一场 start；沿这条有序链递推，更早的会议也都在当前会议开始前结束，因此任意非相邻对也不会冲突。这是“没发现相邻冲突即可接受”的完整理由，不是说任意重叠区间在排序后必然挨着。</p>
 <p>本题只问一个人能否参加全部会议，不需要分配房间或挑最大兼容子集。一旦存在任何冲突就返回 False，没必要维护所有正在进行的结束时间。相同端点可衔接由会议语义决定；换成闭区间合并题，等号可能就需要视为相交。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：排序 + 相邻比较（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -10153,7 +10153,7 @@
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                <span class="k">return</span> <span class="kc">False</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p><strong><code>events.sort()</code> 会让"结束"（−1）排在"开始"（+1）之前</strong>，这正好符合半开区间的约定，也是 253 题的基础。</p>
+<p><strong><code>events.sort()</code> 会让"结束"（-1）排在"开始"（+1）之前</strong>，这正好符合半开区间的约定，也是 253 题的基础。</p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10166,22 +10166,22 @@
 <tbody>
 <tr>
 <td>排序 + 比较</td>
-<td>O(n log n)</td>
-<td>O(n)（Python 排序辅助空间）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序辅助空间）</td>
 </tr>
 <tr>
 <td>扫描线</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>判断条件是 <code>&lt;</code> 而不是 <code>&lt;=</code></strong>（因为区间是半开区间）。<strong>如果题目改成闭区间，就必须用 <code>&lt;=</code>。</strong></li>
+<li><strong>判断条件是 <span class="arithmatex">\(&lt;\)</span> 而不是 <span class="arithmatex">\(\le\)</span></strong>（因为区间是半开区间）。<strong>如果题目改成闭区间，就必须用 <span class="arithmatex">\(\le\)</span>。</strong></li>
 <li>空数组和单区间都返回 <code>True</code>，上面的写法天然正确。</li>
 <li><strong>只需要比较相邻区间</strong>（因为已经排序）。</li>
-<li><strong>追问：如果会议时间是闭区间 <code>[start, end]</code>？</strong> → 判断条件改成 <code>&lt;=</code>。</li>
+<li><strong>追问：如果会议时间是闭区间 <code>[start, end]</code>？</strong> → 判断条件改成 <span class="arithmatex">\(\le\)</span>。</li>
 <li><strong>追问：如果要求"最多能参加几场会议"？</strong> → <a href="../04-non-overlapping-intervals/">435 Non-overlapping Intervals</a>，按右端点排序后贪心。</li>
 <li><strong>追问：如果有多个会议室？</strong> → <a href="../05-meeting-rooms-ii/">253 Meeting Rooms II</a>，求最少需要几间。</li>
 </ul>

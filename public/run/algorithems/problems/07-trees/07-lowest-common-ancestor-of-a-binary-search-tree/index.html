@@ -4516,10 +4516,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代（推荐，O(1) 额外空间）
+        解法一：迭代（推荐，\(\mathcal{O}(1)\) 额外空间）
       
     </span>
   </a>
@@ -4538,10 +4538,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lca-on-bst" class="md-nav__link">
+  <a href="#lca-mathcalon-bst" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：通用二叉树 LCA 思路（O(n)，不利用 BST 性质）
+        解法三：通用二叉树 LCA 思路（\(\mathcal{O}(n)\)，不利用 BST 性质）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代（推荐，O(1) 额外空间）
+        解法一：迭代（推荐，\(\mathcal{O}(1)\) 额外空间）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lca-on-bst" class="md-nav__link">
+  <a href="#lca-mathcalon-bst" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：通用二叉树 LCA 思路（O(n)，不利用 BST 性质）
+        解法三：通用二叉树 LCA 思路（\(\mathcal{O}(n)\)，不利用 BST 性质）
       
     </span>
   </a>
@@ -10123,12 +10123,12 @@
 <li>它是两者的共同祖先（因为两者都在它的子树里）；</li>
 <li>它是最低的那个（分居两侧时，任一孩子子树都无法包含二者；当前节点就是一个目标时，更低节点也无法成为它的祖先）。</li>
 </ul>
-<p><strong>BST 的搜索性质让"找到分岔点"变成了一次从上到下的单向遍历</strong>，复杂度只有 O(h)。</p>
+<p><strong>BST 的搜索性质让"找到分岔点"变成了一次从上到下的单向遍历</strong>，复杂度只有 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>算法依赖 p、q 已存在且 BST 键互异。两者同在当前键一侧时，任何另一侧节点都不可能成为共同祖先，所以只沿一个孩子继续；第一次分居两侧，或当前节点就是其中一个时，当前节点才是最低分岔点。</p>
 <p>例如 6 的左侧有 2，2 的右侧有 4，查 2 与 4 的 LCA，走到 2 就应返回，不需要再向下寻找“严格在两者中间”的值。普通二叉树没有大小定位信息，需要从子树返回是否找到了目标；若题目不保证目标存在，本题的分岔判断也不足以证明两个节点确实在树中。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：迭代（推荐，O(1) 额外空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：迭代（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span>
@@ -10150,7 +10150,7 @@
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">return</span> <span class="n">root</span>
 </span></code></pre></div>
-<h3 id="lca-on-bst">解法三：通用二叉树 LCA 思路（O(n)，不利用 BST 性质）<a class="headerlink" href="#lca-on-bst" title="Permanent link">&para;</a></h3>
+<h3 id="lca-mathcalon-bst">解法三：通用二叉树 LCA 思路（<span class="arithmatex">\(\mathcal{O}(n)\)</span>，不利用 BST 性质）<a class="headerlink" href="#lca-mathcalon-bst" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span> <span class="ow">or</span> <span class="n">root</span> <span class="ow">is</span> <span class="n">p</span> <span class="ow">or</span> <span class="n">root</span> <span class="ow">is</span> <span class="n">q</span><span class="p">:</span>
@@ -10174,18 +10174,18 @@
 <tbody>
 <tr>
 <td>解法一（迭代）</td>
-<td>O(h)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>解法二（递归）</td>
-<td>O(h)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>解法三（通用）</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10196,7 +10196,7 @@
 <li><strong>"节点可以是自己的祖先"</strong>：当 <code>p == root</code> 时直接返回 <code>root</code>，解法一的 <code>else</code> 分支天然处理。</li>
 <li>题目保证 <code>p</code> 和 <code>q</code> 都存在于树中，所以不需要处理找不到的情况。</li>
 <li><strong>追问：如果是一棵普通的二叉树？</strong> → <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">236</a>，用解法三。</li>
-<li><strong>追问：这题的时间复杂度其实是 O(h) 还是 O(log n)？</strong> → 都是 O(h)；只有在树平衡时才有 <code>h = O(log n)</code>。<strong>不要默认树是平衡的。</strong></li>
+<li><strong>追问：这题的时间复杂度其实是 <span class="arithmatex">\(\mathcal{O}(h)\)</span> 还是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>？</strong> → 都是 <span class="arithmatex">\(\mathcal{O}(h)\)</span>；只有在树平衡时才有 <span class="arithmatex">\(h = \mathcal{O}(\log n)\)</span>。<strong>不要默认树是平衡的。</strong></li>
 <li><strong>追问：如何求多个节点的 LCA？</strong> → 对普通二叉树可以找"包含所有目标节点的最小子树"；对 BST 可以用同样的"分岔点"思路扩展到一组节点的最小值和最大值。</li>
 <li><strong>追问：如果节点有指向父节点的指针？</strong> → 退化成"找两条链表的第一个交点"，用 160 的等长化技巧即可。</li>
 </ul>

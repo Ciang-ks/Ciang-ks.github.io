@@ -10196,7 +10196,7 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">问题的转化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>设数组总和为 <code>total</code>。分成两个和相等的子集，等价于：<strong>能否从数组中选出一部分，使它们的和恰好等于 <code>total / 2</code></strong>。</p>
+<p>设数组总和为 <code>total</code>。分成两个和相等的子集，等价于：<strong>能否从数组中选出一部分，使它们的和恰好等于 <span class="arithmatex">\(\mathrm{total} / 2\)</span></strong>。</p>
 <p>于是问题变成"<strong>子集和</strong>"问题，也就是 <strong>0/1 背包</strong>（每个元素最多用一次）。</p>
 <h3 id="_4">快速特判<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
@@ -10217,7 +10217,7 @@
 <p><strong><code>dp[0] = True</code></strong>（不选任何元素就能凑出和 0）。</p>
 <h3 id="_8">解法推导与模式辨析<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>选中一部分后，另一部分就是补集；总和为偶数且选中和为一半时，两边才同时满足目标。这里无需枚举如何给每个数贴左右标签，只判定某个子集和是否可达。相同值在不同位置仍是独立物品，各可使用一次。</p>
-<p>倒序的含义是读到的 dp[j−x] 仍属于“未加入当前元素”的旧层。例如只有一个 2 时，正序会先让 2 可达，再据此让 4 可达，相当于重复用了同一位置。当前数组全为正数，所以只存 0..target 足够；若包含负数，不能用这张非负容量表直接截断。O(n·target) 随数值大小增长，是伪多项式代价，并不等于按输入位数计的线性算法。</p>
+<p>倒序的含义是读到的 dp[j-x] 仍属于“未加入当前元素”的旧层。例如只有一个 2 时，正序会先让 2 可达，再据此让 4 可达，相当于重复用了同一位置。当前数组全为正数，所以只存 0..target 足够；若包含负数，不能用这张非负容量表直接截断。<span class="arithmatex">\(\mathcal{O}(n\cdot \mathrm{target})\)</span> 随数值大小增长，是伪多项式代价，并不等于按输入位数计的线性算法。</p>
 <h2 id="_9">代码<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="dp01">解法一：一维 DP（0/1 背包，推荐）<a class="headerlink" href="#dp01" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10293,18 +10293,18 @@
 <tbody>
 <tr>
 <td>一维 DP</td>
-<td>O(n · target)</td>
-<td>O(target)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{target})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\mathrm{target})\)</span></td>
 </tr>
 <tr>
 <td>集合版</td>
-<td>O(n · target)</td>
-<td>O(target)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{target})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\mathrm{target})\)</span></td>
 </tr>
 <tr>
 <td>二维 DP</td>
-<td>O(n · target)</td>
-<td>O(n · target)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{target})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{target})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10317,7 +10317,7 @@
 <li><strong>追问：如果要求"输出具体的两个子集"？</strong> → 记录每个状态的来源，最后回溯。</li>
 <li><strong>追问：如果允许重复使用元素？</strong> → 那就是完全背包（正序枚举），变成另一道题。</li>
 <li><strong>追问：如果要求"分成 k 个和相等的子集"？</strong> → <a href="../../10-backtracking/99-extra-practice/">698 Partition to K Equal Sum Subsets</a>，回溯 + 剪枝（因为背包 DP 的状态维度会爆炸）。</li>
-<li><strong>追问：为什么这题是 NP 问题还能多项式求解？</strong> → <strong>因为这里的"和"是数值范围，所以 DP 的复杂度 O(n · target) 是"伪多项式"的</strong>；如果数值极大（比如用二进制表示），问题就是 NP-完全的。<strong>这个观察非常能体现算法理论功底。</strong></li>
+<li><strong>追问：为什么这题是 NP 问题还能多项式求解？</strong> → <strong>因为这里的"和"是数值范围，所以 DP 的复杂度 <span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{target})\)</span> 是"伪多项式"的</strong>；如果数值极大（比如用二进制表示），问题就是 NP-完全的。<strong>这个观察非常能体现算法理论功底。</strong></li>
 </ul>
 <h2 id="_13">相关题目<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>

@@ -8338,10 +8338,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#aomn" class="md-nav__link">
+  <a href="#amathcalomn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 A：用额外的标记数组（O(m+n) 空间）
+        方案 A：用额外的标记数组（\(\mathcal{O}(m+n)\) 空间）
       
     </span>
   </a>
@@ -8349,10 +8349,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bo1" class="md-nav__link">
+  <a href="#bmathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：用首行首列当标记（O(1) 空间，本题的考点）
+        方案 B：用首行首列当标记（\(\mathcal{O}(1)\) 空间，本题的考点）
       
     </span>
   </a>
@@ -8388,10 +8388,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：O(1) 空间（用首行首列当标记，推荐）
+        解法一：\(\mathcal{O}(1)\) 空间（用首行首列当标记，推荐）
       
     </span>
   </a>
@@ -8399,10 +8399,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#omn" class="md-nav__link">
+  <a href="#mathcalomn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：O(m+n) 空间（最容易写对）
+        解法二：\(\mathcal{O}(m+n)\) 空间（最容易写对）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#aomn" class="md-nav__link">
+  <a href="#amathcalomn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 A：用额外的标记数组（O(m+n) 空间）
+        方案 A：用额外的标记数组（\(\mathcal{O}(m+n)\) 空间）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bo1" class="md-nav__link">
+  <a href="#bmathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：用首行首列当标记（O(1) 空间，本题的考点）
+        方案 B：用首行首列当标记（\(\mathcal{O}(1)\) 空间，本题的考点）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：O(1) 空间（用首行首列当标记，推荐）
+        解法一：\(\mathcal{O}(1)\) 空间（用首行首列当标记，推荐）
       
     </span>
   </a>
@@ -10064,10 +10064,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#omn" class="md-nav__link">
+  <a href="#mathcalomn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：O(m+n) 空间（最容易写对）
+        解法二：\(\mathcal{O}(m+n)\) 空间（最容易写对）
       
     </span>
   </a>
@@ -10157,9 +10157,9 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">为什么不能边扫边改<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>如果发现一个 0 就立刻把整行整列置零，那么<strong>后置的零会被误认为"原本就是零"</strong>，导致把不该置零的行列也清零。</p>
-<h3 id="aomn">方案 A：用额外的标记数组（O(m+n) 空间）<a class="headerlink" href="#aomn" title="Permanent link">&para;</a></h3>
+<h3 id="amathcalomn">方案 A：用额外的标记数组（<span class="arithmatex">\(\mathcal{O}(m+n)\)</span> 空间）<a class="headerlink" href="#amathcalomn" title="Permanent link">&para;</a></h3>
 <p>先遍历一遍，记录"哪些行有 0、哪些列有 0"；再遍历一遍，根据标记置零。<strong>逻辑清晰，最容易写对。</strong></p>
-<h3 id="bo1">方案 B：用首行首列当标记（O(1) 空间，本题的考点）<a class="headerlink" href="#bo1" title="Permanent link">&para;</a></h3>
+<h3 id="bmathcalo1">方案 B：用首行首列当标记（<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间，本题的考点）<a class="headerlink" href="#bmathcalo1" title="Permanent link">&para;</a></h3>
 <p><strong>关键技巧：把"第 i 行有 0"记录在 <code>matrix[i][0]</code>，把"第 j 列有 0"记录在 <code>matrix[0][j]</code>。</strong></p>
 <p>但这样做会<strong>破坏首行首列本身的信息</strong>，所以需要额外两个布尔变量先记录"首行 / 首列原本是否有 0"：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. 先扫描首行和首列，记录 row0_has_zero / col0_has_zero
@@ -10175,7 +10175,7 @@
 <p>本题的置零依据只来自原矩阵中的零，不允许新置的零继续传播。因此要分离“发现原始条件”和“执行批量修改”两个阶段；额外标记数组版先讲清这个信息依赖，首行首列版再把同样标记嵌入输入存储。</p>
 <p>matrix[0][0] 同时位于首行首列，却不能单独编码两个独立布尔条件，所以先保存两条原始标记。内部清零期间不能提前清空整条首行或首列，否则会把所有列或所有行都误标为零。用只有内部一个零、只有首行一个零、只有首列一个零的矩阵分别检查，能看出三个信息来源是否混淆。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：O(1) 空间（用首行首列当标记，推荐）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间（用首行首列当标记，推荐）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setZeroes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">ROWS</span><span class="p">,</span> <span class="n">COLS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -10203,7 +10203,7 @@
 </span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">):</span>
 </span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 </span></code></pre></div>
-<h3 id="omn">解法二：O(m+n) 空间（最容易写对）<a class="headerlink" href="#omn" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalomn">解法二：<span class="arithmatex">\(\mathcal{O}(m+n)\)</span> 空间（最容易写对）<a class="headerlink" href="#mathcalomn" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setZeroes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">ROWS</span><span class="p">,</span> <span class="n">COLS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -10249,13 +10249,13 @@
 <tbody>
 <tr>
 <td>首行首列当标记</td>
-<td>O(m · n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>标记数组</td>
-<td>O(m · n)</td>
-<td>O(m + n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m + n)\)</span></td>
 </tr>
 </tbody>
 </table>

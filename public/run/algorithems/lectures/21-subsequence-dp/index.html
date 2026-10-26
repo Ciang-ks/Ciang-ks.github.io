@@ -1810,10 +1810,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lis-on-log-n" class="md-nav__link">
+  <a href="#lis-mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        选读：用最小尾值把 LIS 加速到 O(n log n)
+        选读：用最小尾值把 LIS 加速到 \(\mathcal{O}(n \log n)\)
       
     </span>
   </a>
@@ -9985,10 +9985,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lis-on-log-n" class="md-nav__link">
+  <a href="#lis-mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        选读：用最小尾值把 LIS 加速到 O(n log n)
+        选读：用最小尾值把 LIS 加速到 \(\mathcal{O}(n \log n)\)
       
     </span>
   </a>
@@ -10055,7 +10055,7 @@
 
 <h1 id="21-dp">第 21 讲 · 子序列 DP<a class="headerlink" href="#21-dp" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 20 讲：状态、基例、转移；第 6 讲：lower_bound（快速 LIS）。</p>
-<p><strong>首读范围</strong>：先做 LCS 与 O(n²) LIS；tails、计数和回文第二遍读。</p>
+<p><strong>首读范围</strong>：先做 LCS 与 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> LIS；tails、计数和回文第二遍读。</p>
 <p>这一讲从三个定义开始：</p>
 <blockquote>
 <p><strong>子序列</strong>：从字符串里挑出一些字符，保持原来的相对顺序（不要求连续）。
@@ -10068,7 +10068,7 @@
 </blockquote>
 <p>这和递归里"想子问题"的过程很像，区别在于：像归并排序那样，每个子问题涉及的元素集合不同、<strong>而且只被用一次</strong>；而在 DP 里，我们期待子问题<strong>被反复使用</strong>。</p>
 <p><strong>把"找子问题"当作一项可以单独训练的技能，是这一讲最想让你带走的东西。</strong></p>
-<p>先试x="abc"、y="ac"。x有8个按位置挑选的子序列候选；逐一检查是否也在y中可以得到ac，但长串有2^m个候选。前缀状态的作用是把多次遇到的同一对前缀合并计算，不是靠背诵二维表就消除了枚举。</p>
+<p>先试x="abc"、y="ac"。x有8个按位置挑选的子序列候选；逐一检查是否也在y中可以得到ac，但长串有<span class="arithmatex">\(2^m\)</span>个候选。前缀状态的作用是把多次遇到的同一对前缀合并计算，不是靠背诵二维表就消除了枚举。</p>
 <h2 id="_1">候选子问题：哪些能用，哪些不能<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10101,7 +10101,7 @@
 <p>本节函数输入两个字符串，返回 LCS 的<strong>长度</strong>，不直接返回那段字符。例如 abcde 与 ace 返回 3，空串与任何串都返回 0。用 dp[i][j] 保存两个前缀的 LCS 长度后，接下来只需决定这一格依赖哪些更短前缀。</p>
 <p>先用小例子理解两种情况：ab 与 ac 的末字符不同，不可能把 b、c 配成一对，只能尝试去掉其中一个末字符；abc 与 ac 的末字符同为 c，可以在 ab 与 a 的公共子序列后接这个 c。下面的代码实现这两支，随后给出为何足够的完整证明。</p>
 <p><img alt="LCS 的第一种情况" src="../figures/21-lcs-case1.png" /></p>
-<p>图中两个前缀为 ACGGA 与 ACGCTTA，末字符同为 A；配上这两个 A 后，剩下的是两个各短一位的前缀。C[i,j] 的 i、j 表示前缀长度；Python 读取末字符时用 i−1、j−1。下面填表图改用 abcde 与 ace。</p>
+<p>图中两个前缀为 ACGGA 与 ACGCTTA，末字符同为 A；配上这两个 A 后，剩下的是两个各短一位的前缀。C[i,j] 的 i、j 表示前缀长度；Python 读取末字符时用 i-1、j-1。下面填表图改用 abcde 与 ace。</p>
 <p><img alt="LCS 的填表与回溯" src="../images/21-lcs-table.svg" /></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">lcs</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">text2</span><span class="p">):</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">text2</span><span class="p">)</span>
@@ -10114,13 +10114,13 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
 </span></code></pre></div>
-<p><code>dp[2][1]</code> 问的是 "ab" 与 "a" 的LCS长度，而不是比较两个字符b和a就结束。行列下标是<strong>前缀长度</strong>，取该前缀末字符时才用 <code>text1[i−1]</code>、<code>text2[j−1]</code>。空行/列必须分配出来，因此表有(m+1)×(n+1)个格子。图、后文小表统一使用abcde与ace。</p>
+<p><code>dp[2][1]</code> 问的是 "ab" 与 "a" 的LCS长度，而不是比较两个字符b和a就结束。行列下标是<strong>前缀长度</strong>，取该前缀末字符时才用 <code>text1[i-1]</code>、<code>text2[j-1]</code>。空行/列必须分配出来，因此表有<span class="arithmatex">\((m+1)(n+1)\)</span>个格子。图、后文小表统一使用abcde与ace。</p>
 <p>二维表每一行必须是独立列表，所以用 <code>[[0]*(n+1) for _ in range(m+1)]</code>。若写 <code>[[0]*(n+1)]*(m+1)</code>，各行会引用同一个列表，改一格就会连带改其他行。</p>
 <p><strong>前缀长度从 0 开始，非空前缀的循环从 1 开始</strong>，让 <code>dp[0][j]</code> 表示"<code>text1</code> 取空串"，整行整列天然为 0，省掉所有边界特判。这是双串 DP 的通用技巧。</p>
 <p>转移只有两支，推理是：</p>
 <ul>
-<li><strong>两个末尾相等</strong>，记共同字符为 c：取较短前缀的 LCS 并追加 c，可得到 <code>dp[i−1][j−1]+1</code>。反过来，存在一条最优匹配把两个末尾配在一起：若都未使用，可以追加 c，原解就不最优；若只使用一个末尾，把它与另一串中配对的位置移到末尾，不会破坏前面次序；若都使用，它们只能互相配对。删掉这对后剩余长度不超过 <code>dp[i−1][j−1]</code>。上下两界相同，方程成立。</li>
-<li><strong>两个末尾不等</strong>：保持顺序的匹配不能把这两个末尾同时纳入（会要求二者相等），至少有一个末尾未使用，所以答案在 <code>dp[i−1][j]</code> 与 <code>dp[i][j−1]</code> 中取较大者。</li>
+<li><strong>两个末尾相等</strong>，记共同字符为 c：取较短前缀的 LCS 并追加 c，可得到 <span class="arithmatex">\(dp[i-1][j-1]+1\)</span>。反过来，存在一条最优匹配把两个末尾配在一起：若都未使用，可以追加 c，原解就不最优；若只使用一个末尾，把它与另一串中配对的位置移到末尾，不会破坏前面次序；若都使用，它们只能互相配对。删掉这对后剩余长度不超过 <span class="arithmatex">\(\mathrm{dp}[i-1][j-1]\)</span>。上下两界相同，方程成立。</li>
+<li><strong>两个末尾不等</strong>：保持顺序的匹配不能把这两个末尾同时纳入（会要求二者相等），至少有一个末尾未使用，所以答案在 <span class="arithmatex">\(\mathrm{dp}[i-1][j]\)</span> 与 <span class="arithmatex">\(\mathrm{dp}[i][j-1]\)</span> 中取较大者。</li>
 </ul>
 <p><strong>注意"不等"时只需要考虑这两种情况</strong>——这正是"分类恰好覆盖"的论证。</p>
 <p>填一遍 <code>x = "abcde"</code>、<code>y = "ace"</code>：</p>
@@ -10128,7 +10128,7 @@
 <thead>
 <tr>
 <th></th>
-<th>∅</th>
+<th>空前缀</th>
 <th>a</th>
 <th>c</th>
 <th>e</th>
@@ -10136,7 +10136,7 @@
 </thead>
 <tbody>
 <tr>
-<td>∅</td>
+<td>空前缀</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -10179,11 +10179,11 @@
 </tr>
 </tbody>
 </table>
-<p>共有 (m+1)(n+1) 个状态，每格最多比较两个字符、读相邻三格，因此时间 O(mn+m+n)，表空间 O((m+1)(n+1))。两串都非空时通常简写为 O(mn)。</p>
+<p>共有 (m+1)(n+1) 个状态，每格最多比较两个字符、读相邻三格，因此时间 <span class="arithmatex">\(\mathcal{O}(mn+m+n)\)</span>，表空间 <span class="arithmatex">\(\mathcal{O}((m+1)(n+1))\)</span>。两串都非空时通常简写为 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <p>答案 3。<strong>从右下角往回走就能还原出 <code>"ace"</code></strong>：字符相等就往左上并记录，否则往数值更大的方向走。</p>
 <h3 id="_2">选读：把两行计算压到一张列表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>首次阅读可以保留上面的二维表。等学完第 22 讲的覆盖顺序，再回来比较下面的实现：一行计算只用到上一行与本行左边的值，因此可以用同一列表覆盖。</p>
-<p>更新第 j 格前，dp[j] 仍是旧行“上方”，dp[j−1] 已是本行“左方”；旧行“左上”会被覆盖，所以另用 prev 保存。先把旧 dp[j] 存到 above，再写新 dp[j]，最后让 prev=above，供下一格使用：</p>
+<p>更新第 j 格前，dp[j] 仍是旧行“上方”，dp[j-1] 已是本行“左方”；旧行“左上”会被覆盖，所以另用 prev 保存。先把旧 dp[j] 存到 above，再写新 dp[j]，最后让 prev=above，供下一格使用：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">lcs_rolling</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">text2</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">text1</span><span class="p">:</span>
@@ -10197,7 +10197,7 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">prev</span> <span class="o">=</span> <span class="n">above</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
-<p>用 ab 与 ac 对照：处理 a 后列表为 [0,1,1]，处理 b 后仍为 [0,1,1]，答案为 1。状态转移没有改变，时间仍为 O(mn+m+n)，额外空间从二维表缩到 O(n+1)。</p>
+<p>用 ab 与 ac 对照：处理 a 后列表为 [0,1,1]，处理 b 后仍为 [0,1,1]，答案为 1。状态转移没有改变，时间仍为 <span class="arithmatex">\(\mathcal{O}(mn+m+n)\)</span>，额外空间从二维表缩到 <span class="arithmatex">\(\mathcal{O}(n+1)\)</span>。</p>
 <h2 id="_3">改成计数：不同位置的选择算不同方案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>现在给定源串 s、目标串 t，问从 s 中选出若干递增下标，使对应字符拼成 t，一共有多少种选择。返回的是方案数，既不是最长长度，也不是去重后的文本种数。例如 s="aaa"、t="aa"，可选下标 (0,1)、(0,2)、(1,2)，所以有 3 种；虽然拼出的文本都是 aa，所选位置不同仍算不同方案。</p>
 <p>下标仍可用两个前缀长度，但状态必须改成“从 s 的前 i 个位置选出 t 的前 j 个字符的方法数”。相同字符分为“用当前 s 字符”和“不用”两类，按所选位置区分方案，才得到"不同的子序列"（数 s 中有多少个子序列等于 t）：</p>
@@ -10214,7 +10214,7 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>记住这个对应关系</strong>：求最大/最小用 <code>max</code>/<code>min</code>，求方案数用 <code>+</code>，求可行性用 <code>or</code>。<strong>LCS 与 Distinct Subsequences 的对比最能说明这一点。</strong></p>
+<p><strong>记住这个对应关系</strong>：求最大/最小用 <code>max</code>/<code>min</code>，求方案数用 <span class="arithmatex">\(+\)</span>，求可行性用 <code>or</code>。<strong>LCS 与 Distinct Subsequences 的对比最能说明这一点。</strong></p>
 <h2 id="lis">LIS：换一种状态定义<a class="headerlink" href="#lis" title="Permanent link">&para;</a></h2>
 <p>输入整数数组 nums，返回最长<strong>严格递增子序列</strong>的长度。可以跳过元素，但相对顺序不能变；严格递增要求后一个值大于前一个，相等不算。例如 <code>[3,1,2]</code> 可选 <code>[1,2]</code>，返回 2；<code>[2,2]</code> 返回 1。</p>
 <p>与 LCS 相比，这次只有一个序列，但多了相邻所选值之间的大小限制。因此定义 <code>dp[i]</code> 为<strong>以 <code>nums[i]</code> 结尾</strong>的最长递增子序列长度。</p>
@@ -10227,11 +10227,11 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span> <span class="k">if</span> <span class="n">nums</span> <span class="k">else</span> <span class="mi">0</span>        <span class="c1"># 答案是所有 dp 的最大值</span>
 </span></code></pre></div>
-<p>先手算 [3,1,2]：dp=[1,1,2]，最后的 2 能接在 1 后面，不能接在 3 后面。以 nums[i] 结尾的长度至少是 1；再试每个更小的前驱 j，取 dp[j]+1 的最大值。检查的 (j,i) 对数为 n(n−1)/2，时间 O(n²)、空间 O(n)。</p>
+<p>先手算 [3,1,2]：dp=[1,1,2]，最后的 2 能接在 1 后面，不能接在 3 后面。以 nums[i] 结尾的长度至少是 1；再试每个更小的前驱 j，取 dp[j]+1 的最大值。检查的 (j,i) 对数为 n(n-1)/2，时间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>、空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>为什么这里用"以 i 结尾"？</strong> 因为递增这个约束<strong>需要知道序列的结尾值</strong>才能判断下一个元素能不能接上。如果 <code>dp[i]</code> 只记"前 i 个的最长长度"，它的最优解可能以任意值结尾，父问题无法判断。<strong>"状态要携带足够的约束信息"是设计状态的核心原则。</strong></p>
 <p>而"以 i 结尾"这个定义也意味着<strong>答案是 <code>max(dp)</code>，不是 <code>dp[n-1]</code></strong>——最优子序列不一定结束在最后一个元素。<strong>把"以 i 结尾"和"前 i 个"混起来，是子序列 DP 最常见的错误。</strong></p>
-<h3 id="lis-on-log-n">选读：用最小尾值把 LIS 加速到 O(n log n)<a class="headerlink" href="#lis-on-log-n" title="Permanent link">&para;</a></h3>
-<p>O(n²) 版本为每个新数遍历所有前驱。如果改成按长度归类，同样长的递增序列中，结尾较小的那条更容易接上后来的数。例如长度都为 2，尾值为 3 的序列能接 4，尾值为 5 的却不能。</p>
+<h3 id="lis-mathcalon-log-n">选读：用最小尾值把 LIS 加速到 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span><a class="headerlink" href="#lis-mathcalon-log-n" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 版本为每个新数遍历所有前驱。如果改成按长度归类，同样长的递增序列中，结尾较小的那条更容易接上后来的数。例如长度都为 2，尾值为 3 的序列能接 4，尾值为 5 的却不能。</p>
 <p>因此 tails[k] 保存“已经扫描过的前缀中，长度为 k+1 的递增子序列所能达到的最小结尾值”。它不是按输入下标保存答案的 dp，而是一张按长度索引的候选表；下面只要求返回最大长度。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">bisect</span><span class="w"> </span><span class="kn">import</span> <span class="n">bisect_left</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -10246,7 +10246,7 @@
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">tails</span><span class="p">)</span>
 </span></code></pre></div>
 <p>对相同长度，尾值3比尾值5更容易接后续元素，且未来不关心此前具体挑了谁，因此只保留最小尾值不会损失未来的最优长度。</p>
-<p>还要解释为何可以二分：长度k+1的任一递增序列，去掉末尾得到更短、尾值更小的序列，所以各长度的最小尾值严格递增，tails是有序的。找到第一个≥x的位置i时，所有更短尾值都<x，若i>0，x可以接在长度i的序列后面，形成长度i+1；同时它不能接到长度i+1的序列后面，因为那一长度的最小尾值已经≥x。因此只更新tails[i]或在末尾追加。每次二分O(log n)，共n次，时间O(n log n)、空间O(n)。</p>
+<p>还要解释为何可以二分：长度k+1的任一递增序列，去掉末尾得到更短、尾值更小的序列，所以各长度的最小尾值严格递增，tails是有序的。找到第一个不小于x的位置i时，所有更短尾值都<x，若i>0，x可以接在长度i的序列后面，形成长度i+1；同时它不能接到长度i+1的序列后面，因为那一长度的最小尾值已经不小于x。因此只更新tails[i]或在末尾追加。每次二分<span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，共n次，时间<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>、空间<span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>tails 不保证是一条真实的 LIS</strong>——它只记录"每个长度的最优结尾"。这一点面试时经常被追问。</p>
 <p>用 <code>[10,9,2,5,3,7,101,18]</code> 走一遍：</p>
 <table>
@@ -10291,10 +10291,10 @@
 </tr>
 </tbody>
 </table>
-<p>长度 4，与 O(n²) 版本一致。<strong>注意严格递增要用 <code>bisect_left</code>，用 <code>bisect_right</code> 会变成"非递减子序列"。</strong></p>
+<p>长度 4，与 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 版本一致。<strong>注意严格递增要用 <code>bisect_left</code>，用 <code>bisect_right</code> 会变成"非递减子序列"。</strong></p>
 <h2 id="_4">最长回文子串：两种视角<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>这次要求连续：给定字符串 s，返回最长的回文子串本身；多个同长答案可返回任意一个，空串返回空串。“回文”是正着读、反着读都相同，例如 aba、abba；例如 babad 可返回 bab 或 aba。不能跳过字符拼成回文，那是回文子序列问题。</p>
-<p>最直观的是<strong>中心扩展</strong>：回文的中心有两类（单字符、两字符之间的缝隙），共 <code>2n−1</code> 个，每个向两边扩展。</p>
+<p>最直观的是<strong>中心扩展</strong>：回文的中心有两类（单字符、两字符之间的缝隙），共 <span class="arithmatex">\(2n-1\)</span> 个，每个向两边扩展。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">longest_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">start</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">expand</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
@@ -10311,20 +10311,20 @@
 </span></code></pre></div>
 <p>同一个问题也可以用<strong>区间 DP</strong>：<code>dp[i][j]</code> 表示 <code>s[i..j]</code> 是否回文，转移是"两端相同且去掉两端后仍是回文"。按区间长度递增可以确保依赖已算好，因为依赖更短的区间。</p>
 <p>再区分一个双串问题：给定 x、y，求同时连续出现在两串中的最长文本长度。例如 abc 与 ac 的 LCS 是 ac、长度 2，但最长公共子串只能是 a 或 c、长度 1。</p>
-<p>这次 dp[i][j] 要改为“分别以 x[i−1]、y[j−1] 结尾的公共子串长度”。末字符相等时在 dp[i−1][j−1] 上加 1；字符不等时要把 <code>dp[i][j]</code> 置 0 而不是取 max，答案是整张表的最大元素，而不是右下角；可以初始化 best=0，每算出一个 dp[i][j] 就更新 <code>best=max(best,dp[i][j])</code>。<strong>要求连续时，一旦末字符不同，当前这段就断开了。</strong></p>
+<p>这次 dp[i][j] 要改为“分别以 x[i-1]、y[j-1] 结尾的公共子串长度”。末字符相等时在 dp[i-1][j-1] 上加 1；字符不等时要把 <code>dp[i][j]</code> 置 0 而不是取 max，答案是整张表的最大元素，而不是右下角；可以初始化 best=0，每算出一个 dp[i][j] 就更新 <span class="arithmatex">\(\mathrm{best}=\max (\mathrm{best},dp[i][j])\)</span>。<strong>要求连续时，一旦末字符不同，当前这段就断开了。</strong></p>
 <h2 id="_5">从讲义走到代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>文本版本比较可用公共子序列衡量保留的共同内容；恢复实际序列还需记录或回溯选择。</p>
-<p>先做 <a href="../../problems/14-2d-dp/02-longest-common-subsequence/">Longest Common Subsequence</a>，手填 ab 与 ac 的 3×3 表：三行分别为 [0,0,0]、[0,1,1]、[0,1,1]。让程序输出同一张表，再把右下角作为答案。</p>
-<p>接着写 O(n²) 的 LIS，用 [3,1,2] 得 2、[1,2,0] 也得 2，确认答案取全部结尾的最大值。只有能解释每格状态后，再写 tails 版本对照结果。</p>
+<p>先做 <a href="../../problems/14-2d-dp/02-longest-common-subsequence/">Longest Common Subsequence</a>，手填 ab 与 ac 的 <span class="arithmatex">\(3\times3\)</span> 表：三行分别为 [0,0,0]、[0,1,1]、[0,1,1]。让程序输出同一张表，再把右下角作为答案。</p>
+<p>接着写 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 的 LIS，用 [3,1,2] 得 2、[1,2,0] 也得 2，确认答案取全部结尾的最大值。只有能解释每格状态后，再写 tails 版本对照结果。</p>
 <h2 id="_6">练习<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 手工填一遍 <code>x = ABCDEFGH</code>、<code>y = ABXFDEGCT</code> 的表，验证答案是 5。</p>
-<p>右下角是 5，与题目给出的 LCS 长度一致（见上文小表的填法，把两个串换掉即可）。先用上面的 6×4 小表练熟，再填这张更大的表。</p>
+<p>右下角是 5，与题目给出的 LCS 长度一致（见上文小表的填法，把两个串换掉即可）。先用上面的 <span class="arithmatex">\(6\times4\)</span> 小表练熟，再填这张更大的表。</p>
 <p><strong>2.</strong> 如果改成"最长公共<strong>子串</strong>"（要求连续），转移怎么改？</p>
 <p>状态含义变成"以 <code>x[i-1]</code> 与 <code>y[j-1]</code> 结尾的最长公共子串"，<strong>字符不等时置 0</strong>，答案是整张表的最大元素。</p>
 <p><strong>3.</strong> 为什么快速 LIS 实现里的 <code>tails</code> 不一定是一条真实的 LIS？</p>
 <p>它记录每个长度的最小结尾。例如 <code>[3,5,6,2]</code> 结束时 tails 为 <code>[2,5,6]</code>，但 2 在 5、6 之后出现，这三个值不能依原顺序组成子序列。可用这组下标顺序核对是否误把 tails 当作结果序列。</p>
 <p><strong>4.</strong> <code>Distinct Subsequences</code> 里"字符相同"为什么是相加而不是取 max？</p>
-<p>因为目标不同：LCS 求<strong>最长</strong>所以取 <code>max</code>；115 求<strong>方案数</strong>所以把两种选择的方案数 <code>+</code> 起来。</p>
+<p>因为目标不同：LCS 求<strong>最长</strong>所以取 <code>max</code>；115 求<strong>方案数</strong>所以把两种选择的方案数 <span class="arithmatex">\(+\)</span> 起来。</p>
 <p><strong>5.</strong> 实现 <code>word_break(s, word_dict)</code>：给定字符串和非空单词组成的词典，判断能否把整个字符串切成若干词典单词，单词可重复使用，不能丢弃字符。例如 <code>"leetcode"</code> 与 <code>["leet","code"]</code> 返回 True；<code>"appleapple"</code> 与 <code>["apple"]</code> 也返回 True。只返回是否可行，不要求给出切分。</p>
 <p>"前 i 个字符能否被拆分"，转移是"存在切分点 j 使 <code>dp[j]</code> 为真且 <code>s[j:i]</code> 在词典里"：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">word_break</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">word_dict</span><span class="p">):</span>

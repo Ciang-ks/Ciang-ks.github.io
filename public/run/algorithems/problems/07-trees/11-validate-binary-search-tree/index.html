@@ -4661,10 +4661,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#oh" class="md-nav__link">
+  <a href="#mathcaloh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：中序遍历 + 迭代（不用递归，空间 O(h)）
+        解法二：中序遍历 + 迭代（不用递归，空间 \(\mathcal{O}(h)\)）
       
     </span>
   </a>
@@ -4672,10 +4672,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：中序遍历收集所有值（最直观，空间 O(n)）
+        解法三：中序遍历收集所有值（最直观，空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10064,10 +10064,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#oh" class="md-nav__link">
+  <a href="#mathcaloh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：中序遍历 + 迭代（不用递归，空间 O(h)）
+        解法二：中序遍历 + 迭代（不用递归，空间 \(\mathcal{O}(h)\)）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：中序遍历收集所有值（最直观，空间 O(n)）
+        解法三：中序遍历收集所有值（最直观，空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10194,10 +10194,10 @@
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 </span></code></pre></div>
-<p>用 <code>prev</code> 一个变量就能边遍历边检查，不需要真的把序列存下来，空间 O(h)。</p>
+<p>用 <code>prev</code> 一个变量就能边遍历边检查，不需要真的把序列存下来，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>局部父子比较漏掉的是祖先给出的范围。例如根 5、右孩子 6、6 的左孩子 4：4&lt;6 满足父子关系，却违反“整棵右子树都必须&gt;5”。递归参数 (lo,hi) 是沿途全部祖先约束的交集，不是仅当前父节点的区间。</p>
-<p>每向左走收紧上界，每向右走收紧下界；另一端必须继续保留，不能重置成无穷。中序递增法是同一全局大小约束的另一表达，重复键在本题中也非法。因此不能把≤和&lt;随便互换来“支持重复值”，那会改变 BST 定义并影响后续第 k 小等接口。</p>
+<p>每向左走收紧上界，每向右走收紧下界；另一端必须继续保留，不能重置成无穷。中序递增法是同一全局大小约束的另一表达，重复键在本题中也非法。因此不能把不大于和&lt;随便互换来“支持重复值”，那会改变 BST 定义并影响后续第 k 小等接口。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：上下界递归（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10212,7 +10212,7 @@
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="k">return</span> <span class="n">valid</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'-inf'</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">))</span>
 </span></code></pre></div>
-<h3 id="oh">解法二：中序遍历 + 迭代（不用递归，空间 O(h)）<a class="headerlink" href="#oh" title="Permanent link">&para;</a></h3>
+<h3 id="mathcaloh">解法二：中序遍历 + 迭代（不用递归，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>）<a class="headerlink" href="#mathcaloh" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isValidBST</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
@@ -10231,7 +10231,7 @@
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<h3 id="on">解法三：中序遍历收集所有值（最直观，空间 O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：中序遍历收集所有值（最直观，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isValidBST</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
@@ -10258,18 +10258,18 @@
 <tbody>
 <tr>
 <td>上下界递归</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>中序迭代</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>中序收集</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10277,7 +10277,7 @@
 <ul>
 <li><strong>绝对不能只比较父子节点</strong>，务必用上下界或中序。这是本题的核心考点，面试官一定会拿 <code>[5,1,4,null,null,3,6]</code> 来问。</li>
 <li>上下界用 <code>float('-inf')</code> / <code>float('inf')</code> 而不是 0。若树的值可能超出 int 范围，也可以用 <code>None</code> 表示无界。</li>
-<li>比较必须是<strong>严格</strong>的：<code>lo &lt; node.val &lt; hi</code>，用 <code>&lt;=</code> 会把含重复值的树误判为合法（题目要求严格 BST）。</li>
+<li>比较必须是<strong>严格</strong>的：<code>lo &lt; node.val &lt; hi</code>，用 <span class="arithmatex">\(\le\)</span> 会把含重复值的树误判为合法（题目要求严格 BST）。</li>
 <li>中序解法里，<code>prev</code> 的初值是 <code>-inf</code>（或者"第一个节点不比较"）。</li>
 <li><strong>追问：如果允许右子树出现等于根的值？</strong> → 那就不是严格 BST，需要重新定义比较符号。</li>
 <li><strong>追问：如何找出 BST 中被错误交换的两个节点？</strong> → <a href="https://leetcode.com/problems/recover-binary-search-tree/">99 Recover Binary Search Tree</a>，用中序找到逆序对。</li>

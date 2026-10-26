@@ -1322,10 +1322,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        双向链表：删除任意已知节点变 O(1)
+        双向链表：删除任意已知节点变 \(\mathcal{O}(1)\)
       
     </span>
   </a>
@@ -9995,10 +9995,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        双向链表：删除任意已知节点变 O(1)
+        双向链表：删除任意已知节点变 \(\mathcal{O}(1)\)
       
     </span>
   </a>
@@ -10100,10 +10100,10 @@
 <h1 id="4">第 4 讲 · 链表、栈与队列<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 1 讲：不变量；第 2 讲：数组操作；第 3 讲：字典、集合与遍历。</p>
 <p><strong>首读范围</strong>：先读节点引用、反转链表、栈与队列；单调栈是第二遍。</p>
-<p>第 2 讲比较过数组访问与插入的代价，这里继续看链表：数组能 O(1) 随机访问，但插到中间要搬元素；链表改几个指针就能插删，但按位置找第 i 个节点要从头走 O(i+1) 步。这一讲先把链表真正写一遍，再引出两个"受限的序列"——栈和队列。它们规定的是操作接口，可用数组或链表实现；实际上是后面图搜索、表达式求值、单调栈这一大批算法的骨架。</p>
+<p>第 2 讲比较过数组访问与插入的代价，这里继续看链表：数组能 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 随机访问，但插到中间要搬元素；链表改几个指针就能插删，但按位置找第 i 个节点要从头走 <span class="arithmatex">\(\mathcal{O}(i+1)\)</span> 步。这一讲先把链表真正写一遍，再引出两个"受限的序列"——栈和队列。它们规定的是操作接口，可用数组或链表实现；实际上是后面图搜索、表达式求值、单调栈这一大批算法的骨架。</p>
 <h2 id="_1">单链表：删一个节点要先找到它的前驱<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>下面用 class 把每个节点的“值”和“下一节点”放在一起。<code>__init__</code> 创建节点时设置字段，self 是当前对象。</p>
-<p>链表由节点组成。<code>head</code> 引用第一个节点，<code>node.next</code> 引用下一个；<code>None</code> 表示末尾。<code>a=b</code> 让两个变量引用同一对象，不会复制节点；<code>a.next=c</code> 修改的是节点的连接。先画 <code>1 → 2 → 3 → None</code>，再执行代码，才能看清“改连接”和“改值”的区别。</p>
+<p>链表由节点组成。<code>head</code> 引用第一个节点，<code>node.next</code> 引用下一个；<code>None</code> 表示末尾。<span class="arithmatex">\(a=b\)</span> 让两个变量引用同一对象，不会复制节点；<code>a.next=c</code> 修改的是节点的连接。先画 <code>1 → 2 → 3 → None</code>，再执行代码，才能看清“改连接”和“改值”的区别。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ListNode</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nxt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
@@ -10128,7 +10128,7 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
 </span></code></pre></div>
 <p><code>cur=cur.next</code> 只是让变量指向下一个节点，没有改动连接。相反，<code>a.next=c</code> 会让这条链跳过 b。插入代码 <code>node.next=ListNode(val,node.next)</code> 会先读取旧 next、创建新节点，再把 node 的 next 指向新节点，因此后面的链不会丢。</p>
-<p>注意这两个函数的参数都是"<strong>某个节点</strong>"，不是"第 i 个位置"——定位是另一回事。函数名里的 <code>_after</code> 也很重要：单链表<strong>拿不到前驱</strong>，想删掉 <code>cur</code> 本身必须先找到它的前驱，那是 O(n)。</p>
+<p>注意这两个函数的参数都是"<strong>某个节点</strong>"，不是"第 i 个位置"——定位是另一回事。函数名里的 <code>_after</code> 也很重要：单链表<strong>拿不到前驱</strong>，想删掉 <code>cur</code> 本身必须先找到它的前驱，那是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p>先用反转看清引用怎样改变，再用哑节点统一处理“删除头节点”的情况。</p>
 <h3 id="_2">反转：每次只改一根连接<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>代码里的 <code>while cur</code> 等价于此处的 <code>while cur is not None</code>：到末尾 cur 为 None 就结束。遍历时沿 next 前进；反转却要把 next 改成朝前指。若先改再找后继，就丢掉了原来的路，所以先保存 nxt：</p>
@@ -10142,7 +10142,7 @@
 </span></code></pre></div>
 <p>先看图的三个快照：①是循环开始，②只改了 <code>cur.next</code>，变量 prev、cur 还没挪；③才是执行 <code>prev,cur=cur,nxt</code> 后的下一轮起点。变量名是贴在对象上的标签，箭头才是对象里的 next 字段。</p>
 <p><img alt="反转链表时三根指针的移动" src="../images/04-reverse-list.svg" /></p>
-<p>循环开始时，prev 是已反转部分的头，cur 是未处理部分的头。每轮把 cur 移到前一部分，未处理节点数减少 1；结束时 cur 为 None，prev 就是整条反转链的新头。调用要接住返回值：<code>head=reverse_list(head)</code>。每个节点只处理一次，时间 O(n)，额外只存三根引用，空间 O(1)。</p>
+<p>循环开始时，prev 是已反转部分的头，cur 是未处理部分的头。每轮把 cur 移到前一部分，未处理节点数减少 1；结束时 cur 为 None，prev 就是整条反转链的新头。调用要接住返回值：<code>head=reverse_list(head)</code>。每个节点只处理一次，时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，额外只存三根引用，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h3 id="_3">哑结点：让删除头节点也有前驱<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>现在要实现 <code>remove_elements(head, val)</code>：给定链表头和目标值，删除所有值等于 val 的节点，保留其余节点的原顺序，并返回新的头。例如 <code>6→6→2</code>、val=6 应得到 <code>2→None</code>；若全被删除则返回 None。</p>
 <p>前面的 remove_after 要拿到待删节点的前驱，但头节点没有前驱。可以在真正的头前面临时放一个不属于答案的节点 dummy，让头节点也有一个可修改的前驱。处理完之后返回 dummy.next，就自然跳过这个辅助节点：</p>
@@ -10159,7 +10159,7 @@
 <p>例如删除 <code>6→6→2</code> 中的 6：第一次删除后 prev 仍停在 dummy，才能继续检查第二个 6；只有保留节点时才前进。若每轮都推进 prev，就会漏掉连续的目标节点。</p>
 <p>没有 <code>dummy</code> 的话，一旦第一个节点就要被删掉，你得多写一大段特判。<strong>凡是题目涉及"可能删除头节点"，先加哑结点</strong>，这一条能省掉链表题里一半的边界讨论。</p>
 <h3 id="next">选读：沿 next 走，怎样知道有环<a class="headerlink" href="#next" title="Permanent link">&para;</a></h3>
-<p>如果某个节点的 next 指回前面，遍历就永远遇不到 None。比如 1→2→3→2→3……，节点 2、3 组成环。可以用集合保存见过的节点，重复遇到同一对象就知道有环，时间 O(n)、空间 O(n)。</p>
+<p>如果某个节点的 next 指回前面，遍历就永远遇不到 None。比如 1→2→3→2→3……，节点 2、3 组成环。可以用集合保存见过的节点，重复遇到同一对象就知道有环，时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>、空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p>也可以让 slow 每轮走一步，fast 每轮走两步：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">has_cycle</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
@@ -10170,8 +10170,8 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="k">return</span> <span class="kc">True</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="kc">False</span>
 </span></code></pre></div>
-<p>无环时 fast 先遇到末尾，返回 False。若有长度为 k 的环，两者最终都进入环；每轮 fast 相对 slow 多走一步，间距模 k 每轮改变 1，至多再过 k 轮就相遇。它们开始都指向 head，因此要先移动再比较，否则任何非空链都会被误判。总共 O(n) 步、额外 O(1) 空间。后面的快乐数把“取下一节点”换成“计算下一个数字”，仍可用这套判环方法。</p>
-<h2 id="o1">双向链表：删除任意已知节点变 O(1)<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h2>
+<p>无环时 fast 先遇到末尾，返回 False。若有长度为 k 的环，两者最终都进入环；每轮 fast 相对 slow 多走一步，间距模 k 每轮改变 1，至多再过 k 轮就相遇。它们开始都指向 head，因此要先移动再比较，否则任何非空链都会被误判。总共 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 步、额外 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。后面的快乐数把“取下一节点”换成“计算下一个数字”，仍可用这套判环方法。</p>
+<h2 id="mathcalo1">双向链表：删除任意已知节点变 <span class="arithmatex">\(\mathcal{O}(1)\)</span><a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h2>
 <p>给每个节点加上 prev 引用，就能直接取得前驱。再配两个哨兵（哑头与哑尾），对已在链表内的普通节点插删时，左右邻居都存在，便能统一处理边界：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DNode</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -10201,7 +10201,7 @@
 <p>栈是后进先出（LIFO）：<code>push</code> 放顶部，<code>pop</code> 取顶部。队列是先进先出（FIFO）：<code>enqueue</code> 放尾部，<code>dequeue</code> 取头部。</p>
 <p>例如依次放入 10、20，栈会先取出 20，队列会先取出 10。撤销操作通常先撤销最近一步，适合栈；按到达顺序处理请求，适合队列。第 15 讲会利用这两种次序安排图的搜索。</p>
 <p>Python 列表可直接作为栈：<code>stack=[]</code>，<code>stack.append(10)</code> 入栈，<code>stack[-1]</code> 查看栈顶，<code>stack.pop()</code> 取出并删除栈顶。查看和弹出前先确认非空。</p>
-<p>用动态数组实现栈很直接：<code>push</code>/<code>pop</code> 都在末尾，摊销 O(1)。但若直接从数组头部出队，就会多出搬移：</p>
+<p>用动态数组实现栈很直接：<code>push</code>/<code>pop</code> 都在末尾，摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。但若直接从数组头部出队，就会多出搬移：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dequeue_from_head</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># O(n)：后面所有元素都要往前挪</span>
 </span></code></pre></div>
@@ -10253,7 +10253,7 @@
 <p>顺便看一个反例：<code>"([)]"</code> 里三种括号的数量都相等，但嵌套非法。<strong>所以"数个数"的做法不行，必须用栈。</strong></p>
 <h3 id="_7">单调栈：找下一个更大的元素<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>先看每日温度这道题：输入 T[i] 表示第 i 天的气温，输出 res[i] 表示还要等多少天，才第一次遇到严格更高的气温；以后都没有则填 0。例如 <code>[73,71,74]</code> 的答案是 <code>[2,1,0]</code>，返回的是等待天数，不是气温。</p>
-<p>直接做法是为每一天向右逐个查找，最坏 O(n²)。换个角度：把尚未等到升温的日期暂存起来，新的一天到来时，为它能解决的旧日期填写答案。这些日期用栈保存，而且对应温度从栈底到栈顶不增；这种维持数值单调关系的栈叫作<strong>单调栈</strong>。栈内存下标，是为了找到答案时能计算 <code>今天下标−旧日期下标</code>：</p>
+<p>直接做法是为每一天向右逐个查找，最坏 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。换个角度：把尚未等到升温的日期暂存起来，新的一天到来时，为它能解决的旧日期填写答案。这些日期用栈保存，而且对应温度从栈底到栈顶不增；这种维持数值单调关系的栈叫作<strong>单调栈</strong>。栈内存下标，是为了找到答案时能计算 <span class="arithmatex">\(\text{今天下标}-\text{旧日期下标}\)</span>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">daily_temperatures</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>                    <span class="c1"># 存下标，对应温度从栈底到顶不增</span>
@@ -10266,8 +10266,8 @@
 </span></code></pre></div>
 <p>栈里保存的是"<strong>还没找到答案的日子</strong>"，而且它们的气温从栈底到顶不增，允许相等温度一起等待。新来的 <code>t</code> 一次把比它小的全部结算掉——因为这些天再也遇不到更早的更高温度了。</p>
 <p>为什么结算的是“第一个”更高温度？若 j 与 i 之间已经出现过比 T[j] 高的温度，j 当时就该出栈了，不可能留到现在。相等温度不能结算，所以 while 用严格小于。</p>
-<p><strong>这里有 <code>while</code> 嵌套，为什么还是 O(n)？</strong> 因为每个下标最多入栈一次、出栈一次，内层循环在整个运行过程中的总执行次数不超过 n。</p>
-<p>走一遍 <code>T = [73, 74, 75, 71, 69, 72, 76, 73]</code>：</p>
+<p><strong>这里有 <code>while</code> 嵌套，为什么还是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？</strong> 因为每个下标最多入栈一次、出栈一次，内层循环在整个运行过程中的总执行次数不超过 n。</p>
+<p>走一遍 <span class="arithmatex">\(T = [73, 74, 75, 71, 69, 72, 76, 73]\)</span>：</p>
 <table>
 <thead>
 <tr>
@@ -10336,9 +10336,9 @@
 <p>先用三个 ListNode 建出 1→2→3，遍历打印后再反转，得到 3→2→1。做 <a href="../../problems/06-linked-list/01-reverse-linked-list/">Reverse Linked List</a> 时，每轮先写下 prev、cur、nxt 指向哪个节点，再翻译成赋值。</p>
 <p>依次测试空链、单节点、三节点；反转后遍历应能在 None 停止。接着做 <a href="../../problems/04-stack/01-valid-parentheses/">Valid Parentheses</a>，用 ([)] 检查自己是否误把数量配平当成嵌套合法。</p>
 <h2 id="_9">练习<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 单链表维护一个尾指针之后 <code>insert_last</code> 变成 O(1)，为什么 <code>remove_last</code> 还是 O(n)？要什么额外信息才能让它也 O(1)？</p>
-<p>有了尾指针，<code>insert_last</code> 只要改 <code>tail.next</code>。但删除尾节点要修改<strong>它的前驱</strong>的 <code>next</code>，单链表拿不到前驱，只能从头再走一遍。要 O(1) 就得换成<strong>双向链表</strong>。</p>
-<p><strong>2.</strong> 用两个栈实现队列，做到摊销 O(1)。</p>
+<p><strong>1.</strong> 单链表维护一个尾指针之后 <code>insert_last</code> 变成 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，为什么 <code>remove_last</code> 还是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？要什么额外信息才能让它也 <span class="arithmatex">\(\mathcal{O}(1)\)</span>？</p>
+<p>有了尾指针，<code>insert_last</code> 只要改 <code>tail.next</code>。但删除尾节点要修改<strong>它的前驱</strong>的 <code>next</code>，单链表拿不到前驱，只能从头再走一遍。要 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 就得换成<strong>双向链表</strong>。</p>
+<p><strong>2.</strong> 用两个栈实现队列，做到摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>维护 incoming 和 outgoing 两个栈。先把 1、2 入 incoming，出队时倒成 outgoing=[2,1]，弹出末尾1；此时再入3，不应把 outgoing 中剩下的2倒回去。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TwoStackQueue</span><span class="p">:</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -10355,8 +10355,8 @@
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">'queue is empty'</span><span class="p">)</span>
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outgoing</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </span></code></pre></div>
-<p>每个元素进 incoming 一次、转入 outgoing 最多一次、最终出栈一次；n次入队加出队共 O(n)。一次搬运可为 O(n)，摊销才是 O(1)。</p>
-<p><strong>3.</strong> 实现 Min Stack：<code>push</code> / <code>pop</code> 摊销 O(1)，<code>top</code> / <code>getMin</code> O(1)，非空时才允许取值或弹出。</p>
+<p>每个元素进 incoming 一次、转入 outgoing 最多一次、最终出栈一次；n次入队加出队共 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。一次搬运可为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，摊销才是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
+<p><strong>3.</strong> 实现 Min Stack：<code>push</code> / <code>pop</code> 摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，<code>top</code> / <code>getMin</code> <span class="arithmatex">\(\mathcal{O}(1)\)</span>，非空时才允许取值或弹出。</p>
 <p>用一个栈，每个位置存一个二元组 <code>(值, 到该位置为止的最小值)</code>。例如依次压入 3、1、2，栈里存 <code>(3,3)、(1,1)、(2,1)</code>；弹掉最后一对后，新的栈顶仍保存当前最小值 1。<code>self.stack[-1]</code> 是栈顶整对，随后 <code>[0]</code> 取值、<code>[1]</code> 取最小值。下面将初始化和更新分别写出来：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MinStack</span><span class="p">:</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -10370,7 +10370,7 @@
 </span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getMin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
-<p>关键点是"最小值随栈深度单调变化"，所以压栈时算一次就够，不需要在 <code>pop</code> 时重算（那会变成 O(n)）。</p>
+<p>关键点是"最小值随栈深度单调变化"，所以压栈时算一次就够，不需要在 <code>pop</code> 时重算（那会变成 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）。</p>
 <p><strong>4.</strong> <code>Reverse Linked List</code> 的迭代版本，写出循环不变量。</p>
 <p>遮住正文代码，先写 <code>prev=None, cur=head</code>，再解释每轮保存、改连接、移变量三步各保护了什么。</p>
 <p>不变量：<strong><code>prev</code> 指向已经反转完成那一段的头，<code>cur</code> 指向尚未处理部分的头。</strong> 顺序不能乱——必须先保存 <code>nxt</code>，否则反转之后找不到后继。</p>

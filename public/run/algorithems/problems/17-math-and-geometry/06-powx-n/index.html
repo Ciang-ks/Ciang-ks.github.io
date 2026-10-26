@@ -8355,10 +8355,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        朴素的 O(n) 做法为什么不行
+        朴素的 \(\mathcal{O}(n)\) 做法为什么不行
       
     </span>
   </a>
@@ -8438,10 +8438,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：迭代快速幂（O(1) 空间，更稳健）
+        解法二：迭代快速幂（\(\mathcal{O}(1)\) 空间，更稳健）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        朴素的 O(n) 做法为什么不行
+        朴素的 \(\mathcal{O}(n)\) 做法为什么不行
       
     </span>
   </a>
@@ -10086,10 +10086,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：迭代快速幂（O(1) 空间，更稳健）
+        解法二：迭代快速幂（\(\mathcal{O}(1)\) 空间，更稳健）
       
     </span>
   </a>
@@ -10173,63 +10173,63 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: x = 2.0, n = -2       输出: 0.25
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="on">朴素的 O(n) 做法为什么不行<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
-<p>把 <code>x</code> 连乘 <code>n</code> 次，时间 O(n)。当 <code>n = 2³¹ - 1</code> 时无法接受。</p>
+<h3 id="mathcalon">朴素的 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 做法为什么不行<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
+<p>把 <code>x</code> 连乘 <code>n</code> 次，时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。当 <span class="arithmatex">\(n = 2^{31} - 1\)</span> 时无法接受。</p>
 <h3 id="_3">快速幂（二分幂）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><strong>核心观察</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>x^n = (x^(n/2))²               如果 n 是偶数
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>x^n = x · (x^((n-1)/2))²       如果 n 是奇数
-</span></code></pre></div>
-<p>也就是说，<strong>每一步都把指数减半</strong>，所以只需要 O(log n) 次乘法。</p>
+<div class="arithmatex">\[
+x^n=\begin{cases}(x^{n/2})^2,&amp;n\text{ 为偶数},\\x(x^{(n-1)/2})^2,&amp;n\text{ 为奇数}.\end{cases}
+\]</div>
+<p>也就是说，<strong>每一步都把指数减半</strong>，所以只需要 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 次乘法。</p>
 <h3 id="_4">处理负指数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><code>x^(-n) = 1 / x^n</code>：先把 <code>n</code> 变成正数，最后取倒数。要注意 <strong><code>n = -2³¹</code> 时取相反数会溢出</strong>（在 C++/Java 里），Python 无所谓。</p>
+<p><span class="arithmatex">\(x^{-n} = 1 / x^n\)</span>：先把 <code>n</code> 变成正数，最后取倒数。要注意 <strong><span class="arithmatex">\(n = -2^{31}\)</span> 时取相反数会溢出</strong>（在 C++/Java 里），Python 无所谓。</p>
 <h3 id="_5">迭代写法（更省空间）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>把指数 <code>n</code> 看作二进制：<strong>指数每次右移一位、底数每次平方</strong>。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>result = 1
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>base = x
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>while n &gt; 0:
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    if n &amp; 1:            # 当前二进制位是 1
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        result *= base
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    base *= base         # 平方，对应"左移一位"
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    n &gt;&gt;= 1              # 指数右移一位
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>result = 1
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>base = x
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>while n &gt; 0:
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    if n &amp; 1:            # 当前二进制位是 1
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        result *= base
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    base *= base         # 平方，对应"左移一位"
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    n &gt;&gt;= 1              # 指数右移一位
 </span></code></pre></div>
 <p><strong>这个"看二进制位"的视角是快速幂的精髓</strong>，和递归版是同一件事的两种写法。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>快速幂复用的是同一个半指数结果。若递归写成 pow(x,n//2)*pow(x,n//2)，会再次展开相同子问题，递推从 T(n)=T(n/2)+O(1) 变为 2T(n/2)+O(1)，失去对数优势；half 变量并非只是少写一次函数名。</p>
-<p>迭代版可用不变式 result×base^remaining=原目标幂来推导：remaining 为奇数时先把一个 base 移进 result，再将 base 平方、remaining 整除二，不变式仍成立。以 13=8+4+1 为例，只需乘上对应三个二进制位的底数幂。负指数先取倒数基数也可，前提是非零；浮点连乘存在舍入误差，比较结果应按容差，而非期待所有写法逐位完全相同。</p>
+<p>快速幂复用的是同一个半指数结果。若递归写成 <code>pow(x,n//2)*pow(x,n//2)</code>，会再次展开相同子问题，递推从 <span class="arithmatex">\(T(n)=T(n/2)+\mathcal{O}(1)\)</span> 变为 <span class="arithmatex">\(T(n)=2T(n/2)+\mathcal{O}(1)\)</span>，失去对数优势；half 变量并非只是少写一次函数名。</p>
+<p>迭代版可用不变式 <span class="arithmatex">\(\mathrm{result}\,\mathrm{base}^{\mathrm{remaining}}=x^N\)</span>来推导：remaining 为奇数时先把一个 base 移进 result，再将 base 平方、remaining 整除二，不变式仍成立。以 <span class="arithmatex">\(13=8+4+1\)</span> 为例，只需乘上对应三个二进制位的底数幂。负指数先取倒数基数也可，前提是非零；浮点连乘存在舍入误差，比较结果应按容差，而非期待所有写法逐位完全相同。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">解法一：递归快速幂（推荐，最贴近数学定义）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">myPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>            <span class="k">return</span> <span class="mf">1.0</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">myPow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span><span class="p">)</span>      <span class="c1"># 负指数转正</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">half</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">myPow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>            <span class="c1"># 关键：只算一次一半</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span> <span class="o">*</span> <span class="n">x</span>
+</span></code></pre></div>
+<h3 id="mathcalo1">解法二：迭代快速幂（<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间，更稳健）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">myPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="k">return</span> <span class="mf">1.0</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">myPow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span><span class="p">)</span>      <span class="c1"># 负指数转正</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">half</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">myPow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>            <span class="c1"># 关键：只算一次一半</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span> <span class="o">*</span> <span class="n">x</span>
-</span></code></pre></div>
-<h3 id="o1">解法二：迭代快速幂（O(1) 空间，更稳健）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">myPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>            <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="n">base</span> <span class="o">=</span> <span class="n">x</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>                           <span class="c1"># 这一位是 1，乘进结果</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                <span class="n">result</span> <span class="o">*=</span> <span class="n">base</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">base</span> <span class="o">*=</span> <span class="n">base</span>                        <span class="c1"># 底数平方</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>                             <span class="c1"># 指数右移</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">base</span> <span class="o">=</span> <span class="n">x</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>                           <span class="c1"># 这一位是 1，乘进结果</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="n">result</span> <span class="o">*=</span> <span class="n">base</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="n">base</span> <span class="o">*=</span> <span class="n">base</span>                        <span class="c1"># 底数平方</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>                             <span class="c1"># 指数右移</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
 <h3 id="_9">解法三：内置运算符（面试中属"作弊"，可用于验证）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">myPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="n">n</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">myPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="n">n</span>
 </span></code></pre></div>
 <h2 id="_10">复杂度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
@@ -10243,35 +10243,35 @@
 <tbody>
 <tr>
 <td>递归快速幂</td>
-<td>O(log n)</td>
-<td>O(log n)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span>（递归栈）</td>
 </tr>
 <tr>
 <td>迭代快速幂</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>朴素连乘</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_11">易错点与面试追问<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>n = 0</code> 时返回 1.0</strong>（题目约定 <code>0^0 = 1</code>）。</li>
-<li><strong>负指数要先取倒数</strong>；注意 <code>n = -2³¹</code> 取相反数会溢出（Python 无此问题，但面试中要提）。</li>
-<li><strong>递归版只能算一次 <code>half</code></strong>，不能写成 <code>self.myPow(x, n//2) * self.myPow(x, n//2)</code>——那样就退化成 O(n) 了。<strong>这是本题最常见的错误。</strong></li>
+<li><strong><code>n = 0</code> 时返回 1.0</strong>（题目约定 <span class="arithmatex">\(0^0 = 1\)</span>）。</li>
+<li><strong>负指数要先取倒数</strong>；注意 <span class="arithmatex">\(n = -2^{31}\)</span> 取相反数会溢出（Python 无此问题，但面试中要提）。</li>
+<li><strong>递归版只能算一次 <code>half</code></strong>，不能写成 <code>self.myPow(x, n//2) * self.myPow(x, n//2)</code>——那样就退化成 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 了。<strong>这是本题最常见的错误。</strong></li>
 <li>浮点乘法会有精度累积误差，题目一般允许一定误差。</li>
-<li><strong>追问：如何计算矩阵的幂？</strong> → 矩阵快速幂（把乘法换成矩阵乘法），<strong>爬楼梯、斐波那契数列的 O(log n) 解法就靠它</strong>。</li>
-<li><strong>追问：如果要求模 <code>10⁹+7</code> 的结果？</strong> → 每步乘法都取模，其余不变。</li>
+<li><strong>追问：如何计算矩阵的幂？</strong> → 矩阵快速幂（把乘法换成矩阵乘法），<strong>爬楼梯、斐波那契数列的 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 解法就靠它</strong>。</li>
+<li><strong>追问：如果要求模 <span class="arithmatex">\(10^{9}+7\)</span> 的结果？</strong> → 每步乘法都取模，其余不变。</li>
 <li><strong>追问：用 <code>math.exp(n * math.log(x))</code> 行不行？</strong> → 有精度和定义域问题（<code>x</code> 为负时无定义），快速幂更稳。</li>
 </ul>
 <h2 id="_12">相关题目<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://leetcode.com/problems/super-pow/">372 Super Pow</a> —— 快速幂的进阶</li>
-<li><a href="../../13-1d-dp/01-climbing-stairs/">70 Climbing Stairs</a> —— 可用矩阵快速幂优化到 O(log n)</li>
+<li><a href="../../13-1d-dp/01-climbing-stairs/">70 Climbing Stairs</a> —— 可用矩阵快速幂优化到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span></li>
 <li><a href="../../05-binary-search/99-extra-practice/">69 Sqrt(x)</a> —— 另一种"二分求幂"的问题</li>
 </ul>
 

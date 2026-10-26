@@ -10043,7 +10043,7 @@
 <hr />
 <h2 id="1-455-assign-cookies">1. 455 Assign Cookies<a class="headerlink" href="#1-455-assign-cookies" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/assign-cookies/">LeetCode 455</a> ｜ <strong>Easy</strong></p>
-<p><strong>题目</strong>：每个孩子有一个胃口值，每块饼干有一个尺寸。只有饼干尺寸 ≥ 胃口时才能满足该孩子，每块饼干最多给一个孩子。求最多能满足多少个孩子。</p>
+<p><strong>题目</strong>：每个孩子有一个胃口值，每块饼干有一个尺寸。只有饼干尺寸 不小于 胃口时才能满足该孩子，每块饼干最多给一个孩子。求最多能满足多少个孩子。</p>
 <p><strong>为什么放这里</strong>：<strong>最朴素的"排序 + 贪心"</strong>。它很好地展示了"为什么排序能让贪心成立"。</p>
 <p><strong>思路提示</strong></p>
 <p><strong>贪心策略：用最小的能满足当前孩子的饼干去满足胃口最小的孩子。</strong></p>
@@ -10062,7 +10062,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">i</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：无论是否满足，饼干 <code>j</code> 都要前移（因为尺寸不够就永远不够）。</p>
-<p><strong>复杂度</strong>：时间 O(n log n + m log m)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n + m \log m)\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <hr />
 <h2 id="2-860-lemonade-change">2. 860 Lemonade Change<a class="headerlink" href="#2-860-lemonade-change" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/lemonade-change/">LeetCode 860</a> ｜ <strong>Easy</strong></p>
@@ -10097,36 +10097,36 @@
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>                    <span class="k">return</span> <span class="kc">False</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：20 元找零的两个分支顺序不能反（先试 10+5，再试 3×5）；不需要记录 20 元张数。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：20 元找零的两个分支顺序不能反（先试 10+5，再试 <span class="arithmatex">\(3\times5\)</span>）；不需要记录 20 元张数。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="3-122-best-time-to-buy-and-sell-stock-ii">3. 122 Best Time to Buy and Sell Stock II<a class="headerlink" href="#3-122-best-time-to-buy-and-sell-stock-ii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">LeetCode 122</a> ｜ <strong>Medium</strong></p>
 <p><strong>题目</strong>：可以<strong>无限次</strong>买卖股票（同一时间最多持一股），求最大利润。</p>
 <p><strong>为什么放这里</strong>：<strong>贪心的极简体现</strong>——"把所有上涨段都吃掉"。</p>
 <p><strong>思路提示</strong>：只要今天比昨天高，就"昨天买今天卖"赚这个差价。<strong>把所有这些正差价累加起来就是最大利润。</strong></p>
-<p><strong>为什么贪心是对的？</strong> 因为任何一笔跨越多天的交易（<code>a</code> 买 <code>b</code> 卖）都可以<strong>拆成每一天的连续交易</strong>，且总利润相同（<code>p[b]-p[a] = Σ(p[i+1]-p[i])</code>）。所以"只取正差价"不会比任何方案差，也不会违反"同一时间只持一股"的约束。</p>
+<p><strong>为什么贪心是对的？</strong> 因为任何一笔跨越多天的交易（<code>a</code> 买 <code>b</code> 卖）都可以<strong>拆成每一天的连续交易</strong>，且总利润相同（<span class="arithmatex">\(p[b]-p[a] = \Sigma (p[i+1]-p[i])\)</span>）。所以"只取正差价"不会比任何方案差，也不会违反"同一时间只持一股"的约束。</p>
 <p><strong>方法辨析</strong>：没有手续费、冷冻期或交易次数上限，所有上升日的正差都可以被合法实现。若增加这些限制，拆成每日交易可能多付费或违反冷却规则，不能继续简单累计正差。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxProfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">prices</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：空数组 / 单元素时返回 0（上面的推导式天然处理）。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p>对照 <a href="../../03-sliding-window/01-best-time-to-buy-and-sell-stock/">121 只能交易一次</a>：那题不能贪心，必须维护"历史最低价"。</p>
 </blockquote>
 <hr />
 <h2 id="4-406-queue-reconstruction-by-height">4. 406 Queue Reconstruction by Height<a class="headerlink" href="#4-406-queue-reconstruction-by-height" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/queue-reconstruction-by-height/">LeetCode 406</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：给定 <code>people = [h, k]</code>（身高和"前面身高 ≥ h 的人数"），重建这个队列。</p>
+<p><strong>题目</strong>：给定 <code>people = [h, k]</code>（身高和"前面身高 不小于 h 的人数"），重建这个队列。</p>
 <p><strong>为什么放这里</strong>：<strong>"排序 + 插入"这一贪心范式的经典题</strong>，思路非常巧妙。</p>
 <p><strong>思路提示</strong></p>
 <ol>
 <li><strong>按身高从高到低排序；身高相同时按 k 从小到大排序</strong>；</li>
 <li>依次把每个人<strong>插入到下标 k 的位置</strong>。</li>
 </ol>
-<p><strong>为什么是对的？</strong> 关键观察：<strong>处理身高较矮的人时，他的插入不会影响已经排好的 taller 人的相对顺序</strong>（因为他更矮，taller 人前面的"身高 ≥ 自己"的人数不会被他改变）。</p>
+<p><strong>为什么是对的？</strong> 关键观察：<strong>处理身高较矮的人时，他的插入不会影响已经排好的 taller 人的相对顺序</strong>（因为他更矮，taller 人前面的"身高 不小于 自己"的人数不会被他改变）。</p>
 <p>所以从高到低处理时，"当前处理的这个人前面的 taller 人已经全部就位"，那么把他插入到下标 <code>k</code> 就恰好满足他的要求。</p>
 <p><strong>"从高到低"保证了"前面的人不受影响"，这是贪心成立的依据。</strong></p>
 <p><strong>方法辨析</strong>：已经插入者身高都不低于当前人，所以其下标 k 恰好等于前方不矮于他的人数。同高者按 k 递增插入，保证其位置要求可实现；更矮者后来插入不会改变前者的不矮人数。</p>
@@ -10138,12 +10138,12 @@
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="n">res</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>                     <span class="c1"># 插入到下标 k</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：排序规则必须同时考虑身高和 k；<code>list.insert</code> 在 Python 里是 O(n)，总复杂度 O(n²)（题目规模允许）。</p>
-<p><strong>复杂度</strong>：时间 O(n²)（插入的代价），空间 O(n)。</p>
+<p><strong>易错点</strong>：排序规则必须同时考虑身高和 k；<code>list.insert</code> 在 Python 里是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，总复杂度 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>（题目规模允许）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>（插入的代价），空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="5-1029-two-city-scheduling">5. 1029 Two City Scheduling<a class="headerlink" href="#5-1029-two-city-scheduling" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/two-city-scheduling/">LeetCode 1029</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：<code>2n</code> 个人，每个人去 A 市和 B 市的费用分别是 <code>[a, b]</code>，要求<strong>恰好 n 人去 A、n 人去 B</strong>，求最小总费用。</p>
+<p><strong>题目</strong>：<span class="arithmatex">\(2n\)</span> 个人，每个人去 A 市和 B 市的费用分别是 <code>[a, b]</code>，要求<strong>恰好 n 人去 A、n 人去 B</strong>，求最小总费用。</p>
 <p><strong>为什么放这里</strong>：<strong>"按差值排序"这一贪心技巧的典型</strong>，和 406 一样是"排序后贪心"的漂亮应用。</p>
 <p><strong>思路提示</strong></p>
 <p><strong>先假设所有人都去 A</strong>，然后需要选 <code>n</code> 个人改去 B。让第 i 个人改去 B 的"额外代价"是 <code>b[i] - a[i]</code>。</p>
@@ -10160,7 +10160,7 @@
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：排序的 key 是<strong>差值</strong> <code>b - a</code>（不是 <code>a</code> 或 <code>b</code> 单独）；前 n 个去 B、后 n 个去 A。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <hr />
 <h2 id="6-452-minimum-number-of-arrows-to-burst-balloons">6. 452 Minimum Number of Arrows to Burst Balloons<a class="headerlink" href="#6-452-minimum-number-of-arrows-to-burst-balloons" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/">LeetCode 452</a> ｜ <strong>Medium</strong></p>
@@ -10189,8 +10189,8 @@
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
 </span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="k">return</span> <span class="n">arrows</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：按<strong>右端点</strong>排序（不是左端点）；判断条件是 <code>start &gt; end</code>（本题的区间是<strong>闭区间</strong>，端点相等时一支箭就能同时射中两个气球）。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>易错点</strong>：按<strong>右端点</strong>排序（不是左端点）；判断条件是 <span class="arithmatex">\(\mathrm{start} &gt; \mathrm{end}\)</span>（本题的区间是<strong>闭区间</strong>，端点相等时一支箭就能同时射中两个气球）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <blockquote>
 <p><strong>和 435 Non-overlapping Intervals 的对照</strong>：435 求"要删除多少个区间才能互不重叠"，本题求"需要多少支箭覆盖所有区间"。<strong>两者的贪心策略完全一致（按右端点排序）</strong>，只是最后的统计方式不同。</p>
 </blockquote>

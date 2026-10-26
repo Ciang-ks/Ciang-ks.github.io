@@ -10086,7 +10086,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>地址：1000  1008  1016  1024
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>值：   10    20    30    40
 </span></code></pre></div>
-<p>要找下标 3，直接计算 <code>1000 + 3×8</code>。下标无论是 3 还是 300000，都只做固定次数的地址计算，所以按下标读写是 O(1)。</p>
+<p>要找下标 3，直接计算 <span class="arithmatex">\(1000 + 3\times 8\)</span>。下标无论是 3 还是 300000，都只做固定次数的地址计算，所以按下标读写是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>这里连续的是等宽槽位。Python 列表的槽位存对象引用，引用指向的对象不必相邻；这仍然允许按下标直接定位槽位。</p>
 <h2 id="_3">中间插入为什么要搬家<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>设当前数组有 n 个有效元素。把 99 插到 <code>[10,20,30,40]</code> 的下标 1，期望结果是 <code>[10,99,20,30,40]</code>。格子不能凭空长在中间，所以先从右往左搬：</p>
@@ -10095,17 +10095,17 @@
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                 → [10,20,20,30,40]
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                 → [10,99,20,30,40]
 </span></code></pre></div>
-<p>必须从右往左：如果先用 20 覆盖 30，就丢掉了还没搬走的 30。插在位置 i，需要搬 <code>n−i</code> 个元素，再写入新值，总时间 Θ(n−i+1)。头部插入 Θ(n)，末尾在有空位时 Θ(1)。</p>
-<p>删除也要保持剩余元素的顺序。例如从 <code>[10,20,30,40]</code> 删除下标 1 的 20，先把 30 移到下标 1，再把 40 移到下标 2，最后把有效长度从 4 改成 3。结果只读取前三格 <code>[10,30,40]</code>；最后一格可清空，供以后使用。因此删除位置 i 要搬 <code>n−i−1</code> 个元素，删除末尾才不需要搬移。</p>
+<p>必须从右往左：如果先用 20 覆盖 30，就丢掉了还没搬走的 30。插在位置 i，需要搬 <span class="arithmatex">\(n-i\)</span> 个元素，再写入新值，总时间 <span class="arithmatex">\(\Theta (n-i+1)\)</span>。头部插入 <span class="arithmatex">\(\Theta (n)\)</span>，末尾在有空位时 <span class="arithmatex">\(\Theta (1)\)</span>。</p>
+<p>删除也要保持剩余元素的顺序。例如从 <code>[10,20,30,40]</code> 删除下标 1 的 20，先把 30 移到下标 1，再把 40 移到下标 2，最后把有效长度从 4 改成 3。结果只读取前三格 <code>[10,30,40]</code>；最后一格可清空，供以后使用。因此删除位置 i 要搬 <span class="arithmatex">\(n-i-1\)</span> 个元素，删除末尾才不需要搬移。</p>
 <p>前面的插入示例特意多画了一个“空”格。实际使用时，我们怎样知道还有没有空格？如果没有了，追加的新元素又放在哪里？这就需要区分下面两个数量。</p>
 <h2 id="size-capacity">size 与 capacity 是两个数<a class="headerlink" href="#size-capacity" title="Permanent link">&para;</a></h2>
-<p><strong>size 是当前有效元素的个数，capacity 是底层已经准备好的槽位数。</strong> 例如底层有 <code>[10,20,空,空]</code> 四格，其中前两格装着用户放入的元素，便有 size=2、capacity=4。这里的“空”是示意标记，不是序列中的一个值；用户能读取的下标仍须满足 <code>0 ≤ i &lt; size</code>。</p>
+<p><strong>size 是当前有效元素的个数，capacity 是底层已经准备好的槽位数。</strong> 例如底层有 <code>[10,20,空,空]</code> 四格，其中前两格装着用户放入的元素，便有 size=2、capacity=4。这里的“空”是示意标记，不是序列中的一个值；用户能读取的下标仍须满足 <span class="arithmatex">\(0 \le i &lt; \mathrm{size}\)</span>。</p>
 <p>现在执行“在末尾追加 30”。新元素应该放在已有两个元素之后，也就是下标 <code>size=2</code>。因为 size&lt;capacity，这一格已经存在，只需执行一次元素写入，再把 size 加 1：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>追加前：data = [10,20,空,空]，size=2，capacity=4
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>写新值：data[2] = 30
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>追加后：data = [10,20,30,空]，size=3，capacity=4
 </span></code></pre></div>
-<p>这里“只写入一次”指只写入一个新元素，不需要移动已有元素；检查容量和更新 size 也有开销，但都是固定次数，所以总计 O(1)。</p>
+<p>这里“只写入一次”指只写入一个新元素，不需要移动已有元素；检查容量和更新 size 也有开销，但都是固定次数，所以总计 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>如果继续追加 40，四格就装满了。再追加 50 时，下标 4 尚不属于这块存储区域，不能直接写。<strong>动态数组</strong>会自动准备一块更大的连续存储区，把旧元素逐个复制过去，再让容器改为使用新区域。例如采用容量翻倍策略：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>旧区域：[10,20,30,40]                  size=4，capacity=4
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>新区域：[空,空,空,空,空,空,空,空]       先准备 8 个槽位
@@ -10197,9 +10197,9 @@
 </tr>
 </tbody>
 </table>
-<p>第 5 次很贵，但前 8 次总共只做了 15 个单位。一般地，n 次追加所复制的容量依次为 <code>1,2,4,…,C/2</code>，C 是最后容量。这些数之和为 <code>C−1</code>；n&gt;1 时 <code>C&lt;2n</code>，所以总复制量 <code>&lt;2n</code>，加 n 次新写入，总代价 <code>&lt;3n</code>。</p>
-<p><strong>摊销 O(1)</strong> 的意思是：从空表开始，任意连续 n 次追加的总代价为 O(n)，折到每次为 O(1)。它不依赖“随机输入”，也不保证某一次追加不会卡顿。单次最坏仍为 O(n)。</p>
-<p>代码中的 <code>[None] * new_capacity</code> 还会初始化新槽位。把这笔也算上，每次扩容仍是线性于新容量；所有新容量也是几何级数，总时间依然 O(n)，只是不能再把 <code>&lt;3n</code> 当作全部 Python 操作数。</p>
+<p>第 5 次很贵，但前 8 次总共只做了 15 个单位。一般地，n 次追加所复制的容量依次为 <span class="arithmatex">\(1,2,4,\cdots ,C/2\)</span>，C 是最后容量。这些数之和为 <span class="arithmatex">\(C-1\)</span>；n&gt;1 时 <span class="arithmatex">\(C&lt;2n\)</span>，所以总复制量 <span class="arithmatex">\(&lt;2n\)</span>，加 n 次新写入，总代价 <span class="arithmatex">\(&lt;3n\)</span>。</p>
+<p><strong>摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span></strong> 的意思是：从空表开始，任意连续 n 次追加的总代价为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，折到每次为 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。它不依赖“随机输入”，也不保证某一次追加不会卡顿。单次最坏仍为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p>代码中的 <code>[None] * new_capacity</code> 还会初始化新槽位。把这笔也算上，每次扩容仍是线性于新容量；所有新容量也是几何级数，总时间依然 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，只是不能再把 <span class="arithmatex">\(&lt;3n\)</span> 当作全部 Python 操作数。</p>
 <h2 id="1-10-100">扩容 1 个、10%，还是 100%<a class="headerlink" href="#1-10-100" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10212,22 +10212,22 @@
 <tbody>
 <tr>
 <td>每次加 1</td>
-<td>Θ(n²)</td>
-<td>几乎每次都复制：<code>1+2+…+(n−1)</code></td>
+<td><span class="arithmatex">\(\Theta (n^{2})\)</span></td>
+<td>几乎每次都复制：<span class="arithmatex">\(1+2+\cdots +(n-1)\)</span></td>
 </tr>
 <tr>
 <td>每次加固定数量（如 10）</td>
-<td>Θ(n²)</td>
+<td><span class="arithmatex">\(\Theta (n^{2})\)</span></td>
 <td>容量是等差增长，仍累加到平方量级</td>
 </tr>
 <tr>
 <td>每次乘固定倍数 r&gt;1（含 1.1）</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 <td>容量几何增长，总和由最后一项的常数倍控制</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长 10% 就是乘 1.1，也能摊销 O(1)。</strong> 实现时向上取整并至少增长 1，避免小容量不变。倍数越接近 1，搬运次数与常数开销越大，但预留空位通常更少；翻倍便于讲解，不是唯一正确选项。</p>
+<p><strong>增长 10% 就是乘 1.1，也能摊销 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</strong> 实现时向上取整并至少增长 1，避免小容量不变。倍数越接近 1，搬运次数与常数开销越大，但预留空位通常更少；翻倍便于讲解，不是唯一正确选项。</p>
 <p>代码需要把三个相关的量一直保存在一起，所以用一个类。<code>a=DynamicArray()</code> 创建一个容器，自动调用 <code>__init__</code> 初始化；<code>self</code> 指这次操作的容器，<code>self.size</code> 是它保存的字段。调用 <code>a.append(10)</code> 时，Python 会把 a 作为 self 传入。这里用类只是为了保存状态，扩容过程仍是你已经会写的条件和循环。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DynamicArray</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -10258,9 +10258,9 @@
 <p>常用策略是：size 降到容量的 1/4 时才缩为一半，并设置最小容量。例如容量 8、size=2 才缩为 4，缩完还有 2 个空位。两次反向调整之间必须有足够多次普通操作，才能支付下一次搬运。</p>
 <h2 id="_6">前缀和：把重复求和变成两次读取<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>前面研究了“数组怎样存、怎样增长”；现在使用数组的按下标访问能力，解决“怎样避免反复计算同一批数据”。例如报表中的每日销量已经固定，却要反复查询不同日期区间的总销量。</p>
-<p>给 <code>A=[3,1,4,2]</code>，反复查询从下标 l 到 r 的元素和，记为闭区间 <code>[l,r]</code>，意思是包含两个端点。每次重加当然可行，但若查询很多，整段会被重复计算。</p>
-<p>先认识两个 Python 写法：<code>pre.append(x)</code> 在列表末尾追加一个元素；<code>pre[-1]</code> 读取最后一个元素，等价于 <code>pre[len(pre)-1]</code>。负下标从末尾倒数，−1 是倒数第一项，但空列表没有最后一项。</p>
-<p>让 <code>pre[i]</code> 表示<strong>前 i 个元素的和</strong>，所以 <code>pre[0]=0</code>，<code>pre=[0,3,4,8,10]</code>。求下标 <code>[1,2]</code>：前三个元素的和减去前一个元素的和，即 <code>pre[3]−pre[1]=8−3=5</code>。</p>
+<p>给 <span class="arithmatex">\(A=[3,1,4,2]\)</span>，反复查询从下标 l 到 r 的元素和，记为闭区间 <span class="arithmatex">\([l,r]\)</span>，意思是包含两个端点。每次重加当然可行，但若查询很多，整段会被重复计算。</p>
+<p>先认识两个 Python 写法：<code>pre.append(x)</code> 在列表末尾追加一个元素；<code>pre[-1]</code> 读取最后一个元素，等价于 <code>pre[len(pre)-1]</code>。负下标从末尾倒数，-1 是倒数第一项，但空列表没有最后一项。</p>
+<p>让 <code>pre[i]</code> 表示<strong>前 i 个元素的和</strong>，所以 <span class="arithmatex">\(\mathrm{pre}[0]=0\)</span>，<span class="arithmatex">\(\mathrm{pre}=[0,3,4,8,10]\)</span>。求下标 <code>[1,2]</code>：前三个元素的和减去前一个元素的和，即 <span class="arithmatex">\(\mathrm{pre}[3]-\mathrm{pre}[1]=8-3=5\)</span>。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">build_prefix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">pre</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
@@ -10272,11 +10272,11 @@
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">return</span> <span class="n">pre</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pre</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
 </span></code></pre></div>
 <p>为什么是 r+1？下标 r 是第 r+1 个元素；<code>pre</code> 的下标表示“个数”，不是最后一个元素的位置。先说清变量含义，边界就不必背。</p>
-<p>建表 O(n)，每次查询 O(1)，q 次查询总计 O(n+q)，额外空间 O(n)。它适合查询期间数组不变的情形；改一个 <code>A[i]</code> 会让后面的前缀都受影响。</p>
+<p>建表 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，每次查询 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，q 次查询总计 <span class="arithmatex">\(\mathcal{O}(n+q)\)</span>，额外空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。它适合查询期间数组不变的情形；改一个 <code>A[i]</code> 会让后面的前缀都受影响。</p>
 <p>最大值不能用同样的相减技巧：<code>[5,1]</code> 与 <code>[5,4]</code> 的前缀最大值都为 <code>[5,5]</code>，却有不同的第二个元素。仅凭这两个前缀最大值无法恢复区间答案。</p>
 <h2 id="_7">从前缀和走到前后缀乘积<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>另一个任务给定整数数组 A，要求返回一个同样长度的数组 ans，其中 ans[i] 等于 A 中除下标 i 以外所有元素的乘积，且不能用除法。例如 <code>[1,2,3,4]</code> 应返回 <code>[24,12,8,6]</code>：下标 1 的答案是 <code>1×3×4=12</code>。输入可能包含 0；本节假定至少有两个元素，并按一次乘法 O(1) 计费。</p>
-<p>直接对每个位置重扫其余数要 O(n²)。这次不用相减，而是把答案拆成<strong>左边的乘积 × 右边的乘积</strong>：</p>
+<p>另一个任务给定整数数组 A，要求返回一个同样长度的数组 ans，其中 ans[i] 等于 A 中除下标 i 以外所有元素的乘积，且不能用除法。例如 <code>[1,2,3,4]</code> 应返回 <code>[24,12,8,6]</code>：下标 1 的答案是 <span class="arithmatex">\(1\times 3\times 4=12\)</span>。输入可能包含 0；本节假定至少有两个元素，并按一次乘法 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 计费。</p>
+<p>直接对每个位置重扫其余数要 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。这次不用相减，而是把答案拆成<span class="arithmatex">\(\text{左侧乘积}\times\text{右侧乘积}\)</span>：</p>
 <table>
 <thead>
 <tr>
@@ -10318,7 +10318,7 @@
 </tr>
 </tbody>
 </table>
-<p>空的一侧取乘积 1，因为乘 1 不改变另一侧。第一遍从左往右：先把累计乘积写入答案，再把当前元素乘进累计值，才能排除自己；第二遍从右往左同样先用右侧累计值乘答案，再加入当前元素。不需要真的存两张辅助表，输出数组以外只用两个累计变量。两次扫描共 O(n)，额外空间 O(1)，输出 O(n)。输入包含 0 也成立，因为整个过程没有除法。</p>
+<p>空的一侧取乘积 1，因为乘 1 不改变另一侧。第一遍从左往右：先把累计乘积写入答案，再把当前元素乘进累计值，才能排除自己；第二遍从右往左同样先用右侧累计值乘答案，再加入当前元素。不需要真的存两张辅助表，输出数组以外只用两个累计变量。两次扫描共 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，额外空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，输出 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。输入包含 0 也成立，因为整个过程没有除法。</p>
 <h2 id="_8">从讲义走到代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>日志缓冲区追加记录需要动态数组；静态报表反复求某段总量适合前缀和。</p>
 <p>先独立写 build_prefix 与 range_sum，用 [3,1,4,2] 检查区间 [1,2] 的和为 5。再做 <a href="../../problems/01-arrays-and-hashing/06-product-of-array-except-self/">Product of Array Except Self</a>：照上表先填左侧乘积，再从右往左补上右侧乘积。</p>
@@ -10333,17 +10333,17 @@
 <p><strong>2.</strong> 容量翻倍的数组连续追加 5 个元素，总复制量是 4 吗？</p>
 <details>
 <summary>解答</summary>
-<p>是 <code>1+2+4=7</code>，不是 4。n 不是 2 的幂时，总复制量可能大于 n，但仍小于 2n。</p>
+<p>是 <span class="arithmatex">\(1+2+4=7\)</span>，不是 4。n 不是 2 的幂时，总复制量可能大于 n，但仍小于 2n。</p>
 </details>
-<p><strong>3.</strong> 每次增长 10% 为什么不会变成 Θ(n²)？</p>
+<p><strong>3.</strong> 每次增长 10% 为什么不会变成 <span class="arithmatex">\(\Theta (n^{2})\)</span>？</p>
 <details>
 <summary>解答</summary>
-<p>因为是乘以固定的 1.1，容量按几何级数增长。把最后容量记为 C，之前复制量受 <code>C/1.1+C/1.1²+…</code> 控制，为 O(C)=O(n)。常数会比翻倍大。</p>
+<p>因为是乘以固定的 1.1，容量按几何级数增长。把最后容量记为 C，之前复制量受 <span class="arithmatex">\(C/1.1+C/1.1^{2}+\cdots\)</span> 控制，为 <span class="arithmatex">\(\mathcal{O}(C)=\mathcal{O}(n)\)</span>。常数会比翻倍大。</p>
 </details>
-<p><strong>4.</strong> <code>A=[3,1,4,2]</code>，求 <code>[0,0]</code>、<code>[0,3]</code>、<code>[2,3]</code> 的和。为什么预留 <code>pre[0]</code>？</p>
+<p><strong>4.</strong> <span class="arithmatex">\(A=[3,1,4,2]\)</span>，求 <code>[0,0]</code>、<code>[0,3]</code>、<code>[2,3]</code> 的和。为什么预留 <code>pre[0]</code>？</p>
 <details>
 <summary>解答</summary>
-<p>分别是 3、10、6。<code>pre[0]=0</code> 让从下标 0 开始的查询也能统一相减，无须特判。</p>
+<p>分别是 3、10、6。<span class="arithmatex">\(\mathrm{pre}[0]=0\)</span> 让从下标 0 开始的查询也能统一相减，无须特判。</p>
 </details>
 
 

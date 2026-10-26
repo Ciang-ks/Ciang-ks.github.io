@@ -8653,10 +8653,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么递推式能保证 O(n)
+        为什么递推式能保证 \(\mathcal{O}(n)\)
       
     </span>
   </a>
@@ -8714,10 +8714,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-n" class="md-nav__link">
+  <a href="#mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：对每个数单独计算（O(n log n)，不满足题目要求）
+        解法三：对每个数单独计算（\(\mathcal{O}(n \log n)\)，不满足题目要求）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么递推式能保证 O(n)
+        为什么递推式能保证 \(\mathcal{O}(n)\)
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-n" class="md-nav__link">
+  <a href="#mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：对每个数单独计算（O(n log n)，不满足题目要求）
+        解法三：对每个数单独计算（\(\mathcal{O}(n \log n)\)，不满足题目要求）
       
     </span>
   </a>
@@ -10151,45 +10151,47 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [0,1,1,2,1,2]      # 0=0, 1=1, 2=10, 3=11, 4=100, 5=101
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>要求 O(n) 时间</strong>——如果对每个 <code>i</code> 都调用一次 191 的函数，复杂度是 O(n log n)，不满足要求。</p>
+<p><strong>要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间</strong>——如果对每个 <code>i</code> 都调用一次 191 的函数，复杂度是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，不满足要求。</p>
 <p>关键是用 <strong>DP 递推</strong>：<code>ans[i]</code> 可以从某个更小的数推出来。</p>
 <h3 id="1ansi-ansi-1-i-1">递推式 1：<code>ans[i] = ans[i &gt;&gt; 1] + (i &amp; 1)</code><a class="headerlink" href="#1ansi-ansi-1-i-1" title="Permanent link">&para;</a></h3>
 <p>把 <code>i</code> 右移一位（相当于"去掉最低位"），那么 <code>i &gt;&gt; 1</code> 的 1 的个数是已知的，再加上最低位是不是 1：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ans[i] = ans[i &gt;&gt; 1] + (i &amp; 1)
-</span></code></pre></div>
-<p>例如 <code>i = 5</code>（<code>101</code>）：<code>ans[2] = 1</code>（<code>10</code>），最低位是 1，所以 <code>ans[5] = 1 + 1 = 2</code>。</p>
+<div class="arithmatex">\[
+\mathrm{ans}[i]=\mathrm{ans}[\lfloor i/2\rfloor]+(i\bmod2)
+\]</div>
+<p>例如 <code>i = 5</code>（<code>101</code>）：<span class="arithmatex">\(\mathrm{ans}[2] = 1\)</span>（<code>10</code>），最低位是 1，所以 <span class="arithmatex">\(\mathrm{ans}[5] = 1 + 1 = 2\)</span>。</p>
 <h3 id="2ansi-ansi-i-1-1">递推式 2：<code>ans[i] = ans[i &amp; (i - 1)] + 1</code><a class="headerlink" href="#2ansi-ansi-i-1-1" title="Permanent link">&para;</a></h3>
 <p>利用 191 题的性质：<code>i &amp; (i - 1)</code> 消掉了 <code>i</code> 最低位的 1，所以它比 <code>i</code> <strong>少一个 1</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ans[i] = ans[i &amp; (i - 1)] + 1
-</span></code></pre></div>
-<p>例如 <code>i = 5</code>（<code>101</code>）：<code>5 &amp; 4 = 4</code>（<code>100</code>），<code>ans[4] = 1</code>，所以 <code>ans[5] = 1 + 1 = 2</code>。</p>
+<div class="arithmatex">\[
+\mathrm{ans}[i]=\mathrm{ans}[i\mathbin{\&amp;}(i-1)]+1
+\]</div>
+<p>例如 <code>i = 5</code>（<code>101</code>）：<span class="arithmatex">\(5\mathbin{\&amp;}4=4\)</span>（<code>100</code>），<span class="arithmatex">\(\mathrm{ans}[4] = 1\)</span>，所以 <span class="arithmatex">\(\mathrm{ans}[5] = 1 + 1 = 2\)</span>。</p>
 <p><strong>两个递推式都值得记住</strong>：第一个更直观（"右移 + 看最低位"），第二个更巧妙（"消掉一个 1"）。<strong>面试中能同时说出两个，说明你对位运算的理解很到位。</strong></p>
-<h3 id="on">为什么递推式能保证 O(n)<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
-<p>因为每个 <code>ans[i]</code> 都是用"更小的下标"算出来的，所以一次线性扫描就够了，总共 O(n) 次常数运算。</p>
+<h3 id="mathcalon">为什么递推式能保证 <span class="arithmatex">\(\mathcal{O}(n)\)</span><a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
+<p>因为每个 <code>ans[i]</code> 都是用"更小的下标"算出来的，所以一次线性扫描就够了，总共 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 次常数运算。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>分别数每个整数的 1 会反复处理相同高位，DP 将它们共享：i 的最低位贡献 i&amp;1，其余高位正是已经算好的 i&gt;&gt;1。因为对 i&gt;0 有 i&gt;&gt;1&lt;i，按数值从小到大遍历就是合法依赖顺序，ans[0]=0 则提供基线。</p>
-<p>例如 6=110₂，右移为 3=11₂，最低位为 0，故 ans[6]=ans[3]=2。另一式 i&amp;(i−1) 也严格变小，符合相同的先算依赖条件。O(n) 指固定机器字长下的 n 次基本操作和 n+1 项输出；若整数长度也随输入无限增长，就应另外计入大整数位运算成本。</p>
+<p>例如 <span class="arithmatex">\(6=(110)_2\)</span>，右移为 <span class="arithmatex">\(3=(11)_2\)</span>，最低位为 0，故 ans[6]=ans[3]=2。另一式 i&amp;(i-1) 也严格变小，符合相同的先算依赖条件。<span class="arithmatex">\(\mathcal{O}(n)\)</span> 指固定机器字长下的 n 次基本操作和 n+1 项输出；若整数长度也随输入无限增长，就应另外计入大整数位运算成本。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1">解法一：递推式 1（推荐，最直观）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># 右移一位的答案 + 最低位</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">return</span> <span class="n">ans</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># 右移一位的答案 + 最低位</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
 <h3 id="2">解法二：递推式 2（更巧妙）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>      <span class="c1"># 去掉最低位的 1，数量加一</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">return</span> <span class="n">ans</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>      <span class="c1"># 去掉最低位的 1，数量加一</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
-<h3 id="on-log-n">解法三：对每个数单独计算（O(n log n)，不满足题目要求）<a class="headerlink" href="#on-log-n" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="k">return</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+<h3 id="mathcalon-log-n">解法三：对每个数单独计算（<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，不满足题目要求）<a class="headerlink" href="#mathcalon-log-n" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">countBits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">return</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
 </span></code></pre></div>
 <h2 id="_5">复杂度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
@@ -10203,30 +10205,30 @@
 <tbody>
 <tr>
 <td>递推式 1</td>
-<td>O(n)</td>
-<td>O(n)（输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（输出）</td>
 </tr>
 <tr>
 <td>递推式 2</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>逐个计算</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_6">易错点与面试追问<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>ans</code> 的长度是 <code>n + 1</code></strong>（要包含 <code>0</code>），并且 <code>ans[0] = 0</code>。</li>
+<li><strong><code>ans</code> 的长度是 <span class="arithmatex">\(n + 1\)</span></strong>（要包含 <code>0</code>），并且 <span class="arithmatex">\(\mathrm{ans}[0] = 0\)</span>。</li>
 <li><strong>循环从 1 开始</strong>（<code>ans[0]</code> 已经是正确答案）。</li>
-<li><strong>题目明确要求 O(n)</strong>，所以"逐个调用 191 的函数"是不够好的答案。<strong>面试中要主动说明这一点。</strong></li>
+<li><strong>题目明确要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>，所以"逐个调用 191 的函数"是不够好的答案。<strong>面试中要主动说明这一点。</strong></li>
 <li><strong>追问：为什么这两个递推式都成立？</strong> → 递推式 1 的依据是"右移一位等价于删掉最低位"；递推式 2 的依据是"<code>i &amp; (i-1)</code> 恰好删掉一个 1"。<strong>能分别说清依据，才算真正掌握。</strong></li>
 <li><strong>追问：如何求"二进制表示中 0 的个数"？</strong> → <code>总位数 - 1 的个数</code>。</li>
-<li><strong>追问：如何求 <code>[0, n]</code> 中所有数的异或和？</strong> → 有 O(1) 的数学公式（按 <code>n % 4</code> 分四种情况）。</li>
-<li><strong>追问：如果 n 很大（10⁹）？</strong> → 需要按位分块统计，用"每个二进制位的周期"来算，可以做到 O(log n)。</li>
+<li><strong>追问：如何求 <code>[0, n]</code> 中所有数的异或和？</strong> → 有 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 的数学公式（按 <code>n % 4</code> 分四种情况）。</li>
+<li><strong>追问：如果 n 很大（<span class="arithmatex">\(10^{9}\)</span>）？</strong> → 需要按位分块统计，用"每个二进制位的周期"来算，可以做到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</li>
 </ul>
 <h2 id="_7">相关题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>

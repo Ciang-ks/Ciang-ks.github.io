@@ -6697,10 +6697,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：滚动变量（推荐，O(1) 空间）
+        解法一：滚动变量（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：滚动变量（推荐，O(1) 空间）
+        解法一：滚动变量（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10178,52 +10178,53 @@
 <p><strong><code>dp[i]</code> = 爬到第 <code>i</code> 级台阶的方法数。</strong></p>
 <h3 id="_4">转移方程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>要到达第 <code>i</code> 级，最后一步只能是"从第 <code>i-1</code> 级爬 1 级"或者"从第 <code>i-2</code> 级爬 2 级"。这两种情况互不重叠（最后一步不同就是不同的方法），所以：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dp[i] = dp[i-1] + dp[i-2]
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{dp}[i]=\mathrm{dp}[i-1]+\mathrm{dp}[i-2]
+\]</div>
 <h3 id="_5">初始化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>dp[0] = 1</code>：爬到第 0 级（不动）算 1 种方法——它对应唯一的空动作序列，可以这样理解：站在地面上是唯一一种"不爬"的方式；</li>
-<li><code>dp[1] = 1</code>：爬到第 1 级只有一种方法（爬 1 级）。</li>
+<li><span class="arithmatex">\(dp[0] = 1\)</span>：爬到第 0 级（不动）算 1 种方法——它对应唯一的空动作序列，可以这样理解：站在地面上是唯一一种"不爬"的方式；</li>
+<li><span class="arithmatex">\(dp[1] = 1\)</span>：爬到第 1 级只有一种方法（爬 1 级）。</li>
 </ul>
-<p><strong>如果对 <code>dp[0] = 1</code> 感到别扭，可以改成直接从 <code>dp[1] = 1, dp[2] = 2</code> 开始递推</strong>，效果完全一样。面试中说明这个选择即可。</p>
+<p><strong>如果对 <span class="arithmatex">\(dp[0] = 1\)</span> 感到别扭，可以改成直接从 <span class="arithmatex">\(dp[1] = 1, dp[2] = 2\)</span> 开始递推</strong>，效果完全一样。面试中说明这个选择即可。</p>
 <h3 id="_6">空间优化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>因为只依赖前两项，可以用两个变量滚动，空间从 O(n) 降到 O(1)。</p>
+<p>因为只依赖前两项，可以用两个变量滚动，空间从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h3 id="_7">解法推导与模式辨析<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>判断能否使用递推，要找不同完整方案怎样归入较小问题。这里按最后一步的长度分组，两组互斥且覆盖所有方案；删掉最后一步后，分别与到 i−1、i−2 的方案一一对应，因此相加不会重计。只说“长得像斐波那契”无法说明为何成立。</p>
-<p>例如到第 3 级的方案是 111、12、21，12 与 21 是不同路径，不能当作同一种无序组合。dp[0]=1 对应唯一的空动作序列，使最后一次跳跃前恰好站在地面的方案可被计入。当前实现直接从 dp[1]、dp[2] 开始，题目 n≥1；若扩展接口允许 n=0，应按采用的路径计数约定另处理。</p>
+<p>判断能否使用递推，要找不同完整方案怎样归入较小问题。这里按最后一步的长度分组，两组互斥且覆盖所有方案；删掉最后一步后，分别与到 i-1、i-2 的方案一一对应，因此相加不会重计。只说“长得像斐波那契”无法说明为何成立。</p>
+<p>例如到第 3 级的方案是 111、12、21，12 与 21 是不同路径，不能当作同一种无序组合。dp[0]=1 对应唯一的空动作序列，使最后一次跳跃前恰好站在地面的方案可被计入。当前实现直接从 dp[1]、dp[2] 开始，题目 n不小于1；若扩展接口允许 n=0，应按采用的路径计数约定另处理。</p>
 <h2 id="_8">代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：滚动变量（推荐，O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：滚动变量（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">climbStairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>            <span class="k">return</span> <span class="n">n</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>            <span class="c1"># dp[1], dp[2]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">+</span> <span class="n">prev2</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="k">return</span> <span class="n">prev1</span>
+</span></code></pre></div>
+<h3 id="_9">解法二：完整数组（更容易理解状态定义）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">climbStairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>            <span class="k">return</span> <span class="n">n</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>            <span class="c1"># dp[1], dp[2]</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">+</span> <span class="n">prev2</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">return</span> <span class="n">prev1</span>
-</span></code></pre></div>
-<h3 id="_9">解法二：完整数组（更容易理解状态定义）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">climbStairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="k">return</span> <span class="n">n</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 </span></code></pre></div>
 <h3 id="_10">解法三：记忆化搜索（自顶向下）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">climbStairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">ways</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                <span class="k">return</span> <span class="n">i</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="k">return</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="k">return</span> <span class="n">ways</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">climbStairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">ways</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                <span class="k">return</span> <span class="n">i</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="k">return</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">return</span> <span class="n">ways</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="_11">复杂度<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
@@ -10237,30 +10238,30 @@
 <tbody>
 <tr>
 <td>滚动变量</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>完整数组</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>记忆化搜索</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_12">易错点与面试追问<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>边界</strong>：<code>n = 1</code> 返回 1，<code>n = 2</code> 返回 2。用 <code>if n &lt;= 2: return n</code> 一句搞定。</li>
-<li><strong><code>dp[0] = 1</code> 是人为定义</strong>，不是"爬到第 0 级的真实方法数"。理解这一点可以避免很多困惑。</li>
+<li><strong><span class="arithmatex">\(dp[0] = 1\)</span> 是人为定义</strong>，不是"爬到第 0 级的真实方法数"。理解这一点可以避免很多困惑。</li>
 <li>递推方向必须<strong>从小到大</strong>（<code>dp[i]</code> 依赖更小的下标）。</li>
-<li><strong>追问：如果一次可以爬 1、2 或 3 级？</strong> → <code>dp[i] = dp[i-1] + dp[i-2] + dp[i-3]</code>，是"三步斐波那契"（Tribonacci）。</li>
+<li><strong>追问：如果一次可以爬 1、2 或 3 级？</strong> → <span class="arithmatex">\(dp[i] = dp[i-1] + dp[i-2] + dp[i-3]\)</span>，是"三步斐波那契"（Tribonacci）。</li>
 <li><strong>追问：如果有些台阶不能踩？</strong> → 把那些位置的 <code>dp</code> 设为 0。</li>
-<li><strong>追问：如果一次可以爬 1 到 m 级？</strong> → <code>dp[i] = sum(dp[i-k] for k in 1..m)</code>，可以用滑动窗口优化到 O(n)。</li>
-<li><strong>追问：n 很大（比如 10⁹）怎么办？</strong> → 用<strong>矩阵快速幂</strong>，把递推写成矩阵乘法，复杂度 O(log n)。这是很出彩的加分回答。</li>
+<li><strong>追问：如果一次可以爬 1 到 m 级？</strong> → <code>dp[i] = sum(dp[i-k] for k in 1..m)</code>，可以用滑动窗口优化到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
+<li><strong>追问：n 很大（比如 <span class="arithmatex">\(10^{9}\)</span>）怎么办？</strong> → 用<strong>矩阵快速幂</strong>，把递推写成矩阵乘法，复杂度 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。这是很出彩的加分回答。</li>
 <li><strong>追问：答案会不会溢出？</strong> → 会，Python 有大整数不怕，但在 C++/Java 里要注意取模或使用大数。</li>
 </ul>
 <h2 id="_13">相关题目<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>

@@ -10049,8 +10049,8 @@
 <p><strong>这一讲真正要训练的，是"把问题翻译成图"这件事</strong>：节点是什么？边是什么？要解决的是"能不能到"、"最少几步"、还是"有没有环"？</p>
 <h2 id="_1">定义与存储<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>先用三个地点 A、B、C 想象道路：地点是顶点，道路是边。如果道路只能从 A 到 B，就记有向边 A→B；双向道路则记无向边 A—B。有向图中 A→B 不自动包含 B→A。</p>
-<p>图 <code>G = (V, E)</code>，<code>V</code> 是顶点集，<code>E</code> 是边集。所谓“顶点对”，就是一条边连接的两个端点；有向边要区分起点与终点，因此是有序对，无向边则不区分先后。这里假设图是<strong>简单图</strong>：没有重边、没有自环。由"简单"立刻得到 <code>|E| = O(|V|²)</code>。</p>
-<p>两个记号后面一直用：出邻居集 <code>Adj⁺(u) = {v | (u,v) ∈ E}</code>，出度 <code>deg⁺(u) = |Adj⁺(u)|</code>；入邻居集与入度对称定义。无向图里两者相等。</p>
+<p>图 <span class="arithmatex">\(G = (V, E)\)</span>，<code>V</code> 是顶点集，<code>E</code> 是边集。所谓“顶点对”，就是一条边连接的两个端点；有向边要区分起点与终点，因此是有序对，无向边则不区分先后。这里假设图是<strong>简单图</strong>：没有重边、没有自环。由"简单"立刻得到 <span class="arithmatex">\(\vert E\vert = \mathcal{O}(\vert V\vert ^{2})\)</span>。</p>
+<p>两个记号后面一直用：出邻居集 <span class="arithmatex">\(\operatorname{Adj}^{+}(u)=\{v:(u,v)\in E\}\)</span>，出度 <span class="arithmatex">\(\deg^{+}(u)=|\operatorname{Adj}^{+}(u)|\)</span>；入邻居集与入度对称定义。无向图里两者相等。</p>
 <p>最常用的存储是邻接表：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">g</span> <span class="o">=</span> <span class="p">{}</span>
@@ -10062,19 +10062,19 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>          <span class="c1"># 无向图要加两条边</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">g</span>
 </span></code></pre></div>
-<p>例如 n=4、edges=[(0,1),(0,2),(1,3),(2,3)]，有向存储得到 <code>{0:[1,2],1:[3],2:[3],3:[]}</code>；无向时还加反向条目。编号0..n−1不是固定数学规则，只是本讲代码约定。<code>|V|</code> 中的竖线表示集合元素个数，Σ表示逐个相加。无向边被两端各记一次，这就是握手引理的2倍；有向图的总出度则等于|E|。</p>
-<p>它的空间是 <code>Σ_u (1 + deg(u)) = |V| + 2|E| = Θ(|V| + |E|)</code>——这里用了<strong>握手引理</strong> <code>Σ deg(u) = 2|E|</code>。<strong>这就是为什么"图算法的线性时间"指的是 <code>Θ(|V| + |E|)</code>，而不是 <code>Θ(|V|)</code>。</strong></p>
+<p>例如 n=4、edges=[(0,1),(0,2),(1,3),(2,3)]，有向存储得到 <code>{0:[1,2],1:[3],2:[3],3:[]}</code>；无向时还加反向条目。编号0..n-1不是固定数学规则，只是本讲代码约定。<code>|V|</code> 中的竖线表示集合元素个数，<span class="arithmatex">\(\Sigma\)</span>表示逐个相加。无向边被两端各记一次，这就是握手引理的2倍；有向图的总出度则等于|E|。</p>
+<p>它的空间是 <span class="arithmatex">\(\sum_{u\in V}(1+\deg(u))=|V|+2|E|=\Theta(|V|+|E|)\)</span>——这里用了<strong>握手引理</strong> <span class="arithmatex">\(\sum_{u\in V}\deg(u)=2|E|\)</span>。<strong>这就是为什么"图算法的线性时间"指的是 <span class="arithmatex">\(\Theta (\vert V\vert + \vert E\vert )\)</span>，而不是 <span class="arithmatex">\(\Theta (\vert V\vert )\)</span>。</strong></p>
 <p>写代码前先确认一件事：<strong>边要不要存方向</strong>。这比选哪种存储方式更容易出错。</p>
 <h2 id="_2">从"反复扫描"到"搜索"<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>判断 s 能否到达 t，最朴素的做法是维护一个"已确认可达"的集合，不断扫描所有边直到不再变化。<strong>它是对的，但代价是 <code>O(|V|·|E|)</code></strong>——因为每一轮都要重扫全部边，最多扫 <code>|V|</code> 轮。</p>
-<p>瓶颈很清楚：<strong>已经处理过的边被反复检查。</strong> 改成"从一个顶点出发，沿它的邻接表一直走"——走过一个顶点就把它的邻居放进待访问容器。<strong>每条边只在它的起点被访问时被检查一次</strong>，总代价降到 <code>O(|V| + |E|)</code>。</p>
+<p>判断 s 能否到达 t，最朴素的做法是维护一个"已确认可达"的集合，不断扫描所有边直到不再变化。<strong>它是对的，但代价是 <span class="arithmatex">\(\mathcal{O}(\vert V\vert \cdot \vert E\vert )\)</span></strong>——因为每一轮都要重扫全部边，最多扫 <code>|V|</code> 轮。</p>
+<p>瓶颈很清楚：<strong>已经处理过的边被反复检查。</strong> 改成"从一个顶点出发，沿它的邻接表一直走"——走过一个顶点就把它的邻居放进待访问容器。<strong>每条边只在它的起点被访问时被检查一次</strong>，总代价降到 <span class="arithmatex">\(\mathcal{O}(\vert V\vert + \vert E\vert )\)</span>。</p>
 <p>而这个"容器"用队列就是广度优先，用栈就是深度优先。队列优先处理先发现的顶点，栈优先处理最近发现的顶点；访问顺序不一定恰好相反。递归 DFS 还隐含“回来继续处理剩余邻居”的调用栈。</p>
 <h2 id="_3">广度优先：按距离分层<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="BFS 队列与 DFS 进入、完成顺序" src="../images/15-bfs-dfs.svg" /></p>
-<p>先把“距离”说清：无权图中，路径是沿边走的一串顶点，长度是边数；<code>δ(s,v)</code> 是从 s 到 v 的最少边数，不可达记为 ∞。<code>Lᵢ</code> 表示距离恰好为 i 的顶点集合。</p>
+<p>先把“距离”说清：无权图中，路径是沿边走的一串顶点，长度是边数；<span class="arithmatex">\(\delta (s,v)\)</span> 是从 s 到 v 的最少边数，不可达记为 无穷大。<span class="arithmatex">\(L_{i}\)</span> 表示距离恰好为 i 的顶点集合。</p>
 <p>例如 <code>0→1, 0→2, 1→3, 2→3</code>：第 0 层是 <code>{0}</code>，第 1 层是 <code>{1,2}</code>，第 2 层是 <code>{3}</code>。3 虽有两个入口，也只应入队一次。代码中的 <code>dist</code> 既存距离，也记录是否已发现。</p>
 <p>为什么逐层扩展正确？已知第 i 层时，从它向外走一条边能给未发现的 v 一条长 i+1 的路径；若 v 有更短路径，它早应由前一层发现。两边合起来，首次发现的距离恰好就是最短距离。</p>
-<p>于是算法就是"从 <code>L₀ = {s}</code> 开始，一层一层往外生成"：</p>
+<p>于是算法就是"从 <span class="arithmatex">\(L_{0} = {s}\)</span> 开始，一层一层往外生成"：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
@@ -10091,8 +10091,8 @@
 </span></code></pre></div>
 <p><strong>访问标记放在入队时做</strong>，这样每个顶点最多入队一次。（放在出队时会重复入队，结果虽可能仍对，但复杂度会退化。）</p>
 <p>代码处理一个顶点的全部邻居后再取队头，所以先入队的同层点一定先于下一层点被处理。结合前面的距离上下界，首次发现的层号就是最短边数。图中队列状态是<strong>逐次出队后</strong>的队列，不能把整层缩略状态当作每次循环的实际内容。</p>
-<p>顺带说一个工程上的点：最短路径树只需 O(V) 个父指针，就能为每个可达顶点保存一条最短路径，比"把每条路径都存下来"（可能要 <code>Θ(V²)</code>）聪明得多。</p>
-<p>拿到 parent 后，可以这样恢复一条路径。这里只给“从 s 可达”的点设置父指针，不可达的 t 应返回空列表。沿父指针得到的是终点到起点的逆序，所以最后用 <code>path[::-1]</code> 返回一个倒序的新列表；切片的第三项 −1 表示从后向前取：</p>
+<p>顺带说一个工程上的点：最短路径树只需 <span class="arithmatex">\(\mathcal{O}(V)\)</span> 个父指针，就能为每个可达顶点保存一条最短路径，比"把每条路径都存下来"（可能要 <span class="arithmatex">\(\Theta (V^{2})\)</span>）聪明得多。</p>
+<p>拿到 parent 后，可以这样恢复一条路径。这里只给“从 s 可达”的点设置父指针，不可达的 t 应返回空列表。沿父指针得到的是终点到起点的逆序，所以最后用 <code>path[::-1]</code> 返回一个倒序的新列表；切片的第三项 -1 表示从后向前取：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">restore_path</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="p">[]</span>
@@ -10105,7 +10105,7 @@
 <p>对四点有向图，执行 <code>g=build(4,[(0,1),(0,2),(1,3),(2,3)],directed=True)</code>，再 <code>dist,parent=bfs(g,0)</code>，得到 dist={0:0,1:1,2:1,3:2}。<code>restore_path(parent,3)</code> 返回 [0,1,3]；如果按相反顺序存储 0 的邻居，也可能返回 [0,2,3]，两条都长 2。</p>
 <h2 id="_4">深度优先与拓扑排序<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><img alt="DFS 的一帧" src="../figures/15-dfs-labyrinth.png" /></p>
-<p>深绿色节点的全部出边已经探索完；橙线是尚未返回的 DFS 调用沿途经过的边；斜线起点仍有邻边待探索。橙色路线表示当前探索过程，不保证是最短路线。</p>
+<p>蓝色路径表示当前调用栈 s → a → b。b 没有后继后逐层返回，再从 s 探索 c、d；DFS 不保证最短路线。</p>
 <p>DFS 的递归结构很自然：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -10120,7 +10120,7 @@
 <blockquote>
 <p><strong>若 G 是 DAG，则 Full-DFS 的"完成顺序"的逆序就是一个拓扑序。</strong></p>
 </blockquote>
-<p>证明只需对一条边 <code>(u,v)</code> 讨论两种情况。若 u 比 v 先被访问，那么访问 u 的过程中必然（直接或间接）访问到 v，于是 v 先完成。若 v 比 u 先被访问，由于图无环，u 不可能从 v 到达（否则会有环），于是访问 v 时碰不到 u，v 也先完成。两种情形都满足"v 先于 u 完成"。∎</p>
+<p>证明只需对一条边 <code>(u,v)</code> 讨论两种情况。若 u 比 v 先被访问，那么访问 u 的过程中必然（直接或间接）访问到 v，于是 v 先完成。若 v 比 u 先被访问，由于图无环，u 不可能从 v 到达（否则会有环），于是访问 v 时碰不到 u，v 也先完成。两种情形都满足"v 先于 u 完成"。</p>
 <p>在前面的四点有向图中，按邻接表顺序从 0 做完整 DFS，完成顺序为 [3,1,2,0]，它本身把 3 放在先修 1 的前面，不能直接用；反转为 [0,2,1,3] 才是一个合法拓扑序。</p>
 <p>另一个更容易直接手写的方法是 <strong>Kahn 算法</strong>。入度就是“还有多少条边指向这个点”，在先修模型里表示“还有多少门先修没完成”。入度为 0 的课可以现在上；完成它后，从图中逻辑上删掉它的出边，让后续课的未完成先修数减 1。无需真的删除邻接表条目，维护计数即可。</p>
 <p>下面引入标准库 defaultdict。普通字典第一次执行 graph[u].append(v) 前，必须先保证键 u 已存在；<code>defaultdict(list)</code> 遇到缺失键时会自动新建并保存一个空列表。因此终点即使没有出边，也能通过 graph[u] 读到空列表。它简化的是缺键处理，图的含义与前面的普通字典邻接表相同：</p>
@@ -10172,10 +10172,10 @@
 </span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>                        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">))</span>
 </span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
-<p><strong>"就地标记"是网格题的标准技巧</strong>：把访问过的格子改成一个不会出现的值（<code>'#'</code>、<code>0</code>），可省独立 visited 集合，但会修改输入，BFS 队列仍可能占 O(mn) 空间。需要保留网格时应复制或另用 visited。</p>
+<p><strong>"就地标记"是网格题的标准技巧</strong>：把访问过的格子改成一个不会出现的值（<code>'#'</code>、<code>0</code>），可省独立 visited 集合，但会修改输入，BFS 队列仍可能占 <span class="arithmatex">\(\mathcal{O}(mn)\)</span> 空间。需要保留网格时应复制或另用 visited。</p>
 <h3 id="bfs">多源 BFS<a class="headerlink" href="#bfs" title="Permanent link">&para;</a></h3>
-<p>输入整数网格：0 是空格，1 是新鲜橘子，2 是腐烂橘子。每分钟，所有腐烂橘子会<strong>同时</strong>使上下左右相邻的新鲜橘子变腐烂。返回所有新鲜橘子都腐烂所需的最少分钟数；原本没有新鲜橘子则返回 0，有橘子永远无法感染则返回 −1，空格不能传播。</p>
-<p>例如一行网格 <code>[[2,1,1]]</code> 要 2 分钟；<code>[[2,0,1]]</code> 被空格隔开，返回 −1。为模拟同时开始，把所有最初腐烂的格子都放进队列，设它们属于第 0 层；做一次 BFS，层数就是时间。</p>
+<p>输入整数网格：0 是空格，1 是新鲜橘子，2 是腐烂橘子。每分钟，所有腐烂橘子会<strong>同时</strong>使上下左右相邻的新鲜橘子变腐烂。返回所有新鲜橘子都腐烂所需的最少分钟数；原本没有新鲜橘子则返回 0，有橘子永远无法感染则返回 -1，空格不能传播。</p>
+<p>例如一行网格 <code>[[2,1,1]]</code> 要 2 分钟；<code>[[2,0,1]]</code> 被空格隔开，返回 -1。为模拟同时开始，把所有最初腐烂的格子都放进队列，设它们属于第 0 层；做一次 BFS，层数就是时间。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">oranges_rotting</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">grid</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="mi">0</span>
@@ -10206,7 +10206,7 @@
 <p><strong>"所有源点同时入队"是多源 BFS 的灵魂</strong>——依次对每个源点做 BFS 会让复杂度乘以源点个数。同一个模板稍作改动就是"每个房间到最近门的距离"（把源点换成门）。</p>
 <h3 id="_6">反向搜索<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>有些问题正向很难，反向很简单。两个典型：</p>
-<p><strong>Pacific Atlantic（水流入两大洋）</strong>：输入每格的高度，水只能向上下左右不高于自己的格子流。上、左边界接太平洋，下、右边界接大西洋；要求返回既能流到太平洋、又能流到大西洋的所有格子坐标。正向要问"这个格子能不能流到某个海洋"，反向则<strong>从两个海洋的边界出发，逆着水流方向往高处爬</strong>，能到达的格子就是"能流到该海洋"的。起点只有 <code>O(m+n)</code> 个，复杂度降到 <code>O(mn)</code>。</p>
+<p><strong>Pacific Atlantic（水流入两大洋）</strong>：输入每格的高度，水只能向上下左右不高于自己的格子流。上、左边界接太平洋，下、右边界接大西洋；要求返回既能流到太平洋、又能流到大西洋的所有格子坐标。正向要问"这个格子能不能流到某个海洋"，反向则<strong>从两个海洋的边界出发，逆着水流方向往高处爬</strong>，能到达的格子就是"能流到该海洋"的。起点只有 <span class="arithmatex">\(\mathcal{O}(m+n)\)</span> 个，复杂度降到 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <p>反向走时只允许进入高度不低于当前格的邻格。分别得到“能流到太平洋”和“能流到大西洋”两个可达集合，取交集才是答案。</p>
 <p><strong>Surrounded Regions（被围绕的区域）</strong>：输入由 X、O 组成的网格，要把所有不能沿上下左右的 O 路径到达边界的 O 改成 X，与边界连通的 O 保留。正向判断"某块 O 是否被完全包围"很麻烦，反向则<strong>从四条边界上的 O 出发标记</strong>，剩下的 O 就是被包围的。</p>
 <p><strong>"正向难、反向易"是网格题里非常常见的转折点</strong>，值得单独记一条。</p>
@@ -10236,11 +10236,11 @@
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>                    <span class="k">return</span> <span class="kc">False</span>
 </span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p><strong>3.</strong> 为什么 BFS 的复杂度不能写成 <code>O(|V|²)</code>？</p>
-<p>因为 <code>O(|V|²)</code> 是更松的上界。对稀疏图（<code>|E| = O(|V|)</code>）它会把真实的线性代价夸大一个 <code>|V|</code> 因子。<strong>渐进记号要给尽可能紧的界</strong>，否则会掩盖真实性能。</p>
+<p><strong>3.</strong> 为什么 BFS 的复杂度不能写成 <span class="arithmatex">\(\mathcal{O}(\vert V\vert ^{2})\)</span>？</p>
+<p>因为 <span class="arithmatex">\(\mathcal{O}(\vert V\vert ^{2})\)</span> 是更松的上界。对稀疏图（<span class="arithmatex">\(\vert E\vert = \mathcal{O}(\vert V\vert )\)</span>）它会把真实的线性代价夸大一个 <code>|V|</code> 因子。<strong>渐进记号要给尽可能紧的界</strong>，否则会掩盖真实性能。</p>
 <p><strong>4.</strong> 证明"有向图有拓扑序 ⟺ 它是 DAG"。</p>
 <p>（DAG ⇒ 有拓扑序）对顶点数归纳：DAG 必有入度为 0 的顶点（否则沿入边一直往回走会重复，形成环），删掉它之后剩下的仍是 DAG，递归得到拓扑序并放在最前面。</p>
-<p>（有拓扑序 ⇒ DAG）若图有环 <code>v₀ → v₁ → ⋯ → v_k → v₀</code>，由拓扑序可得 <code>v₀</code> 排在 <code>v₁</code> 前、⋯、<code>v_k</code> 排在 <code>v₀</code> 前，串起来是"<code>v₀</code> 排在 <code>v₀</code> 前"，矛盾。∎</p>
+<p>（有拓扑序 ⇒ DAG）若图有环 <span class="arithmatex">\(v_0\to v_1\to\cdots\to v_k\to v_0\)</span>，由拓扑序可得 <span class="arithmatex">\(v_{0}\)</span> 排在 <span class="arithmatex">\(v_{1}\)</span> 前、……、<code>v_k</code> 排在 <span class="arithmatex">\(v_{0}\)</span> 前，串起来是"<span class="arithmatex">\(v_{0}\)</span> 排在 <span class="arithmatex">\(v_{0}\)</span> 前"，矛盾。</p>
 <p><strong>5.</strong> 为什么"从 s 出发的 BFS"求不了带权图的最短路？</p>
 <p>BFS 假设每条边代价都是 1，所以"层数 = 距离"。带权时，"边数少但权重巨大"的路径可能比"边数多但权重小"的路径更贵。反例：<code>A —1— B —1— C</code> 与 <code>A —3— C</code>，BFS 说 A 到 C 距离 1，按权重算最短路是 <code>A→B→C</code> 代价 2。<strong>这就是第 18 讲要引入 Dijkstra 的原因。</strong></p>
 <p><strong>6.</strong> 用 DFS 的后序实现拓扑排序，与 Kahn 算法对比。</p>

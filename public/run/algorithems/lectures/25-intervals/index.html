@@ -10109,7 +10109,7 @@
 </tbody>
 </table>
 <p>不信的话看一个反例：<code>[[1,100], [2,3], [4,5]]</code>。按左端点排，第一个就是 <code>[1,100]</code>，选完只剩 1 个；按右端点排，可以选 <code>[2,3]</code> 与 <code>[4,5]</code>，拿到 2 个。<strong>同一组数据，两种排序，答案不同。</strong></p>
-<p>先读端点：合并区间和射箭通常按闭区间 <code>[s,e]</code>，含两个端点；活动/会议按半开区间 <code>[s,e)</code>，不含结束时刻。于是[1,2]与[2,3]闭区间相交，会议[1,2)与[2,3)却可接续。本讲每段代码沿用相应题目约定，不把一个条件带着等号抄到所有题里。</p>
+<p>先读端点：合并区间和射箭通常按闭区间 <span class="arithmatex">\([s,e]\)</span>，含两个端点；活动/会议按半开区间 <span class="arithmatex">\([s,e)\)</span>，不含结束时刻。于是[1,2]与[2,3]闭区间相交，会议[1,2)与[2,3)却可接续。本讲每段代码沿用相应题目约定，不把一个条件带着等号抄到所有题里。</p>
 <h2 id="max">合并区间：按左端点，取 max<a class="headerlink" href="#max" title="Permanent link">&para;</a></h2>
 <p>输入若干闭区间 <code>[start,end]</code>，允许无序、嵌套、重复，要求返回覆盖范围完全相同且彼此不重叠的区间列表。例如 <code>[[1,3],[2,6],[8,10]]</code> 应合为 <code>[[1,6],[8,10]]</code>。这不是选一部分区间，原来被覆盖的每个点都必须保留。空输入返回空列表。</p>
 <p><img alt="合并区间：按左端点排序后一路右扫" src="../images/25-merge-intervals.svg" /></p>
@@ -10123,8 +10123,8 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">])</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong><code>max</code> 不能省。</strong> 看 <code>[[1,10], [2,3]]</code>：第二个区间被完全包在里面，如果顺手写成 <code>res[-1][1] = end</code>，终点会被改小成 3，等于把 <code>[1,10]</code> 硬生生截断。</p>
-<p>为什么这里必须按左端点？因为合并的判断是"<strong>新起点 ≤ 上一个结果的终点</strong>"。起点递增之后，每个区间只需要和结果列表的最后一个比一次，<strong>不会出现"得回头跟更早的结果比"的情况</strong>。换成按右端点排序，这个性质就没了。</p>
+<p><strong><code>max</code> 不能省。</strong> 看 <code>[[1,10], [2,3]]</code>：第二个区间被完全包在里面，如果顺手写成 <span class="arithmatex">\(\mathrm{res}[-1][1] = \mathrm{end}\)</span>，终点会被改小成 3，等于把 <code>[1,10]</code> 硬生生截断。</p>
+<p>为什么这里必须按左端点？因为合并的判断是"<strong>新起点 不大于 上一个结果的终点</strong>"。起点递增之后，每个区间只需要和结果列表的最后一个比一次，<strong>不会出现"得回头跟更早的结果比"的情况</strong>。换成按右端点排序，这个性质就没了。</p>
 <h2 id="_1">插入区间：题目已经把数组排好了<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>输入 intervals 已按起点升序排列，且原有闭区间彼此不相交；另给一个 new_interval。要求把新区间加入覆盖范围，并合并因此相交的区间，返回新的有序列表。例如 <code>[[1,3],[6,9]]</code> 加入 <code>[2,5]</code>，结果为 <code>[[1,5],[6,9]]</code>。</p>
 <p>因为原区间已有序，可以分三段处理：完全在新区间左边的直接保留；相交的并入新区间，同时更新它的右端；其余都在右边，整段接上。</p>
@@ -10144,13 +10144,13 @@
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">res</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>                        <span class="c1"># 阶段 3：剩下的都在右边</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p>题目还保证原区间互不重叠，并已按起点排好序，这就是在提示你：<strong>可以做到 O(n)</strong>。写成"插进去、重排、再合并"当然也对，但那是 <code>O(n log n)</code>，面试里一定会被追问"能不能用上已排序这个条件"。</p>
+<p>题目还保证原区间互不重叠，并已按起点排好序，这就是在提示你：<strong>可以做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>。写成"插进去、重排、再合并"当然也对，但那是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，面试里一定会被追问"能不能用上已排序这个条件"。</p>
 <p><strong>两个相位的等号是配套的</strong>：阶段 1 用严格小于（<code>end &lt; new_start</code>，说明完全不沾边），阶段 2 用带等号（<code>start &lt;= new_end</code>，端点相接也算重叠）。只改一个不改另一个，就会出错。</p>
 <h2 id="_2">最少删掉几个区间：其实就是活动选择<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>输入若干 start&lt;end 的区间，要求删除尽量少的整段，使剩下的区间不再重叠，返回删除数量；这里端点相接允许保留两段。例如 <code>[[1,2],[2,3],[1,3]]</code> 删掉 <code>[1,3]</code> 即可，答案为 1。</p>
 <p>每段不是留下就是删除，最少删除数便等于 n 减去最多可留数。因此直接复用第 24 讲按结束时间选择活动的方法。</p>
 <p><img alt="活动选择的时间轴" src="../figures/25-activity-timeline.png" /></p>
-<p>图中的 7 个活动按结束时间扫描，选出 a₂、a₅、a₃、a₇，斜线灰色活动与已选活动冲突而被排除。这里的编号仅用于这张图；下面代码可以处理任意数量的区间。</p>
+<p>图中的 7 个活动按结束时间扫描，选出 <span class="arithmatex">\(a_{2}\)</span>、<span class="arithmatex">\(a_{5}\)</span>、<span class="arithmatex">\(a_{3}\)</span>、<span class="arithmatex">\(a_{7}\)</span>，灰色活动与已选活动冲突而被排除。这里的编号仅用于这张图；下面代码可以处理任意数量的区间。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">erase_overlap_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>     <span class="c1"># 按右端点升序</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">removed</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10162,9 +10162,9 @@
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">last_end</span> <span class="o">=</span> <span class="n">end</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="n">removed</span>
 </span></code></pre></div>
-<p>注意这题问的是"<strong>删掉最少几个</strong>"，所以直接数冲突个数就行。<strong>等价的说法是 <code>n − 最多能选出几个不重叠的区间</code></strong>——正着数和反着数是一回事，而按右端点排序这个前提没变。</p>
+<p>注意这题问的是"<strong>删掉最少几个</strong>"，所以直接数冲突个数就行。<strong>等价的说法是 <code>n - 最多能选出几个不重叠的区间</code></strong>——正着数和反着数是一回事，而按右端点排序这个前提没变。</p>
 <h2 id="_3">最少几支箭：用点覆盖全部区间<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>每个气球用一个闭区间 <code>[start,end]</code> 表示水平范围。选一个横坐标 x 射箭，就能射中所有满足 start≤x≤end 的气球，一支箭可同时射中多个。要求射中全部气球，返回最少箭数。例如 <code>[1,2]</code> 与 <code>[2,3]</code> 可在 x=2 一箭射中，答案为 1；空输入不需要箭。</p>
+<p>每个气球用一个闭区间 <code>[start,end]</code> 表示水平范围。选一个横坐标 x 射箭，就能射中所有满足 start不大于x不大于end 的气球，一支箭可同时射中多个。要求射中全部气球，返回最少箭数。例如 <code>[1,2]</code> 与 <code>[2,3]</code> 可在 x=2 一箭射中，答案为 1；空输入不需要箭。</p>
 <p>按右端点升序扫描，第一支箭放在最早结束的气球的右端；以后只有遇到当前箭射不到的区间，才再开一支。先看代码，再证明这个位置选择不会增加箭数：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_min_arrows</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">points</span><span class="p">:</span>
@@ -10178,13 +10178,13 @@
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="n">end</span> <span class="o">=</span> <span class="n">e</span>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">return</span> <span class="n">arrows</span>
 </span></code></pre></div>
-<p>先证明第一支箭放在哪里。取右端点最早的区间 [s,e]，任意方案都要用一支位于 [s,e] 的箭 x 射中它。把 x 右移到 e：原先被 x 射中的其他区间，左端≤x≤e，而右端都≥e（因为 e 最早），因此仍被 e 射中。箭数没增加，所以存在把第一支箭放 e 的最优方案。</p>
+<p>先证明第一支箭放在哪里。取右端点最早的区间 [s,e]，任意方案都要用一支位于 [s,e] 的箭 x 射中它。把 x 右移到 e：原先被 x 射中的其他区间，左端不大于x不大于e，而右端都不小于e（因为 e 最早），因此仍被 e 射中。箭数没增加，所以存在把第一支箭放 e 的最优方案。</p>
 <p>删去所有被 e 射中的区间，剩下每个区间的左端都&gt;e，重复同样的交换即可。两题都按右端点排序，但活动选择是在保留区间，射箭是在覆盖全部区间；需要分别说明交换为何安全。</p>
-<p><strong>判断写的是 <code>start &gt; end</code>，因为本题是闭区间</strong>：端点相等时一支箭能同时射中两个气球。写成 <code>&gt;=</code>，答案就会多出来。</p>
+<p><strong>判断写的是 <span class="arithmatex">\(\mathrm{start} &gt; \mathrm{end}\)</span>，因为本题是闭区间</strong>：端点相等时一支箭能同时射中两个气球。写成 <span class="arithmatex">\(\ge\)</span>，答案就会多出来。</p>
 <h2 id="_4">会议室：这是另一个问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><img alt="扫描线求同时进行的最大会议数" src="../images/25-scanline.svg" /></p>
 <blockquote>
-<p>给定所有会议的起止时间，每场必须按原时间完整进行，不能删除或改期，同一房间同一时刻最多一场。返回安排全部会议所需的最少房间数。会议按半开区间 <code>[start,end)</code>，且 start&lt;end；空输入返回 0。</p>
+<p>给定所有会议的起止时间，每场必须按原时间完整进行，不能删除或改期，同一房间同一时刻最多一场。返回安排全部会议所需的最少房间数。会议按半开区间 <span class="arithmatex">\([\mathrm{start},\mathrm{end})\)</span>，且 start&lt;end；空输入返回 0。</p>
 </blockquote>
 <p>例如 <code>[[0,30],[5,10],[15,20]]</code> 需要两间：第一场单独占一间，后两场可以共用另一间。</p>
 <p>这题<strong>不是</strong>"选择不重叠的区间"，而是"求<strong>同时进行</strong>的最大数量"。换了个问题，就得换工具：</p>
@@ -10200,7 +10200,7 @@
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
-<p><strong>为什么同一时刻的"结束"要排在"开始"前面？</strong> 因为本题的区间是半开区间 <code>[start, end)</code>——一场会 10 点结束、另一场 10 点开始，可以共用一间。<code>(时间, 增量)</code> 这样的元组排序天然让 <code>-1</code> 排在 <code>+1</code> 之前，正好对上这个约定。闭区间若相接也算冲突，应在同一时刻先处理开始，再处理结束。仅当端点是整数且按整数点覆盖时，才可用 end+1 转为半开区间；连续时间不能随意加 1。这里假设每场 start&lt;end，零时长会议需按题意单独约定。</p>
+<p><strong>为什么同一时刻的"结束"要排在"开始"前面？</strong> 因为本题的区间是半开区间 <span class="arithmatex">\([\mathrm{start}, \mathrm{end})\)</span>——一场会 10 点结束、另一场 10 点开始，可以共用一间。<code>(时间, 增量)</code> 这样的元组排序天然让 <code>-1</code> 排在 <span class="arithmatex">\(+1\)</span> 之前，正好对上这个约定。闭区间若相接也算冲突，应在同一时刻先处理开始，再处理结束。仅当端点是整数且按整数点覆盖时，才可用 end+1 转为半开区间；连续时间不能随意加 1。这里假设每场 start&lt;end，零时长会议需按题意单独约定。</p>
 <p>用最小堆也能做：按开始时间排序，堆里为每个已开房间保存“下次空闲时刻”。取堆顶就能知道是否至少有一间房已空闲。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
@@ -10213,13 +10213,13 @@
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
 </span></code></pre></div>
-<p>这份代码每次只弹出一个空闲房间，堆中保留的是<strong>所有已开房间下一次可用的时刻</strong>，不全是仍在进行的会议；大小表示已开房间总数。若有空闲就复用，否则必须新开，所以最终房间数最少。若想维护“正在进行的会议”，需 while 弹出全部结束项并另记历史最大堆大小。 这里的 <code>&lt;=</code> 同样来自半开区间的约定；改成闭区间时要用 <code>&lt;</code>。</p>
+<p>这份代码每次只弹出一个空闲房间，堆中保留的是<strong>所有已开房间下一次可用的时刻</strong>，不全是仍在进行的会议；大小表示已开房间总数。若有空闲就复用，否则必须新开，所以最终房间数最少。若想维护“正在进行的会议”，需 while 弹出全部结束项并另记历史最大堆大小。 这里的 <span class="arithmatex">\(\le\)</span> 同样来自半开区间的约定；改成闭区间时要用 <span class="arithmatex">\(&lt;\)</span>。</p>
 <h2 id="_5">选读：查询很多的时候，把查询排到一起处理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>输入整数闭区间 intervals 和整数查询列表 queries。对每个查询 q，在包含 q 的区间中找最短者，返回它覆盖的整数点数 right−left+1；没有区间包含 q 则返回 −1。结果顺序必须与 queries 相同。</p>
+<p>输入整数闭区间 intervals 和整数查询列表 queries。对每个查询 q，在包含 q 的区间中找最短者，返回它覆盖的整数点数 right-left+1；没有区间包含 q 则返回 -1。结果顺序必须与 queries 相同。</p>
 </blockquote>
 <p>例如 intervals=<code>[[1,4],[2,3]]</code>、queries=<code>[3,1,5]</code>，答案是 <code>[2,4,-1]</code>。第一个查询选 <code>[2,3]</code>，第二个只能选 <code>[1,4]</code>。</p>
-<p>每个查询都扫描全部区间会重复检查。先将查询按值递增处理，走到 q 时把所有 left≤q 的区间加入最小堆，堆按长度排序；右端&lt;q 的候选已无法覆盖当前或未来查询，弹出。另存原查询下标，才能把答案放回原来的位置。</p>
+<p>每个查询都扫描全部区间会重复检查。先将查询按值递增处理，走到 q 时把所有 left不大于q 的区间加入最小堆，堆按长度排序；右端&lt;q 的候选已无法覆盖当前或未来查询，弹出。另存原查询下标，才能把答案放回原来的位置。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_interval</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">queries</span><span class="p">):</span>
@@ -10240,12 +10240,12 @@
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>            <span class="n">res</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>                           <span class="c1"># 堆顶就是覆盖 q 的最短区间</span>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>这道题真正的突破是"离线处理"</strong>：查询之间互相独立，所以可以先不按输入顺序回答，而是<strong>把所有查询排序后一起处理</strong>，最后再照原顺序填回答案。查询值递增之后，"区间的加入"和"区间的过期"都变成单调的，每个区间最多进出堆一次，总复杂度为 <code>O(n log n+q log q+(n+q) log(n+1))</code>（含查询排序）。</p>
-<p>堆顶按长度排序，不按右端点排序，所以堆里可能还藏着已过期的长区间。只需不断弹出过期的堆顶，直到最短候选合法即可；隐藏的过期项不会挡住更短合法项，将来露到堆顶时再删。这是第 18 讲同样用过的惰性删除。这里约定区间端点与查询均为整数，所以长度用 right−left+1。</p>
+<p><strong>这道题真正的突破是"离线处理"</strong>：查询之间互相独立，所以可以先不按输入顺序回答，而是<strong>把所有查询排序后一起处理</strong>，最后再照原顺序填回答案。查询值递增之后，"区间的加入"和"区间的过期"都变成单调的，每个区间最多进出堆一次，总复杂度为 <span class="arithmatex">\(\mathcal{O}(n \log n+q \log q+(n+q) \log (n+1))\)</span>（含查询排序）。</p>
+<p>堆顶按长度排序，不按右端点排序，所以堆里可能还藏着已过期的长区间。只需不断弹出过期的堆顶，直到最短候选合法即可；隐藏的过期项不会挡住更短合法项，将来露到堆顶时再删。这是第 18 讲同样用过的惰性删除。这里约定区间端点与查询均为整数，所以长度用 right-left+1。</p>
 <h2 id="_6">为什么这些贪心是对的<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>合并区间的正确性。</strong> 要证两件事：结果互不重叠，而且并集和原来一样。</p>
-<p>不重叠是构造出来的：只有 <code>start &gt; res[-1][1]</code> 时才追加新区间，所以相邻两个结果的端点满足 <code>res[-1][1] &lt; start</code>。并集不变看合并那一步：被并进 <code>res[-1]</code> 的区间满足 <code>s ≤ res[-1][1]</code>，即与当前结果有交或相接；由于终点取的是 <code>max</code>，合并后的区间同时包含原来两个，<strong>并集一个点都没丢</strong>。反过来，任何一个点若被原区间覆盖，在那一步要么已经被并进 <code>res[-1]</code>，要么落在一个已经追加的区间里。∎</p>
-<p><strong>会议室问题的正确性。</strong> 设某个时刻有 k 场会议同时进行，那么这 k 场两两重叠，<strong>必须占用 k 间不同的会议室</strong>，所以答案 ≥ k。另一方面，按开始时间处理会议：若已有空房就复用；若所有已开房都占用，此刻新会议与每个在用房的会议同时进行，必须新开一间。每次增房都有一个同等数量的重叠下界作为证据，因此最终房数恰好等于历史最大重叠数，扫描线算的正是它。∎</p>
+<p>不重叠是构造出来的：只有 <span class="arithmatex">\(\mathrm{start} &gt; \mathrm{res}[-1][1]\)</span> 时才追加新区间，所以相邻两个结果的端点满足 <span class="arithmatex">\(\mathrm{res}[-1][1] &lt; \mathrm{start}\)</span>。并集不变看合并那一步：被并进 <code>res[-1]</code> 的区间满足 <span class="arithmatex">\(s \le \mathrm{res}[-1][1]\)</span>，即与当前结果有交或相接；由于终点取的是 <code>max</code>，合并后的区间同时包含原来两个，<strong>并集一个点都没丢</strong>。反过来，任何一个点若被原区间覆盖，在那一步要么已经被并进 <code>res[-1]</code>，要么落在一个已经追加的区间里。</p>
+<p><strong>会议室问题的正确性。</strong> 设某个时刻有 k 场会议同时进行，那么这 k 场两两重叠，<strong>必须占用 k 间不同的会议室</strong>，所以答案 不小于 k。另一方面，按开始时间处理会议：若已有空房就复用；若所有已开房都占用，此刻新会议与每个在用房的会议同时进行，必须新开一间。每次增房都有一个同等数量的重叠下界作为证据，因此最终房数恰好等于历史最大重叠数，扫描线算的正是它。</p>
 <p>删除冲突区间可直接用第 24 讲的活动选择证明；射箭则用本讲“把射中最早结束区间的箭右移到其右端点”的交换证明。两者都保留某个最优解，但交换的对象不同。</p>
 <h2 id="_7">复杂度与几个例子<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
@@ -10261,44 +10261,44 @@
 <tr>
 <td>Meeting Rooms（252）</td>
 <td>左端点</td>
-<td><code>O(n log n)</code></td>
-<td>O(n)（含 Python 排序工作空间）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（含 Python 排序工作空间）</td>
 </tr>
 <tr>
 <td>Insert Interval（57）</td>
 <td>已经有序</td>
-<td><code>O(n)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Merge Intervals（56）</td>
 <td><strong>左端点</strong></td>
-<td><code>O(n log n)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Non-overlapping（435）</td>
 <td><strong>右端点</strong></td>
-<td><code>O(n log n)</code></td>
-<td>O(n)（含 Python 排序工作空间）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（含 Python 排序工作空间）</td>
 </tr>
 <tr>
 <td>Meeting Rooms II（253）</td>
 <td>扫描线 / 最小堆</td>
-<td><code>O(n log n)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Min Arrows（452）</td>
 <td>右端点</td>
-<td><code>O(n log n)</code></td>
-<td>O(n)（含 Python 排序工作空间）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（含 Python 排序工作空间）</td>
 </tr>
 <tr>
 <td>Min Interval to Include Query（1851）</td>
 <td>离线 + 堆</td>
-<td><code>O(n log(n+1)+q log(q+1)+q log(n+1))</code></td>
-<td><code>O(n+q)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log (n+1)+q \log (q+1)+q \log (n+1))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n+q)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10321,7 +10321,7 @@
 </tr>
 <tr>
 <td>[2,6]</td>
-<td>2 ≤ 3，重叠</td>
+<td>2 不大于 3，重叠</td>
 <td>合并</td>
 <td><code>[[1,6]]</code></td>
 </tr>
@@ -10405,22 +10405,22 @@
 <p>先做 <a href="../../problems/16-intervals/03-merge-intervals/">Merge Intervals</a>，测试 [[1,10],[2,3]]→[[1,10]]，防止合并时把右端点改小；[[1,2],[2,3]] 在闭区间约定下应合成 [[1,3]]。</p>
 <p>再做 <a href="../../problems/16-intervals/05-meeting-rooms-ii/">Meeting Rooms II</a>，用 [[0,30],[5,10],[15,20]] 得 2；用 [[1,2],[2,3]] 得 1。先说明会议为半开区间，再决定同一时刻先处理结束事件。</p>
 <h2 id="_10">练习<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 给定四个活动 <code>a₁ = (1,5)</code>、<code>a₂ = (3,7)</code>、<code>a₃ = (6,9)</code>、<code>a₄ = (2,4)</code>，最优解是 2 个（<code>a₁ + a₃</code> 或 <code>a₄ + a₃</code>）。为什么 <code>a₄ + a₃</code> 合法，而 <code>a₁ + a₂</code> 不合法？</p>
-<p><code>a₄ = (2,4)</code> 结束于 4，<code>a₃ = (6,9)</code> 从 6 开始，中间没有重叠。而 <code>a₁ = (1,5)</code> 与 <code>a₂ = (3,7)</code> 在 3 到 5 这一段重合。</p>
+<p><strong>1.</strong> 给定四个活动 <span class="arithmatex">\(a_{1} = (1,5)\)</span>、<span class="arithmatex">\(a_{2} = (3,7)\)</span>、<span class="arithmatex">\(a_{3} = (6,9)\)</span>、<span class="arithmatex">\(a_{4} = (2,4)\)</span>，最优解是 2 个（<span class="arithmatex">\(a_{1} + a_{3}\)</span> 或 <span class="arithmatex">\(a_{4} + a_{3}\)</span>）。为什么 <span class="arithmatex">\(a_{4} + a_{3}\)</span> 合法，而 <span class="arithmatex">\(a_{1} + a_{2}\)</span> 不合法？</p>
+<p><span class="arithmatex">\(a_{4} = (2,4)\)</span> 结束于 4，<span class="arithmatex">\(a_{3} = (6,9)\)</span> 从 6 开始，中间没有重叠。而 <span class="arithmatex">\(a_{1} = (1,5)\)</span> 与 <span class="arithmatex">\(a_{2} = (3,7)\)</span> 在 3 到 5 这一段重合。</p>
 <p><strong>2.</strong> 用"结束最早优先"的贪心走一遍，看它选出哪两个。</p>
-<p>按结束时间排序是 <code>a₄(2,4)</code>, <code>a₁(1,5)</code>, <code>a₂(3,7)</code>, <code>a₃(6,9)</code>：</p>
+<p>按结束时间排序是 <span class="arithmatex">\(a_{4}(2,4)\)</span>, <span class="arithmatex">\(a_{1}(1,5)\)</span>, <span class="arithmatex">\(a_{2}(3,7)\)</span>, <span class="arithmatex">\(a_{3}(6,9)\)</span>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>选 a₄（end=4）
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>a₁ 的 start=1 &lt; 4 → 跳过
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>a₂ 的 start=3 &lt; 4 → 跳过
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>a₃ 的 start=6 ≥ 4 → 选中（end=9）
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>答案 2 个：a₄ 与 a₃
 </span></code></pre></div>
-<p><strong>3.</strong> 如果把 <code>a₃</code> 改成 <code>(5,9)</code>，答案会变吗？</p>
-<p>不变。<code>a₄(2,4)</code> 与 <code>(5,9)</code> 仍然不重叠（4 ≤ 5），答案还是 2。这一例的 [2,4) 与 [5,9) 之间有空隙，并没有端点相接。若再把 a₃ 改成 (4,9)，才会出现 [2,4) 与 [4,9) 相接：半开区间允许接续，闭区间 [2,4] 与 [4,9] 则在 4 相交。<strong>这就是为什么动手写代码之前要先确认题目用的是哪种约定。</strong></p>
+<p><strong>3.</strong> 如果把 <span class="arithmatex">\(a_{3}\)</span> 改成 <code>(5,9)</code>，答案会变吗？</p>
+<p>不变。<span class="arithmatex">\(a_{4}(2,4)\)</span> 与 <code>(5,9)</code> 仍然不重叠（4 不大于 5），答案还是 2。这一例的 [2,4) 与 [5,9) 之间有空隙，并没有端点相接。若再把 <span class="arithmatex">\(a_{3}\)</span> 改成 (4,9)，才会出现 [2,4) 与 [4,9) 相接：半开区间允许接续，闭区间 [2,4] 与 [4,9] 则在 4 相交。<strong>这就是为什么动手写代码之前要先确认题目用的是哪种约定。</strong></p>
 <p><strong>4.</strong> 什么时候按左端点排，什么时候按右端点排？各举一题。</p>
 <p>按左端点：合并区间（56）、插入区间（57）——"起点递增"让重叠判断只需要看一个端点。按右端点：活动选择（435）、最少箭数（452）——"结束最早"给后面留的空间最大，交换论证才成立。</p>
 <p><strong>5.</strong> 会议室问题为什么不能直接套活动选择的贪心？</p>
-<p>活动选择求的是"<strong>在一条时间轴上最多选几个互不重叠的活动</strong>"，会议室问题求的是"<strong>同一时刻最多有多少个活动叠在一起</strong>"。一个是"选择"，一个是"计数"。会议室需要<strong>扫描线</strong>（把区间拆成 +1/−1 事件）或<strong>最小堆</strong>（堆里存结束时间），工具完全不同。</p>
+<p>活动选择求的是"<strong>在一条时间轴上最多选几个互不重叠的活动</strong>"，会议室问题求的是"<strong>同一时刻最多有多少个活动叠在一起</strong>"。一个是"选择"，一个是"计数"。会议室需要<strong>扫描线</strong>（把区间拆成 +1/-1 事件）或<strong>最小堆</strong>（堆里存结束时间），工具完全不同。</p>
 <p><strong>6.</strong> <code>Partition Labels</code>（第 24 讲）为什么说它"本质是区间合并"？</p>
 <p>每个字符对应一个区间 <code>[首次出现, 最后出现]</code>。"同一字母只能落在一个片段里"等价于"<strong>把这些区间合并起来</strong>"，合并后每个区间的长度就是答案。先把每个字符的首次、末次出现位置构成闭区间，再调用区间合并；不是把原字符串直接传给 merge_intervals。</p>
 <p><strong>7.</strong> 实现 <code>merge_intervals</code>、<code>insert_interval</code>、<code>erase_overlap_intervals</code>，并分别说清各自的排序 key。</p>

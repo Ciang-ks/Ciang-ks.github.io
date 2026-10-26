@@ -10074,14 +10074,14 @@
 <p><strong>题目</strong>：判断一个整数是否是 2 的幂。</p>
 <p><strong>为什么放这里</strong>：<strong><code>n &amp; (n - 1)</code> 最经典的应用</strong>，一行就能解决。</p>
 <p><strong>思路提示</strong>：2 的幂的二进制里<strong>只有一个 1</strong>，所以 <code>n &amp; (n - 1)</code> 会把它变成 0。</p>
-<p><strong>方法辨析</strong>：正整数只有一位 1 当且仅当它是 2 的幂；零虽也满足 n&amp;(n−1)==0，却不是幂，因此 n&gt;0 是数学条件。不要把这个判断直接扩成任意底数的幂。</p>
+<p><strong>方法辨析</strong>：正整数只有一位 1 当且仅当它是 2 的幂；零虽也满足 n&amp;(n-1)==0，却不是幂，因此 n&gt;0 是数学条件。不要把这个判断直接扩成任意底数的幂。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
 </span></code></pre></div>
-<p><strong><code>n &gt; 0</code> 这个条件不能省</strong>：<code>n = 0</code> 时 <code>0 &amp; -1 == 0</code> 也成立，但 0 不是 2 的幂；负数也有问题。</p>
-<p><strong>易错点</strong>：<code>n &gt; 0</code> 必须放前面；Python 中 &amp; 的优先级高于 ==，此处括号有助于阅读，并非语法必需；其他语言应查各自优先级。</p>
-<p><strong>复杂度</strong>：时间 O(1)，空间 O(1)。</p>
+<p><strong><span class="arithmatex">\(n &gt; 0\)</span> 这个条件不能省</strong>：<code>n = 0</code> 时 <code>0 &amp; -1 == 0</code> 也成立，但 0 不是 2 的幂；负数也有问题。</p>
+<p><strong>易错点</strong>：<span class="arithmatex">\(n &gt; 0\)</span> 必须放前面；Python 中 &amp; 的优先级高于 ==，此处括号有助于阅读，并非语法必需；其他语言应查各自优先级。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p><strong>变体</strong>：<a href="https://leetcode.com/problems/power-of-four/">342 Power of Four</a> 需要在 2 的幂的基础上再加一个条件（1 出现在奇数位上，用 <code>n &amp; 0xAAAAAAAA == 0</code> 判断）。</p>
 </blockquote>
@@ -10092,7 +10092,7 @@
 <p><strong>为什么放这里</strong>：<strong>异或 + 数 1</strong> 的组合，把本模块的两个核心技巧串在一起。</p>
 <p><strong>思路提示</strong></p>
 <ol>
-<li><strong>异或</strong>：<code>x ^ y</code> 的结果里，为 1 的位正好是两个数不同的位；</li>
+<li><strong>异或</strong>：<span class="arithmatex">\(x ^ y\)</span> 的结果里，为 1 的位正好是两个数不同的位；</li>
 <li><strong>数 1</strong>：用 <code>x &amp; (x - 1)</code> 统计（就是 191 题）。</li>
 </ol>
 <p><strong>方法辨析</strong>：异或把对应位不同转成 1，问题随即变为一个整数的置位数。按位比较的是同一固定编码位置，若是任意字符串相似度或允许插删，不能再用这个简单汉明距离模型。</p>
@@ -10106,7 +10106,7 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>diff=x ^ y</code> 的 1 表示不同位；随后反复执行 <code>diff &amp;= diff-1</code> 计数。</p>
-<p><strong>复杂度</strong>：时间 O(1)（最多 32 轮），空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>（最多 32 轮），空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p><strong>应用</strong>：汉明距离在<strong>纠错码（Hamming Code）、相似性搜索、DNA 序列比对</strong>中都有应用。<strong>能说出这个背景很加分。</strong></p>
 </blockquote>
@@ -10123,7 +10123,7 @@
 <li>所以 <code>count % 3</code> 剩下的就是"只出现一次的那个元素"在第 <code>i</code> 位的值。</li>
 </ul>
 <p>于是对 32 个位分别统计，再把结果拼起来就是答案。</p>
-<p><strong>方法辨析</strong>：逐位把所有输入的 1 数量对三取模，三份相同值的贡献都消失。固定 32 位恢复负数时，最高位为 1 需减 2³²；直接把累积位模式当 Python 正整数，会把负答案解释错。</p>
+<p><strong>方法辨析</strong>：逐位把所有输入的 1 数量对三取模，三份相同值的贡献都消失。固定 32 位恢复负数时，最高位为 1 需减 <span class="arithmatex">\(2^{32}\)</span>；直接把累积位模式当 Python 正整数，会把负答案解释错。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">singleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10136,7 +10136,7 @@
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<strong>负数要特殊处理</strong>（最高位是符号位）；<code>result |= (1 &lt;&lt; i)</code> 用来设置第 i 位。</p>
-<p><strong>复杂度</strong>：时间 O(32n) = O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(32n)\)</span> = <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p><strong>一个更漂亮的解法</strong>（不需要逐位循环）是用<strong>两个变量模拟三进制计数器</strong>，能在一次遍历中完成。<strong>面试中提一句它的存在很加分。</strong></p>
 </blockquote>
@@ -10148,8 +10148,8 @@
 <p><strong>思路提示</strong></p>
 <p>分为三步：</p>
 <ol>
-<li><strong>把所有数异或起来</strong>，得到 <code>a ^ b</code>（两个目标元素的异或值，因为其他元素都抵消了）；</li>
-<li><strong>找出 <code>a ^ b</code> 里最低位的 1</strong>（用 <code>diff &amp; (-diff)</code> 取 lowbit）——这一位在 <code>a</code> 和 <code>b</code> 里必定不同；</li>
+<li><strong>把所有数异或起来</strong>，得到 <span class="arithmatex">\(a \oplus  b\)</span>（两个目标元素的异或值，因为其他元素都抵消了）；</li>
+<li><strong>找出 <span class="arithmatex">\(a \oplus  b\)</span> 里最低位的 1</strong>（用 <code>diff &amp; (-diff)</code> 取 lowbit）——这一位在 <code>a</code> 和 <code>b</code> 里必定不同；</li>
 <li><strong>按这一位把数组分成两组</strong>：这一位是 1 的一组、是 0 的一组。<strong><code>a</code> 和 <code>b</code> 一定被分到了不同组</strong>，而其他元素（成对出现）也会被分到同一组；</li>
 <li>对每组内部做一次异或，就分别得到了 <code>a</code> 和 <code>b</code>。</li>
 </ol>
@@ -10172,7 +10172,7 @@
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>diff &amp; (-diff)</code> 是取 lowbit（不是 <code>diff &amp; (diff-1)</code>，那是清除 lowbit）；分组的依据是"这一位是不是 1"。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p><strong>这道题把本模块的三个核心式子全用上了</strong>：异或抵消、<code>x &amp; (-x)</code> 取 lowbit、按位分组。<strong>做完它，位运算的基本功就过关了。</strong></p>
 </blockquote>
@@ -10195,9 +10195,9 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="n">shift</span> <span class="o">+=</span> <span class="mi">1</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">return</span> <span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
 </span></code></pre></div>
-<p><strong>另一个等价技巧</strong>：<code>right &amp;= right - 1</code> 会清除 <code>right</code> 最低位的 1，不断执行直到 <code>right &lt;= left</code>，此时 <code>right</code> 就是答案。</p>
-<p><strong>易错点</strong>：返回时要<strong>左移回原来的位数</strong>（<code>left &lt;&lt; shift</code>）；循环条件是 <code>left &lt; right</code>。</p>
-<p><strong>复杂度</strong>：时间 O(32) 最坏，空间 O(1)。</p>
+<p><strong>另一个等价技巧</strong>：<code>right &amp;= right - 1</code> 会清除 <code>right</code> 最低位的 1，不断执行直到 <span class="arithmatex">\(\mathrm{right} \le \mathrm{left}\)</span>，此时 <code>right</code> 就是答案。</p>
+<p><strong>易错点</strong>：返回时要<strong>左移回原来的位数</strong>（<code>left &lt;&lt; shift</code>）；循环条件是 <span class="arithmatex">\(\mathrm{left} &lt; \mathrm{right}\)</span>。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(32)\)</span> 最坏，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="6-318-maximum-product-of-word-lengths">6. 318 Maximum Product of Word Lengths<a class="headerlink" href="#6-318-maximum-product-of-word-lengths" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/maximum-product-of-word-lengths/">LeetCode 318</a> ｜ <strong>Medium</strong></p>
@@ -10206,7 +10206,7 @@
 <p><strong>思路提示</strong></p>
 <ol>
 <li>对每个单词，用 26 个 bit 表示"它包含哪些字母"（第 <code>i</code> 位表示字母 <code>'a'+i</code> 是否出现）；</li>
-<li>检查两个单词是否含相同字母，只需 <code>mask1 &amp; mask2 == 0</code>（<strong>O(1) 而不是 O(26) 或 O(单词长度)</strong>）；</li>
+<li>检查两个单词是否含相同字母，只需 <code>mask1 &amp; mask2 == 0</code>（<strong><span class="arithmatex">\(\mathcal{O}(1)\)</span> 而不是 <span class="arithmatex">\(\mathcal{O}(26)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(单词长度)\)</span></strong>）；</li>
 <li>两两比较取最大乘积。</li>
 </ol>
 <p><strong>这个"用整数当集合"的技巧非常实用</strong>——元素种类较少时，位掩码通常紧凑且便于集合运算；实际性能仍取决于位宽、操作与运行环境。</p>
@@ -10228,7 +10228,7 @@
 </span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：可写 <code>(masks[i] &amp; masks[j]) == 0</code> 清楚表达先求交再判空；Python 中 &amp; 实际比 == 优先级高；<code>1 &lt;&lt; (ord(c) - ord('a'))</code> 的偏移。</p>
-<p><strong>复杂度</strong>：时间 O(n² + 总字符数)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n^{2} + 总字符数)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="7-29-divide-two-integers">7. 29 Divide Two Integers<a class="headerlink" href="#7-29-divide-two-integers" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/divide-two-integers/">LeetCode 29</a> ｜ <strong>Medium</strong></p>
@@ -10242,8 +10242,8 @@
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>       dividend -= divisor &lt;&lt; k
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>3. 处理溢出：如果结果超出 32 位有符号范围，返回 2^31 - 1
 </span></code></pre></div>
-<p><strong>为什么这样是对的？</strong> 因为除法本质上就是"把被除数分解成若干个 <code>divisor × 2^k</code> 的和"，而"乘以 2 的幂"就是左移。</p>
-<p><strong>方法辨析</strong>：每轮减去不超过余数的最大 divisor×2ᵏ，并给商加对应 2ᵏ，相当于逐步确定二进制商位。商向零截断，最后按原符号恢复；−2³¹ 除以 −1 的数学结果超界，需按题目截为最大正数。</p>
+<p><strong>为什么这样是对的？</strong> 因为除法本质上就是"把被除数分解成若干个 <span class="arithmatex">\(\mathrm{divisor}\,2^k\)</span> 的和"，而"乘以 2 的幂"就是左移。</p>
+<p><strong>方法辨析</strong>：每轮减去不超过余数的最大 <span class="arithmatex">\(\mathrm{divisor}\times2^k\)</span>，并给商加对应 <span class="arithmatex">\(2^k\)</span>，相当于逐步确定二进制商位。商向零截断，最后按原符号恢复；-<span class="arithmatex">\(2^{31}\)</span> 除以 -1 的数学结果超界，需按题目截为最大正数。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dividend</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="n">INT_MAX</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span> <span class="o">-</span> <span class="mi">1</span>
@@ -10263,10 +10263,10 @@
 </span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
 </span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>        <span class="k">return</span> <span class="o">-</span><span class="n">result</span> <span class="k">if</span> <span class="n">negative</span> <span class="k">else</span> <span class="n">result</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：<code>dividend = -2³¹</code> 且 <code>divisor = -1</code> 时结果会溢出（这是唯一的特殊情况，必须单独处理）；符号判断用"异或"式的 <code>!=</code>；<code>1 &lt;&lt; shift</code> 是 2 的 shift 次幂。</p>
-<p><strong>复杂度</strong>：时间 O((log n)²)（外层循环最多 log n 次，内层找 shift 也是 log n），空间 O(1)。</p>
+<p><strong>易错点</strong>：<span class="arithmatex">\(\mathrm{dividend}=-2^{31}\)</span> 且 <code>divisor = -1</code> 时结果会溢出（这是唯一的特殊情况，必须单独处理）；符号判断用"异或"式的 <span class="arithmatex">\(\ne\)</span>；<code>1 &lt;&lt; shift</code> 是 2 的 shift 次幂。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}((\log n)^{2})\)</span>（外层循环最多 log n 次，内层找 shift 也是 log n），空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
-<p><strong>优化</strong>：内层的"找最大 shift"可以用二分搜索降到 O(log n)，总复杂度变成 O(log² n) 的常数更小版本；也可以用"从高位往低位试"的一次遍历做到 O(log n)。</p>
+<p><strong>优化</strong>：内层的"找最大 shift"可以用二分搜索降到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，总复杂度变成 <span class="arithmatex">\(\mathcal{O}(\log ^{2} n)\)</span> 的常数更小版本；也可以用"从高位往低位试"的一次遍历做到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 </blockquote>
 
 

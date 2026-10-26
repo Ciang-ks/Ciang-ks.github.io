@@ -10090,11 +10090,11 @@
 <ol>
 <li>右指针 <code>r</code> 不断扩张，把 <code>s[r]</code> 加入窗口；</li>
 <li>如果加入后出现重复字符，就移动左指针 <code>l</code>，直到窗口重新变得<strong>无重复</strong>；</li>
-<li>此时 <code>[l, r]</code> 是以 <code>r</code> 结尾的最长合法窗口，用 <code>r - l + 1</code> 更新答案。</li>
+<li>此时 <span class="arithmatex">\([l, r]\)</span> 是以 <code>r</code> 结尾的最长合法窗口，用 <span class="arithmatex">\(r - l + 1\)</span> 更新答案。</li>
 </ol>
-<p><strong>为什么可以这样收缩？</strong> 因为"无重复"这个性质对收缩是单调的：如果 <code>[l, r]</code> 有重复，那么任何包含它的更大窗口也一定有重复。所以右指针不需要回退。</p>
+<p><strong>为什么可以这样收缩？</strong> 因为"无重复"这个性质对收缩是单调的：如果 <span class="arithmatex">\([l, r]\)</span> 有重复，那么任何包含它的更大窗口也一定有重复。所以右指针不需要回退。</p>
 <p>有两种写法：</p>
-<p><strong>写法 A（set）</strong>：窗口里只有一个集合，重复时用 <code>while</code> 逐个弹出左端字符。每个字符最多被加入和弹出各一次，O(n)。</p>
+<p><strong>写法 A（set）</strong>：窗口里只有一个集合，重复时用 <code>while</code> 逐个弹出左端字符。每个字符最多被加入和弹出各一次，<span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>写法 B（dict 记最近下标）</strong>：记录每个字符<strong>最近一次出现的下标</strong>。当遇到重复时，直接把左指针跳到 <code>last[c] + 1</code>，跳过了中间所有字符，常数更小。</p>
 <p><strong>写法 B 的关键细节</strong>：要写 <code>l = max(l, last[c] + 1)</code>，而不是 <code>l = last[c] + 1</code>。因为 <code>last[c]</code> 可能是<strong>当前窗口左边界之前</strong>的位置，此时不应该让 <code>l</code> 往回跳。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -10153,29 +10153,29 @@
 <tbody>
 <tr>
 <td>集合 + 收缩</td>
-<td>O(n)</td>
-<td>O(min(n, 字符集大小))</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\min (n, 字符集大小))\)</span></td>
 </tr>
 <tr>
 <td>哈希表记下标</td>
-<td>O(n)</td>
-<td>O(min(n, 字符集大小))</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\min (n, 字符集大小))\)</span></td>
 </tr>
 <tr>
 <td>暴力</td>
-<td>O(n²)</td>
-<td>O(min(n, 字符集大小))</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\min (n, 字符集大小))\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>l = max(l, last[c] + 1)</code> 中的 <code>max</code> 不能省</strong>：考虑 <code>"abba"</code>，处理第二个 <code>a</code> 时 <code>last['a'] = 0</code>，若直接写 <code>l = 0 + 1 = 1</code> 会把左指针从 2 退回到 1，答案就错了。</li>
-<li>窗口长度是 <code>r - l + 1</code>，不是 <code>r - l</code>。</li>
+<li><strong><code>l = max(l, last[c] + 1)</code> 中的 <code>max</code> 不能省</strong>：考虑 <code>"abba"</code>，处理第二个 <code>a</code> 时 <code>last['a'] = 0</code>，若直接写 <span class="arithmatex">\(l = 0 + 1 = 1\)</span> 会把左指针从 2 退回到 1，答案就错了。</li>
+<li>窗口长度是 <span class="arithmatex">\(r - l + 1\)</span>，不是 <code>r - l</code>。</li>
 <li>集合解法里移除的是 <code>s[l]</code> 而不是 <code>c</code>。</li>
 <li>空字符串返回 0；长度为 1 返回 1。</li>
-<li><strong>追问：最多允许 k 个不同字符？</strong> → <a href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/">340 Longest Substring with At Most K Distinct Characters</a>（会员题），把"无重复"换成"种类数 ≤ k"。</li>
-<li><strong>追问：最多允许有重复字符出现两次？</strong> → 改成计数表，条件是"所有计数 ≤ 2"。</li>
+<li><strong>追问：最多允许 k 个不同字符？</strong> → <a href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/">340 Longest Substring with At Most K Distinct Characters</a>（会员题），把"无重复"换成"种类数 不大于 k"。</li>
+<li><strong>追问：最多允许有重复字符出现两次？</strong> → 改成计数表，条件是"所有计数 不大于 2"。</li>
 <li><strong>追问：如果字符串是 Unicode？</strong> → Python 的 <code>str</code> 按字符处理，天然支持。</li>
 <li><strong>追问：字符集很大时哪种写法更好？</strong> → 写法二的字典比集合更省常数（不用逐个弹出）。</li>
 </ul>

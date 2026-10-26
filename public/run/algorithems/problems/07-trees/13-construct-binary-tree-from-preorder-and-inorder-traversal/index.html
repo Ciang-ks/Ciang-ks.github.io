@@ -4656,10 +4656,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优化：用哈希表把"在中序里找根"变成 O(1)
+        优化：用哈希表把"在中序里找根"变成 \(\mathcal{O}(1)\)
       
     </span>
   </a>
@@ -4706,10 +4706,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：哈希表 + 递归（推荐，O(n)）
+        解法一：哈希表 + 递归（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -4728,10 +4728,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on_1" class="md-nav__link">
+  <a href="#mathcalon_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：迭代（用一个栈模拟，O(n)）
+        解法三：迭代（用一个栈模拟，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优化：用哈希表把"在中序里找根"变成 O(1)
+        优化：用哈希表把"在中序里找根"变成 \(\mathcal{O}(1)\)
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：哈希表 + 递归（推荐，O(n)）
+        解法一：哈希表 + 递归（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on_1" class="md-nav__link">
+  <a href="#mathcalon_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：迭代（用一个栈模拟，O(n)）
+        解法三：迭代（用一个栈模拟，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10168,15 +10168,15 @@
 <li>左段的长度 = 左子树的节点数；用这个长度在前序里切出左子树的前序段，剩下的就是右子树的前序段；</li>
 <li>递归构造左右子树。</li>
 </ol>
-<h3 id="o1">优化：用哈希表把"在中序里找根"变成 O(1)<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
-<p>朴素做法每次都用 <code>index()</code> 线性查找根的位置，最坏是 O(n²)（比如链状树）。<strong>事先建一个 <code>值 → 中序下标</code> 的字典</strong>，就能把每次查找降到 O(1)，总复杂度 O(n)。</p>
+<h3 id="mathcalo1">优化：用哈希表把"在中序里找根"变成 <span class="arithmatex">\(\mathcal{O}(1)\)</span><a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
+<p>朴素做法每次都用 <code>index()</code> 线性查找根的位置，最坏是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>（比如链状树）。<strong>事先建一个 <code>值 → 中序下标</code> 的字典</strong>，就能把每次查找降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，总复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h3 id="_4">用下标而不是切片<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>Python 里每次切片都会复制。平衡树上的累计复制量可为 O(n log n)，链状树则可达 O(n²)；同时保留多层切片的峰值空间也取决于树形。<strong>更规范的做法是只传下标区间</strong>，配合一个"当前前序读到哪儿"的指针（或全局计数器）。</p>
+<p>Python 里每次切片都会复制。平衡树上的累计复制量可为 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，链状树则可达 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>；同时保留多层切片的峰值空间也取决于树形。<strong>更规范的做法是只传下标区间</strong>，配合一个"当前前序读到哪儿"的指针（或全局计数器）。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>前序负责决定当前根是谁，中序负责决定这个根的左右成员集合，二者缺一不可。左右递归的范围可以只用中序区间表示；全局 pre_idx 每次建节点后前进一次，并且必须先建完整左子树再建右子树，才与前序消费顺序一致。</p>
 <p>例如前序 [3,9,20,15,7]、中序 [9,3,15,20,7]：根 3 把中序左边分成单个 9，右边分成三项；左递归只消费前序中的 9，再从 20 开始建右边。值互异保证字典能唯一定位根；若有重复值，相同遍历可能对应多种结构，本页的值→下标映射不再足够。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="on">解法一：哈希表 + 递归（推荐，O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法一：哈希表 + 递归（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">buildTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preorder</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">inorder</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inorder</span><span class="p">)}</span>   <span class="c1"># 值 -&gt; 中序下标</span>
@@ -10208,8 +10208,8 @@
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildTree</span><span class="p">(</span><span class="n">preorder</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">inorder</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="n">root</span>
 </span></code></pre></div>
-<p>这段代码短，但<strong>每次切片都复制数组，并且 <code>index</code> 是 O(n)</strong>。面试中写出来之后一定要说明"这段是 O(n²)，我可以用哈希表和下标把复杂度降到 O(n)"。</p>
-<h3 id="on_1">解法三：迭代（用一个栈模拟，O(n)）<a class="headerlink" href="#on_1" title="Permanent link">&para;</a></h3>
+<p>这段代码短，但<strong>每次切片都复制数组，并且 <code>index</code> 是 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>。面试中写出来之后一定要说明"这段是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，我可以用哈希表和下标把复杂度降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>"。</p>
+<h3 id="mathcalon_1">解法三：迭代（用一个栈模拟，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon_1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">buildTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preorder</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">inorder</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">preorder</span><span class="p">:</span>
@@ -10233,7 +10233,7 @@
 </span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
 </span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="k">return</span> <span class="n">root</span>
 </span></code></pre></div>
-<p>迭代版不需要哈希表，空间 O(h)，但逻辑难讲，<strong>面试中建议用解法一</strong>。</p>
+<p>迭代版不需要哈希表，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，但逻辑难讲，<strong>面试中建议用解法一</strong>。</p>
 <h2 id="_8">复杂度<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10246,18 +10246,18 @@
 <tbody>
 <tr>
 <td>哈希表 + 下标递归</td>
-<td>O(n)</td>
-<td>O(n)（哈希表）+ O(h)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（哈希表）+ <span class="arithmatex">\(\mathcal{O}(h)\)</span>（递归栈）</td>
 </tr>
 <tr>
 <td>切片递归</td>
-<td>O(n²)</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>迭代</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10265,7 +10265,7 @@
 <ul>
 <li><strong>递归顺序必须是"先左后右"</strong>，因为 <code>pre_idx</code> 只能单向前进。</li>
 <li>左子树的区间是 <code>inorder[lo..mid-1]</code>，右子树是 <code>inorder[mid+1..hi]</code>，<strong>要跳过根本身</strong>。</li>
-<li>递归的终止条件是 <code>lo &gt; hi</code>（空区间），不是 <code>lo &gt;= hi</code>。</li>
+<li>递归的终止条件是 <span class="arithmatex">\(lo &gt; hi\)</span>（空区间），不是 <span class="arithmatex">\(lo \ge hi\)</span>。</li>
 <li>题目保证元素互不相同——这是能用哈希表定位根的前提。<strong>如果允许重复值，就必须用"中序区间 + 计数"来区分，难度大幅上升</strong>（<a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106 的重复值版本</a> 没有重复，但 <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/">889</a> 需要另外处理）。</li>
 <li><strong>追问：如果给的是后序 + 中序？</strong> → <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106</a>，根是<strong>后序的最后一个元素</strong>，构造顺序改成"先右后左"。</li>
 <li><strong>追问：如果给的是前序 + 后序？</strong> → <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/">889</a>，<strong>结果可能不唯一</strong>（无法确定只有一个孩子时它在左还是在右），需要题目额外约定。</li>

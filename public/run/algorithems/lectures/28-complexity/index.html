@@ -10099,8 +10099,9 @@
 <p><strong>阅读起点</strong>：第 1 讲：规模；第 22 讲：数值与位数；第 19 讲：欧拉。</p>
 <p><strong>首读范围</strong>：先分清求解/验证与归约方向；不可判定、广义游戏和强弱复杂性选读。</p>
 <p>到这里，你已经见过一整条复杂度阶梯：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³) &lt; 2ⁿ &lt; n!
-</span></code></pre></div>
+<div class="arithmatex">\[
+1\prec\log n\prec n\prec n\log n\prec n^2\prec n^3\prec2^n\prec n!\qquad(f\prec g\text{ 表示 }f=o(g))
+\]</div>
 <p>对应例子依次为期望哈希查找、二分、线性扫描、比较排序、平方 DP、立方区间 DP、枚举子集、枚举排列。这里比较的是增长函数，不是把 O 记号当作严格有序的数。</p>
 <p>但有一类问题让人不痛快：<strong>它们验证起来很容易，却至今没有人找到多项式时间的解法。</strong></p>
 <ul>
@@ -10108,7 +10109,7 @@
 <li>给定 100 个整数，能否挑出一些使和恰好等于目标值（<strong>子集和</strong>）？</li>
 <li>给定若干逻辑子句，是否存在一组赋值让它们全部为真（<strong>SAT</strong>）？</li>
 </ul>
-<p>先补上第三个问题的记号：SAT 的变量只能取真或假，¬x 表示 x 的否定，<code>x∨y</code> 表示至少一个为真，一组子句要求同时成立。例如 <code>(x∨y)</code> 与 <code>(¬x∨y)</code> 可以令 y 为真来同时满足；<code>x</code> 与 <code>¬x</code> 则无法同时为真。SAT 问的是有没有可行赋值，给定一组赋值逐条检查只是验证。</p>
+<p>先补上第三个问题的记号：SAT 的变量只能取真或假，<span class="arithmatex">\(\neg x\)</span> 表示 x 的否定，<span class="arithmatex">\(x\lor y\)</span> 表示至少一个为真，一组子句要求同时成立。例如 <span class="arithmatex">\((x\lor y)\)</span> 与 <span class="arithmatex">\((\neg x\lor y)\)</span> 可以令 y 为真来同时满足；<code>x</code> 与 <span class="arithmatex">\(\neg x\)</span> 则无法同时为真。SAT 问的是有没有可行赋值，给定一组赋值逐条检查只是验证。</p>
 <p>换一个<strong>决策问题</strong>的角度，这些问题的共同点就清楚了。</p>
 <h2 id="_1">决策问题：把输出压成是/否<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>先说明<strong>简单路径</strong>：沿路不重复经过同一个顶点。例如 A→B→C 是简单路径，A→B→A→C 不是。限制不重复很关键，否则有正权环时，可以反复绕圈让路径越来越长，便没有有限的“最长”值。</p>
@@ -10126,7 +10127,7 @@
 <tbody>
 <tr>
 <td>s-t 最短路</td>
-<td>是否存在权重 ≤ d 的 s-t 路径？</td>
+<td>是否存在权重 不大于 d 的 s-t 路径？</td>
 </tr>
 <tr>
 <td>负环</td>
@@ -10134,7 +10135,7 @@
 </tr>
 <tr>
 <td><strong>最长简单路径</strong></td>
-<td>是否存在权重 ≥ d 的简单路径？</td>
+<td>是否存在权重 不小于 d 的简单路径？</td>
 </tr>
 <tr>
 <td><strong>子集和</strong></td>
@@ -10155,8 +10156,8 @@
 </tbody>
 </table>
 <p>先区分两件事：“算法太慢”与“没有任何总能停止并答对的程序”不是同一个结论。停机问题属于后者。完整不可判定性证明是选读；比较程序与函数的数量只能说明<strong>存在</strong>不可判定问题，不能单独证明停机问题不可判定。</p>
-<p>先区分两个尺度。输入长度 N 指写下整个输入需要多少个比特；多项式时间是 O(N^c)，其中 c 为固定常数，N、N²、N³ 都属于这一类。输入中的一个大数值可能远大于 N，所以第 22 讲的 O(nW) 不能仅凭形式就认定是多项式。</p>
-<p>下面的类别是按“问题有没有某种时间界的算法”划分，而不是给某一份代码贴标签。可判定问题记作 R，其中有多项式时间 P 和指数时间 EXP。<code>⊆</code> 表示包含且允许相等，<code>⊊</code> 表示严格包含，即右侧至少还有一些左侧没有的问题。已知 <code>P⊊EXP⊊R</code>，但给某个具体问题分类还要说明模型。普通固定 8×8 象棋和“棋盘大小也是输入”的广义象棋不同，不能直接把普通象棋贴成 EXP 完全。本讲后续只讨论有限输入的决策问题与多项式验证。</p>
+<p>先区分两个尺度。输入长度 N 指写下整个输入需要多少个比特；多项式时间是 <span class="arithmatex">\(\mathcal{O}(N^c)\)</span>，其中 c 为固定常数，N、<span class="arithmatex">\(N^{2}\)</span>、<span class="arithmatex">\(N^{3}\)</span> 都属于这一类。输入中的一个大数值可能远大于 N，所以第 22 讲的 <span class="arithmatex">\(\mathcal{O}(nW)\)</span> 不能仅凭形式就认定是多项式。</p>
+<p>下面的类别是按“问题有没有某种时间界的算法”划分，而不是给某一份代码贴标签。可判定问题记作 R，其中有多项式时间 P 和指数时间 EXP。<span class="arithmatex">\(\subseteq\)</span> 表示包含且允许相等，<span class="arithmatex">\(\subsetneq\)</span> 表示严格包含，即右侧至少还有一些左侧没有的问题。已知 <span class="arithmatex">\(P\subsetneq\mathrm{EXP}\subsetneq R\)</span>，但给某个具体问题分类还要说明模型。普通固定 <span class="arithmatex">\(8\times8\)</span> 象棋和“棋盘大小也是输入”的广义象棋不同，不能直接把普通象棋贴成 EXP 完全。本讲后续只讨论有限输入的决策问题与多项式验证。</p>
 <h2 id="p-np">P 与 NP：求解容易，还是验证容易<a class="headerlink" href="#p-np" title="Permanent link">&para;</a></h2>
 <p><img alt="P、NP、EXP 与 NP 完全的关系" src="../images/28-p-np.svg" /></p>
 <blockquote>
@@ -10176,7 +10177,7 @@
 <tr>
 <td>s-t 最短路</td>
 <td>一条 s-t 路径</td>
-<td>把路径上的权加起来，检查是否 ≤ d</td>
+<td>把路径上的权加起来，检查是否 不大于 d</td>
 </tr>
 <tr>
 <td>负环</td>
@@ -10186,7 +10187,7 @@
 <tr>
 <td>最长简单路径</td>
 <td>一条路径</td>
-<td>检查它是简单路径且权重 ≥ d</td>
+<td>检查它是简单路径且权重 不小于 d</td>
 </tr>
 <tr>
 <td>子集和</td>
@@ -10203,42 +10204,42 @@
 <p><strong>证书是输入长度的多项式长度以内的一份 YES 证明，验证器运行时间也受输入长度的多项式界定：YES 输入要存在一份能让验证器通过的证书，NO 输入则无论给什么证书都通不过。</strong></p>
 <p>例如子集和输入nums=[3,8,5]、目标11，证书可以是下标[0,1]。验证要检查下标合法且不重复，再加3+8得到11；给[0,0,2]即使和碰巧相等也应拒绝，因为同一位置不能重复选。验证容易不代表知道怎样找到证书；对NO输入，也不能仅凭某一份失败证书就判定所有候选失败。</p>
 <p>把子集和的验证器写出来，就能看见它比“寻找子集”少做了什么：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_subset_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">return</span> <span class="n">total</span> <span class="o">==</span> <span class="n">target</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_subset_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">total</span> <span class="o">==</span> <span class="n">target</span>
 </span></code></pre></div>
 <p>验证器只检查交来的这一份下标，不会搜索别的子集。证书最多含 n 个下标；整数相加的位成本也受输入长度的多项式界定，所以这满足 NP 的验证要求。<code>verify_subset_sum([3,8,5],11,[0,1])</code> 为 True，重复使用下标的 [0,0,2] 为 False。</p>
 <p>两个包含关系可以这样理解：</p>
 <ul>
-<li><strong><code>P ⊆ NP</code></strong>：验证器干脆忽略证书，直接把问题解出来；</li>
-<li><strong><code>NP ⊆ EXP</code></strong>：把所有可能的证书都试一遍——证书长度是多项式级的，枚举量最多 <code>2^(n^O(1))</code>，逐份跑验证器。</li>
+<li><strong><span class="arithmatex">\(P\subseteq\mathrm{NP}\)</span></strong>：验证器干脆忽略证书，直接把问题解出来；</li>
+<li><strong><span class="arithmatex">\(\mathrm{NP}\subseteq\mathrm{EXP}\)</span></strong>：把所有可能的证书都试一遍——证书长度是多项式级的，枚举量最多 <span class="arithmatex">\(2^{n^{\mathcal{O}(1)}}\)</span>，逐份跑验证器。</li>
 </ul>
-<p>于是就有了那个著名的悬赏问题：<strong><code>P = NP</code> 吗？</strong> 绝大多数研究者相信 <code>P ⊊ NP</code>，也就是说"<strong>生成一个解比检查一个解更难</strong>"，但没有人能证明。这就是 P 与 NP 问题。</p>
+<p>于是就有了那个著名的悬赏问题：<strong><span class="arithmatex">\(P = NP\)</span> 吗？</strong> 绝大多数研究者相信 <span class="arithmatex">\(P\subsetneq\mathrm{NP}\)</span>，也就是说"<strong>生成一个解比检查一个解更难</strong>"，但没有人能证明。这就是 P 与 NP 问题。</p>
 <h2 id="_2">归约：把难度传过去<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>我们为什么关心一个问题是不是"NP 里最难的"？</strong> 因为一旦确定它是，那么只要 <code>P ≠ NP</code>，它就<strong>不可能有多项式算法</strong>——这句话本身就是最强的负面结论。</p>
+<p><strong>我们为什么关心一个问题是不是"NP 里最难的"？</strong> 因为一旦确定它是，那么只要 <span class="arithmatex">\(P \ne NP\)</span>，它就<strong>不可能有多项式算法</strong>——这句话本身就是最强的负面结论。</p>
 <p>而"哪两个问题一样难"是靠<strong>归约</strong>来判断的：</p>
 <blockquote>
-<p>想解决问题 A，可以先把 A 转成问题 B，再用 B 的算法求解。这就是从 A 到 B 的<strong>归约</strong>（记作 <code>A → B</code>）。<strong>因为 B 能用来解 A，所以 B 至少和 A 一样难</strong>（<code>A ≤ B</code>）。</p>
+<p>想解决问题 A，可以先把 A 转成问题 B，再用 B 的算法求解。这就是从 A 到 B 的<strong>归约</strong>（记作 <code>A → B</code>）。<strong>因为 B 能用来解 A，所以 B 至少和 A 一样难</strong>（<span class="arithmatex">\(A \le B\)</span>）。</p>
 </blockquote>
 <p>这个思路其实你早就在用了：<strong>把"打家劫舍"归约成"路径图上的独立集"，把"± 分配"归约成"子集和"</strong>（第 22 讲），都是"换个问题来解"。</p>
-<p>还要留意方向：A≤B 表示“若 B 快，则 A 也快”。若要说明新问题 B 至少与已知难题 A 一样难，应把 A 的输入转换成 B；把 B 转成 A，只说明我们会用 A 的算法解 B，不能证明 B 难。正式使用的归约要求转换时间为多项式，并保持 YES/NO 答案。</p>
+<p>还要留意方向：A不大于B 表示“若 B 快，则 A 也快”。若要说明新问题 B 至少与已知难题 A 一样难，应把 A 的输入转换成 B；把 B 转成 A，只说明我们会用 A 的算法解 B，不能证明 B 难。正式使用的归约要求转换时间为多项式，并保持 YES/NO 答案。</p>
 <h2 id="np">NP 完全，以及面对它该怎么办<a class="headerlink" href="#np" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>NP 完全</strong>：问题 X 属于 NP，且<strong>所有 NP 问题都能多项式归约到 X</strong>。</p>
 </blockquote>
-<p>它的含义很重：这些问题的任意一个若能多项式求解，<strong>所有 NP 问题就都能</strong>——也就是 <code>P = NP</code>。</p>
+<p>它的含义很重：这些问题的任意一个若能多项式求解，<strong>所有 NP 问题就都能</strong>——也就是 <span class="arithmatex">\(P = NP\)</span>。</p>
 <p>下面会列出一条归约关系链。其中，3-SAT 是每个子句至多含三个“文字”的 SAT，文字指变量或它的否定；独立集要求所选顶点两两不相邻，团要求两两相邻；顶点覆盖要求每条边至少有一个端点被选中；旅行商的决策版问是否有一条访问所有城市一次并回到起点、总费用不超过给定预算的路线。链中的箭头表示已有多项式归约，不是凭题目相似性得出的结论。</p>
 <p>第一个被证明是 NP 完全的是 <strong>SAT</strong>（1971 年，Cook–Levin 定理），它成了整条归约链的源头：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>SAT → 3-SAT → 独立集 / 顶点覆盖 / 团
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>            → 哈密顿路径 / 旅行商
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>            → 子集和 / 背包 / 划分
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>            → …
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>SAT → 3-SAT → 独立集 / 顶点覆盖 / 团
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>            → 哈密顿路径 / 旅行商
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>            → 子集和 / 背包 / 划分
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>            → …
 </span></code></pre></div>
 <p><strong>那工程上遇到这类问题怎么办？</strong> 学术上的答案是"别指望多项式精确算法"，实践中通常走这四条退路：</p>
 <table>
@@ -10268,14 +10269,14 @@
 <tr>
 <td><strong>伪多项式 DP</strong></td>
 <td>数值范围有限时用 DP</td>
-<td>背包的 <code>O(nW)</code>（第 22 讲）</td>
+<td>背包的 <span class="arithmatex">\(\mathcal{O}(nW)\)</span>（第 22 讲）</td>
 </tr>
 </tbody>
 </table>
-<p><strong>"伪多项式"这一条解释了一个常见的困惑</strong>：为什么"子集和是 NP 完全的"和"我们有 O(nT) 的 DP"不矛盾？因为 <code>O(nT)</code> 依赖的是 <strong>T 的数值</strong>，而 T 在输入里只占 <code>log T</code> 个比特——<strong>T 很大时，这个算法相对于输入长度就是指数级的</strong>。</p>
-<p>所以在面试里被问到"子集和是不是 NP 完全"，一个准确的回答是：<strong>"它是 NP 完全的，但有 O(nW) 的伪多项式 DP；当数值被输入长度的多项式界定时，这个 DP 才成为多项式时间。"</strong></p>
+<p><strong>"伪多项式"这一条解释了一个常见的困惑</strong>：为什么"子集和是 NP 完全的"和"我们有 <span class="arithmatex">\(\mathcal{O}(nT)\)</span> 的 DP"不矛盾？因为 <span class="arithmatex">\(\mathcal{O}(nT)\)</span> 依赖的是 <strong>T 的数值</strong>，而 T 在输入里只占 <span class="arithmatex">\(\log T\)</span> 个比特——<strong>T 很大时，这个算法相对于输入长度就是指数级的</strong>。</p>
+<p>所以在面试里被问到"子集和是不是 NP 完全"，一个准确的回答是：<strong>"它是 NP 完全的，但有 <span class="arithmatex">\(\mathcal{O}(nW)\)</span> 的伪多项式 DP；当数值被输入长度的多项式界定时，这个 DP 才成为多项式时间。"</strong></p>
 <h2 id="_3">几组"只差一点点"的对照<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>以下按对应的决策形式讨论 P 与 NP 完全，例如最短路问“是否存在代价≤d 的路径”，最长简单路径问“是否存在长度≥d 的简单路径”。</p>
+<p>以下按对应的决策形式讨论 P 与 NP 完全，例如最短路问“是否存在代价不大于d 的路径”，最长简单路径问“是否存在长度不小于d 的简单路径”。</p>
 <p>这个系列里反复出现过“看起来很像、难度却天差地别”的成对问题。<strong>记住这张表，能帮你快速判断一个新问题该往哪个方向找算法</strong>：</p>
 <table>
 <thead>
@@ -10318,7 +10319,7 @@
 </tr>
 </tbody>
 </table>
-<p>其中第一组最值得盯着看。<strong>欧拉路径的判据是"每个顶点的度数"</strong>（第 19 讲）——这是<strong>局部</strong>信息，检查一遍 <code>O(V+E)</code> 就完了；<strong>哈密顿路径没有任何已知的简单判据</strong>，因为"每个顶点恰好一次"是<strong>全局</strong>的组合条件。这是结构差异的例子，不能推广为“局部约束都容易”；3-SAT 每个子句只涉及 3 个文字，仍可 NP 完全。</p>
+<p>其中第一组最值得盯着看。<strong>欧拉路径的判据是"每个顶点的度数"</strong>（第 19 讲）——这是<strong>局部</strong>信息，检查一遍 <span class="arithmatex">\(\mathcal{O}(V+E)\)</span> 就完了；<strong>哈密顿路径没有任何已知的简单判据</strong>，因为"每个顶点恰好一次"是<strong>全局</strong>的组合条件。这是结构差异的例子，不能推广为“局部约束都容易”；3-SAT 每个子句只涉及 3 个文字，仍可 NP 完全。</p>
 <h2 id="_4">归约长什么样：两个例子<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>要证明一个归约成立，需要两件事：<strong>(a) 转化本身是多项式时间的；(b) 两个问题的答案一致（"A 有解 ⟺ B 有解"）。</strong></p>
 <p><img alt="独立集归约为补图的团" src="../images/28-reduction.svg" /></p>
@@ -10327,15 +10328,15 @@
 <p><strong>独立集</strong>：选最多的顶点，使任意两点都不相邻。
 <strong>团</strong>：选最多的顶点，使任意两点都相邻。</p>
 </blockquote>
-<p>做法是把图 <code>G</code> 的<strong>补图</strong>（有边变没边、没边变有边）交给"团"的算法。证明只有两句话：<strong>构造补图要看所有 <code>O(V²)</code> 对顶点，是多项式的</strong>；而 <code>S</code> 是 <code>G</code> 的独立集 ⟺ <code>S</code> 中任意两点在 <code>G</code> 中不相邻 ⟺ <code>S</code> 中任意两点在补图中相邻 ⟺ <code>S</code> 是补图的团。∎ 同一补图操作也能反向把团转为独立集，因此二者可互相多项式归约。</p>
+<p>做法是把图 <code>G</code> 的<strong>补图</strong>（有边变没边、没边变有边）交给"团"的算法。证明只有两句话：<strong>构造补图要看所有 <span class="arithmatex">\(\mathcal{O}(V^{2})\)</span> 对顶点，是多项式的</strong>；而 <code>S</code> 是 <code>G</code> 的独立集 ⟺ <code>S</code> 中任意两点在 <code>G</code> 中不相邻 ⟺ <code>S</code> 中任意两点在补图中相邻 ⟺ <code>S</code> 是补图的团。 同一补图操作也能反向把团转为独立集，因此二者可互相多项式归约。</p>
 <p><strong>例子二：子集和 → 划分。</strong> 子集和输入一列数和目标 S，问能否选出和为 S 的位置子集；划分则输入一列数，问能否把所有位置分成和相等的两组。下面要把前一种输入构造成后一种，使答案一致。</p>
-<p>约定输入都是非负整数，令总和 U，目标 S。若 S&lt;0 或 S&gt;U，直接映射到固定无解实例 <code>[1]</code>；其余情况添加一个数 <code>x=|U−2S|</code>。</p>
+<p>约定输入都是非负整数，令总和 U，目标 S。若 S&lt;0 或 S&gt;U，直接映射到固定无解实例 <code>[1]</code>；其余情况添加一个数 <span class="arithmatex">\(x=\vert U-2S\vert\)</span>。</p>
 <ul>
-<li>若 S≤U/2，加入后总和为 <code>2(U−S)</code>，一半为 U−S。划分中包含 x 的一侧，去掉 x 后，原数之和为 <code>(U−S)−(U−2S)=S</code>。</li>
+<li>若 S不大于U/2，加入后总和为 <span class="arithmatex">\(2(U-S)\)</span>，一半为 U-S。划分中包含 x 的一侧，去掉 x 后，原数之和为 <span class="arithmatex">\((U-S)-(U-2S)=S\)</span>。</li>
 <li>若 S&gt;U/2，加入后总和为 2S，不含新增 x 的一侧必由原数凑出 S。</li>
 </ul>
-<p>例如 nums=[3,8,5]、S=11，总和 U=16，新增 x=|16−22|=6。原来选择 3+8=11，对应新数组分为 <code>[3,8]</code> 与 <code>[5,6]</code>，两组都为 11；反过来，任意平分中不含新添 6 的那一组，就是原数组和为 11 的子集。</p>
-<p>反向也成立：若原数有子集和 S，把其他原数与新增 x 放到适当一侧，就得到平分。S=U/2 时 x=0，可省略。构造只添加一个位数为 O(log(U+1)) 的数，求和与构造的位成本对输入长度是多项式。</p>
+<p>例如 nums=[3,8,5]、S=11，总和 U=16，新增 x=|16-22|=6。原来选择 3+8=11，对应新数组分为 <code>[3,8]</code> 与 <code>[5,6]</code>，两组都为 11；反过来，任意平分中不含新添 6 的那一组，就是原数组和为 11 的子集。</p>
+<p>反向也成立：若原数有子集和 S，把其他原数与新增 x 放到适当一侧，就得到平分。S=U/2 时 x=0，可省略。构造只添加一个位数为 <span class="arithmatex">\(\mathcal{O}(\log (U+1))\)</span> 的数，求和与构造的位成本对输入长度是多项式。</p>
 <h2 id="_5">折半枚举：面对指数级问题的一个实用招数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>同一个问题，输入结构一变，难度可能完全不同。以<strong>子集和</strong>为例：</p>
 <table>
@@ -10348,19 +10349,19 @@
 </thead>
 <tbody>
 <tr>
-<td>数值都很小（总和 ≤ 10⁵）</td>
+<td>数值都很小（总和 不大于 <span class="arithmatex">\(10^{5}\)</span>）</td>
 <td>背包 DP</td>
-<td><code>O(nW)</code>，实际很快</td>
+<td><span class="arithmatex">\(\mathcal{O}(nW)\)</span>，实际很快</td>
 </tr>
 <tr>
-<td>数值很大但 n ≤ 20</td>
+<td>数值很大但 n 不大于 20</td>
 <td>枚举子集</td>
-<td><code>2ⁿ</code></td>
+<td><span class="arithmatex">\(2^{n}\)</span></td>
 </tr>
 <tr>
-<td>数值很大但 n ≤ 40</td>
+<td>数值很大但 n 不大于 40</td>
 <td><strong>折半枚举</strong></td>
-<td><code>2^(n/2)</code></td>
+<td><span class="arithmatex">\(2^{n/2}\)</span></td>
 </tr>
 <tr>
 <td>数值很大且 n 很大</td>
@@ -10370,24 +10371,24 @@
 </tbody>
 </table>
 <p><strong>折半枚举（meet in the middle）</strong>把数组分成两半，分别列出各自所有子集和，再找两边能否各取一个和，合计为目标。任何原数组子集都唯一分成“左边选了哪些、右边选了哪些”，因此这种拆分不会漏解。</p>
-<p>例如 <code>[3,8,5]</code>、目标 11，左半 <code>[3]</code> 的和为 <code>[0,3]</code>，右半 <code>[8,5]</code> 的和为 <code>[0,8,5,13]</code>。查到左和 3 时，只需在右边找 11−3=8，就知道有解。这正是第 3 讲“查补数”的思路，只是候选从单个元素换成了半边子集和。</p>
+<p>例如 <code>[3,8,5]</code>、目标 11，左半 <code>[3]</code> 的和为 <code>[0,3]</code>，右半 <code>[8,5]</code> 的和为 <code>[0,8,5,13]</code>。查到左和 3 时，只需在右边找 11-3=8，就知道有解。这正是第 3 讲“查补数”的思路，只是候选从单个元素换成了半边子集和。</p>
 <p>生成一半的子集和时先有空集的 0；每读入 x，旧和表示“不选 x”，旧和各加 x 表示“选 x”。合在一起就是新列表。最后函数只返回是否存在，并不恢复所选下标：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_mitm</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""折半枚举：n &lt;= 40 左右可行"""</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">all_sums</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="n">sums</span> <span class="o">+=</span> <span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sums</span><span class="p">]</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">return</span> <span class="n">sums</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">all_sums</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="n">mid</span><span class="p">]),</span> <span class="n">all_sums</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">right_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">right_set</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">left</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_mitm</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">"""折半枚举：n &lt;= 40 左右可行"""</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">all_sums</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="n">sums</span> <span class="o">+=</span> <span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sums</span><span class="p">]</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">return</span> <span class="n">sums</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">all_sums</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="n">mid</span><span class="p">]),</span> <span class="n">all_sums</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">right_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">right_set</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">left</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>复杂度从 <code>2ⁿ</code> 降到 <code>2^(n/2)</code></strong>，<code>n = 40</code> 时完全可行。它的启发是：面对指数级问题，把指数从 n 降到 n/2 会显著减少枚举量；时间与空间仍是指数级，Python 中百万级大整数集合也需留出内存预算。</p>
+<p><strong>复杂度从 <span class="arithmatex">\(2^{n}\)</span> 降到 <span class="arithmatex">\(2^{n/2}\)</span></strong>，<code>n = 40</code> 时完全可行。它的启发是：面对指数级问题，把指数从 n 降到 n/2 会显著减少枚举量；时间与空间仍是指数级，Python 中百万级大整数集合也需留出内存预算。</p>
 <h2 id="_6">一张“全书复杂度”的底表<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>下面按增长阶整理已经学过的算法。数组题 n 通常是元素数；图遍历的线性规模应取 V+E；双串表在两个串长度均为 n 时才写成 O(n²)。P、NP、NP 完全是问题类别，与单个算法的时间表达式是不同层次的概念。</p>
+<p>下面按增长阶整理已经学过的算法。数组题 n 通常是元素数；图遍历的线性规模应取 V+E；双串表在两个串长度均为 n 时才写成 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。P、NP、NP 完全是问题类别，与单个算法的时间表达式是不同层次的概念。</p>
 <table>
 <thead>
 <tr>
@@ -10398,48 +10399,48 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>O(1)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(1)\)</span></strong></td>
 <td>常数</td>
 <td>哈希查找（期望）、栈操作</td>
 </tr>
 <tr>
-<td><strong>O(log n)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></strong></td>
 <td>对数</td>
 <td>二分、快速幂、平衡树操作</td>
 </tr>
 <tr>
-<td><strong>O(n)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(n)\)</span></strong></td>
 <td>线性</td>
 <td>扫描、BFS/DFS、单调栈</td>
 </tr>
 <tr>
-<td><strong>O(n log n)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></strong></td>
 <td>线性对数</td>
 <td>排序（也是比较排序的下界）</td>
 </tr>
 <tr>
-<td><strong>O(n²)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></strong></td>
 <td>平方</td>
 <td>3Sum、双串等长时的编辑距离、回文区间 DP</td>
 </tr>
 <tr>
-<td><strong>O(n³)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(n^{3})\)</span></strong></td>
 <td>立方</td>
 <td>矩阵链乘、Floyd–Warshall、戳气球</td>
 </tr>
 <tr>
-<td><strong>O(2ⁿ)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(2^{n})\)</span></strong></td>
 <td>指数</td>
 <td>枚举子集、回溯</td>
 </tr>
 <tr>
-<td><strong>O(n!)</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(n!)\)</span></strong></td>
 <td>阶乘</td>
 <td>枚举排列、N 皇后</td>
 </tr>
 <tr>
 <td><strong>伪多项式</strong></td>
-<td><code>O(nW)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(nW)\)</span></td>
 <td>背包、子集和（依赖数值大小）</td>
 </tr>
 <tr>
@@ -10473,7 +10474,7 @@
 <tr>
 <td><a href="../../problems/10-backtracking/09-n-queens/">N-Queens</a></td>
 <td>要枚举所有摆法</td>
-<td><code>n ≤ 9</code>，回溯 + 剪枝足够</td>
+<td><span class="arithmatex">\(n \le 9\)</span>，回溯 + 剪枝足够</td>
 </tr>
 <tr>
 <td><a href="../../problems/08-tries/03-word-search-ii/">Word Search II</a></td>
@@ -10483,7 +10484,7 @@
 <tr>
 <td><a href="../../problems/10-backtracking/99-extra-practice/">Partition to K Equal Sum Subsets</a>（698）</td>
 <td>划分问题是 NP 完全的</td>
-<td><code>n ≤ 16</code>，回溯 + 强剪枝</td>
+<td><span class="arithmatex">\(n \le 16\)</span>，回溯 + 强剪枝</td>
 </tr>
 <tr>
 <td><a href="https://leetcode.com/problems/matchsticks-to-square/">Matchsticks to Square</a>（473）</td>
@@ -10493,7 +10494,7 @@
 <tr>
 <td><a href="https://leetcode.com/problems/partition-equal-subset-sum/">Partition Equal Subset Sum</a>（416）</td>
 <td>伪多项式</td>
-<td>DP <code>O(nW)</code></td>
+<td>DP <span class="arithmatex">\(\mathcal{O}(nW)\)</span></td>
 </tr>
 <tr>
 <td><a href="../../problems/12-advanced-graphs/04-reconstruct-itinerary/">Reconstruct Itinerary</a></td>
@@ -10505,22 +10506,22 @@
 <p>这组对照很有教育意义：<strong>416 与 698 看着像同一道题</strong>（都是"把数组分成和相等的部分"），但一个用 DP、一个用回溯——因为 416 只分两份且有数值范围约束，698 要分 k 份、约束也不同。<strong>选哪种算法取决于具体约束，而不是问题的表面相似度。</strong></p>
 <h2 id="_8">从讲义走到代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>遇到通用难题时，还可利用小输入、特殊结构、有限数值范围或近似要求来选择实现。</p>
-<p>先做 <a href="../../problems/10-backtracking/01-subsets/">Subsets</a>：从 [[]] 开始，每加入 x，就把现有每个子集复制一份并加上 x；[1,2] 应得到 4 个子集。这里按元素位置选取，n 个元素共有 2ⁿ 个选择。</p>
+<p>先做 <a href="../../problems/10-backtracking/01-subsets/">Subsets</a>：从 [[]] 开始，每加入 x，就把现有每个子集复制一份并加上 x；[1,2] 应得到 4 个子集。这里按元素位置选取，n 个元素共有 <span class="arithmatex">\(2^{n}\)</span> 个选择。</p>
 <p>再用 subset_sum_mitm([3,8,5],11) 得 True、目标 7 得 False；向 verify_subset_sum 提交 [0,1] 验证 11。分别观察“枚举寻找”“折半寻找”“检查给定证书”各做了哪些工作，别把验证器误当成求解器。</p>
 <h2 id="_9">练习<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 为什么 <code>P ⊆ NP</code> 显然成立？</p>
+<p><strong>1.</strong> 为什么 <span class="arithmatex">\(P\subseteq\mathrm{NP}\)</span> 显然成立？</p>
 <p>一个问题如果能多项式求解，给定任意输入直接算就行——<strong>这就是一种验证：证书可以是空的，验证器就是那个求解算法</strong>。所以 P 里的问题都在 NP 里。</p>
 <p><strong>2.</strong> 为什么"程序只有可数无穷多个，而问题有不可数无穷多个"能推出"大多数问题无解"？</p>
 <p>程序可以编号（每个程序是有限比特串），所以数量是可数无穷；而"问题"是从输入到 0/1 的函数，数量是不可数无穷。用一个对角线论证就能造出一个"任何程序都算不对"的问题。<strong>所以像停机问题那样不可判定的问题不是特例，而是绝大多数</strong>——我们平时遇到的问题之所以能解，是因为它们有结构。</p>
-<p><strong>3.</strong> 如果某天有人证明了 <code>P = NP</code>，会发生什么？举两个具体影响。</p>
-<p>其一，<strong>密码学基础动摇</strong>：RSA 等公钥体制依赖"大整数分解很难"，整数分解是搜索问题，相关判定形式可放入 NP，并可借助多项式判定反复定位因子；<code>P = NP</code> 意味着存在多项式时间的分解算法。其二，许多具有短证书的组合优化问题将存在多项式精确算法。但多项式也可能有很高次数或巨大常数，因此不自动意味着工业规模可用；要进一步分析实际代价。这些影响是条件推论，不能代替 P 与 NP 是否相等的证明。</p>
+<p><strong>3.</strong> 如果某天有人证明了 <span class="arithmatex">\(P = NP\)</span>，会发生什么？举两个具体影响。</p>
+<p>其一，<strong>密码学基础动摇</strong>：RSA 等公钥体制依赖"大整数分解很难"，整数分解是搜索问题，相关判定形式可放入 NP，并可借助多项式判定反复定位因子；<span class="arithmatex">\(P = NP\)</span> 意味着存在多项式时间的分解算法。其二，许多具有短证书的组合优化问题将存在多项式精确算法。但多项式也可能有很高次数或巨大常数，因此不自动意味着工业规模可用；要进一步分析实际代价。这些影响是条件推论，不能代替 P 与 NP 是否相等的证明。</p>
 <p><strong>4.</strong> 区分"NP 难"与"NP 完全"。</p>
 <p><strong>NP 完全 = 属于 NP 且 NP 难。</strong> NP 难只要求"所有 NP 问题都能归约到它"，<strong>不要求它自己属于 NP</strong>。例如"旅行商问题的最优值"这个优化形式不是决策问题、不直接适用 NP 对决策语言的定义；验证一条路线的成本容易，认证它是全局最优是另一项任务，所以它只是 NP 难，不是 NP 完全。</p>
 <p><strong>5.</strong> 为什么"欧拉路径是 P、哈密顿路径是 NP 完全"这件事特别有意思？</p>
 <p>两个问题的表述只差一个词（"每条边" vs "每个顶点"），难度却天壤之别。欧拉路径有“连通性+度数”这一组充分必要条件；哈密顿路径没有这样的已知高效通用算法。局部/全局的直觉不能替代复杂度证明。<strong>这是整个算法理论里最令人印象深刻的一组对照。</strong></p>
-<p><strong>6.</strong> 为什么子集和既是 NP 完全的，又有 <code>O(nW)</code> 的 DP？</p>
-<p>因为它是<strong>弱 NP 完全</strong>的。<code>O(nW)</code> 里的 W 是目标和的<strong>数值</strong>，输入中只占 <code>log W</code> 个比特；当数值很大时，<code>O(nW)</code> 相对于输入长度就是指数级的。“强 NP 完全”通常用于含数值参数的问题：即使把这些数值限制在输入长度的多项式范围，问题仍 NP 完全。若 P≠NP，这类问题就不存在通常形式的伪多项式算法。3-SAT 与哈密顿路径没有需要靠巨大整数表达的数值参数，也不能用压低数值范围化简。</p>
-<p><strong>7.</strong> 判断下面这些问题的类别，并说出该用什么算法：无向图连通性；非负权最短路；有向图判环；"和为 S 的子集个数"（S ≤ 10⁵）；TSP 的决策版；欧拉路径；"把数组分成 k 个和相等的子集"（n ≤ 16）。</p>
+<p><strong>6.</strong> 为什么子集和既是 NP 完全的，又有 <span class="arithmatex">\(\mathcal{O}(nW)\)</span> 的 DP？</p>
+<p>因为它是<strong>弱 NP 完全</strong>的。<span class="arithmatex">\(\mathcal{O}(nW)\)</span> 里的 W 是目标和的<strong>数值</strong>，输入中只占 <span class="arithmatex">\(\log W\)</span> 个比特；当数值很大时，<span class="arithmatex">\(\mathcal{O}(nW)\)</span> 相对于输入长度就是指数级的。“强 NP 完全”通常用于含数值参数的问题：即使把这些数值限制在输入长度的多项式范围，问题仍 NP 完全。若 P不等于NP，这类问题就不存在通常形式的伪多项式算法。3-SAT 与哈密顿路径没有需要靠巨大整数表达的数值参数，也不能用压低数值范围化简。</p>
+<p><strong>7.</strong> 判断下面这些问题的类别，并说出该用什么算法：无向图连通性；非负权最短路；有向图判环；"和为 S 的子集个数"（S 不大于 <span class="arithmatex">\(10^{5}\)</span>）；TSP 的决策版；欧拉路径；"把数组分成 k 个和相等的子集"（n 不大于 16）。</p>
 <table>
 <thead>
 <tr>
@@ -10535,13 +10536,13 @@
 <td>1</td>
 <td>无向图连通性</td>
 <td>P</td>
-<td>BFS/DFS 或并查集，<code>O(V+E)</code></td>
+<td>BFS/DFS 或并查集，<span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>2</td>
 <td>非负权最短路</td>
 <td>P</td>
-<td>Dijkstra，<code>O(E log V)</code></td>
+<td>Dijkstra，<span class="arithmatex">\(\mathcal{O}(E \log V)\)</span></td>
 </tr>
 <tr>
 <td>3</td>
@@ -10553,32 +10554,32 @@
 <td>4</td>
 <td>和为 S 的子集个数</td>
 <td>计数问题，不能直接贴 P/NP 决策标签</td>
-<td>0/1 背包计数，<code>O(nS)</code></td>
+<td>0/1 背包计数，<span class="arithmatex">\(\mathcal{O}(nS)\)</span></td>
 </tr>
 <tr>
 <td>5</td>
 <td>TSP 决策版</td>
 <td>NP 完全</td>
-<td>规模小时用回溯 / 状压 DP <code>O(2ⁿn²)</code></td>
+<td>规模小时用回溯 / 状压 DP <span class="arithmatex">\(\mathcal{O}(2^{n}n^{2})\)</span></td>
 </tr>
 <tr>
 <td>6</td>
 <td>欧拉路径</td>
 <td>P</td>
-<td>Hierholzer，<code>O(E)</code></td>
+<td>Hierholzer，<span class="arithmatex">\(\mathcal{O}(E)\)</span></td>
 </tr>
 <tr>
 <td>7</td>
 <td>分成 k 个等和子集</td>
-<td>一般决策版 NP 完全；n≤16 是此处求解范围</td>
+<td>一般决策版 NP 完全；n不大于16 是此处求解范围</td>
 <td>规模小时用回溯 + 强剪枝</td>
 </tr>
 </tbody>
 </table>
 <p><strong>这张表本身就是一次复习</strong>：先看问题的"结构"（图？序列？区间？），再看它的"难度类别"，最后才决定用什么算法。</p>
-<p><strong>8.</strong> 面试官说"数据规模 n ≤ 20"，你会怎么判断该用什么算法？</p>
-<p>n≤20 提示可以估算 2ⁿ 类算法，但不表示所有指数或阶乘算法都可行（<code>2²⁰ ≈ 10⁶</code>）。可考虑回溯枚举子集；枚举所有排列是 20!，不能由 2²⁰≈10⁶ 推出它可行。也可考虑<strong>状压 DP</strong>（用一个整数的每一位表示"某个元素是否被选/访问"），复杂度通常是 <code>O(2ⁿ · n)</code> 或 <code>O(2ⁿ · n²)</code>。</p>
-<p>反过来，<strong>看到 <code>n ≤ 10⁵</code> 就基本可以排除任何含 <code>2ⁿ</code>、<code>n!</code> 的做法</strong>，可先估算 O(n) 或 O(n log n) 做法；是否还能接受 O(n√n)，要计算实际工作量与限制。<strong>"看数据规模猜算法"是刷题和面试里最实用的一条经验。</strong></p>
+<p><strong>8.</strong> 面试官说"数据规模 n 不大于 20"，你会怎么判断该用什么算法？</p>
+<p>n不大于20 提示可以估算 <span class="arithmatex">\(2^{n}\)</span> 类算法，但不表示所有指数或阶乘算法都可行（<span class="arithmatex">\(2^{20} \approx 10^{6}\)</span>）。可考虑回溯枚举子集；枚举所有排列是 20!，不能由 <span class="arithmatex">\(2^{20}\)</span>约为<span class="arithmatex">\(10^{6}\)</span> 推出它可行。也可考虑<strong>状压 DP</strong>（用一个整数的每一位表示"某个元素是否被选/访问"），复杂度通常是 <span class="arithmatex">\(\mathcal{O}(2^{n} \cdot n)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(2^{n} \cdot n^{2})\)</span>。</p>
+<p>反过来，<strong>看到 <span class="arithmatex">\(n \le 10^{5}\)</span> 就基本可以排除任何含 <span class="arithmatex">\(2^{n}\)</span>、<span class="arithmatex">\(n!\)</span> 的做法</strong>，可先估算 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 做法；是否还能接受 <span class="arithmatex">\(\mathcal{O}(n\sqrt n)\)</span>，要计算实际工作量与限制。<strong>"看数据规模猜算法"是刷题和面试里最实用的一条经验。</strong></p>
 <h2 id="_10">收个尾<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>回过头看，这一套讲义其实一直在重复同一个套路：<strong>先给一个朴素想法，指出它卡在哪里，然后让关键的那个观察出现</strong>——可能是"换个问法"（背包从"选哪些"变成"容量是多少"），可能是"换个顺序"（区间 DP 从枚举第一个变成枚举最后一个），也可能只是"少做一次乘法"（Karatsuba）。观察一旦出现，算法、证明、复杂度就都顺着流出来了。</p>
 <p>如果每一讲的习题你都动手做过一遍，那么面对一道新题，你应当能给出四样东西：<strong>一个正确的算法、一句清楚的思路、一个准确的复杂度、以及"为什么它对"的理由。</strong></p>

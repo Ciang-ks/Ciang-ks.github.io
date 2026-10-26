@@ -10133,7 +10133,7 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="bfs">为什么是多源 BFS<a class="headerlink" href="#bfs" title="Permanent link">&para;</a></h3>
 <p>"每分钟，<strong>所有</strong>腐烂橘子同时向外扩散一层"——这正是 BFS 的"层"语义。所有的腐烂橘子都是<strong>初始源点</strong>，所以要把它们<strong>同时</strong>放进队列，然后做一次 BFS，<strong>BFS 的层数就是经过的分钟数</strong>。</p>
-<p>若分别搜索，应先对每个新鲜格取各源到达时间的最小值，再对格子取最大值；直接取各源完成时间的最大值会算错，而且重复搜索更慢；而多源 BFS 只做一次遍历，是 O(mn)。</p>
+<p>若分别搜索，应先对每个新鲜格取各源到达时间的最小值，再对格子取最大值；直接取各源完成时间的最大值会算错，而且重复搜索更慢；而多源 BFS 只做一次遍历，是 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <h3 id="_3">完整流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>第一遍扫描</strong>：统计新鲜橘子的数量 <code>fresh</code>，把所有腐烂橘子的坐标入队；</li>
@@ -10219,8 +10219,8 @@
 <tbody>
 <tr>
 <td>多源 BFS</td>
-<td>O(m · n)</td>
-<td>O(m · n)（队列）</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span>（队列）</td>
 </tr>
 </tbody>
 </table>

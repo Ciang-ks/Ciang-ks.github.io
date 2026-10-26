@@ -10100,13 +10100,13 @@
 <p><strong>强连通分量（SCC）</strong>就是极大的强连通子集。"极大"意味着不能再把外面的顶点加进来还保持强连通。</p>
 <h2 id="_2">为什么关心它<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="网页链接图里的 SCC" src="../figures/16-scc-web.png" /></p>
-<p>橙色虚线圈分别圈出互相可达的网页，蓝箭头是网页链接。每圈缩成一点后，跨圈箭头构成 DAG。先看各圈能否互相到达，再看为什么有跨圈单向边仍不必合并。</p>
+<p>浅蓝区域分别是 ABC、DE 和单点 F 三个强连通分量，箭头表示有向链接。缩点后得到 ABC → DE → F；跨区域的单向链接不产生互相可达关系。</p>
 <p>因为<strong>把每个 SCC 缩成一个点之后，得到的图一定是 DAG。</strong></p>
 <p>为什么？如果缩点后还有环，环上的所有 SCC 互相可达，它们本该合并成一个更大的 SCC，与"极大"矛盾。</p>
 <p>这条性质是 SCC 全部价值的来源：<strong>它把有环的有向图变成无环的 DAG，而无环图上的问题（拓扑排序、DP、路径计数）都好办得多。</strong> 编译器检测循环依赖、2-SAT 判定可满足性、把"互相依赖的模块"归成一组，用的都是这个思路。</p>
 <p>（顺便说一句：写完 SCC 之后可以用这条性质自检——<strong>缩点后如果有环，算法一定实现错了。</strong>）</p>
 <h2 id="_3">一个笨办法：每个顶点各搜一次<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>先约定程序接口：n 个顶点编号为 0..n−1，graph[u] 列出 u 的出邻居；即使某个点没有出边，也要有空列表。返回 comp 和 cid：comp[u] 是顶点 u 所属的分量编号，cid 是分量总数。同组节点编号相同即可，具体用 0 还是 1 命名不影响分组。</p>
+<p>先约定程序接口：n 个顶点编号为 0..n-1，graph[u] 列出 u 的出邻居；即使某个点没有出边，也要有空列表。返回 comp 和 cid：comp[u] 是顶点 u 所属的分量编号，cid 是分量总数。同组节点编号相同即可，具体用 0 还是 1 命名不影响分组。</p>
 <p>例如边为 0→1、1→0、1→2，0 和 1 互相可达，2 却回不到它们，因此可返回 <code>comp=[0,0,1]</code>、<code>cid=2</code>。单个顶点也可以构成一个分量：从自己到自己允许走 0 条边。</p>
 <p>对每个顶点做一次 DFS，看它和哪些顶点互相可达：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">scc_naive</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
@@ -10131,7 +10131,7 @@
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">cid</span> <span class="o">+=</span> <span class="mi">1</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">return</span> <span class="n">comp</span><span class="p">,</span> <span class="n">cid</span>
 </span></code></pre></div>
-<p>这里用 n 表示顶点数、m 表示边数。<strong>正确，但代价是 <code>O(n(n+m))</code>。</strong> 瓶颈在于：为了知道"谁和谁互相可达"，我们做了 n 次独立的搜索，而其中的信息大量重复。</p>
+<p>这里用 n 表示顶点数、m 表示边数。<strong>正确，但代价是 <span class="arithmatex">\(\mathcal{O}(n(n+m))\)</span>。</strong> 瓶颈在于：为了知道"谁和谁互相可达"，我们做了 n 次独立的搜索，而其中的信息大量重复。</p>
 <h2 id="kosaraju">Kosaraju 的两条观察<a class="headerlink" href="#kosaraju" title="Permanent link">&para;</a></h2>
 <p>换个角度。因为缩点后是 DAG，这个 DAG 里一定有<strong>源点 SCC</strong>（没有来自其他 SCC 的入边）和<strong>汇点 SCC</strong>（没有出边通向别的 SCC）。</p>
 <blockquote>
@@ -10147,7 +10147,7 @@
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>3. 按完成顺序的【逆序】在转置图上做 DFS：每棵 DFS 树恰好是一个 SCC
 </span></code></pre></div>
 <h3 id="_4">为什么"逆序"是对的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>先只看两个不同分量之间的一条边 <code>S→T</code>。令 <code>finish(S)</code> 为 S 中最后一个顶点的完成时间。要证 <code>finish(S)&gt;finish(T)</code>，分两种情况：</p>
+<p>先只看两个不同分量之间的一条边 <code>S→T</code>。令 <code>finish(S)</code> 为 S 中最后一个顶点的完成时间。要证 <span class="arithmatex">\(\operatorname{finish}(S)&gt;\operatorname{finish}(T)\)</span>，分两种情况：</p>
 <ol>
 <li>若先发现 S，DFS 能沿分量内部的路径再经这条边到达整个 T。T 没有路径回到 S（否则该合并），因此 T 会在 S 的首个调用返回前完成。</li>
 <li>若先发现 T，T 不能到达 S，因此 T 整块完成后，才会在别处发现 S。</li>
@@ -10188,7 +10188,7 @@
 </span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>            <span class="n">cid</span> <span class="o">+=</span> <span class="mi">1</span>
 </span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    <span class="k">return</span> <span class="n">comp</span><span class="p">,</span> <span class="n">cid</span>
 </span></code></pre></div>
-<p>递归版最好写，但链状图上递归深度是 <code>O(|V|)</code>，大图要改成显式栈。<strong>面试里写递归版完全可以，只要能说明递归深度的问题。</strong></p>
+<p>递归版最好写，但链状图上递归深度是 <span class="arithmatex">\(\mathcal{O}(\vert V\vert )\)</span>，大图要改成显式栈。<strong>面试里写递归版完全可以，只要能说明递归深度的问题。</strong></p>
 <h2 id="_5">缩点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><img alt="强连通分量与缩点后的 DAG" src="../images/16-scc.svg" /></p>
 <p>此处换成ABC、DE、单点F三个分量，用来展示缩点；前面两遍DFS的例子是ABC、DEF两组，不能沿用那份comp数组。图中所有方向都由可见箭头标明。</p>
@@ -10201,7 +10201,7 @@
 </span></code></pre></div>
 <p>这里 <code>{c:set() for c in comp}</code> 是字典推导式：逐个读取分量编号 c，以 c 为键、一个新空集合为值；重复编号仍对应同一个键。也可先建空字典，再循环执行 dag[c]=set()。返回字典包含全部分量编号，汇分量与孤立分量也保留空邻接集合。集合会去掉多条指向同一分量的边；若后续要统计原图边数或容量，不能去重后丢掉这些信息。</p>
 <h2 id="_6">复杂度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>建图、两次 DFS 都是 <code>Θ(|V| + |E|)</code>，所以<strong>总计 <code>Θ(|V| + |E|)</code></strong>。对比暴力算法的 <code>O(n(n+m))</code>，这就是本讲的直接价值。</p>
+<p>建图、两次 DFS 都是 <span class="arithmatex">\(\Theta (\vert V\vert + \vert E\vert )\)</span>，所以<strong>总计 <span class="arithmatex">\(\Theta (\vert V\vert + \vert E\vert )\)</span></strong>。对比暴力算法的 <span class="arithmatex">\(\mathcal{O}(n(n+m))\)</span>，这就是本讲的直接价值。</p>
 <h2 id="_7">走一遍<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>考虑两个用单向边连起来的强连通块：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>A → B → C → A          ← {A,B,C} 是一个 SCC
@@ -10231,7 +10231,7 @@
 <p><strong>1.</strong> 无向图的连通分量与有向图的 SCC 有什么不同？</p>
 <p>无向图可从未访问点逐次 DFS，每次得到一个连通分量。有向图一次搜索只保证从起点能到达，未必能回来；SCC 要互相可达。因此不能直接照搬无向图“从未访问点搜到的就是一整块”的分组方法。</p>
 <p><strong>2.</strong> 为什么"缩点之后一定是 DAG"？如果缩点后出现环说明什么？</p>
-<p>若缩点后有环 <code>S₁ → S₂ → ⋯ → S_k → S₁</code>，那么 <code>S₁</code> 中任意顶点能到达 <code>S_k</code> 中顶点，<code>S_k</code> 又能回到 <code>S₁</code>，于是它们的并集整体强连通，与"每个 <code>Sᵢ</code> 极大"矛盾。<strong>所以出现环说明实现错了。</strong></p>
+<p>若缩点后有环 <span class="arithmatex">\(S_1\to S_2\to\cdots\to S_k\to S_1\)</span>，那么 <span class="arithmatex">\(S_{1}\)</span> 中任意顶点能到达 <code>S_k</code> 中顶点，<code>S_k</code> 又能回到 <span class="arithmatex">\(S_{1}\)</span>，于是它们的并集整体强连通，与"每个 <span class="arithmatex">\(S_{i}\)</span> 极大"矛盾。<strong>所以出现环说明实现错了。</strong></p>
 <p><strong>3.</strong> 为什么第一次 DFS 必须用<strong>后序</strong>而不是前序？</p>
 <p>我们需要的是"哪个 SCC 最上游"，而这个信息体现在<strong>完成时间的先后</strong>上（源点 SCC 最后完成）。前序记录的是"进入顺序"，反映的是 DFS 从哪开始，无法用来定位源点 SCC。</p>
 <p><strong>4.</strong> Kosaraju 为什么不能在同一张图上做两次 DFS？</p>
@@ -10239,8 +10239,8 @@
 <p><strong>5.</strong> 如果图已经是 DAG，SCC 算法会返回什么？</p>
 <p>返回 n 个大小为 1 的 SCC。<strong>这也说明 SCC 算法可以顺便判环：分量数小于 n 就说明存在至少含两个顶点的 SCC。在本讲无自环的简单图约定下，这可用于判环；允许自环时还要另查单点自环。</strong></p>
 <p><strong>6.</strong> 用 SCC 判断一个 2-SAT 实例是否可满足。</p>
-<p>2-SAT 的输入是一组形如 <code>(a ∨ b)</code> 的条件，问能否给所有变量赋 True/False，使每条条件都成立。∨ 表示“或”，¬ 表示“非”，a、b 各是一个变量或它的否定。例如 <code>(x ∨ y)</code> 要求 x、y 至少一个为真。</p>
-<p>把每个布尔变量 <code>x</code> 拆成两个节点 <code>x</code> 与 <code>¬x</code>；子句 <code>(a ∨ b)</code> 等价于两条蕴含 <code>¬a → b</code> 与 <code>¬b → a</code>，把它们建成有向边。<strong>该实例不可满足，当且仅当存在某个变量 <code>x</code> 使得 <code>x</code> 与 <code>¬x</code> 落在同一个 SCC 里。</strong> 赋值还需成对处理变量与否定，且方向取决于分量编号的约定；这是选读的下一步，不能直接把任意 SCC 编号当真值。</p>
+<p>2-SAT 的输入是一组形如 <span class="arithmatex">\((a\lor b)\)</span> 的条件，问能否给所有变量赋 True/False，使每条条件都成立。符号 <span class="arithmatex">\(\lor\)</span> 表示“或”，符号 <span class="arithmatex">\(\neg\)</span> 表示“非”，a、b 各是一个变量或它的否定。例如 <span class="arithmatex">\((x\lor y)\)</span> 要求 x、y 至少一个为真。</p>
+<p>把每个布尔变量 <code>x</code> 拆成两个节点 <code>x</code> 与 <span class="arithmatex">\(\neg x\)</span>；子句 <span class="arithmatex">\((a\lor b)\)</span> 等价于两条蕴含 <span class="arithmatex">\(\neg a\to b\)</span> 与 <span class="arithmatex">\(\neg b\to a\)</span>，把它们建成有向边。<strong>该实例不可满足，当且仅当存在某个变量 <code>x</code> 使得 <code>x</code> 与 <span class="arithmatex">\(\neg x\)</span> 落在同一个 SCC 里。</strong> 赋值还需成对处理变量与否定，且方向取决于分量编号的约定；这是选读的下一步，不能直接把任意 SCC 编号当真值。</p>
 
 
 

@@ -10122,12 +10122,12 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        path.pop()
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        used[i] = False               # 撤销标记
 </span></code></pre></div>
-<p><strong>决策树的形状</strong>：第 1 层有 n 种选择，第 2 层 n-1 种……所以叶子数量是 <code>n!</code>，这就是复杂度下界。</p>
+<p><strong>决策树的形状</strong>：第 1 层有 n 种选择，第 2 层 n-1 种……所以叶子数量是 <span class="arithmatex">\(n!\)</span>，这就是复杂度下界。</p>
 <h3 id="_3">另一种思路：交换法（原地生成）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>固定第 <code>i</code> 个位置，让它和后面的每个位置交换，然后递归 <code>i+1</code>。这样不需要 <code>used</code> 数组，也不需要额外的 <code>path</code>。<strong>缺点是它不能自然地处理"有重复元素"的情况</strong>（需要额外去重），而且会打乱原数组。</p>
+<p>固定第 <code>i</code> 个位置，让它和后面的每个位置交换，然后递归 <span class="arithmatex">\(i+1\)</span>。这样不需要 <code>used</code> 数组，也不需要额外的 <code>path</code>。<strong>缺点是它不能自然地处理"有重复元素"的情况</strong>（需要额外去重），而且会打乱原数组。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>每个递归层填的是答案中的下一个位置，而不是决定某个输入元素是否入选，因此所有尚未使用的下标都必须重新成为候选。输入 [1,2] 要同时生成 [1,2] 和 [2,1]；若沿用组合的 start 递增约束，第二个结果会被漏掉。</p>
-<p>used[i] 表示“当前路径已使用第 i 个位置”，返回后必须撤销，使兄弟分支还能选它。这与图遍历的永久 visited 不同。当前输入值互异，按下标区分恰好不会产生相同排列；若输入含重复值，要再处理同层等值分支。叶子有 n! 个，每份结果复制 n 项，输出代价为 Θ(n·n!)，不能只用 n! 描述完整运行成本。</p>
+<p>used[i] 表示“当前路径已使用第 i 个位置”，返回后必须撤销，使兄弟分支还能选它。这与图遍历的永久 visited 不同。当前输入值互异，按下标区分恰好不会产生相同排列；若输入含重复值，要再处理同层等值分支。叶子有 n! 个，每份结果复制 n 项，输出代价为 <span class="arithmatex">\(\Theta (n\cdot n!)\)</span>，不能只用 n! 描述完整运行成本。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="used">解法一：回溯 + used 数组（推荐，最通用）<a class="headerlink" href="#used" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10203,13 +10203,13 @@
 <tbody>
 <tr>
 <td>used 回溯</td>
-<td>O(n · n!)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot n!)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>交换法</td>
-<td>O(n · n!)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot n!)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10220,9 +10220,9 @@
 <li>每层循环是 <code>range(len(nums))</code>（<strong>从头开始</strong>），不是 <code>range(start, ...)</code>——这是排列和组合的本质区别。</li>
 <li><code>res.append(path[:])</code> 要切片。</li>
 <li><strong>追问：如果有重复元素？</strong> → <a href="https://leetcode.com/problems/permutations-ii/">47 Permutations II</a>，排序 + <code>if i &gt; 0 and nums[i] == nums[i-1] and not used[i-1]: continue</code>。这个去重条件比子集/组合更绕，需要专门理解（核心是"同一个值必须按顺序被使用"）。</li>
-<li><strong>追问：如何求第 k 个排列？</strong> → <a href="https://leetcode.com/problems/permutation-sequence/">60 Permutation Sequence</a>，用数学（康托展开）直接算，O(n²)。</li>
+<li><strong>追问：如何求第 k 个排列？</strong> → <a href="https://leetcode.com/problems/permutation-sequence/">60 Permutation Sequence</a>，用数学（康托展开）直接算，<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
 <li><strong>追问：如何生成下一个排列？</strong> → <a href="https://leetcode.com/problems/next-permutation/">31 Next Permutation</a>，从右往左找第一个"升序对"再调整。</li>
-<li><strong>追问：n 很大时怎么办？</strong> → <code>n!</code> 增长极快，n &gt; 12 基本无法枚举全部；这时要重新审视题目是否真的需要枚举。</li>
+<li><strong>追问：n 很大时怎么办？</strong> → <span class="arithmatex">\(n!\)</span> 增长极快，n &gt; 12 基本无法枚举全部；这时要重新审视题目是否真的需要枚举。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

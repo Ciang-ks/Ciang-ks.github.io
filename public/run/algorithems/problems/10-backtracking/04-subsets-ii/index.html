@@ -5519,10 +5519,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#i-start-i-0" class="md-nav__link">
+  <a href="#i-mathrmstart-i-0" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么是 i &gt; start 而不是 i &gt; 0（必考）
+        为什么是 \(i &gt; \mathrm{start}\) 而不是 \(i &gt; 0\)（必考）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#i-start-i-0" class="md-nav__link">
+  <a href="#i-mathrmstart-i-0" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么是 i &gt; start 而不是 i &gt; 0（必考）
+        为什么是 \(i &gt; \mathrm{start}\) 而不是 \(i &gt; 0\)（必考）
       
     </span>
   </a>
@@ -10154,18 +10154,18 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>两步走：排序 + 同层去重。</strong></p>
 <h3 id="_3">第一步：排序<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>排序让相同的元素<strong>相邻</strong>，这是后面能"跳过重复"的前提。不排序的话，没有办法用 O(1) 判断"当前值和上一个值是否相同"。</p>
+<p>排序让相同的元素<strong>相邻</strong>，这是后面能"跳过重复"的前提。不排序的话，没有办法用 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 判断"当前值和上一个值是否相同"。</p>
 <h3 id="_4">第二步：同层跳过重复值<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>在 <code>start</code> 索引模板上加一行判断：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="k">continue</span>          <span class="c1"># 同一层里已经用相同的值开过分支了，跳过</span>
 </span></code></pre></div>
-<h3 id="i-start-i-0">为什么是 <code>i &gt; start</code> 而不是 <code>i &gt; 0</code>（必考）<a class="headerlink" href="#i-start-i-0" title="Permanent link">&para;</a></h3>
+<h3 id="i-mathrmstart-i-0">为什么是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 而不是 <span class="arithmatex">\(i &gt; 0\)</span>（必考）<a class="headerlink" href="#i-mathrmstart-i-0" title="Permanent link">&para;</a></h3>
 <p>这是本题乃至所有回溯去重题的核心，必须彻底理解：</p>
 <ul>
-<li><strong><code>i &gt; start</code> 判断的是"同一层"</strong>：在当前递归层里，如果前面已经用相同的值做过选择，那么从当前值出发的整个子树都是重复的，直接跳过；</li>
-<li><strong>写成 <code>i &gt; 0</code> 是错的</strong>：它会误伤"上一层选了 <code>nums[i-1]</code>、这一层选 <code>nums[i]</code>"这种<strong>合法的跨层选择</strong>。以 <code>[1,2,2]</code> 为例，正确答案 <code>[2,2]</code> 需要"第 1 层选第一个 2，第 2 层选第二个 2"，用 <code>i &gt; 0</code> 会被错误跳过。</li>
+<li><strong><span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 判断的是"同一层"</strong>：在当前递归层里，如果前面已经用相同的值做过选择，那么从当前值出发的整个子树都是重复的，直接跳过；</li>
+<li><strong>写成 <span class="arithmatex">\(i &gt; 0\)</span> 是错的</strong>：它会误伤"上一层选了 <code>nums[i-1]</code>、这一层选 <code>nums[i]</code>"这种<strong>合法的跨层选择</strong>。以 <code>[1,2,2]</code> 为例，正确答案 <code>[2,2]</code> 需要"第 1 层选第一个 2，第 2 层选第二个 2"，用 <span class="arithmatex">\(i &gt; 0\)</span> 会被错误跳过。</li>
 </ul>
 <p><strong>记住这个口诀：同层去重看 <code>start</code>，跨层允许重复选。</strong></p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10249,27 +10249,27 @@
 <tbody>
 <tr>
 <td>排序 + 同层跳过</td>
-<td>O(n · 2ⁿ)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>set 去重</td>
-<td>O(n · 2ⁿ)，但展开的分支更多</td>
-<td>O(n · 2ⁿ)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span>，但展开的分支更多</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span></td>
 </tr>
 <tr>
 <td>计数法</td>
-<td>O(n · 2^k)，k 为不同值的个数</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^k)\)</span>，k 为不同值的个数</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>去重条件必须是 <code>i &gt; start</code></strong>，不是 <code>i &gt; 0</code>。这是本题唯一的、也是最重要的考点。</li>
-<li><strong>必须先排序</strong>，否则 <code>nums[i] == nums[i-1]</code> 不能代表"重复值"。</li>
+<li><strong>去重条件必须是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span></strong>，不是 <span class="arithmatex">\(i &gt; 0\)</span>。这是本题唯一的、也是最重要的考点。</li>
+<li><strong>必须先排序</strong>，否则 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span> 不能代表"重复值"。</li>
 <li><code>res.append(path[:])</code> 要切片。</li>
-<li><strong>追问：排序会不会带来额外开销？</strong> → 排序是 O(n log n)，相比 O(n·2ⁿ) 的枚举可以忽略。</li>
+<li><strong>追问：排序会不会带来额外开销？</strong> → 排序是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，相比 <span class="arithmatex">\(\mathcal{O}(n\cdot 2^{n})\)</span> 的枚举可以忽略。</li>
 <li><strong>追问：如果元素取值范围很小（比如 0~10）？</strong> → 用计数法（解法三），搜索树规模只与"不同值的个数"有关。</li>
 <li><strong>追问：这题和 78 子集的关系？</strong> → 完全相同的模板，只多了一行去重判断。</li>
 </ul>

@@ -10131,13 +10131,13 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>这是<strong>连通性统计的母题</strong>，三种解法都能做，<strong>建议全部掌握</strong>，因为它们是面试中"图连通性"这条主线的三个抓手。</p>
 <h3 id="a">方法 A：并查集（最直接）<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
-<p>初始时每个节点自成一个连通块（<code>count = n</code>）；每成功合并两个不同集合，<code>count -= 1</code>。最后 <code>count</code> 就是答案。</p>
+<p>初始时每个节点自成一个连通块（<span class="arithmatex">\(\mathrm{count} = n\)</span>）；每成功合并两个不同集合，<code>count -= 1</code>。最后 <code>count</code> 就是答案。</p>
 <p><strong>优势</strong>：天然支持"动态加边"，如果边是流式到来的也能处理。</p>
 <h3 id="bdfs-bfs">方法 B：DFS / BFS 遍历<a class="headerlink" href="#bdfs-bfs" title="Permanent link">&para;</a></h3>
 <p>建邻接表，用一个 <code>visited</code> 数组；对每个未访问的节点启动一次遍历，遍历次数就是连通分量数。</p>
 <p><strong>注意</strong>：<strong>孤立节点也算一个连通分量</strong>，所以必须遍历所有 <code>n</code> 个节点，不能只看边里出现过的节点。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>每条边最多把两个已有分量合为一个：代表元不同才 count−1，代表元相同只说明边处在同一分量内。比如 n=4，依次加 0−1、1−2、0−2，count 从 4 变为 3、2、2，节点 3 作为孤立分量仍被计入。</p>
+<p>每条边最多把两个已有分量合为一个：代表元不同才 count-1，代表元相同只说明边处在同一分量内。比如 n=4，依次加 0-1、1-2、0-2，count 从 4 变为 3、2、2，节点 3 作为孤立分量仍被计入。</p>
 <p>并查集保存的是等价类，不提供最短距离、可行路线或有向可达性。若图一次性给出，DFS/BFS 一样是合适的线性方法；若不断加边并反复问分量数，增量合并更有优势。标准并查集不支持任意删边后自动拆分，不能将“动态连通”无限泛化到所有增删操作。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：并查集（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10227,20 +10227,20 @@
 <tbody>
 <tr>
 <td>并查集</td>
-<td>O((n + E) · α(n)) ≈ O(n + E)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}((n + E) \cdot \alpha (n))\)</span> 约为 <span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>DFS / BFS</td>
-<td>O(n + E)</td>
-<td>O(n + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>孤立节点也是连通分量</strong>：必须遍历所有节点（<code>range(n)</code>），不能只遍历边里出现的节点。</li>
-<li>并查集的 <code>count</code> 初值是 <code>n</code>，每次<strong>成功合并</strong>才减 1（<code>ra != rb</code> 时才减）。</li>
+<li>并查集的 <code>count</code> 初值是 <code>n</code>，每次<strong>成功合并</strong>才减 1（<span class="arithmatex">\(ra \ne rb\)</span> 时才减）。</li>
 <li>并查集的 <code>find</code> 和 <code>union</code> 都要带优化（路径压缩 + 按秩合并）。</li>
 <li>有自环边（<code>[a, a]</code>）时，<code>find(a) == find(a)</code>，不会减计数，正确。</li>
 <li><strong>追问：并查集和 DFS 各适合什么场景？</strong> → <strong>并查集</strong>适合"边动态加入、随时查询连通性"；<strong>DFS/BFS</strong> 适合"图已经完整给好、只需要一次性统计"。</li>

@@ -6417,10 +6417,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hierholzer-oe" class="md-nav__link">
+  <a href="#hierholzer-mathcaloe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hierholzer 算法（排序后遍历 O(E)）
+        Hierholzer 算法（排序后遍历 \(\mathcal{O}(E)\)）
       
     </span>
   </a>
@@ -10036,10 +10036,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hierholzer-oe" class="md-nav__link">
+  <a href="#hierholzer-mathcaloe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hierholzer 算法（排序后遍历 O(E)）
+        Hierholzer 算法（排序后遍历 \(\mathcal{O}(E)\)）
       
     </span>
   </a>
@@ -10199,7 +10199,7 @@
 <p><strong>"用完所有的边恰好一次"</strong>——这正是<strong>欧拉路径（Eulerian path）</strong>的定义。图是有向图，题目保证存在合法行程。</p>
 <h3 id="_4">朴素回溯为什么不行<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>用 DFS 枚举所有可能的走法，找到第一条"用完全部机票"的路径。<strong>最坏情况下路径数量是指数级的</strong>，会超时（尤其在有大量重复航班时）。</p>
-<h3 id="hierholzer-oe">Hierholzer 算法（排序后遍历 O(E)）<a class="headerlink" href="#hierholzer-oe" title="Permanent link">&para;</a></h3>
+<h3 id="hierholzer-mathcaloe">Hierholzer 算法（排序后遍历 <span class="arithmatex">\(\mathcal{O}(E)\)</span>）<a class="headerlink" href="#hierholzer-mathcaloe" title="Permanent link">&para;</a></h3>
 <p>Hierholzer 算法的核心是<strong>"走到死路再记录"</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dfs(node):
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    只要 node 还有未使用的出边：
@@ -10215,7 +10215,7 @@
 <p><strong>每次都要优先选择字典序最小的目的地。</strong> 实现方法是把邻接表<strong>从大到小排序</strong>，然后用 <code>pop()</code> 从末尾取（末尾就是最小的）；或者用小顶堆。</p>
 <h3 id="_7">解法推导与模式辨析<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>每张机票是一条独立的边，重复起终点的机票也要分别消费；机场可以多次经过，不能使用“访问过机场就跳过”的节点 visited。Hierholzer 的后序记录相当于把沿途尚未用完的支路先处理，再将各段嵌回完整路线，所以每条边只被 pop 一次。</p>
-<p>例如 JFK→KUL、JFK→NRT、NRT→JFK，最小目的地 KUL 会先走进死路，却应出现在最终行程末尾。后序反转得到 JFK→NRT→JFK→KUL，说明“优先小目的地”不等于直接按访问次序输出。按字典序尝试出边配合这种支路拼接，才得到最小合法路线；邻接排序使总时间最坏 O(E log E)，O(E) 仅指排序后的边遍历。若不保证存在合法行程，还需检查起点、度数与连通等条件。</p>
+<p>例如 JFK→KUL、JFK→NRT、NRT→JFK，最小目的地 KUL 会先走进死路，却应出现在最终行程末尾。后序反转得到 JFK→NRT→JFK→KUL，说明“优先小目的地”不等于直接按访问次序输出。按字典序尝试出边配合这种支路拼接，才得到最小合法路线；邻接排序使总时间最坏 <span class="arithmatex">\(\mathcal{O}(E \log E)\)</span>，<span class="arithmatex">\(\mathcal{O}(E)\)</span> 仅指排序后的边遍历。若不保证存在合法行程，还需检查起点、度数与连通等条件。</p>
 <h2 id="_8">代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="hierholzer">解法一：Hierholzer（推荐）<a class="headerlink" href="#hierholzer" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
@@ -10296,13 +10296,13 @@
 <tbody>
 <tr>
 <td>Hierholzer</td>
-<td>O(E log E)（排序）+ O(E)（遍历）</td>
-<td>O(E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(E \log E)\)</span>（排序）+ <span class="arithmatex">\(\mathcal{O}(E)\)</span>（遍历）</td>
+<td><span class="arithmatex">\(\mathcal{O}(E)\)</span></td>
 </tr>
 <tr>
 <td>小顶堆版</td>
-<td>O(E log E)</td>
-<td>O(E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(E \log E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(E)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10313,7 +10313,7 @@
 <li>起点固定是 <code>"JFK"</code>。</li>
 <li>有重复机票（比如两张 <code>JFK → SFO</code>）时，算法要能用掉每一张——<code>pop()</code> 天然处理（相同的目的地会有多个副本）。</li>
 <li>题目保证存在合法行程，所以不需要处理无解的情况。</li>
-<li><strong>追问：为什么普通回溯会超时？</strong> → 路径数量可能是指数级的；而 Hierholzer 每条边只用一次，是 O(E)。</li>
+<li><strong>追问：为什么普通回溯会超时？</strong> → 路径数量可能是指数级的；而 Hierholzer 每条边只用一次，是 <span class="arithmatex">\(\mathcal{O}(E)\)</span>。</li>
 <li><strong>追问：如果要求"字典序最大的行程"？</strong> → 把排序方向反过来。</li>
 <li><strong>追问：欧拉路径和欧拉回路的区别？</strong> → 欧拉路径是"从 A 出发、到 B 结束，走遍所有边一次"；欧拉回路要求首尾相同。<strong>Hierholzer 对两者都适用</strong>。</li>
 <li><strong>追问：判断欧拉路径存在的条件？</strong> → 有向图：最多一个节点出度 = 入度 + 1（起点），最多一个节点入度 = 出度 + 1（终点），其余节点入度 = 出度。</li>

@@ -10124,13 +10124,13 @@
 <h1 id="1851-minimum-interval-to-include-each-query">1851. Minimum Interval to Include Each Query · 包含每个查询的最小区间<a class="headerlink" href="#1851-minimum-interval-to-include-each-query" title="Permanent link">&para;</a></h1>
 <p><code>Hard</code> ｜ <code>Intervals</code> ｜ <a href="https://leetcode.com/problems/minimum-interval-to-include-each-query/">LeetCode 1851</a> ｜ <a href="https://leetcode.io/problems/minimum-interval-to-include-each-query">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定一组区间 <code>intervals = [left, right]</code> 和一组查询点 <code>queries</code>。对每个查询点，找出<strong>包含它的最短区间</strong>的长度（<code>right - left + 1</code>）；不存在则返回 -1。</p>
+<p>给定一组区间 <code>intervals = [left, right]</code> 和一组查询点 <code>queries</code>。对每个查询点，找出<strong>包含它的最短区间</strong>的长度（<span class="arithmatex">\(\mathrm{right} - \mathrm{left} + 1\)</span>）；不存在则返回 -1。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: intervals = [[1,4],[2,3],[3,4]], queries = [2,3,4]
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [3,3,4]
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">暴力做法的问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>对每个查询点遍历所有区间，复杂度 O(n · q)，当 n 和 q 都很大时会超时。</p>
+<p>对每个查询点遍历所有区间，复杂度 <span class="arithmatex">\(\mathcal{O}(n \cdot q)\)</span>，当 n 和 q 都很大时会超时。</p>
 <h3 id="_4">关键思路：离线处理 + 排序 + 堆<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><strong>"离线"的意思是：不按输入顺序回答查询，而是把所有查询排序后一起处理，最后再按原顺序输出。</strong></p>
 <p>具体流程：</p>
@@ -10138,21 +10138,21 @@
 <li><strong>把区间按左端点排序</strong>，把查询按数值排序（同时记录原始下标，便于最后还原顺序）；</li>
 <li>用一个指针 <code>i</code> 遍历区间，用一个<strong>最小堆</strong>存"候选区间"（堆的 key 是区间长度）；</li>
 <li>对每个查询 <code>q</code>（按升序处理）：
-   - <strong>把所有 <code>left &lt;= q</code> 的区间加入堆</strong>（这些区间"已经开始"，有机会覆盖 <code>q</code>）；
-   - <strong>反复弹出堆顶 <code>right &lt; q</code> 的区间，直到堆顶合法或堆空</strong>（这些区间"已经结束"，不可能覆盖 <code>q</code>）；
+   - <strong>把所有 <span class="arithmatex">\(\mathrm{left} \le q\)</span> 的区间加入堆</strong>（这些区间"已经开始"，有机会覆盖 <code>q</code>）；
+   - <strong>反复弹出堆顶 <span class="arithmatex">\(\mathrm{right} &lt; q\)</span> 的区间，直到堆顶合法或堆空</strong>（这些区间"已经结束"，不可能覆盖 <code>q</code>）；
    - <strong>堆顶就是覆盖 <code>q</code> 的最短区间</strong>（因为堆按长度排序）。如果堆为空，答案是 -1；</li>
 <li>把答案写回原始下标对应的位置。</li>
 </ol>
 <h3 id="_5">如何汇总排序与堆操作的复杂度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li>每个区间最多被压入堆一次、弹出一次 → O(n log n)；</li>
-<li>一次查询可能触发多次弹出，但总弹出次数不超过 n；另外还需区间排序 O(n log n)、查询排序 O(q log q)；</li>
+<li>每个区间最多被压入堆一次、弹出一次 → <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>；</li>
+<li>一次查询可能触发多次弹出，但总弹出次数不超过 n；另外还需区间排序 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>、查询排序 <span class="arithmatex">\(\mathcal{O}(q \log q)\)</span>；</li>
 <li><strong>关键在于"随着查询值递增，区间的加入和过期都是单调的"</strong>——这正是能用双指针 + 堆的原因。</li>
 </ul>
 <p><strong>"把查询排序后一起处理"是本题最核心的思想突破</strong>，面试中一定要讲清楚为什么可以离线。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>排序查询后，一个区间只有“还没开始、已开始、永远过期”三种单向变化；因此不必为每个查询重建候选。比如区间 [1,4] 在查询 2 时可用，在查询 5 时过期，此后更大的查询都不可用，才能安全永久删除。</p>
-<p>堆按长度排序，并不按右端点排序，所以过期区间可能埋在内部。代码只清理过期的堆顶：内部旧项暂时不影响当前最小合法答案，将来浮到顶再删即可。每次查询可能连续弹出多项，成本应按“每区间最多入出各一次”汇总，而不是说每次只做常数次操作。还要计查询排序 O(q log q)，总时间为 O(n log n+q log q+(n+q)log(n+1))。</p>
+<p>堆按长度排序，并不按右端点排序，所以过期区间可能埋在内部。代码只清理过期的堆顶：内部旧项暂时不影响当前最小合法答案，将来浮到顶再删即可。每次查询可能连续弹出多项，成本应按“每区间最多入出各一次”汇总，而不是说每次只做常数次操作。还要计查询排序 <span class="arithmatex">\(\mathcal{O}(q \log q)\)</span>，总时间为 <span class="arithmatex">\(\mathcal{O}(n \log n+q \log q+(n+q)\log (n+1))\)</span>。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">解法一：离线 + 排序 + 堆（推荐）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
@@ -10183,8 +10183,8 @@
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <h3 id="_9">其他可行的方向<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p><strong>方向一：离散化 + 线段树。</strong> 把查询点离散化成若干坐标段，对每个区间做一次"区间取 min"的更新，最后单点查询。线段树维护"区间最小值"即可，复杂度 O((n + q) log q)。代价是实现远比堆版本繁琐，胜在支持在线查询。</p>
-<p><strong>方向二：在线处理。</strong> 如果查询必须按输入顺序实时作答，就不能把查询排序。此时需要"前缀最大值 + 二分"之类的结构先筛出"哪些区间覆盖了这个点"，再从中取长度最小的，通常要配合平衡树或线段树，复杂度 O(q log² n)。</p>
+<p><strong>方向一：离散化 + 线段树。</strong> 把查询点离散化成若干坐标段，对每个区间做一次"区间取 min"的更新，最后单点查询。线段树维护"区间最小值"即可，复杂度 <span class="arithmatex">\(\mathcal{O}((n + q) \log q)\)</span>。代价是实现远比堆版本繁琐，胜在支持在线查询。</p>
+<p><strong>方向二：在线处理。</strong> 如果查询必须按输入顺序实时作答，就不能把查询排序。此时需要"前缀最大值 + 二分"之类的结构先筛出"哪些区间覆盖了这个点"，再从中取长度最小的，通常要配合平衡树或线段树，复杂度 <span class="arithmatex">\(\mathcal{O}(q \log ^{2} n)\)</span>。</p>
 <p><strong>为什么本题的堆版本最优？</strong> 因为它同时利用了三个性质：查询之间互相独立（可以离线）、区间按左端点排序后"加入"是单调的、区间按右端点排序后"过期"也是单调的。<strong>"两个单调指针 + 一个堆"正是这类问题的标准组合。</strong></p>
 <h2 id="_10">复杂度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
@@ -10198,13 +10198,13 @@
 <tbody>
 <tr>
 <td>离线 + 堆</td>
-<td>O(n log n+q log q+(n+q)log(n+1))</td>
-<td>O(n + q)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n+q \log q+(n+q)\log (n+1))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n + q)\)</span></td>
 </tr>
 <tr>
 <td>暴力</td>
-<td>O(n · q)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot q)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10212,8 +10212,8 @@
 <ul>
 <li><strong>必须记录查询的原始下标</strong>（因为要按原顺序输出答案）。</li>
 <li><strong>区间按左端点排序、查询按值排序</strong>，两者的顺序不能搞乱。</li>
-<li><strong>过期条件是 <code>right &lt; q</code></strong>（严格小于）：<code>right == q</code> 时区间仍然覆盖 <code>q</code>，不能弹出。</li>
-<li>堆里存 <code>(长度, 右端点)</code>，<strong>长度的计算是 <code>right - left + 1</code></strong>（闭区间的元素个数）。</li>
+<li><strong>过期条件是 <span class="arithmatex">\(\mathrm{right} &lt; q\)</span></strong>（严格小于）：<span class="arithmatex">\(\mathrm{right} = q\)</span> 时区间仍然覆盖 <code>q</code>，不能弹出。</li>
+<li>堆里存 <code>(长度, 右端点)</code>，<strong>长度的计算是 <span class="arithmatex">\(\mathrm{right} - \mathrm{left} + 1\)</span></strong>（闭区间的元素个数）。</li>
 <li>堆为空说明没有区间覆盖该查询点，答案是 -1。</li>
 <li><strong>追问：为什么可以"离线"处理？</strong> → 因为<strong>查询之间是相互独立的</strong>，每个查询的答案只依赖区间集合，不依赖其他查询的答案。<strong>如果查询之间有依赖（比如后一个查询依赖前一个的结果），就不能离线。</strong></li>
 <li><strong>追问：如果查询是在线的（必须按顺序回答）？</strong> → 若区间集合静态，可预处理各端点之间的最短覆盖答案，再对每个查询二分；无需一概使用持久化结构，具体方法取决于区间是否也动态变化。</li>

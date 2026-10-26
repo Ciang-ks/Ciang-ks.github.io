@@ -9988,11 +9988,11 @@
 <h1 id="9">第 9 讲 · 线性时间排序<a class="headerlink" href="#9" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 2 讲：前缀和；第 3、8 讲：字典与期望；第 7 讲：稳定性。</p>
 <p><strong>首读范围</strong>：先做月份分桶、计数排序；决策树下界选读。</p>
-<p>第 7 讲归并排序最坏 Θ(n log n)，第 8 讲对互异元素的随机快速排序期望 Θ(n log n)。一个自然的问题是：<strong>能不能更快？</strong></p>
-<p>答案分两半，很耐人寻味：如果只允许"比较两个元素的大小"，<strong>不能</strong>，有 <code>Ω(n log n)</code> 的下界；但如果元素的键有额外结构（比如"是 1 到 12 之间的整数"），<strong>能</strong>，因为那时可以不用比较。</p>
+<p>第 7 讲归并排序最坏 <span class="arithmatex">\(\Theta (n \log n)\)</span>，第 8 讲对互异元素的随机快速排序期望 <span class="arithmatex">\(\Theta (n \log n)\)</span>。一个自然的问题是：<strong>能不能更快？</strong></p>
+<p>答案分两半，很耐人寻味：如果只允许"比较两个元素的大小"，<strong>不能</strong>，有 <span class="arithmatex">\(\Omega (n \log n)\)</span> 的下界；但如果元素的键有额外结构（比如"是 1 到 12 之间的整数"），<strong>能</strong>，因为那时可以不用比较。</p>
 <h2 id="_1">从一个特别朴素的场景说起<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>先看一个特别朴素的场景：<strong>把 n 个学生按出生月份排序</strong>，月份只有 12 种取值，同月份内部顺序随便。</p>
-<p>用归并排序是 <code>Θ(n log n)</code>，但<strong>这里的信息被浪费了</strong>——键的取值范围只有 12 个，为什么还要做 n log n 次比较？开 13 个桶，让下标 1..12 直接对应月份，第 0 桶空着：</p>
+<p>用归并排序是 <span class="arithmatex">\(\Theta (n \log n)\)</span>，但<strong>这里的信息被浪费了</strong>——键的取值范围只有 12 个，为什么还要做 n log n 次比较？开 13 个桶，让下标 1..12 直接对应月份，第 0 桶空着：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">sort_by_month</span><span class="p">(</span><span class="n">students</span><span class="p">):</span>        <span class="c1"># students: [(name, month)]</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">buckets</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">)]</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">students</span><span class="p">:</span>
@@ -10002,7 +10002,7 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">buckets</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="n">out</span>
 </span></code></pre></div>
-<p><code>Θ(n + 13) = Θ(n)</code>。<strong>这就是"用空间换取低于比较下界"的思路。</strong></p>
+<p><span class="arithmatex">\(\Theta (n + 13) = \Theta (n)\)</span>。<strong>这就是"用空间换取低于比较下界"的思路。</strong></p>
 <h2 id="_2">计数排序<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="计数排序：用值当下标，再顺序写出" src="../images/09-counting-sort.svg" /></p>
 <p>更一般的版本是：键是 <code>[0, k]</code> 内的整数（两端都包含，故分配 k+1 个槽），可以先统计每个键出现多少次，再算出每个键在输出中的位置。</p>
@@ -10018,9 +10018,9 @@
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="n">out</span><span class="p">[</span><span class="n">count</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="n">x</span>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">return</span> <span class="n">out</span>
 </span></code></pre></div>
-<p>这里返回新的升序列表，不修改 A。先计数要 O(n)，累计 k+1 个计数要 O(k)，按原数组回填要 O(n)，所以时间为 Θ(n+k)，额外空间为 O(n+k)。最后一遍的扫描方向还使它保持<strong>稳定性</strong>。</p>
-<p>先把“个数”变成“下标”：若恰有 3 个数≤2，那么值为 2 的最后一个位置最多是下标 2，而不是 3。因此先把 count[2] 减 1，再写到那个下标。再遇到一个 2 时继续减，就填到前一格。</p>
-<p><code>reversed(A)</code> 表示按原列表从后往前遍历，不修改 A。<strong>第三步为什么要从后往前？</strong> <code>count[x]</code> 表示"≤ x 的元素个数"，也就是 x 该放的位置区间的末尾。从后往前扫时，后出现的相同键会被放到更靠后的位置，<strong>保持了输入顺序</strong>——这就是稳定性。</p>
+<p>这里返回新的升序列表，不修改 A。先计数要 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，累计 k+1 个计数要 <span class="arithmatex">\(\mathcal{O}(k)\)</span>，按原数组回填要 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，所以时间为 <span class="arithmatex">\(\Theta (n+k)\)</span>，额外空间为 <span class="arithmatex">\(\mathcal{O}(n+k)\)</span>。最后一遍的扫描方向还使它保持<strong>稳定性</strong>。</p>
+<p>先把“个数”变成“下标”：若恰有 3 个数不大于2，那么值为 2 的最后一个位置最多是下标 2，而不是 3。因此先把 count[2] 减 1，再写到那个下标。再遇到一个 2 时继续减，就填到前一格。</p>
+<p><code>reversed(A)</code> 表示按原列表从后往前遍历，不修改 A。<strong>第三步为什么要从后往前？</strong> <code>count[x]</code> 表示"不大于 x 的元素个数"，也就是 x 该放的位置区间的末尾。从后往前扫时，后出现的相同键会被放到更靠后的位置，<strong>保持了输入顺序</strong>——这就是稳定性。</p>
 <p>再看一个会丢失重复元素的坏例子（它不只是“不稳定”，而是连元素都没保全）：如果直接用"键当数组下标"（所谓直接访问数组排序），重复的键会互相覆盖，根本排不了有重复元素的数组。计数排序多出的那一步"统计每个键有多少个"，正是为了把重复键<strong>连续地放在一段区间里</strong>。</p>
 <h2 id="_3">稳定性为什么值钱<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>因为有了它，<strong>基数排序</strong>才可能出现。</p>
@@ -10043,13 +10043,13 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">return</span> <span class="n">A</span>
 </span></code></pre></div>
 <p><strong>这个“全数组逐位稳定排序”的版本为什么从低位到高位？</strong> 因为后面一轮会覆盖前面一轮的顺序，但稳定性保证了"同一高位分组内部，仍然按低位有序"。若仍每轮对整个数组排序，先排高位后排低位会破坏优先级；也存在先按高位分桶、再各桶递归的MSD基数排序，那是另一套算法。</p>
-<p>形式化地说，记 <code>P(t)</code> 为"数组按最低 t 位有序"。<code>P(1)</code> 由第一轮直接得到。做第 t+1 轮时，若两个元素截取最低 t+1 位后 <code>x &lt; y</code>：第 t+1 位不同时靠这一轮排定；第 t+1 位相同时，比较取决于更低的 t 位，而由 <code>P(t)</code> 它们已经有序，<strong>又因为本轮排序稳定，这个顺序被保留</strong>。所以 <code>P(t+1)</code> 成立。∎</p>
+<p>形式化地说，记 <code>P(t)</code> 为"数组按最低 t 位有序"。<code>P(1)</code> 由第一轮直接得到。做第 t+1 轮时，若两个元素截取最低 t+1 位后 <span class="arithmatex">\(x &lt; y\)</span>：第 t+1 位不同时靠这一轮排定；第 t+1 位相同时，比较取决于更低的 t 位，而由 <code>P(t)</code> 它们已经有序，<strong>又因为本轮排序稳定，这个顺序被保留</strong>。所以 <span class="arithmatex">\(P(t+1)\)</span> 成立。</p>
 <p><strong>注意证明里"稳定"起的作用</strong>：没有它，第二种情况就失去保证。这解释了为什么基数排序必须用稳定排序做子过程。</p>
-<p>复杂度：每轮计数排序 <code>Θ(n + base)</code>，共 <code>digits</code> 轮，<code>Θ(digits × (n + base))</code>。</p>
+<p>复杂度：每轮计数排序 <span class="arithmatex">\(\Theta (n + \mathrm{base})\)</span>，共 <code>digits</code> 轮，<span class="arithmatex">\(\Theta(\mathrm{digits}(n+\mathrm{base}))\)</span>。</p>
 <p><img alt="基数排序的一轮" src="../figures/09-radix-pass.png" /></p>
 <p>图中是十位这一轮：上排 [50,21,101,1,13,234,345] 已按个位排好。按十位稳定分桶后得到 [101,1,13,21,234,345,50]。十位相同的 101 与 1 保持原先次序。下方表格另用 [170,45,75,90,802,24,2,66] 演示完整三轮。</p>
 <h2 id="_4">桶排序<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>当键是 <code>[0, 1)</code> 上近似均匀分布的实数时，可以切成 n 个等长的桶，桶内再排序（本例调用 Python sorted；若改插入排序，偏斜分布下最坏可达 Θ(n²)）：</p>
+<p>当键是 <code>[0, 1)</code> 上近似均匀分布的实数时，可以切成 n 个等长的桶，桶内再排序（本例调用 Python sorted；若改插入排序，偏斜分布下最坏可达 <span class="arithmatex">\(\Theta (n^{2})\)</span>）：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bucket_sort</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">buckets</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
@@ -10060,8 +10060,8 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">return</span> <span class="n">out</span>
 </span></code></pre></div>
-<p>每桶的平均元素数是 1，但仅凭平均数还不能推出平均排序成本。设某桶大小为 X，独立均匀分桶时 <code>E[X]=1</code>、<code>E[X²]=2−1/n</code>；而 sorted 的 O(X log(X+1)) 成本可用 O(1+X²) 界定，所以每桶期望 O(1)，n 个桶合计期望 Θ(n)。这项分析依赖独立均匀分布，第一遍只需记住适用条件。<strong>但如果分布严重偏斜（所有元素挤进一个桶），它会退化成 <code>Θ(n log n)</code>。</strong> 这一点和快速排序需要随机化形成了有趣的对照。</p>
-<p>走一遍基数排序：<code>A = [170, 45, 75, 90, 802, 24, 2, 66]</code></p>
+<p>每桶的平均元素数是 1，但仅凭平均数还不能推出平均排序成本。设某桶大小为 X，独立均匀分桶时 <span class="arithmatex">\(E[X]=1\)</span>、<span class="arithmatex">\(E[X^{2}]=2-1/n\)</span>；而 sorted 的 <span class="arithmatex">\(\mathcal{O}(X \log (X+1))\)</span> 成本可用 <span class="arithmatex">\(\mathcal{O}(1+X^{2})\)</span> 界定，所以每桶期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，n 个桶合计期望 <span class="arithmatex">\(\Theta (n)\)</span>。这项分析依赖独立均匀分布，第一遍只需记住适用条件。<strong>但如果分布严重偏斜（所有元素挤进一个桶），它会退化成 <span class="arithmatex">\(\Theta (n \log n)\)</span>。</strong> 这一点和快速排序需要随机化形成了有趣的对照。</p>
+<p>走一遍基数排序：<span class="arithmatex">\(A = [170, 45, 75, 90, 802, 24, 2, 66]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10089,11 +10089,11 @@
 </tbody>
 </table>
 <h2 id="_5">比较排序的下界<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p><strong>任何只用"比较两个元素"来决定顺序的排序算法，最坏情况下至少需要 <code>Ω(n log n)</code> 次比较。</strong></p>
+<p><strong>任何只用"比较两个元素"来决定顺序的排序算法，最坏情况下至少需要 <span class="arithmatex">\(\Omega (n \log n)\)</span> 次比较。</strong></p>
 <p><img alt="三元素比较分支与六种次序" src="../images/09-decision-tree.svg" /></p>
 <p>证明用的是决策树。把算法的执行过程画成一棵二叉树，每个内部节点是一次比较、两个分支对应两种结果，每个叶子上挂着一种输出排列。要正确排序，不同的输入排列必须落到不同的叶子。</p>
-<p>这里用 n 个互异且带身份的元素来证明最坏下界。<code>n!</code> 读作 n 的阶乘，即 n×(n−1)×…×1。算法虽会把数排成升序，但不同输入次序所需的身份排列不同，所以必须有足够多的叶子区分它们。</p>
-<p><code>n</code> 个元素有 <code>n!</code> 种排列，所以叶子至少 <code>n!</code> 个；深度为 <code>d</code> 的二叉树最多 <code>2^d</code> 个叶子，于是 <code>2^d ≥ n!</code>。取对数并估计 <code>n!≥(n/2)^(n/2)</code>（后半段各因子≥n/2），因此log₂(n!)≥(n/2)log₂(n/2)；同时n!≤n^n，得到log₂(n!)=Θ(n log n)，得 <code>d = Ω(n log n)</code>。∎</p>
+<p>这里用 n 个互异且带身份的元素来证明最坏下界。<span class="arithmatex">\(n!\)</span> 读作 n 的阶乘，即 <span class="arithmatex">\(n(n-1)\cdots1\)</span>。算法虽会把数排成升序，但不同输入次序所需的身份排列不同，所以必须有足够多的叶子区分它们。</p>
+<p>互异的 <span class="arithmatex">\(n\)</span> 个元素有 <span class="arithmatex">\(n!\)</span> 种排列，因此决策树至少有 <span class="arithmatex">\(n!\)</span> 个叶子；深度为 <span class="arithmatex">\(d\)</span> 的二叉树最多有 <span class="arithmatex">\(2^d\)</span> 个叶子，所以 <span class="arithmatex">\(d\ge\log_2(n!)\)</span>。对 <span class="arithmatex">\(n\ge2\)</span>，后半段至少有 <span class="arithmatex">\(\lfloor n/2\rfloor\)</span> 个因子不小于 <span class="arithmatex">\(n/2\)</span>，故 <span class="arithmatex">\(\log_2(n!)\ge\lfloor n/2\rfloor\log_2(n/2)\)</span>；又因 <span class="arithmatex">\(n!\le n^n\)</span>，得到 <span class="arithmatex">\(\log_2(n!)=\Theta(n\log n)\)</span>。因此最坏比较次数至少为 <span class="arithmatex">\(\Omega(n\log n)\)</span>。</p>
 <p><strong>这个下界只约束比较排序。</strong> 计数排序、基数排序使用整数数位来定位桶，不只靠两两比较。桶排序也会在桶内比较，但利用分布假设降低期望成本；它没有突破任意输入下的比较排序最坏下界。<strong>"要不要比较"是算法设计里一条根本的分界线。</strong></p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>状态码或月份的取值范围很小时，按值分桶能省去两两比较。</p>
@@ -10101,9 +10101,9 @@
 <p>对 [1,1,1,2,2,3]、k=2，计数为 {1:3,2:2,3:1}，从频率 n 向 1 扫，取出 1、2 即可。频率桶最多 n+1 个，即使原数值很大也不受影响。</p>
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 对"按月份排序"，如果还要求同月份内部按名字字典序排，上面那个做法要怎么改？复杂度呢？</p>
-<p>先按名字排一遍（<code>Θ(n log n)</code>），再做一次<strong>稳定</strong>的按月份分桶。总复杂度由第一步主导。<strong>这个"先按次要键排、再按主要键稳定排"的套路就是基数排序的思路。</strong></p>
-<p><strong>2.</strong> 如果月份不是 1..12 而是任意字符串，还能做到 <code>Θ(n)</code> 吗？</p>
-<p>不能无条件做到——键的取值范围不再有界，计数数组开不出来。但如果是<strong>固定长度的短字符串</strong>，可以逐字符做基数排序，<code>Θ(d(n + σ))</code>，d 是字符数，σ 是字符集大小；小写 σ 在这里表示一个数量，与求和符号 Σ 不同。<strong>这又一次说明"线性时间排序需要额外结构假设"。</strong></p>
+<p>先按名字排一遍（<span class="arithmatex">\(\Theta (n \log n)\)</span>），再做一次<strong>稳定</strong>的按月份分桶。总复杂度由第一步主导。<strong>这个"先按次要键排、再按主要键稳定排"的套路就是基数排序的思路。</strong></p>
+<p><strong>2.</strong> 如果月份不是 1..12 而是任意字符串，还能做到 <span class="arithmatex">\(\Theta (n)\)</span> 吗？</p>
+<p>不能无条件做到——键的取值范围不再有界，计数数组开不出来。但如果是<strong>固定长度的短字符串</strong>，可以逐字符做基数排序，<span class="arithmatex">\(\Theta (d(n + \sigma ))\)</span>，d 是字符数，<span class="arithmatex">\(\sigma\)</span> 是字符集大小；小写 <span class="arithmatex">\(\sigma\)</span> 在这里表示一个数量，与求和符号 <span class="arithmatex">\(\Sigma\)</span> 不同。<strong>这又一次说明"线性时间排序需要额外结构假设"。</strong></p>
 <p><strong>3.</strong> 学生记录为 (姓名,月份)，要求先按月份、同月再按姓名排。为什么只按月份排序还不够？</p>
 <p>单键排序只保证月份有序，同月记录可能仍按原输入顺序。可以先按姓名排序，再稳定地按月份排序；也可以给排序提供一个取比较字段的函数：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">student_key</span><span class="p">(</span><span class="n">student</span><span class="p">):</span>
@@ -10114,9 +10114,9 @@
 </span></code></pre></div>
 <p><code>key=</code> 指定拿哪个字段比较，sorted 返回新列表，不改变 students；元组从左往右比较，第一项相同才比较第二项。<code>lambda student: (student[1],student[0])</code> 是上面这个只含一个 return 的函数的简写，后面会用同样写法选区间的结束时间。逐维稳定排序是一种多键排序方法，并非唯一做法；它的重要性在于能把有限值域的每一位都交给线性时间子程序处理。</p>
 <p><strong>4.</strong> 计数排序必须事先知道键的范围 <code>k</code>。如果不知道呢？</p>
-<p>先扫一遍取最大值（Θ(n)），非负整数时把它作为k；总成本仍为O(n+k)，但k可能极大而不实用。负数可先用最小值平移，再看整个值域宽度。也可用基数排序，但要从最大值的位数确定 digits，或不断处理到所有高位都为 0；不能固定处理不足的位数。</p>
-<p><strong>5.</strong> 实现 <code>top_k_frequent(nums, k)</code>，要求 O(n)。</p>
-<p>先用普通字典 freq={} 计数，对每个 x 更新 <code>freq[x]=freq.get(x,0)+1</code>（期望 O(n)），再按<strong>频率</strong>分桶——桶的下标是频率，范围是 <code>1..n</code>。从高频往低频取 k 个。<strong>这题提醒我们：桶排序的关键不是"数字"，而是"找到一个值域有限且小的量"。</strong></p>
+<p>先扫一遍取最大值（<span class="arithmatex">\(\Theta (n)\)</span>），非负整数时把它作为k；总成本仍为<span class="arithmatex">\(\mathcal{O}(n+k)\)</span>，但k可能极大而不实用。负数可先用最小值平移，再看整个值域宽度。也可用基数排序，但要从最大值的位数确定 digits，或不断处理到所有高位都为 0；不能固定处理不足的位数。</p>
+<p><strong>5.</strong> 实现 <code>top_k_frequent(nums, k)</code>，要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p>先用普通字典 freq={} 计数，对每个 x 更新 <code>freq[x]=freq.get(x,0)+1</code>（期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>），再按<strong>频率</strong>分桶——桶的下标是频率，范围是 <code>1..n</code>。从高频往低频取 k 个。<strong>这题提醒我们：桶排序的关键不是"数字"，而是"找到一个值域有限且小的量"。</strong></p>
 
 
 

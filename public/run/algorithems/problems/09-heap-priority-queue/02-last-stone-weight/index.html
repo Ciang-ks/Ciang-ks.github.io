@@ -5155,10 +5155,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2-log-n" class="md-nav__link">
+  <a href="#mathcalon2-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序模拟（O(n² log n)，用于对照）
+        解法三：排序模拟（\(\mathcal{O}(n^{2} \log n)\)，用于对照）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2-log-n" class="md-nav__link">
+  <a href="#mathcalon2-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序模拟（O(n² log n)，用于对照）
+        解法三：排序模拟（\(\mathcal{O}(n^{2} \log n)\)，用于对照）
       
     </span>
   </a>
@@ -10080,9 +10080,9 @@
 <h1 id="1046-last-stone-weight">1046. Last Stone Weight · 最后一块石头的重量<a class="headerlink" href="#1046-last-stone-weight" title="Permanent link">&para;</a></h1>
 <p><code>Easy</code> ｜ <code>Heap</code> ｜ <a href="https://leetcode.com/problems/last-stone-weight/">LeetCode 1046</a> ｜ <a href="https://neetcode.io/problems/last-stone-weight">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>每次从石头堆里挑出<strong>最重的两块</strong> <code>x ≥ y</code>：</p>
+<p>每次从石头堆里挑出<strong>最重的两块</strong> <span class="arithmatex">\(x \ge y\)</span>：</p>
 <ul>
-<li>若 <code>x == y</code>，两块都消失；</li>
+<li>若 <span class="arithmatex">\(x = y\)</span>，两块都消失；</li>
 <li>否则把 <code>x - y</code> 作为一块新石头放回去。</li>
 </ul>
 <p>重复直到只剩 0 或 1 块石头，返回最后一块的重量（没有则返回 0）。</p>
@@ -10099,7 +10099,7 @@
 </ol>
 <p>这是"用堆做反复极值操作"的最简示范，也是熟悉"负数模拟大顶堆"的好练习。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>这里每轮的规则已经规定要碰撞最重的两块，不是在所有碰撞方案中寻找最优值。堆只是高效执行规则：取出后石头数量至少减少一块，所以至多执行 n−1 轮；新差值可能插入重量序列的任意位置，不能只将原数组排一次后一直从尾部取。</p>
+<p>这里每轮的规则已经规定要碰撞最重的两块，不是在所有碰撞方案中寻找最优值。堆只是高效执行规则：取出后石头数量至少减少一块，所以至多执行 n-1 轮；新差值可能插入重量序列的任意位置，不能只将原数组排一次后一直从尾部取。</p>
 <p>例如 [2,7,4] 先取 7、4 得 3，再取 3、2 得 1。负号只改变排序方向，计算差值前应还原正重量。若题目允许自由挑选碰撞顺序并求最小剩余重量，就变成另一道分组和差问题，本题模拟不能证明那个目标最优。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：负数模拟大顶堆（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10132,8 +10132,8 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>     <span class="c1"># a - b 恰好等于 -(y - x)</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">return</span> <span class="o">-</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">heap</span> <span class="k">else</span> <span class="mi">0</span>
 </span></code></pre></div>
-<p>因为 <code>a = -y</code>、<code>b = -x</code>，所以 <code>a - b = x - y</code>，正好是要压回的负值。这个等价变换很漂亮，但初学时容易绕晕，建议先写清解法一。</p>
-<h3 id="on2-log-n">解法三：排序模拟（O(n² log n)，用于对照）<a class="headerlink" href="#on2-log-n" title="Permanent link">&para;</a></h3>
+<p>因为 <span class="arithmatex">\(a = -y\)</span>、<span class="arithmatex">\(b = -x\)</span>，所以 <span class="arithmatex">\(a - b = x - y\)</span>，正好是要压回的负值。这个等价变换很漂亮，但初学时容易绕晕，建议先写清解法一。</p>
+<h3 id="mathcalon2-log-n">解法三：排序模拟（<span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>，用于对照）<a class="headerlink" href="#mathcalon2-log-n" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lastStoneWeight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stones</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">stones</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -10157,24 +10157,24 @@
 <tbody>
 <tr>
 <td>堆</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>排序模拟</td>
-<td>O(n² log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>负数压入、负数弹出</strong>，最后返回时要取反。</li>
-<li>判断条件是 <code>x != y</code>：相等时两块都消失，不放回。</li>
+<li>判断条件是 <span class="arithmatex">\(x \ne y\)</span>：相等时两块都消失，不放回。</li>
 <li>循环条件是 <code>len(heap) &gt; 1</code>；最后可能剩 0 块（返回 0）或 1 块。</li>
 <li>压回的值必须是 <code>y - x</code>（<code>y</code> 是较大的那块），顺序弄反就得到负数了。</li>
-<li><strong>追问：<code>heapq.heapify</code> 的复杂度？</strong> → O(n)，不是 O(n log n)。主动说出来是加分项。</li>
-<li><strong>追问：如果石头有 10⁶ 块？</strong> → 堆解法 O(n log n) 完全够用；排序模拟会超时。</li>
+<li><strong>追问：<code>heapq.heapify</code> 的复杂度？</strong> → <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。主动说出来是加分项。</li>
+<li><strong>追问：如果石头有 <span class="arithmatex">\(10^{6}\)</span> 块？</strong> → 堆解法 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 完全够用；排序模拟会超时。</li>
 <li><strong>追问：如果每次取 k 块而不是 2 块？</strong> → 逻辑类似，但要先明确"取 k 块后如何合并"的规则。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

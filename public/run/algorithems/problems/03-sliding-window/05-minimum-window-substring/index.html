@@ -3046,10 +3046,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#need-window-haveon-m" class="md-nav__link">
+  <a href="#need-window-havemathcalon-m" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：need / window + have（推荐，O(n + m)）
+        解法一：need / window + have（推荐，\(\mathcal{O}(n + m)\)）
       
     </span>
   </a>
@@ -10042,10 +10042,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#need-window-haveon-m" class="md-nav__link">
+  <a href="#need-window-havemathcalon-m" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：need / window + have（推荐，O(n + m)）
+        解法一：need / window + have（推荐，\(\mathcal{O}(n + m)\)）
       
     </span>
   </a>
@@ -10131,7 +10131,7 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>这是<strong>可变长度窗口求最短</strong>的标准题，也是本模块最难的一题。核心是"怎么高效判断窗口是否已经覆盖 t"。</p>
 <h3 id="_3">朴素做法的问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>如果每轮都重新统计窗口字符并与 <code>t</code> 的 <code>Counter</code> 比较，复杂度会变成 O(n·|t|) 或更多，而且写法容易出错。</p>
+<p>如果每轮都重新统计窗口字符并与 <code>t</code> 的 <code>Counter</code> 比较，复杂度会变成 <span class="arithmatex">\(\mathcal{O}(n\cdot \vert t\vert )\)</span> 或更多，而且写法容易出错。</p>
 <h3 id="need-window-have">正确做法：need / window 两张表 + have 计数<a class="headerlink" href="#need-window-have" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>need</code>：<code>t</code> 中每个字符需要的次数；</li>
@@ -10153,18 +10153,18 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">need</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="n">need</span><span class="p">[</span><span class="n">c</span><span class="p">]:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">have</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></code></pre></div>
-<p>用 <code>==</code> 而不是 <code>&gt;=</code>：只有"刚好达标的那一刻"才让 <code>have</code> 增加一次，避免重复计数。</p>
-<p>移除字符 <code>d = s[l]</code> 时：</p>
+<p>用 <span class="arithmatex">\(=\)</span> 而不是 <span class="arithmatex">\(\ge\)</span>：只有"刚好达标的那一刻"才让 <code>have</code> 增加一次，避免重复计数。</p>
+<p>移除字符 <span class="arithmatex">\(d = s[l]\)</span> 时：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">window</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">if</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">need</span> <span class="ow">and</span> <span class="n">window</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">need</span><span class="p">[</span><span class="n">d</span><span class="p">]:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">have</span> <span class="o">-=</span> <span class="mi">1</span>
 </span></code></pre></div>
-<p>用 <code>&lt;</code>：只有在"从达标变成不达标"时才减少。</p>
+<p>用 <span class="arithmatex">\(&lt;\)</span>：只有在"从达标变成不达标"时才减少。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>本题要求各字符至少达到需求，允许有多余字符，也允许窗口包含 t 中没有的字符。例如 t="AAB" 时，窗口 AB 虽然覆盖两种字符，仍缺一个 A；have 必须统计“需求已达标的种类”，而不是见过几种或收集了多少总字符。</p>
 <p>在右端固定且已经覆盖后，应在删除前先记录答案，再连续试更短窗口，直到某一需求刚被打破。移出的无关字符、或某字符的多余副本，都不应立刻减少 have。这个过程枚举每个右端下最短的合法窗口；被丢掉的更左起点以后只会产生更长窗口，因此无需回退。与最长无重复子串相比，收缩条件相反：那里在违规时修复，这里在仍合法时主动逼近边界。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<h3 id="need-window-haveon-m">解法一：need / window + have（推荐，O(n + m)）<a class="headerlink" href="#need-window-haveon-m" title="Permanent link">&para;</a></h3>
+<h3 id="need-window-havemathcalon-m">解法一：need / window + have（推荐，<span class="arithmatex">\(\mathcal{O}(n + m)\)</span>）<a class="headerlink" href="#need-window-havemathcalon-m" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10240,17 +10240,17 @@
 <tbody>
 <tr>
 <td>need/window + have</td>
-<td>O(n + m)</td>
-<td>O(k)，k 为不同字符数</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span>，k 为不同字符数</td>
 </tr>
 <tr>
 <td>missing 计数</td>
-<td>O(n + m)</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>每个字符最多被右指针加入一次、被左指针移除一次，所以内层 <code>while</code> 的总执行次数是 O(n)。</p>
+<p>每个字符最多被右指针加入一次、被左指针移除一次，所以内层 <code>while</code> 的总执行次数是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>求最短窗口时，答案要在收缩循环内部更新</strong>，不能放在循环外面。这是与"求最长"最大的区别。</li>
@@ -10258,7 +10258,7 @@
 <li><code>window[c] == need[c]</code> 用等号，<code>window[d] &lt; need[d]</code> 用小于号，两个判断的方向容易写反。</li>
 <li><strong><code>t</code> 中重复字符必须用计数表而不是集合</strong>：<code>t = "AA"</code> 时，窗口里只有一个 <code>A</code> 是不够的。</li>
 <li>如果 <code>t</code> 中的字符不在 <code>s</code> 中，直接返回 <code>""</code>；上面的写法天然处理。</li>
-<li><strong>追问：为什么内层 <code>while</code> 不会让复杂度变 O(n²)？</strong> → 因为 <code>l</code> 只增不减，每个字符最多被移出一次。</li>
+<li><strong>追问：为什么内层 <code>while</code> 不会让复杂度变 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>？</strong> → 因为 <code>l</code> 只增不减，每个字符最多被移出一次。</li>
 <li><strong>追问：如何返回所有最短窗口？</strong> → 收集所有长度为 <code>best</code> 的区间。</li>
 <li><strong>追问：如何扩展到"字符集很大"的场景？</strong> → 用字典而非数组，逻辑不变。</li>
 <li>面试建议：先讲清"need / window / have"三元结构，再强调"求最短在 while 内更新"，最后补一句复杂度论证。</li>

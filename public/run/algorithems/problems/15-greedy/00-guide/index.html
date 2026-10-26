@@ -10420,7 +10420,7 @@
 <tr>
 <td>复杂度</td>
 <td>取决于选择与维护成本</td>
-<td>状态数×每状态转移成本，也可能 O(n)</td>
+<td>状态数乘以每个状态的转移成本，也可能 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>正确性依据</td>
@@ -10513,7 +10513,7 @@
 <h3 id="1-maximum-subarray53">1. Maximum Subarray（53）<a class="headerlink" href="#1-maximum-subarray53" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："和最大的连续子数组"。</p>
 <p><strong>候选思路</strong>：维护"以当前位置结尾的最大和"<code>cur</code>。对每个新元素只有两个选择：接在前面（<code>cur + x</code>）或重新开始（<code>x</code>）。<strong>当 <code>cur &lt; 0</code> 时重新开始，因为负前缀只会拖累后面。</strong></p>
-<p><strong>走一遍示例</strong>：<code>nums = [-2,1,-3,4,-1,2,1,-5,4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [-2,1,-3,4,-1,2,1,-5,4]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10584,7 +10584,7 @@
 <h3 id="2-jump-game55">2. Jump Game（55）<a class="headerlink" href="#2-jump-game55" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："每个位置最多能跳几步，判断能否到终点"。</p>
 <p><strong>候选思路</strong>：维护"能到达的最远位置"<code>farthest</code>。<strong>为什么贪心成立？</strong> 因为可达性具有"前缀封闭"的性质——如果位置 i 可达，那么所有 j &lt; i 都可达，所以遍历到 i 时"i 之前所有位置的跳跃范围"已经全部合并进 <code>farthest</code> 了。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [2,3,1,1,4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [2,3,1,1,4]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>i=0: farthest = max(0, 0+2) = 2
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>i=1: 1 &lt;= 2 ✓，farthest = max(2, 1+3) = 4
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>i=2: 2 &lt;= 4 ✓，farthest = max(4, 3) = 4
@@ -10596,7 +10596,7 @@
 <h3 id="3-jump-game-ii45">3. Jump Game II（45）<a class="headerlink" href="#3-jump-game-ii45" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："求最少跳跃次数"。</p>
 <p><strong>候选思路</strong>：把"最远可达"理解成<strong>一层一层地扩展</strong>（BFS 视角）。维护两个变量：<code>end</code>（当前层右边界）、<code>farthest</code>（下一层右边界）。到达 <code>end</code> 就说明<strong>必须再跳一次</strong>。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [2,3,1,1,4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [2,3,1,1,4]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10627,12 +10627,12 @@
 <td>1</td>
 <td>4</td>
 <td>是</td>
-<td>2，end=4 ≥ 终点 → 停</td>
+<td>2，end=4 不小于 终点 → 停</td>
 </tr>
 </tbody>
 </table>
 <p>答案 2（0 → 1 → 4）。</p>
-<p><strong>关键细节</strong>：<strong>必须先更新 <code>farthest</code> 再判断 <code>i == end</code></strong>；循环只到 <code>n-2</code>；<code>n == 1</code> 返回 0。</p>
+<p><strong>关键细节</strong>：<strong>必须先更新 <code>farthest</code> 再判断 <span class="arithmatex">\(i = \mathrm{end}\)</span></strong>；循环只到 <code>n-2</code>；<span class="arithmatex">\(n = 1\)</span> 返回 0。</p>
 <p><strong>追问准备</strong>："为什么不能做 BFS 队列？" → 因为可达位置永远是连续区间，用一个右边界就能表示整层，不需要队列。</p>
 <h3 id="4-gas-station134">4. Gas Station（134）<a class="headerlink" href="#4-gas-station134" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："环形加油站，求能绕行一周的起点"。</p>
@@ -10641,7 +10641,7 @@
 <li><strong>总量判断可行性</strong>：<code>sum(gas) &lt; sum(cost)</code> 一定无解；反之一定有解；</li>
 <li><strong>一旦在某处断油，起点必须跳到下一个位置</strong>——因为在断油点之前的任何位置都不可能是起点（从中间出发只会"少了前面积累的油"）。</li>
 </ol>
-<p><strong>走一遍示例</strong>：<code>gas = [1,2,3,4,5]</code>，<code>cost = [3,4,5,1,2]</code></p>
+<p><strong>走一遍示例</strong>：<code>gas = [1,2,3,4,5]</code>，<span class="arithmatex">\(\mathrm{cost} = [3,4,5,1,2]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10690,9 +10690,9 @@
 </tr>
 </tbody>
 </table>
-<p><code>total = 0 ≥ 0</code>，返回 3。</p>
+<p><span class="arithmatex">\(\mathrm{total} = 0 \ge 0\)</span>，返回 3。</p>
 <p><strong>关键细节</strong>：<code>total</code> 和 <code>cur</code> 都要维护（一个判可行性、一个找起点）；<strong>可行性必须在最后才判断</strong>，不能中途返回 -1。</p>
-<p><strong>论证要能说清</strong>：为什么"从 i 出发在 j 断油"意味着"i 到 j 之间任何点都不能作为起点"？用反证法——若从 k（i&lt;k≤j）出发能成功，那么从 i 出发时"i 到 k 的净油量 ≥ 0"（否则 k 之前就断了），所以从 i 出发也应该成功，矛盾。</p>
+<p><strong>论证要能说清</strong>：为什么"从 i 出发在 j 断油"意味着"i 到 j 之间任何点都不能作为起点"？用反证法——若从 k（i&lt;k不大于j）出发能成功，那么从 i 出发时"i 到 k 的净油量 不小于 0"（否则 k 之前就断了），所以从 i 出发也应该成功，矛盾。</p>
 <h3 id="5-hand-of-straights846">5. Hand of Straights（846）<a class="headerlink" href="#5-hand-of-straights846" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："把牌分成若干组，每组 groupSize 张连续的牌"。</p>
 <p><strong>候选思路</strong>：设当前<strong>最小的牌</strong>是 x，那么<strong>任何包含 x 的组必须以 x 开头</strong>（x 已是最小）。而 x 必须被分到某一组里——<strong>所以选择是强制的，贪心自动成立</strong>。</p>
@@ -10710,12 +10710,12 @@
 <p><strong>任何某一维超过 target 的三元组都不能参与合并</strong>（一旦参与，那一维永远大于 target）。</p>
 </blockquote>
 <p>筛掉这些之后，问题变成"<strong>每个维度是否都存在一个安全三元组，其该维恰好等于 target 的对应维</strong>"。</p>
-<p><strong>走一遍示例</strong>：<code>target = [2,7,5]</code>，<code>triplets = [[2,5,3],[1,7,5]]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{target} = [2,7,5]\)</span>，<code>triplets = [[2,5,3],[1,7,5]]</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[2,5,3]：三维都 ≤ target → 安全；第 1 维等于 2 → 标记第 1 维 ✓
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>[1,7,5]：安全；第 2 维等于 7、第 3 维等于 5 → 标记第 2、3 维 ✓
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>三维都标记 → True
 </span></code></pre></div>
-<p><strong>关键细节</strong>：判断是"<strong>恰好等于</strong>"而不是"≤"；<strong>不需要考虑合并顺序</strong>（取最大值满足交换律和结合律）。</p>
+<p><strong>关键细节</strong>：判断是"<strong>恰好等于</strong>"而不是"不大于"；<strong>不需要考虑合并顺序</strong>（取最大值满足交换律和结合律）。</p>
 <h3 id="7-partition-labels763">7. Partition Labels（763）<a class="headerlink" href="#7-partition-labels763" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："划分成尽可能多的片段，同一字母只能出现在一个片段里"。</p>
 <p><strong>候选思路</strong>：某个片段一旦包含字符 c，就必须<strong>延伸到 c 最后出现的位置</strong>。于是扫描时维护"必须延伸到的最远处"<code>end</code>，到达 end 时第一次允许切开，为最多段数应立即切。</p>
@@ -10726,11 +10726,11 @@
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>下一段从 9 开始，同理得到 7 和 8
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>答案 [9,7,8]
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<code>end = max(end, last[c])</code> 必须写在 <code>i == end</code> 判断之前；长度是 <code>end - start + 1</code>。</p>
+<p><strong>关键细节</strong>：<code>end = max(end, last[c])</code> 必须写在 <span class="arithmatex">\(i = \mathrm{end}\)</span> 判断之前；长度是 <span class="arithmatex">\(\mathrm{end} - \mathrm{start} + 1\)</span>。</p>
 <p><strong>本质</strong>：这就是"区间合并"——每个字符的 <code>[首次出现, 最后出现]</code> 是一个区间，把它们合并后的长度就是答案。<strong>能看出这层联系说明你对区间贪心已经有直觉了。</strong></p>
 <h3 id="8-valid-parenthesis-string678">8. Valid Parenthesis String（678）<a class="headerlink" href="#8-valid-parenthesis-string678" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："<code>*</code> 可以是 <code>(</code>、<code>)</code> 或空串，判断括号串是否合法"。</p>
-<p><strong>候选思路</strong>：每个 <code>*</code> 有 3 种可能，n 个星号就是 3ⁿ 种组合，<strong>枚举不可行</strong>。关键是不枚举每种可能，而是<strong>维护"未匹配左括号数量"的可能范围 <code>[lo, hi]</code></strong>。</p>
+<p><strong>题面信号</strong>："<span class="arithmatex">\(*\)</span> 可以是 <code>(</code>、<code>)</code> 或空串，判断括号串是否合法"。</p>
+<p><strong>候选思路</strong>：每个 <span class="arithmatex">\(*\)</span> 有 3 种可能，n 个星号就是 <span class="arithmatex">\(3^{n}\)</span> 种组合，<strong>枚举不可行</strong>。关键是不枚举每种可能，而是<strong>维护"未匹配左括号数量"的可能范围 <span class="arithmatex">\([\mathrm{lo}, \mathrm{hi}]\)</span></strong>。</p>
 <p><strong>范围怎么更新</strong>：</p>
 <table>
 <thead>
@@ -10746,15 +10746,15 @@
 </tr>
 <tr>
 <td><code>)</code></td>
-<td><code>lo -= 1, hi -= 1</code>；若 <code>hi &lt; 0</code> → 直接 False</td>
+<td><code>lo -= 1, hi -= 1</code>；若 <span class="arithmatex">\(hi &lt; 0\)</span> → 直接 False</td>
 </tr>
 <tr>
-<td><code>*</code></td>
+<td><span class="arithmatex">\(*\)</span></td>
 <td><code>lo -= 1</code>（当 <code>)</code>）、<code>hi += 1</code>（当 <code>(</code>）</td>
 </tr>
 <tr>
 <td>每轮结束</td>
-<td><code>lo = max(lo, 0)</code>（左括号数不可能为负）</td>
+<td><span class="arithmatex">\(lo = \max (lo, 0)\)</span>（左括号数不可能为负）</td>
 </tr>
 </tbody>
 </table>
@@ -10774,7 +10774,7 @@
 <td>1</td>
 </tr>
 <tr>
-<td><code>*</code></td>
+<td><span class="arithmatex">\(*\)</span></td>
 <td>0</td>
 <td>2</td>
 </tr>
@@ -10790,9 +10790,9 @@
 </tr>
 </tbody>
 </table>
-<p>结束时 <code>lo == 0</code> → True。</p>
+<p>结束时 <span class="arithmatex">\(lo = 0\)</span> → True。</p>
 <p><strong>为什么"维护范围"等价于枚举所有可能？</strong> 因为"未匹配左括号数"的取值是<strong>连续的一段区间</strong>（每步只是整体平移或向两端扩展），所以两个端点就能完整表示这个集合。<strong>这是本题最精妙的地方。</strong></p>
-<p><strong>关键细节</strong>：<code>hi &lt; 0</code> 要立即返回 False；每轮都要 <code>lo = max(lo, 0)</code>；最终判断是 <code>lo == 0</code>。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(hi &lt; 0\)</span> 要立即返回 False；每轮都要 <span class="arithmatex">\(lo = \max (lo, 0)\)</span>；最终判断是 <span class="arithmatex">\(lo = 0\)</span>。</p>
 <h2 id="_5">六、复杂度速查<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10806,42 +10806,42 @@
 <tr>
 <td>Maximum Subarray</td>
 <td>维护当前最优</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Jump Game</td>
 <td>维护最远可达</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Jump Game II</td>
 <td>最远可达 + 分层</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Gas Station</td>
 <td>全局记账</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Hand of Straights</td>
 <td>排序 + 分组</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Merge Triplets</td>
 <td>逐维筛选</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Partition Labels</td>
 <td>最远边界切分</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Valid Parenthesis String</td>
 <td>区间维护状态</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10853,15 +10853,15 @@
 <li><strong>把"局部最优"理解错</strong>（Coin Change 的经典反例）。</li>
 <li>53 题<strong>用 0 当初始值</strong>，全负数时出错。</li>
 <li>846 题<strong>用 <code>if</code> 而不是 <code>while</code></strong>。</li>
-<li>763 题<strong>先判断 <code>i == end</code> 再更新 <code>end</code></strong>。</li>
-<li>45 题<strong>先判断 <code>i == end</code> 再更新 <code>farthest</code></strong>。</li>
+<li>763 题<strong>先判断 <span class="arithmatex">\(i = \mathrm{end}\)</span> 再更新 <code>end</code></strong>。</li>
+<li>45 题<strong>先判断 <span class="arithmatex">\(i = \mathrm{end}\)</span> 再更新 <code>farthest</code></strong>。</li>
 </ol>
 <h2 id="_7">八、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>"我用贪心。每一步都维护'到目前为止能到达的最远位置'，因为一旦确认某个位置可达，更靠前的选择就不会影响后面的结果——这保证了局部最优可以累积成全局最优。时间 O(n)，空间 O(1)。"</p>
+<p>"我用贪心。每一步都维护'到目前为止能到达的最远位置'，因为一旦确认某个位置可达，更靠前的选择就不会影响后面的结果——这保证了局部最优可以累积成全局最优。时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>53 题里"什么时候重新开始"的依据是什么？</li>
-<li>45 题怎么在 O(n) 里求出最少步数？</li>
+<li>45 题怎么在 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 里求出最少步数？</li>
 <li>Gas Station 为什么"从某点失败后可以直接从下一点开始试"？</li>
 <li>Partition Labels 为什么"到达当前边界就能切一刀"？</li>
 <li>678 里为什么"维护 lo/hi 范围"等价于枚举所有可能？</li>

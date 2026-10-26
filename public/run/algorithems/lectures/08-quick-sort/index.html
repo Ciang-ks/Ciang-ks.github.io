@@ -10011,7 +10011,7 @@
 <p><strong>阅读起点</strong>：第 7 讲：递归与分治；第 3 讲：期望；本讲引入指示变量与期望的线性性。</p>
 <p><strong>首读范围</strong>：先看 partition 的四段区间；概率求和第二遍读。</p>
 <p>归并排序的做法是"先切两半、排好、再合并"。能不能换个思路：<strong>先随便挑一个元素当标杆，把比它小的都放左边、比它大的都放右边</strong>？这样标杆自动到了最终位置，剩下的两边递归处理就好。</p>
-<p>这就是快速排序。它在原数组上交换元素，不需要额外的合并数组；递归调用本身仍占空间。但它有一个致命弱点：<strong>标杆选得不好会退化成 <code>Θ(n²)</code></strong>。这一讲的一大半篇幅都在处理这件事，而解决它的工具（随机化与期望分析）比快速排序本身更重要。</p>
+<p>这就是快速排序。它在原数组上交换元素，不需要额外的合并数组；递归调用本身仍占空间。但它有一个致命弱点：<strong>标杆选得不好会退化成 <span class="arithmatex">\(\Theta (n^{2})\)</span></strong>。这一讲的一大半篇幅都在处理这件事，而解决它的工具（随机化与期望分析）比快速排序本身更重要。</p>
 <h2 id="_1">划分<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>先实现一次划分，再调用它完成排序。<code>partition(A,lo,hi)</code> 处理闭区间 A[lo..hi]，本次选最右边的 A[hi] 作标杆 pivot；函数会修改这段数组，并返回标杆最终所在下标。它只保证左边小于标杆、右边不小于标杆，<strong>不保证两边内部已经排好</strong>。例如对 <code>[3,1,2]</code> 以 2 为标杆，得到 <code>[1,2,3]</code> 是碰巧两边各只有一个元素；较长区间还要递归排序。</p>
 <p><img alt="快速排序的分区" src="../images/08-quicksort-partition.svg" /></p>
@@ -10032,7 +10032,7 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  A[j..hi-1] 尚未处理
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  A[hi]      = pivot
 </span></code></pre></div>
-<p>循环结束时 <code>A[lo..i-1] &lt; pivot ≤ A[i..hi-1]</code>，再把标杆换到位置 <code>i</code>，就得到"左边全部更小、右边全部不小于它"的格局——<strong>标杆从此不会再动，它已经在最终位置上了</strong>。</p>
+<p>循环结束时 <span class="arithmatex">\(A[k]&lt;\mathrm{pivot}\)</span> 对所有 <span class="arithmatex">\(lo\le k&lt;i\)</span> 成立，<span class="arithmatex">\(A[k]\ge\mathrm{pivot}\)</span> 对所有 <span class="arithmatex">\(i\le k&lt;hi\)</span> 成立，再把标杆换到位置 <code>i</code>，就得到"左边全部更小、右边全部不小于它"的格局——<strong>标杆从此不会再动，它已经在最终位置上了</strong>。</p>
 <p>图严格采用本代码的定义：i 是“小于区的<strong>下一个空位</strong>”，初始 i=lo；命中 <code>A[j]&lt;pivot</code> 后先交换 A[i] 与 A[j]，再让 i 加1；最后交换 <strong>A[i]</strong> 与 pivot。另一种把 i 定义成“小于区末尾”的模板会用 i+1，但本讲不能混用。</p>
 <h2 id="_2">随机选标杆，避免固定规则总遇到坏划分<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>有了 partition，完整排序就能分成三步：选一个标杆并移到末尾，划分这段数组，再分别排序标杆左右两侧。长度为 0 或 1 时直接结束。本实现用 random.randint(lo,hi) 等概率选取闭区间内的一个下标，并原地修改 A；调用 <code>quicksort(A)</code> 就会处理整个数组。</p>
@@ -10050,65 +10050,66 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">quicksort</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">return</span> <span class="n">A</span>
 </span></code></pre></div>
-<p>如果固定选末尾元素当标杆，输入 <code>[1,2,3,4,5]</code> 时每次划分都得到"左边 n−1 个、右边 0 个"，递归深度变成 n，总代价 <code>Θ(n²)</code>。而"已排序的输入"恰恰是非常常见的情况。</p>
-<p><strong>对元素互异的输入，这份随机二路划分实现的期望时间为 <code>Θ(n log n)</code>。重复值很多时，须使用后文的三路划分；全相等输入在二路版中仍是 Θ(n²)。</strong> 这里固定一份满足元素互异条件的输入，只让每次标杆选择随机变化；期望是对这些<strong>算法内部的随机选择</strong>取的。这个区别是随机化算法最值得玩味的地方。</p>
+<p>如果固定选末尾元素当标杆，输入 <code>[1,2,3,4,5]</code> 时每次划分都得到"左边 n-1 个、右边 0 个"，递归深度变成 n，总代价 <span class="arithmatex">\(\Theta (n^{2})\)</span>。而"已排序的输入"恰恰是非常常见的情况。</p>
+<p><strong>对元素互异的输入，这份随机二路划分实现的期望时间为 <span class="arithmatex">\(\Theta (n \log n)\)</span>。重复值很多时，须使用后文的三路划分；全相等输入在二路版中仍是 <span class="arithmatex">\(\Theta (n^{2})\)</span>。</strong> 这里固定一份满足元素互异条件的输入，只让每次标杆选择随机变化；期望是对这些<strong>算法内部的随机选择</strong>取的。这个区别是随机化算法最值得玩味的地方。</p>
 <h2 id="_3">期望分析：指示变量与线性性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>要分析它的期望运行时间，得先用上两个工具，先把它们摆出来。</p>
-<p>先从抛硬币理解期望：一次公平硬币取正面为 1、反面为 0，期望是 <code>1×1/2+0×1/2=1/2</code>。期望是按概率加权的平均值，不一定是某次运行真的取到的值。下面的 Pr[E] 表示事件 E 的概率，E[X] 表示变量 X 的期望；Σ 表示把所有指定项相加。这部分可在掌握划分代码后再读。</p>
-<p><strong>指示变量</strong>：把"某事件是否发生"编码成 0/1 随机变量 <code>X_E</code>，那么 <code>E[X_E] = Pr[E]</code>。</p>
-<p><strong>期望的线性性</strong>：对任意随机变量（<strong>不要求独立</strong>），<code>E[X₁ + ⋯ + X_k] = E[X₁] + ⋯ + E[X_k]</code>。</p>
+<p>先从抛硬币理解期望：一次公平硬币取正面为 1、反面为 0，期望是 <span class="arithmatex">\(1\times 1/2+0\times 1/2=1/2\)</span>。期望是按概率加权的平均值，不一定是某次运行真的取到的值。下面的 Pr[E] 表示事件 E 的概率，E[X] 表示变量 X 的期望；<span class="arithmatex">\(\Sigma\)</span> 表示把所有指定项相加。这部分可在掌握划分代码后再读。</p>
+<p><strong>指示变量</strong>：把"某事件是否发生"编码成 0/1 随机变量 <code>X_E</code>，那么 <span class="arithmatex">\(\mathbb{E}[X_E]=\Pr(E)\)</span>。</p>
+<p><strong>期望的线性性</strong>：对任意随机变量（<strong>不要求独立</strong>），<span class="arithmatex">\(\mathbb{E}[\sum_{i=1}^k X_i]=\sum_{i=1}^k\mathbb{E}[X_i]\)</span>。</p>
 <p>为什么可以先分别求期望再相加？把所有随机结果列出时，“先把这次结果里的工作量相加，再按概率平均”，与“每部分先按概率平均，最后相加”只是分配律交换了求和顺序。两部分是否一起变大，不影响这个等式。</p>
 <p>两条合起来，就能把总比较次数拆成逐对发生比较的概率，无需先求出整棵随机递归树的分布。</p>
-<p>现在分析快速排序的比较次数。设排序后的元素依次是 <code>z₁ &lt; z₂ &lt; ⋯ &lt; zₙ</code>，定义 <code>X_ij</code> 表示"<code>zᵢ</code> 与 <code>z_j</code> 是否被比较过"。总比较次数 <code>X = Σ_{i&lt;j} X_ij</code>，由线性性</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>E[X] = Σ_{i&lt;j} Pr[zᵢ 与 z_j 被比较]
-</span></code></pre></div>
-<p><strong>关键引理</strong>：<code>Pr[zᵢ 与 z_j 被比较] = 2 / (j − i + 1)</code>。</p>
-<p>考虑集合 <code>{zᵢ, …, z_j}</code>，共 <code>j − i + 1</code> 个元素。在"这个集合里第一次有元素被选为标杆"之前，<code>zᵢ</code> 和 <code>z_j</code> 一定还在同一个待处理区间里。此时：</p>
+<p>现在分析快速排序的比较次数。设排序后的元素依次是 <span class="arithmatex">\(z_{1} &lt; z_{2} &lt; \cdots &lt; z_{n}\)</span>，定义 <code>X_ij</code> 表示"<span class="arithmatex">\(z_{i}\)</span> 与 <code>z_j</code> 是否被比较过"。总比较次数 <span class="arithmatex">\(X=\sum_{i&lt;j}X_{ij}\)</span>，由线性性</p>
+<div class="arithmatex">\[
+\mathbb{E}[X]=\sum_{1\le i&lt;j\le n}\Pr(z_i\text{ 与 }z_j\text{ 被比较})
+\]</div>
+<p><strong>关键引理</strong>：<span class="arithmatex">\(\Pr(z_i\text{ 与 }z_j\text{ 被比较})=2/(j-i+1)\)</span>。</p>
+<p>考虑集合 <span class="arithmatex">\(\{z_i,\ldots,z_j\}\)</span>，共 <span class="arithmatex">\(j - i + 1\)</span> 个元素。在"这个集合里第一次有元素被选为标杆"之前，<span class="arithmatex">\(z_{i}\)</span> 和 <code>z_j</code> 一定还在同一个待处理区间里。此时：</p>
 <ul>
-<li>若选中的标杆是 <code>zᵢ</code> 或 <code>z_j</code>，它们就会被比较（划分时标杆要和区间内所有元素比）；</li>
-<li>若选中的是中间的某个 <code>z_k</code>（<code>i &lt; k &lt; j</code>），<code>zᵢ</code> 和 <code>z_j</code> 会被分到左右两侧，<strong>从此再也不会比较</strong>。</li>
+<li>若选中的标杆是 <span class="arithmatex">\(z_{i}\)</span> 或 <code>z_j</code>，它们就会被比较（划分时标杆要和区间内所有元素比）；</li>
+<li>若选中的是中间的某个 <code>z_k</code>（<span class="arithmatex">\(i &lt; k &lt; j\)</span>），<span class="arithmatex">\(z_{i}\)</span> 和 <code>z_j</code> 会被分到左右两侧，<strong>从此再也不会比较</strong>。</li>
 </ul>
-<p>标杆是从这 <code>j − i + 1</code> 个元素里<strong>均匀随机</strong>选的，两个"会触发比较"的选择在总共 <code>j−i+1</code> 个等可能选择中占 2 个，所以概率是 <code>2/(j−i+1)</code>。</p>
+<p>标杆是从这 <span class="arithmatex">\(j - i + 1\)</span> 个元素里<strong>均匀随机</strong>选的，两个"会触发比较"的选择在总共 <span class="arithmatex">\(j-i+1\)</span> 个等可能选择中占 2 个，所以概率是 <span class="arithmatex">\(2/(j-i+1)\)</span>。</p>
 <p>代回求和：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>E[X] = Σ_{i=1}^{n-1} Σ_{j=i+1}^{n} 2/(j−i+1) ≤ Σ_{i=1}^{n} Σ_{k=1}^{n} 2/k
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>     = 2n·H_n = O(n log n)
-</span></code></pre></div>
-<p><code>H_n = 1 + 1/2 + ⋯ + 1/n</code> 是调和数。按下标分组：第 2 项、第 3～4 项、第 5～8 项……每组的和至多 1，分组数为 O(log n)，所以 H_n=O(log n)。上式先得到上界；反过来，只取间隔 j−i≤n/2 的那些项，就有至少 n/2 个起点各累加一个 Θ(log n) 的调和和，得到 Ω(n log n) 下界。<strong>所以期望比较次数是 <code>Θ(n log n)</code>，而且这个结论不依赖输入分布。</strong></p>
+<div class="arithmatex">\[
+\mathbb{E}[X]=\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\frac{2}{j-i+1}\le\sum_{i=1}^{n}\sum_{k=1}^{n}\frac{2}{k}=2nH_n=\mathcal{O}(n\log n)
+\]</div>
+<p><span class="arithmatex">\(H_n=1+\frac12+\cdots+\frac1n\)</span> 是调和数。按下标分组：第 2 项、第 3～4 项、第 5～8 项……每组的和至多 1，分组数为 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，所以 <span class="arithmatex">\(H_n=\mathcal{O}(\log n)\)</span>。上式先得到上界；反过来，只取间隔 <span class="arithmatex">\(j-i\le n/2\)</span> 的那些项，就有至少 n/2 个起点各累加一个 <span class="arithmatex">\(\Theta (\log n)\)</span> 的调和和，得到 <span class="arithmatex">\(\Omega (n \log n)\)</span> 下界。<strong>所以期望比较次数是 <span class="arithmatex">\(\Theta (n \log n)\)</span>，而且这个结论不依赖输入分布。</strong></p>
 <h2 id="_4">快速选择<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>快速排序的直接推广：题目要第 k 小的值时，先换算为升序下标 index=k−1；要第 k 大时则是 index=len(A)−k。划分后比较标杆位置 p 与 index，只保留含这个位置的一侧。以下参数 index 始终表示从 0 开始的目标下标，不能直接传入从 1 开始的名次 k。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">quickselect</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">lo</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">if</span> <span class="n">hi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">index</span><span class="p">:</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="k">elif</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">:</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="k">return</span> <span class="kc">None</span>
+<p>快速排序的直接推广：题目要第 k 小的值时，先换算为升序下标 index=k-1；要第 k 大时则是 index=len(A)-k。划分后比较标杆位置 p 与 index，只保留含这个位置的一侧。以下参数 index 始终表示从 0 开始的目标下标，不能直接传入从 1 开始的名次 k。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">quickselect</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">lo</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">if</span> <span class="n">hi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">index</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">elif</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="k">return</span> <span class="kc">None</span>
 </span></code></pre></div>
-<p><strong>只递归一侧不等于每轮都平分。</strong> 若标杆每次都最差，仍有 <code>n+(n−1)+…+1=Θ(n²)</code>。元素互异、标杆均匀随机时，期望才是 O(n)，第 10 讲会把“等到一次足够好的划分要付多少账”讲清楚。代码中的 index 为从 0 开始的升序位置，需保证 <code>0≤index&lt;len(A)</code>，并且会修改 A。</p>
+<p><strong>只递归一侧不等于每轮都平分。</strong> 若标杆每次都最差，仍有 <span class="arithmatex">\(n+(n-1)+\cdots +1=\Theta (n^{2})\)</span>。元素互异、标杆均匀随机时，期望才是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，第 10 讲会把“等到一次足够好的划分要付多少账”讲清楚。代码中的 index 为从 0 开始的升序位置，需保证 <code>0&lt;=index&lt;len(A)</code>，并且会修改 A。</p>
 <h2 id="_5">大量重复元素怎么办<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>数组里有大量相等元素时，<code>partition</code> 会把它们全堆到一侧，性能退化。<strong>三路划分</strong>把数组分成 <code>&lt; pivot</code>、<code>= pivot</code>、<code>&gt; pivot</code> 三段，等于标杆的元素一次全部就位：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="n">lo</span> <span class="o">&gt;=</span> <span class="n">hi</span><span class="p">:</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="n">A</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">pivot</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)]</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">lt</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">gt</span> <span class="o">=</span> <span class="n">lo</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span>      <span class="c1"># [lo,lt) &lt; p, [lt,i) == p, (gt,hi] &gt; p</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">gt</span><span class="p">:</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="n">A</span><span class="p">[</span><span class="n">lt</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">lt</span><span class="p">];</span> <span class="n">lt</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="k">elif</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">:</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">gt</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">gt</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">gt</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="n">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">lt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="n">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">gt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="k">return</span> <span class="n">A</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="n">lo</span> <span class="o">&gt;=</span> <span class="n">hi</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="n">A</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">pivot</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)]</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">lt</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">gt</span> <span class="o">=</span> <span class="n">lo</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span>      <span class="c1"># [lo,lt) &lt; p, [lt,i) == p, (gt,hi] &gt; p</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">gt</span><span class="p">:</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">A</span><span class="p">[</span><span class="n">lt</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">lt</span><span class="p">];</span> <span class="n">lt</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">elif</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">:</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">gt</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">gt</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">gt</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="n">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">lt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">quicksort_3way</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">gt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">A</span>
 </span></code></pre></div>
 <p>遇到 <code>A[i]&gt;pivot</code> 时，只让 gt 左移，i 不能加 1：从右端换回来的数还没检查。例如 [5,1,3]、pivot=3，第一次交换把 3 换到 i=0，必须再检查它，才能正确归入等于区。调用完整数组时写 <code>quicksort_3way(A,0,len(A)-1)</code>。</p>
 <h2 id="_6">两种排序的取舍<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -10133,13 +10134,13 @@
 </tr>
 <tr>
 <td>额外空间</td>
-<td><code>Θ(n)</code></td>
-<td><code>Θ(log n)</code>（期望）</td>
+<td><span class="arithmatex">\(\Theta (n)\)</span></td>
+<td><span class="arithmatex">\(\Theta (\log n)\)</span>（期望）</td>
 </tr>
 <tr>
 <td>最坏时间</td>
-<td><code>Θ(n log n)</code></td>
-<td><code>Θ(n²)</code></td>
+<td><span class="arithmatex">\(\Theta (n \log n)\)</span></td>
+<td><span class="arithmatex">\(\Theta (n^{2})\)</span></td>
 </tr>
 <tr>
 <td>适用取舍</td>
@@ -10148,27 +10149,27 @@
 </tr>
 </tbody>
 </table>
-<p><strong>期望 O(n log n) 与最坏 O(n log n) 是两种不同的保证</strong>：前者是"反复运行，长期平均"，后者是"任何输入任何随机选择都不超过"。工程上按需求选。</p>
+<p><strong>期望 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 与最坏 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 是两种不同的保证</strong>：前者是"反复运行，长期平均"，后者是"任何输入任何随机选择都不超过"。工程上按需求选。</p>
 <h2 id="_7">从讲义走到代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>分区能按阈值把元素分组，选择第 k 个元素只需保留其中一侧。</p>
-<p>先手写 partition，对 [7,2,8,3,5,1,4] 分区应返回 p=3，并得到 [2,3,1,4,5,8,7]。检查左侧都&lt;4、右侧都≥4；两边内部不要求有序。</p>
-<p>再做 <a href="../../problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/">Kth Largest Element in an Array</a>：输入数组与从 1 开始的名次 k，返回排序后倒数第 k 个数，重复值也占名次。把第 k 大转换为升序下标 n−k。用 [3,2,1,5,6,4]、k=2 检查返回 5；再试 [2,2,2] 的第 2 大，传 index=1：每次 partition 返回当前 lo，第一轮 p=0，下一轮 p=1 才命中。相同数值仍占不同名次；全相等且目标 index 靠右时，每轮只排除一个位置，会退化到平方量级。</p>
+<p>先手写 partition，对 [7,2,8,3,5,1,4] 分区应返回 p=3，并得到 [2,3,1,4,5,8,7]。检查左侧都&lt;4、右侧都不小于4；两边内部不要求有序。</p>
+<p>再做 <a href="../../problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/">Kth Largest Element in an Array</a>：输入数组与从 1 开始的名次 k，返回排序后倒数第 k 个数，重复值也占名次。把第 k 大转换为升序下标 n-k。用 [3,2,1,5,6,4]、k=2 检查返回 5；再试 [2,2,2] 的第 2 大，传 index=1：每次 partition 返回当前 lo，第一轮 p=0，下一轮 p=1 才命中。相同数值仍占不同名次；全相等且目标 index 靠右时，每轮只排除一个位置，会退化到平方量级。</p>
 <h2 id="_8">练习<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 设 <code>X</code> 以 1/100 的概率取 1、以 99/100 的概率取 0。(a) <code>E[X]</code>？(b) 取 n 个独立同分布的 <code>Xᵢ</code>，<code>E[ΣXᵢ]</code>？(c) 反复取到第一次出现 1，所需试验次数 N 的期望（第一次试验计为 1）？</p>
-<p>(a) <code>1/100</code>。(b) 由<strong>线性性</strong>（不要求独立）得 <code>n/100</code>。(c) 几何分布，<code>E[N] = 1/p = 100</code>。严格推导是 <code>E[N] = 1 + (1−p)E[N]</code>。</p>
+<p><strong>1.</strong> 设 <code>X</code> 以 1/100 的概率取 1、以 99/100 的概率取 0。(a) <code>E[X]</code>？(b) 取 n 个独立同分布的 <span class="arithmatex">\(X_{i}\)</span>，<span class="arithmatex">\(\mathbb{E}[\sum_i X_i]\)</span>？(c) 反复取到第一次出现 1，所需试验次数 N 的期望（第一次试验计为 1）？</p>
+<p>(a) <span class="arithmatex">\(1/100\)</span>。(b) 由<strong>线性性</strong>（不要求独立）得 <span class="arithmatex">\(n/100\)</span>。(c) 几何分布，<span class="arithmatex">\(E[N] = 1/p = 100\)</span>。严格推导是 <span class="arithmatex">\(E[N] = 1 + (1-p)E[N]\)</span>。</p>
 <p><strong>2.</strong> 下面这个"排序"算法，第 i 次 shuffle 后恰好有序的指示变量期望是多少？<code>while</code> 循环期望执行几次？</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bogosort</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">while</span> <span class="n">A</span> <span class="o">!=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">return</span> <span class="n">A</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bogosort</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">while</span> <span class="n">A</span> <span class="o">!=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">return</span> <span class="n">A</span>
 </span></code></pre></div>
-<p>一次随机排列恰好有序的概率是 <code>1/n!</code>，所以 <code>E[Xᵢ] = 1/n!</code>，若初始尚未有序且元素互异，期望 shuffle <code>n!</code> 次；若一开始有序则是 0 次。<strong>这就是 bogosort 只能出现在段子里的原因</strong>：<code>n = 20</code> 时 <code>20! ≈ 2.4 × 10¹⁸</code>。</p>
+<p>一次随机排列恰好有序的概率是 <span class="arithmatex">\(1/n!\)</span>，所以 <span class="arithmatex">\(E[X_{i}] = 1/n!\)</span>，若初始尚未有序且元素互异，期望 shuffle <span class="arithmatex">\(n!\)</span> 次；若一开始有序则是 0 次。<strong>这就是 bogosort 只能出现在段子里的原因</strong>：<code>n = 20</code> 时 <span class="arithmatex">\(20! \approx 2.4 \times 10^{18}\)</span>。</p>
 <p><strong>3.</strong> 为什么线性性里"不要求独立"这个条件这么重要？举一个"变量强相关但仍可用线性性"的例子。</p>
-<p>期望的线性性对任意随机变量都成立。例子：把 n 个球随机放进 n 个盒子，令 <code>Xᵢ</code> 表示"第 i 个盒子为空"，则 <code>E[Xᵢ] = (1 − 1/n)ⁿ</code>，空盒数的期望是 <code>n(1−1/n)ⁿ ≈ n/e</code>。<strong>这些 <code>Xᵢ</code> 高度相关</strong>（一个盒子空会略微影响另一个），但求和仍然成立。</p>
+<p>期望的线性性对任意随机变量都成立。例子：把 n 个球随机放进 n 个盒子，令 <span class="arithmatex">\(X_{i}\)</span> 表示"第 i 个盒子为空"，则 <span class="arithmatex">\(E[X_{i}] = (1 - 1/n)^{n}\)</span>，空盒数的期望是 <span class="arithmatex">\(n(1-1/n)^{n} \approx n/e\)</span>。<strong>这些 <span class="arithmatex">\(X_{i}\)</span> 高度相关</strong>（一个盒子空会略微影响另一个），但求和仍然成立。</p>
 <p><strong>4.</strong> 如果标杆总是选到真中位数，快速排序多快？为什么实际不用它？</p>
-<p>每次都平分，<code>T(n) = 2T(n/2) + Θ(n) = Θ(n log n)</code>。<strong>但"找到真中位数"本身要花 O(n)</strong>（第 10 讲），虽然渐进一样，常数不如随机化。</p>
-<p><strong>5.</strong> 随机化快速排序的最坏情况仍是 <code>Θ(n²)</code>，"期望 O(n log n)"到底保证了什么？</p>
-<p>对元素互异的随机划分，极端坏划分仍可能发生；期望界本身不等于任何特定的失败概率界。期望保证的是<strong>平均表现</strong>：反复运行，长期平均代价是 <code>O(n log n)</code>。</p>
+<p>每次都平分，<span class="arithmatex">\(T(n) = 2T(n/2) + \Theta (n) = \Theta (n \log n)\)</span>。<strong>但"找到真中位数"本身要花 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>（第 10 讲），虽然渐进一样，常数不如随机化。</p>
+<p><strong>5.</strong> 随机化快速排序的最坏情况仍是 <span class="arithmatex">\(\Theta (n^{2})\)</span>，"期望 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>"到底保证了什么？</p>
+<p>对元素互异的随机划分，极端坏划分仍可能发生；期望界本身不等于任何特定的失败概率界。期望保证的是<strong>平均表现</strong>：反复运行，长期平均代价是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</p>
 
 
 

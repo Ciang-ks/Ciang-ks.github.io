@@ -10140,7 +10140,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>if depth == len(res):
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    res.append(node.val)        # 这一层第一次被访问到
 </span></code></pre></div>
-<p>这个写法的妙处是<strong>不需要保存整层的节点</strong>，空间从 O(层宽) 降到 O(树高)。</p>
+<p>这个写法的妙处是<strong>不需要保存整层的节点</strong>，空间从 <span class="arithmatex">\(\mathcal{O}(层宽)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(树高)\)</span>。</p>
 <p><strong>两种思路都要会</strong>：BFS 按层组织，DFS 按深度组织；额外空间优劣取决于宽度与高度，面试时可以根据追问灵活切换。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>右视图每层只保留最右节点，问的不是沿着 root.right 一直走。若右子树很浅，下一层看到的节点可能来自左子树；例如根有右叶 3，左边链 2→4，右视图仍是 [根值,3,4]。</p>
@@ -10218,25 +10218,25 @@
 <tbody>
 <tr>
 <td>BFS</td>
-<td>O(n)</td>
-<td>O(w)（最大层宽）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span>（最大层宽）</td>
 </tr>
 <tr>
 <td>DFS 右优先</td>
-<td>O(n)</td>
-<td>O(h)（树高）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span>（树高）</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_6">易错点与面试追问<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DFS 解法必须"先右后左"</strong>，否则 <code>depth == len(res)</code> 拿到的是最左边的节点，结果就变成了左视图。</li>
-<li>DFS 用 <code>depth == len(res)</code> 判重，而不是 <code>depth &gt; len(res)</code> 或 <code>&lt;</code>。</li>
+<li>DFS 用 <code>depth == len(res)</code> 判重，而不是 <code>depth &gt; len(res)</code> 或 <span class="arithmatex">\(&lt;\)</span>。</li>
 <li>每层的"最后"指的是<strong>最右边存在的节点</strong>，而不是"最右的叶子"。注意题目例子里的 <code>3</code> 有右孩子 <code>4</code>，但第 2 层最右是 <code>3</code>。</li>
 <li>空树返回 <code>[]</code>。</li>
 <li><strong>追问：如何求左视图？</strong> → 把 DFS 的左右顺序换一下，或 BFS 取每层第一个。</li>
 <li><strong>追问：如何求"每层的最大值"？</strong> → BFS 每层取 <code>max(level)</code>。</li>
-<li><strong>追问：如果树很深（链状）？</strong> → DFS 的空间是 O(h)，BFS 是 O(1)（每层只有一个节点），此时 BFS 更省。</li>
+<li><strong>追问：如果树很深（链状）？</strong> → DFS 的空间是 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，BFS 是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>（每层只有一个节点），此时 BFS 更省。</li>
 </ul>
 <h2 id="_7">相关题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>

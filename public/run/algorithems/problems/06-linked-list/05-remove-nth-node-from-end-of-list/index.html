@@ -4044,10 +4044,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：用栈（思路清晰，但空间 O(n)）
+        解法三：用栈（思路清晰，但空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：用栈（思路清晰，但空间 O(n)）
+        解法三：用栈（思路清晰，但空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10154,10 +10154,10 @@
 <h3 id="_3">朴素做法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>先遍历一遍数出长度 <code>L</code>，再从头走 <code>L - n</code> 步删除。需要两趟遍历。</p>
 <h3 id="n">一趟做法：哑结点 + 快慢指针保持 n 步间隔<a class="headerlink" href="#n" title="Permanent link">&para;</a></h3>
-<p>让 <code>fast</code> 先走 <code>n + 1</code> 步，然后 <code>fast</code> 和 <code>slow</code> 同速前进，直到 <code>fast</code> 变成 <code>None</code>。此时 <code>slow</code> 恰好停在<strong>待删节点的前一个节点</strong>，直接 <code>slow.next = slow.next.next</code> 即可。</p>
-<p><strong>为什么是 <code>n + 1</code> 而不是 <code>n</code>？</strong> 因为我们希望 <code>slow</code> 停在被删节点的<strong>前驱</strong>上——只有拿到前驱，才能用一次指针赋值完成删除。领先 <code>n + 1</code> 步就实现了这一点。</p>
+<p>让 <code>fast</code> 先走 <span class="arithmatex">\(n + 1\)</span> 步，然后 <code>fast</code> 和 <code>slow</code> 同速前进，直到 <code>fast</code> 变成 <code>None</code>。此时 <code>slow</code> 恰好停在<strong>待删节点的前一个节点</strong>，直接 <code>slow.next = slow.next.next</code> 即可。</p>
+<p><strong>为什么是 <span class="arithmatex">\(n + 1\)</span> 而不是 <code>n</code>？</strong> 因为我们希望 <code>slow</code> 停在被删节点的<strong>前驱</strong>上——只有拿到前驱，才能用一次指针赋值完成删除。领先 <span class="arithmatex">\(n + 1\)</span> 步就实现了这一点。</p>
 <h3 id="_4">哑结点的作用：统一删除头节点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>如果要删除的是<strong>头节点</strong>（比如 <code>n == 链表长度</code>），没有哑结点时必须单独处理删除头节点并更新 head。加上哑结点后，<code>head</code> 的前驱就是 <code>dummy</code>，逻辑完全统一。</p>
+<p>如果要删除的是<strong>头节点</strong>（比如 <span class="arithmatex">\(n = 链表长度\)</span>），没有哑结点时必须单独处理删除头节点并更新 head。加上哑结点后，<code>head</code> 的前驱就是 <code>dummy</code>，逻辑完全统一。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>先确定要找的是待删节点的前驱，而非节点本身。两指针都从 dummy 出发，fast 先走 n+1 次 next；此后始终相差 n+1 条连接。fast 到 None 时，slow 的后面恰有 n 个真实节点，所以 slow.next 就是倒数第 n 个。</p>
 <p>长度 3、n=3 时，fast 走 4 步到 None，slow 仍在 dummy，直接跳过原头即可。若采用 fast 从 head 出发的另一模板，领先步数和停止条件会不同，不能只把 n+1 改为 n 而保留其他行。dummy 是统一边界的选择，并非删除头节点唯一可能的方法；没有它也可单独更新 head。</p>
@@ -10194,7 +10194,7 @@
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
 </span></code></pre></div>
-<h3 id="on">解法三：用栈（思路清晰，但空间 O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：用栈（思路清晰，但空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">removeNthFromEnd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">dummy</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
@@ -10220,31 +10220,31 @@
 <tbody>
 <tr>
 <td>快慢指针</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>两趟扫描</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>栈</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>必须用哑结点</strong>：否则删除头节点时会出问题。</li>
-<li><code>fast</code> 先走 <code>n + 1</code> 步，不是 <code>n</code> 步。可以先在纸上画一个 3 个节点的例子验证。</li>
-<li>题目保证 <code>n</code> 合法（<code>1 ≤ n ≤ 链表长度</code>），但仍建议在面试中说出来。</li>
+<li><code>fast</code> 先走 <span class="arithmatex">\(n + 1\)</span> 步，不是 <code>n</code> 步。可以先在纸上画一个 3 个节点的例子验证。</li>
+<li>题目保证 <code>n</code> 合法（<span class="arithmatex">\(1 \le n \le 链表长度\)</span>），但仍建议在面试中说出来。</li>
 <li><code>slow.next = slow.next.next</code> 是删除的固定写法；被删除的节点不需要手动释放（Python 有 GC），但在 C++ 中应该 <code>delete</code>。</li>
 <li><strong>追问：如果要求删除所有值为 x 的节点？</strong> → <a href="https://leetcode.com/problems/remove-linked-list-elements/">203 Remove Linked List Elements</a>，哑结点 + 单指针往前走。</li>
 <li><strong>追问：如果链表是双向的？</strong> → 可以从尾部回退，直接走 n 步。</li>
 <li><strong>追问：如果 k 比链表更长？</strong> → 在 <code>fast</code> 前进那一步加上判空，提前返回原链表。</li>
-<li><strong>追问：这题的"一趟"是什么意思？</strong> → 快慢指针只走了一遍链表（<code>fast</code> 走 n+1 到末尾），但严格说 <code>fast</code> 走了 <code>L + n + 1</code> 步。复杂度仍是 O(n)。</li>
+<li><strong>追问：这题的"一趟"是什么意思？</strong> → 快慢指针只走了一遍链表（<code>fast</code> 走 n+1 到末尾），但严格说 <code>fast</code> 走了 <span class="arithmatex">\(L + n + 1\)</span> 步。复杂度仍是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 </ul>
 <h2 id="_11">相关题目<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>

@@ -10085,7 +10085,7 @@
 <p>答案是：BFS 说距离 1（因为只有一条边）；按权重算是 <code>A → B → C</code>，代价 2；<strong>而 BFS 不能直接改造</strong>，因为它的正确性建立在"每条边代价相同"这个假设上。</p>
 <p>这一讲要补上的，正是"边有权重"时的算法。</p>
 <h2 id="_1">从一对顶点到全部顶点<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>本讲用 δ(s,v) 表示从 s 到 v 的最小<strong>边权总和</strong>，不可达记为 ∞。这是第 15 讲距离的推广：所有边权都是 1 时，总权重恰好等于边数，才退回 BFS 的最少步数。</p>
+<p>本讲用 <span class="arithmatex">\(\delta (s,v)\)</span> 表示从 s 到 v 的最小<strong>边权总和</strong>，不可达记为 无穷大。这是第 15 讲距离的推广：所有边权都是 1 时，总权重恰好等于边数，才退回 BFS 的最少步数。</p>
 <table>
 <thead>
 <tr>
@@ -10103,28 +10103,28 @@
 <tr>
 <td>单对最短路</td>
 <td><code>G, s, t</code></td>
-<td>δ(s,t) 与一条最短路径</td>
+<td><span class="arithmatex">\(\delta (s,t)\)</span> 与一条最短路径</td>
 </tr>
 <tr>
 <td><strong>单源最短路（SSSP）</strong></td>
 <td><code>G, s</code></td>
-<td>对所有 v，δ(s,v) 与最短路径树</td>
+<td>对所有 v，<span class="arithmatex">\(\delta (s,v)\)</span> 与最短路径树</td>
 </tr>
 <tr>
 <td><strong>全源最短路（APSP）</strong></td>
 <td><code>G</code></td>
-<td>对所有 u,v，δ(u,v)</td>
+<td>对所有 u,v，<span class="arithmatex">\(\delta (u,v)\)</span></td>
 </tr>
 </tbody>
 </table>
 <p>只要能解决单源，就能解决前两个。所以重心在 SSSP，最后再扩展到全源。</p>
-<p>顺带说一句工程上的巧思：<strong>最短路径树只需要每个顶点一个父指针</strong>，就能为每个可达顶点编码一条最短路径——比"把每条路径都存下来"（可能要 <code>Θ(V²)</code> 空间）聪明得多。</p>
+<p>顺带说一句工程上的巧思：<strong>最短路径树只需要每个顶点一个父指针</strong>，就能为每个可达顶点编码一条最短路径——比"把每条路径都存下来"（可能要 <span class="arithmatex">\(\Theta (V^{2})\)</span> 空间）聪明得多。</p>
 <p><img alt="带权图上的最短路" src="../figures/18-weighted-graph.png" /></p>
-<p>橙色路线 CoDa→Packard→CS161→Old Union 的代价为 1+1+4=6。弯曲边上的 25 是 CoDa—Dish 这一条边的权重。下面的 s/a/b/t 图另演示 Dijkstra 的逐轮更新。</p>
-<p>先明确后面函数的接口：n 个顶点编号为 0..n−1，边表中 <code>(u,v,w)</code> 表示从 u 到 v 的一条有向边，代价为 w。若要表示无向边，应加入两个方向。源点 s 必须存在。返回 dist[v] 表示最短距离，不可达为无穷大；parent[v] 记录路径上 v 的前一个顶点。</p>
+<p>蓝色路线 CoDa→Packard→CS161→Old Union 的代价为 <span class="arithmatex">\(1+1+4=6\)</span>。边上的 25 是 CoDa—Dish 这一条边的权重。下面的 <span class="arithmatex">\(s/a/b/t\)</span> 图另演示 Dijkstra 的逐轮更新。</p>
+<p>先明确后面函数的接口：n 个顶点编号为 0..n-1，边表中 <code>(u,v,w)</code> 表示从 u 到 v 的一条有向边，代价为 w。若要表示无向边，应加入两个方向。源点 s 必须存在。返回 dist[v] 表示最短距离，不可达为无穷大；parent[v] 记录路径上 v 的前一个顶点。</p>
 <h2 id="_2">先手推一次“松弛”<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>初始化 <code>dist[s]=0</code>，因为留在起点不用走边；其余位置为无穷大，表示还没有找到到达它们的路径。后面不断改进这些记录。</p>
-<p><code>dist[v]</code> 是<strong>已找到的路径里</strong>从 s 到 v 的最小长度，不是未经证明的真实最短距离。<code>∞</code> 表示尚未找到路径。“松弛 u→v”就是比较：走到 u 再付 w，是否比旧 dist[v] 更便宜？</p>
+<p>初始化 <span class="arithmatex">\(\mathrm{dist}[s]=0\)</span>，因为留在起点不用走边；其余位置为无穷大，表示还没有找到到达它们的路径。后面不断改进这些记录。</p>
+<p><code>dist[v]</code> 是<strong>已找到的路径里</strong>从 s 到 v 的最小长度，不是未经证明的真实最短距离。<span class="arithmatex">\(\infty\)</span> 表示尚未找到路径。“松弛 u→v”就是比较：走到 u 再付 w，是否比旧 dist[v] 更便宜？</p>
 <p>例如图中边为 <code>s→a(4), s→b(1), b→a(2), a→t(5), b→t(8)</code>：先从 s 得到 a=4、b=1；弹出 b 后把 a 改为 3，堆中同时有 <code>(4,a)</code> 与 <code>(3,a)</code>。3 那份先处理，4 那份后来因过期被跳过。图里的距离更新应按这样的中间状态来读。</p>
 <h2 id="dijkstra">Dijkstra：把队列换成优先队列<a class="headerlink" href="#dijkstra" title="Permanent link">&para;</a></h2>
 <p><img alt="Dijkstra：弹出最小距离并松弛邻居" src="../images/18-dijkstra.svg" /></p>
@@ -10153,19 +10153,19 @@
 </span></code></pre></div>
 <p><strong><code>if d &gt; dist[u]: continue</code> 这一行不能省。</strong> 同一个顶点可能被多次压入堆（每次距离被改进就压一次），在非负权前提下，跳过过期条目后首次有效弹出可确定最短距离。若不跳过，仍可能得到正确距离，但会重复扫描邻接表，失去原本的效率保证。</p>
 <p>图的弹出记录包含过期项：(0,s)、(1,b)、(3,a)、(4,a旧)、(8,t)、(9,t旧)。图中“距离从小到大确定”只说有效记录；旧项弹出后直接continue，不能再当作新的定型。数组dist记录当前最好值，堆记录“曾经发现的候选”，所以两者不是一份永远同步的数据。</p>
-<p>每次成功松弛最多新压入一项，共O(E)项；含初始化，本实现在简单图上时间O((V+E)log(V+1))、额外空间O(V+E)。如果输入允许大量平行边，更直接的堆大小界是O(E)，对数项应写log(E+1)。</p>
+<p>每次成功松弛最多新压入一项，共<span class="arithmatex">\(\mathcal{O}(E)\)</span>项；含初始化，本实现在简单图上时间<span class="arithmatex">\(\mathcal{O}((V+E)\log (V+1))\)</span>、额外空间<span class="arithmatex">\(\mathcal{O}(V+E)\)</span>。如果输入允许大量平行边，更直接的堆大小界是<span class="arithmatex">\(\mathcal{O}(E)\)</span>，对数项应写log(E+1)。</p>
 <p>为什么第一次弹出的一定正确？这就是全部的正确性所在，值得完整写一遍。</p>
-<p>以下“弹出”仅指跳过旧项后的<strong>首次有效弹出</strong>。任意有限dist都是一条已找到路径的长度，所以不可能比真实最短距离更小。设u是第一个此时距离仍偏大的顶点，即 <code>dist[u] &gt; δ(s,u)</code>。取从 s 到 u 的一条真实最短路径 P，设 P 上<strong>第一个尚未被弹出</strong>的顶点是 x，y 是 x 在 P 上的前驱（y 已被弹出）。</p>
+<p>以下“弹出”仅指跳过旧项后的<strong>首次有效弹出</strong>。任意有限dist都是一条已找到路径的长度，所以不可能比真实最短距离更小。设u是第一个此时距离仍偏大的顶点，即 <span class="arithmatex">\(\mathrm{dist}[u] &gt; \delta (s,u)\)</span>。取从 s 到 u 的一条真实最短路径 P，设 P 上<strong>第一个尚未被弹出</strong>的顶点是 x，y 是 x 在 P 上的前驱（y 已被弹出）。</p>
 <ul>
-<li>由 u 的选取，<code>dist[y] = δ(s,y)</code>；</li>
-<li>松弛边 <code>(y,x)</code> 之后，<code>dist[x] ≤ δ(s,y) + w(y,x) = δ(s,x)</code>；</li>
-<li>因为 x 还没被弹出，而 u 要被弹出（堆里取最小），所以 <code>dist[u] ≤ dist[x]</code>；</li>
-<li>由边权非负，<code>δ(s,x) ≤ δ(s,u)</code>；</li>
-<li>串起来得 <code>dist[u] ≤ δ(s,u) &lt; dist[u]</code>，矛盾。∎</li>
+<li>由 u 的选取，<span class="arithmatex">\(\mathrm{dist}[y] = \delta (s,y)\)</span>；</li>
+<li>松弛边 <code>(y,x)</code> 之后，<span class="arithmatex">\(\mathrm{dist}[x] \le \delta (s,y) + w(y,x) = \delta (s,x)\)</span>；</li>
+<li>因为 x 还没被弹出，而 u 要被弹出（堆里取最小），所以 <span class="arithmatex">\(\mathrm{dist}[u] \le \mathrm{dist}[x]\)</span>；</li>
+<li>由边权非负，<span class="arithmatex">\(\delta (s,x) \le \delta (s,u)\)</span>；</li>
+<li>串起来得 <span class="arithmatex">\(\mathrm{dist}[u] \le \delta (s,u) &lt; \mathrm{dist}[u]\)</span>，矛盾。</li>
 </ul>
-<p><strong>注意"边权非负"出现在第四步。</strong> 如果允许负权，<code>δ(s,x) ≤ δ(s,u)</code> 就不成立——后面的负权反例会展示这一保证怎样失效。</p>
+<p><strong>注意"边权非负"出现在第四步。</strong> 如果允许负权，<span class="arithmatex">\(\delta (s,x) \le \delta (s,u)\)</span> 就不成立——后面的负权反例会展示这一保证怎样失效。</p>
 <h2 id="bellman-ford">Bellman-Ford：允许负权<a class="headerlink" href="#bellman-ford" title="Permanent link">&para;</a></h2>
-<p>负权可以表示一段路线带来的返还或抵扣。例如 s→a 费用 3，a→t 费用 −2，整条路线费用为 1。若有可从 s 到达的负权环，就可以反复绕它让费用继续降低；受它影响的顶点不再有有限的最短距离。下面的函数一旦发现可达负环，便返回 <code>(None,None)</code> 报告这一情况。</p>
+<p>负权可以表示一段路线带来的返还或抵扣。例如 s→a 费用 3，a→t 费用 -2，整条路线费用为 1。若有可从 s 到达的负权环，就可以反复绕它让费用继续降低；受它影响的顶点不再有有限的最短距离。下面的函数一旦发现可达负环，便返回 <code>(None,None)</code> 报告这一情况。</p>
 <p>在没有负环的情况下，我们仍然要找到各点的最短距离。负边使“最近的候选可以立即定型”的理由失效，因此换成<strong>反复松弛所有边</strong>：先把源点的信息传出去，随后继续向更远处传播，直到没有改进或达到规定轮数。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">bellman_ford</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">dist</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
@@ -10184,11 +10184,11 @@
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">parent</span>
 </span></code></pre></div>
-<p><strong>为什么要 n−1 轮？</strong> 无可达负环时，可删除路径上的非负环，得到至多 n−1 条边的一条最短路径。第 k 轮结束后，所有能用至多 k 条边达到的最优距离都已被传播到；就地更新还可能在同一轮传播更多边，所以不能说数组“恰好等于限 k 边的最优值”。要表达严格限边数的状态，必须使用下一节的快照。</p>
-<p>Bellman–Ford 的时间为 O(V+VE)，距离与父指针额外 O(V)，输入边表另计；限 k 个中转的快照版做 k+1 轮，时间 O(V+(k+1)(V+E))，两份距离数组共 O(V)。</p>
-<p><strong>为什么第 n 轮还能松弛就说明有从 s 可达的负环？</strong> 若不存在负环，所有最短路在 <code>n−1</code> 轮内就确定了，第 n 轮不该有任何改进。反过来若还能改进，说明存在一条"越来越短"的路径——那必然是绕着一个负环打转。</p>
+<p><strong>为什么要 n-1 轮？</strong> 无可达负环时，可删除路径上的非负环，得到至多 n-1 条边的一条最短路径。第 k 轮结束后，所有能用至多 k 条边达到的最优距离都已被传播到；就地更新还可能在同一轮传播更多边，所以不能说数组“恰好等于限 k 边的最优值”。要表达严格限边数的状态，必须使用下一节的快照。</p>
+<p>Bellman–Ford 的时间为 <span class="arithmatex">\(\mathcal{O}(V+VE)\)</span>，距离与父指针额外 <span class="arithmatex">\(\mathcal{O}(V)\)</span>，输入边表另计；限 k 个中转的快照版做 k+1 轮，时间 <span class="arithmatex">\(\mathcal{O}(V+(k+1)(V+E))\)</span>，两份距离数组共 <span class="arithmatex">\(\mathcal{O}(V)\)</span>。</p>
+<p><strong>为什么第 n 轮还能松弛就说明有从 s 可达的负环？</strong> 若不存在负环，所有最短路在 <span class="arithmatex">\(n-1\)</span> 轮内就确定了，第 n 轮不该有任何改进。反过来若还能改进，说明存在一条"越来越短"的路径——那必然是绕着一个负环打转。</p>
 <h2 id="_3">限步数的变体<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这里的任务是：给定 n 个城市、有向航班 <code>(u,v,票价)</code>、起点 src、终点 dst，以及非负整数 k，返回至多经过 k 个中转城市的最低票价；无可行路线返回 −1。起终点不算中转，所以 k=0 只允许直达，k=1 最多允许两段航班。</p>
+<p>这里的任务是：给定 n 个城市、有向航班 <code>(u,v,票价)</code>、起点 src、终点 dst，以及非负整数 k，返回至多经过 k 个中转城市的最低票价；无可行路线返回 -1。起终点不算中转，所以 k=0 只允许直达，k=1 最多允许两段航班。</p>
 <p>例如 0→1 票价 100、1→2 票价 100、0→2 票价 500，从 0 到 2：k=0 时只能花 500，k=1 时可以花 200。这里每一轮必须恰好只多允许一段航班，因此要<strong>用上一轮的快照来更新</strong>。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">cheapest_within_k</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">flights</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
@@ -10206,67 +10206,69 @@
 <p><strong>为什么必须用副本？</strong> 如果就地更新，同一轮里可能连续松弛多条边（比如 <code>0→1→2→3</code> 在一轮内全部完成），那就等于用了三段却只算一轮，<strong>跨越了 k 的限制</strong>。这是这题最容易错的地方。</p>
 <h2 id="floydwarshall">选读：全源最短路 Floyd–Warshall<a class="headerlink" href="#floydwarshall" title="Permanent link">&para;</a></h2>
 <p>下面会把中间计算结果存成一张表，这种方法将在第 20 讲系统介绍。首次学习只需先掌握单源算法，之后再回来读。</p>
-<p>令 D[k][i][j] 表示“只允许编号 0..k−1 的顶点作中转”时 i 到 j 的最短距离。最初 D[0] 只考虑直接边与自己到自己的空路径。放开下一个顶点 k 时，最短路径要么不用 k，要么经 k 分成两段：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>D[k+1][i][j] = min(D[k][i][j], D[k][i][k] + D[k][k][j])
-</span></code></pre></div>
+<p>令 D[k][i][j] 表示“只允许编号 0..k-1 的顶点作中转”时 i 到 j 的最短距离。最初 D[0] 只考虑直接边与自己到自己的空路径。放开下一个顶点 k 时，最短路径要么不用 k，要么经 k 分成两段：</p>
+<div class="arithmatex">\[
+D^{(k+1)}_{i,j}=\min\{D^{(k)}_{i,j},D^{(k)}_{i,k}+D^{(k)}_{k,j}\}
+\]</div>
 <p>这里先假定无负环，最短路径可去掉绕圈，因此不需要反复经过 k。</p>
 <p>把阶段 k 这一维省掉，就得到下面的二维实现。<code>[[INF]*n for _ in range(n)]</code> 每轮新建一行；不能写 <code>[[INF]*n]*n</code>，后者各行会引用同一个列表，改一格就会同时改其他行。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">floyd_warshall</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">dist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">INF</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">],</span> <span class="n">w</span><span class="p">)</span>        <span class="c1"># 处理平行边：取最小</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                         <span class="c1"># k 必须在最外层！</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">:</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                <span class="k">continue</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                    <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">dist</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">floyd_warshall</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">dist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">INF</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">],</span> <span class="n">w</span><span class="p">)</span>        <span class="c1"># 处理平行边：取最小</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                         <span class="c1"># k 必须在最外层！</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="k">continue</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                    <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="k">return</span> <span class="n">dist</span>
 </span></code></pre></div>
 <p>无负环时，本轮 dist[k][k]=0，经过 k 再到 k 不会改进距离，所以本轮使用的第 k 行与第 k 列不会因更新而改变；这才允许在同一张表上原地更新，而无需保留上一张表。</p>
 <p><strong><code>k</code> 必须在最外层</strong>——它对应 DP 的"阶段"：我们一轮一轮地放宽"允许中转的顶点集合"。把它写到内层得到的就不是最短距离了。</p>
 <p>若 dist[i][i]&lt;0，说明从 i 出发再返回 i 可获得负权闭合游走，其中含负环；它不必是恰好经过 i 的简单环。</p>
 <h2 id="johnson">选读：稀疏图上的全源 Johnson<a class="headerlink" href="#johnson" title="Permanent link">&para;</a></h2>
-<p>Floyd-Warshall 是 <code>O(V³)</code>，稀疏图（<code>E = O(V)</code>）上太慢。Johnson 的思路分四步：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>1. 加一个虚拟源点 q，连 n 条权为 0 的边到所有顶点，用 Bellman-Ford 求 q 到各点的距离 h(v)
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>   （若检测到负环直接报错）
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>2. 给每条边重新赋权：w' = w + h(u) − h(v)     ← 这一步保证所有边权非负
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>3. 对每个顶点用一次 Dijkstra，得到重权后的最短路 d'(u,v)
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>4. 还原：d(u,v) = d'(u,v) − h(u) + h(v)
+<p>Floyd-Warshall 是 <span class="arithmatex">\(\mathcal{O}(V^{3})\)</span>，稀疏图（<span class="arithmatex">\(E = \mathcal{O}(V)\)</span>）上太慢。Johnson 的思路分四步：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>1. 加一个虚拟源点 q，连 n 条权为 0 的边到所有顶点，用 Bellman-Ford 求 q 到各点的距离 h(v)
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>   （若检测到负环直接报错）
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>2. 给每条边重新赋权：w' = w + h(u) − h(v)     ← 这一步保证所有边权非负
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>3. 对每个顶点用一次 Dijkstra，得到重权后的最短路 d'(u,v)
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>4. 还原：d(u,v) = d'(u,v) − h(u) + h(v)
 </span></code></pre></div>
 <p><strong>为什么重权不破坏最短路？</strong> 沿任意路径 <code>s → ⋯ → t</code> 求和，<code>h</code> 项两两抵消：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>w'(p) = Σ [w(u,v) + h(u) − h(v)] = w(p) + h(s) − h(t)
-</span></code></pre></div>
-<p>也就是说，<strong>对固定的 s、t，所有路径的 <code>w'</code> 与 <code>w</code> 只差同一个常数</strong>，路径之间的相对大小完全不变。至于 <code>w' ≥ 0</code>：由 Bellman-Ford 的三角不等式 <code>h(v) ≤ h(u) + w(u,v)</code> 直接得到。</p>
-<p>按本讲堆实现，可写为 O(V(V+E)log(V+1))，还含 Bellman–Ford 的预处理；常在 E≥V 的稀疏图讨论中简写 O(VE log V)。</p>
+<div class="arithmatex">\[
+w^{\prime}(p)=\sum_{(u,v)\in p}[w(u,v)+h(u)-h(v)]=w(p)+h(s)-h(t)
+\]</div>
+<p>也就是说，<strong>对固定的 s、t，所有路径的 <code>w'</code> 与 <code>w</code> 只差同一个常数</strong>，路径之间的相对大小完全不变。至于 <span class="arithmatex">\(w^{\prime}\ge0\)</span>：由 Bellman-Ford 的三角不等式 <span class="arithmatex">\(h(v) \le h(u) + w(u,v)\)</span> 直接得到。</p>
+<p>按本讲堆实现，可写为 <span class="arithmatex">\(\mathcal{O}(V(V+E)\log (V+1))\)</span>，还含 Bellman–Ford 的预处理；常在 E不小于V 的稀疏图讨论中简写 <span class="arithmatex">\(\mathcal{O}(VE \log V)\)</span>。</p>
 <h2 id="_4">一个容易忽略的最快情形<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>如果图是 <strong>DAG</strong>，那么按拓扑序做一次松弛就能求出单源最短路——<strong>时间 <code>O(V + E)</code>，而且允许负权</strong>。因为拓扑序保证"处理一个顶点时，所有能到达它的顶点都已处理完"。</p>
+<p>如果图是 <strong>DAG</strong>，那么按拓扑序做一次松弛就能求出单源最短路——<strong>时间 <span class="arithmatex">\(\mathcal{O}(V + E)\)</span>，而且允许负权</strong>。因为拓扑序保证"处理一个顶点时，所有能到达它的顶点都已处理完"。</p>
 <p>利用无环结构，这里比一般带权图少了反复松弛或堆维护的开销。</p>
 <h2 id="_5">选读：把“求和”换掉<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><code>Swim in Rising Water</code> 给一个方形高度网格，水位随时间 t 上升；只有高度不超过 t 的格子才能进入。任务是从左上走到右下，只能上下左右移动，求最早到达时间。一条固定路线需要等到它经过的<strong>最高格子</strong>被淹没，因此路径代价是沿途格子高度的最大值。用 Dijkstra 时，起点代价为左上格高度，进入高度 x 的下一格时，新代价为 max(t,x)。</p>
-<p>与累加边权的普通最短路相比，这里把“加法”换成“取最大值”，而 <code>max(t,x) ≥ t</code> <strong>仍然单调不减</strong>，所以 Dijkstra 的"第一次弹出即最优"依然成立。这个变体除了“延长路径不会让代价变小”，还满足“原来更好的路径在接同一条边后仍不会更差”：<code>a≤b</code> 时 <code>max(a,w)≤max(b,w)</code>。这些性质共同允许保留每个顶点的一个最优标签，不能只凭单调不减就推广到任意代价定义。</p>
+<p>与累加边权的普通最短路相比，这里把“加法”换成“取最大值”，而 <span class="arithmatex">\(\max (t,x) \ge t\)</span> <strong>仍然单调不减</strong>，所以 Dijkstra 的"第一次弹出即最优"依然成立。这个变体除了“延长路径不会让代价变小”，还满足“原来更好的路径在接同一条边后仍不会更差”：<span class="arithmatex">\(a\le b\)</span> 时 <span class="arithmatex">\(\max (a,w)\le \max (b,w)\)</span>。这些性质共同允许保留每个顶点的一个最优标签，不能只凭单调不减就推广到任意代价定义。</p>
 <p>最大概率路径则输入每条边的成功概率，假定沿途成功事件独立，目标是使整条路线的概率乘积最大。概率在 [0,1] 时，接一条边不会增大乘积，且同乘一个非负概率不会颠倒两个候选的优劣。因此可把“取当前最小距离”改成“取当前最大概率”。</p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>边权表示非负传播时间时可以用 Dijkstra；限制航班中转数还需要记录轮次。</p>
-<p>先对正文 s/a/b/t 图运行 dijkstra，得到距离 [0,3,1,8]（按 s,a,b,t 编号）。记录堆中过期的 (4,a) 为何应跳过。再做 <a href="../../problems/12-advanced-graphs/02-network-delay-time/">Network Delay Time</a>，先把 1..n 编号转成 0..n−1。</p>
-<p>对 times=[[1,2,1],[2,3,2]]、n=3、起点 1，答案为 3；缺少通向 3 的边时为 −1。接着做 <a href="../../problems/12-advanced-graphs/03-cheapest-flights-within-k-stops/">Cheapest Flights</a>，用 0→1→2 的链与 k=0 检查同一轮是否误用了两段航班。</p>
+<p>先对正文 s/a/b/t 图运行 dijkstra，得到距离 [0,3,1,8]（按 s,a,b,t 编号）。记录堆中过期的 (4,a) 为何应跳过。再做 <a href="../../problems/12-advanced-graphs/02-network-delay-time/">Network Delay Time</a>，先把 1..n 编号转成 0..n-1。</p>
+<p>对 times=[[1,2,1],[2,3,2]]、n=3、起点 1，答案为 3；缺少通向 3 的边时为 -1。接着做 <a href="../../problems/12-advanced-graphs/03-cheapest-flights-within-k-stops/">Cheapest Flights</a>，用 0→1→2 的链与 k=0 检查同一轮是否误用了两段航班。</p>
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> BFS 与按权重算，A 到 C 的最短路分别是什么？能改造 BFS 吗？</p>
 <p>BFS 说 1 条边；按权重是 <code>A→B→C</code> 代价 2。<strong>不能直接改 BFS</strong>，因为它的正确性依赖"先入队的一定更近"。改造方向是"把队列换成能按当前距离取最小的容器"，也就是最小堆——那就是 Dijkstra。</p>
 <p><strong>2.</strong> 如果允许负权，Dijkstra 还成立吗？举反例。</p>
-<p>首次有效弹出即定型的结论不成立。正确反例是 <code>s→a(1), s→b(2), b→a(−5)</code>：先弹出 a 得 1，但真实最短距离是 <code>s→b→a=−3</code>。若弹出 a 就作为终点提前返回，会给错答案。</p>
-<p>本讲代码没有永久 settled 标记，后来可把 a 以 −3 再压回堆，因此它在这个反例上会修正结果。这不挽救非负权的正确性证明与复杂度保证；若有可达负环，还可能一直更新。学习反例时必须说明反驳的是哪项性质。</p>
+<p>首次有效弹出即定型的结论不成立。正确反例是 <span class="arithmatex">\(s\to a\,(1),\ s\to b\,(2),\ b\to a\,(-5)\)</span>：先弹出 a 得 1，但真实最短距离是 <span class="arithmatex">\(s\to b\to a=-3\)</span>。若弹出 a 就作为终点提前返回，会给错答案。</p>
+<p>本讲代码没有永久 settled 标记，后来可把 a 以 -3 再压回堆，因此它在这个反例上会修正结果。这不挽救非负权的正确性证明与复杂度保证；若有可达负环，还可能一直更新。学习反例时必须说明反驳的是哪项性质。</p>
 <p><strong>3.（学完第 20 讲再做）</strong> 为什么朴素递归求斐波那契是指数级的？怎么改进？它和 Bellman-Ford 有什么共同点？</p>
-<p>递归式 <code>T(n) = T(n−1) + T(n−2) + O(1)</code> 的解是 <code>Θ(φⁿ)</code>，因为同一个子问题被反复求解。改进方式是记忆化或自底向上递推。<strong>Bellman-Ford 也可以看成 DP</strong>：状态是"从 s 出发、最多用 k 条边到达顶点 v 的最短距离"，<strong>阶段就是允许的边数 k</strong>，一共 <code>n−1</code> 个阶段。这与斐波那契"状态空间有限、转移只依赖更小的阶段"完全同构。</p>
-<p><strong>4.</strong> 实现 <code>network_delay_time(times, n, k)</code>：从 k 广播，求所有节点收到信号的最短时间，不可达返回 −1。</p>
-<p>Dijkstra，答案是 <code>max(dist)</code> 而不是总和——<strong>信号是并行传播的，最慢的那个决定总时间</strong>。有 <code>inf</code> 就返回 −1。</p>
+<p>递归式 <span class="arithmatex">\(T(n) = T(n-1) + T(n-2) + \mathcal{O}(1)\)</span> 的解是 <span class="arithmatex">\(\Theta (\varphi ^{n})\)</span>，因为同一个子问题被反复求解。改进方式是记忆化或自底向上递推。<strong>Bellman-Ford 也可以看成 DP</strong>：状态是"从 s 出发、最多用 k 条边到达顶点 v 的最短距离"，<strong>阶段就是允许的边数 k</strong>，一共 <span class="arithmatex">\(n-1\)</span> 个阶段。这与斐波那契"状态空间有限、转移只依赖更小的阶段"完全同构。</p>
+<p><strong>4.</strong> 实现 <code>network_delay_time(times, n, k)</code>：从 k 广播，求所有节点收到信号的最短时间，不可达返回 -1。</p>
+<p>Dijkstra，答案是 <code>max(dist)</code> 而不是总和——<strong>信号是并行传播的，最慢的那个决定总时间</strong>。有 <code>inf</code> 就返回 -1。</p>
 <p><strong>5.</strong> 实现 <code>min_effort_path(heights)</code>：输入非空矩形高度网格，从左上走到右下，每步上下左右移动。一步的体力消耗是相邻格高度差的绝对值，一条路线的消耗取其中最大的一步。返回所有路线里最小的这种消耗。例如一行 <code>[[1,3,2]]</code> 只有一条路线，消耗为 max(2,1)=2。</p>
-<p>Dijkstra 变体，堆里存 <code>(当前最大高度差, r, c)</code>，扩展时 <code>新代价 = max(旧代价, |高度差|)</code>。与 <code>Swim in Rising Water</code> 是同一个模板。</p>
-<p><strong>6.</strong> 给定一个 DAG 和源点，求单源最短路（允许负权），要求 <code>O(V + E)</code>。</p>
+<p>Dijkstra 变体，堆里存 <code>(当前最大高度差, r, c)</code>，扩展时 <span class="arithmatex">\(新代价 = \max (旧代价, \vert 高度差\vert )\)</span>。与 <code>Swim in Rising Water</code> 是同一个模板。</p>
+<p><strong>6.</strong> 给定一个 DAG 和源点，求单源最短路（允许负权），要求 <span class="arithmatex">\(\mathcal{O}(V + E)\)</span>。</p>
 <p>先拓扑排序，再按拓扑序对每个顶点松弛它的出边。<strong>因为拓扑序保证处理某点时"所有能到达它的点都已处理完"，一次遍历就够了。</strong></p>
 
 

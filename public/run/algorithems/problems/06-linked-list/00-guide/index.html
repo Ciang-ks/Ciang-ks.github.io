@@ -10423,7 +10423,7 @@
 </tr>
 </tbody>
 </table>
-<p>画 3 到 5 个带独立身份的节点，先列改动前后每条 next，再决定赋值顺序。复杂度应包括定位时间；已知节点时可 O(1) 删除，不等于按下标删除也 O(1)。</p>
+<p>画 3 到 5 个带独立身份的节点，先列改动前后每条 next，再决定赋值顺序。复杂度应包括定位时间；已知节点时可 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 删除，不等于按下标删除也 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h2 id="_2">二、五个常用模板与使用条件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="1">模板 1 反转链表（迭代）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">reverse_list</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
@@ -10541,7 +10541,7 @@
 </tbody>
 </table>
 <p>循环结束 <code>cur = None</code>，返回 <code>prev = 3</code>。</p>
-<p><strong>关键细节</strong>：迭代版空间 O(1)；递归版空间 O(n)，链很长时有栈溢出风险——<strong>主动说出这一点是加分项</strong>。</p>
+<p><strong>关键细节</strong>：迭代版空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>；递归版空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，链很长时有栈溢出风险——<strong>主动说出这一点是加分项</strong>。</p>
 <h3 id="2-merge-two-sorted-lists21">2. Merge Two Sorted Lists（21）<a class="headerlink" href="#2-merge-two-sorted-lists21" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："合并两条升序链表"。</p>
 <p><strong>候选思路</strong>：这就是归并排序的 merge 步骤 → 哑结点 + 双路归并。</p>
@@ -10555,8 +10555,8 @@
 </span></code></pre></div>
 <p><strong>关键细节</strong>：<code>tail.next = l1 or l2</code> 一行收尾；<strong>不需要逐节点遍历剩下的部分</strong>，因为剩下的本来就是有序的。</p>
 <h3 id="3-linked-list-cycle141">3. Linked List Cycle（141）<a class="headerlink" href="#3-linked-list-cycle141" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："判断链表是否有环"，要求 O(1) 空间。</p>
-<p><strong>候选思路</strong>：哈希集合是 O(n) 空间；<strong>快慢指针</strong>是 O(1)。相遇的原理是"快指针每轮相对慢指针靠近 1 步"。</p>
+<p><strong>题面信号</strong>："判断链表是否有环"，要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。</p>
+<p><strong>候选思路</strong>：哈希集合是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间；<strong>快慢指针</strong>是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。相遇的原理是"快指针每轮相对慢指针靠近 1 步"。</p>
 <p><strong>走一遍示例</strong>：<code>3 → 2 → 0 → -4 ↺（指回 2）</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>step1: slow=2, fast=0
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>step2: slow=0, fast=2   ← fast 走了两步：-4 → 2
@@ -10584,16 +10584,16 @@
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>slow 停在 3（待删节点 4 的前驱）→ slow.next = slow.next.next
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>结果 1→2→3→5
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>必须用哑结点</strong>（删除头节点时没有前驱可用）；<code>fast</code> 先走 <code>n + 1</code> 步。</p>
+<p><strong>关键细节</strong>：<strong>必须用哑结点</strong>（删除头节点时没有前驱可用）；<code>fast</code> 先走 <span class="arithmatex">\(n + 1\)</span> 步。</p>
 <h3 id="6-copy-list-with-random-pointer138">6. Copy List with Random Pointer（138）<a class="headerlink" href="#6-copy-list-with-random-pointer138" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："每个节点还有一个 random 指针，要求深拷贝"。</p>
 <p><strong>候选思路</strong>：难点是 <code>random</code> 可能指向"还没创建"的节点 → <strong>用哈希表记录"旧节点 → 新节点"</strong>。这和处理带环的图深拷贝（133）是同一个问题。</p>
 <p><strong>关键顺序</strong>：<strong>先登记 <code>memo[cur] = copy</code>，再递归邻居</strong>。这样遇到环时能直接拿到已登记的副本，不会无限递归。</p>
-<p><strong>进阶</strong>：原地穿插可以把空间降到 O(1)——把新节点插在老节点后面，于是 <code>cur.random.next</code> 就是"random 的副本"。</p>
+<p><strong>进阶</strong>：原地穿插可以把空间降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>——把新节点插在老节点后面，于是 <code>cur.random.next</code> 就是"random 的副本"。</p>
 <h3 id="7-add-two-numbers2">7. Add Two Numbers（2）<a class="headerlink" href="#7-add-two-numbers2" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：两个数按<strong>逆序</strong>存储在链表里，求和。</p>
 <p><strong>候选思路</strong>：逆序存储意味着<strong>个位在头部</strong>，正好是竖式加法从低位开始的方向 → 一次遍历模拟进位即可，不用反转。</p>
-<p><strong>走一遍示例</strong>：<code>(2→4→3) + (5→6→4)</code> = <code>342 + 465</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\((2\to 4\to 3) + (5\to 6\to 4)\)</span> = <span class="arithmatex">\(342 + 465\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10633,23 +10633,23 @@
 </tbody>
 </table>
 <p>结果 <code>7→0→8</code>（即 807）。</p>
-<p><strong>关键细节</strong>：<strong>循环条件必须包含 <code>carry</code></strong>（<code>99 + 1</code> 的最后进位不能丢）；短的链表用 0 补齐。</p>
+<p><strong>关键细节</strong>：<strong>循环条件必须包含 <code>carry</code></strong>（<span class="arithmatex">\(99 + 1\)</span> 的最后进位不能丢）；短的链表用 0 补齐。</p>
 <h3 id="8-find-the-duplicate-number287">8. Find the Duplicate Number（287）<a class="headerlink" href="#8-find-the-duplicate-number287" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："长度 n+1，值域 1..n，只有一个数重复；不能修改数组，O(1) 空间"。</p>
+<p><strong>题面信号</strong>："长度 n+1，值域 1..n，只有一个数重复；不能修改数组，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间"。</p>
 <p><strong>候选思路</strong>：值域是 <code>1..n</code>，所以 <code>nums[i]</code> 可以当<strong>下标</strong>用 → 把数组看成链表 <code>i → nums[i]</code>。有限状态与唯一后继保证沿路径进入环；0 没有入边，所以入口同时有来自前缀和环内的两个前驱，这两个位置指向的入口编号就是重复值。于是问题变成 142：找环的入口。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,3,4,2,2]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,3,4,2,2]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>路径: 0 → 1 → 3 → 2 → 4 → 2 → 4 → ...
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>环: 2 → 4 → 2，入口是 2
 </span></code></pre></div>
 <p><strong>关键细节</strong>：快指针写 <code>fast = nums[nums[fast]]</code>；第二阶段里另一个指针从 <strong>0</strong>（链表头）出发。</p>
 <p><strong>追问准备</strong>："为什么不能用求和 / 异或？" → 因为重复数字可能<strong>出现多次</strong>，只出现一次和出现三次会互相抵消。</p>
 <h3 id="9-lru-cache146">9. LRU Cache（146）<a class="headerlink" href="#9-lru-cache146" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："O(1) 的 get / put，超容量淘汰最久未使用"。</p>
-<p><strong>候选思路</strong>：单一结构都不够——哈希表查得快但没有顺序，数组移动是 O(n)。<strong>答案是"哈希表 + 双向链表"</strong>。</p>
-<p><strong>为什么必须双向？</strong> 因为要 O(1) 删除任意节点，而单向链表删除某节点需要它的前驱。</p>
+<p><strong>题面信号</strong>："<span class="arithmatex">\(\mathcal{O}(1)\)</span> 的 get / put，超容量淘汰最久未使用"。</p>
+<p><strong>候选思路</strong>：单一结构都不够——哈希表查得快但没有顺序，数组移动是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。<strong>答案是"哈希表 + 双向链表"</strong>。</p>
+<p><strong>为什么必须双向？</strong> 因为要 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 删除任意节点，而单向链表删除某节点需要它的前驱。</p>
 <p><strong>设计要点</strong>：</p>
 <ul>
-<li><code>key → 节点</code> 的哈希表，O(1) 定位；</li>
+<li><code>key → 节点</code> 的哈希表，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 定位；</li>
 <li>链表<strong>头部 = 最近使用</strong>，<strong>尾部 = 最久未使用</strong>；</li>
 <li>哑头 + 哑尾两个哨兵，让插入/删除不需要判空；</li>
 <li><strong>节点必须保存 key</strong>，否则淘汰尾部时无法从哈希表里删掉它。</li>
@@ -10662,9 +10662,9 @@
 </span></code></pre></div>
 <h3 id="10-merge-k-sorted-lists23">10. Merge k Sorted Lists（23）<a class="headerlink" href="#10-merge-k-sorted-lists23" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："合并 k 条升序链表"。</p>
-<p><strong>候选思路</strong>：两条是 21 题；k 条有两种做法——<strong>最小堆</strong>（堆里始终 ≤ k 个元素）或<strong>分治归并</strong>（两两合并，log k 轮）。</p>
-<p><strong>分治为什么是 O(N log k)？</strong> 每一轮的合并总量都是 N，共 log k 轮。</p>
-<p><strong>Python 特有的坑</strong>：<code>heapq</code> 比较元组时，若第一个元素（值）相同就会去比较 <code>ListNode</code> 对象，而它没有定义 <code>&lt;</code>，直接抛 <code>TypeError</code>。解决办法是插入一个唯一递增计数器：<code>(node.val, counter, node)</code>。</p>
+<p><strong>候选思路</strong>：两条是 21 题；k 条有两种做法——<strong>最小堆</strong>（堆里始终 不大于 k 个元素）或<strong>分治归并</strong>（两两合并，log k 轮）。</p>
+<p><strong>分治为什么是 <span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>？</strong> 每一轮的合并总量都是 N，共 log k 轮。</p>
+<p><strong>Python 特有的坑</strong>：<code>heapq</code> 比较元组时，若第一个元素（值）相同就会去比较 <code>ListNode</code> 对象，而它没有定义 <span class="arithmatex">\(&lt;\)</span>，直接抛 <code>TypeError</code>。解决办法是插入一个唯一递增计数器：<code>(node.val, counter, node)</code>。</p>
 <h3 id="11-reverse-nodes-in-k-group25">11. Reverse Nodes in k-Group（25）<a class="headerlink" href="#11-reverse-nodes-in-k-group25" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："每 k 个一组翻转，不足 k 个保持原样"。</p>
 <p><strong>候选思路</strong>：206 的分组版本，每组要维护"组前驱"和"组后继"。<strong>必须先探测够不够 k 个</strong>——如果在反转途中才发现不够，链表已经改坏了。</p>
@@ -10691,68 +10691,68 @@
 <tr>
 <td>Reverse Linked List</td>
 <td>三指针</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Merge Two Sorted</td>
 <td>哑结点 + 归并</td>
-<td>O(n+m)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n+m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Linked List Cycle</td>
 <td>快慢指针</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Reorder List</td>
 <td>中点 + 反转 + 合并</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Remove Nth From End</td>
 <td>双指针间隔 n+1</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Copy List w/ Random</td>
 <td>哈希表</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Add Two Numbers</td>
 <td>模拟竖式</td>
-<td>O(max(m,n))</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\max (m,n))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Find Duplicate Number</td>
 <td>数组当链表 + 判环</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>LRU Cache</td>
 <td>哈希表 + 双向链表</td>
-<td>O(1) 每次</td>
-<td>O(capacity)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span> 每次</td>
+<td><span class="arithmatex">\(\mathcal{O}(\mathrm{capacity})\)</span></td>
 </tr>
 <tr>
 <td>Merge k Sorted Lists</td>
 <td>堆归并</td>
-<td>O(k+N log(k+1))</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(k+N \log (k+1))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 <tr>
 <td>Reverse k-Group</td>
 <td>分组反转</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10765,7 +10765,7 @@
 <li><strong>合并时忘接收尾</strong> <code>tail.next = l1 or l2</code>。</li>
 <li>BFS 里 <strong><code>while</code> 条件和 <code>fast.next.next</code> 不匹配</strong>。</li>
 <li><strong>LRU 的节点没存 key</strong>，淘汰时无法从哈希表删除。</li>
-<li>链表题<strong>不要用 <code>a, b = b, a</code> 式交换</strong>涉及 <code>.next</code> 的多个字段（容易踩坑），老实写临时变量。</li>
+<li>链表题<strong>不要用 <span class="arithmatex">\(a, b = b, a\)</span> 式交换</strong>涉及 <code>.next</code> 的多个字段（容易踩坑），老实写临时变量。</li>
 <li><strong>不要用"把链表转数组"来绕过指针操作</strong>——除非面试官同意。</li>
 </ol>
 <h2 id="_7">七、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -10774,7 +10774,7 @@
 <ol>
 <li>为什么反转链表必须先保存 <code>next</code>？</li>
 <li>哑结点解决了什么问题？举三个例子。</li>
-<li>快慢指针凭什么能在 O(1) 空间里判断环并找到入口？</li>
+<li>快慢指针凭什么能在 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间里判断环并找到入口？</li>
 <li>LRU 为什么必须用双向链表而不是单链表？</li>
 <li>25 题里 <code>prev</code> 的初值为什么是 <code>group_next</code>？</li>
 </ol>

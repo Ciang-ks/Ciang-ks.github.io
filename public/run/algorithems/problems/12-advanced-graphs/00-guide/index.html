@@ -10342,7 +10342,7 @@
 <ol>
 <li><code>if d &gt; dist[u]: continue</code> 不能省——同一个节点可能被多次入堆，只有第一次弹出的才是最优的；</li>
 <li><strong>只能处理非负权边</strong>（有负权时贪心性质失效）；</li>
-<li>复杂度 O((V + E) log V)。</li>
+<li>复杂度 <span class="arithmatex">\(\mathcal{O}((V + E) \log V)\)</span>。</li>
 </ol>
 <h3 id="1-max">变形 1 瓶颈路径（代价取 max）<a class="headerlink" href="#1-max" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_max_path</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
@@ -10501,7 +10501,7 @@
 <h3 id="1-min-cost-to-connect-all-points1584">1. Min Cost to Connect All Points（1584）<a class="headerlink" href="#1-min-cost-to-connect-all-points1584" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："用最小总费用把所有点连通"。</p>
 <p><strong>候选思路</strong>：<strong>"连通所有点、总代价最小"就是最小生成树的定义</strong>，和"最短路"是两个完全不同的问题——MST 保证总权重最小，但不保证任意两点间路径最短。</p>
-<p><strong>为什么用 Prim 而不是 Kruskal？</strong> 因为点两两之间的边有 O(n²) 条，<strong>显式构造所有边会占用 O(n²) 空间</strong>；数组版 Prim 按需计算边权，额外空间 O(n)；本页堆模板保留大量候选边，最坏占 O(n²)。</p>
+<p><strong>为什么用 Prim 而不是 Kruskal？</strong> 因为点两两之间的边有 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 条，<strong>显式构造所有边会占用 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 空间</strong>；数组版 Prim 按需计算边权，额外空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；本页堆模板保留大量候选边，最坏占 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</p>
 <p><strong>走一遍示例</strong>：<code>points = [[0,0],[2,2],[3,10],[5,2],[7,0]]</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>从点 0 出发：到各点距离 4, 13, 7, 7 → 选最近的点 1（距离 4）
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>生成树 {0,1}：点 2 到树的最近距离 min(13, 9) = 9；点 3：min(7, 4)=4；点 4：min(7, 5)=5
@@ -10520,7 +10520,7 @@
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>从 3 继续：dist[4] = 2
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>所有节点可达，答案 = max(0,1,1,2) = 2
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>有节点不可达时返回 -1</strong>（检查 <code>max(dist.values())</code> 是否为 <code>inf</code>）；节点编号是 1..n（开 <code>n+1</code> 大小的数组或直接用字典）；<strong>有向图只加一条边</strong>。</p>
+<p><strong>关键细节</strong>：<strong>有节点不可达时返回 -1</strong>（检查 <code>max(dist.values())</code> 是否为 <code>inf</code>）；节点编号是 1..n（开 <span class="arithmatex">\(n+1\)</span> 大小的数组或直接用字典）；<strong>有向图只加一条边</strong>。</p>
 <h3 id="3-cheapest-flights-within-k-stops787">3. Cheapest Flights Within K Stops（787）<a class="headerlink" href="#3-cheapest-flights-within-k-stops787" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最多 k 个中转站的最便宜航班"。</p>
 <p><strong>候选思路</strong>：普通 Dijkstra 只管"价格最低"，<strong>这里多了一个"步数上限"的约束</strong>，最便宜的路径可能步数超标。所以状态要带上"已用段数"。</p>
@@ -10530,7 +10530,7 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>第 2 轮（最多 2 段）: 从 1 出发 → dist[2] = 200, dist[3] = 700
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>答案 = 700（0 → 1 → 3，共 2 段 = 1 个中转站）✓
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong><code>k</code> 是中转站数量，所以最多 <code>k+1</code> 段航班</strong>（写成 <code>range(k)</code> 会少一轮）；<strong>必须用副本更新</strong> <code>nxt = dist[:]</code>，否则同一轮内会连续松弛多条边，跨越 k 的限制。</p>
+<p><strong>关键细节</strong>：<strong><code>k</code> 是中转站数量，所以最多 <span class="arithmatex">\(k+1\)</span> 段航班</strong>（写成 <code>range(k)</code> 会少一轮）；<strong>必须用副本更新</strong> <code>nxt = dist[:]</code>，否则同一轮内会连续松弛多条边，跨越 k 的限制。</p>
 <h3 id="4-reconstruct-itinerary332">4. Reconstruct Itinerary（332）<a class="headerlink" href="#4-reconstruct-itinerary332" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："用完所有机票恰好一次，返回行程；多种走法时取字典序最小"。</p>
 <p><strong>候选思路</strong>：<strong>"用完所有的边恰好一次"就是欧拉路径</strong>。朴素回溯枚举所有走法是指数级的，必须用 Hierholzer。</p>
@@ -10542,16 +10542,16 @@
 </span></code></pre></div>
 <p><strong>关键细节</strong>：<strong>必须后序记录再反转</strong>；邻接表要<strong>倒序排序</strong>（配合 <code>pop()</code> 才能取到字典序最小的目的地），或者直接用<strong>小顶堆</strong>；有重复机票时 <code>pop()</code> 天然处理。</p>
 <h3 id="5-swim-in-rising-water778">5. Swim in Rising Water（778）<a class="headerlink" href="#5-swim-in-rising-water778" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："时刻 t 只能走高度 ≤ t 的格子，求从左上到右下所需的最小时间"。</p>
+<p><strong>题面信号</strong>："时刻 t 只能走高度 不大于 t 的格子，求从左上到右下所需的最小时间"。</p>
 <p><strong>候选思路</strong>：把每个格子的高度看成"边权"，问题变成"<strong>最小化路径上的最大值</strong>"（最小瓶颈路径）。<strong>Dijkstra 的框架不变，只把"代价相加"换成"代价取 max"。</strong></p>
-<p><strong>为什么取 max 之后仍然正确？</strong> 因为 max(t,x)≥t，且 t₁≤t₂ 时 max(t₁,x)≤max(t₂,x)，扩展不降价且保序，故最小候选首次出堆即可确定最优。</p>
+<p><strong>为什么取 max 之后仍然正确？</strong> 因为 max(t,x)不小于t，且 <span class="arithmatex">\(t_{1}\)</span>不大于<span class="arithmatex">\(t_{2}\)</span> 时 max(<span class="arithmatex">\(t_{1}\)</span>,x)不大于max(<span class="arithmatex">\(t_{2}\)</span>,x)，扩展不降价且保序，故最小候选首次出堆即可确定最优。</p>
 <p><strong>走一遍示例</strong>：<code>grid = [[0,2],[1,3]]</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>起点 t = 0
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>邻居 (0,1) 高度 2 → 代价 max(0,2) = 2；(1,0) 高度 1 → 代价 1
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>弹出代价 1 的 (1,0)，从它到 (1,1) 高度 3 → 代价 max(1,3) = 3
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>弹出终点 (1,1)，代价 3 → 返回 3 ✓
 </span></code></pre></div>
-<p><strong>另一种解法</strong>：二分答案 t + BFS 判断连通性，O(n² log(maxH))。<strong>第三种解法</strong>：按高度升序"激活"格子并用并查集合并，起点终点第一次连通时的高度就是答案（和 Kruskal 同源）。</p>
+<p><strong>另一种解法</strong>：二分答案 t + BFS 判断连通性，<span class="arithmatex">\(\mathcal{O}(n^{2} \log (maxH))\)</span>。<strong>第三种解法</strong>：按高度升序"激活"格子并用并查集合并，起点终点第一次连通时的高度就是答案（和 Kruskal 同源）。</p>
 <h3 id="6-alien-dictionary269">6. Alien Dictionary（269）<a class="headerlink" href="#6-alien-dictionary269" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："给定按外星字典序排好序的单词，推导字母顺序"。</p>
 <p><strong>候选思路</strong>：<strong>难点在建图，不在排序</strong>。相邻两个单词的<strong>第一个不同字符</strong>确定了一条先后关系；把这些关系建成有向图后，拓扑排序就是答案。</p>
@@ -10582,32 +10582,32 @@
 <tr>
 <td>Min Cost to Connect All Points</td>
 <td>MST（Prim / Kruskal）</td>
-<td>O(n² log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span></td>
 </tr>
 <tr>
 <td>Network Delay Time</td>
 <td>Dijkstra</td>
-<td>O(E log V)</td>
+<td><span class="arithmatex">\(\mathcal{O}(E \log V)\)</span></td>
 </tr>
 <tr>
 <td>Cheapest Flights Within K Stops</td>
 <td>快照分层松弛</td>
-<td>O((k+1)(E+V))</td>
+<td><span class="arithmatex">\(\mathcal{O}((k+1)(E+V))\)</span></td>
 </tr>
 <tr>
 <td>Reconstruct Itinerary</td>
 <td>Hierholzer</td>
-<td>O(E log E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(E \log E)\)</span></td>
 </tr>
 <tr>
 <td>Swim in Rising Water</td>
 <td>Dijkstra 变体 / 二分 + BFS</td>
-<td>O(n² log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span></td>
 </tr>
 <tr>
 <td>Alien Dictionary</td>
 <td>拓扑排序</td>
-<td>O(总字符数)</td>
+<td><span class="arithmatex">\(\mathcal{O}(总字符数)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10623,7 +10623,7 @@
 <li><strong>269 漏掉前缀冲突</strong>这个边界。</li>
 </ol>
 <h2 id="_6">九、面试话术<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>"这是一个非负权单源最短路问题，我用 Dijkstra。维护一个距离数组和一个优先队列，每次弹出当前距离最小的节点，用它去松弛邻居。因为边权非负，节点第一次被弹出时距离一定最优。复杂度 O((V+E) log V)。"</p>
+<p>"这是一个非负权单源最短路问题，我用 Dijkstra。维护一个距离数组和一个优先队列，每次弹出当前距离最小的节点，用它去松弛邻居。因为边权非负，节点第一次被弹出时距离一定最优。复杂度 <span class="arithmatex">\(\mathcal{O}((V+E) \log V)\)</span>。"</p>
 <h2 id="30">十、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Dijkstra 为什么不能处理负权边？</li>

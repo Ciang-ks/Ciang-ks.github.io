@@ -10141,7 +10141,7 @@
 </blockquote>
 <p>树加一条边会产生唯一的环，环上的多条边都可能作为删除答案。顺序扫描中，最后加入的那条环边才会让两端已经连通，因此第一次合并失败正好满足“返回输入中最后出现的可删除边”。</p>
 <h3 id="dfs">DFS 检测环的替代方案<a class="headerlink" href="#dfs" title="Permanent link">&para;</a></h3>
-<p>每加一条边就判断"在<strong>不包含</strong>这条边的子图里，<code>u</code> 和 <code>v</code> 是否连通"。用 DFS 每次是 O(V + E)，总共 O(E(V+E))，<strong>远慢于并查集</strong>。</p>
+<p>每加一条边就判断"在<strong>不包含</strong>这条边的子图里，<code>u</code> 和 <code>v</code> 是否连通"。用 DFS 每次是 <span class="arithmatex">\(\mathcal{O}(V + E)\)</span>，总共 <span class="arithmatex">\(\mathcal{O}(E(V+E))\)</span>，<strong>远慢于并查集</strong>。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>树加一条边形成唯一的环，但环上每条边都可以删去后恢复树，因此可删除答案可能很多。按输入顺序加入边时，只有这条环的最后一条边被加入后，两端才通过其余环边已经连通；所以第一次 union 失败找到的，恰好是所有可删除边中在输入里最后出现的一条。</p>
 <p>例如 [[1,2],[1,3],[2,3]] 三条都可删除，而算法返回最后的 [2,3]。并查集只需要回答“此前是否已有一条连接两端的路径”，无需保存路径本身；若题目要输出整个环，则还需邻接图或其他信息。这个判环依据适用于无向图，有向边的两端弱连通并不能推出有向环。</p>
@@ -10240,26 +10240,26 @@
 <tbody>
 <tr>
 <td>并查集（路径压缩 + 按秩）</td>
-<td>O(n · α(n)) ≈ O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \alpha (n))\)</span> 约为 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>DFS 检测</td>
-<td>O(n²)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>（<code>α</code> 是反阿克曼函数，实际取值不超过 4，可以视为常数。）</p>
+<p>（<span class="arithmatex">\(\alpha\)</span> 是反阿克曼函数，实际取值不超过 4，可以视为常数。）</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>并查集的大小要开 <code>n + 1</code></strong>：节点编号是从 1 开始的。</li>
+<li><strong>并查集的大小要开 <span class="arithmatex">\(n + 1\)</span></strong>：节点编号是从 1 开始的。</li>
 <li><strong><code>find</code> 必须做路径压缩</strong>（<code>parent[x] = parent[parent[x]]</code>），否则大树会退化。</li>
 <li><strong><code>union</code> 必须做按秩 / 按大小合并</strong>，否则最坏情况下树会退化成链。</li>
 <li>判断顺序是"<strong>先看是否已连通，再合并</strong>"——这是找到环的关键。</li>
-<li><strong>追问：并查集的复杂度为什么接近 O(1)？</strong> → 路径压缩 + 按秩合并共同保证了 O(α(n))。</li>
+<li><strong>追问：并查集的复杂度为什么接近 <span class="arithmatex">\(\mathcal{O}(1)\)</span>？</strong> → 路径压缩 + 按秩合并共同保证了 <span class="arithmatex">\(\mathcal{O}(\alpha (n))\)</span>。</li>
 <li><strong>追问：如果有多条冗余边？</strong> → <a href="https://leetcode.com/problems/redundant-connection-ii/">685 Redundant Connection II</a>（有向图，需要分类讨论），难度明显提升。</li>
-<li><strong>追问：如何找出</strong>所有<strong>能删除的边？</strong> → 需要枚举每条边，判断删掉后图是否仍然连通，O(E²)。</li>
+<li><strong>追问：如何找出</strong>所有<strong>能删除的边？</strong> → 需要枚举每条边，判断删掉后图是否仍然连通，<span class="arithmatex">\(\mathcal{O}(E^{2})\)</span>。</li>
 <li><strong>追问：这题和 261 Graph Valid Tree 的关系？</strong> → 261 是"判断给定的边集能否构成树"，本题是"已知多了一条边，找出它"。<strong>两者的核心判断都是"加边时两端是否已经连通"。</strong></li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

@@ -10401,7 +10401,7 @@
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">obj</span><span class="p">))</span>   <span class="c1"># counter 保证不会比较到 obj</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></code></pre></div>
-<p><strong>元组会依次比较各元素</strong>。如果前几个字段相等，就会去比较后面的对象——而 <code>ListNode</code> 之类没有定义 <code>&lt;</code>，直接抛 <code>TypeError</code>。<strong>插入一个唯一递增计数器是标准解法</strong>（23、355 都会用到）。</p>
+<p><strong>元组会依次比较各元素</strong>。如果前几个字段相等，就会去比较后面的对象——而 <code>ListNode</code> 之类没有定义 <span class="arithmatex">\(&lt;\)</span>，直接抛 <code>TypeError</code>。<strong>插入一个唯一递增计数器是标准解法</strong>（23、355 都会用到）。</p>
 <h2 id="_3">四、从读题到写码：四步流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>判断数据是动态还是静态</strong>：动态 → 堆；静态且只求第 k 大 → 快速选择。</li>
@@ -10413,7 +10413,7 @@
 <h3 id="1-kth-largest-element-in-a-stream703">1. Kth Largest Element in a Stream（703）<a class="headerlink" href="#1-kth-largest-element-in-a-stream703" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："数据流"+"第 k 大"。</p>
 <p><strong>候选思路</strong>：动态 → 堆。<strong>关键观察：维护"第 k 大"只需要维护"当前最大的 k 个"</strong>，这 k 个里最小的那个就是答案，其余元素怎么变都不影响第 k 大。</p>
-<p><strong>走一遍示例</strong>：初始 <code>nums = [4,5,8,2]</code>，<code>k = 3</code>，随后依次 <code>add(3)</code>、<code>add(5)</code>、<code>add(10)</code>、<code>add(9)</code>、<code>add(4)</code>。</p>
+<p><strong>走一遍示例</strong>：初始 <span class="arithmatex">\(\mathrm{nums} = [4,5,8,2]\)</span>，<code>k = 3</code>，随后依次 <code>add(3)</code>、<code>add(5)</code>、<code>add(10)</code>、<code>add(9)</code>、<code>add(4)</code>。</p>
 <p>初始时"最大的 3 个"是 <code>{4, 5, 8}</code>（<code>2</code> 在收缩时被弹掉）：</p>
 <table>
 <thead>
@@ -10466,19 +10466,19 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>最终剩 1
 </span></code></pre></div>
 <p><strong>关键细节</strong>：压回堆的值是 <code>y - x</code>（<code>y</code> 是较大的）；循环条件是 <code>len(heap) &gt; 1</code>；最后可能剩 0 块（返回 0）。</p>
-<p><strong>顺带记住</strong>：<code>heapify</code> 是 O(n)，不是 O(n log n)——面试中主动说出来是加分项。</p>
+<p><strong>顺带记住</strong>：<code>heapify</code> 是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>——面试中主动说出来是加分项。</p>
 <h3 id="3-k-closest-points-to-origin973">3. K Closest Points to Origin（973）<a class="headerlink" href="#3-k-closest-points-to-origin973" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最近的 k 个点"。</p>
 <p><strong>候选思路</strong>：Top-K 的变体，但<strong>方向相反</strong>——要淘汰"最远的"，所以用<strong>大顶堆</strong>。</p>
 <p><strong>两个关键优化</strong>：</p>
 <ol>
-<li><strong>不要开方</strong>：比较 <code>x² + y²</code> 即可，避免浮点误差；</li>
+<li><strong>不要开方</strong>：比较 <span class="arithmatex">\(x^{2} + y^{2}\)</span> 即可，避免浮点误差；</li>
 <li>元组写成 <code>(-距离平方, x, y)</code>，<strong><code>x</code>、<code>y</code> 作为 tie-break</strong>，保证元组可比较。</li>
 </ol>
-<p><strong>追问准备</strong>："k 接近 n 时？" → 改用快速选择（平均 O(n)）或直接排序。</p>
+<p><strong>追问准备</strong>："k 接近 n 时？" → 改用快速选择（平均 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）或直接排序。</p>
 <h3 id="4-kth-largest-element-in-an-array215">4. Kth Largest Element in an Array（215）<a class="headerlink" href="#4-kth-largest-element-in-an-array215" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："静态数组的第 k 大"。</p>
-<p><strong>候选思路</strong>：三种做法 —— 小顶堆（O(n log k)）、快速选择（平均 O(n)）、排序（O(n log n)）。</p>
+<p><strong>候选思路</strong>：三种做法 —— 小顶堆（<span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>）、快速选择（平均 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）、排序（<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>）。</p>
 <p><strong>快速选择的关键</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>"第 k 大" = 升序排序后的第 n-k 个位置（别写成 k-1）
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>partition 之后只递归一边，所以期望复杂度是 n + n/2 + n/4 + … = O(n)
@@ -10487,11 +10487,11 @@
 <p><strong>关键细节</strong>：<strong>"必须随机化 pivot"是这道题最常被追问的点</strong>；<code>while True</code> + 三路分支（等于目标直接返回）。</p>
 <h3 id="5-task-scheduler621">5. Task Scheduler（621）<a class="headerlink" href="#5-task-scheduler621" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："同类任务之间要间隔 n 个时间单位，求最短总时间"。</p>
-<p><strong>候选思路</strong>：先想<strong>数学公式</strong>，因为它 O(n) 且代码极短。</p>
+<p><strong>候选思路</strong>：先想<strong>数学公式</strong>，因为它 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 且代码极短。</p>
 <p><strong>推一把公式</strong>：设出现最多的任务出现 <code>maxf</code> 次，且有 <code>maxcnt</code> 种任务都出现了 <code>maxf</code> 次。先把这些"最重的"排成骨架：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>A _ _ A _ _ A          （maxf = 3，n = 2）
 </span></code></pre></div>
-<p>骨架长度 = <code>(maxf - 1) * (n + 1) + maxcnt</code>。<strong>为什么最后要加 <code>maxcnt</code>？</strong> 因为如果多种任务并列最高频，它们会并排填在最后一批里。</p>
+<p>骨架长度 = <span class="arithmatex">\((\mathrm{maxf} - 1) * (n + 1) + \mathrm{maxcnt}\)</span>。<strong>为什么最后要加 <code>maxcnt</code>？</strong> 因为如果多种任务并列最高频，它们会并排填在最后一批里。</p>
 <p><strong>最后必须和 <code>len(tasks)</code> 取 max</strong>：如果任务种类足够多，能把所有间隔填满甚至溢出，就不需要任何 idle。</p>
 <p><strong>走一遍示例</strong>：<code>tasks = ["A","A","A","B","B","B"]</code>，<code>n = 2</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>maxf = 3，maxcnt = 2（A 和 B 都是 3 次）
@@ -10508,13 +10508,13 @@
 <p><strong>关键细节</strong>：<code>getNewsFeed</code> 必须<strong>包含自己</strong>（用 <code>follows[uid] | {uid}</code> 一步搞定）；堆里要带 <code>(userId, idx)</code> 才能补下一条；<code>unfollow</code> 用 <code>discard</code> 而不是 <code>remove</code>。</p>
 <h3 id="7-find-median-from-data-stream295">7. Find Median from Data Stream（295）<a class="headerlink" href="#7-find-median-from-data-stream295" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："流式数据的中位数"。</p>
-<p><strong>候选思路</strong>：每来一个数就排序是 O(n log n)；<strong>双堆</strong>可以做到 O(log n) 插入、O(1) 查询。</p>
+<p><strong>候选思路</strong>：每来一个数就排序是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>；<strong>双堆</strong>可以做到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 插入、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 查询。</p>
 <p><strong>双堆的分工</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>small：大顶堆，存较小的一半（堆顶是这半的最大值）
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>large：小顶堆，存较大的一半（堆顶是这半的最小值）
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>中位数 = small 堆顶（奇数个） 或 两个堆顶平均（偶数个）
 </span></code></pre></div>
-<p><strong>插入的三步（顺序不能变）</strong>：先压 <code>small</code> → 把 <code>small</code> 的堆顶移到 <code>large</code> → 若 <code>len(small) &lt; len(large)</code> 再挪回来。这三步保证了"<code>small</code> 的所有元素 ≤ <code>large</code> 的所有元素"。</p>
+<p><strong>插入的三步（顺序不能变）</strong>：先压 <code>small</code> → 把 <code>small</code> 的堆顶移到 <code>large</code> → 若 <code>len(small) &lt; len(large)</code> 再挪回来。这三步保证了"<code>small</code> 的所有元素 不大于 <code>large</code> 的所有元素"。</p>
 <p><strong>走一遍示例</strong>：依次加入 1、2、3</p>
 <table>
 <thead>
@@ -10546,7 +10546,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>追问准备</strong>："为什么不用两个数组？" → 插入后维持有序是 O(n)；"带删除的双堆？" → 需要惰性删除（480）。</p>
+<p><strong>追问准备</strong>："为什么不用两个数组？" → 插入后维持有序是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；"带删除的双堆？" → 需要惰性删除（480）。</p>
 <h2 id="_5">六、复杂度速查<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10561,44 +10561,44 @@
 <tr>
 <td>Kth Largest in a Stream</td>
 <td>动态 Top-K</td>
-<td>O(log k) 每次</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log k)\)</span> 每次</td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 <tr>
 <td>Last Stone Weight</td>
 <td>大顶堆模拟</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>K Closest Points</td>
 <td>大顶堆（淘汰最远）</td>
-<td>O(n log k)</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 <tr>
 <td>Kth Largest in Array</td>
 <td>堆 或 快速选择</td>
-<td>O(n log k) / 平均 O(n)</td>
-<td>O(k) / O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log k)\)</span> / 平均 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span> / <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Task Scheduler</td>
 <td>公式 / 堆 + 队列</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Design Twitter</td>
 <td>多路归并</td>
-<td>O(F+10 log(F+1)) 查询</td>
-<td>O(F) 查询临时堆，历史另计</td>
+<td><span class="arithmatex">\(\mathcal{O}(F+10 \log (F+1))\)</span> 查询</td>
+<td><span class="arithmatex">\(\mathcal{O}(F)\)</span> 查询临时堆，历史另计</td>
 </tr>
 <tr>
 <td>Find Median</td>
 <td>双堆</td>
-<td>O(log n) 插入</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 插入</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10609,11 +10609,11 @@
 <li>求 Top-K 时<strong>方向搞反</strong>：要"最大的 k 个"就得用小顶堆淘汰最小值。</li>
 <li><strong>元组里放不可比较对象</strong>没加计数器。</li>
 <li><strong>双堆平衡条件写错</strong> / 插入三步顺序写反。</li>
-<li><strong><code>heapify</code> 复杂度记成 O(n log n)</strong>。</li>
-<li><strong>用 <code>nlargest</code> 却不解释复杂度</strong>：k 小时是 O(n log k)，k 接近 n 时会退化成排序。</li>
+<li><strong><code>heapify</code> 复杂度记成 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></strong>。</li>
+<li><strong>用 <code>nlargest</code> 却不解释复杂度</strong>：k 小时是 <span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>，k 接近 n 时会退化成排序。</li>
 </ol>
 <h2 id="_7">八、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>"我用一个小顶堆维护当前最大的 k 个元素。遍历时把元素压入堆，堆大小超过 k 就弹出堆顶（也就是这 k 个里最小的）。遍历结束后堆顶就是第 k 大的元素。时间 O(n log k)，空间 O(k)。"</p>
+<p>"我用一个小顶堆维护当前最大的 k 个元素。遍历时把元素压入堆，堆大小超过 k 就弹出堆顶（也就是这 k 个里最小的）。遍历结束后堆顶就是第 k 大的元素。时间 <span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(k)\)</span>。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>使用 heapq 小顶堆接口时，怎样模拟大顶堆？</li>

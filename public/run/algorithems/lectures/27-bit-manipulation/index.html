@@ -10280,7 +10280,7 @@
 <blockquote>
 <p>内存是一排编号的格子，每格放一个"<strong>字</strong>"，通常 64 位。<strong>算术、比较、按位运算都算一次操作。</strong></p>
 </blockquote>
-<p>这里把处理一个机器字的位运算与加减法都按 O(1) 计费，不表示它们在真实机器上耗时完全相同。第一次接触位运算时，先把整数想成一排 0、1 开关；“按位”就是把两个整数对齐，每一对开关单独计算。后面先介绍规则，再看这些规则怎样减少搜索或计数。</p>
+<p>这里把处理一个机器字的位运算与加减法都按 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 计费，不表示它们在真实机器上耗时完全相同。第一次接触位运算时，先把整数想成一排 0、1 开关；“按位”就是把两个整数对齐，每一对开关单独计算。后面先介绍规则，再看这些规则怎样减少搜索或计数。</p>
 <p>这一讲会反复用到四种套路：</p>
 <table>
 <thead>
@@ -10309,7 +10309,7 @@
 </tbody>
 </table>
 <h2 id="_1">先把二进制和运算符看清<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>十进制 13 是 <code>1×8+1×4+0×2+1×1</code>，写成二进制 <code>1101</code>。从右往左依次是第 0、1、2、3 位，权重分别为 1、2、4、8。</p>
+<p>十进制 13 是 <span class="arithmatex">\(1\times 8+1\times 4+0\times 2+1\times 1\)</span>，写成二进制 <code>1101</code>。从右往左依次是第 0、1、2、3 位，权重分别为 1、2、4、8。</p>
 <table>
 <thead>
 <tr>
@@ -10317,7 +10317,7 @@
 <th>b 位</th>
 <th><code>a &amp; b</code> 两个都是 1</th>
 <th><code>a \| b</code> 至少一个 1</th>
-<th><code>a ^ b</code> 两位不同</th>
+<th><span class="arithmatex">\(a \oplus  b\)</span> 两位不同</th>
 </tr>
 </thead>
 <tbody>
@@ -10352,7 +10352,7 @@
 </tbody>
 </table>
 <p>表中的 &amp;、|、^ 分别叫按位与、按位或、按位异或。这里它们返回计算后的整数，与布尔条件里的 and、or 不是同一个操作；Python 的 ^ 也不是乘方，乘方写 **。</p>
-<p>对非负整数，左移一位相当于乘 2，右移一位相当于整除 2；<code>1&lt;&lt;k</code> 只把第 k 位置 1。先按位对齐再计算，例如 <code>1101 &amp; 0110 = 0100</code>。正文数 1 的函数约定 n≥0；Python 负数右移会保留符号，不能直接用 while n 数位。</p>
+<p>对非负整数，左移一位相当于乘 2，右移一位相当于整除 2；<code>1&lt;&lt;k</code> 只把第 k 位置 1。先按位对齐再计算，例如 <span class="arithmatex">\(\mathtt{1101}_2\mathbin{\&amp;}\mathtt{0110}_2=\mathtt{0100}_2\)</span>。正文数 1 的函数约定 n不小于0；Python 负数右移会保留符号，不能直接用 while n 数位。</p>
 <h2 id="_2">先看笨办法：逐位检查<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>问题</strong>：输入非负整数 n，返回它的二进制表示中有多少个 1。例如 n=13 的二进制是 1101，返回 3；n=0 返回 0。</p>
@@ -10370,16 +10370,16 @@
 <h2 id="_3">两个式子：清除，还是取出<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="x&amp;(x-1) 清除最低位的 1；x&amp;(-x) 取出它" src="../images/27-bit-tricks.svg" /></p>
 <blockquote>
-<p><strong>式子一：<code>x &amp; (x − 1)</code> 清除最低位的那个 1。</strong></p>
+<p><strong>式子一：<code>x &amp; (x - 1)</code> 清除最低位的那个 1。</strong></p>
 </blockquote>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>x         = 1100
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>x - 1     = 1011      （最低位的 1 变成 0，它后面那些 0 全变成 1）
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>x &amp; (x-1) = 1000      （最低位的 1 被消掉了）
 </span></code></pre></div>
 <h3 id="lowbit">选读：补码与 lowbit<a class="headerlink" href="#lowbit" title="Permanent link">&para;</a></h3>
-<p>补码是固定二进制位数下表示有符号整数的方法：最高位为 1 的位模式可解释为一个负数，例如 8 位的 11111111 按无符号读是 255，按补码读是 255−256=−1。固定 8 位时，−x 的补码由“把 x 的 8 位全部翻转，再加 1”得到。12 是 00001100，翻转成 11110011，再加 1 得 11110100。最低那个 1 及其右边的 0 在取负后保持原样，高于它的位置则与原数相反，所以按位与只留下最低那个 1。Python 的按位运算在语义上相当于无限延伸符号位，正数 x 的这个结果仍相同。</p>
+<p>补码是固定二进制位数下表示有符号整数的方法：最高位为 1 的位模式可解释为一个负数，例如 8 位的 11111111 按无符号读是 255，按补码读是 255-256=-1。固定 8 位时，-x 的补码由“把 x 的 8 位全部翻转，再加 1”得到。12 是 00001100，翻转成 11110011，再加 1 得 11110100。最低那个 1 及其右边的 0 在取负后保持原样，高于它的位置则与原数相反，所以按位与只留下最低那个 1。Python 的按位运算在语义上相当于无限延伸符号位，正数 x 的这个结果仍相同。</p>
 <blockquote>
-<p><strong>式子二：<code>x &amp; (−x)</code> 取出最低位的那个 1（lowbit）。</strong></p>
+<p><strong>式子二：<code>x &amp; (-x)</code> 取出最低位的那个 1（lowbit）。</strong></p>
 </blockquote>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>x         = 1100
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>(-x) 低4位   = 0100      （完整8位补码是11110100）
@@ -10418,134 +10418,134 @@
 </span></code></pre></div>
 <h2 id="_4">异或：让成对的东西互相抵消<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>异或有三条性质：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>a ^ a = 0        相同抵消
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>a ^ 0 = a        与 0 异或不变
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>交换律、结合律    与顺序无关
-</span></code></pre></div>
+<div class="arithmatex">\[
+a\oplus a=0,\qquad a\oplus0=a,\qquad a\oplus b=b\oplus a
+\]</div>
 <p>先明确 Single Number 的任务：输入非空整数数组，保证恰有一个数出现一次，其余每种数都出现两次，返回那个只出现一次的值。例如 <code>[4,1,2,1,2]</code> 返回 4；题目已经保证出现次数，不需要我们验证这个前提。</p>
-<p>为什么三条性质足够？利用交换律与结合律，可以在分析时把相同值放到一起：<code>4^1^2^1^2=4^(1^1)^(2^2)=4^0^0=4</code>。实际代码无须排序，按任意顺序累计异或就行：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">result</span> <span class="o">^=</span> <span class="n">x</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">return</span> <span class="n">result</span>
+<p>为什么三条性质足够？利用交换律与结合律，可以在分析时把相同值放到一起：<span class="arithmatex">\(4\oplus1\oplus2\oplus1\oplus2=4\oplus(1\oplus1)\oplus(2\oplus2)=4\)</span>。实际代码无须排序，按任意顺序累计异或就行：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">result</span> <span class="o">^=</span> <span class="n">x</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
 <p>如果改成“一个元素出现一次、其余都出现三次”，任务仍然是返回唯一的那个值，但三份 x 异或后是 x，并没有消掉。下一节因此换用逐位计数。</p>
 <h2 id="_5">选读：逐位独立与按位分组<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>Single Number II 的输入保证恰有一个数出现一次，其余每种数都出现三次。例如 <code>[2,2,3,2]</code> 应返回 3。把它们写成二进制 <code>10,10,11,10</code>：最低位共有一个 1，次低位共有四个 1；各自除以 3 取余都为 1，于是答案的两位是 11。</p>
 <p>一般地，在任意一位上，出现三次的数要么贡献三个 1，要么贡献零个，模 3 后都消失，剩下的就是唯一数在该位的 0 或 1。代码用 <code>(x&gt;&gt;i)&amp;1</code> 取第 i 位，用 <code>result |= 1&lt;&lt;i</code> 把答案该位置为 1。</p>
-<p>本节约定输入都在有符号 32 位范围内，即 −2³¹ 到 2³¹−1；代码先把结果当作 32 位非负位模式。补码解释中，最高位为 1 的模式代表负数，需要减去 2³²。例如 8 位演示中 11111111 当无符号数是 255，按补码解释则是 255−256=−1。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number_ii</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">):</span>                          <span class="c1"># 一位一位处理</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">bit_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">if</span> <span class="n">bit_sum</span> <span class="o">%</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>            <span class="n">result</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span>                   <span class="c1"># 这一位属于那个唯一的数</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="c1"># Python 的负数处理：符号位是 1 时要转回负数</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
+<p>本节约定输入都在有符号 32 位范围内，即 -<span class="arithmatex">\(2^{31}\)</span> 到 <span class="arithmatex">\(2^{31}-1\)</span>；代码先把结果当作 32 位非负位模式。补码解释中，最高位为 1 的模式代表负数，需要减去 <span class="arithmatex">\(2^{32}\)</span>。例如 8 位演示中 11111111 当无符号数是 255，按补码解释则是 255-256=-1。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number_ii</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">):</span>                          <span class="c1"># 一位一位处理</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">bit_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">if</span> <span class="n">bit_sum</span> <span class="o">%</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="n">result</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span>                   <span class="c1"># 这一位属于那个唯一的数</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="c1"># Python 的负数处理：符号位是 1 时要转回负数</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
 </span></code></pre></div>
-<p>这题的思路很有代表性：<strong>各个二进制位是彼此独立的。</strong> 既然第 i 位上"1 的个数模 3"就能定出答案的第 i 位，那就一位一位地算。时间 <code>O(32n) = O(n)</code>，空间 <code>O(1)</code>。</p>
-<p>再改一道题：Single Number III 保证恰有<strong>两个不同的值</strong>各出现一次，其余每种值出现两次，要求返回这两个值，次序不限。例如 <code>[1,2,1,3,2,5]</code> 返回 <code>[3,5]</code>。先把全部元素异或起来，得到 <code>a ^ b</code>；因为 <code>a ≠ b</code>，这个值必定有某一位是 1。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number_iii</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="n">diff</span> <span class="o">^=</span> <span class="n">x</span>                       <span class="c1"># diff = a ^ b</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">lowbit</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">-</span><span class="n">diff</span><span class="p">)</span>             <span class="c1"># 取最低位的 1：这一位上 a 与 b 必然不同</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">lowbit</span><span class="p">:</span>                  <span class="c1"># 按这一位分成两组</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>            <span class="n">a</span> <span class="o">^=</span> <span class="n">x</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            <span class="n">b</span> <span class="o">^=</span> <span class="n">x</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+<p>这题的思路很有代表性：<strong>各个二进制位是彼此独立的。</strong> 既然第 i 位上"1 的个数模 3"就能定出答案的第 i 位，那就一位一位地算。时间 <span class="arithmatex">\(\mathcal{O}(32n) = \mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
+<p>再改一道题：Single Number III 保证恰有<strong>两个不同的值</strong>各出现一次，其余每种值出现两次，要求返回这两个值，次序不限。例如 <code>[1,2,1,3,2,5]</code> 返回 <code>[3,5]</code>。先把全部元素异或起来，得到 <span class="arithmatex">\(a \oplus  b\)</span>；因为 <span class="arithmatex">\(a \ne b\)</span>，这个值必定有某一位是 1。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">single_number_iii</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">diff</span> <span class="o">^=</span> <span class="n">x</span>                       <span class="c1"># diff = a ^ b</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">lowbit</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">-</span><span class="n">diff</span><span class="p">)</span>             <span class="c1"># 取最低位的 1：这一位上 a 与 b 必然不同</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">lowbit</span><span class="p">:</span>                  <span class="c1"># 按这一位分成两组</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="n">a</span> <span class="o">^=</span> <span class="n">x</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="n">b</span> <span class="o">^=</span> <span class="n">x</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
 </span></code></pre></div>
-<p>三步环环相扣：先异或出 <code>a ^ b</code>；<code>lowbit</code> 取出的那一位上 <code>a</code> 与 <code>b</code> 必然不同，于是<strong>按这一位分组，a 和 b 一定被分到不同组</strong>；每组内部各做一次"找唯一元素"即可。<strong>注意成对的元素在该位上取值相同，必然落进同一组</strong>，所以每组的性质没有被破坏。</p>
+<p>三步环环相扣：先异或出 <span class="arithmatex">\(a \oplus  b\)</span>；<code>lowbit</code> 取出的那一位上 <code>a</code> 与 <code>b</code> 必然不同，于是<strong>按这一位分组，a 和 b 一定被分到不同组</strong>；每组内部各做一次"找唯一元素"即可。<strong>注意成对的元素在该位上取值相同，必然落进同一组</strong>，所以每组的性质没有被破坏。</p>
 <h2 id="1_1">批量统计：一次算出所有数的 1 的个数<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>给一个 n，要求输出 0 到 n 每个数的二进制里 1 的个数。</p>
 </blockquote>
-<p>逐个调用上面的函数是 <code>O(n log n)</code>，但这里可以递推：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_bits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># 右移一位的答案 + 最低位</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">return</span> <span class="n">ans</span>
+<p>逐个调用上面的函数是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，但这里可以递推：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_bits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># 右移一位的答案 + 最低位</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
 <p><strong>另一个等价、且更"位运算"的写法</strong>是借式子一：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_bits_alt</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># 消掉一个 1 之后的数量，再加回这一个</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="k">return</span> <span class="n">ans</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_bits_alt</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># 消掉一个 1 之后的数量，再加回这一个</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
 <p>两个递推式都要能解释：前者是"右移一位 + 看最低位"，后者是"消掉最低位的 1 再加 1"。</p>
 <h2 id="_6">反转位与丢失的数字<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">颠倒二进制位<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>输入 0≤n&lt;2³²，把它写成固定 32 位二进制串（不足补前导零），左右反转后，返回新位串表示的非负整数。例如 n=1 只有最右边一位为 1，反转后该位到最左，返回 2³¹；这与反转十进制数字不同。</p>
+<p>输入 <span class="arithmatex">\(0\le n&lt;2^{32}\)</span>，把它写成固定 32 位二进制串（不足补前导零），左右反转后，返回新位串表示的非负整数。例如 n=1 只有最右边一位为 1，反转后该位到最左，返回 <span class="arithmatex">\(2^{31}\)</span>；这与反转十进制数字不同。</p>
 <p>代码每轮取出输入的最低位，把已构造的结果左移腾出一格，再用按位或把这一位放进去。恰好做 32 次，才能连前导的 0 一起搬过去：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">reverse_bits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">):</span>                    <span class="c1"># 必须固定 32 次</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># 结果左移腾出最低位，填入 n 的最低位</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">return</span> <span class="n">result</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">reverse_bits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">):</span>                    <span class="c1"># 必须固定 32 次</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># 结果左移腾出最低位，填入 n 的最低位</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
 <p><strong>"结果左移"配合"输入右移"，合起来就是颠倒</strong>——这是理解这题最省力的方式。固定 32 次是为了保留输入的前导零：用 8 位缩小示例，<code>00000001</code> 应反转为 <code>10000000</code>；若 while n 只处理 1 次，就只得到 1。Python 非负整数反复右移<strong>会</strong>变成 0；负数会保留符号，是另一项注意事项。这是 Python 做位运算题最典型的坑。</p>
 <h3 id="_8">丢失的数字<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>输入长 n 的数组 nums，元素两两不同且来自 0..n，因此恰好缺少一个数，返回缺少的值。例如 <code>[3,0,1]</code> 长度为 3，完整范围是 0、1、2、3，缺少 2。</p>
-<p>把完整范围的所有数与实际数组的所有数一起异或：已出现的值各有两份，会抵消；缺少的值只有完整范围中的那一份，因而留下。循环下标刚好提供 0..n−1，初始化时再补上 n：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">missing_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>                    <span class="c1"># n 本身也要参与进来</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="n">result</span> <span class="o">^=</span> <span class="n">i</span> <span class="o">^</span> <span class="n">x</span>                   <span class="c1"># 下标与值一起异或</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="k">return</span> <span class="n">result</span>
+<p>把完整范围的所有数与实际数组的所有数一起异或：已出现的值各有两份，会抵消；缺少的值只有完整范围中的那一份，因而留下。循环下标刚好提供 0..n-1，初始化时再补上 n：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">missing_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>                    <span class="c1"># n 本身也要参与进来</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="n">result</span> <span class="o">^=</span> <span class="n">i</span> <span class="o">^</span> <span class="n">x</span>                   <span class="c1"># 下标与值一起异或</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
-<p>两种思路都要会：异或（不涉及溢出）与求和（<code>n(n+1)/2 − sum(nums)</code>，在 C++/Java 里要留意溢出）。这一题是"数组与完整序列互相抵消"，而 Single Number 是"数组内部两两抵消"——同一个性质的两个方向。</p>
+<p>两种思路都要会：异或（不涉及溢出）与求和（<span class="arithmatex">\(n(n+1)/2 - \mathrm{sum}(\mathrm{nums})\)</span>，在 C++/Java 里要留意溢出）。这一题是"数组与完整序列互相抵消"，而 Single Number 是"数组内部两两抵消"——同一个性质的两个方向。</p>
 <h2 id="_9">不用加号做加法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>输入两个有符号 32 位整数 a、b，要求用位运算模拟它们的和，例如 get_sum(3,5)=8、get_sum(−1,1)=0。下面实现按 32 位补码计算；超出范围时保留低 32 位，再解释为有符号整数。</p>
-<p>先看一列二进制加法：0+0 的本位为 0，0+1 或 1+0 的本位为 1，1+1 的本位为 0 并向左进 1。因此本位结果正好是异或 a^b，进位位置正好是 a&amp;b，再左移一位。把两部分继续按同样规则合并，直到没有进位。</p>
+<p>输入两个有符号 32 位整数 a、b，要求用位运算模拟它们的和，例如 get_sum(3,5)=8、get_sum(-1,1)=0。下面实现按 32 位补码计算；超出范围时保留低 32 位，再解释为有符号整数。</p>
+<p>先看一列二进制加法：0+0 的本位为 0，0+1 或 1+0 的本位为 1，1+1 的本位为 0 并向左进 1。因此本位结果正好是异或 <span class="arithmatex">\(a\oplus b\)</span>，进位位置正好是 a&amp;b，再左移一位。把两部分继续按同样规则合并，直到没有进位。</p>
 <p><code>MASK=0xFFFFFFFF</code> 是十六进制写法，表示低 32 位全为 1。与 MASK 按位与，会保留低 32 位、丢弃更高位，模拟固定字长。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">MASK</span>             <span class="c1"># 先限制在 32 位内</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">carry</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>     <span class="c1"># 进位</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>                <span class="c1"># 无进位和</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="n">b</span> <span class="o">=</span> <span class="n">carry</span>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">MASK</span>             <span class="c1"># 先限制在 32 位内</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        <span class="n">carry</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>     <span class="c1"># 进位</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>                <span class="c1"># 无进位和</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        <span class="n">b</span> <span class="o">=</span> <span class="n">carry</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
 </span></code></pre></div>
-<p>先把两个加数按位对齐：对照二进制加法的真值表，<code>a ^ b</code> 恰好是"<strong>不进位的和</strong>"，<code>(a &amp; b) &lt;&lt; 1</code> 恰好是"<strong>进位</strong>"。反复迭代到进位为 0。这是先分开计算本位和与进位的做法；下一轮再把进位加回，直到不再产生进位。</p>
+<p>先把两个加数按位对齐：对照二进制加法的真值表，<span class="arithmatex">\(a \oplus  b\)</span> 恰好是"<strong>不进位的和</strong>"，<code>(a &amp; b) &lt;&lt; 1</code> 恰好是"<strong>进位</strong>"。反复迭代到进位为 0。这是先分开计算本位和与进位的做法；下一轮再把进位加回，直到不再产生进位。</p>
 <p>用a=3（二进制011）、b=5（101）手算：无进位和110，进位010；再算110与010，无进位和100、进位100；最后100与100得到无进位和000、进位1000；再与0合并为1000=8。进位向高位移动，不能只计算一轮XOR就返回。</p>
-<p>这段代码把输入和中间值按32位截断，最终按32位有符号数解释；因此讨论的是模2³²加法。若真实数学和溢出32位，返回的是截断值，不是Python无限精度的和。</p>
+<p>这段代码把输入和中间值按32位截断，最终按32位有符号数解释；因此讨论的是模<span class="arithmatex">\(2^{32}\)</span>加法。若真实数学和溢出32位，返回的是截断值，不是Python无限精度的和。</p>
 <p><strong>为什么需要 <code>MASK</code>？</strong> 因为 Python 的整数没有固定 32 位截断；例如负数参与这套加法时，进位可能不断向更高位传播，使循环无法结束。用掩码把结果截在 32 位，最后再把符号位解释回 Python 的负数。</p>
 <h2 id="_10">用位掩码当集合<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>任务是：给一个只含小写英文字母的单词列表，选两个不同位置的单词，要求二者没有任何公共字母，返回长度乘积的最大值；没有符合的一对则返回 0。例如 <code>["ab","cd","a"]</code> 最好选 ab 与 cd，结果为 4；ab 与 a 不能配对。</p>
 <p>每个单词是否出现 a、b、…、z，可以存成 26 个布尔值，也可以用一个整数的第 0..25 位表示。比如 ab 的掩码为二进制 11，ac 为 101，两者按位与得到 1，表示都含 a；ab 与 cd 的掩码相与为 0，表示没有公共字母。同一字母出现多次只重复置 1，不影响集合。</p>
 <p>代码先为每个词建立掩码，再枚举不同词对，只有掩码相与为 0 才比较长度乘积：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_product</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">"""求两个不含公共字母的单词的最大长度乘积"""</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">masks</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>            <span class="n">mask</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>     <span class="c1"># 第 i 位表示字母 i 出现过</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="n">masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>            <span class="k">if</span> <span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">masks</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>       <span class="c1"># 没有公共字母</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>                <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    <span class="k">return</span> <span class="n">best</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_product</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="sd">"""求两个不含公共字母的单词的最大长度乘积"""</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">masks</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">mask</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="n">mask</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>     <span class="c1"># 第 i 位表示字母 i 出现过</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="n">masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>            <span class="k">if</span> <span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">masks</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>       <span class="c1"># 没有公共字母</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>                <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
-<p><strong>把整数当集合用，判断两个集合是否相交就从"遍历 26 个字母"变成一次按位与。</strong> 字符种类固定且较少时，位掩码常更紧凑；是否更快要看操作与实现，不能由种类≤64直接断言。</p>
+<p><strong>把整数当集合用，判断两个集合是否相交就从"遍历 26 个字母"变成一次按位与。</strong> 字符种类固定且较少时，位掩码常更紧凑；是否更快要看操作与实现，不能由种类不大于64直接断言。</p>
 <h2 id="_11">三段证明<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p><strong>命题一：<code>x &amp; (x−1)</code> 消掉最低位的那个 1。</strong> 设 <code>x</code> 的最低位的 1 在第 k 位（第 0..k−1 位都是 0，第 k 位是 1）。那么 <code>x − 1</code> 会在第 k 位借位：<strong>第 k 位变 0、第 0..k−1 位全变 1，第 k 位以上不变</strong>。所以 <code>x &amp; (x−1)</code> 在第 k 位及以下全为 0，高位与 <code>x</code> 相同——<strong>正好把最低位那个 1 抹成 0，别的位没动</strong>。∎</p>
-<p><strong>命题二：异或能找出唯一元素。</strong> 把数组记为 <code>a₁, …, aₙ</code>，除了 <code>x</code> 每个元素出现两次。由交换律与结合律把相同的元素两两配对：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>a₁ ^ a₂ ^ … ^ aₙ = (成对的那些) ^ x = 0 ^ 0 ^ … ^ x = x
-</span></code></pre></div>
-<p>所以结果就是 <code>x</code>。∎</p>
-<p><strong>命题三（选读）：lowbit 分组能把 a 和 b 分开。</strong> 设 <code>diff = a ^ b</code>，<code>lowbit = diff &amp; (−diff)</code> 是 <code>diff</code> 中最低位的 1。由异或的定义，<strong><code>diff</code> 第 k 位为 1 ⟺ <code>a</code> 与 <code>b</code> 的第 k 位不同</strong>。所以 <code>a</code>、<code>b</code> 在 <code>lowbit</code> 代表的这一位上取值不同，<strong>按这一位分组必然落到不同组</strong>。而其他元素成对出现，同一对在该位上取值相同，必然落进同一组——于是每组内部仍是"一个唯一的元素 + 若干对"，用命题二即可求出。∎</p>
+<p><strong>命题一：<code>x &amp; (x-1)</code> 消掉最低位的那个 1。</strong> 设 <code>x</code> 的最低位的 1 在第 k 位（第 0..k-1 位都是 0，第 k 位是 1）。那么 <code>x - 1</code> 会在第 k 位借位：<strong>第 k 位变 0、第 0..k-1 位全变 1，第 k 位以上不变</strong>。所以 <code>x &amp; (x-1)</code> 在第 k 位及以下全为 0，高位与 <code>x</code> 相同——<strong>正好把最低位那个 1 抹成 0，别的位没动</strong>。</p>
+<p><strong>命题二：异或能找出唯一元素。</strong> 把数组记为 <span class="arithmatex">\(a_{1}, \cdots , a_{n}\)</span>，除了 <code>x</code> 每个元素出现两次。由交换律与结合律把相同的元素两两配对：</p>
+<div class="arithmatex">\[
+a_1\oplus a_2\oplus\cdots\oplus a_n=0\oplus\cdots\oplus0\oplus x=x
+\]</div>
+<p>所以结果就是 <code>x</code>。</p>
+<p><strong>命题三（选读）：lowbit 分组能把 a 和 b 分开。</strong> 设 <code>diff = a ^ b</code>，<code>lowbit = diff &amp; (-diff)</code> 是 <code>diff</code> 中最低位的 1。由异或的定义，<strong><code>diff</code> 第 k 位为 1 ⟺ <code>a</code> 与 <code>b</code> 的第 k 位不同</strong>。所以 <code>a</code>、<code>b</code> 在 <code>lowbit</code> 代表的这一位上取值不同，<strong>按这一位分组必然落到不同组</strong>。而其他元素成对出现，同一对在该位上取值相同，必然落进同一组——于是每组内部仍是"一个唯一的元素 + 若干对"，用命题二即可求出。</p>
 <h2 id="_12">复杂度与几个手算的例子<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10560,84 +10560,84 @@
 <tr>
 <td>Number of 1 Bits</td>
 <td><code>n &amp; (n-1)</code></td>
-<td><code>O(k)</code>（k 为 1 的个数）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span>（k 为 1 的个数）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Single Number</td>
 <td>异或抵消</td>
-<td><code>O(n)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Single Number II</td>
 <td>逐位统计模 3</td>
-<td><code>O(32n) = O(n)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(32n) = \mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Single Number III</td>
 <td>异或 + lowbit 分组</td>
-<td><code>O(n)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Counting Bits</td>
 <td>递推</td>
-<td><code>O(n)</code></td>
-<td><code>O(n)</code>（输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（输出）</td>
 </tr>
 <tr>
 <td>Reverse Bits</td>
 <td>逐位搬移</td>
-<td>O(1)（固定 32 次）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（固定 32 次）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Missing Number</td>
 <td>异或 或 求和</td>
-<td><code>O(n)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Sum of Two Integers</td>
 <td><code>^</code> 与 <code>&amp; &lt;&lt; 1</code></td>
-<td>O(1)（≤ 32 轮）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（不大于 32 轮）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Reverse Integer（延伸，见题库）</td>
 <td>取模构造</td>
-<td><code>O(log x)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log x)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Maximum Product of Word Lengths</td>
 <td>位掩码当集合</td>
-<td><code>O(n² + 总字符数)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} + 总字符数)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <p><strong>数 1 的个数</strong>：<code>n = 11</code>（二进制 <code>1011</code>）。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>1011 &amp; 1010 = 1010      count = 1
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>1010 &amp; 1001 = 1000      count = 2
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>1000 &amp; 0111 = 0000      count = 3
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>结果 3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>1011 &amp; 1010 = 1010      count = 1
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>1010 &amp; 1001 = 1000      count = 2
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>1000 &amp; 0111 = 0000      count = 3
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>结果 3
 </span></code></pre></div>
-<p><strong>只出现一次的数字</strong>：<code>nums = [4,1,2,1,2]</code>。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>4 ^ 1 = 5
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>5 ^ 2 = 7
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>7 ^ 1 = 6
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>6 ^ 2 = 4        ← 1 和 2 各自抵消一次，只剩 4
+<p><strong>只出现一次的数字</strong>：<span class="arithmatex">\(\mathrm{nums} = [4,1,2,1,2]\)</span>。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>4 ^ 1 = 5
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>5 ^ 2 = 7
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>7 ^ 1 = 6
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>6 ^ 2 = 4        ← 1 和 2 各自抵消一次，只剩 4
 </span></code></pre></div>
-<p><strong>只出现一次的数字 III</strong>：<code>nums = [1,2,1,3,2,5]</code>（答案 3 与 5）。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>diff   = 1^2^1^3^2^5 = 3 ^ 5 = 6      （二进制 110）
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>lowbit = 6 &amp; (−6) = 2                  （二进制 010）
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>按第 1 位分组：
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  该位为 1 的：2(10), 3(11), 2(10)      → 异或得 3
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>  该位为 0 的：1(01), 1(01), 5(101)     → 异或得 5
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>答案 [3, 5]
+<p><strong>只出现一次的数字 III</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,2,1,3,2,5]\)</span>（答案 3 与 5）。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>diff   = 1^2^1^3^2^5 = 3 ^ 5 = 6      （二进制 110）
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>lowbit = 6 &amp; (−6) = 2                  （二进制 010）
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>按第 1 位分组：
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  该位为 1 的：2(10), 3(11), 2(10)      → 异或得 3
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  该位为 0 的：1(01), 1(01), 5(101)     → 异或得 5
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>答案 [3, 5]
 </span></code></pre></div>
 <p><strong>比特位计数</strong>：<code>n = 5</code></p>
 <table>
@@ -10707,8 +10707,8 @@
 <ol>
 <li><strong>运算符优先级</strong>。Python 中按位 <code>&amp;</code> 的优先级<strong>高于</strong> <code>==</code>，因此下面两句等价；加括号有助阅读，并非修复错误：</li>
 </ol>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>            <span class="c1"># 解析为 (n &amp; 1) == 0</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>          <span class="c1"># 推荐显式括号</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>            <span class="c1"># 解析为 (n &amp; 1) == 0</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>          <span class="c1"># 推荐显式括号</span>
 </span></code></pre></div>
 <p>可对照 <a href="https://docs.python.org/3/reference/expressions.html#operator-precedence">Python 运算符优先级</a>。不要把其他语言的优先级规则直接搬过来。</p>
 <ol start="2">
@@ -10716,13 +10716,13 @@
 <p><strong><code>x &amp; (x-1)</code> 与 <code>x &amp; (-x)</code> 弄混</strong>。前者清除，后者取出。</p>
 </li>
 <li>
-<p><strong>判断 2 的幂时忘了排除 <code>n &lt;= 0</code></strong>。<code>0 &amp; (−1) == 0</code> 也成立，但 0 不是 2 的幂。</p>
+<p><strong>判断 2 的幂时忘了排除 <span class="arithmatex">\(n \le 0\)</span></strong>。<code>0 &amp; (-1) == 0</code> 也成立，但 0 不是 2 的幂。</p>
 </li>
 <li>
 <p><strong>忘记 32 位掩码</strong>。Python 的负数会"无限延伸"，左移会让它越来越长。</p>
 </li>
 <li>
-<p><strong>以为位运算一定更快</strong>。现代 CPU 上很多简单循环已经优化得很好；在固定 26 字母场景，O(26) 本来就是 O(1)，主要可能优化常数；若集合跨多个机器字，按位与也要按字数计费。</p>
+<p><strong>以为位运算一定更快</strong>。现代 CPU 上很多简单循环已经优化得很好；在固定 26 字母场景，<span class="arithmatex">\(\mathcal{O}(26)\)</span> 本来就是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，主要可能优化常数；若集合跨多个机器字，按位与也要按字数计费。</p>
 </li>
 </ol>
 <h2 id="_13">它在题库里长什么样<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
@@ -10790,36 +10790,36 @@
 </table>
 <h2 id="_14">从讲义走到代码<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p>权限或功能开关可用位集合保存，每一位对应一种明确的“有或无”。</p>
-<p>先手算 5^5=0、5^0=5，再做 <a href="../../problems/18-bit-manipulation/01-single-number/">Single Number</a>，用 [4,1,2,1,2] 检查返回 4。接着做 Number of 1 Bits：11 的位模式 1011，应循环清除三次。</p>
-<p>再练反转位：8 位的 00000001 应反转成 10000000，32 位题则固定处理 32 轮。做加法模拟时测试 get_sum(−1,1)=0，并解释掩码截断的是哪 32 位。</p>
+<p>先手算 <span class="arithmatex">\(5\oplus5=0\)</span>、<span class="arithmatex">\(5\oplus0=5\)</span>，再做 <a href="../../problems/18-bit-manipulation/01-single-number/">Single Number</a>，用 [4,1,2,1,2] 检查返回 4。接着做 Number of 1 Bits：11 的位模式 1011，应循环清除三次。</p>
+<p>再练反转位：8 位的 00000001 应反转成 10000000，32 位题则固定处理 32 轮。做加法模拟时测试 get_sum(-1,1)=0，并解释掩码截断的是哪 32 位。</p>
 <h2 id="_15">练习<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> word RAM 模型假设"<code>x &amp; y</code>、<code>x &lt;&lt; k</code>、<code>x + y</code> 都是 O(1)"。这个假设什么时候会失效？</p>
-<p>当"字长"本身随问题规模增长时会失效。比如大整数运算（第 26 讲），一个数可能横跨很多个机器字，这时 <code>x + y</code> 是 <code>O(位数)</code>；位运算作用在超过一个字长的对象上时也一样，得按位数计费。<strong>word RAM 模型隐含的前提是"参与运算的数装得进一个机器字"。</strong> 这正是"两个 n 位数相乘"要单独做一套复杂度分析的原因。</p>
-<p><strong>2.</strong> 证明 <code>x &amp; (x−1) == 0</code> 当且仅当 <code>x</code> 是 2 的幂（或 <code>x = 0</code>）。</p>
-<p>若 <code>x</code> 是 2 的幂，二进制里只有一个 1，由命题一消掉后为 0。反之，若 <code>x &amp; (x-1) == 0</code> 且 <code>x &gt; 0</code>，说明消掉最低位的 1 之后 <code>x</code> 变成 0，即原本只有一个 1——那就是 2 的幂。<code>x = 0</code> 时 <code>0 &amp; (−1) == 0</code> 也成立，所以<strong>判断时必须补上 <code>x &gt; 0</code></strong>。∎</p>
+<p><strong>1.</strong> word RAM 模型假设"<code>x &amp; y</code>、<code>x &lt;&lt; k</code>、<span class="arithmatex">\(x + y\)</span> 都是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>"。这个假设什么时候会失效？</p>
+<p>当"字长"本身随问题规模增长时会失效。比如大整数运算（第 26 讲），一个数可能横跨很多个机器字，这时 <span class="arithmatex">\(x + y\)</span> 是 <span class="arithmatex">\(\mathcal{O}(位数)\)</span>；位运算作用在超过一个字长的对象上时也一样，得按位数计费。<strong>word RAM 模型隐含的前提是"参与运算的数装得进一个机器字"。</strong> 这正是"两个 n 位数相乘"要单独做一套复杂度分析的原因。</p>
+<p><strong>2.</strong> 证明 <code>x &amp; (x-1) == 0</code> 当且仅当 <code>x</code> 是 2 的幂（或 <code>x = 0</code>）。</p>
+<p>若 <code>x</code> 是 2 的幂，二进制里只有一个 1，由命题一消掉后为 0。反之，若 <code>x &amp; (x-1) == 0</code> 且 <span class="arithmatex">\(x &gt; 0\)</span>，说明消掉最低位的 1 之后 <code>x</code> 变成 0，即原本只有一个 1——那就是 2 的幂。<code>x = 0</code> 时 <code>0 &amp; (-1) == 0</code> 也成立，所以<strong>判断时必须补上 <span class="arithmatex">\(x &gt; 0\)</span></strong>。</p>
 <p><strong>3.</strong> 为什么"逐位统计模 3"能解决 Single Number II，而异或不行？</p>
-<p>异或的抵消性质是 <code>a ^ a = 0</code>，<strong>只对出现偶数次的情况有效</strong>；出现三次时 <code>a ^ a ^ a = a</code>，不抵消。逐位统计利用的是"每一位上 1 的个数模 3"：出现三次的元素在该位贡献 3 个 1（模 3 为 0），只留下唯一元素那一个。<strong>差别在于：异或要求"成对"，逐位统计只要求"贡献能被模掉"。</strong></p>
+<p>异或的抵消性质是 <span class="arithmatex">\(a \oplus  a = 0\)</span>，<strong>只对出现偶数次的情况有效</strong>；出现三次时 <span class="arithmatex">\(a \oplus  a \oplus  a = a\)</span>，不抵消。逐位统计利用的是"每一位上 1 的个数模 3"：出现三次的元素在该位贡献 3 个 1（模 3 为 0），只留下唯一元素那一个。<strong>差别在于：异或要求"成对"，逐位统计只要求"贡献能被模掉"。</strong></p>
 <p><strong>4.</strong> 实现 <code>hamming_weight(n)</code>（两种写法）与 <code>is_power_of_two(n)</code>。</p>
 <p>两种写法见上文（逐位检查、<code>n &amp; (n-1)</code>）；2 的幂判据是 <code>n &gt; 0 and (n &amp; (n-1)) == 0</code>。</p>
 <p><strong>5.</strong> 实现 <code>get_sum(a, b)</code>，并解释为什么需要 <code>MASK</code>。</p>
 <p>见上文。Python 的按位语义相当于无限延伸符号位，负数参与时进位可能不断向高位传播；掩码把结果限制在 32 位，最后再把符号位解释回来。</p>
 <p><strong>6.</strong> 实现 <code>max_product(words)</code>，并说明位掩码比哈希集合快在哪。</p>
-<p>见上文。固定字母表下，两种判交本来都是 O(1)；位掩码把多个字符检查合并为一次字运算，<strong>因为 26 个字母的"在或不在"被压进了一个整数里，一次运算就能全部比完</strong>。</p>
+<p>见上文。固定字母表下，两种判交本来都是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>；位掩码把多个字符检查合并为一次字运算，<strong>因为 26 个字母的"在或不在"被压进了一个整数里，一次运算就能全部比完</strong>。</p>
 <p><strong>7.</strong> 给定由 n 个不同元素组成的列表 items，返回所有子集，包括空集与全集。例如 <code>["a","b"]</code> 的结果包含 <code>[]</code>、<code>["a"]</code>、<code>["b"]</code>、<code>["a","b"]</code>。用一个 n 位整数表示选择：第 i 位为 1 就选 items[i]，为 0 就不选。</p>
-<p>每位有两种选择，共 2ⁿ 种，恰好对应整数 0..2ⁿ−1。逐个整数检查各位，就能不重不漏地枚举全部子集：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">all_subsets</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>               <span class="c1"># 0 到 2^n − 1</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>        <span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    <span class="k">return</span> <span class="n">res</span>
+<p>每位有两种选择，共 <span class="arithmatex">\(2^{n}\)</span> 种，恰好对应整数 <span class="arithmatex">\(0,\ldots,2^n-1\)</span>。逐个整数检查各位，就能不重不漏地枚举全部子集：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">all_subsets</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>               <span class="c1"># 0 到 2^n − 1</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p>复杂度 <code>O(n · 2ⁿ)</code>（每个子集要花 <code>O(n)</code> 构造）。<strong>这是"用整数表示集合"最经典的应用</strong>，也是回溯枚举子集的另一种写法。</p>
+<p>复杂度 <span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span>（每个子集要花 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 构造）。<strong>这是"用整数表示集合"最经典的应用</strong>，也是回溯枚举子集的另一种写法。</p>
 <p><strong>8.（选读）</strong> 理解整数掩码：求绝对值，并解释用比较结果构造 max 的公式。</p>
-<p>对 32 位整数，令 <code>mask = x &gt;&gt; 31</code>（负数时为 −1，非负时为 0），则 <code>abs(x) = (x ^ mask) - mask</code>；下面的最大值公式仍使用 <code>&lt;</code>，不满足“完全不用比较”的额外限制： <code>max(a,b) = a ^ ((a ^ b) &amp; -(a &lt; b))</code>——<strong>把布尔值转成 0 或 −1 当掩码用</strong>。</p>
+<p>对 32 位整数，令 <code>mask = x &gt;&gt; 31</code>（负数时为 -1，非负时为 0），则 <span class="arithmatex">\(|x|=(x\oplus\mathrm{mask})-\mathrm{mask}\)</span>；下面的最大值公式仍使用 <span class="arithmatex">\(&lt;\)</span>，不满足“完全不用比较”的额外限制： <span class="arithmatex">\(\max(a,b)=a\oplus\bigl((a\oplus b)\mathbin{\&amp;}(-\mathbf{1}_{\{a&lt;b\}})\bigr)\)</span>——<strong>把布尔值转成 0 或 -1 当掩码用</strong>。</p>
 <p><strong>9.（选读）</strong> 给定至少含两个非负整数的数组，选两个不同位置，返回它们异或的最大值，例如 <code>[2,5]</code> 返回 7。为什么既可以用二进制 Trie，也可以用逐位贪心加哈希？</p>
-<p>读完本讲后，回读第 13 讲末尾的二进制 Trie 选读即可接上这一题：沿着树优先走"相反的位"。前缀集合加逐位贪心则是维护"当前能取到的最大异或前缀 <code>ans</code>"，对每一位试着问"集合里是否存在 <code>p</code> 与 <code>p ^ candidate</code>"，可行就把这一位定下来。<strong>两者复杂度都是 <code>O(n · 位数)</code></strong>，面试里讲清任一种即可。</p>
+<p>读完本讲后，回读第 13 讲末尾的二进制 Trie 选读即可接上这一题：沿着树优先走"相反的位"。前缀集合加逐位贪心则是维护"当前能取到的最大异或前缀 <code>ans</code>"，对每一位试着问"集合里是否存在 <code>p</code> 与 <code>p ^ candidate</code>"，可行就把这一位定下来。<strong>两者复杂度都是 <span class="arithmatex">\(\mathcal{O}(n \cdot  位数)\)</span></strong>，面试里讲清任一种即可。</p>
 
 
 

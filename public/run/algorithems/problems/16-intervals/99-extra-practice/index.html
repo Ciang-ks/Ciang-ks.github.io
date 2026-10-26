@@ -10067,8 +10067,8 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：排序 key 必须是 <code>(start, -end)</code>；题目说"完全覆盖"包含相等的情形，所以判断用 <code>&lt;=</code>（即 <code>end &gt; max_end</code> 才计入）。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>易错点</strong>：排序 key 必须是 <code>(start, -end)</code>；题目说"完全覆盖"包含相等的情形，所以判断用 <span class="arithmatex">\(\le\)</span>（即 <code>end &gt; max_end</code> 才计入）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <hr />
 <h2 id="2-986-interval-list-intersections">2. 986 Interval List Intersections<a class="headerlink" href="#2-986-interval-list-intersections" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/interval-list-intersections/">LeetCode 986</a> ｜ <strong>Medium</strong></p>
@@ -10103,12 +10103,12 @@
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
 </span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：交集条件是 <code>max(start) &lt;= min(end)</code>（带等号，单点交集也算）；<strong>必须移动结束更早的那个指针</strong>。</p>
-<p><strong>复杂度</strong>：时间 O(m + n)，空间 O(1)（不计输出）。</p>
+<p><strong>易错点</strong>：交集条件是 <span class="arithmatex">\(\max (\mathrm{start}) \le \min (\mathrm{end})\)</span>（带等号，单点交集也算）；<strong>必须移动结束更早的那个指针</strong>。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(m + n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计输出）。</p>
 <hr />
 <h2 id="3-646-maximum-length-of-pair-chain">3. 646 Maximum Length of Pair Chain<a class="headerlink" href="#3-646-maximum-length-of-pair-chain" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/maximum-length-of-pair-chain/">LeetCode 646</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：给定数对 <code>[a, b]</code>（<code>a &lt; b</code>），若前一个的 <code>b &lt;</code> 后一个的 <code>a</code> 就可以连成链，求最长链的长度。</p>
+<p><strong>题目</strong>：给定数对 <code>[a, b]</code>（<span class="arithmatex">\(a &lt; b\)</span>），若前一个的 <span class="arithmatex">\(b &lt;\)</span> 后一个的 <code>a</code> 就可以连成链，求最长链的长度。</p>
 <p><strong>为什么放这里</strong>：<strong>435 Non-overlapping Intervals 的换壳题</strong>——"选的区间不能重叠"变成了"前一个的 b 必须严格小于后一个的 a"。</p>
 <p><strong>思路提示</strong>：<strong>按右端点排序</strong>，然后贪心地选择"左端点大于上一个选中区间右端点"的区间。</p>
 <p><strong>方法辨析</strong>：本题后一个左端必须严格大于前一个右端，所以连接条件为 &gt;，与允许会议首尾衔接的 &gt;= 不同。按最早结束交换仍成立，但等号不能随模板一起迁移。</p>
@@ -10126,7 +10126,7 @@
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：条件是 <code>a &gt; last_end</code>（<strong>严格大于</strong>，因为本题不允许相接），这和 435 的 <code>start &gt;= last_end</code> 不同。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，辅助空间 O(n)（Python 排序）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，辅助空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序）。</p>
 <blockquote>
 <p><strong>和 435 的对照</strong>：435 里 <code>[1,2]</code> 和 <code>[2,3]</code> 可以共存（相接不算重叠），本题里不行。<strong>这个细微差别正是"闭区间 vs 半开区间"约定的体现。</strong></p>
 </blockquote>
@@ -10152,9 +10152,9 @@
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
-<p><strong>关键技巧：把 <code>right</code> 替换成 <code>right + 1</code></strong>，这样就把闭区间问题转化成了半开区间问题，实现了"同一时刻开始优先"。<strong>这是一个非常实用的转换技巧。</strong></p>
-<p><strong>易错点</strong>：闭区间要转成 <code>right + 1</code>；不能用 <code>(time, -delta)</code> 之类的排序魔法而不解释清楚。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，空间 O(n)。</p>
+<p><strong>关键技巧：把 <code>right</code> 替换成 <span class="arithmatex">\(\mathrm{right} + 1\)</span></strong>，这样就把闭区间问题转化成了半开区间问题，实现了"同一时刻开始优先"。<strong>这是一个非常实用的转换技巧。</strong></p>
+<p><strong>易错点</strong>：闭区间要转成 <span class="arithmatex">\(\mathrm{right} + 1\)</span>；不能用 <code>(time, -delta)</code> 之类的排序魔法而不解释清楚。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="5-759-employee-free-time">5. 759 Employee Free Time<a class="headerlink" href="#5-759-employee-free-time" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/employee-free-time/">LeetCode 759</a> ｜ <strong>Hard</strong></p>
@@ -10187,14 +10187,14 @@
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：合并时终点取 <code>max</code>；<strong>空隙是"前一个的 end 到后一个的 start"</strong>（本题允许端点相接，即 <code>[1,3]</code> 和 <code>[3,5]</code> 之间没有空隙）。</p>
-<p><strong>复杂度</strong>：时间 O(N log N)（N 为区间总数），空间 O(N)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(N \log N)\)</span>（N 为区间总数），空间 <span class="arithmatex">\(\mathcal{O}(N)\)</span>。</p>
 <blockquote>
-<p><strong>更优的写法</strong>：利用"每个员工的列表已经有序"这一条件，用一个大小为 k 的最小堆做 k 路归并，复杂度 O(N log k)。<strong>面试中能主动提出这一点很加分。</strong></p>
+<p><strong>更优的写法</strong>：利用"每个员工的列表已经有序"这一条件，用一个大小为 k 的最小堆做 k 路归并，复杂度 <span class="arithmatex">\(\mathcal{O}(N \log k)\)</span>。<strong>面试中能主动提出这一点很加分。</strong></p>
 </blockquote>
 <hr />
 <h2 id="6-732-my-calendar-iii">6. 732 My Calendar III<a class="headerlink" href="#6-732-my-calendar-iii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/my-calendar-iii/">LeetCode 732</a> ｜ <strong>Hard</strong></p>
-<p><strong>题目</strong>：设计一个日历，每次 <code>book(start, end)</code> 加入一个<strong>半开区间</strong> <code>[start, end)</code>，并返回<strong>当前所有区间里同时重叠的最大数量</strong>。</p>
+<p><strong>题目</strong>：设计一个日历，每次 <code>book(start, end)</code> 加入一个<strong>半开区间</strong> <span class="arithmatex">\([\mathrm{start}, \mathrm{end})\)</span>，并返回<strong>当前所有区间里同时重叠的最大数量</strong>。</p>
 <p><strong>为什么放这里</strong>：<strong>动态扫描线</strong>的代表——不是算一次，而是每次插入后都要报出当前的"最大重叠数"。</p>
 <p><strong>思路提示</strong></p>
 <p>用<strong>有序字典</strong>（或 <code>SortedDict</code>）维护"时间点 → 覆盖次数的变化量"：</p>
@@ -10202,7 +10202,7 @@
 <li><code>book</code> 时：<code>diff[start] += 1</code>，<code>diff[end] -= 1</code>；</li>
 <li>然后<strong>按时间顺序遍历整个字典</strong>，累加 <code>cur</code>，取最大值。</li>
 </ul>
-<p>这个版本每次对至多 O(n) 个差分端点重新排序并扫描，第 n 次调用 O(n log n)，n 次总成本上界 O(n² log n)。是否满足时限需结合调用规模判断。</p>
+<p>这个版本每次对至多 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 个差分端点重新排序并扫描，第 n 次调用 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，n 次总成本上界 <span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>。是否满足时限需结合调用规模判断。</p>
 <p><strong>更优的做法</strong>是使用带子树和与最大前缀和的增强平衡树，或维护覆盖峰值的线段树。只有排序容器并不能自动将每次查询峰值降到对数。</p>
 <p><strong>方法辨析</strong>：差分记录的是各端点的净增减，按顺序累加的最大前缀和就是重叠峰值。普通字典每次重新排序可得到正确结果，但排序不免费；要让在线更新高效，需维护区间覆盖或增强树的聚合摘要。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sortedcontainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SortedDict</span>        <span class="c1"># LeetCode 支持该第三方库</span>
@@ -10223,9 +10223,9 @@
 </span></code></pre></div>
 <p>如果不方便使用 <code>SortedDict</code>，也可以用普通字典 + 每次 <code>sorted(self.diff)</code> 遍历，效果相同。</p>
 <p><strong>易错点</strong>：区间是半开区间（<code>end</code> 处减 1，意味着 <code>end</code> 时刻不占用）；每次 <code>book</code> 都要重新扫描一遍求最大值（因为历史上插入的区间会影响当前的最大重叠）。</p>
-<p><strong>复杂度</strong>：时间最坏 O(n² log n)（n 次插入，每次重新排序端点），空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间最坏 <span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>（n 次插入，每次重新排序端点），空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <blockquote>
-<p><strong>进阶</strong>：用线段树维护"区间加 + 全局最大值"，可以做到 O(log n) 每次插入。<strong>面试中能说出这个优化方向就足够了。</strong></p>
+<p><strong>进阶</strong>：用线段树维护"区间加 + 全局最大值"，可以做到 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 每次插入。<strong>面试中能说出这个优化方向就足够了。</strong></p>
 </blockquote>
 
 

@@ -10122,10 +10122,10 @@
 <li>如果堆大小超过 k，弹出堆顶（它是这 k+1 个里最小的，已经不配留在"最大的 k 个"里）；</li>
 <li>此时<strong>堆顶就是第 k 大</strong>。</li>
 </ol>
-<p><strong>为什么必须用小顶堆？</strong> 因为我们要淘汰的是"最小的那个"，小顶堆的堆顶恰好是最小值，弹出是 O(log k)；用大顶堆的话，淘汰最小元素需要遍历整个堆。</p>
+<p><strong>为什么必须用小顶堆？</strong> 因为我们要淘汰的是"最小的那个"，小顶堆的堆顶恰好是最小值，弹出是 <span class="arithmatex">\(\mathcal{O}(\log k)\)</span>；用大顶堆的话，淘汰最小元素需要遍历整个堆。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>先区分“第 k 大”和“第 k 个不同的大数”：本题按出现次数排名，重复值也占名次。比如 k=3、已见 [5,5,2,1]，保留 [2,5,5]，答案为 2。被丢掉的 1 已有至少 k 个数不小于它，将来只会新增元素，因此不可能重新进入前 k，才可以永久忘记。</p>
-<p>堆的方向应从“要删谁”推导：保留最大的 k 个，就要快速删最小候选。只有总元素数达到 k，堆顶才有第 k 大的含义，题目保证查询时满足这一点。当前构造函数先对全部 nums 建堆再缩小，初始化并非 O(n log k) 且直接改动传入列表；流式逐个保留 k 项的版本才能始终只占 O(k) 候选空间。</p>
+<p>堆的方向应从“要删谁”推导：保留最大的 k 个，就要快速删最小候选。只有总元素数达到 k，堆顶才有第 k 大的含义，题目保证查询时满足这一点。当前构造函数先对全部 nums 建堆再缩小，初始化并非 <span class="arithmatex">\(\mathcal{O}(n \log k)\)</span> 且直接改动传入列表；流式逐个保留 k 项的版本才能始终只占 <span class="arithmatex">\(\mathcal{O}(k)\)</span> 候选空间。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="k">解法一：小顶堆维护最大的 k 个（推荐）<a class="headerlink" href="#k" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
@@ -10161,7 +10161,7 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
 <h3 id="sortedlist">解法三：用有序结构（SortedList）维护<a class="headerlink" href="#sortedlist" title="Permanent link">&para;</a></h3>
-<p>如果允许使用第三方库，也可以用 <code>sortedcontainers.SortedList</code> 直接维护一个有序数组：插入是 O(log n)，取第 k 大是 O(1)。</p>
+<p>如果允许使用第三方库，也可以用 <code>sortedcontainers.SortedList</code> 直接维护一个有序数组：插入是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，取第 k 大是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sortedcontainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SortedList</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">KthLargest</span><span class="p">:</span>
@@ -10189,13 +10189,13 @@
 <tbody>
 <tr>
 <td>初始化（先建堆再缩小）</td>
-<td>O(n+(n−k)₊ log(n+1)) 上界</td>
+<td><span class="arithmatex">\(\mathcal{O}(n+(n-k)₊ \log (n+1))\)</span> 上界</td>
 <td>初始复用 n 项列表，稳定后保留 k 项</td>
 </tr>
 <tr>
 <td><code>add</code></td>
-<td>O(log k)</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10203,10 +10203,10 @@
 <ul>
 <li><strong>堆里存"最大的 k 个"</strong>，超过 k 要弹出<strong>最小值</strong>。搞反了答案就完全错了。</li>
 <li><code>heap[0]</code> 是堆顶（最小值），<strong>只用来读取，不要 pop</strong>——pop 只用于淘汰。</li>
-<li>题目保证"<code>add</code> 之后至少存在 k 个元素"（初始长度 + 调用次数 ≥ k）。</li>
-<li><strong>追问：如果 k 很大、内存吃紧？</strong> → 空间是 O(k)；k 很大时可以用近似算法（Count-Min Sketch + 堆）。</li>
+<li>题目保证"<code>add</code> 之后至少存在 k 个元素"（初始长度 + 调用次数 不小于 k）。</li>
+<li><strong>追问：如果 k 很大、内存吃紧？</strong> → 空间是 <span class="arithmatex">\(\mathcal{O}(k)\)</span>；k 很大时可以用近似算法（Count-Min Sketch + 堆）。</li>
 <li><strong>追问：如果改成"第 k 小"？</strong> → 换成大顶堆（存负数）维护"最小的 k 个"。</li>
-<li><strong>追问：如果数据是静态的？</strong> → 直接用快速选择 O(n) 求第 k 大，无需维护堆。</li>
+<li><strong>追问：如果数据是静态的？</strong> → 直接用快速选择 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 求第 k 大，无需维护堆。</li>
 <li><strong>追问：为什么不用红黑树 / 有序集合？</strong> → 堆的常数更小，且我们只关心最值，不需要完整的排序能力。</li>
 </ul>
 <h2 id="_7">相关题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>

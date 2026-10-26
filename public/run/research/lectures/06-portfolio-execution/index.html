@@ -970,7 +970,7 @@
   <a href="#62" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 冲击的非线性直觉
+        6.2 相对中间价的滑点的非线性直觉
       
     </span>
   </a>
@@ -10473,7 +10473,7 @@
   <a href="#62" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 冲击的非线性直觉
+        6.2 相对中间价的滑点的非线性直觉
       
     </span>
   </a>
@@ -10825,7 +10825,7 @@ leverage_t=\operatorname{clip}\left(\frac{\sigma^*}{\hat\sigma_{p,t}},L_{min},L_
 \]</div>
 <p>波动升高时降低仓位，波动降低时增加仓位。实际必须加入平滑、最小/最大变动、保证金和交易成本，否则波动估计噪声会造成频繁交易。</p>
 <p><img alt="真实 S&amp;P 500 的 realized 波动与波动率目标下的仓位倍数" src="../figures/ch06_vol_targeting.png" /></p>
-<p><strong>图 6-1｜波动率目标自动去杠杆。</strong> 上方面板是 60 日 realized 年化波动与 10% 的目标线，下方面板是仓位倍数 = 目标 ÷ realized（滞后一天、截断在 0.2–2）。2020 年 3 月波动冲到约 60% 时倍数降到约 0.2，2017 年低波动期倍数封顶 2：风险预算不变，名义仓位随环境变化。数据类型：公开数据本地快照（Yahoo Finance ^GSPC）；仅用于教学。</p>
+<p><strong>图 6-1｜波动率目标自动去杠杆。</strong> 用 60 日简单收益波动估计计算 <span class="arithmatex">\(0.10/\hat\sigma_t\)</span>，截断在 <span class="arithmatex">\([0.2,2]\)</span>，下一交易日采用该倍数。图内极值标注由同一序列计算。滞后估计、上下限与波动变化意味着实际组合风险不一定恰好等于目标。数据类型：公开 S&amp;P 500 本地快照。</p>
 <h3 id="22-risk-parity">2.2 Risk parity<a class="headerlink" href="#22-risk-parity" title="Permanent link">&para;</a></h3>
 <p>若组合希望各资产对风险贡献相近，资产 i 的 marginal risk contribution 为：</p>
 <div class="arithmatex">\[
@@ -10837,7 +10837,7 @@ TRC_i=w_i MRC_i.
 \]</div>
 <p>Risk parity 不是简单等权，也不保证收益最高；它依赖协方差估计和约束。高相关资产仍可能共享同一风险来源。</p>
 <p><img alt="等权与逆波动权重的权重份额和风险贡献份额对比" src="../figures/ch06_risk_contribution.png" /></p>
-<p><strong>图 6-2｜权重不等于风险贡献。</strong> 左图是两种权重方案的权重份额，右图是对应的风险贡献份额（w_i (Σw)_i / w'Σw）。等权组合里高波动资产贡献了远超其权重的风险；逆波动权重把风险贡献拉得更均匀，但并不保证收益更高。数据类型：projects/alpha_research 合成面板的样本协方差。</p>
+<p><strong>图 6-2｜权重不等于风险贡献。</strong> 两种方案的权重份额与风险贡献份额不同。风险贡献份额为 <span class="arithmatex">\(w_i(\Sigma w)_i/(w^T\Sigma w)\)</span>，可因对冲关系而为负；逆波动权重也不保证各资产贡献完全相等。数据类型：项目 A 合成收益的样本协方差，用于描述而非预测风险。</p>
 <h3 id="23-factor-neutralization">2.3 Factor neutralization<a class="headerlink" href="#23-factor-neutralization" title="Permanent link">&para;</a></h3>
 <p>若不想让 alpha 只是市场 beta，可以回归资产特征/权重对风险因子：</p>
 <div class="arithmatex">\[
@@ -10857,7 +10857,7 @@ w=X\beta+u,
 <li><span class="arithmatex">\(\hat\mu\)</span>：预测收益；</li>
 <li><span class="arithmatex">\(\hat\Sigma\)</span>：协方差；</li>
 <li><span class="arithmatex">\(G\)</span>：gross 上限；</li>
-<li><span class="arithmatex">\(c_i\)</span>：单名上限；</li>
+<li>c_i：单名上限；</li>
 <li><span class="arithmatex">\(A^Tw\)</span>：行业、国家、beta 或流动性暴露。</li>
 </ul>
 <p>预测均值误差通常远大于协方差优化能弥补的精度。实务中会 shrink expected returns、使用 factor covariance、提高约束、加入 turnover penalty，或者把优化结果与简单分位数权重混合。</p>
@@ -10876,7 +10876,7 @@ w=X\beta+u,
 <h3 id="42">4.2 订单簿和成交概率<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>限价订单在 bid/ask 上等待，可能享受价格改善但承担不成交和被知情交易者选择的风险。市价单通常提高成交确定性但穿越 spread。订单簿深度、撤单率、成交速度和价差随时段变化，不能用日均成交量完全替代。</p>
 <p><img alt="市价买单逐档吃穿卖单与平均成交价相对 mid 的冲击" src="../figures/ch06_book_walk.png" /></p>
-<p><strong>图 6-3｜大单为什么成交在更差的价格。</strong> 左图是五档卖单及 6,000 股市价买单的逐档成交；右图累计深度曲线显示该订单把价格从 100.1 推到 100.5，平均成交价约 100.213，相对 mid 100.00 的冲击约 21 bp——这还没算隐藏流动性和回补。数据类型：概念示意图（手写报价）。</p>
+<p><strong>图 6-3｜大单为什么成交在更差的价格。</strong> 6,000 股买单按卖价从低到高成交，最后触及 100.5，均价约为 100.258。相对中间价 100.00 的滑点约为 25.8 bp，包含价差与静态吃单深度；它不全是因果意义的市场冲击。右图用阶梯表示边际卖价。数据类型：手写报价的概念示例，未模拟补单与撤单。</p>
 <h2 id="5-execution-algorithms">5. 执行算法（Execution Algorithms）<a class="headerlink" href="#5-execution-algorithms" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Market order</strong>：立即成交，价格不确定；适合紧迫、流动性足够的订单。</li>
@@ -10893,16 +10893,16 @@ w=X\beta+u,
 Cost_t=\sum_i c_i|\Delta q_{i,t}|,
 \]</div>
 <p>适合早期 sanity check。至少做低、中、高成本敏感性。</p>
-<h3 id="62">6.2 冲击的非线性直觉<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<h3 id="62">6.2 相对中间价的滑点的非线性直觉<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>常见简化形式：</p>
 <div class="arithmatex">\[
 Impact_i\approx Y\sigma_i\sqrt{\frac{Q_i}{ADV_i}},
 \]</div>
-<p>其中 <span class="arithmatex">\(Q_i\)</span> 是订单数量、<span class="arithmatex">\(ADV_i\)</span> 是平均日成交量、<span class="arithmatex">\(\sigma_i\)</span> 是波动、Y 是经验常数。它说明订单占市场比例提高时，成本不是简单线性增长。此公式只是研究起点，不应直接当成生产报价。</p>
+<p>其中 Q_i 是订单数量、ADV_i 是平均日成交量、<span class="arithmatex">\(\sigma_i\)</span> 是波动、Y 是经验常数。它说明订单占市场比例提高时，成本不是简单线性增长。此公式只是研究起点，不应直接当成生产报价。</p>
 <h3 id="63-cost-aware-backtest">6.3 Cost-aware backtest<a class="headerlink" href="#63-cost-aware-backtest" title="Permanent link">&para;</a></h3>
-<p>回测应保存：预期交易价格、实际 fill、数量、spread、手续费、冲击、现金和持仓。不要只在最终收益上扣一个总数，因为成本会改变仓位路径、换手和下一期信号。</p>
+<p>回测应保存：预期交易价格、实际 fill、数量、spread、手续费、相对中间价的滑点、现金和持仓。不要只在最终收益上扣一个总数，因为成本会改变仓位路径、换手和下一期信号。</p>
 <p><img alt="同一策略在 0/10/25/50 bps 成本下的净值曲线与净 Sharpe" src="../figures/ch06_cost_monotonicity.png" /></p>
-<p><strong>图 6-4｜成本单调性是不变量。</strong> 上方面板是项目 A 同一信号在四种单边成本假设下的净净值曲线，加一条等权基准；下方面板是对应净 Sharpe。成本越高净值越低、Sharpe 越差，这条单调性是回测会计正确性的检查项：若出现成本更高反而更好，先查代码。数据类型：projects/alpha_research 确定性 pipeline 在进程内重算（合成数据，教学结果）。</p>
+<p><strong>图 6-4｜成本单调性是不变量。</strong> 价格与权重固定时，提高非负交易成本不能提高对应日的净收益与净值。图中净 Sharpe 也下降，但 Sharpe 的单调性不是普适会计不变量。虚线为同资产集合的等权基准。数据类型：项目 A 的确定性合成输出。</p>
 <h2 id="7-pnl">7. PnL、风险归因与监控<a class="headerlink" href="#7-pnl" title="Permanent link">&para;</a></h2>
 <p>每日 PnL 可以拆为：</p>
 <ul>
@@ -10914,7 +10914,7 @@ Impact_i\approx Y\sigma_i\sqrt{\frac{Q_i}{ADV_i}},
 <li><strong>model/hedge residual</strong>：未解释部分。</li>
 </ul>
 <p><img alt="项目 A 10 bps 情景下毛收益、成本拖累与净收益的累计曲线" src="../figures/ch06_pnl_decomposition.png" /></p>
-<p><strong>图 6-5｜PnL 分解：毛 − 成本 = 净。</strong> 三条累计曲线分别是毛收益、成本拖累（单调向下）和净收益，浅色带是成本吃掉的部分。把 PnL 拆成可见的几项，才能在结果变差时知道是信号失效还是成本假设失真。数据类型：projects/alpha_research 确定性 pipeline（10 bp，成本按 |Δw| 线性计算的教学模型）。</p>
+<p><strong>图 6-5｜PnL 分解：毛收益与成本拖累。</strong> 图中毛收益、负的成本拖累与净收益都按逐日简单收益累加，满足加法分解；它们不是复利净值。成本为 <span class="arithmatex">\(\mathrm{turnover}_t c_{\mathrm{bps}}10^{-4}\)</span>，换手按目标权重变化的绝对值和计算。数据类型：项目 A 合成数据的 10 bps 成本情景。</p>
 <p>生产监控至少包括：</p>
 <ul>
 <li>position、gross/net、杠杆和 margin；</li>
@@ -10972,15 +10972,15 @@ Impact_i\approx Y\sigma_i\sqrt{\frac{Q_i}{ADV_i}},
 <h3 id="cpnl">练习 C：PnL 归因<a class="headerlink" href="#cpnl" title="Permanent link">&para;</a></h3>
 <p>策略毛收益 +100 bp，执行相对 mid -25 bp，手续费 -10 bp，借券 -15 bp，beta 因子贡献 +80 bp。剩余 alpha 约是多少？为什么不能直接把剩余项称为“纯 alpha”？</p>
 <h2 id="almgrenchriss">Almgren–Chriss 执行直觉<a class="headerlink" href="#almgrenchriss" title="Permanent link">&para;</a></h2>
-<p>设一笔订单在若干时段内完成，<code>x_t</code> 是时点 <code>t</code> 尚未成交的数量，交易量 <code>v_t=x_{t-1}-x_t</code>。执行价格可以拆成：参考价格、bid–ask 与手续费、临时冲击（temporary impact）和永久冲击（permanent impact）。一个常见的教学目标是</p>
+<p>设一笔订单在若干时段内完成，<code>x_t</code> 是时点 <code>t</code> 尚未成交的数量，交易量 <span class="arithmatex">\(v_t=x_{t-1}-x_t\)</span>。执行价格可以拆成：参考价格、bid–ask 与手续费、临时冲击（temporary impact）和永久冲击（permanent impact）。一个常见的教学目标是</p>
 <div class="arithmatex">\[
 \text{expected cost} + \lambda\,\text{variance of execution cost},
 \]</div>
 <p>其中 <code>lambda</code> 代表对风险的厌恶。执行越快，通常临时冲击更高但暴露时间更短；执行越慢，冲击可能下降但价格在未完成期间更容易波动，且 alpha 可能衰减。这解释了为什么 market、limit、TWAP、VWAP、POV 和 implementation shortfall 没有脱离上下文的“最佳答案”。</p>
-<p>项目 A 的 <code>turnover × cost_bps</code> 只模拟平均摩擦，不能称为最优执行。升级时可依次加入：按 <code>order/ADV</code> 增加冲击、区分 spread 与 fee、模拟部分成交和机会成本、比较不同执行速度，并在报告中保留成本分解。任何执行改进都必须在同一信号和同一信息时点下比较，否则改善可能只是换了 alpha。</p>
+<p>项目 A 的 <span class="arithmatex">\(\mathrm{cost}_t=\mathrm{turnover}_t c_{\mathrm{bps}}10^{-4}\)</span> 只模拟平均摩擦，不能称为最优执行。升级时可依次加入：按 <code>order/ADV</code> 增加冲击、区分 spread 与 fee、模拟部分成交和机会成本、比较不同执行速度，并在报告中保留成本分解。任何执行改进都必须在同一信号和同一信息时点下比较，否则改善可能只是换了 alpha。</p>
 <h2 id="tca">TCA、换手惩罚与信号相关性<a class="headerlink" href="#tca" title="Permanent link">&para;</a></h2>
 <h3 id="1-target-weight-implementation-shortfall">1. 从 target weight 到 Implementation Shortfall<a class="headerlink" href="#1-target-weight-implementation-shortfall" title="Permanent link">&para;</a></h3>
-<p>目标仓位 <span class="arithmatex">\(w^*\)</span> 只是决策，真实执行还要经过 order、fill 和现金。以决策时的 arrival price <span class="arithmatex">\(P_0\)</span> 为基准，对一笔数量 <span class="arithmatex">\(Q\)</span> 的买单，符号化的 <strong>implementation shortfall（实施短缺，IS）</strong> 可写成：</p>
+<p>目标仓位 <span class="arithmatex">\(w^*\)</span> 只是决策，真实执行还要经过 order、fill 和现金。以决策时的 arrival price P_0 为基准，对一笔数量 <span class="arithmatex">\(Q\)</span> 的买单，符号化的 <strong>implementation shortfall（实施短缺，IS）</strong> 可写成：</p>
 <div class="arithmatex">\[
 IS=(P_{exec}-P_0)Q+fees+\text{opportunity cost},
 \]</div>
@@ -10997,12 +10997,12 @@ IS=(P_{exec}-P_0)Q+fees+\text{opportunity cost},
 <tr>
 <td>Spread</td>
 <td>订单穿过 bid–ask 花了多少？</td>
-<td>half-spread × aggressive quantity</td>
+<td><span class="arithmatex">\(\text{半价差}\times\text{主动成交量}\)</span></td>
 </tr>
 <tr>
 <td>Fees/rebates</td>
 <td>交易所/经纪费是多少？</td>
-<td>fee schedule × filled quantity</td>
+<td><span class="arithmatex">\(\text{单位费用}\times\text{成交量}\)</span></td>
 </tr>
 <tr>
 <td>Market impact</td>
@@ -11021,7 +11021,7 @@ IS=(P_{exec}-P_0)Q+fees+\text{opportunity cost},
 </tr>
 </tbody>
 </table>
-<p>这就是 <strong>TCA（transaction cost analysis）</strong> 的最小版本。线性 <code>turnover × bps</code> 适合教学单元测试；研究结论要至少做成本敏感性和 <code>order/ADV</code> 非线性压力。</p>
+<p>这就是 <strong>TCA（transaction cost analysis）</strong> 的最小版本。线性 <span class="arithmatex">\(\mathrm{turnover}\,c_{\mathrm{bps}}10^{-4}\)</span> 适合教学单元测试；研究结论要至少做成本敏感性和 <code>order/ADV</code> 非线性压力。</p>
 <h3 id="2-turnover-aware-portfolio-construction">2. Turnover-aware portfolio construction<a class="headerlink" href="#2-turnover-aware-portfolio-construction" title="Permanent link">&para;</a></h3>
 <p>最简单的 signal-to-weight 映射是 <span class="arithmatex">\(w_t\propto s_t/\hat\sigma_t\)</span>，但如果目标仓位离旧仓位很远，交易成本会吞掉 alpha。一个透明的教学目标是：</p>
 <div class="arithmatex">\[
@@ -11083,30 +11083,32 @@ IS=(P_{exec}-P_0)Q+fees+\text{opportunity cost},
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Make the notebook runnable from research/lectures, research, or a parent workspace.</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">_here</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">_candidates</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">for</span> <span class="n">_c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_here</span><span class="p">,</span> <span class="o">*</span><span class="n">_here</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">_candidates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_c</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">]</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">for</span> <span class="n">_candidate</span> <span class="ow">in</span> <span class="n">_candidates</span><span class="p">:</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">_candidate</span> <span class="o">/</span> <span class="s2">"notebook_helpers.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"sources"</span> <span class="o">/</span> <span class="s2">"external"</span> <span class="o">/</span> <span class="s2">"data"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="n">LECTURE_DIR</span> <span class="o">=</span> <span class="n">_candidate</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="n">ROOT</span> <span class="o">=</span> <span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">break</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"请从 research、research/lectures 或包含 research 的工作区目录运行 notebook"</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">LECTURE_DIR</span><span class="p">))</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="kn">from</span><span class="w"> </span><span class="nn">notebook_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_real_market_data</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">annualized_sharpe</span><span class="p">,</span> <span class="n">max_drawdown</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">FIG_DIR</span> <span class="o">=</span> <span class="n">LECTURE_DIR</span> <span class="o">/</span> <span class="s2">"figures"</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">FIG_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"seaborn-v0_8-whitegrid"</span><span class="p">)</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROOT=</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python=</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"数据只从 sources/external/data 本地读取；要更新数据，请先保存新快照和来源说明。"</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cycler</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"axes.prop_cycle"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">"#2563eb"</span><span class="p">,</span> <span class="s2">"#64748b"</span><span class="p">,</span> <span class="s2">"#38bdf8"</span><span class="p">,</span> <span class="s2">"#1e3a8a"</span><span class="p">,</span> <span class="s2">"#93c5fd"</span><span class="p">])</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Make the notebook runnable from research/lectures, research, or a parent workspace.</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">_here</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">_candidates</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">for</span> <span class="n">_c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_here</span><span class="p">,</span> <span class="o">*</span><span class="n">_here</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">_candidates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_c</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">]</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">for</span> <span class="n">_candidate</span> <span class="ow">in</span> <span class="n">_candidates</span><span class="p">:</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">_candidate</span> <span class="o">/</span> <span class="s2">"notebook_helpers.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"sources"</span> <span class="o">/</span> <span class="s2">"external"</span> <span class="o">/</span> <span class="s2">"data"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="n">LECTURE_DIR</span> <span class="o">=</span> <span class="n">_candidate</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">ROOT</span> <span class="o">=</span> <span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">break</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"请从 research、research/lectures 或包含 research 的工作区目录运行 notebook"</span><span class="p">)</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">LECTURE_DIR</span><span class="p">))</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="kn">from</span><span class="w"> </span><span class="nn">notebook_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_real_market_data</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">annualized_sharpe</span><span class="p">,</span> <span class="n">max_drawdown</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">FIG_DIR</span> <span class="o">=</span> <span class="n">LECTURE_DIR</span> <span class="o">/</span> <span class="s2">"figures"</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">FIG_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"seaborn-v0_8-whitegrid"</span><span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROOT=</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python=</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"数据只从 sources/external/data 本地读取；要更新数据，请先保存新快照和来源说明。"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">market</span> <span class="o">=</span> <span class="n">load_real_market_data</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2010"</span><span class="p">:</span><span class="s2">"2025"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -11128,7 +11130,7 @@ IS=(P_{exec}-P_0)Q+fees+\text{opportunity cost},
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">weights</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.75</span><span class="p">)</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"target weights"</span><span class="p">)</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Inverse-vol target weights (shifted for returns)"</span><span class="p">)</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">equity</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">equity</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"navy"</span><span class="p">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">equity</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">equity</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2563eb"</span><span class="p">)</span>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"net wealth"</span><span class="p">)</span>
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"date"</span><span class="p">)</span>
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>

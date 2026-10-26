@@ -10133,53 +10133,54 @@
 <h3 id="_3">第一步：确定答案的范围<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>下界 <code>lo = 1</code></strong>：每小时至少吃 1 根（<code>k = 0</code> 永远吃不完）。</li>
-<li><strong>上界 <code>hi = max(piles)</code></strong>：如果每小时能吃完整整最大的一堆，那每堆最多花 1 小时，总用时 <code>n</code> 小时。因为题目保证 <code>h &gt;= n</code>，所以 <code>max(piles)</code> 一定可行。</li>
+<li><strong>上界 <span class="arithmatex">\(hi = \max (\mathrm{piles})\)</span></strong>：如果每小时能吃完整整最大的一堆，那每堆最多花 1 小时，总用时 <code>n</code> 小时。因为题目保证 <span class="arithmatex">\(h \ge n\)</span>，所以 <code>max(piles)</code> 一定可行。</li>
 </ul>
 <blockquote>
 <p>上界不要取 <code>sum(piles)</code>。吃速超过最大堆的高度没有任何额外收益，只会让搜索空间白白变大。</p>
 </blockquote>
 <h3 id="_4">第二步：写可行性函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>给定速度 <code>k</code>，吃完第 <code>i</code> 堆需要 <code>⌈piles[i] / k⌉</code> 小时。总用时就是所有堆之和：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>hours(k) = Σ ceil(piles[i] / k)
-</span></code></pre></div>
+<p>给定速度 <code>k</code>，吃完第 <code>i</code> 堆需要 <span class="arithmatex">\(\lceil \mathrm{piles}[i] / k\rceil\)</span> 小时。总用时就是所有堆之和：</p>
+<div class="arithmatex">\[
+\mathrm{hours}(k)=\sum_{i=0}^{n-1}\left\lceil\frac{\mathrm{piles}[i]}{k}\right\rceil
+\]</div>
 <p>向上取整在整型运算里写成 <code>(p + k - 1) // k</code>。</p>
 <h3 id="_5">第三步：论证单调性（面试必答）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p><code>k</code> 越大，<code>hours(k)</code> 越小——<strong><code>hours</code> 关于 <code>k</code> 单调不增</strong>，所以"<code>hours(k) &lt;= h</code>"这个性质对 <code>k</code> 是<strong>单调的</strong>（一旦某个 k 可行，比它大的 k 也都可行）。</p>
 <p>于是要求"最小可行 k"，就是求<strong>第一个满足条件的 k</strong>，用"找左边界"模板：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">if</span> <span class="n">hours</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>          <span class="c1"># mid 可行，试试更小的</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>      <span class="c1"># mid 不可行，答案更大</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">if</span> <span class="n">hours</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>          <span class="c1"># mid 可行，试试更小的</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>      <span class="c1"># mid 不可行，答案更大</span>
 </span></code></pre></div>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>“求最小值”只能提出二分答案的候选，真正允许二分的是可行性随速度单调。一堆香蕉每小时只处理一堆，不能用 ceil(总根数/k) 代替逐堆向上取整之和；例如 [3,3]、k=4 仍需 2 小时，而不是 2 堆合并后的一次配额计算。</p>
-<p>搜索时左侧是已经证实不够快的速度，右侧保留一个可行速度。试到 mid 可行后仍保留 mid，因为它可能恰好最小。若某题增加速度反而引发另一种限制、使可行性不是假后真，就不能沿用本题。另要记住每次判定扫描全部堆，O(log M) 是轮数而非整题时间。</p>
+<p>搜索时左侧是已经证实不够快的速度，右侧保留一个可行速度。试到 mid 可行后仍保留 mid，因为它可能恰好最小。若某题增加速度反而引发另一种限制、使可行性不是假后真，就不能沿用本题。另要记住每次判定扫描全部堆，<span class="arithmatex">\(\mathcal{O}(\log M)\)</span> 是轮数而非整题时间。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">解法一：二分答案（推荐）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">hours_needed</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">)</span>   <span class="c1"># 向上取整求和</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">piles</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="k">if</span> <span class="n">hours_needed</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>            <span class="c1"># 可行，尝试更小</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>        <span class="c1"># 不可行，必须更大</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="n">lo</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">def</span><span class="w"> </span><span class="nf">hours_needed</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>            <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">)</span>   <span class="c1"># 向上取整求和</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">piles</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="k">if</span> <span class="n">hours_needed</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>            <span class="c1"># 可行，尝试更小</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>        <span class="c1"># 不可行，必须更大</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
 <h3 id="_9">解法二：线性枚举（用于对照，会超时）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="k">if</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                <span class="k">return</span> <span class="n">k</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">if</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="k">return</span> <span class="n">k</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></code></pre></div>
 <h2 id="_10">复杂度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
@@ -10193,25 +10194,25 @@
 <tbody>
 <tr>
 <td>二分答案</td>
-<td>O(n log max(piles))</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log \max (\mathrm{piles}))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>线性枚举</td>
-<td>O(n · max(piles))</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \max (\mathrm{piles}))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_11">易错点与面试追问<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>上界用 <code>max(piles)</code></strong>，不是 <code>sum(piles)</code>。这是本题最常见的低效写法。</li>
-<li>向上取整用 <code>(p + k - 1) // k</code>，不要写 <code>p / k</code>（浮点）或 <code>p // k</code>（会少算）。</li>
-<li><code>while lo &lt; hi</code> 而不是 <code>&lt;=</code>：我们要收敛到一个点，而不是查找一个元素。</li>
-<li><code>hi = mid</code> 而不是 <code>mid - 1</code>：<code>mid</code> 本身可能是答案，不能丢弃。</li>
+<li>向上取整用 <code>(p + k - 1) // k</code>，不要写 <span class="arithmatex">\(p / k\)</span>（浮点）或 <code>p // k</code>（会少算）。</li>
+<li><code>while lo &lt; hi</code> 而不是 <span class="arithmatex">\(\le\)</span>：我们要收敛到一个点，而不是查找一个元素。</li>
+<li><span class="arithmatex">\(hi = \mathrm{mid}\)</span> 而不是 <code>mid - 1</code>：<code>mid</code> 本身可能是答案，不能丢弃。</li>
 <li>中间变量 <code>mid</code> 在 Python 里不需要防溢出，但可以提一句 C++/Java 的写法。</li>
 <li><strong>追问：为什么可以用二分？</strong> → 因为"可行性关于 k 单调"。<strong>必须能说出这句话</strong>，否则只是套模板。</li>
-<li><strong>追问：时间复杂度怎么算？</strong> → 二分执行 O(log max) 轮，每轮 O(n) 检查，所以 O(n log max)。</li>
+<li><strong>追问：时间复杂度怎么算？</strong> → 二分执行 <span class="arithmatex">\(\mathcal{O}(\log \max )\)</span> 轮，每轮 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 检查，所以 <span class="arithmatex">\(\mathcal{O}(n \log \max )\)</span>。</li>
 <li><strong>同类题：</strong> <a href="https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/">1011 Capacity To Ship Packages Within D Days</a>、<a href="https://leetcode.com/problems/split-array-largest-sum/">410 Split Array Largest Sum</a>、<a href="https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/">1482 Minimum Number of Days to Make m Bouquets</a>。<strong>这三题的代码骨架和本题一模一样</strong>。</li>
 </ul>
 <h2 id="_12">相关题目<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>

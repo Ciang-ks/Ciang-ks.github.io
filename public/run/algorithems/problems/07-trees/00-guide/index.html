@@ -10659,7 +10659,7 @@
 <ol>
 <li><strong>中序遍历是严格升序</strong>；</li>
 <li>任意节点的值都大于<strong>左子树的所有值</strong>、小于<strong>右子树的所有值</strong>；</li>
-<li>查找/插入/删除是 O(h)。</li>
+<li>查找/插入/删除是 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</li>
 </ol>
 <h3 id="bst_1">验证 BST 的标准写法（带上下界）<a class="headerlink" href="#bst_1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_bst</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -10706,15 +10706,15 @@
 <p><strong>关键细节</strong>：后序写法最不容易出错（先用临时变量接住左右孩子再交换）；前序写法在交换之后递归的孩子已经是"原来的另一个"。</p>
 <h3 id="2-maximum-depth-of-binary-tree104">2. Maximum Depth of Binary Tree（104）<a class="headerlink" href="#2-maximum-depth-of-binary-tree104" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最大深度"。</p>
-<p><strong>候选思路</strong>：这是类型 B 的母题——<code>dfs(node) = 1 + max(dfs(left), dfs(right))</code>，空节点返回 0。</p>
-<p><strong>关键细节</strong>：用 <code>max</code>（最大深度）；求<strong>最小深度</strong>时不能直接写 <code>1 + min(left, right)</code>，因为只有一个孩子时另一个是 0，会算错。</p>
+<p><strong>候选思路</strong>：这是类型 B 的母题——<span class="arithmatex">\(\operatorname{dfs}(\mathrm{node})=1+\max(\operatorname{dfs}(\mathrm{left}),\operatorname{dfs}(\mathrm{right}))\)</span>，空节点返回 0。</p>
+<p><strong>关键细节</strong>：用 <code>max</code>（最大深度）；求<strong>最小深度</strong>时不能直接写 <span class="arithmatex">\(1 + \min (\mathrm{left}, \mathrm{right})\)</span>，因为只有一个孩子时另一个是 0，会算错。</p>
 <h3 id="3-diameter-of-binary-tree543">3. Diameter of Binary Tree（543）<a class="headerlink" href="#3-diameter-of-binary-tree543" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："任意两节点间最长路径的边数"。</p>
 <p><strong>候选思路</strong>：<strong>关键观察——任一条路径都有一个"最高点"</strong>，在这点向左下、右下各延伸一段。于是"经过 node 的最长路径 = 左高 + 右高"。</p>
 <p><strong>难点在于分清两个量</strong>：</p>
 <ul>
 <li>递归<strong>返回值</strong>：以 node 为根的子树高度（<strong>单边量</strong>，因为高度只能沿一条路往上传）；</li>
-<li><strong>全局答案</strong>：<code>max(左高 + 右高)</code>（<strong>双边量</strong>，因为路径可以在这里拐弯）。</li>
+<li><strong>全局答案</strong>：<span class="arithmatex">\(\max (左高 + 右高)\)</span>（<strong>双边量</strong>，因为路径可以在这里拐弯）。</li>
 </ul>
 <p><strong>走一遍示例</strong>：<code>1(2(4,5), 3)</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>dfs(4) = 1，dfs(5) = 1
@@ -10723,12 +10723,12 @@
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>dfs(1): 左高 2 + 右高 1 = 3 → 候选答案 3；返回 1 + max(2,1) = 3
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>最终答案 3（路径 4→2→1→3）
 </span></code></pre></div>
-<p><strong>关键细节</strong>：直径可能完全落在某个子树里（所以要在每个节点都更新答案，不能只在根处算）；答案是<strong>边数</strong>，若按节点数算应写 <code>left + right + 1</code>。</p>
+<p><strong>关键细节</strong>：直径可能完全落在某个子树里（所以要在每个节点都更新答案，不能只在根处算）；答案是<strong>边数</strong>，若按节点数算应写 <span class="arithmatex">\(\mathrm{left} + \mathrm{right} + 1\)</span>。</p>
 <h3 id="4-balanced-binary-tree110">4. Balanced Binary Tree（110）<a class="headerlink" href="#4-balanced-binary-tree110" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："判断每个节点的左右子树高度差是否不超过 1"。</p>
-<p><strong>候选思路</strong>：朴素做法是"对每个节点求一次高度"，会重复计算（O(n²)）。<strong>优化方式是"在求高度的同时判断平衡"，用 -1 当哨兵短路</strong>。</p>
+<p><strong>候选思路</strong>：朴素做法是"对每个节点求一次高度"，会重复计算（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>）。<strong>优化方式是"在求高度的同时判断平衡"，用 -1 当哨兵短路</strong>。</p>
 <p><strong>为什么 -1 能短路？</strong> 一旦某个子树返回 -1，父节点就直接返回 -1，不再计算另一半——<strong>这样每个节点只被访问一次。</strong></p>
-<p><strong>关键细节</strong>：所有用到高度的地方都要先检查 <code>== -1</code>，不能把它当普通高度参与 <code>abs</code> 计算；判断条件是 <code>&gt; 1</code>。</p>
+<p><strong>关键细节</strong>：所有用到高度的地方都要先检查 <span class="arithmatex">\(= -1\)</span>，不能把它当普通高度参与 <code>abs</code> 计算；判断条件是 <span class="arithmatex">\(&gt; 1\)</span>。</p>
 <h3 id="5-same-tree100">5. Same Tree（100）<a class="headerlink" href="#5-same-tree100" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："两棵树结构和值是否都相同"。</p>
 <p><strong>候选思路</strong>：同步递归。<strong>三种空节点情况必须写全</strong>：都空 → True；只有一个空 → False；都不空 → 比值 + 递归。</p>
@@ -10741,7 +10741,7 @@
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>                     or isSubtree(root.left, sub)       # 或在左子树里
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>                     or isSubtree(root.right, sub)      # 或在右子树里
 </span></code></pre></div>
-<p><strong>关键细节</strong>：序列化 + 字符串匹配可以做到 O(n+m)，但<strong>空节点必须参与序列化</strong>（否则 <code>[1,2]</code> 和 <code>[1,2,null]</code> 会生成相同结果）。</p>
+<p><strong>关键细节</strong>：序列化 + 字符串匹配可以做到 <span class="arithmatex">\(\mathcal{O}(n+m)\)</span>，但<strong>空节点必须参与序列化</strong>（否则 <code>[1,2]</code> 和 <code>[1,2,null]</code> 会生成相同结果）。</p>
 <h3 id="7-lowest-common-ancestor-of-a-bst235">7. Lowest Common Ancestor of a BST（235）<a class="headerlink" href="#7-lowest-common-ancestor-of-a-bst235" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："BST 中两个节点的最近公共祖先"。</p>
 <p><strong>候选思路</strong>：利用 BST 的大小关系，<strong>不需要遍历整棵树</strong>：从根往下走，两个值都小于当前节点就向左；都大于就向右；<strong>否则当前节点就是分岔点，也就是答案</strong>。</p>
@@ -10753,12 +10753,12 @@
 <h3 id="8-binary-tree-level-order-traversal102">8. Binary Tree Level Order Traversal（102）<a class="headerlink" href="#8-binary-tree-level-order-traversal102" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："按层返回节点值"。</p>
 <p><strong>候选思路</strong>：BFS + <code>for _ in range(len(q))</code> 分层。</p>
-<p><strong>另一种不用队列的写法</strong>：DFS 时把 <code>depth</code> 当参数传下去，<code>res[depth].append(node.val)</code>；前序遍历天然保证同层从左到右。<strong>这种写法空间从 O(层宽) 降到 O(树高)。</strong></p>
-<p><strong>关键细节</strong>：空树返回 <code>[]</code> 而不是 <code>[[]]</code>；用 <code>deque</code> 而不是 <code>list</code>（<code>list.pop(0)</code> 是 O(n)）。</p>
+<p><strong>另一种不用队列的写法</strong>：DFS 时把 <code>depth</code> 当参数传下去，<code>res[depth].append(node.val)</code>；前序遍历天然保证同层从左到右。<strong>这种写法空间从 <span class="arithmatex">\(\mathcal{O}(层宽)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(树高)\)</span>。</strong></p>
+<p><strong>关键细节</strong>：空树返回 <code>[]</code> 而不是 <code>[[]]</code>；用 <code>deque</code> 而不是 <code>list</code>（<code>list.pop(0)</code> 是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）。</p>
 <h3 id="9-binary-tree-right-side-view199">9. Binary Tree Right Side View（199）<a class="headerlink" href="#9-binary-tree-right-side-view199" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："站在右侧能看到的节点" = 每层最右边。</p>
 <p><strong>候选思路</strong>：层序取 <code>level[-1]</code>；或者 <strong>DFS 优先访问右子树</strong>，每个深度第一次到达的节点就是最右节点（<code>depth == len(res)</code>）。</p>
-<p><strong>关键细节</strong>：DFS 版<strong>必须先右后左</strong>，否则拿到的是最左节点；DFS 版的空间是 O(树高)，比 BFS 的 O(层宽) 更省。</p>
+<p><strong>关键细节</strong>：DFS 版<strong>必须先右后左</strong>，否则拿到的是最左节点；DFS 版的空间是 <span class="arithmatex">\(\mathcal{O}(树高)\)</span>，比 BFS 的 <span class="arithmatex">\(\mathcal{O}(层宽)\)</span> 更省。</p>
 <h3 id="10-count-good-nodes-in-binary-tree1448">10. Count Good Nodes in Binary Tree（1448）<a class="headerlink" href="#10-count-good-nodes-in-binary-tree1448" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："路径上没有比它更大的值的节点"。</p>
 <p><strong>候选思路</strong>：判断只需要"从根到它的路径上的最大值" → 类型 A 自顶向下，把 <code>max_so_far</code> 当参数。</p>
@@ -10812,7 +10812,7 @@
 </tbody>
 </table>
 <p>答案 4。</p>
-<p><strong>关键细节</strong>：判断用 <code>&gt;=</code>（相等也是好节点）；初始值用 <code>float("-inf")</code>，这样根节点必然被计入。</p>
+<p><strong>关键细节</strong>：判断用 <span class="arithmatex">\(\ge\)</span>（相等也是好节点）；初始值用 <code>float("-inf")</code>，这样根节点必然被计入。</p>
 <h3 id="11-validate-binary-search-tree98">11. Validate Binary Search Tree（98）<a class="headerlink" href="#11-validate-binary-search-tree98" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："判断是否合法 BST"。</p>
 <p><strong>候选思路</strong>：<strong>带上下界的递归</strong>，或<strong>中序遍历必须严格递增</strong>。</p>
@@ -10821,34 +10821,33 @@
 <h3 id="12-kth-smallest-element-in-a-bst230">12. Kth Smallest Element in a BST（230）<a class="headerlink" href="#12-kth-smallest-element-in-a-bst230" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："BST 中第 k 小的元素"。</p>
 <p><strong>候选思路</strong>：BST 的中序是升序 → <strong>中序遍历到第 k 个就返回，不必遍历整棵树</strong>。</p>
-<p><strong>关键细节</strong>：迭代中序（栈）可以在找到后立刻返回，时间 O(h + k)；<code>k</code> 是 1-based；循环条件 <code>while stack or cur</code> 两个都不能少。</p>
+<p><strong>关键细节</strong>：迭代中序（栈）可以在找到后立刻返回，时间 <span class="arithmatex">\(\mathcal{O}(h + k)\)</span>；<code>k</code> 是 1-based；循环条件 <code>while stack or cur</code> 两个都不能少。</p>
 <h3 id="13-construct-binary-tree-from-preorder-and-inorder105">13. Construct Binary Tree from Preorder and Inorder（105）<a class="headerlink" href="#13-construct-binary-tree-from-preorder-and-inorder105" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："用前序 + 中序重建二叉树"。</p>
 <p><strong>候选思路</strong>：<strong>前序的第一个元素是根</strong>；<strong>中序里根的左边是左子树、右边是右子树</strong>。两者结合就能递归切分。</p>
-<p><strong>走一遍示例</strong>：<code>pre = [3,9,20,15,7]</code>，<code>in = [9,3,15,20,7]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{pre} = [3,9,20,15,7]\)</span>，<span class="arithmatex">\(in = [9,3,15,20,7]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>前序首元素 3 是根；在中序里找到 3 的下标 1
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>→ 左子树中序 [9]，长度 1；右子树中序 [15,20,7]，长度 3
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>→ 前序按长度切成 [9] 和 [20,15,7]
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>递归处理左右
 </span></code></pre></div>
-<p><strong>关键细节</strong>：用 <code>值 → 中序下标</code> 的哈希表把定位从 O(n) 降到 O(1)，总复杂度 O(n)；<strong>递归顺序必须先左后右</strong>（因为前序指针只能单向前进）。</p>
+<p><strong>关键细节</strong>：用 <code>值 → 中序下标</code> 的哈希表把定位从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，总复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；<strong>递归顺序必须先左后右</strong>（因为前序指针只能单向前进）。</p>
 <p><strong>追问准备</strong>："后序 + 中序？" → 106，根在后序的最后一个，构造顺序变成先右后左。</p>
 <h3 id="14-binary-tree-maximum-path-sum124">14. Binary Tree Maximum Path Sum（124）<a class="headerlink" href="#14-binary-tree-maximum-path-sum124" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："路径上节点值之和的最大值"（路径不一定要经过根）。</p>
 <p><strong>候选思路</strong>：结构和 543 <strong>完全一样</strong>——返回值是单边量、答案是双边合并量，只多了"处理负数"。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>递归返回值：从 node 出发向下延伸的最大单边路径和
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>           = node.val + max(0, gain(左), gain(右))
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>全局答案  ：node.val + max(0, gain(左)) + max(0, gain(右))
-</span></code></pre></div>
+<div class="arithmatex">\[
+\begin{aligned}\operatorname{gain}(u)&amp;=v_u+\max\{0,\operatorname{gain}(u_L),\operatorname{gain}(u_R)\},\\\operatorname{through}(u)&amp;=v_u+\max\{0,\operatorname{gain}(u_L)\}+\max\{0,\operatorname{gain}(u_R)\}.\end{aligned}
+\]</div>
 <p><strong><code>max(0, ...)</code> 的两个作用</strong>：① 截断负数子树（走那边只会更差）；② 把空节点统一成 0。</p>
 <p><strong>走一遍示例</strong>：<code>-10(9, 20(15,7))</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>dfs(9) = 9
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>dfs(15) = 15，dfs(7) = 7
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>dfs(20): 20 + 15 + 7 = 42 → 候选答案 42；返回 20 + max(15,7) = 35
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>dfs(-10): 左 9、右 35 → 候选 9 + 35 - 10 = 34；返回 -10 + max(9,35) = 25
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>最终答案 42
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>dfs(9) = 9
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>dfs(15) = 15，dfs(7) = 7
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>dfs(20): 20 + 15 + 7 = 42 → 候选答案 42；返回 20 + max(15,7) = 35
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>dfs(-10): 左 9、右 35 → 候选 9 + 35 - 10 = 34；返回 -10 + max(9,35) = 25
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>最终答案 42
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<code>best</code> 必须初始化为 <code>-inf</code>（全负数数组时答案是负数，不能是 0）；<strong>返回值只能选一条腿</strong>，不能返回 <code>left + right</code>（否则父节点会重复用同一个节点）。</p>
+<p><strong>关键细节</strong>：<code>best</code> 必须初始化为 <code>-inf</code>（全负数数组时答案是负数，不能是 0）；<strong>返回值只能选一条腿</strong>，不能返回 <span class="arithmatex">\(\mathrm{left} + \mathrm{right}\)</span>（否则父节点会重复用同一个节点）。</p>
 <h3 id="15-serialize-and-deserialize-binary-tree297">15. Serialize and Deserialize Binary Tree（297）<a class="headerlink" href="#15-serialize-and-deserialize-binary-tree297" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："把树编码成一个字符串，再原样还原"。</p>
 <p><strong>候选思路</strong>：<strong>空节点必须显式记录</strong>，否则 <code>[1,2]</code> 和 <code>[1,null,2]</code> 会产生同一个序列。</p>
@@ -10869,92 +10868,92 @@
 <tr>
 <td>Invert Binary Tree</td>
 <td>后序</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Maximum Depth</td>
 <td>后序</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Diameter</td>
 <td>后序（单边返回值 + 全局答案）</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Balanced Binary Tree</td>
 <td>后序 + 短路</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Same Tree</td>
 <td>同步递归</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Subtree of Another Tree</td>
 <td>嵌套递归</td>
-<td>O(n·m)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n\cdot m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>LCA of a BST</td>
 <td>自顶向下利用 BST</td>
-<td>O(h)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Level Order Traversal</td>
 <td>BFS</td>
-<td>O(n)</td>
-<td>O(w)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span></td>
 </tr>
 <tr>
 <td>Right Side View</td>
 <td>BFS 或右优先 DFS</td>
-<td>O(n)</td>
-<td>O(w) / O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span> / <span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Count Good Nodes</td>
 <td>自顶向下</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Validate BST</td>
 <td>自顶向下（上下界）</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Kth Smallest in BST</td>
 <td>中序（可提前停）</td>
-<td>O(h+k)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h+k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Construct from Pre+In</td>
 <td>分治</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Maximum Path Sum</td>
 <td>后序</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>Serialize/Deserialize</td>
 <td>前序 + 空标记</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10968,10 +10967,10 @@
 <li><strong>高度定义</strong>（节点数 vs 边数）没确认就写。</li>
 <li><strong>右视图 DFS 写成先左后右</strong>，结果变成左视图。</li>
 <li><strong>246 之类的对称题只比较同侧</strong>（镜像要交叉比较）。</li>
-<li><strong>递归深度</strong>：链状树是 O(n)，Python 默认上限约 1000，必要时改迭代。</li>
+<li><strong>递归深度</strong>：链状树是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，Python 默认上限约 1000，必要时改迭代。</li>
 </ol>
 <h2 id="_8">九、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"我用后序遍历。递归函数返回子树的高度；同时用全局变量记录答案，每到一个节点就用 left + right 更新它。这样每个节点只访问一次，复杂度 O(n)。<strong>区分'返回值是单边量、答案是双边量'是这题的关键。</strong>"</p>
+<p>"我用后序遍历。递归函数返回子树的高度；同时用全局变量记录答案，每到一个节点就用 left + right 更新它。这样每个节点只访问一次，复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。<strong>区分'返回值是单边量、答案是双边量'是这题的关键。</strong>"</p>
 <h2 id="30">十、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>什么时候用自顶向下、什么时候用自底向上？</li>

@@ -2705,10 +2705,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：哈希表枚举（O(n²)，代码更短）
+        解法二：哈希表枚举（\(\mathcal{O}(n^{2})\)，代码更短）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：哈希表枚举（O(n²)，代码更短）
+        解法二：哈希表枚举（\(\mathcal{O}(n^{2})\)，代码更短）
       
     </span>
   </a>
@@ -10085,7 +10085,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [[-1, -1, 2], [-1, 0, 1]]
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>暴力</strong>：三重循环枚举所有三元组，O(n³)，还需要额外去重。</p>
+<p><strong>暴力</strong>：三重循环枚举所有三元组，<span class="arithmatex">\(\mathcal{O}(n^{3})\)</span>，还需要额外去重。</p>
 <p><strong>优化第一步：排序。</strong> 排序带来两个好处：</p>
 <ol>
 <li>让"去重"变得可能——相同元素会挨在一起；</li>
@@ -10098,7 +10098,7 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    while l &lt; r:
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        根据 nums[l] + nums[r] 与 target 的关系移动指针
 </span></code></pre></div>
-<p>复杂度 O(n²)：外层 n 次，内层双指针 O(n)。</p>
+<p>复杂度 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>：外层 n 次，内层双指针 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h2 id="_3">去重是本题的核心<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>有 <strong>两处</strong> 必须去重，缺一不可：</p>
 <p><strong>第一处：固定的第一个数去重</strong></p>
@@ -10109,7 +10109,7 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">continue</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># 下面是左右双指针部分</span>
 </span></code></pre></div>
-<p>如果 <code>nums[i]</code> 和上一个固定的数相同，那么后面所有组合一定已经被枚举过了，跳过。注意必须写成 <code>nums[i] == nums[i-1]</code>（和前一个比），而不是和后一个比。</p>
+<p>如果 <code>nums[i]</code> 和上一个固定的数相同，那么后面所有组合一定已经被枚举过了，跳过。注意必须写成 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span>（和前一个比），而不是和后一个比。</p>
 <p><strong>第二处：找到答案后，左右指针跳过重复值</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -10117,10 +10117,10 @@
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
 </span></code></pre></div>
 <p>因为数组已排序，相同的值都相邻。找到一组答案后，如果只移动一格，下一个 <code>nums[l]</code> 可能还是同一个值，会产出重复三元组。</p>
-<p><strong>还有一个剪枝</strong>：排序后如果 <code>nums[i] &gt; 0</code>，那后面全是正数，和不可能为 0，可以直接 <code>break</code>。</p>
+<p><strong>还有一个剪枝</strong>：排序后如果 <span class="arithmatex">\(\mathrm{nums}[i] &gt; 0\)</span>，那后面全是正数，和不可能为 0，可以直接 <code>break</code>。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>固定第一个数时，只在 i 右侧继续取两个位置，就自然保证三个下标不同，并让每组答案都有一个唯一的“最左下标角色”。排序本身没有去重，真正去重的是后续跳过相同固定值，以及命中一对后跳过相同左右值。</p>
-<p>例如 [-1,-1,2,2] 可以选 [-1,-1,2]，所以不能预先把输入变成集合；两份 −1 来自不同位置，是合法的重数。重复输出的却是数值三元组，选哪一份 2 不应增加一组答案。推广到 k-Sum 时，可继续固定一个值降一维，但每一层都要分别保证下标不复用和答案按值去重；它们是两项不同要求。</p>
+<p>例如 [-1,-1,2,2] 可以选 [-1,-1,2]，所以不能预先把输入变成集合；两份 -1 来自不同位置，是合法的重数。重复输出的却是数值三元组，选哪一份 2 不应增加一组答案。推广到 k-Sum 时，可继续固定一个值降一维，但每一层都要分别保证下标不复用和答案按值去重；它们是两项不同要求。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：排序 + 双指针（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10157,7 +10157,7 @@
 </span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
 </span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h3 id="on2">解法二：哈希表枚举（O(n²)，代码更短）<a class="headerlink" href="#on2" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon2">解法二：哈希表枚举（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，代码更短）<a class="headerlink" href="#mathcalon2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">threeSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -10173,7 +10173,7 @@
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 </span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
 </span></code></pre></div>
-<p>用 <code>set</code> 自动去重，写法简单，但常数更大、额外空间 O(n)。可以作为"先给出一个能跑的版本，再优化"的过渡方案。</p>
+<p>用 <code>set</code> 自动去重，写法简单，但常数更大、额外空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。可以作为"先给出一个能跑的版本，再优化"的过渡方案。</p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10186,24 +10186,24 @@
 <tbody>
 <tr>
 <td>排序 + 双指针</td>
-<td>O(n²)</td>
-<td>O(1)（不计排序与输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计排序与输出）</td>
 </tr>
 <tr>
 <td>HashSet 枚举</td>
-<td>O(n²)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>漏掉任一处去重</strong>都会返回重复三元组。建议写完后用 <code>[-1,0,1,2,-1,-4]</code> 手推一遍。</li>
-<li>内层去重必须写在 <code>l += 1; r -= 1</code> <strong>之后</strong>，且带 <code>l &lt; r</code> 条件，否则可能越界。</li>
+<li>内层去重必须写在 <code>l += 1; r -= 1</code> <strong>之后</strong>，且带 <span class="arithmatex">\(l &lt; r\)</span> 条件，否则可能越界。</li>
 <li>外层循环上界是 <code>n - 2</code>（还需要留两个位置给 <code>l</code> 和 <code>r</code>）。</li>
-<li><code>nums[i] &gt; 0</code> 的剪枝是 <code>break</code> 而不是 <code>continue</code>，因为数组已排序，后面的数只会更大。</li>
+<li><span class="arithmatex">\(\mathrm{nums}[i] &gt; 0\)</span> 的剪枝是 <code>break</code> 而不是 <code>continue</code>，因为数组已排序，后面的数只会更大。</li>
 <li><strong>追问：如果要求返回下标而不是数值？</strong> → 排序会打乱下标，需要先存 <code>(值, 下标)</code> 再处理，且去重逻辑要改。</li>
-<li><strong>追问：能用哈希吗？</strong> → 固定一个数后，对剩余部分用哈希找配对，也可做到期望 O(n²)，但需额外存储与结果去重；哈希不会自动使枚举三元组变成一趟线性。</li>
+<li><strong>追问：能用哈希吗？</strong> → 固定一个数后，对剩余部分用哈希找配对，也可做到期望 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，但需额外存储与结果去重；哈希不会自动使枚举三元组变成一趟线性。</li>
 <li><strong>追问：4Sum 怎么做？</strong> → 再套一层循环，或者写通用 kSum 递归，见本模块补充题库。</li>
 <li><strong>追问：改成"最接近 target 的三数之和"？</strong> → 双指针框架不变，把"相等判断"换成"更新最近差值"。</li>
 </ul>

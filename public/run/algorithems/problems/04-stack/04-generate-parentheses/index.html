@@ -10086,18 +10086,18 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>这题虽然归在 Stack 模块，但<strong>标准解法是回溯</strong>（单纯的括号验证栈并没有枚举不同选择的过程）。它和 <code>10-backtracking</code> 是同一套模板。</p>
-<p><strong>朴素做法</strong>：生成所有 <code>2^(2n)</code> 种括号串，再逐个验证合法性。浪费极大。</p>
+<p><strong>朴素做法</strong>：生成所有 <span class="arithmatex">\(2^{2n}\)</span> 种括号串，再逐个验证合法性。浪费极大。</p>
 <p><strong>正确做法：边生成边剪枝。</strong> 关键观察是——<strong>任何时刻，已经放置的右括号数量都不能超过左括号数量</strong>。因为每个右括号必须有一个在它左边、尚未配对的左括号。</p>
 <p>于是维护两个计数：</p>
 <ul>
 <li><code>open</code>：已放置的左括号数量，<code>open &lt; n</code> 时才可以继续放 <code>'('</code>；</li>
 <li><code>close</code>：已放置的右括号数量，<code>close &lt; open</code> 时才可以继续放 <code>')'</code>。</li>
 </ul>
-<p>当 <code>len(path) == 2n</code> 时得到一个合法结果。</p>
+<p>当 <code>len(path) == 2 * n</code> 时得到一个合法结果。</p>
 <p><strong>这个剪枝把搜索树裁掉了绝大部分分支</strong>，直接只枚举合法串。生成的串的数量是第 n 个卡特兰数 <span class="arithmatex">\(C_n = \frac{1}{n+1}\binom{2n}{n}\)</span>，这是无法再优化的下界（因为输出本身就有这么多）。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>状态可以用“已经构造的前缀、已用左括号数、已用右括号数”描述。生成过程中始终保持 0≤close≤open≤n，结束时长度为 2n 便自动推出 open=close=n。这不是等到叶子再验证，而是在选择下一字符时排除所有不可能补成合法串的前缀。</p>
-<p>n=2 时，前缀 "(" 可以继续 "((" 或 "()"，而前缀 ")" 从起点就被剪掉。每个合法串对应唯一的逐字符选择路径，所以无需另设集合去重；但输出每个长度 2n 的串仍要 O(n) 工作，不能只按答案条数计时间。若引入多种括号，close&lt;open 只保证数量，还必须用栈保留类型顺序。</p>
+<p>状态可以用“已经构造的前缀、已用左括号数、已用右括号数”描述。生成过程中始终保持 0不大于close不大于open不大于n，结束时长度为 2n 便自动推出 open=close=n。这不是等到叶子再验证，而是在选择下一字符时排除所有不可能补成合法串的前缀。</p>
+<p>n=2 时，前缀 "(" 可以继续 "((" 或 "()"，而前缀 ")" 从起点就被剪掉。每个合法串对应唯一的逐字符选择路径，所以无需另设集合去重；但输出每个长度 2n 的串仍要 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 工作，不能只按答案条数计时间。若引入多种括号，close&lt;open 只保证数量，还必须用栈保留类型顺序。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：回溯 + 计数剪枝（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10154,8 +10154,8 @@
 </span></code></pre></div>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
-<li>时间：O(Cₙ · n)，其中 Cₙ 是第 n 个卡特兰数（结果数量），乘以每串的构造代价。</li>
-<li>空间：O(n) 递归栈（不计输出）。</li>
+<li>时间：<span class="arithmatex">\(\mathcal{O}(C_{n} \cdot n)\)</span>，其中 <span class="arithmatex">\(C_{n}\)</span> 是第 n 个卡特兰数（结果数量），乘以每串的构造代价。</li>
+<li>空间：<span class="arithmatex">\(\mathcal{O}(n)\)</span> 递归栈（不计输出）。</li>
 </ul>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

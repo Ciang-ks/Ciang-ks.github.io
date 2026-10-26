@@ -10085,18 +10085,18 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [0, 1]        # nums[0] + nums[1] = 9
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>暴力</strong>：枚举所有下标对，检查和是否为 <code>target</code>，O(n²)。瓶颈在于"每个元素都要重新扫描一遍前面所有元素"。</p>
-<p><strong>关键转换</strong>：与其问"哪两个数加起来等于 <code>target</code>"，不如问"对当前元素 <code>x</code>，它的<strong>补数</strong> <code>target - x</code> 是否已经出现过？" 这是一个<strong>存在性查询</strong>，而哈希表的查询是 O(1)。</p>
+<p><strong>暴力</strong>：枚举所有下标对，检查和是否为 <code>target</code>，<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。瓶颈在于"每个元素都要重新扫描一遍前面所有元素"。</p>
+<p><strong>关键转换</strong>：与其问"哪两个数加起来等于 <code>target</code>"，不如问"对当前元素 <code>x</code>，它的<strong>补数</strong> <code>target - x</code> 是否已经出现过？" 这是一个<strong>存在性查询</strong>，而哈希表的查询是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>所以流程是：</p>
 <ol>
 <li>维护一个哈希表 <code>seen</code>，记录"数值 → 下标"。</li>
 <li>从左到右遍历，对每个 <code>x</code> 先检查 <code>target - x</code> 是否在 <code>seen</code> 里。</li>
 <li>命中就返回两个下标；否则把当前值记入 <code>seen</code>，继续。</li>
 </ol>
-<p><strong>"先查后写"的顺序是这套模板的关键</strong>：如果先写后查，当 <code>target = 2 * x</code> 且数组里只有一个 <code>x</code> 时，会把同一个元素和它自己配对，得到 <code>[i, i]</code> 这种错误答案。</p>
+<p><strong>"先查后写"的顺序是这套模板的关键</strong>：如果先写后查，当 <span class="arithmatex">\(\mathrm{target} = 2 * x\)</span> 且数组里只有一个 <code>x</code> 时，会把同一个元素和它自己配对，得到 <code>[i, i]</code> 这种错误答案。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>选择字典的依据是输出还需要“历史数值对应的下标”，不是因为题目含有“和”就一定用哈希。每轮的状态定义为：seen 只含当前下标左侧的元素。这样查到的补数一定来自不同位置；扫描到任意一组答案较右的位置时，较左值必已出现，所以至少能找到一组。</p>
-<p>遇到重复值，保存一个先前下标就够，例如 [3,3]、target=6 在第二项查到第一项即可。若改为统计所有下标对，状态要换成“值→出现次数”，每轮增加补数出现次数；若要列出所有下标对，则需要保存下标列表并计入输出成本。不能靠把当前返回值改成 append，就假定仍然只需 O(n) 时间。</p>
+<p>遇到重复值，保存一个先前下标就够，例如 [3,3]、target=6 在第二项查到第一项即可。若改为统计所有下标对，状态要换成“值→出现次数”，每轮增加补数出现次数；若要列出所有下标对，则需要保存下标列表并计入输出成本。不能靠把当前返回值改成 append，就假定仍然只需 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：哈希表一次遍历（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10142,27 +10142,27 @@
 <tbody>
 <tr>
 <td>暴力</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>哈希一次遍历</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>两趟哈希</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>先查后写</strong>，否则 <code>target = 2 * nums[i]</code> 时会返回同一个下标两次。</li>
+<li><strong>先查后写</strong>，否则 <span class="arithmatex">\(\mathrm{target} = 2 * \mathrm{nums}[i]\)</span> 时会返回同一个下标两次。</li>
 <li>题目要求返回<strong>下标</strong>而不是数值，注意别返回 <code>[x, need]</code>。</li>
 <li>题目保证有解，但仍建议写 <code>return []</code> 兜底，避免函数隐式返回 <code>None</code>。</li>
-<li><strong>追问：数组已经有序怎么办？</strong> → 用左右双指针，空间降到 O(1)，见 <a href="../../02-two-pointers/02-two-sum-ii-input-array-is-sorted/">167 Two Sum II</a>。此时哈希反而不是最优。</li>
+<li><strong>追问：数组已经有序怎么办？</strong> → 用左右双指针，空间降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，见 <a href="../../02-two-pointers/02-two-sum-ii-input-array-is-sorted/">167 Two Sum II</a>。此时哈希反而不是最优。</li>
 <li><strong>追问：要找到三个数之和？</strong> → <a href="../../02-two-pointers/03-3sum/">15 3Sum</a>，排序 + 固定一个数 + 双指针。</li>
 <li><strong>追问：要返回所有满足条件的下标对（不重复）？</strong> → 需要额外去重逻辑，可以讨论把结果存成 <code>set</code> 或对重复值做跳过的技巧。</li>
 <li><strong>追问：如果数组里有大量重复值？</strong> → 哈希表存"值 → 下标列表"，或者在哈希解法中存第一个下标即可（本题只求一组解）。</li>

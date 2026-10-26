@@ -10146,7 +10146,7 @@
 <h1 id="212-word-search-ii-ii">212. Word Search II · 单词搜索 II<a class="headerlink" href="#212-word-search-ii-ii" title="Permanent link">&para;</a></h1>
 <p><code>Hard</code> ｜ <code>Tries</code> / 回溯 ｜ <a href="https://leetcode.com/problems/word-search-ii/">LeetCode 212</a> ｜ <a href="https://neetcode.io/problems/search-for-word-ii">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定 <code>m × n</code> 的字符网格 <code>board</code> 和一个单词列表 <code>words</code>，找出所有<strong>能在网格中找到</strong>的单词。</p>
+<p>给定 <span class="arithmatex">\(m\times n\)</span> 的字符网格 <code>board</code> 和一个单词列表 <code>words</code>，找出所有<strong>能在网格中找到</strong>的单词。</p>
 <p>规则：单词必须由<strong>相邻格子</strong>（上下左右，不能斜着）的字母依次连接而成，同一个格子在一次匹配中不能重复使用。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>board = [["o","a","a","n"],
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         ["e","t","a","e"],
@@ -10157,7 +10157,7 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">朴素做法为什么不行<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>对每个单词，在网格上做一次 DFS 搜索。如果单词有 <code>W</code> 个、平均长度 <code>L</code>，总代价是 O(W · m · n · 4^L)，<strong>慢得离谱</strong>。</p>
+<p>对每个单词，在网格上做一次 DFS 搜索。如果单词有 <code>W</code> 个、平均长度 <code>L</code>，总代价是 <span class="arithmatex">\(\mathcal{O}(W \cdot m \cdot n \cdot 4^L)\)</span>，<strong>慢得离谱</strong>。</p>
 <h3 id="trie-dfs">关键优化：把所有词建成 Trie，一次网格 DFS 同时搜所有词<a class="headerlink" href="#trie-dfs" title="Permanent link">&para;</a></h3>
 <p>核心思想：<strong>不要"对每个词搜一遍网格"，而是"从每个网格起点枚举路径，同时沿 Trie 检查前缀"</strong>。</p>
 <p>具体做法：</p>
@@ -10309,13 +10309,13 @@
 <tbody>
 <tr>
 <td>Trie + DFS</td>
-<td>O(m·n·4^L) 最坏，但 Trie 剪枝后实际远小</td>
-<td>O(总词长)（Trie）</td>
+<td><span class="arithmatex">\(\mathcal{O}(m\cdot n\cdot 4^L)\)</span> 最坏，但 Trie 剪枝后实际远小</td>
+<td><span class="arithmatex">\(\mathcal{O}(总词长)\)</span>（Trie）</td>
 </tr>
 <tr>
 <td>逐词 DFS</td>
-<td>O(W · m·n·4^L)</td>
-<td>O(L)</td>
+<td><span class="arithmatex">\(\mathcal{O}(W \cdot m\cdot n\cdot 4^L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
 </tr>
 </tbody>
 </table>

@@ -10118,7 +10118,7 @@
 <p>因为加 1 只可能影响"最低位的那个不是 9 的位置"，再往前的位不受影响。所以从后往前遇到第一个非 9 的位就可以停。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>数组按高位到低位存储，例如 [1,2,9] 表示 129，末项才是个位。加一先让个位承受进位：9→0 且继续向左；遇到 0..8 则加一、进位消失，左边不再改变。扫描方向来自位权和进位依赖，不是数字数组都要逆序遍历。</p>
-<p>[9,9] 会把两位都变为 0，最终还剩一份进位，所以返回 [1,0,0]。当前代码会原地改动 digits；全 9 时额外新建长度 n+1 的结果，因而额外分配最坏 O(n)，其余情况只用常数辅助状态。把整串转整数再加一虽绕过算法，但不利于理解任意长度数字表示，且其他语言可能装不下它。</p>
+<p>[9,9] 会把两位都变为 0，最终还剩一份进位，所以返回 [1,0,0]。当前代码会原地改动 digits；全 9 时额外新建长度 n+1 的结果，因而额外分配最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，其余情况只用常数辅助状态。把整串转整数再加一虽绕过算法，但不利于理解任意长度数字表示，且其他语言可能装不下它。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：从后往前扫描（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10166,20 +10166,20 @@
 <tbody>
 <tr>
 <td>从后往前扫描</td>
-<td>O(n)</td>
-<td>O(1)（除全 9 的情况外）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（除全 9 的情况外）</td>
 </tr>
 <tr>
 <td>转整数</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>全是 9 的情况必须处理</strong>（返回 <code>[1] + digits</code>），否则会漏掉最高位的进位。</li>
-<li><strong><code>digits.insert(0, 1)</code> 在 Python 里是 O(n)</strong>（要移动所有元素）；用 <code>[1] + digits</code> 更直观。</li>
+<li><strong><code>digits.insert(0, 1)</code> 在 Python 里是 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>（要移动所有元素）；用 <code>[1] + digits</code> 更直观。</li>
 <li>数组不会前导零，除了"数字 0"本身（输入 <code>[0]</code>，输出 <code>[1]</code>）。</li>
 <li><strong>追问：如果要求"加 k"而不是加 1？</strong> → 把 <code>carry</code> 初始化为 <code>k</code>，逻辑几乎不变。</li>
 <li><strong>追问：如果是二进制（加一）？</strong> → 同样的逻辑，把 9 换成 1。</li>

@@ -10099,14 +10099,14 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># "foo" -&gt; [(1, "bar"), (4, "bar2")]</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># "bar" -&gt; [(7, "baz")]</span>
 </span></code></pre></div>
-<p><code>set</code> 只需要往对应列表的<strong>末尾追加</strong>一条记录，是 O(1)；而 <code>get</code> 要在有序数组里找"<strong>最后一个 timestamp ≤ t 的记录</strong>"，这正是<strong>二分查找的经典变体（找右边界）</strong>。</p>
+<p><code>set</code> 只需要往对应列表的<strong>末尾追加</strong>一条记录，是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>；而 <code>get</code> 要在有序数组里找"<strong>最后一个 timestamp 不大于 t 的记录</strong>"，这正是<strong>二分查找的经典变体（找右边界）</strong>。</p>
 <p>两种实现：</p>
 <ol>
 <li><strong>手写二分</strong>（面试推荐）；</li>
 <li><strong><code>bisect_right</code></strong>（工程中常用，一行搞定）。</li>
 </ol>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>这里的哈希表只负责按 key 分组，二分负责在组内时间轴上定位，两个结构解决不同维度的查询。目标是最后一条时间≤查询时间的记录，不是时间最接近的记录；时间太晚的值无论多近都不能返回。</p>
+<p>这里的哈希表只负责按 key 分组，二分负责在组内时间轴上定位，两个结构解决不同维度的查询。目标是最后一条时间不大于查询时间的记录，不是时间最接近的记录；时间太晚的值无论多近都不能返回。</p>
 <p>例如 foo 在 1、4 时分别存 bar、bar2：查询 0 返回空串，查询 3 返回 bar，查询 4 或 8 返回 bar2。手写版命中可用记录后仍向右搜，res 保存截至目前最晚的合法候选。如果 set 不再保证时间递增，追加会破坏二分前提，必须维护有序插入或改用其他有序结构。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：哈希表 + 手写二分（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10148,7 +10148,7 @@
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="n">i</span> <span class="o">=</span> <span class="n">bisect_right</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">127</span><span class="p">)))</span>   <span class="c1"># 找到第一个 &gt; (timestamp, 最大字符)</span>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">""</span>
 </span></code></pre></div>
-<p><code>chr(127)</code> 是个足够大的字符串，用来保证 <code>bisect_right</code> 落在"所有 timestamp ≤ t 的记录之后"。也可以用 <code>float('inf')</code> 作为哨兵值（前提是元组第二个元素类型一致）。</p>
+<p><code>chr(127)</code> 是个足够大的字符串，用来保证 <code>bisect_right</code> 落在"所有 timestamp 不大于 t 的记录之后"。也可以用 <code>float('inf')</code> 作为哨兵值（前提是元组第二个元素类型一致）。</p>
 <h3 id="defaultdict">解法三：不用 defaultdict（显式检查键是否存在）<a class="headerlink" href="#defaultdict" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TimeMap</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -10182,25 +10182,25 @@
 <tbody>
 <tr>
 <td><code>set</code></td>
-<td>O(1)</td>
-<td>O(1) 追加</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span> 追加</td>
 </tr>
 <tr>
 <td><code>get</code></td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>总的存储空间是 O(记录数)。</p>
+<p>总的存储空间是 <span class="arithmatex">\(\mathcal{O}(记录数)\)</span>。</p>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>要返回"最近的更早时刻"，不是"最近一次 set"</strong>。上面用二分找右边界而不是直接取最后一个元素，正是为了满足这一点。</li>
 <li>key 不存在、或所有 timestamp 都大于查询时间时，返回 <code>""</code>。用一个 <code>res = ""</code> 的哨兵变量即可，不需要特判。</li>
 <li><code>data</code> 要用 <code>defaultdict(list)</code> 或 <code>setdefault</code>，否则第一次 <code>set</code> 一个 key 会 <code>KeyError</code>。</li>
-<li><strong>追问：如果没有"timestamp 严格递增"的保证呢？</strong> → 需要每次插入后排序（或用平衡树 / <code>SortedList</code>），<code>set</code> 变成 O(log n) 或 O(n)。</li>
+<li><strong>追问：如果没有"timestamp 严格递增"的保证呢？</strong> → 需要每次插入后排序（或用平衡树 / <code>SortedList</code>），<code>set</code> 变成 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 <li><strong>追问：如果同一个 timestamp 被 set 两次？</strong> → 题目保证不会。如果会，需要覆盖而不是追加。</li>
-<li><strong>追问：为什么不用哈希表存 <code>(key, timestamp)</code>？</strong> → 那样查询时需要遍历所有 timestamp，会退化成 O(n log n) 或 O(n²)。</li>
+<li><strong>追问：为什么不用哈希表存 <code>(key, timestamp)</code>？</strong> → 那样查询时需要遍历所有 timestamp，会退化成 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
 <li><strong>追问：如何支持"删除某个时间点之后的记录"？</strong> → 二分找到位置后切片，或改用平衡树。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>

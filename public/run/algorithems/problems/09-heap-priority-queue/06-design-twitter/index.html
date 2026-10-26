@@ -10146,7 +10146,7 @@
 <p><strong>注意 <code>unfollow</code> 的边界</strong>：不能取消关注自己；关注自己也没有实际意义，但题目不禁止 <code>follow(1, 1)</code>。<strong>一个常见做法是在 <code>getNewsFeed</code> 里把自己无条件加入关注集合</strong>，这样 <code>follow</code> 时就不需要特判自己。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>把每位用户的推文从新到旧看成一条有序流：当前尚未输出的全局最新推文，必然是某条流的首项。堆保存每条流当前的首项，弹出谁，就只补进那条流的下一项。这是多路归并的前沿不变式，而不是“看到前 10 就维护 Top K”的另一种叫法。</p>
-<p>若关注 f 人、输出至多 t=10 条，当前写法先扫描 f+1 位用户并 heapify，查询为 O(f+t log(f+1))，不会遍历全部历史推文。自己与关注集合取并集是为了避免重复流，并确保无需关注自己也能看到自己的推文。真实信息流还可能有分页、权限、删除与推荐排序，这里时间戳全序和历史列表只追加的假设，使每条流能直接从尾部向前读取。</p>
+<p>若关注 f 人、输出至多 t=10 条，当前写法先扫描 f+1 位用户并 heapify，查询为 <span class="arithmatex">\(\mathcal{O}(f+t \log (f+1))\)</span>，不会遍历全部历史推文。自己与关注集合取并集是为了避免重复流，并确保无需关注自己也能看到自己的推文。真实信息流还可能有分页、权限、删除与推荐排序，这里时间戳全序和历史列表只追加的假设，使每条流能直接从尾部向前读取。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="k">解法一：k 路归并（推荐）<a class="headerlink" href="#k" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
@@ -10219,10 +10219,10 @@
 </span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">follows</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="pushpull">另一种设计思路：推模式（push）与拉模式（pull）<a class="headerlink" href="#pushpull" title="Permanent link">&para;</a></h3>
-<p>上面的实现属于<strong>拉模式</strong>：<code>postTweet</code> 只写自己的推文列表，等 <code>getNewsFeed</code> 时才去把关注者的推文"拉"过来合并。优点是写入极快（O(1)），代价是读取时要合并多路。</p>
-<p>另一种设计是<strong>推模式</strong>：<code>postTweet</code> 时立刻把这条推文"推"进所有关注者的时间线。读取变成 O(1)，但写入的代价是 O(关注者数)——一个普通用户发一条推文要写进几百万个粉丝的时间线，系统会被写爆。</p>
+<p>上面的实现属于<strong>拉模式</strong>：<code>postTweet</code> 只写自己的推文列表，等 <code>getNewsFeed</code> 时才去把关注者的推文"拉"过来合并。优点是写入极快（<span class="arithmatex">\(\mathcal{O}(1)\)</span>），代价是读取时要合并多路。</p>
+<p>另一种设计是<strong>推模式</strong>：<code>postTweet</code> 时立刻把这条推文"推"进所有关注者的时间线。读取变成 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，但写入的代价是 <span class="arithmatex">\(\mathcal{O}(关注者数)\)</span>——一个普通用户发一条推文要写进几百万个粉丝的时间线，系统会被写爆。</p>
 <p>真实系统采用的是<strong>推拉混合</strong>：粉丝少的用户走推模式（享受读取的快速），粉丝极多的大 V 走拉模式（避免写入风暴）。</p>
-<p><strong>面试中把"拉模式 O(1) 写 / O(k log k) 读"与"推模式 O(粉丝数) 写 / O(1) 读"的取舍讲清楚</strong>，比多写一种实现更能体现设计能力。</p>
+<p><strong>面试中把"拉模式 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 写 / <span class="arithmatex">\(\mathcal{O}(k \log k)\)</span> 读"与"推模式 <span class="arithmatex">\(\mathcal{O}(粉丝数)\)</span> 写 / <span class="arithmatex">\(\mathcal{O}(1)\)</span> 读"的取舍讲清楚</strong>，比多写一种实现更能体现设计能力。</p>
 <h2 id="_6">复杂度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10235,23 +10235,23 @@
 <tbody>
 <tr>
 <td><code>postTweet</code></td>
-<td>O(1)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td><code>follow</code> / <code>unfollow</code></td>
-<td>O(1)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td><code>getNewsFeed</code>（k 路归并）</td>
-<td>O((F + 10) log F)，F 为关注人数</td>
-<td>O(F)</td>
+<td><span class="arithmatex">\(\mathcal{O}((F + 10) \log F)\)</span>，F 为关注人数</td>
+<td><span class="arithmatex">\(\mathcal{O}(F)\)</span></td>
 </tr>
 <tr>
 <td><code>getNewsFeed</code>（全收集）</td>
-<td>O(T log 10)，T 为候选推文总数</td>
-<td>O(T)</td>
+<td><span class="arithmatex">\(\mathcal{O}(T \log 10)\)</span>，T 为候选推文总数</td>
+<td><span class="arithmatex">\(\mathcal{O}(T)\)</span></td>
 </tr>
 </tbody>
 </table>

@@ -2265,10 +2265,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-on" class="md-nav__link">
+  <a href="#python-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序（Python 辅助空间最坏 O(n)）
+        解法三：排序（Python 辅助空间最坏 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-on" class="md-nav__link">
+  <a href="#python-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序（Python 辅助空间最坏 O(n)）
+        解法三：排序（Python 辅助空间最坏 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10088,11 +10088,11 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>输出: false
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>暴力</strong>：两两比较，O(n²)，作为开场陈述可以，不要真的去写。</p>
+<p><strong>暴力</strong>：两两比较，<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，作为开场陈述可以，不要真的去写。</p>
 <p><strong>优化方向</strong>：问题本质是"数组里有没有重复元素"，等价于"去重后的长度是否变短"。于是有两条路：</p>
 <ol>
-<li><strong>哈希集合</strong>：遍历一次，遇到已经见过的元素立刻返回 <code>True</code>。时间 O(n)，空间 O(n)。</li>
-<li><strong>排序</strong>：排序后相等的元素必然相邻，检查相邻对即可。时间 O(n log n)，若原地用常数辅助空间的排序算法可省集合；本页 Python list.sort 的最坏辅助空间为 O(n)，不能直接承诺 O(1)。</li>
+<li><strong>哈希集合</strong>：遍历一次，遇到已经见过的元素立刻返回 <code>True</code>。时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
+<li><strong>排序</strong>：排序后相等的元素必然相邻，检查相邻对即可。时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，若原地用常数辅助空间的排序算法可省集合；本页 Python list.sort 的最坏辅助空间为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不能直接承诺 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</li>
 </ol>
 <p>Python 里最简洁的写法是一行 <code>len(set(nums)) != len(nums)</code>。但面试时建议写显式循环，因为一旦被追问"找出第一个重复的元素"，一行写法就得重写。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -10114,7 +10114,7 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">containsDuplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="python-on">解法三：排序（Python 辅助空间最坏 O(n)）<a class="headerlink" href="#python-on" title="Permanent link">&para;</a></h3>
+<h3 id="python-mathcalon">解法三：排序（Python 辅助空间最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#python-mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">containsDuplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -10132,18 +10132,18 @@
 <tbody>
 <tr>
 <td>暴力</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>哈希集合</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>排序</td>
-<td>O(n log n)</td>
-<td>O(n)（Python 排序辅助空间）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 排序辅助空间）</td>
 </tr>
 </tbody>
 </table>
@@ -10153,7 +10153,7 @@
 <li><strong>追问：不允许额外空间怎么办？</strong> → 排序；或者当值域落在 <code>[1, n]</code> 时用原地标记，把 <code>nums[abs(x) - 1]</code> 置为负数表示"这个值出现过"。</li>
 <li><strong>追问：返回第一个重复出现的元素？</strong> → 哈希集合法天然支持，遇到重复直接返回 <code>x</code>；排序法会丢失"谁先出现"的信息。这是一个很好的取舍讨论点。</li>
 <li><strong>追问：数据量极大、内存放不下？</strong> → 可以提外排序、分块去重，或者 Bloom Filter（有假阳性）。</li>
-<li><code>zip(nums, nums[1:])</code> 会复制一份列表，空间是 O(n)；如果严格要求 O(1) 就写成下标循环 <code>for i in range(1, len(nums))</code>。</li>
+<li><code>zip(nums, nums[1:])</code> 会复制一份列表，空间是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；如果严格要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 就写成下标循环 <code>for i in range(1, len(nums))</code>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

@@ -10089,18 +10089,18 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="n">mirror</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span> <span class="k">else</span> <span class="kc">True</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：把 <code>mirror(a.left, b.right)</code> 写成 <code>mirror(a.left, b.left)</code> 就成了 Same Tree，不再是镜像判断。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(h)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</p>
 <hr />
 <h2 id="2-111-minimum-depth-of-binary-tree">2. 111 Minimum Depth of Binary Tree<a class="headerlink" href="#2-111-minimum-depth-of-binary-tree" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/">LeetCode 111</a> ｜ <strong>Easy</strong></p>
 <p><strong>题目</strong>：求从根到<strong>最近的叶子节点</strong>的节点数。</p>
 <p><strong>为什么放这里</strong>：与 104 对比，专门用来理解"叶子节点"的定义陷阱，以及 BFS 的提前终止优势。</p>
 <p><strong>思路提示</strong></p>
-<p><strong>不能写 <code>1 + min(left, right)</code>！</strong> 因为只有一个孩子时，另一个孩子的深度是 0，会把答案算成 1。正确的递归是：</p>
+<p><strong>不能写 <span class="arithmatex">\(1 + \min (\mathrm{left}, \mathrm{right})\)</span>！</strong> 因为只有一个孩子时，另一个孩子的深度是 0，会把答案算成 1。正确的递归是：</p>
 <ul>
 <li>左右都为空 → 是叶子，深度 1；</li>
 <li>只有一边为空 → 走非空的那一边；</li>
-<li>两边都非空 → <code>1 + min(左, 右)</code>。</li>
+<li>两边都非空 → <span class="arithmatex">\(1 + \min (左, 右)\)</span>。</li>
 </ul>
 <p>更漂亮的做法是 <strong>BFS</strong>：层序遍历，<strong>遇到第一个叶子就返回当前层号</strong>。</p>
 <p><strong>方法辨析</strong>：深度路径必须在叶子结束，空孩子不提供一条深度为零的候选路径。BFS 首次遇到叶子即可返回，因为更深层不可能改善最小深度；遇到只有一个孩子的节点还不能停。</p>
@@ -10122,7 +10122,7 @@
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="k">return</span> <span class="mi">0</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：递归版的 <code>min(left, right)</code> 陷阱；BFS 版必须<strong>在出队时判断叶子</strong>（入队时判断会漏掉"根就是叶子"的情况，或者需要额外处理）。</p>
-<p><strong>复杂度</strong>：BFS 最坏 O(n) 时间，但遇到浅叶子时可以提前结束；空间 O(w)。</p>
+<p><strong>复杂度</strong>：BFS 最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间，但遇到浅叶子时可以提前结束；空间 <span class="arithmatex">\(\mathcal{O}(w)\)</span>。</p>
 <hr />
 <h2 id="3-112-path-sum">3. 112 Path Sum<a class="headerlink" href="#3-112-path-sum" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/path-sum/">LeetCode 112</a> ｜ <strong>Easy</strong></p>
@@ -10157,7 +10157,7 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasPathSum</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">rest</span><span class="p">))</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：忘记"必须是叶子"这个条件；空树直接返回 <code>False</code>（不存在任何路径）。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(h)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/path-sum-ii/">113 Path Sum II</a> 要返回所有满足条件的路径，需要回溯记录路径；<a href="https://leetcode.com/problems/path-sum-iii/">437 Path Sum III</a> 不要求从根开始，需要用前缀和 + 哈希表。</p>
 </blockquote>
@@ -10181,8 +10181,8 @@
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="k">return</span> <span class="n">build</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：区间是闭区间 <code>[lo, hi]</code>，终止条件 <code>lo &gt; hi</code>；取 <code>(lo+hi)//2</code> 或 <code>(lo+hi+1)//2</code> 都能得到合法的平衡 BST，只是偶数长度时根的选取不同。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(log n)（递归栈）。</p>
+<p><strong>易错点</strong>：区间是闭区间 <span class="arithmatex">\([\mathrm{lo}, \mathrm{hi}]\)</span>，终止条件 <span class="arithmatex">\(lo &gt; hi\)</span>；取 <code>(lo+hi)//2</code> 或 <code>(lo+hi+1)//2</code> 都能得到合法的平衡 BST，只是偶数长度时根的选取不同。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>（递归栈）。</p>
 <hr />
 <h2 id="5-236-lowest-common-ancestor-of-a-binary-tree">5. 236 Lowest Common Ancestor of a Binary Tree<a class="headerlink" href="#5-236-lowest-common-ancestor-of-a-binary-tree" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">LeetCode 236</a> ｜ <strong>Medium</strong></p>
@@ -10208,7 +10208,7 @@
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">return</span> <span class="n">left</span> <span class="ow">or</span> <span class="n">right</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：比较用 <code>root is p</code>（节点身份）；返回 <code>left or right</code> 的写法依赖 <code>None</code> 是假值；递归必须在<strong>后序位置</strong>做判断。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(h)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</p>
 <hr />
 <h2 id="6-103-binary-tree-zigzag-level-order-traversal">6. 103 Binary Tree Zigzag Level Order Traversal<a class="headerlink" href="#6-103-binary-tree-zigzag-level-order-traversal" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">LeetCode 103</a> ｜ <strong>Medium</strong></p>
@@ -10240,8 +10240,8 @@
 </span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
 </span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：方向变量每层都要翻转；用 <code>level[::-1]</code> 比双端队列插入更易读，代价是多一次 O(层宽) 的反转。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(w)。</p>
+<p><strong>易错点</strong>：方向变量每层都要翻转；用 <code>level[::-1]</code> 比双端队列插入更易读，代价是多一次 <span class="arithmatex">\(\mathcal{O}(层宽)\)</span> 的反转。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(w)\)</span>。</p>
 <hr />
 <h2 id="7-863-all-nodes-distance-k-in-binary-tree">7. 863 All Nodes Distance K in Binary Tree<a class="headerlink" href="#7-863-all-nodes-distance-k-in-binary-tree" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/">LeetCode 863</a> ｜ <strong>Medium</strong></p>
@@ -10281,7 +10281,7 @@
 </span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">q</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：忘记 visited 会死循环；<code>parent[root]</code> 是 <code>None</code>，要用 <code>if nxt</code> 过滤；BFS 的层数控制用 <code>for _ in range(k)</code> 外层循环。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <blockquote>
 <p><strong>这个"树 → 加父指针 → 图 BFS"的思路非常重要</strong>，很多"树上距离"类问题都靠它转化。做完这题再回头看 199、102，会发现自己对"树就是图的一种特例"有了更统一的理解。</p>
 </blockquote>

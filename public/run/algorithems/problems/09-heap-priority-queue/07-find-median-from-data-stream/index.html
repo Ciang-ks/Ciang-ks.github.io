@@ -5278,10 +5278,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#olog-n" class="md-nav__link">
+  <a href="#mathcalolog-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么这个方案是 O(log n)
+        为什么这个方案是 \(\mathcal{O}(\log n)\)
       
     </span>
   </a>
@@ -5317,10 +5317,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#olog-n-o1" class="md-nav__link">
+  <a href="#mathcalolog-n-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：双堆（推荐，O(log n) 插入、O(1) 查询）
+        解法一：双堆（推荐，\(\mathcal{O}(\log n)\) 插入、\(\mathcal{O}(1)\) 查询）
       
     </span>
   </a>
@@ -10036,10 +10036,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#olog-n" class="md-nav__link">
+  <a href="#mathcalolog-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么这个方案是 O(log n)
+        为什么这个方案是 \(\mathcal{O}(\log n)\)
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#olog-n-o1" class="md-nav__link">
+  <a href="#mathcalolog-n-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：双堆（推荐，O(log n) 插入、O(1) 查询）
+        解法一：双堆（推荐，\(\mathcal{O}(\log n)\) 插入、\(\mathcal{O}(1)\) 查询）
       
     </span>
   </a>
@@ -10181,7 +10181,7 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">为什么不能每来一个数就排序<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>那样每次 <code>addNum</code> 是 O(n log n)，<code>findMedian</code> 是 O(1)，总代价太高。</p>
+<p>那样每次 <code>addNum</code> 是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，<code>findMedian</code> 是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，总代价太高。</p>
 <h3 id="_4">双堆结构（标准解法）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>把数据分成<strong>较小的一半</strong>和<strong>较大的一半</strong>：</p>
 <ul>
@@ -10202,13 +10202,13 @@
 <li>如果此时 <code>len(small) &lt; len(large)</code>，把 <code>large</code> 的堆顶移回 <code>small</code>，恢复平衡。</li>
 </ol>
 <p>这份实现应按上述次序执行；也可以先比较新值与堆顶再选择入堆，但要另行检查并恢复两个不变式。</p>
-<h3 id="olog-n">为什么这个方案是 O(log n)<a class="headerlink" href="#olog-n" title="Permanent link">&para;</a></h3>
-<p>每次插入涉及常数次堆操作，每次 O(log n)；<code>findMedian</code> 只读堆顶，O(1)。</p>
+<h3 id="mathcalolog-n">为什么这个方案是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span><a class="headerlink" href="#mathcalolog-n" title="Permanent link">&para;</a></h3>
+<p>每次插入涉及常数次堆操作，每次 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>；<code>findMedian</code> 只读堆顶，<span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>两个不变式必须分别维护：分界关系是 small 中每个值≤large 中每个值，数量关系是 small 与 large 等长或多一个。只平衡数量不够，例如 small={100}、large={1} 仍会给错奇数时的中位数；只维护大小分界，也可能让中位位置落在堆内部而不是堆顶。</p>
+<p>两个不变式必须分别维护：分界关系是 small 中每个值不大于large 中每个值，数量关系是 small 与 large 等长或多一个。只平衡数量不够，例如 small={100}、large={1} 仍会给错奇数时的中位数；只维护大小分界，也可能让中位位置落在堆内部而不是堆顶。</p>
 <p>先把新值加入 small，再把其最大值送到 large，可恢复大小分界；若 small 太少，再把 large 的最小值送回来。存储时 small 使用负值，所以偶数中位数实际是 (-small[0]+large[0])/2。与固定 k 的问题不同，中位数排名会随总数变化，无法仅保留固定数量的候选；当前结构保存所有值。若还要删除滑出窗口的旧值，需要额外支持按值延迟删除或其他有序结构，不能直接调用 heappop 删除任意旧元素。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<h3 id="olog-n-o1">解法一：双堆（推荐，O(log n) 插入、O(1) 查询）<a class="headerlink" href="#olog-n-o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalolog-n-mathcalo1">解法一：双堆（推荐，<span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 插入、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 查询）<a class="headerlink" href="#mathcalolog-n-mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">MedianFinder</span><span class="p">:</span>
@@ -10231,7 +10231,7 @@
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">small</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">large</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
 </span></code></pre></div>
 <h3 id="multiset-treeset">解法二：用有序集合（multiset / TreeSet）<a class="headerlink" href="#multiset-treeset" title="Permanent link">&para;</a></h3>
-<p>在 C++ 里可以用 <code>multiset</code>、Java 里可以用 <code>TreeSet</code> 维护全部数据，并额外维护一个<strong>指向中位数的迭代器</strong>：插入新元素是 O(log n)，同时根据插入位置调整迭代器；查询中位数就是 O(1)。</p>
+<p>在 C++ 里可以用 <code>multiset</code>、Java 里可以用 <code>TreeSet</code> 维护全部数据，并额外维护一个<strong>指向中位数的迭代器</strong>：插入新元素是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，同时根据插入位置调整迭代器；查询中位数就是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p>复杂度和双堆一样，但<strong>必须手动维护"迭代器指向哪里"</strong>——要考虑插入值比中位数大还是小、当前元素个数是奇数还是偶数，代码比双堆长得多，也更容易写错。</p>
 <p><strong>这正是双堆成为标准答案的原因</strong>：它用"两个堆的大小关系"隐式地表达了中位数的位置，不需要任何显式的指针。</p>
 <h3 id="_8">解法三：暴力（每次插入后排序，用于对照）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
@@ -10262,21 +10262,21 @@
 <tbody>
 <tr>
 <td>双堆</td>
-<td>O(log n)</td>
-<td>O(1)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>平衡树</td>
-<td>O(log n)</td>
-<td>O(1) 或 O(log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>暴力排序</td>
-<td>O(n log n)</td>
-<td>O(1)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10285,8 +10285,8 @@
 <li><strong><code>small</code> 用负数</strong>，读取时要取反。</li>
 <li><strong>插入的三步顺序不能变</strong>：先进 <code>small</code>、再把 <code>small</code> 的最大值挪到 <code>large</code>、最后按需挪回。这个顺序保证了两堆之间的大小关系。</li>
 <li>平衡规则必须固定：这里约定 <code>len(small) &gt;= len(large)</code> 且差值不超过 1。</li>
-<li><code>findMedian</code> 返回<strong>浮点数</strong>（Python 的 <code>/</code> 天然返回 float）。</li>
-<li><strong>追问：为什么不能用两个数组？</strong> → 插入后维持有序需要 O(n)。</li>
+<li><code>findMedian</code> 返回<strong>浮点数</strong>（Python 的 <span class="arithmatex">\(/\)</span> 天然返回 float）。</li>
+<li><strong>追问：为什么不能用两个数组？</strong> → 插入后维持有序需要 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 <li><strong>追问：如果数据带权重（每个数有出现次数）？</strong> → 需要在堆里额外维护"该值出现几次"，或者用"按权重二分"的思路。</li>
 <li><strong>追问：如果要求返回中位数附近的 k 个数？</strong> → 双堆只能给中位数；要取排名区间，需要用<strong>带子树大小的平衡树</strong>（<code>SortedList</code> / 索引树）。</li>
 <li><strong>追问：如果数据量极大、内存放不下？</strong> → 用近似算法，如 t-digest、GK sketch，可以在有界内存内估计分位数。</li>

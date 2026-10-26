@@ -10080,11 +10080,11 @@
 <h1 id="36-valid-sudoku">36. Valid Sudoku · 有效的数独<a class="headerlink" href="#36-valid-sudoku" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Arrays &amp; Hashing</code> ｜ <a href="https://leetcode.com/problems/valid-sudoku/">LeetCode 36</a> ｜ <a href="https://neetcode.io/problems/valid-sudoku">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定一个 9×9 的字符矩阵 <code>board</code>，判断它是否是<strong>合法</strong>的数独（不要求可解）。合法需同时满足：</p>
+<p>给定一个 <span class="arithmatex">\(9\times9\)</span> 的字符矩阵 <code>board</code>，判断它是否是<strong>合法</strong>的数独（不要求可解）。合法需同时满足：</p>
 <ul>
 <li>每一行没有重复的 <code>'1'</code>–<code>'9'</code></li>
 <li>每一列没有重复的 <code>'1'</code>–<code>'9'</code></li>
-<li>每个 3×3 九宫格内没有重复的 <code>'1'</code>–<code>'9'</code></li>
+<li>每个 <span class="arithmatex">\(3\times3\)</span> 九宫格内没有重复的 <code>'1'</code>–<code>'9'</code></li>
 </ul>
 <p>空格用 <code>'.'</code> 表示，忽略即可。</p>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -10099,7 +10099,7 @@
 <li>宫表：<code>boxs[(r // 3, c // 3)]</code> 里有没有 <code>val</code></li>
 </ul>
 <p>三处都没有重复就登记进去，任何一处冲突就返回 <code>False</code>。</p>
-<p><strong>关键点：九宫格的索引是 <code>(r // 3, c // 3)</code>，不是 <code>(r % 3, c % 3)</code>。</strong> 前者把棋盘切成 3×3 个块，后者只是块内的相对坐标。这是本题第一大坑。</p>
+<p><strong>关键点：九宫格的索引是 <code>(r // 3, c // 3)</code>，不是 <code>(r % 3, c % 3)</code>。</strong> 前者把棋盘切成 <span class="arithmatex">\(3\times3\)</span> 个块，后者只是块内的相对坐标。这是本题第一大坑。</p>
 <p><strong>方案 C：位掩码优化</strong></p>
 <p>把每个 set 换成一个 9 位整数，<code>1 &lt;&lt; (int(val) - 1)</code> 表示该数字出现过，通过 <code>mask &amp; bit</code> 检查冲突。常数更小，是加分写法。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -10181,13 +10181,13 @@
 <tbody>
 <tr>
 <td>三张哈希表</td>
-<td>O(81) = O(1)</td>
-<td>O(81) = O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(81)\)</span> = <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(81)\)</span> = <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>位掩码</td>
-<td>O(81)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(81)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>

@@ -2355,10 +2355,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：桶排序（推荐，O(n)）
+        解法一：桶排序（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -2366,10 +2366,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-k" class="md-nav__link">
+  <a href="#mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：小顶堆（O(n log k)，适合数据流场景）
+        解法二：小顶堆（\(\mathcal{O}(n \log k)\)，适合数据流场景）
       
     </span>
   </a>
@@ -9987,10 +9987,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：桶排序（推荐，O(n)）
+        解法一：桶排序（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -9998,10 +9998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-k" class="md-nav__link">
+  <a href="#mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：小顶堆（O(n log k)，适合数据流场景）
+        解法二：小顶堆（\(\mathcal{O}(n \log k)\)，适合数据流场景）
       
     </span>
   </a>
@@ -10085,24 +10085,24 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [1, 2]
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>分两步：<strong>先统计频率，再按频率取 Top-K</strong>。第一步用 <code>Counter</code> 是 O(n)，真正有区分度的是第二步。</p>
-<p><strong>方案 A：排序</strong> —— 按频率降序排序取前 k 个，O(n log n)。</p>
-<p><strong>方案 B：小顶堆</strong> —— 维护大小为 k 的堆，超了就弹出频率最小的。O(n log k)，当 k ≪ n 时明显更快。</p>
+<p>分两步：<strong>先统计频率，再按频率取 Top-K</strong>。第一步用 <code>Counter</code> 是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，真正有区分度的是第二步。</p>
+<p><strong>方案 A：排序</strong> —— 按频率降序排序取前 k 个，<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</p>
+<p><strong>方案 B：小顶堆</strong> —— 维护大小为 k 的堆，超了就弹出频率最小的。<span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>，当 <span class="arithmatex">\(k\ll n\)</span> 时明显更快。</p>
 <p><strong>方案 C：桶排序</strong> —— 最优解，也是本题的考点。</p>
 <p>关键观察：<strong>频率的取值范围是 <code>[1, n]</code></strong>（一个元素最多出现 n 次）。值域有限且连续，就可以用<strong>下标表示频率</strong>：</p>
 <ul>
-<li>建长度为 <code>n + 1</code> 的桶数组 <code>buckets</code>，<code>buckets[f]</code> 存放所有出现 <code>f</code> 次的元素；</li>
+<li>建长度为 <span class="arithmatex">\(n + 1\)</span> 的桶数组 <code>buckets</code>，<code>buckets[f]</code> 存放所有出现 <code>f</code> 次的元素；</li>
 <li>按频率从高到低扫描桶，攒够 k 个就返回。</li>
 </ul>
-<p>因为频率的种类最多 n 种，从高到低扫桶的总代价是 O(n)，没有发生排序。这是"计数排序"思想在频率上的应用。</p>
+<p>因为频率的种类最多 n 种，从高到低扫桶的总代价是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，没有发生排序。这是"计数排序"思想在频率上的应用。</p>
 <blockquote>
-<p>记住这个套路：<strong>当被排序的键是"出现次数"时，往往可以用桶把 O(n log n) 降到 O(n)。</strong></p>
+<p>记住这个套路：<strong>当被排序的键是"出现次数"时，往往可以用桶把 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</strong></p>
 </blockquote>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>本题有两种不同的数：原元素值决定“谁相同”，出现次数决定“谁更靠前”。先用字典把 n 项压成 u 个不同值及其频次，再在这 u 个候选里选择。桶下标是频次而非原值，所以原值即使达到十亿，也不需要开十亿个桶。</p>
-<p>例如 [4,4,4,9,9,7] 得到 4→3、9→2、7→1，把它们分别放在桶 3、2、1，从高频桶取两个就是 4、9。选择桶法靠的是频次≤n；维护大小 k 的堆则靠“只需保留 k 个候选”，适合不愿准备 n 个桶的情形。若任务变成不断更新频次并随时查 Top-K，静态分桶不能原样解决，还需要处理候选优先级的变化。</p>
+<p>例如 [4,4,4,9,9,7] 得到 4→3、9→2、7→1，把它们分别放在桶 3、2、1，从高频桶取两个就是 4、9。选择桶法靠的是频次不大于n；维护大小 k 的堆则靠“只需保留 k 个候选”，适合不愿准备 n 个桶的情形。若任务变成不断更新频次并随时查 Top-K，静态分桶不能原样解决，还需要处理候选优先级的变化。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="on">解法一：桶排序（推荐，O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法一：桶排序（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10120,7 +10120,7 @@
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                    <span class="k">return</span> <span class="n">res</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h3 id="on-log-k">解法二：小顶堆（O(n log k)，适合数据流场景）<a class="headerlink" href="#on-log-k" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon-log-k">解法二：小顶堆（<span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>，适合数据流场景）<a class="headerlink" href="#mathcalon-log-k" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -10155,29 +10155,29 @@
 <tbody>
 <tr>
 <td>排序</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>小顶堆</td>
-<td>O(n log k)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>桶排序</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li>桶数组长度是 <code>len(nums) + 1</code>，不是 <code>len(count) + 1</code>——最大频率可能等于数组长度。</li>
-<li>频率 <code>f ≥ 1</code>，所以 <code>buckets[0]</code> 恒为空，扫描从 <code>len(nums)</code> 到 <code>1</code> 即可。</li>
+<li>频率 <span class="arithmatex">\(f \ge 1\)</span>，所以 <code>buckets[0]</code> 恒为空，扫描从 <code>len(nums)</code> 到 <code>1</code> 即可。</li>
 <li>题目说"答案唯一"，但若存在频率并列的元素，桶排序与堆排序返回的顺序可能不同，只要集合正确就行。</li>
-<li><strong>追问：数据是流式的，一边读一边要 Top-K？</strong> → 堆更合适（每次插入 O(log k)）；桶排序必须拿到全量数据。</li>
-<li><strong>追问：k 接近 n？</strong> → 桶排序仍是 O(n)；堆会退化到 O(n log n)。</li>
-<li><strong>追问：只求第 k 高频元素，不求前 k 个？</strong> → 这就是 <a href="../../09-heap-priority-queue/04-kth-largest-element-in-an-array/">215 Kth Largest Element</a> 的变体，可以用快速选择做到期望 O(n)。</li>
+<li><strong>追问：数据是流式的，一边读一边要 Top-K？</strong> → 堆更合适（每次插入 <span class="arithmatex">\(\mathcal{O}(\log k)\)</span>）；桶排序必须拿到全量数据。</li>
+<li><strong>追问：k 接近 n？</strong> → 桶排序仍是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；堆会退化到 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</li>
+<li><strong>追问：只求第 k 高频元素，不求前 k 个？</strong> → 这就是 <a href="../../09-heap-priority-queue/04-kth-largest-element-in-an-array/">215 Kth Largest Element</a> 的变体，可以用快速选择做到期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

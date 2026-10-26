@@ -10084,7 +10084,7 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">return</span> <span class="n">slow</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：想让偶数长度返回<strong>靠前</strong>的中点，就把循环条件改成 <code>while fast.next and fast.next.next</code>。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="2-83-remove-duplicates-from-sorted-list">2. 83 Remove Duplicates from Sorted List<a class="headerlink" href="#2-83-remove-duplicates-from-sorted-list" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/">LeetCode 83</a> ｜ <strong>Easy</strong></p>
@@ -10103,17 +10103,17 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="k">return</span> <span class="n">head</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：删除后 <code>cur</code> <strong>不能前移</strong>，因为新的 <code>cur.next</code> 可能还是重复值；链表不需要哑结点，因为头节点永远不会被删。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/">82 Remove Duplicates from Sorted List II</a> 要求把"只要重复就全删掉"，此时头节点也可能被删，<strong>必须用哑结点</strong>。</p>
 </blockquote>
 <hr />
 <h2 id="3-160-intersection-of-two-linked-lists">3. 160 Intersection of Two Linked Lists<a class="headerlink" href="#3-160-intersection-of-two-linked-lists" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">LeetCode 160</a> ｜ <strong>Easy</strong></p>
-<p><strong>题目</strong>：找出两条链表的<strong>相交起始节点</strong>，不相交返回 <code>None</code>。要求 O(1) 空间。</p>
+<p><strong>题目</strong>：找出两条链表的<strong>相交起始节点</strong>，不相交返回 <code>None</code>。要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。</p>
 <p><strong>为什么放这里</strong>：双指针的巧妙应用——<strong>让两个指针走过相同的总路程</strong>。</p>
 <p><strong>思路提示</strong>：指针 A 走完链表 1 后跳到链表 2 的头部，指针 B 走完链表 2 后跳到链表 1 的头部。</p>
-<p>设链表长度分别为 <code>a</code> 和 <code>b</code>，共同部分长度为 <code>c</code>。那么 A 走过的总路程是 <code>a + b</code>、B 也是 <code>a + b</code>，<strong>两者必定同时到达相交点</strong>（或同时到达 <code>None</code>）。这个等长化的技巧非常漂亮。</p>
+<p>设链表长度分别为 <code>a</code> 和 <code>b</code>，共同部分长度为 <code>c</code>。那么 A 走过的总路程是 <span class="arithmatex">\(a + b\)</span>、B 也是 <span class="arithmatex">\(a + b\)</span>，<strong>两者必定同时到达相交点</strong>（或同时到达 <code>None</code>）。这个等长化的技巧非常漂亮。</p>
 <p><strong>方法辨析</strong>：相交比较的是同一个节点对象，而非值相同。切换头部让两指针分别补走另一条非共享前缀，抵消长度差；若无交点，最后同时为 None。这个遍历模型假设两链无环，否则不能照常保证终止。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getIntersectionNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headA</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">,</span> <span class="n">headB</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
@@ -10124,11 +10124,11 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">return</span> <span class="n">p</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：比较用 <code>is</code>（节点身份）；不相交时最终 <code>p == q == None</code>，循环会正常退出。</p>
-<p><strong>复杂度</strong>：时间 O(a + b)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(a + b)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="4-234-palindrome-linked-list">4. 234 Palindrome Linked List<a class="headerlink" href="#4-234-palindrome-linked-list" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/palindrome-linked-list/">LeetCode 234</a> ｜ <strong>Easy</strong></p>
-<p><strong>题目</strong>：判断链表是否为回文。要求 O(n) 时间和 O(1) 空间。</p>
+<p><strong>题目</strong>：判断链表是否为回文。要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间和 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。</p>
 <p><strong>为什么放这里</strong>：把"找中点""反转""比较"三个模板串起来，是 143 的姊妹题。</p>
 <p><strong>思路提示</strong>：</p>
 <ol>
@@ -10137,7 +10137,7 @@
 <li>两段同时从头比较。</li>
 </ol>
 <p>（严格来说这会修改原链表；如果面试官要求链表保持不变，可以在最后再反转回去，或者改用递归/栈的方案。）</p>
-<p><strong>方法辨析</strong>：反转半链是为把两端的读取方向统一，然后逐个比较对应值。必须明确偶数与奇数如何切分，奇数中间节点无需配对；比较结束再反转并重接，才能在 O(1) 额外空间下保留原结构。</p>
+<p><strong>方法辨析</strong>：反转半链是为把两端的读取方向统一，然后逐个比较对应值。必须明确偶数与奇数如何切分，奇数中间节点无需配对；比较结束再反转并重接，才能在 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间下保留原结构。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="c1"># 1. 找中点</span>
@@ -10163,13 +10163,13 @@
 </span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：奇数长度时中间那个节点属于"前半段"，所以循环应该用后半段（<code>q</code>）作为条件；比较用值而不是节点。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="5-92-reverse-linked-list-ii">5. 92 Reverse Linked List II<a class="headerlink" href="#5-92-reverse-linked-list-ii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/reverse-linked-list-ii/">LeetCode 92</a> ｜ <strong>Medium</strong></p>
 <p><strong>题目</strong>：反转链表中第 <code>left</code> 到第 <code>right</code> 个节点（1-based），其余保持不变。<strong>只遍历一遍</strong>。</p>
 <p><strong>为什么放这里</strong>：25 题的"单组版本"，也是"用哑结点处理头节点"的经典教学题。</p>
-<p><strong>思路提示</strong>：用哑结点 + 一个 <code>prev</code> 走到第 <code>left - 1</code> 个位置，然后做标准的头插法反转 <code>right - left + 1</code> 个节点。</p>
+<p><strong>思路提示</strong>：用哑结点 + 一个 <code>prev</code> 走到第 <code>left - 1</code> 个位置，然后做标准的头插法反转 <span class="arithmatex">\(\mathrm{right} - \mathrm{left} + 1\)</span> 个节点。</p>
 <p>头插法的思路是：每次把 <code>cur.next</code> 摘下来插到 <code>prev</code> 的后面，插满 <code>right - left</code> 次。</p>
 <p><strong>方法辨析</strong>：prev 固定在待反转区间前，cur 固定为逐渐变成尾部的原首节点；每次把 cur.next 移到 prev 后，即向已反转前缀前面加一个节点。prev 不应随循环前移，否则会把反转边界移动掉。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10188,8 +10188,8 @@
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：头插法<strong>不需要移动 <code>cur</code></strong>（它始终是"反转区间的第一个节点"，最终变成区间末尾）；循环次数是 <code>right - left</code> 而不是 <code>right - left + 1</code>。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：头插法<strong>不需要移动 <code>cur</code></strong>（它始终是"反转区间的第一个节点"，最终变成区间末尾）；循环次数是 <code>right - left</code> 而不是 <span class="arithmatex">\(\mathrm{right} - \mathrm{left} + 1\)</span>。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="6-61-rotate-list">6. 61 Rotate List<a class="headerlink" href="#6-61-rotate-list" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/rotate-list/">LeetCode 61</a> ｜ <strong>Medium</strong></p>
@@ -10229,21 +10229,21 @@
 </span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
 </span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        <span class="k">return</span> <span class="n">new_head</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：<code>k</code> 可能大于链表长度，必须取模；<code>k % L == 0</code> 时不需要旋转，但上面的代码也能正确返回原链表；空链表和单节点要提前返回。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(1)。</p>
+<p><strong>易错点</strong>：<code>k</code> 可能大于链表长度，必须取模；<span class="arithmatex">\(k \% L = 0\)</span> 时不需要旋转，但上面的代码也能正确返回原链表；空链表和单节点要提前返回。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="7-148-sort-list">7. 148 Sort List<a class="headerlink" href="#7-148-sort-list" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/sort-list/">LeetCode 148</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：把链表按升序排序。要求 O(n log n) 时间和 O(1) 空间。</p>
-<p><strong>为什么放这里</strong>：链表场景下最适合的排序是<strong>归并排序</strong>——因为归并排序的顺序访问模式与链表完全契合（不需要随机访问），而且链表的合并可以做到 O(1) 额外空间。快排的 partition 在链表上很别扭，堆排需要数组。</p>
-<p><strong>思路提示</strong>：自底向上的归并排序可以把空间压到真正的 O(1)。</p>
+<p><strong>题目</strong>：把链表按升序排序。要求 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 时间和 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。</p>
+<p><strong>为什么放这里</strong>：链表场景下最适合的排序是<strong>归并排序</strong>——因为归并排序的顺序访问模式与链表完全契合（不需要随机访问），而且链表的合并可以做到 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。快排的 partition 在链表上很别扭，堆排需要数组。</p>
+<p><strong>思路提示</strong>：自底向上的归并排序可以把空间压到真正的 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <ul>
 <li>用快慢指针把链表切成两半；</li>
 <li>递归排序两半；</li>
 <li>用 21 题的合并模板合并。</li>
 </ul>
-<p><strong>为了做到 O(1) 空间，要用自底向上（迭代）的版本</strong>：按 <code>step = 1, 2, 4, ...</code> 分组，每组内两两合并。</p>
-<p><strong>方法辨析</strong>：链表容易在已知节点处分段重接，不需要快排那样按下标划分，因此归并自然。递归二分仍占 O(log n) 调用栈；迭代版按长度 1、2、4 合并，必须在每轮重接各段并保留下一组起点，才真正消除递归空间。</p>
+<p><strong>为了做到 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间，要用自底向上（迭代）的版本</strong>：按 <code>step = 1, 2, 4, ...</code> 分组，每组内两两合并。</p>
+<p><strong>方法辨析</strong>：链表容易在已知节点处分段重接，不需要快排那样按下标划分，因此归并自然。递归二分仍占 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 调用栈；迭代版按长度 1、2、4 合并，必须在每轮重接各段并保留下一组起点，才真正消除递归空间。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
@@ -10272,9 +10272,9 @@
 </span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>        <span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">left</span> <span class="ow">or</span> <span class="n">right</span>
 </span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
 </span></code></pre></div>
-<p>上面的递归版本空间是 O(log n) 的递归栈。<strong>真正的 O(1) 空间</strong>需要用迭代的自底向上归并（按 step 分组），代码更长，属于加分项。</p>
+<p>上面的递归版本空间是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 的递归栈。<strong>真正的 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间</strong>需要用迭代的自底向上归并（按 step 分组），代码更长，属于加分项。</p>
 <p><strong>易错点</strong>：切分时快指针从 <code>head.next</code> 出发（保证偶数长度时前半段少一个节点，避免死循环）；两半都要递归排序后再合并。</p>
-<p><strong>复杂度</strong>：时间 O(n log n)，空间 O(log n)（递归栈）/ O(1)（自底向上迭代版）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>（递归栈）/ <span class="arithmatex">\(\mathcal{O}(1)\)</span>（自底向上迭代版）。</p>
 <blockquote>
 <p><strong>对照记忆</strong>：数组排序用快排/堆排/归并都行；链表排序<strong>只推荐归并</strong>。</p>
 </blockquote>

@@ -10146,7 +10146,7 @@
 <h1 id="48-rotate-image">48. Rotate Image · 旋转图像<a class="headerlink" href="#48-rotate-image" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Geometry</code> ｜ <a href="https://leetcode.com/problems/rotate-image/">LeetCode 48</a> ｜ <a href="https://neetcode.io/problems/rotate-matrix">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>把一个 <code>n × n</code> 的矩阵<strong>顺时针旋转 90°</strong>，要求<strong>原地修改</strong>（不能新建矩阵）。</p>
+<p>把一个 <span class="arithmatex">\(n\times n\)</span> 的矩阵<strong>顺时针旋转 90°</strong>，要求<strong>原地修改</strong>（不能新建矩阵）。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: [[1,2,3],
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       [4,5,6],
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       [7,8,9]]
@@ -10161,18 +10161,18 @@
 <li><strong>沿主对角线转置</strong>：交换 <code>matrix[i][j]</code> 和 <code>matrix[j][i]</code>；</li>
 <li><strong>左右翻转每一行</strong>：交换 <code>matrix[i][j]</code> 和 <code>matrix[i][n-1-j]</code>。</li>
 </ol>
-<p><strong>验证一下</strong>：<code>(i, j)</code> 经过转置变成 <code>(j, i)</code>，再经过左右翻转变成 <code>(j, n-1-i)</code>。而顺时针 90° 的映射正是"原来的第 i 行第 j 列 → 新的第 j 行第 n-1-i 列"。<strong>两者一致，所以组合是对的。</strong></p>
+<p><strong>验证一下</strong>：<code>(i, j)</code> 经过转置变成 <code>(j, i)</code>，再经过左右翻转变成 <span class="arithmatex">\((j,n-1-i)\)</span>。而顺时针 90° 的映射正是"原来的第 i 行第 j 列 → 新的第 j 行第 n-1-i 列"。<strong>两者一致，所以组合是对的。</strong></p>
 <h3 id="b">方案 B：四元素循环置换（一步到位，但难写）<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
-<p>观察一个位置上的元素去了哪里：<code>(i, j) → (j, n-1-i) → (n-1-i, n-1-j) → (n-1-j, i) → (i, j)</code>。这四个位置构成一个循环，可以<strong>一次交换四个元素</strong>：</p>
+<p>观察一个位置上的元素去了哪里：<span class="arithmatex">\((i,j)\to(j,n-1-i)\to(n-1-i,n-1-j)\to(n-1-j,i)\to(i,j)\)</span>。这四个位置构成一个循环，可以<strong>一次交换四个元素</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">][</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> \
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">matrix</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">][</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">]</span>
 </span></code></pre></div>
-<p>逐圈处理：<code>i in range(n//2)</code>，<code>j in range(i,n-1-i)</code>，每次移动同一旋转循环的四个位置，空间 O(1)。</p>
-<p>两者时间都是 O(n²)；方案 A 易用坐标映射核对方向，四点轮换需要更仔细地控制覆盖范围。</p>
+<p>逐圈处理：<code>i in range(n//2)</code>，<code>j in range(i,n-1-i)</code>，每次移动同一旋转循环的四个位置，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
+<p>两者时间都是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>；方案 A 易用坐标映射核对方向，四点轮换需要更仔细地控制覆盖范围。</p>
 <h3 id="_3">逆时针旋转<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>逆时针 90° 等价于"<strong>转置 + 上下翻转</strong>"（或者"左右翻转 + 转置"）。<strong>说清方向很重要，面试中先确认题目要的是哪个方向。</strong></p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>先用一个位置验方向：3×3 矩阵左上角 (0,0) 顺时针后应在 (0,2)，而不是 (2,0)。坐标变换的复合次序不能交换；转置后左右翻转是顺时针，先左右翻转再转置则为逆时针。</p>
+<p>先用一个位置验方向：<span class="arithmatex">\(3\times3\)</span> 矩阵左上角 (0,0) 顺时针后应在 (0,2)，而不是 (2,0)。坐标变换的复合次序不能交换；转置后左右翻转是顺时针，先左右翻转再转置则为逆时针。</p>
 <p>转置时每对 (i,j)、(j,i) 只交换一次，因此只遍历 j&gt;i；遍历整个方阵会交换两次还原。该实现依赖方阵，非方阵旋转会改变行列尺寸，不能用相同循环原地完成。四点轮换也需逐层且每圈每组只处理一次，不是任意截取四分之一的位置都可直接用。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：转置 + 左右翻转（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -10221,27 +10221,27 @@
 <tbody>
 <tr>
 <td>转置 + 翻转</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>四元素置换</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>新建矩阵</td>
-<td>O(n²)</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>转置只遍历上三角</strong>（<code>j</code> 从 <code>i+1</code> 开始），否则每个元素会被交换两次，等于没动。</li>
+<li><strong>转置只遍历上三角</strong>（<code>j</code> 从 <span class="arithmatex">\(i+1\)</span> 开始），否则每个元素会被交换两次，等于没动。</li>
 <li><strong>"转置 + 左右翻转"是顺时针，"转置 + 上下翻转"是逆时针</strong>。方向搞反是本题最常见的错误。</li>
 <li>四元素置换的循环范围是 <code>i</code> 从 0 到 <code>n//2 - 1</code>，<code>j</code> 从 <code>i</code> 到 <code>n-2-i</code>，很容易写错一两个边界。</li>
-<li>题目保证 <code>n ≥ 1</code>，矩阵是正方形。</li>
+<li>题目保证 <span class="arithmatex">\(n \ge 1\)</span>，矩阵是正方形。</li>
 <li><strong>追问：如果是逆时针 90°？</strong> → 转置 + 上下翻转。</li>
 <li><strong>追问：如果是旋转 180°？</strong> → 上下翻转 + 左右翻转（或者旋转两次 90°）。</li>
 <li><strong>追问：如果矩阵不是正方形？</strong> → 那就不能"原地旋转"，必须新建矩阵（因为形状会变）。</li>

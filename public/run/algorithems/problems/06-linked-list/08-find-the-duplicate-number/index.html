@@ -4106,10 +4106,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#floyd-on-o1" class="md-nav__link">
+  <a href="#floyd-mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：Floyd 判圈（推荐，O(n) 时间、O(1) 空间）
+        解法一：Floyd 判圈（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#floyd-on-o1" class="md-nav__link">
+  <a href="#floyd-mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：Floyd 判圈（推荐，O(n) 时间、O(1) 空间）
+        解法一：Floyd 判圈（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10146,8 +10146,8 @@
 <h1 id="287-find-the-duplicate-number">287. Find the Duplicate Number · 寻找重复数<a class="headerlink" href="#287-find-the-duplicate-number" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Linked List</code>（环检测） ｜ <a href="https://leetcode.com/problems/find-the-duplicate-number/">LeetCode 287</a> ｜ <a href="https://neetcode.io/problems/find-duplicate-integer">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定长度为 <code>n + 1</code> 的数组 <code>nums</code>，元素取值都在 <code>[1, n]</code> 范围内，<strong>只有一个数字重复出现（可能不止两次）</strong>。找出这个数字。</p>
-<p><strong>约束：不能修改数组，只能使用 O(1) 额外空间。</strong></p>
+<p>给定长度为 <span class="arithmatex">\(n + 1\)</span> 的数组 <code>nums</code>，元素取值都在 <code>[1, n]</code> 范围内，<strong>只有一个数字重复出现（可能不止两次）</strong>。找出这个数字。</p>
+<p><strong>约束：不能修改数组，只能使用 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [1,3,4,2,2]     输出: 2
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: nums = [3,1,3,4,2]     输出: 3
 </span></code></pre></div>
@@ -10156,7 +10156,7 @@
 <p>因为所有元素都在 <code>[1, n]</code> 范围内，所以 <strong><code>nums[i]</code> 可以当作一个合法的下标</strong>。构造映射：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>i → nums[i]
 </span></code></pre></div>
-<p>例如 <code>nums = [1,3,4,2,2]</code>，从下标 0 出发：</p>
+<p>例如 <span class="arithmatex">\(\mathrm{nums} = [1,3,4,2,2]\)</span>，从下标 0 出发：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>0 → nums[0]=1 → nums[1]=3 → nums[3]=2 → nums[2]=4 → nums[4]=2 → nums[2]=4 → ...
 </span></code></pre></div>
 <p>注意到 <code>2 → 4 → 2 → 4 ...</code> <strong>形成环</strong>。沿唯一后继不断前进，有限节点必会重复，因此进入环。又因为没有边指向 0，从 0 出发的路径先有非环前缀；入口同时被前缀末节点与环内前驱指向，这两个位置存着同一个值，所以入口是重复数字。</p>
@@ -10168,15 +10168,15 @@
 <li>两指针同速前进，再次相遇处就是环的入口 = 重复数字。</li>
 </ol>
 <h3 id="_4">另一条路：二分答案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>因为“数值≤mid 的元素个数”与"是否有重复落在左半边"之间具有单调性：</p>
+<p>因为“数值不大于mid 的元素个数”与"是否有重复落在左半边"之间具有单调性：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>count(≤ mid) &gt; mid  ⟹  重复值一定在 [1, mid]
 </span></code></pre></div>
-<p>于是可以二分 <code>mid ∈ [1, n]</code>。时间 O(n log n)，空间 O(1)，也是合法答案，而且比 Floyd 更容易想到。</p>
+<p>于是可以二分 <span class="arithmatex">\(\mathrm{mid}\in[1,n]\)</span>。时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，也是合法答案，而且比 Floyd 更容易想到。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>数组转为 next 映射的依据不是“出现重复”本身，而是每个 nums[i] 都是合法下标。由有限状态和每个节点唯一后继，沿 0、nums[0]、nums[nums[0]] 前进必进入环；又因数值从 1 开始，0 没有入边，起点不可能已经在环内。</p>
 <p>于是环入口有来自非环前缀的入边，也有来自环内前驱的入边，这两个不同下标保存同一个值。题目保证只有一种重复值，因此入口编号就是该值。若数值可超出下标范围，这个建模直接失效；若允许多个不同的重复值，从 0 可达的入口不再代表所有重复值。二分计数法同样依赖固定值域，不能当成任意数组查重模板。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="floyd-on-o1">解法一：Floyd 判圈（推荐，O(n) 时间、O(1) 空间）<a class="headerlink" href="#floyd-on-o1" title="Permanent link">&para;</a></h3>
+<h3 id="floyd-mathcalon-mathcalo1">解法一：Floyd 判圈（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#floyd-mathcalon-mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">findDuplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="c1"># 1. 快慢指针找相遇点</span>
@@ -10231,26 +10231,26 @@
 <tbody>
 <tr>
 <td>Floyd 判圈</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>✅</td>
 </tr>
 <tr>
 <td>二分答案</td>
-<td>O(n log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>✅</td>
 </tr>
 <tr>
 <td>哈希集合</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 <td>❌ 空间超标</td>
 </tr>
 <tr>
 <td>排序</td>
-<td>O(n log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>❌ 修改了数组</td>
 </tr>
 </tbody>

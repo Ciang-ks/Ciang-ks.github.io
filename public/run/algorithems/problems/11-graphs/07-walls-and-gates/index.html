@@ -10119,7 +10119,7 @@
 <li>994 里源点是"腐烂橘子"，扩散的是"腐烂"；</li>
 <li>286 里源点是"门"，扩散的是"距离"。</li>
 </ul>
-<p><strong>如果对每个空房间分别做 BFS 找最近的门，复杂度是 O((mn)²)</strong>；而把所有门<strong>同时</strong>入队做一次多源 BFS，每个格子只被访问一次，复杂度 O(mn)。</p>
+<p><strong>如果对每个空房间分别做 BFS 找最近的门，复杂度是 <span class="arithmatex">\(\mathcal{O}((mn)^{2})\)</span></strong>；而把所有门<strong>同时</strong>入队做一次多源 BFS，每个格子只被访问一次，复杂度 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <h3 id="_3">关键点：距离怎么记录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>多源 BFS 的层数就是距离。有两种写法：</p>
 <ol>
@@ -10129,7 +10129,7 @@
 <p>第二种写法更简洁，也是本题最漂亮的实现方式。<strong>第一次访问就是最短距离</strong>，这是 BFS 的核心性质。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>无权网格中，距离 d 的节点总在距离 d+1 的节点之前处理；将所有门设为第 0 层，就把“分别找最近门”合成一次遍历。比如一行 [0,INF,INF,0] 得到 [0,1,1,0]，不是只归属于扫描时先见到的门。</p>
-<p>只在值为 INF 时入队，同时写成父格距离+1，相当于用距离数组兼任 visited。墙保持 −1、门保持 0、不可达房间保持 INF，各有不同含义。若格子移动代价不同，第一次通过 FIFO 队列发现就不一定最短，必须重新选择最短路算法，不能原样搬用这个更新规则。</p>
+<p>只在值为 INF 时入队，同时写成父格距离+1，相当于用距离数组兼任 visited。墙保持 -1、门保持 0、不可达房间保持 INF，各有不同含义。若格子移动代价不同，第一次通过 FIFO 队列发现就不一定最短，必须重新选择最短路算法，不能原样搬用这个更新规则。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="bfs">解法一：多源 BFS + 就地更新距离（推荐）<a class="headerlink" href="#bfs" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
@@ -10183,7 +10183,7 @@
 </span></code></pre></div>
 <h3 id="_7">为什么不能"从每个房间出发找最近的门"<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>也可以换个方向想：对每个 <code>INF</code> 房间做一次 BFS，向四周扩散直到撞见一扇门，层数就是它到最近门的距离。</p>
-<p>这个做法在小网格上是对的，但复杂度不可接受：每个房间一次 BFS 是 O(mn)，而房间里最多有 O(mn) 个，总代价 O((mn)²)。一个 500×500 的网格就是 6.25 × 10¹⁰ 次操作。</p>
+<p>这个做法在小网格上是对的，但复杂度不可接受：每个房间一次 BFS 是 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>，而房间里最多有 <span class="arithmatex">\(\mathcal{O}(mn)\)</span> 个，总代价 <span class="arithmatex">\(\mathcal{O}((mn)^{2})\)</span>。一个 <span class="arithmatex">\(500\times500\)</span> 的网格就是 <span class="arithmatex">\(6.25\times10^{10}\)</span> 次操作。</p>
 <p><strong>多源 BFS 只用一次遍历就同时算出所有房间的答案</strong>，因为"从门出发向外扩散"和"从房间出发向内找门"在无权图上是对称的，而前者的起点只有门的个数（远小于房间数）。</p>
 <h2 id="_8">复杂度<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>
@@ -10197,13 +10197,13 @@
 <tbody>
 <tr>
 <td>多源 BFS</td>
-<td>O(m · n)</td>
-<td>O(m · n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
 </tr>
 <tr>
 <td>逐房间 BFS</td>
-<td>O((m·n)²)</td>
-<td>O(m · n)</td>
+<td><span class="arithmatex">\(\mathcal{O}((m\cdot n)^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
 </tr>
 </tbody>
 </table>

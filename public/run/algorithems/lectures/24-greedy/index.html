@@ -10191,7 +10191,7 @@
 <h2 id="_2">活动选择：从几个"看起来合理"的策略里挑一个<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="活动选择：按结束时间最早贪心" src="../images/24-activity-selection.svg" /></p>
 <blockquote>
-<p><strong>问题</strong>：有 n 个活动，活动 i 占据时间区间 <code>[sᵢ, fᵢ)</code>。同一时刻只能做一个活动，问最多能做几个。</p>
+<p><strong>问题</strong>：有 n 个活动，活动 i 占据时间区间 <span class="arithmatex">\([s_i,f_i)\)</span>。同一时刻只能做一个活动，问最多能做几个。</p>
 </blockquote>
 <p>先拿一组数据试试：<code>(1,5), (3,7), (6,9), (2,4)</code>，答案是 <strong>2</strong>（可以选 <code>(1,5)</code> 与 <code>(6,9)</code>，也可以选 <code>(2,4)</code> 与 <code>(6,9)</code>）。</p>
 <p>接下来的问题是：<strong>应该按什么顺序贪心地往里加活动？</strong> 先比较几个常见候选策略：</p>
@@ -10233,32 +10233,31 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">last_end</span> <span class="o">=</span> <span class="n">end</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
-<p>扫描代码短，但关键是排序条件与下面的证明。<strong>已经按结束时间排好序时是 <code>O(n)</code>，否则是 <code>O(n log n)</code>。</strong></p>
+<p>扫描代码短，但关键是排序条件与下面的证明。<strong>已经按结束时间排好序时是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，否则是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</strong></p>
 <h2 id="_3">"我们从不排除最优解"<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>活动选择为什么对？比"举几个例子都对"更可靠的做法，是先立一条<strong>不变式</strong>：</p>
 <blockquote>
 <p><strong>只要贪心的每一步都不"排除"掉最优解，走到最后拿到的就一定是某个最优解。</strong></p>
 </blockquote>
 <p>下面把“仍然保留某个最优解”说具体：</p>
-<p>先只看第一次选择：令g为结束最早的活动，某个最优安排按时间写成 <code>o₁,o₂,…,oₘ</code>。若g不是o₁，把o₁换成g。因为 <code>end(g)≤end(o₁)≤start(o₂)</code>，g仍不与后面的活动冲突，活动数仍为m，所以至少存在一个<strong>以g开始</strong>的最优安排。</p>
-<p>现在选了一个前缀，最后结束于E，只讨论start≥E的剩余活动。当前g必须从这些活动中挑结束最早的；最优安排中的对应后缀也满足start≥E。用同样的方法替换它的<strong>第一项</strong>，既不碰前缀，也不挡住更后面的项。这样每一步都保留某个包含全部已选前缀的最优安排。</p>
+<p>先只看第一次选择：令g为结束最早的活动，某个最优安排按时间写成 <span class="arithmatex">\(o_{1},o_{2},\cdots ,oₘ\)</span>。若g不是<span class="arithmatex">\(o_{1}\)</span>，把<span class="arithmatex">\(o_{1}\)</span>换成g。因为 <span class="arithmatex">\(\mathrm{end}(g)\le \mathrm{end}(o_{1})\le \mathrm{start}(o_{2})\)</span>，g仍不与后面的活动冲突，活动数仍为m，所以至少存在一个<strong>以g开始</strong>的最优安排。</p>
+<p>现在选了一个前缀，最后结束于E，只讨论start不小于E的剩余活动。当前g必须从这些活动中挑结束最早的；最优安排中的对应后缀也满足start不小于E。用同样的方法替换它的<strong>第一项</strong>，既不碰前缀，也不挡住更后面的项。这样每一步都保留某个包含全部已选前缀的最优安排。</p>
 <p>例如最优安排先选(1,5)，贪心先选(2,4)，用后者替换前者，后续(6,9)仍能接；没有额外创造活动，也没有删掉后面的合法项。相反，若换成结束更晚的(1,10)，就可能撞上(6,9)，交换证明在这里失败。</p>
 <p>最后没有可接的活动时，仍包含贪心前缀的最优安排也不可能再多一项，否则那一项就是可接候选。这才从“每一步有最优解与之兼容”推出“最终整个安排最优”。</p>
 <p>交换论证要说明三个事实：替换哪一项、为何替换后仍合法、目标值为何不变差；只说“结束早留空间”还没完成证明。</p>
 <p><img alt="交换论证" src="../figures/24-greedy-swap.png" /></p>
-<p>虚线左侧的已选前缀保持不变；右侧是剩余问题。用当前结束最早的绿色活动 a_k 替换最优剩余安排的第一项 a_j，后面的活动仍能接上，活动总数也没减少。</p>
+<p>虚线左侧的已选前缀保持不变；右侧是剩余问题。用当前结束最早的活动 <span class="arithmatex">\(a_k\)</span> 替换最优剩余安排的第一项 <span class="arithmatex">\(a_j\)</span>，后面的活动仍能接上，活动总数也没减少。</p>
 <h2 id="_4">第二个成立的例子：任务调度<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>再看一个更贴近生活的场景：</p>
 <blockquote>
-<p>有 n 个任务，任务 i 需要 <code>tᵢ</code> 小时；只要它还没做完，每小时都要付 <code>cᵢ</code> 的罚金。请安排一个顺序，使总罚金最小。</p>
+<p>有 n 个任务，任务 i 需要 <span class="arithmatex">\(t_{i}\)</span> 小时；只要它还没做完，每小时都要付 <span class="arithmatex">\(c_{i}\)</span> 的罚金。请安排一个顺序，使总罚金最小。</p>
 </blockquote>
-<p>例如睡觉需 10 小时、每小时罚 2，作业需 8 小时、每小时罚 3。先作业再睡觉：作业在第 8 小时完成、睡觉在第 18 小时完成，总代价 <code>8×3+18×2=60</code>；反过来为 <code>10×2+18×3=74</code>。默认所有任务现在都可开始、不能中断、一次只做一项，且每项所需时间为正、每小时罚金非负。</p>
+<p>例如睡觉需 10 小时、每小时罚 2，作业需 8 小时、每小时罚 3。先作业再睡觉：作业在第 8 小时完成、睡觉在第 18 小时完成，总代价 <span class="arithmatex">\(8\times 3+18\times 2=60\)</span>；反过来为 <span class="arithmatex">\(10\times 2+18\times 3=74\)</span>。默认所有任务现在都可开始、不能中断、一次只做一项，且每项所需时间为正、每小时罚金非负。</p>
 <p>先看"任意两项谁先做"。设 A 需要 x 小时、每小时罚 z，B 需要 y 小时、每小时罚 w：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cost(A 先) = x·z + (x + y)·w
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Cost(B 先) = y·w + (x + y)·z
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>A 先更好  ⟺  x·z + x·w + y·w ≤ y·w + x·z + y·z  ⟺  w·x ≤ y·z  ⟺  w/y ≤ z/x
-</span></code></pre></div>
-<p><strong>最后一行说明：真正重要的不是总时间，也不是单位时间的罚金，而是两者的比 <code>c/t</code>。</strong> 所以贪心策略是"每次挑剩余任务里 <code>c/t</code> 最大的那个"，证明手法与活动选择完全相同——用的是同一套归纳：假设贪心选了 B 而它不在最优解的第一位，那么把 B 与它前面那个任务交换，"其他什么都不变，而我们已经证明代价不会变大"，反复交换直到 B 排在第一位。<strong>同一个论证换一道题，这就是这套框架的价值。</strong></p>
+<div class="arithmatex">\[
+\begin{aligned}C_{AB}&amp;=xz+(x+y)w,\\C_{BA}&amp;=yw+(x+y)z,\\C_{AB}\le C_{BA}&amp;\iff wx\le yz\iff \frac{w}{y}\le\frac{z}{x}.\end{aligned}
+\]</div>
+<p><strong>最后一行说明：真正重要的不是总时间，也不是单位时间的罚金，而是两者的比 <span class="arithmatex">\(c/t\)</span>。</strong> 所以贪心策略是"每次挑剩余任务里 <span class="arithmatex">\(c/t\)</span> 最大的那个"，证明手法与活动选择完全相同——用的是同一套归纳：假设贪心选了 B 而它不在最优解的第一位，那么把 B 与它前面那个任务交换，"其他什么都不变，而我们已经证明代价不会变大"，反复交换直到 B 排在第一位。<strong>同一个论证换一道题，这就是这套框架的价值。</strong></p>
 <h2 id="_5">那什么时候可以贪心<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>那么，<strong>一般来说什么时候适合贪心？</strong> 答案是：还需要证明当前局部选择能与某个全局最优解兼容；仅有最优子结构不足以保证贪心，背包就有最优子结构。</p>
 <p>一个更实用的判据是这句问话：</p>
@@ -10271,89 +10270,89 @@
 <h3 id="_7">一、最大子数组和：决定延续还是重新开始<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>给定非空整数数组 nums，选一段非空连续子数组，返回最大元素和。例如 <code>[-2,1,-3,4,-1,2,1,-5,4]</code> 的最佳连续段是 <code>[4,-1,2,1]</code>，返回 6。允许负数，但不能选空段。</p>
 <p>令 cur 为“必须以当前元素结尾的最大子数组和”，best 为“所有已考虑结尾中的最大值”。新元素 x 到来时，要么单独开一段 x，要么接在上一步的最佳结尾后面；比较 x 与 cur+x 即可。这也是一种只需保存一个结尾状态的动态规划：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_subarray</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>          <span class="c1"># 要么接上前面，要么从自己重新开始</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="n">best</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_subarray</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>          <span class="c1"># 要么接上前面，要么从自己重新开始</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>"重新开始"的依据</strong>：一旦 <code>cur &lt; 0</code>，它对未来只有拖累。注意 <code>best</code> 和 <code>cur</code> 都要初始化成 <code>nums[0]</code>——数组可能全是负数。</p>
 <h3 id="_8">二、跳跃游戏：维护最远可达下标<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>输入非空非负整数数组 nums，起点在下标 0；从位置 i 可向右跳 1 到 nums[i] 步，也可以在到达终点后停止。Jump Game 问能否到达最后一个下标，返回布尔值。例如 <code>[2,0,0]</code> 可从 0 直接跳到 2，返回 True；<code>[1,0,1]</code> 到下标 1 后无路可走，返回 False。</p>
 <p>只从已可达的位置向外扩展，farthest 记录目前能到达的最右位置。因为可跳长度包含较短步长，0..farthest 内的位置都可达；遇到 i&gt;farthest 才说明出现无法跨越的断点。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_jump</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">farthest</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">farthest</span><span class="p">:</span>               <span class="c1"># 到不了这里</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">farthest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">farthest</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">return</span> <span class="kc">True</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_jump</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">farthest</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">farthest</span><span class="p">:</span>               <span class="c1"># 到不了这里</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">farthest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">farthest</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
 <p>Jump Game II 保留相同跳跃规则，另保证终点可达，改问<strong>最少需要几跳</strong>，返回次数；单元素数组已经在终点，答案为 0。此时只知道最远位置还不够，还要区分它是多少跳以内到达的。end 标记当前跳数覆盖到的边界，扫描完这一层才增加一次跳数：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">jump</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">"""题目保证终点可达；最少跳跃次数：把"最远可达"理解成一层一层向外扩展（BFS 的视角）"""</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">jumps</span> <span class="o">=</span> <span class="n">end</span> <span class="o">=</span> <span class="n">farthest</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">farthest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">farthest</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>                   <span class="c1"># 走到当前这一层的边界，就必须再跳一次</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="n">jumps</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">end</span> <span class="o">=</span> <span class="n">farthest</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">return</span> <span class="n">jumps</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">jump</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""题目保证终点可达；最少跳跃次数：把"最远可达"理解成一层一层向外扩展（BFS 的视角）"""</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">jumps</span> <span class="o">=</span> <span class="n">end</span> <span class="o">=</span> <span class="n">farthest</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">farthest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">farthest</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>                   <span class="c1"># 走到当前这一层的边界，就必须再跳一次</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="n">jumps</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">end</span> <span class="o">=</span> <span class="n">farthest</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">return</span> <span class="n">jumps</span>
 </span></code></pre></div>
-<p>循环只到倒数第二个位置：走到最后一格已经抵达终点，不需要再起跳。如果把最后一格也纳入 <code>i==end</code> 的判断，会凭空多计一次。例如 nums=[0] 时循环执行零次，正确返回 0；不能在终点再计一跳。</p>
+<p>循环只到倒数第二个位置：走到最后一格已经抵达终点，不需要再起跳。如果把最后一格也纳入 <span class="arithmatex">\(i=\mathrm{end}\)</span> 的判断，会凭空多计一次。例如 nums=[0] 时循环执行零次，正确返回 0；不能在终点再计一跳。</p>
 <p>以 [2,3,1,1,4] 为例：第一次跳后最远能到下标 2；扫描第一层的下标 1、2，它们下一跳最远能到 4。因此到达 4 至少要两跳，也确实能以 0→1→4 两跳到达。end 是当前跳数能覆盖的右边界，farthest 汇总“再跳一次”的最远位置；扫描到 end 才增加跳数。</p>
 <p><strong>为什么这不需要真的写一个 BFS？</strong> 因为可达位置始终是一段连续区间，所以"一整层"可以用一个右边界表示。</p>
 <h3 id="_9">三、加油站：先排除不能出发的一段<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>n 个加油站沿环路排列。到达站 i 可以得到 gas[i] 升油，从 i 开到下一个站需要 cost[i] 升，最后一站再回到 0。油箱容量无限，但出发时为空。要求找一个能沿固定方向绕完整圈的起点，返回下标；不存在则返回 −1。两个数组等长且非空，元素非负。</p>
-<p>例如 gas=[2,0,2]、cost=[1,2,1]：从 0 出发会在离开 1 前断油；从 2 出发，经过 2、0、1 后能回到 2，返回 2。每站净增加量 diff=gas[i]−cost[i]，total 累计整圈净油量，cur 累计从当前候选起点以来的余额。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_complete_circuit</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gas</span><span class="p">)):</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">diff</span> <span class="o">=</span> <span class="n">gas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">diff</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">cur</span> <span class="o">+=</span> <span class="n">diff</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">if</span> <span class="n">cur</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>                    <span class="c1"># 从 start 出发到这里断油了</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>              <span class="c1"># 起点必须更靠后</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">return</span> <span class="n">start</span> <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<p>n 个加油站沿环路排列。到达站 i 可以得到 gas[i] 升油，从 i 开到下一个站需要 cost[i] 升，最后一站再回到 0。油箱容量无限，但出发时为空。要求找一个能沿固定方向绕完整圈的起点，返回下标；不存在则返回 -1。两个数组等长且非空，元素非负。</p>
+<p>例如 gas=[2,0,2]、cost=[1,2,1]：从 0 出发会在离开 1 前断油；从 2 出发，经过 2、0、1 后能回到 2，返回 2。每站净增加量 diff=gas[i]-cost[i]，total 累计整圈净油量，cur 累计从当前候选起点以来的余额。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_complete_circuit</span><span class="p">(</span><span class="n">gas</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gas</span><span class="p">)):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">diff</span> <span class="o">=</span> <span class="n">gas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">diff</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">cur</span> <span class="o">+=</span> <span class="n">diff</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">if</span> <span class="n">cur</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>                    <span class="c1"># 从 start 出发到这里断油了</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>              <span class="c1"># 起点必须更靠后</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">start</span> <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
-<p><code>total</code> 回答"整体有没有解"，<code>cur</code> 用来定位起点。令从当前候选起点 i 到位置 k−1 的净油量为 P。因为这是第一次断油，所有 k≤j 都有 P≥0；而从 i 到 j 的总净量为负，所以从 k 到 j 的净量等于“负数−P”，仍为负。因此 i..j 都可排除。该证明依赖“首次失败”，不能对任意 i、j 直接套用。</p>
-<p>total≥0 为什么足够？每次失败后重启，相当于选在累计净油量的新最低点之后。设最终起点为 start，从它到末尾的每段前缀和都非负；绕回开头走到任意 j&lt;start 时，油量等于 total 加上“全局前缀和到 j”减去“全局前缀和到 start−1”，后两者之差也非负。所以整圈都能走通。这里假定 gas、cost 等长且非空。</p>
+<p><code>total</code> 回答"整体有没有解"，<code>cur</code> 用来定位起点。令从当前候选起点 i 到位置 k-1 的净油量为 P。因为这是第一次断油，所有 k不大于j 都有 P不小于0；而从 i 到 j 的总净量为负，所以从 k 到 j 的净量等于“负数-P”，仍为负。因此 i..j 都可排除。该证明依赖“首次失败”，不能对任意 i、j 直接套用。</p>
+<p>total不小于0 为什么足够？每次失败后重启，相当于选在累计净油量的新最低点之后。设最终起点为 start，从它到末尾的每段前缀和都非负；绕回开头走到任意 j&lt;start 时，油量等于 total 加上“全局前缀和到 j”减去“全局前缀和到 start-1”，后两者之差也非负。所以整圈都能走通。这里假定 gas、cost 等长且非空。</p>
 <h3 id="_10">四、划分字母区间：确定一段最早在哪里结束<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>输入字符串 s，要求把整串切成尽量多的连续片段，使每种字符只出现在其中一个片段里，返回各片段长度。例如 <code>"abac"</code> 只能把两个 a 放在同段，最细可切成 <code>"aba"|"c"</code>，返回 <code>[3,1]</code>。</p>
 <p>先记录每个字符最后出现的下标 last。当前片段每遇到字符 c，右端点至少要扩展到 last[c]，否则这个字符会落在两个片段里。扫描到这个最远要求的位置时，才可以结束当前段：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">partition_labels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">last</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)}</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">last</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>        <span class="c1"># 右边界只会变大</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>                   <span class="c1"># 走到边界，可以切一刀</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="k">return</span> <span class="n">res</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">partition_labels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">last</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)}</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">last</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>        <span class="c1"># 右边界只会变大</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>                   <span class="c1"># 走到边界，可以切一刀</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>为什么"走到 end 就能切"？</strong> 不能更早——<code>end</code> 之前还有字符会在后面出现；也不必更晚——已经出现过的字符在 <code>end</code> 之后都不再出现。<strong>"最早不能早、最晚也不必晚"，就是贪心成立的标志。</strong></p>
 <h3 id="_11">五、带星号的括号：同时保留一段可能状态<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>输入只含 <code>(</code>、<code>)</code>、<code>*</code> 的字符串，每个 * 可以独立解释为左括号、右括号或空串。问是否存在一种解释，使整个字符串括号匹配，返回 True/False。例如 <code>"(*)"</code> 可把 * 当空串，<code>"(*))"</code> 可把 * 当左括号；<code>"*("</code> 无论怎样解释都不合法。</p>
+<p>输入只含 <code>(</code>、<code>)</code>、<span class="arithmatex">\(*\)</span> 的字符串，每个 * 可以独立解释为左括号、右括号或空串。问是否存在一种解释，使整个字符串括号匹配，返回 True/False。例如 <code>"(*)"</code> 可把 * 当空串，<code>"(*))"</code> 可把 * 当左括号；<code>"*("</code> 无论怎样解释都不合法。</p>
 <p>若逐个尝试每个星号的三种解释，会产生大量分支。先看没有星号时：扫描前缀，只需数“尚未匹配的左括号”，该数不能为负，结束时必须为 0。有星号后可能同时有多个计数，我们用 lo、hi 记录其中最小和最大值，下面会解释为何中间整数也都可达。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">check_valid_string</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span>                        <span class="c1"># 未匹配左括号数的可能范围 [lo, hi]</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">'('</span><span class="p">:</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">')'</span><span class="p">:</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="k">else</span><span class="p">:</span>                          <span class="c1"># '*'</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c1"># 当成 ')' 则 lo−1，当成 '(' 则 hi+1</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">return</span> <span class="n">lo</span> <span class="o">==</span> <span class="mi">0</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">check_valid_string</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span>                        <span class="c1"># 未匹配左括号数的可能范围 [lo, hi]</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">'('</span><span class="p">:</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">')'</span><span class="p">:</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="k">else</span><span class="p">:</span>                          <span class="c1"># '*'</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c1"># 当成 ')' 则 lo−1，当成 '(' 则 hi+1</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="k">return</span> <span class="n">lo</span> <span class="o">==</span> <span class="mi">0</span>
 </span></code></pre></div>
 <p>先用集合想：每个前缀之后，未匹配左括号数可能不止一个。若原来可能值恰为整数区间 [lo,hi]，遇 ( 就整体加 1；遇 ) 就整体减 1，再丢弃负值；遇 * 则把每个可能值分别减 1、保持、加 1，三个相邻区间的并仍连续。若 hi&lt;0，一个合法状态都不剩；否则把 lo 截到 0。空前缀从 [0,0] 开始，归纳可知这两个端点完整保存了所有可能。最后 lo=0 才表示存在全匹配的方案。</p>
-<p>这一题不太一样：它维护的不是"一个状态"，而是"<strong>一堆可能状态的区间</strong>"。因为"未匹配的左括号数"的取值是连续的一段，两个端点就能完整描述这个集合，于是 <code>3ⁿ</code> 的枚举被压成了 <code>O(n)</code>。</p>
+<p>这一题不太一样：它维护的不是"一个状态"，而是"<strong>一堆可能状态的区间</strong>"。因为"未匹配的左括号数"的取值是连续的一段，两个端点就能完整描述这个集合，于是 <span class="arithmatex">\(3^{n}\)</span> 的枚举被压成了 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h2 id="_12">手工推两个例子<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p><strong>活动选择</strong>：<code>(1,5), (2,4), (3,7), (6,9)</code>，按结束时间排成 <code>(2,4), (1,5), (3,7), (6,9)</code>。</p>
 <table>
@@ -10387,19 +10386,19 @@
 <tr>
 <td>(6,9)</td>
 <td>✅</td>
-<td>6 ≥ 4</td>
+<td>6 不小于 4</td>
 <td>9</td>
 </tr>
 </tbody>
 </table>
 <p>答案 2。<strong>注意最优解并不唯一</strong>：这里选出的是 <code>(2,4)</code> 与 <code>(6,9)</code>，而另一组同样最优的解是 <code>(1,5)</code> 与 <code>(6,9)</code>——<strong>解不唯一，但数量唯一。</strong></p>
 <p><strong>Partition Labels</strong>：<code>s = "ababcbacadefegdehijhklij"</code>。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>start=0 开始扫：'a' → end = max(0, last['a']=8) = 8
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>               'b' → end = max(8, last['b']=5) = 8
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>               …… 扫到 i=8 时 i == end → 切出长度 9
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>下一段从 9 开始：'d' → end = 14；'e' → max(14, 15) = 15；i=15 时切出长度 7
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>最后一段：'h' → 19；'i' → 22；'j' → 23；i=23 时切出长度 8
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>答案 [9, 7, 8]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>start=0 开始扫：'a' → end = max(0, last['a']=8) = 8
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>               'b' → end = max(8, last['b']=5) = 8
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>               …… 扫到 i=8 时 i == end → 切出长度 9
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>下一段从 9 开始：'d' → end = 14；'e' → max(14, 15) = 15；i=15 时切出长度 7
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>最后一段：'h' → 19；'i' → 22；'j' → 23；i=23 时切出长度 8
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>答案 [9, 7, 8]
 </span></code></pre></div>
 <h2 id="_13">它在题库里长什么样<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <table>
@@ -10468,10 +10467,10 @@
 <p>活动选择满足"<strong>贪心选择不会排除最优解</strong>"：结束最早的活动给后面留的空间最大，替换总是安全的。背包不具备这个性质——选一个高价值的物品可能让剩余容量碎掉，反而丧失更好的组合。<strong>判据就是那句问话："贪心之后，剩下的解空间里还有最优解吗？"</strong></p>
 <p><strong>5.</strong> 把活动选择的交换论证写完整。</p>
 <p>取一个与已选前缀兼容的最优安排；找它剩余部分的第一项；用当前结束最早的可选活动替换；说明前缀与后缀仍合法、活动数不减，再对剩余部分重复。</p>
-<p><strong>6.</strong> 任务调度里，为什么真正决定顺序的是 <code>c/t</code> 而不是 <code>t</code> 或者 <code>c</code>？</p>
-<p>因为"两个任务交换顺序"的代价差恰好是 <code>w·x − y·z</code>，"A 先做更好"等价于 <code>w/y ≤ z/x</code>。<strong>只有比值进入判断式，所以按 <code>c/t</code> 从大到小排。</strong> 推导见上文（<code>Cost(A 先)</code> 与 <code>Cost(B 先)</code> 的对比）。</p>
+<p><strong>6.</strong> 任务调度里，为什么真正决定顺序的是 <span class="arithmatex">\(c/t\)</span> 而不是 <code>t</code> 或者 <code>c</code>？</p>
+<p>因为"两个任务交换顺序"的代价差恰好是 <span class="arithmatex">\(wx-yz\)</span>，"A 先做更好"等价于 <span class="arithmatex">\(w/y \le z/x\)</span>。<strong>只有比值进入判断式，所以按 <span class="arithmatex">\(c/t\)</span> 从大到小排。</strong> 推导见上文（<code>Cost(A 先)</code> 与 <code>Cost(B 先)</code> 的对比）。</p>
 <p><strong>7.</strong> <code>Gas Station</code> 里，为什么从某点出发失败后可以直接从下一个位置重试？</p>
-<p>从当前候选 i 出发，在 j <strong>第一次</strong>断油。对任意 i&lt;k≤j，从 i 到 k−1 的净油量 P≥0，而从 i 到 j 的总净油量为负。从 k 到 j 的净油量是“这个负数−P”，仍然为负，所以 k 也失败。这是跳过整段候选的理由。</p>
+<p>从当前候选 i 出发，在 j <strong>第一次</strong>断油。对任意 i&lt;k不大于j，从 i 到 k-1 的净油量 P不小于0，而从 i 到 j 的总净油量为负。从 k 到 j 的净油量是“这个负数-P”，仍然为负，所以 k 也失败。这是跳过整段候选的理由。</p>
 <p><strong>8.</strong> <code>Partition Labels</code> 里为什么"走到当前右边界就能切"？</p>
 <p>不能更早：<code>end</code> 之前还有字符会在后面出现，提前切会割裂同一个字母；也不必更晚：已出现过的字符在 <code>end</code> 之后都不再出现。<strong>"最早不能早、最晚也不必晚"就是判据。</strong></p>
 <p><strong>9.</strong> 实现 <code>max_subarray(nums)</code>，并说明为什么 <code>best</code> 与 <code>cur</code> 都要初始化成 <code>nums[0]</code>。</p>
@@ -10479,9 +10478,9 @@
 <p><strong>10.</strong> 实现 <code>jump(nums)</code>，并说明为什么不需要真的做 BFS。</p>
 <p>因为"可达位置"始终是一段连续区间，所以"一层"可以用一个右边界表示，不需要队列。见上文代码。</p>
 <p><strong>11.</strong> 实现 <code>partition_labels(s)</code> 与 <code>check_valid_string(s)</code>。</p>
-<p>见上文"维护状态区间"那一段的代码。<strong>注意 <code>partition_labels</code> 里的顺序：先更新 <code>end</code>、再判断 <code>i == end</code></strong>，反过来会切错。</p>
+<p>见上文"维护状态区间"那一段的代码。<strong>注意 <code>partition_labels</code> 里的顺序：先更新 <code>end</code>、再判断 <span class="arithmatex">\(i = \mathrm{end}\)</span></strong>，反过来会切错。</p>
 <p><strong>12.（接第 25 讲）</strong> 气球的水平范围由闭区间表示，一支箭选定横坐标 x，可射中所有包含 x 的区间。求射中全部气球所需的最少箭数，并说明它和活动选择的关系。</p>
-<p>按右端点排序后贪心，都先按右端点排序，但射箭需要自己的交换证明：最早结束区间必被某支箭射中，把这支箭移到它的右端点，不会丢掉原先被它射中的剩余区间。具体证明见第 25 讲。<strong>"不重叠"的判据是 <code>左端点 &gt; 上一支箭的位置</code>（端点相切时一箭可以穿透两个）。</strong></p>
+<p>按右端点排序后贪心，都先按右端点排序，但射箭需要自己的交换证明：最早结束区间必被某支箭射中，把这支箭移到它的右端点，不会丢掉原先被它射中的剩余区间。具体证明见第 25 讲。<strong>"不重叠"的判据是 <span class="arithmatex">\(左端点 &gt; 上一支箭的位置\)</span>（端点相切时一箭可以穿透两个）。</strong></p>
 
 
 

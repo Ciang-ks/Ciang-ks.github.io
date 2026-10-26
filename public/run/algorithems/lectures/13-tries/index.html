@@ -10060,7 +10060,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>   <span class="k">return</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">startsWith</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefixes</span>
 </span></code></pre></div>
-<p>在这份 Python 实现中，<code>insert</code> 生成 <code>w[:i]</code> 并首次哈希，要处理 <code>1+2+…+L=Θ(L²)</code> 个字符。完整词查询与前缀查询期望 O(L)，因为要计算查询字符串的哈希。集合会去重相同前缀，<code>"apple"</code> 与 <code>"apply"</code> 的 <code>"app"</code> 只存一次；浪费来自 <code>"a"</code>、<code>"ap"</code>、<code>"app"</code> 等不同字符串各自复制了开头字符。</p>
+<p>在这份 Python 实现中，<code>insert</code> 生成 <code>w[:i]</code> 并首次哈希，要处理 <span class="arithmatex">\(1+2+\cdots +L=\Theta (L^{2})\)</span> 个字符。完整词查询与前缀查询期望 <span class="arithmatex">\(\mathcal{O}(L)\)</span>，因为要计算查询字符串的哈希。集合会去重相同前缀，<code>"apple"</code> 与 <code>"apply"</code> 的 <code>"app"</code> 只存一次；浪费来自 <code>"a"</code>、<code>"ap"</code>、<code>"app"</code> 等不同字符串各自复制了开头字符。</p>
 <h2 id="_2">让共享前缀在物理上共享<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="Trie 里共享前缀只存一份" src="../images/13-trie.svg" /></p>
 <p>把 <code>"app"</code> 的三个字符放在三个节点上，让 <code>"apple"</code> 和 <code>"apply"</code> 的路径在 <code>"app"</code> 之后才分叉：</p>
@@ -10075,7 +10075,7 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>   └─ a
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>      └─ t*       bat
 </span></code></pre></div>
-<p>每个不同的非空前缀对应一个节点，根对应空前缀，因此节点数至多总字符数S加1，未必恰与S同阶（重复插入同一词不会新增节点）。一次查长L的串<strong>最多</strong>走L条边，缺少某字符时可提前失败；字典孩子查找按期望O(1)计，总查询期望O(L)。图和文本均用 app、apple、apply、bat。</p>
+<p>每个不同的非空前缀对应一个节点，根对应空前缀，因此节点数至多总字符数S加1，未必恰与S同阶（重复插入同一词不会新增节点）。一次查长L的串<strong>最多</strong>走L条边，缺少某字符时可提前失败；字典孩子查找按期望<span class="arithmatex">\(\mathcal{O}(1)\)</span>计，总查询期望<span class="arithmatex">\(\mathcal{O}(L)\)</span>。图和文本均用 app、apple、apply、bat。</p>
 <h3 id="_3">路径存在，为什么还要标记词尾<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>插入 <code>"app"</code> 之后，<code>"ap"</code> 也是一条存在的路径，但它不是一个词。所以每个节点要额外记一个标记，说明"从根到这里正好构成一个完整的词"。</p>
 <p><strong>这个布尔标记就是 <code>search</code> 与 <code>startsWith</code> 的全部区别：</strong></p>
@@ -10151,10 +10151,10 @@
 </span></code></pre></div>
 <p>先建词典 <code>trie=Trie()</code>，再执行 <code>trie.insert("app")</code>、<code>trie.insert("bat")</code>。此时 <code>search_with_dot(trie.root,"a..",0)</code> 返回 True，<code>search_with_dot(trie.root,"a.",0)</code> 返回 False，因为 ap 不是完整词。最后一个参数 0 表示从查询第 0 个字符开始。普通字符只走对应孩子；点号试所有孩子，其中任一个能完成剩余部分就成功；用完查询后仍要检查词尾。递归每次 i 加 1，因此会停。</p>
 <p><code>node.children.values()</code> 依次取出字典里的所有孩子节点，不取字符键。这里找到一个成功分支就返回，不继续尝试；如果改用第 3 讲介绍的 any 简写，也应让分支按需计算，避免先把全部递归结果收进列表。</p>
-<p>复杂度要说实话：若查询全为点且没有匹配词，最坏会尝试长度L内的全部可达分支；成功时可以提前返回。代价取决于访问的节点数，而不是简单的 <code>O(L)</code>。</p>
+<p>复杂度要说实话：若查询全为点且没有匹配词，最坏会尝试长度L内的全部可达分支；成功时可以提前返回。代价取决于访问的节点数，而不是简单的 <span class="arithmatex">\(\mathcal{O}(L)\)</span>。</p>
 <h2 id="trie">网格搜索里的 Trie<a class="headerlink" href="#trie" title="Permanent link">&para;</a></h2>
-<p>输入是 m×n 的字符网格 board 和一个非空单词列表 words。一个词可以从任意格开始，沿上、下、左、右相邻格逐字拼出，同一次拼词不能重复使用同一格；输出所有能找到的词，每个词只输出一次。例如 <code>[["a","b"],["c","d"]]</code> 能拼 ab、abd，但不能斜走拼 ad，也不能绕回起点拼 aba。不同词可以使用同一个格子。</p>
-<p>设词数 W、最长词长度 L。如果对每个词单独搜一遍网格，可用 <code>O(W·m·n·4^L)</code> 作为粗略上界：每个词尝试 mn 个起点，每一步最多向四个方向试探。把所有词建成一棵 Trie 之后，从每个格子出发共享前缀搜索，剪掉词典里没有的分支；最坏仍可能枚举许多路径：</p>
+<p>输入是 <span class="arithmatex">\(m\timesn\)</span> 的字符网格 board 和一个非空单词列表 words。一个词可以从任意格开始，沿上、下、左、右相邻格逐字拼出，同一次拼词不能重复使用同一格；输出所有能找到的词，每个词只输出一次。例如 <code>[["a","b"],["c","d"]]</code> 能拼 ab、abd，但不能斜走拼 ad，也不能绕回起点拼 aba。不同词可以使用同一个格子。</p>
+<p>设词数 W、最长词长度 L。如果对每个词单独搜一遍网格，可用 <span class="arithmatex">\(\mathcal{O}(W\cdot m\cdot n\cdot 4^L)\)</span> 作为粗略上界：每个词尝试 mn 个起点，每一步最多向四个方向试探。把所有词建成一棵 Trie 之后，从每个格子出发共享前缀搜索，剪掉词典里没有的分支；最坏仍可能枚举许多路径：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_words</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">board</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="p">[]</span>
@@ -10191,7 +10191,7 @@
 </span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p>回溯中的标记只对<strong>当前路径</strong>有效：进入格子时暂改为 #，返回前恢复原字符，这样另一个起点仍能使用它。它和第 15 讲岛屿搜索中“永久标记整个连通块”不同。这里约定词非空、网格不含 #。</p>
-<p><strong>Trie 在这里的作用是剪枝</strong>：网格上最长为 L 的路径候选数量可按 O(mn·4^L) 上界估计，但绝大多数前缀根本不在词典里。有了 Trie，走第一个字符时就知道这条路有没有前途。</p>
+<p><strong>Trie 在这里的作用是剪枝</strong>：网格上最长为 L 的路径候选数量可按 <span class="arithmatex">\(\mathcal{O}(mn\cdot 4^L)\)</span> 上界估计，但绝大多数前缀根本不在词典里。有了 Trie，走第一个字符时就知道这条路有没有前途。</p>
 <h2 id="trie_1">什么时候值得用 Trie<a class="headerlink" href="#trie_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10204,13 +10204,13 @@
 <tbody>
 <tr>
 <td>查完整单词</td>
-<td>期望 O(L)</td>
-<td>期望 O(L)（字典孩子）</td>
+<td>期望 <span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td>期望 <span class="arithmatex">\(\mathcal{O}(L)\)</span>（字典孩子）</td>
 </tr>
 <tr>
 <td>查前缀</td>
 <td>可扫描原键，或另建索引</td>
-<td>期望 O(L)（字典孩子）</td>
+<td>期望 <span class="arithmatex">\(\mathcal{O}(L)\)</span>（字典孩子）</td>
 </tr>
 <tr>
 <td>按字典序遍历</td>
@@ -10218,14 +10218,14 @@
 <td>可以（按字符顺序 DFS）</td>
 </tr>
 <tr>
-<td>空间（总字符数 S、节点数 P、字符集大小 σ）</td>
-<td>O(S) 存原词及集合结构</td>
-<td>字典版 O(P)，数组版 O(Pσ)，P≤S+1</td>
+<td>空间（总字符数 S、节点数 P、字符集大小 <span class="arithmatex">\(\sigma\)</span>）</td>
+<td><span class="arithmatex">\(\mathcal{O}(S)\)</span> 存原词及集合结构</td>
+<td>字典版 <span class="arithmatex">\(\mathcal{O}(P)\)</span>，数组版 <span class="arithmatex">\(\mathcal{O}(P\sigma )\)</span>，P不大于S+1</td>
 </tr>
 </tbody>
 </table>
 <p>需要前缀判断、共享搜索分支时优先考虑Trie。只查完整词通常先用哈希集合；内存与速度还取决于前缀共享程度、字符集和对象开销。若要数前缀匹配词的数量，还需遍历子树或维护计数；基本 startsWith 只返回真假。</p>
-<p>选读（学完第 27 讲）：Trie 也可以处理整数的二进制位。约定输入为 0≤x&lt;2³¹，把每个数表示成固定 31 位，每层对应一位，孩子只有 0 与 1。先插入所有数，查询某个数的最大异或搭档时，从高位到低位优先走相反位的分支；若不存在才走相同位。高位得到一个 1，比所有低位可能增加的值之和更大，所以这一选择安全。建树与查询每个数最多各走 31 条边，共 O(n×31)。</p>
+<p>选读（学完第 27 讲）：Trie 也可以处理整数的二进制位。约定输入为 <span class="arithmatex">\(0\le x&lt;2^{31}\)</span>，把每个数表示成固定 31 位，每层对应一位，孩子只有 0 与 1。先插入所有数，查询某个数的最大异或搭档时，从高位到低位优先走相反位的分支；若不存在才走相同位。高位得到一个 1，比所有低位可能增加的值之和更大，所以这一选择安全。建树与查询每个数最多各走 31 条边，共 <span class="arithmatex">\(\mathcal{O}(n\times 31)\)</span>。</p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>自动补全先沿前缀定位到节点，再遍历子树列出候选词；输出候选本身也需要时间。</p>
 <p>做 <a href="../../problems/08-tries/01-implement-trie-prefix-tree/">Implement Trie</a>，先写 insert，再把“走完一条字符路径”提成 _walk，最后写 search 与 startsWith。只插 apple：search(app)=False、startsWith(app)=True；再插 app，search(app) 才为 True。</p>
@@ -10233,14 +10233,14 @@
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 插入 <code>"app"</code> 之后，<code>startsWith("ap")</code> 和 <code>search("ap")</code> 分别返回什么？为什么？</p>
 <p>前者 True、后者 False。路径存在只说明"有某个词以它开头"，只有末节点 <code>is_end</code> 为真才说明它本身是词。<strong>这就是 <code>is_end</code> 存在的全部理由。</strong></p>
-<p><strong>2.</strong> 一个有 n 个节点、字符集大小为 σ 的 Trie，空间是多少？数组版为什么更费？</p>
-<p>字典版 <code>O(n)</code>（每个节点只存实际存在的孩子），数组版 <code>O(n·σ)</code>。<strong>数组版用定长数组换常数时间定位，代价是每个节点预留全部字符的位置。</strong></p>
+<p><strong>2.</strong> 一个有 n 个节点、字符集大小为 <span class="arithmatex">\(\sigma\)</span> 的 Trie，空间是多少？数组版为什么更费？</p>
+<p>字典版 <span class="arithmatex">\(\mathcal{O}(n)\)</span>（每个节点只存实际存在的孩子），数组版 <span class="arithmatex">\(\mathcal{O}(n\cdot \sigma )\)</span>。<strong>数组版用定长数组换常数时间定位，代价是每个节点预留全部字符的位置。</strong></p>
 <p><strong>3.</strong> 为什么"把所有前缀存进哈希集合"是正确但浪费的？</p>
 <p>正确性没问题，浪费在两处：每个前缀都要复制成独立字符串（<code>"apple"</code> 要 15 个字符，Trie 只要 5 个节点）；不同长度的前缀字符串重复包含相同开头；集合已经会去重完全相同的字符串。Trie 让这些开头字符沿同一条路径共享。</p>
 <p><strong>4.</strong> 实现 <code>replace_words(dictionary, sentence)</code>：dictionary 是非空词根组成的列表，sentence 是用单个空格分隔的单词字符串。把每个单词替换成能作为其前缀的最短词根；没有匹配词根则原样保留，最后返回用空格连接的字符串。例如词根 ["cat","bat"]、句子 "the cattle battled"，结果为 "the cat bat"。</p>
 <p>先把词根插入 Trie。对每个单词从根向下走，遇到 is_end 就返回已经走过的最短词根；路径中断，或字符已经走完却没有词尾标记，都返回原词。<code>sentence.split()</code> 把句子按空白拆成单词列表，逐词处理后用 <code>' '.join(处理后的词列表)</code> 拼回字符串。</p>
-<p><strong>5.</strong> 如果词典有 10⁶ 个词、平均长度 10，用 26 数组版建 Trie 要多少内存？</p>
-<p>节点数上界约 10⁷+1（共享前缀会减少实际数量），每节点 26 个指针（8 字节）约 208 字节，总共仅指针就约 2 GB，另有节点开销；是否能放下取决于内存预算。可以改用字典版（平均每节点只有一两个实际孩子）、双数组 Trie，或者压缩 Trie（把只有单个孩子的链合并成一条边）。</p>
+<p><strong>5.</strong> 如果词典有 <span class="arithmatex">\(10^{6}\)</span> 个词、平均长度 10，用 26 数组版建 Trie 要多少内存？</p>
+<p>节点数上界约 <span class="arithmatex">\(10^7+1\)</span>（共享前缀会减少实际数量），每节点 26 个指针（8 字节）约 208 字节，总共仅指针就约 2 GB，另有节点开销；是否能放下取决于内存预算。可以改用字典版（平均每节点只有一两个实际孩子）、双数组 Trie，或者压缩 Trie（把只有单个孩子的链合并成一条边）。</p>
 <p><strong>6.</strong> 把 Trie 换成"按长度分组的哈希集合"能解决网格搜索那题吗？</p>
 <p>可以逐路径枚举再查完整词，但按长度分组本身没有高效的前缀剪枝接口。瓶颈通常是<strong>"走到某个前缀时，如何快速判断它有没有前途"</strong>。普通完整词集合只直接回答“这个词在不在”；若要高效判断前缀，还需扫描已有词，或另存前缀索引。<strong>索引结构必须匹配查询的形状。</strong></p>
 

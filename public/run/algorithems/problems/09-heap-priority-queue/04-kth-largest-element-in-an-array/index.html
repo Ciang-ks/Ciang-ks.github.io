@@ -5161,10 +5161,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-k-on-log-k" class="md-nav__link">
+  <a href="#1-k-mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 1：小顶堆维护最大的 k 个（O(n log k)）
+        做法 1：小顶堆维护最大的 k 个（\(\mathcal{O}(n \log k)\)）
       
     </span>
   </a>
@@ -5172,10 +5172,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-on" class="md-nav__link">
+  <a href="#2-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 2：快速选择（期望 O(n)）
+        做法 2：快速选择（期望 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -5183,10 +5183,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3on-log-n" class="md-nav__link">
+  <a href="#3mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 3：直接排序（O(n log n)）
+        做法 3：直接排序（\(\mathcal{O}(n \log n)\)）
       
     </span>
   </a>
@@ -5244,10 +5244,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：快速选择（平均 O(n)）
+        解法三：快速选择（平均 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-k-on-log-k" class="md-nav__link">
+  <a href="#1-k-mathcalon-log-k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 1：小顶堆维护最大的 k 个（O(n log k)）
+        做法 1：小顶堆维护最大的 k 个（\(\mathcal{O}(n \log k)\)）
       
     </span>
   </a>
@@ -10014,10 +10014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-on" class="md-nav__link">
+  <a href="#2-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 2：快速选择（期望 O(n)）
+        做法 2：快速选择（期望 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10025,10 +10025,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3on-log-n" class="md-nav__link">
+  <a href="#3mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        做法 3：直接排序（O(n log n)）
+        做法 3：直接排序（\(\mathcal{O}(n \log n)\)）
       
     </span>
   </a>
@@ -10086,10 +10086,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：快速选择（平均 O(n)）
+        解法三：快速选择（平均 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10174,21 +10174,21 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>三种主流做法，<strong>面试中建议先讲堆、再讲快速选择</strong>，展示对时间复杂度和常数的理解。</p>
-<h3 id="1-k-on-log-k">做法 1：小顶堆维护最大的 k 个（O(n log k)）<a class="headerlink" href="#1-k-on-log-k" title="Permanent link">&para;</a></h3>
+<h3 id="1-k-mathcalon-log-k">做法 1：小顶堆维护最大的 k 个（<span class="arithmatex">\(\mathcal{O}(n \log k)\)</span>）<a class="headerlink" href="#1-k-mathcalon-log-k" title="Permanent link">&para;</a></h3>
 <p>和第 703 题完全一致：堆里始终保存"当前最大的 k 个"，堆顶就是第 k 大。</p>
 <p><strong>优点</strong>：实现简单，k 小的时候很快；<strong>缺点</strong>：k 接近 n 时不如排序。</p>
-<h3 id="2-on">做法 2：快速选择（期望 O(n)）<a class="headerlink" href="#2-on" title="Permanent link">&para;</a></h3>
+<h3 id="2-mathcalon">做法 2：快速选择（期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#2-mathcalon" title="Permanent link">&para;</a></h3>
 <p>基于快排的 partition：选择一个 pivot，将数组分成小于、等于、大于它的三段。</p>
 <ul>
-<li>目标下标 n−k 落在等值段时，返回 pivot；</li>
+<li>目标下标 n-k 落在等值段时，返回 pivot；</li>
 <li>目标落在小值段或大值段时，只继续搜索对应一段。</li>
 </ul>
-<p><strong>关键点：只递归一边</strong>，所以期望复杂度是 n + n/2 + n/4 + … = O(n)。</p>
-<p>随机选择 pivot 可避免某类固定输入持续击中坏枢轴；它给出期望保证，仍可能遇到 O(n²) 的最坏执行。也有更复杂的确定性线性选择算法。</p>
-<h3 id="3on-log-n">做法 3：直接排序（O(n log n)）<a class="headerlink" href="#3on-log-n" title="Permanent link">&para;</a></h3>
+<p><strong>关键点：只递归一边</strong>，所以期望复杂度是 n + n/2 + n/4 + … = <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p>随机选择 pivot 可避免某类固定输入持续击中坏枢轴；它给出期望保证，仍可能遇到 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 的最坏执行。也有更复杂的确定性线性选择算法。</p>
+<h3 id="3mathcalon-log-n">做法 3：直接排序（<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>）<a class="headerlink" href="#3mathcalon-log-n" title="Permanent link">&para;</a></h3>
 <p>一句话解决，面试中作为对照提一下即可。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>将数组按升序想象排好，第 k 大的位置为 n−k，而不是 k−1。快速选择不是把所有位置排好：一次划分只确定某个枢轴的位置或相等值区间，再保留包含目标下标的那一侧。划分接口不同，返回的也可能是分界线而非枢轴最终位置，必须与缩区间规则配套。</p>
+<p>将数组按升序想象排好，第 k 大的位置为 n-k，而不是 k-1。快速选择不是把所有位置排好：一次划分只确定某个枢轴的位置或相等值区间，再保留包含目标下标的那一侧。划分接口不同，返回的也可能是分界线而非枢轴最终位置，必须与缩区间规则配套。</p>
 <p>随机枢轴给出期望线性时间，不能保证每次对半，也不能排除最坏平方时间。大量重复值时，简单二路划分仍可能严重失衡，三路划分可一次处理整段等值元素。堆法无需修改输入，快速选择通常原地改动；选择方法还要看输入是否可写、是否持续到达，以及是否需要排序后的全部结果。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：小顶堆（推荐，稳且好写）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10210,7 +10210,7 @@
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">findKthLargest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">return</span> <span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">nums</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
-<h3 id="on">解法三：快速选择（平均 O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：快速选择（平均 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10258,20 +10258,20 @@
 <tbody>
 <tr>
 <td>小顶堆</td>
-<td>O(n log k)</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 <td>适合较小 k 与持续到达数据</td>
 </tr>
 <tr>
 <td>快速选择</td>
-<td>平均 O(n)，最坏 O(n²)</td>
-<td>O(1)</td>
+<td>平均 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，最坏 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 <td>三路划分配合随机枢轴，保证期望线性，最坏仍平方</td>
 </tr>
 <tr>
 <td>排序</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 <td>最简单</td>
 </tr>
 </tbody>
@@ -10280,11 +10280,11 @@
 <ul>
 <li><strong>"第 k 大"对应升序的 <code>n - k</code> 位置</strong>，别写成 <code>k - 1</code>（那是第 k 小）。</li>
 <li>快速选择的 partition 边界很容易写错，建议先在纸上用一个 3 元素数组手推一遍。</li>
-<li><strong>快速选择必须随机化 pivot</strong>，否则面对已排序输入会退化到 O(n²)。<strong>这一点面试官很爱问。</strong></li>
+<li><strong>快速选择必须随机化 pivot</strong>，否则面对已排序输入会退化到 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。<strong>这一点面试官很爱问。</strong></li>
 <li>题目说数组里的元素可以重复，算法要能正确处理。</li>
-<li><strong>追问：为什么快速选择是 O(n)？</strong> → 每次期望排除一半，等比数列求和。</li>
-<li><strong>追问：有没有最坏情况也是 O(n) 的做法？</strong> → "中位数的中位数"（BFPRT）算法，理论上是 O(n)，但常数很大，实践中不用。</li>
-<li><strong>追问：如果用堆，<code>k</code> 很大时会怎样？</strong> → O(n log k) 退化到 O(n log n)，此时不如直接排序。</li>
+<li><strong>追问：为什么快速选择是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？</strong> → 每次期望排除一半，等比数列求和。</li>
+<li><strong>追问：有没有最坏情况也是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的做法？</strong> → "中位数的中位数"（BFPRT）算法，理论上是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，但常数很大，实践中不用。</li>
+<li><strong>追问：如果用堆，<code>k</code> 很大时会怎样？</strong> → <span class="arithmatex">\(\mathcal{O}(n \log k)\)</span> 退化到 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，此时不如直接排序。</li>
 <li><strong>追问：如何求"前 k 大"而不是"第 k 大"？</strong> → 堆里保留 k 个元素，最后全部返回即可。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

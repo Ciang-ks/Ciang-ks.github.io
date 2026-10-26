@@ -10067,15 +10067,15 @@
 <p>问题于是转化为：怎么设计这个 key？</p>
 <p><strong>方案 A：排序后的字符串</strong></p>
 <p>异位词排序后一定完全相同。<code>"eat" → "aet"</code>，<code>"tea" → "aet"</code>，key 一致。
-代价：每个字符串 O(k log k)，k 是字符串长度。</p>
+代价：每个字符串 <span class="arithmatex">\(\mathcal{O}(k \log k)\)</span>，k 是字符串长度。</p>
 <p><strong>方案 B：字符计数元组</strong></p>
 <p>异位词的本质是"字符频率表相同"，那就直接把频率表当 key：26 个计数组成的 tuple。
-代价：每个字符串 O(k)，比排序快，写法稍长。</p>
-<p>实际刷题中方案 A 更常用（代码短、不易错）；方案 B 是面试官追问"能否做到 O(n·k)"时的答案。</p>
+代价：每个字符串 <span class="arithmatex">\(\mathcal{O}(k)\)</span>，比排序快，写法稍长。</p>
+<p>实际刷题中方案 A 更常用（代码短、不易错）；方案 B 是面试官追问"能否做到 <span class="arithmatex">\(\mathcal{O}(n\cdot k)\)</span>"时的答案。</p>
 <p><strong>为什么 key 必须是 tuple 而不是 list？</strong> 因为列表不可哈希，不能作为字典的 key。这是本题最高频的报错来源。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>设计规范化键需要证明两个方向：异位词必有相同键；相同键也必然是异位词。排序字符串与完整频次向量都满足，而“字符编码之和”“字符集合”只满足部分方向，会错误合并不同组。例如 "ad" 与 "bc" 的编码和相同，"aab" 与 "abb" 的字符集合相同。</p>
-<p>从上题的“两串频次比较”过渡到本题，只是把比较结果变成可查找的索引。逐个处理 eat、tea、tan 时，前两者进入同一个 aet 桶，tan 进入 ant 桶；桶中保留原字符串，键只负责判别类别。固定 26 槽计数法的单串成本是 O(长度+26)，若字符集不固定，需重新设计可哈希且无歧义的键，不能照抄 26 项向量。</p>
+<p>从上题的“两串频次比较”过渡到本题，只是把比较结果变成可查找的索引。逐个处理 eat、tea、tan 时，前两者进入同一个 aet 桶，tan 进入 ant 桶；桶中保留原字符串，键只负责判别类别。固定 26 槽计数法的单串成本是 <span class="arithmatex">\(\mathcal{O}(长度+26)\)</span>，若字符集不固定，需重新设计可哈希且无歧义的键，不能照抄 26 项向量。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="key">解法一：排序作为 key（推荐）<a class="headerlink" href="#key" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
@@ -10115,13 +10115,13 @@
 <tbody>
 <tr>
 <td>排序 key</td>
-<td>O(n · k log k)</td>
-<td>O(n · k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot k \log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot k)\)</span></td>
 </tr>
 <tr>
 <td>计数 key</td>
-<td>O(n · k)</td>
-<td>O(n · k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot k)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10132,7 +10132,7 @@
 <li><code>defaultdict(list)</code> 比手写 <code>if key not in groups</code> 更简洁，也不会因为默认值是可变对象而出错。</li>
 <li>空字符串 <code>""</code> 是合法输入，排序后仍是 <code>""</code>，能正确分组。</li>
 <li>题目只允许小写字母，所以 26 长度的计数数组够用；若不确定字母表，用 <code>Counter</code> 转 <code>frozenset</code>，或者退回到排序 tuple。</li>
-<li><strong>追问：如果字符串特别长（长度 &gt; 10⁵）？</strong> → 排序 key 的 <code>k log k</code> 就不可忽略了，改用计数 key，必要时再对计数向量做二次哈希。</li>
+<li><strong>追问：如果字符串特别长（长度 &gt; <span class="arithmatex">\(10^{5}\)</span>）？</strong> → 排序 key 的 <span class="arithmatex">\(k \log k\)</span> 就不可忽略了，改用计数 key，必要时再对计数向量做二次哈希。</li>
 <li><strong>追问：如何流式处理？</strong> → 维护 <code>key → 组</code> 的字典，每来一个字符串就更新对应组，不用等全量数据。</li>
 </ul>
 <h2 id="_7">相关题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>

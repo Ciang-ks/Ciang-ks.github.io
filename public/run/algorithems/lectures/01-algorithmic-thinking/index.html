@@ -1210,10 +1210,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o" class="md-nav__link">
+  <a href="#oomegatheta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O、Ω、Θ：把增长趋势说准确
+        O、\(\Omega\)、\(\Theta\)：把增长趋势说准确
       
     </span>
   </a>
@@ -9933,10 +9933,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o" class="md-nav__link">
+  <a href="#oomegatheta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O、Ω、Θ：把增长趋势说准确
+        O、\(\Omega\)、\(\Theta\)：把增长趋势说准确
       
     </span>
   </a>
@@ -10035,7 +10035,7 @@
 <p>你已经会写 <code>for</code>，但面对一道题，可能仍不知道从哪里开始。先把“算法”理解为：<strong>把输入变成所需输出的一套明确步骤</strong>。这一讲先解决两个问题：怎样判断步骤正确，怎样比较两套正确步骤的代价。</p>
 <p>第一次读，读到“空间也要计费”即可。后面的峰值是进阶例子，递归式与主定理可以等第 7 讲再回来读。你不需要在第一天掌握整门课的数学工具。</p>
 <h2 id="_1">从一段能写出来的代码开始<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给你 <code>A = [6, 2, 9, 4]</code>，返回最大值。先别想技巧：拿一个变量记住“目前见过的最大值”。</p>
+<p>给你 <span class="arithmatex">\(A = [6, 2, 9, 4]\)</span>，返回最大值。先别想技巧：拿一个变量记住“目前见过的最大值”。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'空数组没有最大值'</span><span class="p">)</span>
@@ -10044,7 +10044,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
-<p>这里的输入是一列数，输出是<strong>最大值本身</strong>，不是它的下标。<code>maximum([6,2,9,4])</code> 返回 9；<code>maximum([-6,-2])</code> 返回 −2。空数组没有最大值，所以代码用 <code>raise ValueError(...)</code> 报告输入不满足要求。以后写函数，也先约定输入允许什么、结果表示什么。</p>
+<p>这里的输入是一列数，输出是<strong>最大值本身</strong>，不是它的下标。<code>maximum([6,2,9,4])</code> 返回 9；<code>maximum([-6,-2])</code> 返回 -2。空数组没有最大值，所以代码用 <code>raise ValueError(...)</code> 报告输入不满足要求。以后写函数，也先约定输入允许什么、结果表示什么。</p>
 <table>
 <thead>
 <tr>
@@ -10080,7 +10080,7 @@
 <p>证明时检查三件事：开始前保证成立；多处理一个元素后保证仍成立；循环结束时保证正好变成题目要求。对上面的代码，<code>max(best, A[i])</code> 比较了旧最大值与唯一的新元素，因此没有遗漏任何候选。</p>
 <p>为什么不能初始化 <code>best = 0</code>？用 <code>[-6,-2]</code> 试一遍：会返回根本不在数组里的 0。一个例子能推翻错算法；要证明对所有输入都正确，还需要上面的逐步保证。</p>
 <h2 id="_2">先数操作，再起名字<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>假设数组长度是 n。<code>maximum</code> 做了 <code>n−1</code> 次大小比较。长度从 100 变成 1000，比较次数从 99 变成 999，约扩大十倍。这叫<strong>线性增长</strong>。</p>
+<p>假设数组长度是 n。<code>maximum</code> 做了 <span class="arithmatex">\(n-1\)</span> 次大小比较。长度从 100 变成 1000，比较次数从 99 变成 999，约扩大十倍。这叫<strong>线性增长</strong>。</p>
 <p>再看一个输出要求不同的问题：给定数组 A 和目标值 target，找两个不同位置，使这两个位置上的数相加等于 target，返回它们从 0 开始的下标；找不到返回空列表。例如 A=[2,7,11,15]、target=9，应返回 [0,1]，因为 A[0]+A[1]=2+7=9。若有多组答案，本函数返回任意一组。</p>
 <p>先用最直接的方法：依次试遍所有不同的位置对，每试一对就检查一次和。这种把候选逐个列出并检查的方法叫作<strong>暴力枚举</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">two_sum_slow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
@@ -10090,13 +10090,13 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                <span class="k">return</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="p">[]</span>
 </span></code></pre></div>
-<p><code>j</code> 从 <code>i+1</code> 开始，既避免同一位置配自己，也避免把 <code>(i,j)</code> 和 <code>(j,i)</code> 算两次。若一直没找到，要检查的对数是：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>n = 4：3 + 2 + 1 = 6 对
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>一般： (n−1) + (n−2) + … + 1 = n(n−1)/2 对
-</span></code></pre></div>
+<p><code>j</code> 从 <span class="arithmatex">\(i+1\)</span> 开始，既避免同一位置配自己，也避免把 <code>(i,j)</code> 和 <code>(j,i)</code> 算两次。若一直没找到，要检查的对数是：</p>
+<div class="arithmatex">\[
+\sum_{k=1}^{n-1}k=\frac{n(n-1)}{2},\qquad n=4\Rightarrow 3+2+1=6
+\]</div>
 <p>n 扩大十倍，配对次数约扩大一百倍。这叫<strong>平方增长</strong>。第 3 讲会用哈希表减少这部分工作。现在先看清，优化针对的是哪一笔账。</p>
-<h2 id="o">O、Ω、Θ：把增长趋势说准确<a class="headerlink" href="#o" title="Permanent link">&para;</a></h2>
-<p>实际代码还会执行赋值、加法、循环判断。假设总操作数是 <code>3n+2</code>，我们通常不追究那个 3 与 2，而关心“输入变大时，它随 n 线性增长”。</p>
+<h2 id="oomegatheta">O、<span class="arithmatex">\(\Omega\)</span>、<span class="arithmatex">\(\Theta\)</span>：把增长趋势说准确<a class="headerlink" href="#oomegatheta" title="Permanent link">&para;</a></h2>
+<p>实际代码还会执行赋值、加法、循环判断。假设总操作数是 <span class="arithmatex">\(3n+2\)</span>，我们通常不追究那个 3 与 2，而关心“输入变大时，它随 n 线性增长”。</p>
 <table>
 <thead>
 <tr>
@@ -10107,53 +10107,53 @@
 </thead>
 <tbody>
 <tr>
-<td><code>O(g(n))</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(g(n))\)</span></td>
 <td>最多按这个量级增长（上界）</td>
-<td><code>3n+2 = O(n)</code></td>
+<td><span class="arithmatex">\(3n+2 = \mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
-<td><code>Ω(g(n))</code></td>
+<td><span class="arithmatex">\(\Omega (g(n))\)</span></td>
 <td>至少按这个量级增长（下界）</td>
-<td><code>3n+2 = Ω(n)</code></td>
+<td><span class="arithmatex">\(3n+2 = \Omega (n)\)</span></td>
 </tr>
 <tr>
-<td><code>Θ(g(n))</code></td>
+<td><span class="arithmatex">\(\Theta (g(n))\)</span></td>
 <td>上下界同阶，量级已确定</td>
-<td><code>3n+2 = Θ(n)</code></td>
+<td><span class="arithmatex">\(3n+2 = \Theta (n)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p><strong>O 不等于“最坏情况”。</strong> 先选你要分析的量，再给它界限。上面 Two Sum：最好第一对就找到，是 <code>Θ(1)</code>；最坏检查所有对，是 <code>Θ(n²)</code>。两者都可以用 O 表达上界，但讨论的是不同情形。</p>
-<p>数学定义也没有额外的魔法。<code>f(n) = O(g(n))</code> 指：能找到固定常数 <code>c &gt; 0</code> 和起点 <code>n₀</code>，从 <code>n ≥ n₀</code> 起始终有 <code>f(n) ≤ c·g(n)</code>。例如 <code>3n+2 ≤ 5n</code> 对所有 <code>n ≥ 1</code> 成立，所以可取 <code>c=5, n₀=1</code>。Ω 把不等号反过来；Θ 要求两边同时成立。</p>
+<p><strong>O 不等于“最坏情况”。</strong> 先选你要分析的量，再给它界限。上面 Two Sum：最好第一对就找到，是 <span class="arithmatex">\(\Theta (1)\)</span>；最坏检查所有对，是 <span class="arithmatex">\(\Theta (n^{2})\)</span>。两者都可以用 O 表达上界，但讨论的是不同情形。</p>
+<p>数学定义也没有额外的魔法。<span class="arithmatex">\(f(n) = \mathcal{O}(g(n))\)</span> 指：能找到固定常数 <span class="arithmatex">\(c &gt; 0\)</span> 和起点 <span class="arithmatex">\(n_{0}\)</span>，从 <span class="arithmatex">\(n \ge n_{0}\)</span> 起始终有 <span class="arithmatex">\(f(n) \le c\cdot g(n)\)</span>。例如 <span class="arithmatex">\(3n+2 \le 5n\)</span> 对所有 <span class="arithmatex">\(n \ge 1\)</span> 成立，所以可取 <span class="arithmatex">\(c=5, n_{0}=1\)</span>。<span class="arithmatex">\(\Omega\)</span> 把不等号反过来；<span class="arithmatex">\(\Theta\)</span> 要求两边同时成立。</p>
 <p><img alt="输入扩大时操作次数如何变化" src="../images/01-growth.svg" /></p>
-<p>图按 n=10、100、1000 列出操作数；先比较同一行，再看输入扩大十倍时各列增长多少。log 列按 log₂n 向上取整，n log n 列用 n 乘该轮数。它展示的是代表性操作数，并不是机器上测出的秒数。<code>n²</code> 在 <code>n=10⁶</code> 时意味着约 <code>10¹²</code> 次操作，通常已不适合常见题目的时间限制；具体耗时仍取决于机器与每次操作的成本。</p>
+<p>图按 n=10、100、1000 列出操作数；先比较同一行，再看输入扩大十倍时各列增长多少。log 列按 <span class="arithmatex">\(\log _{2}n\)</span> 向上取整，n log n 列用 n 乘该轮数。它展示的是代表性操作数，并不是机器上测出的秒数。<span class="arithmatex">\(n^{2}\)</span> 在 <span class="arithmatex">\(n=10^{6}\)</span> 时意味着约 <span class="arithmatex">\(10^{12}\)</span> 次操作，通常已不适合常见题目的时间限制；具体耗时仍取决于机器与每次操作的成本。</p>
 <h2 id="log">为什么每次减半会出现 log<a class="headerlink" href="#log" title="Permanent link">&para;</a></h2>
 <p>把 16 张卡片排好，每次保留一半候选：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>16 → 8 → 4 → 2 → 1
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>          共减半 4 次
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>16 → 8 → 4 → 2 → 1
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>          共减半 4 次
 </span></code></pre></div>
-<p><code>log₂16 = 4</code> 的意思就是“2 连乘几次得到 16”。一般地，减半 k 次剩 <code>n/2^k</code> 个；要剩下约 1 个，需要 <code>2^k ≈ n</code>，所以 <code>k ≈ log₂n</code>。</p>
-<p>这只算了<strong>轮数</strong>。每轮还得计费：每轮 O(1) 才得到总时间 <code>O(log n)</code>；每轮扫描 n 个元素就会是 <code>O(n log n)</code>。第 6 讲的二分查找会实际用到这套计算。</p>
+<p><span class="arithmatex">\(\log _{2}16 = 4\)</span> 的意思就是“2 连乘几次得到 16”。一般地，减半 k 次剩 <span class="arithmatex">\(n/2^k\)</span> 个；要剩下约 1 个，需要 <span class="arithmatex">\(2^k \approx n\)</span>，所以 <span class="arithmatex">\(k \approx \log _{2}n\)</span>。</p>
+<p>这只算了<strong>轮数</strong>。每轮还得计费：每轮 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 才得到总时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>；每轮扫描 n 个元素就会是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。第 6 讲的二分查找会实际用到这套计算。</p>
 <h2 id="_3">空间也要计费<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><code>maximum</code> 只多用了 <code>best</code>、<code>i</code> 等固定几个变量，额外空间 <code>O(1)</code>。复制一份 n 元素数组则是 <code>O(n)</code>。通常说“空间复杂度”指额外空间，是否包含输出要说明。</p>
-<p>这里把装得进机器字的整数比较、加法、数组按下标访问看作 O(1)。Python 超大整数的成本会随位数增长，第 26 讲再展开。<strong>模型是分析时采用的约定，不代表每种语言的每个操作都一样便宜。</strong></p>
+<p><code>maximum</code> 只多用了 <code>best</code>、<code>i</code> 等固定几个变量，额外空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。复制一份 n 元素数组则是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。通常说“空间复杂度”指额外空间，是否包含输出要说明。</p>
+<p>这里把装得进机器字的整数比较、加法、数组按下标访问看作 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。Python 超大整数的成本会随位数增长，第 26 讲再展开。<strong>模型是分析时采用的约定，不代表每种语言的每个操作都一样便宜。</strong></p>
 <h2 id="_4">进阶例子：没有排好序，也能排除一半吗<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>给非空数组，找任意一个<strong>峰值</strong>：值不小于相邻元素的位置。端点只与一个邻居比较。<code>[6,7,4,3,2,1,4,5]</code> 中，下标 1 的 7 和下标 7 的 5 都合格；不要求全局最大值。</p>
-<p>从左到右检查即可，最坏 O(n)。更快的想法来自相邻两个数：若 <code>A[mid] &lt; A[mid+1]</code>，向右有一段上坡。一直往右，遇到第一次不再上升，前一个位置就是峰值；若一直升到末尾，末尾就是峰值。因此右边<strong>至少有一个</strong>答案。</p>
+<p>从左到右检查即可，最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。更快的想法来自相邻两个数：若 <span class="arithmatex">\(A[\mathrm{mid}] &lt; A[\mathrm{mid}+1]\)</span>，向右有一段上坡。一直往右，遇到第一次不再上升，前一个位置就是峰值；若一直升到末尾，末尾就是峰值。因此右边<strong>至少有一个</strong>答案。</p>
 <p>注意这句话允许左边也有答案。我们只需保留一个，不能把它误读成“所有答案都在右边”。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">peak_1d</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'需要非空数组'</span><span class="p">)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">return</span> <span class="n">lo</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">peak_1d</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'需要非空数组'</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
-<p>更严谨地看，搜索区间始终满足：若左边有被排除的邻居，则 <code>A[lo] ≥ A[lo−1]</code>；若右边有被排除的邻居，则 <code>A[hi] ≥ A[hi+1]</code>。初始区间就是全数组，边界条件自然成立。每轮比较正好为新的边界提供这个保证；区间内的最大元素因此也是原数组的峰值。结束时只剩一个位置，它就是答案。</p>
+<p>更严谨地看，搜索区间始终满足：若左边有被排除的邻居，则 <span class="arithmatex">\(A[lo] \ge A[lo-1]\)</span>；若右边有被排除的邻居，则 <span class="arithmatex">\(A[hi] \ge A[hi+1]\)</span>。初始区间就是全数组，边界条件自然成立。每轮比较正好为新的边界提供这个保证；区间内的最大元素因此也是原数组的峰值。结束时只剩一个位置，它就是答案。</p>
 <table>
 <thead>
 <tr>
@@ -10167,13 +10167,13 @@
 <tr>
 <td>0, 7</td>
 <td>3</td>
-<td>3 ≥ 2</td>
+<td>3 不小于 2</td>
 <td>[0,3]</td>
 </tr>
 <tr>
 <td>0, 3</td>
 <td>1</td>
-<td>7 ≥ 4</td>
+<td>7 不小于 4</td>
 <td>[0,1]</td>
 </tr>
 <tr>
@@ -10184,11 +10184,12 @@
 </tr>
 </tbody>
 </table>
-<p>每轮 O(1)，候选数至少减半，总时间 O(log n)，额外空间 O(1)。相等时保留左边也安全，因为峰值定义允许相等。</p>
+<p>每轮 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，候选数至少减半，总时间 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，额外空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。相等时保留左边也安全，因为峰值定义允许相等。</p>
 <h2 id="_5">选读：递归式是一张分层账单<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>如果还没接触递归，可以在第 7 讲学完“函数调用自己”后再读这里。归并排序把数组分成两半，分别排序，再花线性时间合并：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>T(n) = 2T(n/2) + cn，T(1) = d
-</span></code></pre></div>
+<div class="arithmatex">\[
+T(n)=2T(n/2)+cn,\qquad T(1)=d
+\]</div>
 <p>T(n) 是处理 n 个元素的总操作数；2 表示两次子调用，n/2 是子问题大小，cn 是本层工作；d 是长度为 1 时的固定基例成本，也就是每个叶子上的那一笔工作。暂设 n 为 2 的幂：</p>
 <table>
 <thead>
@@ -10226,53 +10227,53 @@
 </tr>
 </tbody>
 </table>
-<p>有 log₂n 层非叶工作，再加叶子，总和 <code>cn log₂n + dn = Θ(n log n)</code>。先懂这张账单，再用公式会更稳。</p>
+<p>有 <span class="arithmatex">\(\log _{2}n\)</span> 层非叶工作，再加叶子，总和 <span class="arithmatex">\(cn \log _{2}n + dn = \Theta (n \log n)\)</span>。先懂这张账单，再用公式会更稳。</p>
 <p><img alt="归并排序递归树：每层工作量" src="../figures/01-recursion-tree.png" /></p>
-<p>归并排序的递归树：第 t 层有 2^t 个子问题，每个规模为 n/2^t，所以每层总工作量为 Θ(n)。叶子共有 n 个；从根减半到叶子需 log₂n 层。</p>
-<p><strong>主定理是这类账单的快捷工具，第一次可跳过。</strong> 对 <code>T(n)=aT(n/b)+f(n)</code>，假定 a≥1、b&gt;1 都是固定常数，基例成本为正常数，令 <code>p=log_b a</code>：</p>
+<p>归并排序的递归树：第 t 层有 <span class="arithmatex">\(2^t\)</span> 个子问题，每个规模为 <span class="arithmatex">\(n/2^t\)</span>，所以每层总工作量为 <span class="arithmatex">\(\Theta (n)\)</span>。叶子共有 n 个；从根减半到叶子需 <span class="arithmatex">\(\log _{2}n\)</span> 层。</p>
+<p><strong>主定理是这类账单的快捷工具，第一次可跳过。</strong> 对 <span class="arithmatex">\(T(n)=aT(n/b)+f(n)\)</span>，假定 <span class="arithmatex">\(a\ge1\)</span>、<span class="arithmatex">\(b&gt;1\)</span> 都是固定常数，基例成本为正常数，令 <span class="arithmatex">\(p=\log_b a\)</span>：</p>
 <table>
 <thead>
 <tr>
-<th>条件（ε 是某个固定正数）</th>
+<th>条件（<span class="arithmatex">\(\epsilon\)</span> 是某个固定正数）</th>
 <th>结论</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>f(n)=O(n^(p−ε))</code></td>
-<td><code>T(n)=Θ(n^p)</code></td>
+<td><span class="arithmatex">\(f(n)=\mathcal{O}(n^{p-\epsilon })\)</span></td>
+<td><span class="arithmatex">\(T(n)=\Theta (n^p)\)</span></td>
 </tr>
 <tr>
-<td><code>f(n)=Θ(n^p)</code></td>
-<td><code>T(n)=Θ(n^p log n)</code></td>
+<td><span class="arithmatex">\(f(n)=\Theta (n^p)\)</span></td>
+<td><span class="arithmatex">\(T(n)=\Theta (n^p \log n)\)</span></td>
 </tr>
 <tr>
-<td><code>f(n)=Ω(n^(p+ε))</code>，且存在 <code>0&lt;c&lt;1</code> 使充分大 n 时 <code>a f(n/b) ≤ c f(n)</code></td>
-<td><code>T(n)=Θ(f(n))</code></td>
+<td><span class="arithmatex">\(f(n)=\Omega (n^{p+\epsilon })\)</span>，且存在 <span class="arithmatex">\(0&lt;c&lt;1\)</span> 使充分大 n 时 <span class="arithmatex">\(a f(n/b) \le c f(n)\)</span></td>
+<td><span class="arithmatex">\(T(n)=\Theta (f(n))\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>最后那个附加条件保证每往下一层，工作量按固定比例减少。例如 <code>T(n)=T(n/2)+n</code>，各层是 <code>n,n/2,n/4,…</code>，总和小于 2n，所以是 Θ(n)。主定理不适用于所有递归式，不必硬套。</p>
+<p>最后那个附加条件保证每往下一层，工作量按固定比例减少。例如 <span class="arithmatex">\(T(n)=T(n/2)+n\)</span>，各层是 <span class="arithmatex">\(n,n/2,n/4,\cdots\)</span>，总和小于 2n，所以是 <span class="arithmatex">\(\Theta (n)\)</span>。主定理不适用于所有递归式，不必硬套。</p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>比较两个处理日志的程序时，可以先数各自扫描了多少条记录、比较了多少对记录。</p>
 <p>先不看题解，给 <a href="../../problems/01-arrays-and-hashing/03-two-sum/">Two Sum</a> 写出双循环版。用 [2,7,11,15]、目标 9 检查返回 [0,1]；再用 [1,2,3,4]、目标 100 记录全部 6 次配对。把函数返回的下标代回原数组相加，验证它确实满足目标。</p>
-<p>在第 3 讲之前，先保留这个正确的 O(n²) 版本。以后每次优化，都用相同输入比较结果与工作量。</p>
+<p>在第 3 讲之前，先保留这个正确的 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 版本。以后每次优化，都用相同输入比较结果与工作量。</p>
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>先在纸上回答，再展开核对。</p>
 <p><strong>1.</strong> 用 <code>[-3,-8,-1]</code> 手推 <code>maximum</code>。为什么不能从 0 开始？</p>
 <details>
 <summary>提示与解答</summary>
-<p><code>best</code> 依次为 −3、−3、−1。0 不是已处理元素的最大值，会在起点破坏不变量。</p>
+<p><code>best</code> 依次为 -3、-3、-1。0 不是已处理元素的最大值，会在起点破坏不变量。</p>
 </details>
 <p><strong>2.</strong> n=5 时 Two Sum 暴力版最多检查几对？找到一对就返回，对最坏时间有影响吗？</p>
 <details>
 <summary>提示与解答</summary>
-<p><code>4+3+2+1=10</code> 对。提前返回改善部分输入，但仍可能一对也找不到，最坏仍为 Θ(n²)。</p>
+<p><span class="arithmatex">\(4+3+2+1=10\)</span> 对。提前返回改善部分输入，但仍可能一对也找不到，最坏仍为 <span class="arithmatex">\(\Theta (n^{2})\)</span>。</p>
 </details>
 <p><strong>3.</strong> 一个循环执行 n 次，另一个独立循环也执行 n 次，总时间是平方吗？</p>
 <details>
 <summary>提示与解答</summary>
-<p>串行执行是 <code>n+n=2n</code>，即 Θ(n)。若内层 n 次要对外层的每一步重做，才是 <code>n×n</code>。判断依据是总次数，不能只数代码里有几个 <code>for</code>。</p>
+<p>串行执行是 <span class="arithmatex">\(n+n=2n\)</span>，即 <span class="arithmatex">\(\Theta (n)\)</span>。若内层 n 次要对外层的每一步重做，才是 <span class="arithmatex">\(n\times n\)</span>。判断依据是总次数，不能只数代码里有几个 <code>for</code>。</p>
 </details>
 <p><strong>4.（选做，读完进阶例子后再做）</strong> 峰值代码在 <code>[2,2,2]</code> 上返回什么？返回的位置合格吗？</p>
 <details>

@@ -10202,7 +10202,7 @@
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">startsWith</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="k">return</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefixes</span>
 </span></code></pre></div>
-<p><strong>不推荐</strong>：虽然功能正确，但空间是 O(所有词长之和 × 平均词长)，而且完全没有体现"前缀树"这个数据结构。面试中写这个基本等于交白卷。</p>
+<p><strong>不推荐</strong>：虽然功能正确，但空间是 <span class="arithmatex">\(\mathcal{O}(所有词长之和 \times 平均词长)\)</span>，而且完全没有体现"前缀树"这个数据结构。面试中写这个基本等于交白卷。</p>
 <h2 id="_6">复杂度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10215,18 +10215,18 @@
 <tbody>
 <tr>
 <td><code>insert</code></td>
-<td>O(L)</td>
-<td>O(L) 新增</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span> 新增</td>
 </tr>
 <tr>
 <td><code>search</code></td>
-<td>O(L)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td><code>startsWith</code></td>
-<td>O(L)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10237,7 +10237,7 @@
 <li><code>insert</code> 时 <code>is_end</code> 只在<strong>最后一个节点</strong>上设置，不能沿途都设。</li>
 <li>用字典实现时不要用 <code>defaultdict(TrieNode)</code> 之类的写法（会误创建节点）；也可以写成 <code>node.children.setdefault(c, TrieNode())</code>。</li>
 <li><code>__slots__</code> 能明显减少节点内存占用，是一个值得主动提的细节。</li>
-<li><strong>追问：Trie 相比哈希表有什么优势？</strong> → 哈希表只能判断"完整单词是否存在"，无法高效支持前缀查询；Trie 的前缀查询是 O(L)。</li>
+<li><strong>追问：Trie 相比哈希表有什么优势？</strong> → 哈希表只能判断"完整单词是否存在"，无法高效支持前缀查询；Trie 的前缀查询是 <span class="arithmatex">\(\mathcal{O}(L)\)</span>。</li>
 <li><strong>追问：Trie 相比哈希表有什么劣势？</strong> → 空间开销大（每个节点都有孩子容器），且常数比哈希大。<strong>只有需要"前缀"语义时才值得用 Trie。</strong></li>
 <li><strong>追问：字符集不是小写字母怎么办？</strong> → 用字典实现；或者用 <code>ord(c)</code> 做偏移的数组（需要知道最大字符码）。</li>
 <li><strong>追问：如何统计以某前缀开头的单词数量？</strong> → 在每个节点维护一个 <code>count</code>，插入时沿路径累加。</li>

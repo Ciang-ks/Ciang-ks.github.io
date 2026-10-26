@@ -10095,7 +10095,7 @@
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：剪枝的边界 <code>n - need + 2</code> 很容易写错，写不准时先用朴素版 <code>range(start, n + 1)</code> 保证正确性，再加剪枝。</p>
-<p><strong>复杂度</strong>：时间 O(k · C(n,k))，空间 O(k)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(k \cdot C(n,k))\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(k)\)</span>。</p>
 <hr />
 <h2 id="2-216-combination-sum-iii">2. 216 Combination Sum III<a class="headerlink" href="#2-216-combination-sum-iii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/combination-sum-iii/">LeetCode 216</a> ｜ <strong>Medium</strong></p>
@@ -10122,15 +10122,15 @@
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">backtrack</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：<code>len(path) == k</code> 时还要检查 <code>remaining == 0</code>，两个条件缺一不可。</p>
-<p><strong>复杂度</strong>：时间 O(C(9,k) · k)，空间 O(k)。</p>
+<p><strong>易错点</strong>：<code>len(path) == k</code> 时还要检查 <span class="arithmatex">\(\mathrm{remaining} = 0\)</span>，两个条件缺一不可。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(C(9,k) \cdot k)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(k)\)</span>。</p>
 <hr />
 <h2 id="3-47-permutations-ii">3. 47 Permutations II<a class="headerlink" href="#3-47-permutations-ii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/permutations-ii/">LeetCode 47</a> ｜ <strong>Medium</strong></p>
 <p><strong>题目</strong>：给定<strong>可能包含重复元素</strong>的数组，返回所有不重复的全排列。</p>
 <p><strong>为什么放这里</strong>：排列版的去重，<strong>它的去重条件比子集 / 组合更绕</strong>，是很多人栽跟头的地方。</p>
 <p><strong>思路提示</strong>：排序 + <code>used</code> 数组，去重条件写成：</p>
-<p><strong>方法辨析</strong>：给相同值的副本固定使用先后，相当于只保留一个代表排列。例如 [1₀,1₁,2] 中必须先用 1₀ 再用 1₁，输出数值却不带身份，因此不会漏掉不同的值排列。used[i−1] 表示在任意祖先层用过，并不限定恰好上一层。</p>
+<p><strong>方法辨析</strong>：给相同值的副本固定使用先后，相当于只保留一个代表排列。例如 [<span class="arithmatex">\(1_a\)</span>,<span class="arithmatex">\(1_b\)</span>,2] 中必须先用 <span class="arithmatex">\(1_a\)</span> 再用 <span class="arithmatex">\(1_b\)</span>，输出数值却不带身份，因此不会漏掉不同的值排列。used[i-1] 表示在任意祖先层用过，并不限定恰好上一层。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">continue</span>
@@ -10140,10 +10140,10 @@
 </span></code></pre></div>
 <p><strong>怎么理解这个条件？</strong> 关键在于保证"<strong>相同的值必须按顺序被使用</strong>"：</p>
 <ul>
-<li>如果 <code>nums[i] == nums[i-1]</code> <strong>且 <code>nums[i-1]</code> 还没被用过</strong>，说明 <code>i-1</code> 和 <code>i</code> 处在<strong>同一层</strong>（都不是上一层选中的），那么"选 <code>i</code> 而不选 <code>i-1</code>"会产生与"选 <code>i-1</code>"完全相同的分支，直接跳过；</li>
+<li>如果 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span> <strong>且 <code>nums[i-1]</code> 还没被用过</strong>，说明 <code>i-1</code> 和 <code>i</code> 处在<strong>同一层</strong>（都不是上一层选中的），那么"选 <code>i</code> 而不选 <code>i-1</code>"会产生与"选 <code>i-1</code>"完全相同的分支，直接跳过；</li>
 <li>如果 <code>nums[i-1]</code> <strong>已经被用过</strong>，说明它是<strong>上一层</strong>选中的，那么这一层选 <code>i</code> 是合法的（对应"连续使用两个相同的值"）。</li>
 </ul>
-<p><strong>与子集去重的对比</strong>：子集用 <code>i &gt; start</code> 就能判断同层；排列因为每层都从头扫、没有 <code>start</code>，所以要用 <code>not used[i-1]</code> 来间接判断"是否同层"。</p>
+<p><strong>与子集去重的对比</strong>：子集用 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 就能判断同层；排列因为每层都从头扫、没有 <code>start</code>，所以要用 <code>not used[i-1]</code> 来间接判断"是否同层"。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">permuteUnique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -10169,14 +10169,14 @@
 </span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>not used[i-1]</code> 是精髓，不能省；<code>nums.sort()</code> 也不能省。</p>
-<p><strong>复杂度</strong>：时间 O(n · n!)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \cdot n!)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="4-93-restore-ip-addresses">4. 93 Restore IP Addresses<a class="headerlink" href="#4-93-restore-ip-addresses" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/restore-ip-addresses/">LeetCode 93</a> ｜ <strong>Medium</strong></p>
 <p><strong>题目</strong>：给定只含数字的字符串，返回所有可能的合法 IP 地址（4 段，每段 0~255，<strong>不能有前导零</strong>）。</p>
 <p><strong>为什么放这里</strong>：分割型回溯（和 131 同一模板），加上"段数固定为 4"和"每段合法性校验"两个约束。</p>
 <p><strong>思路提示</strong>：用 <code>start</code> 表示当前段的起点，<code>parts</code> 记录已切出的段。每层的候选是长度 1、2、3 的子串（IP 每段最多 3 位），并做两项校验：长度大于 1 时不能以 <code>'0'</code> 开头；数值不能超过 255。终止条件是段数到 4 时<strong>必须把字符串正好用完</strong>。</p>
-<p><strong>方法辨析</strong>：每次选择下一段长度，段内数字合法与剩余段数足够都必须满足。还有 rem 段时，剩余字符数必须在 rem..3rem 内；四段已齐仍有字符就失败，不能仅凭局部数字≤255 接受。</p>
+<p><strong>方法辨析</strong>：每次选择下一段长度，段内数字合法与剩余段数足够都必须满足。还有 rem 段时，剩余字符数必须在 rem..3rem 内；四段已齐仍有字符就失败，不能仅凭局部数字不大于255 接受。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">restoreIpAddresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">res</span><span class="p">,</span> <span class="n">parts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -10200,7 +10200,7 @@
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>parts</code> 到 4 段时必须检查 <code>start == len(s)</code>，否则 <code>"1111"</code> 之类会被重复计算；前导零的判断要精确（<code>"0"</code> 合法，<code>"01"</code> 不合法）。</p>
-<p><strong>复杂度</strong>：时间 O(3⁴)（每段最多 3 种长度、共 4 段，实际是常数级），空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(3^{4})\)</span>（每段最多 3 种长度、共 4 段，实际是常数级），空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="5-22-generate-parentheses">5. 22 Generate Parentheses<a class="headerlink" href="#5-22-generate-parentheses" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/generate-parentheses/">LeetCode 22</a> ｜ <strong>Medium</strong></p>
@@ -10228,8 +10228,8 @@
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：剪枝条件写反（是 <code>close_cnt &lt; open_cnt</code>，不是 <code>close_cnt &lt; n</code>）；结果个数是<strong>卡特兰数</strong> Cₙ，无法再优化。</p>
-<p><strong>复杂度</strong>：时间 O(Cₙ · n)，空间 O(n)。</p>
+<p><strong>易错点</strong>：剪枝条件写反（是 <code>close_cnt &lt; open_cnt</code>，不是 <code>close_cnt &lt; n</code>）；结果个数是<strong>卡特兰数</strong> <span class="arithmatex">\(C_{n}\)</span>，无法再优化。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(C_{n} \cdot n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <blockquote>
 <p>详细分析见 <a href="../../04-stack/04-generate-parentheses/">04-stack/04-generate-parentheses.md</a>。</p>
 </blockquote>
@@ -10279,15 +10279,15 @@
 </span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>        <span class="k">return</span> <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：<code>seen</code> 集合要在<strong>每一层重置</strong>；<code>buckets[b] == 0</code> 时的 <code>break</code> 是本题的关键提速点。</p>
-<p><strong>复杂度</strong>：最坏 O(kⁿ)，但剪枝后实际很快。</p>
+<p><strong>复杂度</strong>：最坏 <span class="arithmatex">\(\mathcal{O}(k^{n})\)</span>，但剪枝后实际很快。</p>
 <hr />
 <h2 id="7-37-sudoku-solver">7. 37 Sudoku Solver<a class="headerlink" href="#7-37-sudoku-solver" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/sudoku-solver/">LeetCode 37</a> ｜ <strong>Hard</strong></p>
-<p><strong>题目</strong>：解一个 9×9 数独（保证有唯一解），原地修改棋盘。</p>
+<p><strong>题目</strong>：解一个 <span class="arithmatex">\(9\times9\)</span> 数独（保证有唯一解），原地修改棋盘。</p>
 <p><strong>为什么放这里</strong>：<strong>约束回溯</strong>的终极形态——把"搜索 + 约束检查 + 原地修改"三者结合得非常完整。</p>
 <p><strong>思路提示</strong></p>
 <ol>
-<li>用三个 <code>set</code> 数组（或位掩码）记录每行、每列、每个 3×3 宫里已出现的数字，让冲突检测变成 O(1)；</li>
+<li>用三个 <code>set</code> 数组（或位掩码）记录每行、每列、每个 <span class="arithmatex">\(3\times3\)</span> 宫里已出现的数字，让冲突检测变成 <span class="arithmatex">\(\mathcal{O}(1)\)</span>；</li>
 <li>把所有空格的位置预先收集到一个列表里，递归时按下标推进；</li>
 <li>对每个空格依次尝试 <code>'1'</code>–<code>'9'</code>：不冲突就填入、更新三个集合，然后递归下一个空格；</li>
 <li>递归返回 <code>False</code> 时，撤销填入的数字和集合的更新，继续试下一个数字；</li>
@@ -10334,8 +10334,8 @@
 </span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>
 </span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>        <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：宫索引是 <code>(r // 3) * 3 + c // 3</code>（不是 <code>(r%3)*3 + c%3</code>）；递归返回 <code>True</code> 时<strong>不能撤销</strong>（要保留解），只有失败时才撤销。</p>
-<p><strong>复杂度</strong>：最坏 O(9^空格数)，结合约束剪枝后实际很快。</p>
+<p><strong>易错点</strong>：宫索引是 <code>(r // 3) * 3 + c // 3</code>（不是 <span class="arithmatex">\((r\%3)*3 + c\%3\)</span>）；递归返回 <code>True</code> 时<strong>不能撤销</strong>（要保留解），只有失败时才撤销。</p>
+<p><strong>复杂度</strong>：最坏 <span class="arithmatex">\(\mathcal{O}(9^空格数)\)</span>，结合约束剪枝后实际很快。</p>
 <blockquote>
 <p>与 <a href="../../01-arrays-and-hashing/07-valid-sudoku/">36 Valid Sudoku</a> 对照：36 只判断合法性（不需要回溯），37 要求出解（必须回溯）。<strong>这个对比能帮你判断"什么时候用回溯、什么时候只需要校验"。</strong></p>
 </blockquote>

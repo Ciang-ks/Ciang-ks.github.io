@@ -10335,7 +10335,7 @@
 </tr>
 </tbody>
 </table>
-<p>挑最小的非平凡例子跟踪一轮：两位进位、2×2 旋转、单行螺旋、一个重复坐标。说明循环前仍保留哪些原始信息，以及何时可以覆盖它。</p>
+<p>挑最小的非平凡例子跟踪一轮：两位进位、<span class="arithmatex">\(2\times2\)</span> 旋转、单行螺旋、一个重复坐标。说明循环前仍保留哪些原始信息，以及何时可以覆盖它。</p>
 <h2 id="_2">二、四类问题的核心技巧<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="1">类型 1 数位操作<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">digit_sum</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10346,7 +10346,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">x</span> <span class="o">//=</span> <span class="mi">10</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
-<p><strong>Python 的取模特例</strong>：<code>-123 % 10 = 7</code>（总是非负），和 C++/Java 不同。处理负数时先取绝对值、最后再补符号，最不容易出错。</p>
+<p><strong>Python 的取模特例</strong>：<span class="arithmatex">\(-123 \% 10 = 7\)</span>（总是非负），和 C++/Java 不同。处理负数时先取绝对值、最后再补符号，最不容易出错。</p>
 <h3 id="2">类型 2 矩阵的原地变换<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p><strong>顺时针旋转 90° = 转置 + 左右翻转</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
@@ -10358,7 +10358,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>怎么验证组合是对的？</strong> 追踪一个点：<code>(i, j)</code> 转置后变成 <code>(j, i)</code>，再左右翻转变成 <code>(j, n-1-i)</code>——这正是顺时针 90° 的映射。</p>
+<p><strong>怎么验证组合是对的？</strong> 追踪一个点：<code>(i, j)</code> 转置后变成 <code>(j, i)</code>，再左右翻转变成 <span class="arithmatex">\((j,n-1-i)\)</span>——这正是顺时针 90° 的映射。</p>
 <p><strong>逆时针 90° = 转置 + 上下翻转</strong>。方向说反是本题最常见的错误。</p>
 <p><strong>螺旋遍历 = 四边界收缩</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">spiral_order</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
@@ -10399,7 +10399,7 @@
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
-<p><strong>核心恒等式</strong>：<code>x^n = (x^(n/2))²</code>（n 为偶数）或 <code>x · (x^((n-1)/2))²</code>（n 为奇数）——<strong>每一步把指数减半，所以是 O(log n)</strong>。</p>
+<p><strong>核心恒等式</strong>：<span class="arithmatex">\(x^n = (x^{n/2})^{2}\)</span>（n 为偶数）或 <span class="arithmatex">\(x \cdot (x^((n-1)/2))^{2}\)</span>（n 为奇数）——<strong>每一步把指数减半，所以是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span></strong>。</p>
 <h3 id="4">类型 4 几何与哈希<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -10419,18 +10419,18 @@
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                <span class="n">total</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[(</span><span class="n">px</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">py</span><span class="p">)]</span>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
-<p><strong>正方形的对角线端点满足 <code>|dx| == |dy|</code></strong>——这个性质让"枚举对角顶点"成为最简洁的做法，另外两个角就是 <code>(px, y)</code> 和 <code>(x, py)</code>。</p>
+<p><strong>正方形的对角线端点满足 <span class="arithmatex">\(\vert dx\vert = \vert dy\vert\)</span></strong>——这个性质让"枚举对角顶点"成为最简洁的做法，另外两个角就是 <code>(px, y)</code> 和 <code>(x, py)</code>。</p>
 <h2 id="_3">三、从读题到写码：四步流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>先判断属于哪一类</strong>：数位 / 矩阵 / 几何 / 数值溢出。</li>
 <li><strong>数位类</strong>：想清楚"循环条件"和"边界值"（0、负数、末位为 0）。</li>
-<li><strong>矩阵类</strong>：先在纸上画一个 3×3 的例子，写出下标变换公式。</li>
+<li><strong>矩阵类</strong>：先在纸上画一个 <span class="arithmatex">\(3\times3\)</span> 的例子，写出下标变换公式。</li>
 <li><strong>几何类</strong>：用哈希表把点编码；<strong>避免浮点比较</strong>（斜率用约分后的整数对）。</li>
 </ol>
 <h2 id="_4">四、逐题推演：从题面到思路<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1-happy-number202">1. Happy Number（202）<a class="headerlink" href="#1-happy-number202" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："反复把各位数字平方求和，判断能否到 1"。</p>
-<p><strong>候选思路</strong>：<strong>这个过程一定会进入循环</strong>——因为平方和把数映射到有限范围内（例如三位数最大是 <code>3 × 9² = 243</code>），有限集合上的迭代必然出现重复。于是问题变成"判环"，可以用哈希集合或快慢指针。</p>
+<p><strong>候选思路</strong>：<strong>这个过程一定会进入循环</strong>——因为平方和把数映射到有限范围内（例如三位数最大是 <span class="arithmatex">\(3 \times 9^{2} = 243\)</span>），有限集合上的迭代必然出现重复。于是问题变成"判环"，可以用哈希集合或快慢指针。</p>
 <p><strong>走一遍示例</strong>：<code>n = 19</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>19 → 1+81 = 82 → 64+4 = 68 → 36+64 = 100 → 1 ✓
 </span></code></pre></div>
@@ -10446,12 +10446,12 @@
 <p><strong>关键细节</strong>：<strong>全 9 的情况必须处理</strong>；不要用 <code>int(''.join(...))</code> 转换（题目特意说数字可能非常大，在 C++/Java 里会溢出）。</p>
 <h3 id="3-rotate-image48">3. Rotate Image（48）<a class="headerlink" href="#3-rotate-image48" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："矩阵顺时针旋转 90°，原地修改"。</p>
-<p><strong>候选思路</strong>：<strong>转置 + 左右翻转</strong>（两步都是原地操作，空间 O(1)）。</p>
+<p><strong>候选思路</strong>：<strong>转置 + 左右翻转</strong>（两步都是原地操作，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>）。</p>
 <p><strong>走一遍示例</strong>：<code>[[1,2,3],[4,5,6],[7,8,9]]</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>转置后:      [[1,4,7],[2,5,8],[3,6,9]]
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>左右翻转后:  [[7,4,1],[8,5,2],[9,6,3]] ✓
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>转置只遍历上三角</strong>（<code>j</code> 从 <code>i+1</code> 开始），否则每个元素会被换两次等于没动；<strong>顺时针是"左右翻转"，逆时针是"上下翻转"</strong>。</p>
+<p><strong>关键细节</strong>：<strong>转置只遍历上三角</strong>（<code>j</code> 从 <span class="arithmatex">\(i+1\)</span> 开始），否则每个元素会被换两次等于没动；<strong>顺时针是"左右翻转"，逆时针是"上下翻转"</strong>。</p>
 <h3 id="4-spiral-matrix54">4. Spiral Matrix（54）<a class="headerlink" href="#4-spiral-matrix54" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："按螺旋顺序遍历矩阵"。</p>
 <p><strong>候选思路</strong>：用四个边界 <code>top / bottom / left / right</code> 表示尚未遍历的区域，每走完一条边就收缩一格。</p>
@@ -10463,7 +10463,7 @@
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>第 5 步（左→右，top=1）: 5 → top=2，越界结束
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>结果 [1,2,3,6,9,8,7,4,5] ✓
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>第 3、4 步前必须重新检查 <code>top &lt;= bottom</code> 和 <code>left &lt;= right</code></strong>；单行、单列、单元素都靠这两个判断正确工作。</p>
+<p><strong>关键细节</strong>：<strong>第 3、4 步前必须重新检查 <code>top &lt;= bottom</code> 和 <span class="arithmatex">\(\mathrm{left} \le \mathrm{right}\)</span></strong>；单行、单列、单元素都靠这两个判断正确工作。</p>
 <h3 id="5-set-matrix-zeroes73">5. Set Matrix Zeroes（73）<a class="headerlink" href="#5-set-matrix-zeroes73" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："含 0 的行列全部置零，原地修改"。</p>
 <p><strong>候选思路</strong>：<strong>不能用额外的标记数组的话，就用第一行和第一列当标记</strong>——但这样会破坏首行首列本身的信息，所以需要<strong>两个布尔变量</strong>先记录"首行/首列原本是否有 0"。</p>
@@ -10478,7 +10478,7 @@
 <p><strong>这个技巧的本质</strong>：<code>matrix[i][0]</code> 这一格本来就有值，但它只需要承担 1 bit 的标记功能——<strong>"用已有空间存标记"和 41 题的原地哈希同源</strong>。</p>
 <h3 id="6-powx-n50">6. Pow(x, n)（50）<a class="headerlink" href="#6-powx-n50" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："计算 x 的 n 次幂"。</p>
-<p><strong>候选思路</strong>：朴素连乘是 O(n)，当 <code>n = 2³¹-1</code> 时不可接受 → <strong>快速幂 O(log n)</strong>。</p>
+<p><strong>候选思路</strong>：朴素连乘是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，当 <span class="arithmatex">\(n = 2^{31}-1\)</span> 时不可接受 → <strong>快速幂 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span></strong>。</p>
 <p><strong>递归写法</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">my_pow_recursive</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -10490,21 +10490,21 @@
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span>
 </span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="k">return</span> <span class="n">half</span> <span class="o">*</span> <span class="n">half</span> <span class="o">*</span> <span class="n">x</span>
 </span></code></pre></div>
-<p><strong>最容易写错的一点</strong>：不能写成 <code>my_pow_recursive(x, n//2) * my_pow_recursive(x, n//2)</code>——那样会重复计算，退化成 O(n)。</p>
-<p><strong>关键细节</strong>：<code>n = 0</code> 返回 1.0（包括 <code>x = 0</code> 的情况，题目约定 <code>0^0 = 1</code>）；负指数先取倒数。</p>
+<p><strong>最容易写错的一点</strong>：不能写成 <code>my_pow_recursive(x, n//2) * my_pow_recursive(x, n//2)</code>——那样会重复计算，退化成 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p><strong>关键细节</strong>：<code>n = 0</code> 返回 1.0（包括 <code>x = 0</code> 的情况，题目约定 <span class="arithmatex">\(0^0 = 1\)</span>）；负指数先取倒数。</p>
 <h3 id="7-multiply-strings43">7. Multiply Strings（43）<a class="headerlink" href="#7-multiply-strings43" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："两个大整数字符串相乘"。</p>
-<p><strong>候选思路</strong>：竖式乘法。<strong>关键是算清"乘积落在结果数组的哪一位"</strong>：<code>num1[i]</code> 和 <code>num2[j]</code> 的乘积落在第 <code>i+j</code> 位（进位）和第 <code>i+j+1</code> 位（低位）。</p>
-<p><strong>怎么推出来的？</strong> <code>num1[i]</code> 的权重是 <code>10^(m-1-i)</code>，<code>num2[j]</code> 的权重是 <code>10^(n-1-j)</code>，乘积权重是 <code>10^(m+n-2-i-j)</code>；而结果数组下标 <code>k</code> 的权重是 <code>10^(m+n-1-k)</code>。令两者相等得 <code>k = i+j+1</code>。<strong>能从权重推出下标，这题才算真懂。</strong></p>
+<p><strong>候选思路</strong>：竖式乘法。<strong>关键是算清"乘积落在结果数组的哪一位"</strong>：<code>num1[i]</code> 和 <code>num2[j]</code> 的乘积落在第 <span class="arithmatex">\(i+j\)</span> 位（进位）和第 <span class="arithmatex">\(i+j+1\)</span> 位（低位）。</p>
+<p><strong>怎么推出来的？</strong> <code>num1[i]</code> 的权重是 <span class="arithmatex">\(10^{m-1-i}\)</span>，<code>num2[j]</code> 的权重是 <span class="arithmatex">\(10^{n-1-j}\)</span>，乘积权重是 <span class="arithmatex">\(10^{m+n-2-i-j}\)</span>；而结果数组下标 <code>k</code> 的权重是 <span class="arithmatex">\(10^{m+n-1-k}\)</span>。令两者相等得 <span class="arithmatex">\(k = i+j+1\)</span>。<strong>能从权重推出下标，这题才算真懂。</strong></p>
 <p><strong>走一遍示例</strong>：<code>num1 = "123"</code>，<code>num2 = "456"</code> → <code>"56088"</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>从右往左逐位相乘，累加到 res[i+j+1]，进位加到 res[i+j]
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>最后去掉前导零
 </span></code></pre></div>
-<p><strong>关键细节</strong>：结果数组长度是 <code>m + n</code>；<strong>下标 <code>i+j+1</code>（低位）和 <code>i+j</code>（进位）不能写反</strong>；<code>"10" × "10"</code> 会产生前导零，必须去掉。</p>
-<p><strong>进阶追问</strong>："能不能更快？" → FFT 做多项式乘法，O(n log n)，但远超面试范围（<strong>提一句就够</strong>）。</p>
+<p><strong>关键细节</strong>：结果数组长度是 <span class="arithmatex">\(m + n\)</span>；<strong>下标 <span class="arithmatex">\(i+j+1\)</span>（低位）和 <span class="arithmatex">\(i+j\)</span>（进位）不能写反</strong>；<span class="arithmatex">\(10\times10\)</span> 会产生前导零，必须去掉。</p>
+<p><strong>进阶追问</strong>："能不能更快？" → FFT 做多项式乘法，<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，但远超面试范围（<strong>提一句就够</strong>）。</p>
 <h3 id="8-detect-squares2013">8. Detect Squares（2013）<a class="headerlink" href="#8-detect-squares2013" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："加点、查询能与给定点组成正方形的三元组数量"。</p>
-<p><strong>候选思路</strong>：几何 + 哈希。<strong>关键转化</strong>：给定点 <code>(x, y)</code> 作为正方形的<strong>一个角</strong>时，如果另一个角是 <code>(px, py)</code>，那么两者构成对角线 ⟺ <code>|px - x| == |py - y|</code>；此时另外两个角就是 <code>(px, y)</code> 和 <code>(x, py)</code>。</p>
+<p><strong>候选思路</strong>：几何 + 哈希。<strong>关键转化</strong>：给定点 <code>(x, y)</code> 作为正方形的<strong>一个角</strong>时，如果另一个角是 <code>(px, py)</code>，那么两者构成对角线 ⟺ <span class="arithmatex">\(\vert px - x\vert = \vert py - y\vert\)</span>；此时另外两个角就是 <code>(px, y)</code> 和 <code>(x, py)</code>。</p>
 <p><strong>走一遍示例</strong>：已有 <code>(3,10)</code>、<code>(11,2)</code>、<code>(3,2)</code>，查询 <code>(11,10)</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>枚举已有点作为对角顶点：
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>(3,2): |3-11| = 8 == |2-10| = 8 ✓，且 3≠11、2≠10
@@ -10513,7 +10513,7 @@
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>其他点：不满足 |dx| == |dy|
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>答案 1 ✓
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>重复加入同一个点要计数</strong>（用 <code>defaultdict(int)</code> 而不是 <code>set</code>）；方案数要<strong>相乘</strong>；不能把给定点自身算进去（排除 <code>px == x</code> 或 <code>py == y</code>）。</p>
+<p><strong>关键细节</strong>：<strong>重复加入同一个点要计数</strong>（用 <code>defaultdict(int)</code> 而不是 <code>set</code>）；方案数要<strong>相乘</strong>；不能把给定点自身算进去（排除 <span class="arithmatex">\(px = x\)</span> 或 <span class="arithmatex">\(py = y\)</span>）。</p>
 <h2 id="_5">五、复杂度速查<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10527,42 +10527,42 @@
 <tr>
 <td>Happy Number</td>
 <td>判环</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>Plus One</td>
 <td>从后往前处理进位</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Rotate Image</td>
 <td>转置 + 左右翻转</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 <tr>
 <td>Spiral Matrix</td>
 <td>四边界收缩</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Set Matrix Zeroes</td>
 <td>首行首列当标记</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Pow(x, n)</td>
 <td>快速幂</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>Multiply Strings</td>
 <td>竖式乘法</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Detect Squares</td>
 <td>哈希 + 枚举对角顶点</td>
-<td>O(n) 每次查询</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span> 每次查询</td>
 </tr>
 </tbody>
 </table>
@@ -10578,14 +10578,14 @@
 <li><strong>Set Matrix Zeroes 的处理顺序搞反</strong>。</li>
 </ol>
 <h2 id="_7">七、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>"这题我可以用转置 + 左右翻转来做：先沿主对角线交换 <code>matrix[i][j]</code> 和 <code>matrix[j][i]</code>，再把每一行左右翻转。两步都是原地操作，所以空间是 O(1)，时间 O(n²)。"</p>
+<p>"这题我可以用转置 + 左右翻转来做：先沿主对角线交换 <code>matrix[i][j]</code> 和 <code>matrix[j][i]</code>，再把每一行左右翻转。两步都是原地操作，所以空间是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，时间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。"</p>
 <h2 id="30">八、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>矩阵顺时针旋转 90° 的"转置 + 翻转"为什么成立？</li>
 <li>Spiral Matrix 里哪两个 <code>if</code> 判断不能省，为什么？</li>
-<li>Set Matrix Zeroes 怎么用 O(1) 空间完成？</li>
-<li>快速幂为什么是 O(log n)？</li>
-<li>Multiply Strings 里乘积为什么要落在 <code>i+j</code> 和 <code>i+j+1</code> 两位上？</li>
+<li>Set Matrix Zeroes 怎么用 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间完成？</li>
+<li>快速幂为什么是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>？</li>
+<li>Multiply Strings 里乘积为什么要落在 <span class="arithmatex">\(i+j\)</span> 和 <span class="arithmatex">\(i+j+1\)</span> 两位上？</li>
 </ol>
 
 

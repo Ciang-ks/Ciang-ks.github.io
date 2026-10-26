@@ -10344,7 +10344,7 @@
 <h1 id="26">第 26 讲 · 数学与几何<a class="headerlink" href="#26" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 2 讲：下标；第 3 讲：字典与哈希；第 4 讲：判环；第 7 讲：分治。位操作可对照第 27 讲。</p>
 <p><strong>首读范围</strong>：先做加一、字符串相乘和矩阵操作；快乐数结合第 4 讲判环；Karatsuba、共线与位成本选读。</p>
-<p>先从两个能手写的小任务开始：把十进制数加一，把方阵顺时针旋转 90°。它们都要求先说清“每一位或每个格子最后去哪”，再安排读写顺序。加一的输入是从高到低的数位列表，例如 [1,2,9] 表示 129；旋转的输入则是 n×n 方阵。</p>
+<p>先从两个能手写的小任务开始：把十进制数加一，把方阵顺时针旋转 90°。它们都要求先说清“每一位或每个格子最后去哪”，再安排读写顺序。加一的输入是从高到低的数位列表，例如 [1,2,9] 表示 129；旋转的输入则是 <span class="arithmatex">\(n\timesn\)</span> 方阵。</p>
 <p>这一讲要处理的，就是这类"看起来很朴素、其实很有讲究"的问题：</p>
 <table>
 <thead>
@@ -10389,14 +10389,12 @@
 <h3 id="_3">字符串相乘：先确定每个部分积属于哪一位<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>输入 num1、num2 是表示非负整数的非空字符串，只含数字字符，除了 <code>"0"</code> 没有前导零。返回乘积的十进制字符串，同样不带多余前导零。例如输入 <code>"12"</code>、<code>"34"</code>，输出 <code>"408"</code>。不能把整个字符串转成整数后直接相乘；可以把单个字符转成 0..9，以实现竖式乘法。</p>
 <p>先按位值展开一个熟悉的例子：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>12 × 34 = (1×10 + 2) × (3×10 + 4)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        = 1×3×100 + 1×4×10 + 2×3×10 + 2×4
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        = 300 + 40 + 60 + 8
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        = 408
-</span></code></pre></div>
-<p>因此，每个数位都要与另一个数的每个数位相乘，再把结果加到对应位上。长度分别为 m、n 的两数都小于 10 的相应次幂，乘积小于 <code>10^(m+n)</code>，所以预留 m+n 个数位槽就足够。</p>
-<p><strong>为什么是 <code>i+j+1</code>？</strong> num1[i] 的位值为 <code>10^(m−1−i)</code>，num2[j] 的位值为 <code>10^(n−1−j)</code>，相乘后位值是 <code>10^(m+n−2−i−j)</code>。在长 m+n 的结果数组里，下标 k 的位值是 <code>10^(m+n−1−k)</code>；令两者相等，就得到 k=i+j+1。这个位置放本位数字，十进制进位放在左边的 k−1=i+j。</p>
-<p>例如 12×34 预留四格 <code>[千位,百位,十位,个位]</code>。按代码从右到左处理：</p>
+<div class="arithmatex">\[
+12\times34=(1\times10+2)(3\times10+4)=300+40+60+8=408
+\]</div>
+<p>因此，每个数位都要与另一个数的每个数位相乘，再把结果加到对应位上。长度分别为 m、n 的两数都小于 10 的相应次幂，乘积小于 <span class="arithmatex">\(10^{m+n}\)</span>，所以预留 m+n 个数位槽就足够。</p>
+<p><strong>为什么是 <span class="arithmatex">\(i+j+1\)</span>？</strong> num1[i] 的位值为 <span class="arithmatex">\(10^{m-1-i}\)</span>，num2[j] 的位值为 <span class="arithmatex">\(10^{n-1-j}\)</span>，相乘后位值是 <span class="arithmatex">\(10^{m+n-2-i-j}\)</span>。在长 m+n 的结果数组里，下标 k 的位值是 <span class="arithmatex">\(10^{m+n-1-k}\)</span>；令两者相等，就得到 k=i+j+1。这个位置放本位数字，十进制进位放在左边的 k-1=i+j。</p>
+<p>例如 <span class="arithmatex">\(12\times34\)</span> 预留四格 <code>[千位,百位,十位,个位]</code>。按代码从右到左处理：</p>
 <table>
 <thead>
 <tr>
@@ -10407,137 +10405,138 @@
 </thead>
 <tbody>
 <tr>
-<td>2×4</td>
+<td><span class="arithmatex">\(2\times4\)</span></td>
 <td>个位累加 8</td>
 <td><code>[0,0,0,8]</code></td>
 </tr>
 <tr>
-<td>2×3</td>
+<td><span class="arithmatex">\(2\times3\)</span></td>
 <td>十位累加 6</td>
 <td><code>[0,0,6,8]</code></td>
 </tr>
 <tr>
-<td>1×4</td>
+<td><span class="arithmatex">\(1\times4\)</span></td>
 <td>十位变 10，留下 0，向百位进 1</td>
 <td><code>[0,1,0,8]</code></td>
 </tr>
 <tr>
-<td>1×3</td>
+<td><span class="arithmatex">\(1\times3\)</span></td>
 <td>百位在原有进位上再加 3</td>
 <td><code>[0,4,0,8]</code></td>
 </tr>
 </tbody>
 </table>
 <p>代码每次都先累加，再用 <code>//10</code> 取进位、<code>%10</code> 留本位。因此多个部分积可以汇到同一格，不能直接用新乘积覆盖旧值。最后把数位数组变成字符串：<code>map(str,res)</code> 逐个把数字变成字符，<code>''.join(...)</code> 用空分隔符将它们接成一串，例如 [0,4,0,8] 变成 "0408"；<code>lstrip('0')</code> 只删掉开头连续的 0，得到 "408"，不会删除中间的 0。乘数为零的情况在函数开头单独返回 "0"。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">num1</span> <span class="o">==</span> <span class="s2">"0"</span> <span class="ow">or</span> <span class="n">num2</span> <span class="o">==</span> <span class="s2">"0"</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="s2">"0"</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">num2</span><span class="p">))</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">num2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span>      <span class="c1"># 进位</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">%=</span> <span class="mi">10</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">if</span> <span class="n">num1</span> <span class="o">==</span> <span class="s2">"0"</span> <span class="ow">or</span> <span class="n">num2</span> <span class="o">==</span> <span class="s2">"0"</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="k">return</span> <span class="s2">"0"</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">num2</span><span class="p">))</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">num2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span>      <span class="c1"># 进位</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">%=</span> <span class="mi">10</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="1">快乐数：反复计算会停在 1，还是陷入循环<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>输入正整数 n，每次把它替换为<strong>各个十进制数位的平方和</strong>。如果反复操作最终到达 1，返回 True；如果一直到不了 1，返回 False。例如 19 的变化为：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>19 → 1²+9²=82 → 8²+2²=68 → 6²+8²=100 → 1²+0²+0²=1
-</span></code></pre></div>
+<div class="arithmatex">\[
+19\to1^2+9^2=82\to8^2+2^2=68\to6^2+8^2=100\to1^2+0^2+0^2=1
+\]</div>
 <p>但 2 会走进循环：<code>2→4→16→37→58→89→145→42→20→4→…</code>。一旦数字重复，后续变化也会重复，因为同一个数总有同一个下一结果。</p>
 <p>先考虑用集合：每次变换前检查当前数是否出现过；到 1 则成功，重复且不是 1 则失败。这需要保存见过的数。若想省去集合，可以把“一个数字”看作节点，把“计算下一次平方和”看作 next 连接，沿用第 4 讲的快慢指针判环。</p>
-<p>还需确认它不会永远产生不同的大数。一个 d 位正数的平方和至多 81d；当 d≥4 时，<code>81d&lt;10^(d−1)</code>，下一数比原数更小。降到三位以内后，下一数最多 243，以后始终留在有限范围内。所以一定会出现重复状态；1 的下一状态仍是 1，也可看成一个只有自身的环。快慢指针相遇后，只需检查相遇的数是否为 1。</p>
-<p><code>next_num</code> 用 <code>divmod(x,10)</code> 同时得到去掉个位后的整数和个位数字，例如 <code>divmod(19,10)=(1,9)</code>；逐位平方累加即可。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_happy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">next_num</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">while</span> <span class="n">x</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="n">x</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">s</span> <span class="o">+=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">return</span> <span class="n">s</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">n</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">slow</span> <span class="o">=</span> <span class="n">next_num</span><span class="p">(</span><span class="n">slow</span><span class="p">)</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="n">fast</span> <span class="o">=</span> <span class="n">next_num</span><span class="p">(</span><span class="n">next_num</span><span class="p">(</span><span class="n">fast</span><span class="p">))</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="k">if</span> <span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">:</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="k">return</span> <span class="n">slow</span> <span class="o">==</span> <span class="mi">1</span>
+<p>还需确认它不会永远产生不同的大数。一个 d 位正数的平方和至多 81d；当 d不小于4 时，<span class="arithmatex">\(81d&lt;10^{d-1}\)</span>，下一数比原数更小。降到三位以内后，下一数最多 243，以后始终留在有限范围内。所以一定会出现重复状态；1 的下一状态仍是 1，也可看成一个只有自身的环。快慢指针相遇后，只需检查相遇的数是否为 1。</p>
+<p><code>next_num</code> 用 <code>divmod(x,10)</code> 同时得到去掉个位后的整数和个位数字，例如 <code>divmod(19,10)</code> 返回 <code>(1,9)</code>；逐位平方累加即可。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_happy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">next_num</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">while</span> <span class="n">x</span><span class="p">:</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="n">x</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">s</span> <span class="o">+=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="n">s</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">n</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="n">slow</span> <span class="o">=</span> <span class="n">next_num</span><span class="p">(</span><span class="n">slow</span><span class="p">)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="n">fast</span> <span class="o">=</span> <span class="n">next_num</span><span class="p">(</span><span class="n">next_num</span><span class="p">(</span><span class="n">fast</span><span class="p">))</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="k">if</span> <span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">:</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            <span class="k">return</span> <span class="n">slow</span> <span class="o">==</span> <span class="mi">1</span>
 </span></code></pre></div>
 <h2 id="_4">矩阵题：先确定格子的去向，再安排修改顺序<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>矩阵在代码中用二维列表保存，matrix[i][j] 表示第 i 行、第 j 列；行从上向下编号，列从左向右编号，均从 0 开始。下面三个任务分别是旋转位置、按指定路线读取、按零元素清空行列，操作要求不同。</p>
 <h3 id="90">旋转图像：原地顺时针转 90°<a class="headerlink" href="#90" title="Permanent link">&para;</a></h3>
-<p>输入 n×n 方阵，把所有格子顺时针旋转 90°，要求直接修改 matrix，不另建 n×n 的结果。比如 <code>[[1,2],[3,4]]</code> 要变为 <code>[[3,1],[4,2]]</code>；函数无需返回新矩阵。</p>
-<p>观察原来最上面的一行：旋转后成了最右边的一列。一般地，原格 (i,j) 会到 (j,n−1−i)：原列 j 变成新行，原行 i 距离上边的位置变成距离右边的位置。直接逐格写目标位置会覆盖尚未搬走的值，因此把变换拆成两个只需要交换的步骤。</p>
+<p>输入 <span class="arithmatex">\(n\timesn\)</span> 方阵，把所有格子顺时针旋转 90°，要求直接修改 matrix，不另建 <span class="arithmatex">\(n\timesn\)</span> 的结果。比如 <code>[[1,2],[3,4]]</code> 要变为 <code>[[3,1],[4,2]]</code>；函数无需返回新矩阵。</p>
+<p>观察原来最上面的一行：旋转后成了最右边的一列。一般地，原格 (i,j) 会到 (j,n-1-i)：原列 j 变成新行，原行 i 距离上边的位置变成距离右边的位置。直接逐格写目标位置会覆盖尚未搬走的值，因此把变换拆成两个只需要交换的步骤。</p>
 <p><img alt="顺时针旋转 90° = 转置 + 左右翻转" src="../images/26-rotate-image.svg" /></p>
-<p>图用 3×3 矩阵展示这两个步骤；先用下面的 2×2 例子核对每次交换，再按图追踪更多格子。</p>
-<p><strong>先转置，再左右翻转。</strong> 转置是交换 (i,j) 与 (j,i)，相当于沿主对角线翻折；左右翻转则交换每一行中对称的两格。对 2×2 例子，转置得到 <code>[[1,3],[2,4]]</code>，再把每行倒过来，就得到 <code>[[3,1],[4,2]]</code>。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                     <span class="c1"># 第一步：沿主对角线转置</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>          <span class="c1"># 只遍历上三角，否则每个元素会被换两次</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                     <span class="c1"># 第二步：每一行左右翻转</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+<p>图用 <span class="arithmatex">\(3\times3\)</span> 矩阵展示这两个步骤；先用下面的 <span class="arithmatex">\(2\times2\)</span> 例子核对每次交换，再按图追踪更多格子。</p>
+<p><strong>先转置，再左右翻转。</strong> 转置是交换 (i,j) 与 (j,i)，相当于沿主对角线翻折；左右翻转则交换每一行中对称的两格。对 <span class="arithmatex">\(2\times2\)</span> 例子，转置得到 <code>[[1,3],[2,4]]</code>，再把每行倒过来，就得到 <code>[[3,1],[4,2]]</code>。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                     <span class="c1"># 第一步：沿主对角线转置</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>          <span class="c1"># 只遍历上三角，否则每个元素会被换两次</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                     <span class="c1"># 第二步：每一行左右翻转</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">],</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>怎么确认这个组合是对的？</strong> 跟踪一个点：<code>(i, j)</code> 转置后到 <code>(j, i)</code>，再左右翻转后到 <code>(j, n−1−i)</code>——这正是顺时针 90° 的映射公式。<strong>逆时针 90° 则是"转置 + 上下翻转"。</strong></p>
+<p><strong>怎么确认这个组合是对的？</strong> 跟踪一个点：<code>(i, j)</code> 转置后到 <code>(j, i)</code>，再左右翻转后到 <span class="arithmatex">\((j,n-1-i)\)</span>——这正是顺时针 90° 的映射公式。<strong>逆时针 90° 则是"转置 + 上下翻转"。</strong></p>
 <h3 id="_5">螺旋遍历：沿外圈读取，再转入内圈<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>输入 m×n 矩形矩阵，返回按顺时针螺旋顺序读出的所有元素，不修改原矩阵。起点是左上角，先向右，再向下、向左、向上，一圈后进入内圈。例如 <code>[[1,2,3],[4,5,6]]</code> 返回 <code>[1,2,3,6,5,4]</code>；空矩阵返回 <code>[]</code>。</p>
+<p>输入 <span class="arithmatex">\(m\timesn\)</span> 矩形矩阵，返回按顺时针螺旋顺序读出的所有元素，不修改原矩阵。起点是左上角，先向右，再向下、向左、向上，一圈后进入内圈。例如 <code>[[1,2,3],[4,5,6]]</code> 返回 <code>[1,2,3,6,5,4]</code>；空矩阵返回 <code>[]</code>。</p>
 <p>用 top、bottom 表示尚未输出区域的最上、最下行，left、right 表示最左、最右列。先读 top 行后让 top 加 1，再读 right 列后让 right 减 1，依次处理剩下的下边和左边。每读完一条边就把边界收进去，避免再次读到这一条：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">spiral_order</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="p">[]</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">while</span> <span class="n">top</span> <span class="o">&lt;=</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>           <span class="c1"># 左 → 右</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="n">top</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>           <span class="c1"># 上 → 下</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">right</span><span class="p">])</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="k">if</span> <span class="n">top</span> <span class="o">&lt;=</span> <span class="n">bottom</span><span class="p">:</span>                          <span class="c1"># 收缩之后可能已经没行了</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 右 → 左</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">bottom</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>            <span class="n">bottom</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>                          <span class="c1"># 也可能已经没列了</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 下 → 上</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">left</span><span class="p">])</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>    <span class="k">return</span> <span class="n">res</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">spiral_order</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="p">[]</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">while</span> <span class="n">top</span> <span class="o">&lt;=</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>           <span class="c1"># 左 → 右</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">top</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>           <span class="c1"># 上 → 下</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">right</span><span class="p">])</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="k">if</span> <span class="n">top</span> <span class="o">&lt;=</span> <span class="n">bottom</span><span class="p">:</span>                          <span class="c1"># 收缩之后可能已经没行了</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 右 → 左</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">bottom</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="n">bottom</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>                          <span class="c1"># 也可能已经没列了</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 下 → 上</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">left</span><span class="p">])</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <p><strong>那两个 <code>if</code> 一个都不能省</strong>：前面的收缩可能已经让区间变空（只剩一行或只剩一列），不判断就会重复输出。</p>
 <h3 id="0">矩阵置零：只按原来存在的 0 决定清空范围<a class="headerlink" href="#0" title="Permanent link">&para;</a></h3>
-<p>输入 m×n 整数矩阵，只要<strong>原矩阵</strong>中 matrix[i][j]=0，就要把第 i 行、第 j 列全部改成 0，要求原地修改。例如 <code>[[1,2,3],[4,0,6],[7,8,9]]</code> 应变成 <code>[[1,0,3],[0,0,0],[7,0,9]]</code>。后来为了清空而写入的 0 不能再引发新的清空，否则可能错误地把整张表都清零。</p>
-<p>最容易理解的做法是分两遍：第一遍只记录哪些行、列原本有 0，第二遍按这些标记修改矩阵。独立的行、列标记分别占 O(m)、O(n) 空间。要进一步做到 O(1) 额外空间，可以让矩阵自己的首列保存行标记、首行保存列标记：内部发现零元素 (i,j)，就写 <code>matrix[i][0]=0</code>、<code>matrix[0][j]=0</code>。</p>
+<p>输入 <span class="arithmatex">\(m\timesn\)</span> 整数矩阵，只要<strong>原矩阵</strong>中 matrix[i][j]=0，就要把第 i 行、第 j 列全部改成 0，要求原地修改。例如 <code>[[1,2,3],[4,0,6],[7,8,9]]</code> 应变成 <code>[[1,0,3],[0,0,0],[7,0,9]]</code>。后来为了清空而写入的 0 不能再引发新的清空，否则可能错误地把整张表都清零。</p>
+<p>最容易理解的做法是分两遍：第一遍只记录哪些行、列原本有 0，第二遍按这些标记修改矩阵。独立的行、列标记分别占 <span class="arithmatex">\(\mathcal{O}(m)\)</span>、<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间。要进一步做到 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间，可以让矩阵自己的首列保存行标记、首行保存列标记：内部发现零元素 (i,j)，就写 <code>matrix[i][0]=0</code>、<code>matrix[0][j]=0</code>。</p>
 <p>但首行、首列原本是否含 0，之后会被这些标记混淆，所以先用两个布尔变量单独记住。随后只扫描内部格子设置标记，再据标记清空内部，最后按两个布尔变量处理首行和首列。<code>any(条件 for j in range(n))</code> 按第 3 讲的生成器写法，逐个计算每个 j 的条件，至少一个为真就返回 True。例如首行的检查就是问“首行有没有某一格等于 0”。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_zeroes</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="k">return</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">ROWS</span><span class="p">,</span> <span class="n">COLS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">row0_zero</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COLS</span><span class="p">))</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">col0_zero</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">))</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ROWS</span><span class="p">):</span>                   <span class="c1"># 用首行首列记录"这一行/列要不要清零"</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">COLS</span><span class="p">):</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>                <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ROWS</span><span class="p">):</span>                   <span class="c1"># 按标记清零</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">COLS</span><span class="p">):</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="k">if</span> <span class="n">row0_zero</span><span class="p">:</span>                              <span class="c1"># 首行首列留到最后处理</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COLS</span><span class="p">):</span>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>            <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="k">if</span> <span class="n">col0_zero</span><span class="p">:</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">):</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_zeroes</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrix</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="k">return</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">ROWS</span><span class="p">,</span> <span class="n">COLS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">row0_zero</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COLS</span><span class="p">))</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">col0_zero</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">))</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ROWS</span><span class="p">):</span>                   <span class="c1"># 用首行首列记录"这一行/列要不要清零"</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">COLS</span><span class="p">):</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>                <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ROWS</span><span class="p">):</span>                   <span class="c1"># 按标记清零</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">COLS</span><span class="p">):</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>            <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>                <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="k">if</span> <span class="n">row0_zero</span><span class="p">:</span>                              <span class="c1"># 首行首列留到最后处理</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COLS</span><span class="p">):</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>            <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="k">if</span> <span class="n">col0_zero</span><span class="p">:</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">):</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 </span></code></pre></div>
 <p><strong>三个阶段的顺序不能乱</strong>：先记下首行首列原本有没有 0，再用它们当标记，最后才真正清空首行首列。<strong>提前处理会被自己的标记冲掉。</strong></p>
 <h2 id="_6">几何题：用坐标表示点，用整数对表示方向<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -10546,148 +10545,150 @@
 <p>例如依次加入 <code>[1,0]</code>、<code>[0,1]</code>、<code>[1,1]</code>，查询 <code>[0,0]</code> 返回 1。若再加入一份 <code>[1,1]</code>，查询结果变成 2，因为对角顶点有两份可选记录。</p>
 <p>固定查询角 (x,y)，枚举一个已保存的对角顶点 (px,py)。水平距离与竖直距离相同且非零时，才可能形成轴对齐正方形；另外两角的位置随即确定为 (px,y)、(x,py)。查出这三个坐标各自出现次数后相乘，累加所有可能的对角顶点即可。每个正方形相对查询角只有一个对角顶点，不会因这次枚举重复计数。</p>
 <p><code>defaultdict(int)</code> 在首次读一个缺失键时从 0 开始，便于计数；坐标列表不能直接作字典键，所以 add 用 <code>tuple(point)</code> 转成 <code>(x,y)</code>。查询另两角用 get(key,0)，缺失表示 0 份且不会在遍历时插入新键。<code>self.cnt.items()</code> 每轮给出 <code>(键,值)</code>，这里键又是坐标对，所以 <code>for (px,py),c in ...</code> 依次解出横坐标、纵坐标与记录数；例如键值对 <code>((1,1),2)</code> 对应 px=1、py=1、c=2。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">DetectSquares</span><span class="p">:</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">point</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>            <span class="c1"># 同一个点可能被多次加入，要计数</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">for</span> <span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">),</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="c1"># 把 (px, py) 当作对角顶点，看它和给定点能否构成正方形</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">px</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">abs</span><span class="p">(</span><span class="n">py</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="ow">and</span> <span class="n">px</span> <span class="o">!=</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">py</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>                <span class="n">total</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">px</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">py</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="k">return</span> <span class="n">total</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">DetectSquares</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">point</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>            <span class="c1"># 同一个点可能被多次加入，要计数</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="k">for</span> <span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">),</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>            <span class="c1"># 把 (px, py) 当作对角顶点，看它和给定点能否构成正方形</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">px</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">abs</span><span class="p">(</span><span class="n">py</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="ow">and</span> <span class="n">px</span> <span class="o">!=</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">py</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>                <span class="n">total</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">px</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">py</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
-<p>若三处坐标的记录数分别为 2、3、4，那么从它们各选一份有 <code>2×3×4=24</code> 种方式；查询点只提供固定的第四个角，不再乘它的保存次数。每次 add 期望 O(1)，count 则扫描已经保存的不同坐标。</p>
+<p>若三处坐标的记录数分别为 2、3、4，那么从它们各选一份有 <span class="arithmatex">\(2\times 3\times 4=24\)</span> 种方式；查询点只提供固定的第四个角，不再乘它的保存次数。每次 add 期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，count 则扫描已经保存的不同坐标。</p>
 <h3 id="_8">直线上最多的点：固定一个点，再按方向分组<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>输入两两不同的平面整数点 points，返回一条直线上最多能包含多少个输入点。例如 <code>[[0,0],[1,1],[2,2],[0,1]]</code> 的答案是 3，因为前三点在同一直线上。这里不只判断某三个点，还要在全部候选直线中找最大数量。</p>
-<p>先固定基准点 (x1,y1)。其他点与它的差 <code>(dx,dy)=(x−x1,y−y1)</code> 描述方向；同一直线上的点有相同或相反的方向。例如 (1,2)、(2,4)、(−1,−2) 应归为同一组。把两坐标除以最大公约数 gcd，就能把 (2,4) 化为 (1,2)；再统一正负号，让 (−1,−2) 也化为 (1,2)。竖直方向化为 (0,1)，水平方向化为 (1,0)，避免了斜率除以 0 和浮点误差。</p>
+<p>先固定基准点 (x1,y1)。其他点与它的差 <span class="arithmatex">\((dx,dy)=(x-x1,y-y1)\)</span> 描述方向；同一直线上的点有相同或相反的方向。例如 (1,2)、(2,4)、(-1,-2) 应归为同一组。把两坐标除以最大公约数 gcd，就能把 (2,4) 化为 (1,2)；再统一正负号，让 (-1,-2) 也化为 (1,2)。竖直方向化为 (0,1)，水平方向化为 (1,0)，避免了斜率除以 0 和浮点误差。</p>
 <p>用字典统计每种规范方向的点数，最大组数再加基准点自己，就是经过该基准点的最优答案。让每个输入点都当一次基准点，就不会漏掉最佳直线。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcd</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="c1"># 约定坐标两两不同；重复点需要另计重数。</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="k">return</span> <span class="n">n</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        <span class="n">slopes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>                <span class="k">continue</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>            <span class="n">dx</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>            <span class="n">dy</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y1</span>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>            <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">1</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>            <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">//</span> <span class="n">g</span><span class="p">,</span> <span class="n">dy</span> <span class="o">//</span> <span class="n">g</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>            <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dx</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dy</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>      <span class="c1"># 统一符号</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>                <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="n">dy</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>            <span class="n">slopes</span><span class="p">[(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        <span class="k">if</span> <span class="n">slopes</span><span class="p">:</span>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>            <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">slopes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># 别忘了基准点自己</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>    <span class="k">return</span> <span class="n">best</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcd</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_points</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="c1"># 约定坐标两两不同；重复点需要另计重数。</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="k">return</span> <span class="n">n</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">slopes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>                <span class="k">continue</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>            <span class="n">dx</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x1</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>            <span class="n">dy</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y1</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">1</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>            <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">//</span> <span class="n">g</span><span class="p">,</span> <span class="n">dy</span> <span class="o">//</span> <span class="n">g</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>            <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dx</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dy</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>      <span class="c1"># 统一符号</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>                <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="n">dy</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>            <span class="n">slopes</span><span class="p">[(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>        <span class="k">if</span> <span class="n">slopes</span><span class="p">:</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>            <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">slopes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># 别忘了基准点自己</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
-<p>两个动作缺一不可：<strong>约分</strong>让 <code>(2,4)</code> 与 <code>(1,2)</code> 落到同一个 key；<strong>符号归一化</strong>让 <code>(1,2)</code> 与 <code>(−1,−2)</code> 落到同一个 key。竖直方向统一为 (0,1)，水平方向统一为 (1,0)，也不必特判“除以零”。</p>
+<p>两个动作缺一不可：<strong>约分</strong>让 <code>(2,4)</code> 与 <code>(1,2)</code> 落到同一个 key；<strong>符号归一化</strong>让 <code>(1,2)</code> 与 <code>(-1,-2)</code> 落到同一个 key。竖直方向统一为 (0,1)，水平方向统一为 (1,0)，也不必特判“除以零”。</p>
 <h2 id="_9">快速幂：把指数不断减半<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>输入底数 x 和整数指数 n，返回 x 的 n 次方。例如 x=2、n=10 返回 1024；x=2、n=−2 返回 0.25。这里 x 用浮点数表示，结果受浮点精度限制；负指数要求 x≠0。先约定 n=0 时返回 1，n&lt;0 时把问题改成 <code>(1/x)^(−n)</code>，然后只处理正指数。</p>
-<p>对正指数，朴素方法是把 n 个 x 连乘，需要 O(n) 次乘法。但指数的奇偶性给出了另一条计算路线：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>x^n = (x^(n/2))²             n 为偶数
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>x^n = x · (x^((n-1)/2))²      n 为奇数
+<p>输入底数 x 和整数指数 n，返回 x 的 n 次方。例如 x=2、n=10 返回 1024；x=2、n=-2 返回 0.25。这里 x 用浮点数表示，结果受浮点精度限制；负指数要求 x不等于0。先约定 n=0 时返回 1，n&lt;0 时把问题改成 <span class="arithmatex">\((1/x)^{-n}\)</span>，然后只处理正指数。</p>
+<p>对正指数，朴素方法是把 n 个 x 连乘，需要 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 次乘法。但指数的奇偶性给出了另一条计算路线：</p>
+<div class="arithmatex">\[
+x^n=\begin{cases}(x^{n/2})^2,&amp;n\text{ 为偶数},\\x(x^{(n-1)/2})^2,&amp;n\text{ 为奇数}.\end{cases}
+\]</div>
+<p>例如 <span class="arithmatex">\(x^{10}\)</span> 可以先算 <span class="arithmatex">\(x^5\)</span>，再把结果平方；<span class="arithmatex">\(x^5\)</span> 又等于 <span class="arithmatex">\(x(x^2)^2\)</span>。若用递归，同一个半规模结果只算一次再复用，递归式为 <span class="arithmatex">\(T(n)=T(n/2)+\mathcal{O}(1)\)</span>，所以乘法次数是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
+<p>下面写成循环。result 保存已经取出的乘积，base 是剩余乘方的底数，n 是剩余指数，始终保持 <span class="arithmatex">\(\mathrm{result}\times \mathrm{base}^n\)</span> 等于原来的目标值。n 为偶数时，直接把 base 平方、n 减半；n 为奇数时，先向 result 取出一个 base，剩余偶数次再减半。例子 <span class="arithmatex">\(2^5\)</span> 的三元组变化为 <code>(1,2,5)→(2,4,2)→(2,16,1)→(32,256,0)</code>，最后指数为 0，只剩 result=32。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">my_pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="sd">"""x^n；按定长乘法计数，O(log(abs(n)+1))。"""</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">base</span> <span class="o">=</span> <span class="n">x</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>           <span class="c1"># 奇数：把当前这一份乘进来</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>            <span class="n">result</span> <span class="o">*=</span> <span class="n">base</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">base</span> <span class="o">*=</span> <span class="n">base</span>             <span class="c1"># 底数平方，同时把剩余指数整除 2</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">return</span> <span class="n">result</span>
 </span></code></pre></div>
-<p>例如 x^10 可以先算 x^5，再把结果平方；x^5 又等于 x×(x²)²。若用递归，同一个半规模结果只算一次再复用，递归式为 <code>T(n)=T(n/2)+O(1)</code>，所以乘法次数是 O(log n)。</p>
-<p>下面写成循环。result 保存已经取出的乘积，base 是剩余乘方的底数，n 是剩余指数，始终保持 <code>result×base^n</code> 等于原来的目标值。n 为偶数时，直接把 base 平方、n 减半；n 为奇数时，先向 result 取出一个 base，剩余偶数次再减半。例子 <code>2^5</code> 的三元组变化为 <code>(1,2,5)→(2,4,2)→(2,16,1)→(32,256,0)</code>，最后指数为 0，只剩 result=32。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">my_pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="sd">"""x^n；按定长乘法计数，O(log(abs(n)+1))。"""</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="n">base</span> <span class="o">=</span> <span class="n">x</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>           <span class="c1"># 奇数：把当前这一份乘进来</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>            <span class="n">result</span> <span class="o">*=</span> <span class="n">base</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        <span class="n">base</span> <span class="o">*=</span> <span class="n">base</span>             <span class="c1"># 底数平方，同时把剩余指数整除 2</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        <span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="k">return</span> <span class="n">result</span>
-</span></code></pre></div>
-<p>选读：学完第 27 讲后，也可以把 n 的奇偶检查理解为逐个读取二进制位。例如 10=8+2，因此 x^10=x^8×x²。循环里的 base 依次为 x、x²、x⁴、x⁸，正好只在对应的那两轮乘入 result。首次学习用上面的奇偶分解即可理解代码。</p>
+<p>选读：学完第 27 讲后，也可以把 n 的奇偶检查理解为逐个读取二进制位。例如 <span class="arithmatex">\(10=8+2\)</span>，因此 <span class="arithmatex">\(x^{10}=x^8x^2\)</span>。循环里的 base 依次为 x、<span class="arithmatex">\(x^{2}\)</span>、<span class="arithmatex">\(x^{4}\)</span>、<span class="arithmatex">\(x^{8}\)</span>，正好只在对应的那两轮乘入 result。首次学习用上面的奇偶分解即可理解代码。</p>
 <h2 id="_10">选读：从竖式乘法到分治乘法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<p>竖式乘法中，每一位都要和另一数的每一位相乘，共 O(n²) 次数位乘法。分治先把数各拆成两半，通常需要四次子乘法；Karatsuba 用一个代数恒等式把它减少到三次，改变了整体增长阶。先完成数位与矩阵的练习，再读这个进阶例子。</p>
+<p>竖式乘法中，每一位都要和另一数的每一位相乘，共 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 次数位乘法。分治先把数各拆成两半，通常需要四次子乘法；Karatsuba 用一个代数恒等式把它减少到三次，改变了整体增长阶。先完成数位与矩阵的练习，再读这个进阶例子。</p>
 <h3 id="_11">整数的"规模"是位数，不是数值<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>先定义一台抽象机器（<strong>word RAM</strong>）：内存是一排编号的格子，每格放一个"字"，通常 64 位；<strong>算术、比较、按位运算都算一次操作</strong>。</p>
 <p>这个模型里藏着一个约定：<strong>参与运算的数都装得进一个机器字。</strong> 一旦这条被打破（比如"两个 n 位数相乘"），代价就得按<strong>位数</strong>重新算：</p>
 <ul>
-<li>n 位加法、比较、按位操作最坏需 O(n) 位工作；</li>
-<li>两个 n 位数的竖式乘法需 O(n²) 位/数位工作；</li>
-<li>取模的成本还取决于除数长度，不能无条件说都是 O(n)；</li>
-<li><code>while x: x //=10</code> 有 Θ(d) 轮，d 是十进制位数。但任意精度下除以小常数仍需扫描当前位数，总位工作可能为 Θ(d²)。</li>
+<li>n 位加法、比较、按位操作最坏需 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 位工作；</li>
+<li>两个 n 位数的竖式乘法需 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 位/数位工作；</li>
+<li>取模的成本还取决于除数长度，不能无条件说都是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；</li>
+<li><code>while x: x //=10</code> 有 <span class="arithmatex">\(\Theta (d)\)</span> 轮，d 是十进制位数。但任意精度下除以小常数仍需扫描当前位数，总位工作可能为 <span class="arithmatex">\(\Theta (d^{2})\)</span>。</li>
 </ul>
-<p>回看本讲前面的算法，它们采用不同的计费单位：字符串乘法按单个数位计费；浮点快速幂按一次定长浮点乘法计费；矩阵按格子访问计费。<code>O(log n)</code> 次大整数乘法不等于 O(log n) 位时间。</p>
+<p>回看本讲前面的算法，它们采用不同的计费单位：字符串乘法按单个数位计费；浮点快速幂按一次定长浮点乘法计费；矩阵按格子访问计费。<span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 次大整数乘法不等于 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 位时间。</p>
 <h3 id="_12">竖式乘法：瓶颈在“每一位都要碰每一位”<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>为比较分治乘法，这里再写一个接受非负整数 a、b、返回整数乘积的演示函数。先转成数位列表，故意按<strong>个位在前</strong>保存：12 变成 [2,1]，下标 i 对应 10 的 i 次方。这样两位相乘应累加到下标 i+j，与前面高位在前的 i+j+1 公式不同。</p>
 <p>本版先累计所有部分积，再从低位向高位统一进位；最后反过来读数位并转换成整数。它用于比较算法工作量，输入输出转换不属于核心数位乘法：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mul_naive</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="c1"># 演示非负整数的竖式：先存每一位，再统一进位。</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"本例只处理非负整数"</span><span class="p">)</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="n">digits_a</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))]</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">digits_b</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))]</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">digits_a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits_b</span><span class="p">))</span>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">da</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">digits_a</span><span class="p">):</span>
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">db</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">digits_b</span><span class="p">):</span>
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>            <span class="n">out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">da</span> <span class="o">*</span> <span class="n">db</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="n">out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%=</span> <span class="mi">10</span>
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="n">text</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">out</span><span class="p">))</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'0'</span>
-</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mul_naive</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="c1"># 演示非负整数的竖式：先存每一位，再统一进位。</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"本例只处理非负整数"</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">digits_a</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))]</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">digits_b</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))]</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">digits_a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits_b</span><span class="p">))</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">da</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">digits_a</span><span class="p">):</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">db</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">digits_b</span><span class="p">):</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>            <span class="n">out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">da</span> <span class="o">*</span> <span class="n">db</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>        <span class="n">out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%=</span> <span class="mi">10</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">text</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">out</span><span class="p">))</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'0'</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </span></code></pre></div>
-<p>先用 <code>9×9</code> 检查：累计得到低位 81，进位后为 <code>[1,8]</code>，从高位读为 81。如果漏掉进位，就连这个一位数的例子也会算错。两个 d 位数共做 d² 次数位乘法，位数组占 O(d)；这里额外的整数/字符串转换是演示接口，不是高性能大整数库的实现。</p>
+<p>先用 <span class="arithmatex">\(9\times9\)</span> 检查：累计得到低位 81，进位后为 <code>[1,8]</code>，从高位读为 81。如果漏掉进位，就连这个一位数的例子也会算错。两个 d 位数共做 <span class="arithmatex">\(d^{2}\)</span> 次数位乘法，位数组占 <span class="arithmatex">\(\mathcal{O}(d)\)</span>；这里额外的整数/字符串转换是演示接口，不是高性能大整数库的实现。</p>
 <h3 id="karatsuba">Karatsuba：用一次加法换掉一次乘法<a class="headerlink" href="#karatsuba" title="Permanent link">&para;</a></h3>
 <p><img alt="Karatsuba 的三个乘积" src="../figures/26-karatsuba.png" /></p>
-<p>图中两个完整乘数记作 x、y，下文沿用这两个名字。图里的高低半段 a、b、c、d，下文依次写为 a₁、a₀、b₁、b₀；因此图中 ac 对应 a₁b₁，bd 对应 a₀b₀。半段与完整乘数有不同的名字，避免把它们混在一起。</p>
+<p>图中两个完整乘数记作 x、y，下文沿用这两个名字。图里的高低半段 a、b、c、d，下文依次写为 <span class="arithmatex">\(a_{1}\)</span>、<span class="arithmatex">\(a_{0}\)</span>、<span class="arithmatex">\(b_{1}\)</span>、<span class="arithmatex">\(b_{0}\)</span>；因此图中 ac 对应 <span class="arithmatex">\(a_{1}\)</span><span class="arithmatex">\(b_{1}\)</span>，bd 对应 <span class="arithmatex">\(a_{0}\)</span><span class="arithmatex">\(b_{0}\)</span>。半段与完整乘数有不同的名字，避免把它们混在一起。</p>
 <p>把两个 n 位数 x、y 从中间劈开（先假设 n 为偶数）：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>x = a₁·10^(n/2) + a₀
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>y = b₁·10^(n/2) + b₀
-</span></code></pre></div>
+<div class="arithmatex">\[
+x=a_1\,10^{n/2}+a_0,\qquad y=b_1\,10^{n/2}+b_0
+\]</div>
 <p>展开就有</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>x·y = a₁b₁·10^n + (a₁b₀ + a₀b₁)·10^(n/2) + a₀b₀
-</span></code></pre></div>
-<p>老实算需要 <strong>4 次子乘法</strong>（<code>a₁b₁</code>、<code>a₁b₀</code>、<code>a₀b₁</code>、<code>a₀b₀</code>），递归式 <code>T(n) = 4T(n/2) + O(n)</code>，由主定理得 <code>O(n²)</code>——<strong>和竖式一样，白忙一场。</strong></p>
+<div class="arithmatex">\[
+xy=a_1b_1\,10^n+(a_1b_0+a_0b_1)10^{n/2}+a_0b_0
+\]</div>
+<p>老实算需要 <strong>4 次子乘法</strong>（<span class="arithmatex">\(a_{1}b_{1}\)</span>、<span class="arithmatex">\(a_{1}b_{0}\)</span>、<span class="arithmatex">\(a_{0}b_{1}\)</span>、<span class="arithmatex">\(a_{0}b_{0}\)</span>），递归式 <span class="arithmatex">\(T(n) = 4T(n/2) + \mathcal{O}(n)\)</span>，由主定理得 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>——<strong>和竖式一样，白忙一场。</strong></p>
 <blockquote>
 <p><strong>Karatsuba 的观察</strong>：中间那一项可以用<strong>已经算过的两个乘积</strong>推出来。
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>a₁b₀ + a₀b₁ = (a₁ + a₀)(b₁ + b₀) − a₁b₁ − a₀b₀
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>\(a_{1}\)\(b_{0}\) + \(a_{0}\)\(b_{1}\) = (\(a_{1}\) + \(a_{0}\))(\(b_{1}\) + \(b_{0}\)) - \(a_{1}\)\(b_{1}\) - \(a_{0}\)\(b_{0}\)
 </span></code></pre></div>
-于是只需要 <strong>3 次子乘法</strong>：<code>a₁b₁</code>、<code>a₀b₀</code>、<code>(a₁ + a₀)(b₁ + b₀)</code>。</p>
+于是只需要 <strong>3 次子乘法</strong>：<span class="arithmatex">\(a_{1}b_{1}\)</span>、<span class="arithmatex">\(a_{0}b_{0}\)</span>、<span class="arithmatex">\((a_{1} + a_{0})(b_{1} + b_{0})\)</span>。</p>
 </blockquote>
 <p><img alt="12乘34的三次乘法与拼接" src="../images/26-karatsuba.svg" /></p>
-<p>先算12×34，取十位和个位：a₁=1、a₀=2、b₁=3、b₀=4。只乘三次：高位乘积3、低位乘积8、两半和的乘积 <code>(1+2)(3+4)=21</code>。中间项为21−3−8=10，拼回 <code>3×100+10×10+8=408</code>。</p>
-<p>若位数是奇数，选m=⌊n/2⌋，用divmod(x,10**m)拆成高/低两半，展开式写成 <code>高乘积×10**(2m)+交叉和×10**m+低乘积</code>。这里按位运算计费，加减与拼接需O(n)；两个半数相加可能多1位，不改变渐进阶。</p>
-<p>递归式变成 <code>T(n) = 3T(n/2) + O(n)</code>，主定理给出：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>T(n) = Θ(n^(log₂3))，其中 log₂3 ≈ 1.585
-</span></code></pre></div>
+<p>先算 <span class="arithmatex">\(12\times34\)</span>，取十位和个位：<span class="arithmatex">\(a_1=1\)</span>、<span class="arithmatex">\(a_0=2\)</span>、<span class="arithmatex">\(b_1=3\)</span>、<span class="arithmatex">\(b_0=4\)</span>。只乘三次：高位乘积3、低位乘积8、两半和的乘积 <span class="arithmatex">\((1+2)(3+4)=21\)</span>。中间项为 <span class="arithmatex">\(21-3-8=10\)</span>，拼回 <span class="arithmatex">\(3\times 100+10\times 10+8=408\)</span>。</p>
+<p>若位数是奇数，选<span class="arithmatex">\(m=\lfloor n/2\rfloor\)</span>，用divmod(x,10**m)拆成高/低两半，展开式写成 <span class="arithmatex">\(高乘积\times 10^{2m}+交叉和\times 10^m+低乘积\)</span>。这里按位运算计费，加减与拼接需<span class="arithmatex">\(\mathcal{O}(n)\)</span>；两个半数相加可能多1位，不改变渐进阶。</p>
+<p>递归式变成 <span class="arithmatex">\(T(n) = 3T(n/2) + \mathcal{O}(n)\)</span>，主定理给出：</p>
+<div class="arithmatex">\[
+T(n)=\Theta(n^{\log_2 3}),\qquad \log_2 3\approx1.585
+\]</div>
 <p>每一层都少做一个半规模乘法，节省会沿整棵递归树累积，才使 n 的指数从 2 降到约 1.585；这不是只在最外层少乘一次。</p>
 <h2 id="_13">两段证明<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p><strong>Karatsuba 为什么对。</strong> 只需验证那个代数恒等式：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>(a₁ + a₀)(b₁ + b₀) − a₁b₁ − a₀b₀
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    = a₁b₁ + a₁b₀ + a₀b₁ + a₀b₀ − a₁b₁ − a₀b₀
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    = a₁b₀ + a₀b₁
-</span></code></pre></div>
-<p>代回 <code>x·y = a₁b₁·10^n + (a₁b₀ + a₀b₁)·10^(n/2) + a₀b₀</code> 即可，剩下的"乘 10 的幂"就是移位。递归到位数 ≤ 1 时直接相乘。复杂度由主定理给出：<code>n^(log₂3) &gt; n^1</code>，落在情形 1，所以 <code>T(n) = Θ(n^(log₂3))</code>。∎</p>
-<p><strong>快速幂为什么对。</strong> 先把负指数转换为倒数的正指数，记转换后的初始底数为 x、指数为 N。第 i 轮时 base=x^(2^i)，剩余指数 nᵢ=⌊N/2^i⌋。不变式是</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>result × base^(nᵢ) = x^N
-</span></code></pre></div>
-<p>初始时 <code>result = 1</code>、<code>base = x</code>、<code>n₀ = N</code>，左边就是 <code>x^N</code>。每一步：若 <code>nᵢ</code> 是偶数，则 <code>base^(nᵢ) = (base²)^(nᵢ/2)</code>；若是奇数，则 <code>base^(nᵢ) = base · (base²)^((nᵢ−1)/2)</code>——这时正好要把 <code>base</code> 乘进 <code>result</code>，也就是代码里的 <code>if n % 2 == 1</code>。循环结束时 <code>nᵢ = 0</code>，于是 <code>result = x^N</code>。∎</p>
+<div class="arithmatex">\[
+(a_1+a_0)(b_1+b_0)-a_1b_1-a_0b_0=a_1b_0+a_0b_1
+\]</div>
+<p>代回 <span class="arithmatex">\(x\cdot y = a_{1}b_{1}\cdot 10^n + (a_{1}b_{0} + a_{0}b_{1})\cdot 10^{n/2} + a_{0}b_{0}\)</span> 即可，剩下的"乘 10 的幂"就是移位。递归到位数 不大于 1 时直接相乘。复杂度由主定理给出：<span class="arithmatex">\(n^{\log _{2}3} &gt; n^1\)</span>，落在情形 1，所以 <span class="arithmatex">\(T(n) = \Theta (n^{\log _{2}3})\)</span>。</p>
+<p><strong>快速幂为什么对。</strong> 先把负指数转换为倒数的正指数，记转换后的初始底数为 x、指数为 N。第 i 轮时 <span class="arithmatex">\(\mathrm{base}=x^{2^i}\)</span>，剩余指数为 <span class="arithmatex">\(n_i=\lfloor N/2^i\rfloor\)</span>。不变式是</p>
+<div class="arithmatex">\[
+\mathrm{result}\times\mathrm{base}^{n_i}=x^N
+\]</div>
+<p>初始时 <code>result = 1</code>、<span class="arithmatex">\(\mathrm{base} = x\)</span>、<span class="arithmatex">\(n_{0} = N\)</span>，左边就是 <span class="arithmatex">\(x^N\)</span>。每一步：若 <span class="arithmatex">\(n_{i}\)</span> 是偶数，则 <span class="arithmatex">\(\mathrm{base}^{n_{i}} = (\mathrm{base}^{2})^{n_{i}/2}\)</span>；若是奇数，则 <span class="arithmatex">\(\mathrm{base}^{n_{i}} = \mathrm{base}(\mathrm{base}^2)^{(n_i-1)/2}\)</span>——这时正好要把 <code>base</code> 乘进 <code>result</code>，也就是代码里的 <code>if n % 2 == 1</code>。循环结束时 <span class="arithmatex">\(n_{i} = 0\)</span>，于是 <span class="arithmatex">\(\mathrm{result} = x^N\)</span>。</p>
 <h2 id="_14">复杂度与两个小例子<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
-<p>表中的字母按具体输入解释：数位题 n 是位数；字符串乘法 m、n 是两个串的长度；矩阵题 m、n 是行列数；快速幂的对数取指数绝对值（含 n=0 时写 O(log(|n|+1))）。Detect Squares 的 n 是已经保存的不同坐标数，共线题的 n 是点数、M 是坐标差绝对值的上界。</p>
+<p>表中的字母按具体输入解释：数位题 n 是位数；字符串乘法 m、n 是两个串的长度；矩阵题 m、n 是行列数；快速幂的对数取指数绝对值（含 n=0 时写 <span class="arithmatex">\(\mathcal{O}(\log (\vert n\vert +1))\)</span>）。Detect Squares 的 n 是已经保存的不同坐标数，共线题的 n 是点数、M 是坐标差绝对值的上界。</p>
 <table>
 <thead>
 <tr>
@@ -10701,68 +10702,68 @@
 <tr>
 <td>竖式乘法</td>
 <td>逐位相乘</td>
-<td><code>O(n²)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td><strong>Karatsuba</strong></td>
 <td>3 次子乘法</td>
-<td><code>Θ(n^(log₂3))</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\Theta (n^{\log _{2}3})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>快速幂</td>
 <td>指数减半</td>
-<td><code>O(log n)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Happy Number</td>
 <td>判环</td>
-<td>首次拆位 O(log n)，之后状态迅速缩小（按字操作计）</td>
-<td>O(1) 个整数</td>
+<td>首次拆位 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，之后状态迅速缩小（按字操作计）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span> 个整数</td>
 </tr>
 <tr>
 <td>Plus One</td>
 <td>从后往前处理进位</td>
-<td><code>O(n)</code></td>
-<td>原地部分 O(1)，全 9 时新输出 O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td>原地部分 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，全 9 时新输出 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Rotate Image</td>
 <td>转置 + 翻转</td>
-<td><code>O(n²)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Spiral Matrix</td>
 <td>四边界收缩</td>
-<td><code>O(mn)</code></td>
-<td>辅助 O(1)，输出 O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
+<td>辅助 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，输出 <span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Set Matrix Zeroes</td>
 <td>首行首列当标记</td>
-<td><code>O(mn)</code></td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Multiply Strings</td>
 <td>竖式乘法</td>
-<td><code>O(mn)</code></td>
-<td><code>O(m+n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m+n)\)</span></td>
 </tr>
 <tr>
 <td>Detect Squares</td>
 <td>哈希 + 枚举对角顶点</td>
-<td>每次查询 <code>O(n)</code></td>
-<td><code>O(n)</code></td>
+<td>每次查询 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Max Points on a Line</td>
 <td>约分后的方向向量</td>
-<td><code>O(n² log M)</code></td>
-<td><code>O(n)</code></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log M)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10823,11 +10824,11 @@
 </tbody>
 </table>
 <p><strong>旋转与螺旋</strong>：<code>[[1,2,3],[4,5,6],[7,8,9]]</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>转置后:      [[1,4,7],[2,5,8],[3,6,9]]
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>左右翻转后:  [[7,4,1],[8,5,2],[9,6,3]]     ✓（顺时针 90°）
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>螺旋：左→右 1,2,3 → 上→下 6,9 → 右→左 8,7 → 下→上 4 → 左→右 5
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>得到 [1,2,3,6,9,8,7,4,5]                    ✓
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>转置后:      [[1,4,7],[2,5,8],[3,6,9]]
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>左右翻转后:  [[7,4,1],[8,5,2],[9,6,3]]     ✓（顺时针 90°）
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>螺旋：左→右 1,2,3 → 上→下 6,9 → 右→左 8,7 → 下→上 4 → 左→右 5
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>得到 [1,2,3,6,9,8,7,4,5]                    ✓
 </span></code></pre></div>
 <h2 id="_15">它在题库里长什么样<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <table>
@@ -10887,28 +10888,28 @@
 <h2 id="_16">从讲义走到代码<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <p>图像网格旋转可以直接按坐标映射实现；大整数乘法则要按数位估算工作量。</p>
 <p>先写 plus_one([9,9])，应得 [1,0,0]；再做 <a href="../../problems/17-math-and-geometry/03-rotate-image/">Rotate Image</a>，把 [[1,2],[3,4]] 原地变为 [[3,1],[4,2]]。检查每次交换的两个下标，以及转置时为何只处理上三角。</p>
-<p>接着用 [[1,2,3]] 与 [[1],[2],[3]] 检查螺旋遍历不重复读格子。读到竖式乘法时先算 9×9=81，再用 12×34=408 对照三个 Karatsuba 子乘积。</p>
+<p>接着用 [[1,2,3]] 与 [[1],[2],[3]] 检查螺旋遍历不重复读格子。读到竖式乘法时先算 <span class="arithmatex">\(9\times9=81\)</span>，再用 <span class="arithmatex">\(12\times34=408\)</span> 对照三个 Karatsuba 子乘积。</p>
 <h2 id="_17">练习<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 为什么快速幂是 <code>O(log n)</code>？写出递归式。</p>
-<p>指数每次减半：<code>T(n) = T(n/2) + O(1)</code>，所以 <code>T(n) = O(log n)</code>。<strong>注意这里的 n 是指数的数值，而它在输入里只占 <code>log n</code> 个比特</strong>——按第 22 讲的分类，朴素的连乘才是"伪多项式"的。</p>
-<p><strong>2.</strong> Karatsuba 只是少做了一次子乘法，为什么复杂度从 <code>O(n²)</code> 变成 <code>O(n^1.585)</code>？</p>
-<p>因为复杂度由主定理的 <code>n^(log_b a)</code> 决定，递归调用数 <code>a</code> 出现在<strong>指数</strong>上：<code>a = 4</code> 时是 <code>n²</code>，<code>a = 3</code> 时是 <code>n^1.585</code>。递归每层都减少一个分支，这种节省会在各层累积，改变n的幂指数；不能把单层省一次运算就当成结论。</p>
-<p><strong>3.</strong> 给正整数 x，把十进制数位倒过来，例如 123→321。若每轮用 x%10 取出个位，再令 x//=10 去掉这一位，为什么循环次数是 O(log x) 而不是 O(x)？</p>
-<p><code>while x: x //= 10</code> 每轮把 x 除以 10，循环次数是十进制<strong>位数</strong>，即 <code>O(log₁₀ x)</code>。<strong>整数的规模是位数，不是数值</strong>——这与第 1 讲"用输入规模衡量代价"是同一条原则。</p>
+<p><strong>1.</strong> 为什么快速幂是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>？写出递归式。</p>
+<p>指数每次减半：<span class="arithmatex">\(T(n) = T(n/2) + \mathcal{O}(1)\)</span>，所以 <span class="arithmatex">\(T(n) = \mathcal{O}(\log n)\)</span>。<strong>注意这里的 n 是指数的数值，而它在输入里只占 <span class="arithmatex">\(\log n\)</span> 个比特</strong>——按第 22 讲的分类，朴素的连乘才是"伪多项式"的。</p>
+<p><strong>2.</strong> Karatsuba 只是少做了一次子乘法，为什么复杂度从 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 变成 <span class="arithmatex">\(\mathcal{O}(n^1.585)\)</span>？</p>
+<p>因为复杂度由主定理的 <span class="arithmatex">\(n^{\log_b a}\)</span> 决定，递归调用数 <code>a</code> 出现在<strong>指数</strong>上：<code>a = 4</code> 时是 <span class="arithmatex">\(n^{2}\)</span>，<code>a = 3</code> 时是 <span class="arithmatex">\(n^{1.585}\)</span>。递归每层都减少一个分支，这种节省会在各层累积，改变n的幂指数；不能把单层省一次运算就当成结论。</p>
+<p><strong>3.</strong> 给正整数 x，把十进制数位倒过来，例如 123→321。若每轮用 x%10 取出个位，再令 x//=10 去掉这一位，为什么循环次数是 <span class="arithmatex">\(\mathcal{O}(\log x)\)</span> 而不是 <span class="arithmatex">\(\mathcal{O}(x)\)</span>？</p>
+<p><code>while x: x //= 10</code> 每轮把 x 除以 10，循环次数是十进制<strong>位数</strong>，即 <span class="arithmatex">\(\mathcal{O}(\log _{10} x)\)</span>。<strong>整数的规模是位数，不是数值</strong>——这与第 1 讲"用输入规模衡量代价"是同一条原则。</p>
 <p><strong>4.</strong> 为什么斜率不能直接用除法算出来当 key？</p>
 <p>浮点表示有精度上限，某些本该相等的比值会被舍入成不同的数，某些本该不等的又可能被算成相等。<strong>正确做法是把方向向量约分成最简整数对，并统一符号。</strong></p>
-<p><strong>5.</strong> 实现 <code>my_pow(x, n)</code>，并处理 <code>n &lt; 0</code>。</p>
-<p>见上文快速幂一节。<code>n &lt; 0</code> 时把 <code>x</code> 换成 <code>1/x</code>、<code>n</code> 取相反数即可。</p>
-<p><strong>6.</strong> 实现 <code>rotate(matrix)</code>，要求原地、<code>O(1)</code> 额外空间。</p>
-<p>见上文"转置 + 左右翻转"。<strong>写完一定拿 3×3 矩阵手推一遍</strong>，下标写错是这题最常见的失分点。</p>
+<p><strong>5.</strong> 实现 <code>my_pow(x, n)</code>，并处理 <span class="arithmatex">\(n &lt; 0\)</span>。</p>
+<p>见上文快速幂一节。<span class="arithmatex">\(n &lt; 0\)</span> 时把 <code>x</code> 换成 <span class="arithmatex">\(1/x\)</span>、<code>n</code> 取相反数即可。</p>
+<p><strong>6.</strong> 实现 <code>rotate(matrix)</code>，要求原地、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。</p>
+<p>见上文"转置 + 左右翻转"。<strong>写完一定拿 <span class="arithmatex">\(3\times3\)</span> 矩阵手推一遍</strong>，下标写错是这题最常见的失分点。</p>
 <p><strong>7.</strong> 实现 <code>spiral_order(matrix)</code>，并说明两个 <code>if</code> 各防的是什么。</p>
 <p>第一个 if 检查处理上边之后是否还有未输出的行，防止把仅剩的一行再倒着输出；第二个检查处理右边之后是否还有未输出的列，防止重复输出仅剩的一列。</p>
 <p><strong>8.</strong> 实现 <code>detect_squares</code>，并说明为什么方案数要三个计数相乘。</p>
-<p>同一个坐标可能被 <code>add</code> 多次，每个副本都是独立可选的对象，所以是"选这个副本 × 选那个副本 × 选另一个副本"的乘法。</p>
-<p><strong>9.</strong> 设计一个算法，判断平面上 n 个点中是否存在三点共线，要求优于 <code>O(n³)</code>。</p>
-<p>枚举基准点 <code>pᵢ</code>，把其余点相对于它的方向向量（约分后）丢进哈希表。<strong>若某个方向出现 ≥ 2 次，就说明存在三点共线。</strong> 总复杂度 <code>O(n² log M)</code>，M 是坐标范围（来自 gcd 的代价）。</p>
-<p><strong>10.（选读，需先熟悉矩阵乘法）</strong> 用矩阵快速幂求斐波那契第 n 项，其中 F(0)=0、F(1)=1。</p>
-<p>把递推写成 <code>[F(n+1); F(n)] = [[1,1],[1,0]] · [F(n); F(n-1)]</code>，再对矩阵做快速幂，需 O(log n) 次定阶矩阵乘法；计算精确 F(n) 时整数位数随 n 增长，位时间不能写成 O(log n)。<strong>"把常数阶线性递推转成矩阵幂"是通用技巧</strong>，凡形如 <code>f(n) = a·f(n-1) + b·f(n-2)</code> 的递推都能套。</p>
+<p>同一个坐标可能被 <code>add</code> 多次，每个副本都是独立可选的对象，所以是“三个位置的副本数相乘”的乘法。</p>
+<p><strong>9.</strong> 设计一个算法，判断平面上 n 个点中是否存在三点共线，要求优于 <span class="arithmatex">\(\mathcal{O}(n^{3})\)</span>。</p>
+<p>枚举基准点 <span class="arithmatex">\(p_{i}\)</span>，把其余点相对于它的方向向量（约分后）丢进哈希表。<strong>若某个方向出现 不小于 2 次，就说明存在三点共线。</strong> 总复杂度 <span class="arithmatex">\(\mathcal{O}(n^{2} \log M)\)</span>，M 是坐标范围（来自 gcd 的代价）。</p>
+<p><strong>10.（选读，需先熟悉矩阵乘法）</strong> 用矩阵快速幂求斐波那契第 n 项，其中 <span class="arithmatex">\(F(0)=0\)</span>、<span class="arithmatex">\(F(1)=1\)</span>。</p>
+<p>把递推写成 <span class="arithmatex">\(\begin{pmatrix}F(n+1)\\F(n)\end{pmatrix}=\begin{pmatrix}1&amp;1\\1&amp;0\end{pmatrix}\begin{pmatrix}F(n)\\F(n-1)\end{pmatrix}\)</span>，再对矩阵做快速幂，需 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 次定阶矩阵乘法；计算精确 F(n) 时整数位数随 n 增长，位时间不能写成 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。<strong>"把常数阶线性递推转成矩阵幂"是通用技巧</strong>，凡形如 <span class="arithmatex">\(f(n) = a\cdot f(n-1) + b\cdot f(n-2)\)</span> 的递推都能套。</p>
 
 
 

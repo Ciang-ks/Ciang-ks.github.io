@@ -8603,10 +8603,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ao32" class="md-nav__link">
+  <a href="#amathcalo32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 A：逐位检查（O(32)）
+        方法 A：逐位检查（\(\mathcal{O}(32)\)）
       
     </span>
   </a>
@@ -9992,10 +9992,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ao32" class="md-nav__link">
+  <a href="#amathcalo32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 A：逐位检查（O(32)）
+        方法 A：逐位检查（\(\mathcal{O}(32)\)）
       
     </span>
   </a>
@@ -10151,7 +10151,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: 3
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="ao32">方法 A：逐位检查（O(32)）<a class="headerlink" href="#ao32" title="Permanent link">&para;</a></h3>
+<h3 id="amathcalo32">方法 A：逐位检查（<span class="arithmatex">\(\mathcal{O}(32)\)</span>）<a class="headerlink" href="#amathcalo32" title="Permanent link">&para;</a></h3>
 <p>每次取最低位看是不是 1，然后右移一位，循环 32 次。</p>
 <h3 id="bbrian-kernighan">方法 B：Brian Kernighan 算法（推荐，更快）<a class="headerlink" href="#bbrian-kernighan" title="Permanent link">&para;</a></h3>
 <p><strong><code>n &amp; (n - 1)</code> 会消掉 <code>n</code> 最低位的那个 1。</strong></p>
@@ -10165,7 +10165,7 @@
 <h3 id="c">方法 C：内置函数（面试中说明原理）<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
 <p><code>bin(n).count('1')</code> 或 <code>n.bit_count()</code>（Python 3.10+）。<strong>面试中可以用它验证，但要能手写方法 B。</strong></p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>n−1 会将最低一个 1 改为 0，并把其右侧的连续零改为 1，更高位保持不变；与原数按位与时，右侧因原来全零仍为零，那个最低 1 则被清掉。因此每次恰删一位，循环次数就是答案，而不是任意减少一个数值单位。</p>
+<p>n-1 会将最低一个 1 改为 0，并把其右侧的连续零改为 1，更高位保持不变；与原数按位与时，右侧因原来全零仍为零，那个最低 1 则被清掉。因此每次恰删一位，循环次数就是答案，而不是任意减少一个数值单位。</p>
 <p>例如 101000 依次变成 100000、0，共两次。while n 的前提是输入非负：Python 负整数按无限符号扩展解释，反复清最低 1 不会达到 0。若接口给有符号整数却要求低 32 位的计数，应先做 n&amp;0xFFFFFFFF；宽度约定属于题意，不能在任意精度整数上随意套“32 位”。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="brian-kernighan">解法一：Brian Kernighan 算法（推荐）<a class="headerlink" href="#brian-kernighan" title="Permanent link">&para;</a></h3>
@@ -10204,13 +10204,13 @@
 <tbody>
 <tr>
 <td>Brian Kernighan</td>
-<td>O(k)（k 为 1 的个数）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span>（k 为 1 的个数）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>逐位检查</td>
-<td>O(32)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(32)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10222,7 +10222,7 @@
 <li><strong>追问：把 <code>n &amp; (n - 1)</code> 和 <code>n &amp; (-n)</code> 的区别说清楚。</strong> → <code>n &amp; (n-1)</code> <strong>清除</strong>最低位的 1；<code>n &amp; (-n)</code> <strong>取出</strong>最低位的 1（lowbit）。<strong>这两个是最常用的位运算式子，务必区分清楚。</strong></li>
 <li><strong>追问：如何判断一个数是不是 2 的幂？</strong> → <code>n &gt; 0 and (n &amp; (n - 1)) == 0</code>。因为 2 的幂的二进制里只有一个 1。</li>
 <li><strong>追问：<code>n &amp; (n - 1)</code> 还能用在哪？</strong> → 统计 1 的个数（本题）、判断 2 的幂、枚举一个数的所有子集、树状数组。</li>
-<li><strong>追问：如果是 64 位整数？</strong> → 复杂度变成 O(64)，算法不变。</li>
+<li><strong>追问：如果是 64 位整数？</strong> → 复杂度变成 <span class="arithmatex">\(\mathcal{O}(64)\)</span>，算法不变。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

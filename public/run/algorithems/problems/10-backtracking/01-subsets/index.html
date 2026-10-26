@@ -10130,7 +10130,7 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>这是回溯的入门母题，它的模板后面会反复出现。</strong></p>
-<p>核心思想：把求子集的过程看成"对每个元素做一次<strong>选或不选</strong>的决策"。决策树有 <code>2ⁿ</code> 个叶子节点，每个叶子对应一个子集。</p>
+<p>核心思想：把求子集的过程看成"对每个元素做一次<strong>选或不选</strong>的决策"。决策树有 <span class="arithmatex">\(2^{n}\)</span> 个叶子节点，每个叶子对应一个子集。</p>
 <h3 id="a-start">写法 A：用 start 索引（推荐）<a class="headerlink" href="#a-start" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>backtrack(i):
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    记录当前 path 作为一个子集
@@ -10152,7 +10152,7 @@
 <p>两种写法都对，<strong>写法 A 更通用</strong>（组合、分割类问题都是它的变体），建议优先掌握。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>先决定输出的等价标准：子集只关心成员，不关心加入顺序。start 限制下一次只能选更后的下标，因此 [1,2] 只从 1 再选 2 生成，不会再从 2 回头选 1。这是在搜索过程中避免重复，最后用集合去重并不能代替这份不遗漏、不重复的论证。</p>
-<p>进入每个节点就记录，是因为当前已选成员本身就是一种合法子集；排列则要填满所有位置才记录。path[:] 固定当时的内容，若保存同一个 path 对象，后续撤销会同时改变所有结果。即使递归结构只需 O(n) 路径空间，显式输出 2ⁿ 个子集仍需 Θ(n·2ⁿ) 总元素存储，不能把“不计输出”的空间误作完整占用。</p>
+<p>进入每个节点就记录，是因为当前已选成员本身就是一种合法子集；排列则要填满所有位置才记录。path[:] 固定当时的内容，若保存同一个 path 对象，后续撤销会同时改变所有结果。即使递归结构只需 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 路径空间，显式输出 <span class="arithmatex">\(2^{n}\)</span> 个子集仍需 <span class="arithmatex">\(\Theta (n\cdot 2^{n})\)</span> 总元素存储，不能把“不计输出”的空间误作完整占用。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="start">解法一：start 索引（推荐）<a class="headerlink" href="#start" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10210,21 +10210,21 @@
 <tbody>
 <tr>
 <td>回溯</td>
-<td>O(n · 2ⁿ)</td>
-<td>O(n)（递归栈 + path）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（递归栈 + path）</td>
 </tr>
 <tr>
 <td>位运算</td>
-<td>O(n · 2ⁿ)</td>
-<td>O(n · 2ⁿ)（输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span>（输出）</td>
 </tr>
 </tbody>
 </table>
-<p>时间里的 <code>n</code> 来自"每次记录结果要复制一份长度为 O(n) 的 path"。</p>
+<p>时间里的 <code>n</code> 来自"每次记录结果要复制一份长度为 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的 path"。</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>res.append(path[:])</code> 必须切片</strong>。写成 <code>res.append(path)</code> 会记录引用，最终所有结果都是同一个（且是空）列表。<strong>这是本题最经典的错误。</strong></li>
-<li>递归传 <code>i + 1</code> 而不是 <code>i</code>：本题每个元素只能用一次。</li>
+<li>递归传 <span class="arithmatex">\(i + 1\)</span> 而不是 <code>i</code>：本题每个元素只能用一次。</li>
 <li>记录结果的位置在函数<strong>开头</strong>（解法一），不是循环结束后。</li>
 <li>空数组的答案是 <code>[[]]</code>，上面的写法天然正确。</li>
 <li><strong>追问：如果数组里有重复元素？</strong> → <a href="../04-subsets-ii/">90 Subsets II</a>，需要排序 + 同层去重。</li>

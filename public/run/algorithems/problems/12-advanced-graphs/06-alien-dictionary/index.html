@@ -10277,8 +10277,8 @@
 <tbody>
 <tr>
 <td>Kahn</td>
-<td>O(C)（C 为所有字符总数）</td>
-<td>O(1)（字母表最多 26 个）</td>
+<td><span class="arithmatex">\(\mathcal{O}(C)\)</span>（C 为所有字符总数）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（字母表最多 26 个）</td>
 </tr>
 </tbody>
 </table>
@@ -10289,7 +10289,7 @@
 <li><strong>前缀冲突的判断</strong>：<code>w1[:min_len] == w2[:min_len] and len(w1) &gt; len(w2)</code> → 返回 <code>""</code>。这是最容易被忽略的边界情况。</li>
 <li><strong>有环时返回 <code>""</code></strong>：检查条件是 <code>len(order) == len(graph)</code>（字母总数）。</li>
 <li>建图时要<strong>收集所有出现过的字母</strong>（包括没有参与任何比较的），否则拓扑序的长度检查会出错。</li>
-<li>字母表很小（26 个），所以复杂度实际上是 O(C)。</li>
+<li>字母表很小（26 个），所以复杂度实际上是 <span class="arithmatex">\(\mathcal{O}(C)\)</span>。</li>
 <li><strong>追问：为什么不能从"不相邻的两个单词"提取关系？</strong> → 因为排序只保证了相邻对的关系；从非相邻对提取可能会遗漏或引入错误信息（虽然从相邻对提取的信息是完备的）。</li>
 <li><strong>追问：如果输入的字母表有 26 个以上的字符（比如 Unicode）？</strong> → 算法完全一样，用字典即可。</li>
 <li><strong>追问：这题和 207 Course Schedule 的关系？</strong> → <strong>完全相同的拓扑排序模板</strong>，区别只在于"图是怎么建出来的"。<strong>本题的难点在建图，不在排序。</strong></li>

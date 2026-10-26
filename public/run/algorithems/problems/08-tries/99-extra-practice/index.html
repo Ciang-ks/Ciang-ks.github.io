@@ -10036,7 +10036,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">first</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：空数组要返回 <code>""</code>；只要有一个字符串更短就立刻停止；不要在循环里用 <code>strs[0][i]</code> 之前忘了检查长度。</p>
-<p><strong>复杂度</strong>：时间 O(n · L)（n 个串，最长公共前缀 L），空间 O(1)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \cdot L)\)</span>（n 个串，最长公共前缀 L），空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <hr />
 <h2 id="2-79-word-search">2. 79 Word Search<a class="headerlink" href="#2-79-word-search" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/word-search/">LeetCode 79</a> ｜ <strong>Medium</strong></p>
@@ -10063,7 +10063,7 @@
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ROWS</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COLS</span><span class="p">))</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：回溯必须恢复原字符（<code>word[i]</code> 而不是随便某个值）；边界判断放在最前面；递归终止条件 <code>i == len(word)</code> 要在边界检查之前。</p>
-<p><strong>复杂度</strong>：时间 O(m·n·4^L)（L 为单词长度），空间 O(L)（递归栈）。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(m\cdot n\cdot 4^L)\)</span>（L 为单词长度），空间 <span class="arithmatex">\(\mathcal{O}(L)\)</span>（递归栈）。</p>
 <hr />
 <h2 id="3-648-replace-words">3. 648 Replace Words<a class="headerlink" href="#3-648-replace-words" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/replace-words/">LeetCode 648</a> ｜ <strong>Medium</strong></p>
@@ -10106,7 +10106,7 @@
 </span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">replace</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：找到词根要<strong>立刻返回</strong>（因为越早遇到越短）；<code>is_end</code> 用 <code>word</code> 字段代替，顺便存下了词根本身；句子要按空格切分。</p>
-<p><strong>复杂度</strong>：建 Trie O(字典总长)，替换 O(句子总长)。</p>
+<p><strong>复杂度</strong>：建 Trie <span class="arithmatex">\(\mathcal{O}(字典总长)\)</span>，替换 <span class="arithmatex">\(\mathcal{O}(句子总长)\)</span>。</p>
 <hr />
 <h2 id="4-677-map-sum-pairs">4. 677 Map Sum Pairs<a class="headerlink" href="#4-677-map-sum-pairs" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/map-sum-pairs/">LeetCode 677</a> ｜ <strong>Medium</strong></p>
@@ -10148,7 +10148,7 @@
 </span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">total</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：重复插入同一个 key 时，<strong>必须用差值更新</strong>（否则会累加错误）；根节点的 <code>total</code> 也要更新（前缀为空时的查询）。</p>
-<p><strong>复杂度</strong>：<code>insert</code> O(L)，<code>sum</code> O(L)。</p>
+<p><strong>复杂度</strong>：<code>insert</code> <span class="arithmatex">\(\mathcal{O}(L)\)</span>，<code>sum</code> <span class="arithmatex">\(\mathcal{O}(L)\)</span>。</p>
 <hr />
 <h2 id="5-421-maximum-xor-of-two-numbers-in-an-array">5. 421 Maximum XOR of Two Numbers in an Array<a class="headerlink" href="#5-421-maximum-xor-of-two-numbers-in-an-array" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/">LeetCode 421</a> ｜ <strong>Medium</strong></p>
@@ -10194,7 +10194,7 @@
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：位序必须<strong>从高到低</strong>（高位的 1 比低位的所有 1 加起来还重要）；<code>opposite in node</code> 的判断不能省；<code>cur |= (1 &lt;&lt; b)</code> 表示这一位能取到 1。</p>
-<p><strong>复杂度</strong>：时间 O(n · 32)，空间 O(n · 32)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n \cdot 32)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n \cdot 32)\)</span>。</p>
 <blockquote>
 <p><strong>等价解法（更短，思路更巧妙）</strong>：用前缀集合 + 逐位贪心，维护"当前能取到的最大答案前缀 <code>ans</code>"，每次尝试 <code>ans | (1 &lt;&lt; b)</code> 是否可行（判断 <code>prefixSet</code> 中是否存在 <code>p</code> 和 <code>p ^ candidate</code>）。两种解法复杂度相同，但 Trie 更直观地体现了"按位选择"。</p>
 </blockquote>

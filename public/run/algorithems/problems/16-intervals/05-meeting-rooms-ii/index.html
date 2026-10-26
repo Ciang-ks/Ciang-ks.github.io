@@ -10133,12 +10133,12 @@
 <h3 id="a">方案 A：扫描线（最直观）<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
 <p>把每个区间拆成两个"事件"：</p>
 <ul>
-<li>开始 → <code>(start, +1)</code>；</li>
+<li>开始 → <span class="arithmatex">\((\mathrm{start}, +1)\)</span>；</li>
 <li>结束 → <code>(end, -1)</code>。</li>
 </ul>
 <p>把所有事件按时间排序，然后扫一遍累加 <code>cur</code>，<strong><code>cur</code> 的最大值就是答案</strong>。</p>
-<p><strong>关键细节：同一时刻，"结束"事件必须排在"开始"事件之前。</strong> 因为题目约定半开区间 <code>[start, end)</code>——一场会议在 10 点结束，另一场 10 点开始，是可以共用同一间会议室的。</p>
-<p>实现上很简单：把事件存成 <code>(time, delta)</code> 元组，<strong>直接 <code>sort()</code> 就会让 <code>-1</code> 排在 <code>+1</code> 前面</strong>。</p>
+<p><strong>关键细节：同一时刻，"结束"事件必须排在"开始"事件之前。</strong> 因为题目约定半开区间 <span class="arithmatex">\([\mathrm{start}, \mathrm{end})\)</span>——一场会议在 10 点结束，另一场 10 点开始，是可以共用同一间会议室的。</p>
+<p>实现上很简单：把事件存成 <code>(time, delta)</code> 元组，<strong>直接 <code>sort()</code> 就会让 <code>-1</code> 排在 <span class="arithmatex">\(+1\)</span> 前面</strong>。</p>
 <h3 id="b">方案 B：最小堆（也推荐）<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
 <p>按<strong>开始时间</strong>排序，用一个<strong>最小堆</strong>存放"当前正在进行的会议的结束时间"：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>对每个会议 [s, e]：
@@ -10215,27 +10215,27 @@
 <tbody>
 <tr>
 <td>扫描线</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>最小堆</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>双指针</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>扫描线里"结束"必须排在"开始"之前</strong>（半开区间约定）。如果把结束的优先级写反，答案会偏大。</li>
-<li><strong>堆解法里的判断是 <code>heap[0] &lt;= start</code></strong>（结束时间 ≤ 开始时间就可以复用），带等号。</li>
+<li><strong>堆解法里的判断是 <code>heap[0] &lt;= start</code></strong>（结束时间 不大于 开始时间就可以复用），带等号。</li>
 <li>空数组返回 0。</li>
-<li><strong>追问：如果区间是闭区间 <code>[start, end]</code>？</strong> → 堆解法改成 <code>heap[0] &lt; start</code>；扫描线里把 <code>(time, +1)</code> 排在 <code>(time, -1)</code> 之前（可以给 delta 取反或者用 <code>(time, -delta)</code> 排序）。</li>
+<li><strong>追问：如果区间是闭区间 <code>[start, end]</code>？</strong> → 堆解法改成 <code>heap[0] &lt; start</code>；扫描线里把 <span class="arithmatex">\((\mathrm{time}, +1)\)</span> 排在 <code>(time, -1)</code> 之前（可以给 delta 取反或者用 <code>(time, -delta)</code> 排序）。</li>
 <li><strong>追问：如果要求"输出具体的会议室分配"？</strong> → 用堆存 <code>(结束时间, 会议室编号)</code>，每次分配弹出的编号，没有可复用的就新建一间。</li>
 <li><strong>追问：这题和 252 的关系？</strong> → <strong>252 判断"能不能只用 1 间"，253 求"最少要几间"</strong>。253 的答案是 1 时，252 就是 <code>True</code>。</li>
 <li><strong>追问：这题和 435 的关系？</strong> → 435 求"最多保留几个不重叠区间"，253 求"最多同时重叠几个区间"。<strong>前者按右端点排序贪心，后者用扫描线/堆</strong>——两个问题的结构完全不同。</li>

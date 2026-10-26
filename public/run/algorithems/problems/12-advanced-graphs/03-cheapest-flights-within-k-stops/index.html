@@ -10168,7 +10168,7 @@
 <h1 id="787-cheapest-flights-within-k-stops-k">787. Cheapest Flights Within K Stops · K 站中转内最便宜的航班<a class="headerlink" href="#787-cheapest-flights-within-k-stops-k" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Advanced Graphs</code> / Bellman-Ford ｜ <a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/">LeetCode 787</a> ｜ <a href="https://neetcode.io/problems/cheapest-flight-path">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>有 <code>n</code> 个城市，<code>flights[i] = (from, to, price)</code> 表示一条航线。求从 <code>src</code> 到 <code>dst</code>、<strong>最多经过 k 个中转站</strong>（即最多乘坐 <code>k+1</code> 段航班）的最低价格；不可达返回 -1。</p>
+<p>有 <code>n</code> 个城市，<code>flights[i] = (from, to, price)</code> 表示一条航线。求从 <code>src</code> 到 <code>dst</code>、<strong>最多经过 k 个中转站</strong>（即最多乘坐 <span class="arithmatex">\(k+1\)</span> 段航班）的最低价格；不可达返回 -1。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]],
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      src = 0, dst = 3, k = 1
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>输出: 700            # 0 → 1 → 3，共 2 段航班（1 个中转站）
@@ -10180,7 +10180,7 @@
 <p><strong>所以状态必须同时包含"价格"和"已用段数"</strong>。这有三种处理方式：</p>
 <h3 id="abellman-ford">方案 A：Bellman-Ford 变体（推荐，最简洁）<a class="headerlink" href="#abellman-ford" title="Permanent link">&para;</a></h3>
 <p>Bellman-Ford 的思想是"<strong>逐轮松弛</strong>"：第 <code>i</code> 轮结束后，<code>dist[v]</code> 表示"<strong>最多用 i 条边</strong>到达 v 的最低价格"。</p>
-<p>因此只要做 <code>k + 1</code> 轮，就正好对应"最多 k+1 段航班"。</p>
+<p>因此只要做 <span class="arithmatex">\(k + 1\)</span> 轮，就正好对应"最多 k+1 段航班"。</p>
 <p><strong>这里有一个极其关键的细节</strong>：</p>
 <blockquote>
 <p><strong>每一轮必须基于上一轮的 <code>dist</code> 快照来松弛</strong>，不能就地更新。</p>
@@ -10190,10 +10190,10 @@
 <h3 id="bbfs">方案 B：BFS 分层（按段数分层）<a class="headerlink" href="#bbfs" title="Permanent link">&para;</a></h3>
 <p>把"已乘坐的段数"当作 BFS 的层数，每层用<strong>上一层的价格表</strong>生成下一层。这也是一种"分层 DP"的写法，思路和方案 A 等价。</p>
 <h3 id="cdijkstra">方案 C：Dijkstra + 状态扩展<a class="headerlink" href="#cdijkstra" title="Permanent link">&para;</a></h3>
-<p>堆里存 <code>(价格, 节点, 已用段数)</code>，并且在弹出时<strong>只允许已用段数≤k+1 的状态，并阻止继续扩展超限航段</strong>。这种写法也能过，但"过期状态"的处理更繁琐（需要判断同一节点不同段数的状态），<strong>不如 Bellman-Ford 干净</strong>。</p>
+<p>堆里存 <code>(价格, 节点, 已用段数)</code>，并且在弹出时<strong>只允许已用段数不大于k+1 的状态，并阻止继续扩展超限航段</strong>。这种写法也能过，但"过期状态"的处理更繁琐（需要判断同一节点不同段数的状态），<strong>不如 Bellman-Ford 干净</strong>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>到同一个城市的最低价未必支配其他到达方式：0→1→A 便宜但用两段，0→A 较贵但只用一段，后者可能是继续飞到终点的唯一合法方案。因此必须保留段数信息，或像当前代码一样按段数逐轮维护整张价格表。</p>
-<p>第 i 轮开始的 dist 表示至多 i−1 段的最优价，nxt=dist[:] 保留不新增航段的方案，遍历边则只从旧表生成至多 i 段方案。最多 k 次中转对应 k+1 条边，k=0 仍允许直飞。复杂度除松弛 O((k+1)E) 外，还有每轮复制 O(n)，总为 O((k+1)(E+n))；扩展状态的 Dijkstra 也可做，但不能只用 dist[城市] 淘汰不同剩余航段的状态。</p>
+<p>第 i 轮开始的 dist 表示至多 i-1 段的最优价，nxt=dist[:] 保留不新增航段的方案，遍历边则只从旧表生成至多 i 段方案。最多 k 次中转对应 k+1 条边，k=0 仍允许直飞。复杂度除松弛 <span class="arithmatex">\(\mathcal{O}((k+1)E)\)</span> 外，还有每轮复制 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，总为 <span class="arithmatex">\(\mathcal{O}((k+1)(E+n))\)</span>；扩展状态的 Dijkstra 也可做，但不能只用 dist[城市] 淘汰不同剩余航段的状态。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="bellman-ford">解法一：Bellman-Ford + 副本更新（推荐）<a class="headerlink" href="#bellman-ford" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10284,24 +10284,24 @@
 <tbody>
 <tr>
 <td>Bellman-Ford（k+1 轮）</td>
-<td>O((k+1)·(E+n))</td>
-<td>O(V)</td>
+<td><span class="arithmatex">\(\mathcal{O}((k+1)\cdot (E+n))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V)\)</span></td>
 </tr>
 <tr>
 <td>BFS 分层</td>
-<td>O((k+1)·(E+n))</td>
-<td>O(V + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}((k+1)\cdot (E+n))\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
 </tr>
 <tr>
 <td>Dijkstra + 状态（懒删堆）</td>
-<td>O((k+1)(E+V) log(2+(k+1)E)) 上界</td>
-<td>O(E+(k+1)(E+V)) 上界</td>
+<td><span class="arithmatex">\(\mathcal{O}((k+1)(E+V) \log (2+(k+1)E))\)</span> 上界</td>
+<td><span class="arithmatex">\(\mathcal{O}(E+(k+1)(E+V))\)</span> 上界</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_6">易错点与面试追问<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>k</code> 是"中转站数量"，所以最多 <code>k+1</code> 段航班</strong>。循环写 <code>range(k+1)</code> 而不是 <code>range(k)</code>。</li>
+<li><strong><code>k</code> 是"中转站数量"，所以最多 <span class="arithmatex">\(k+1\)</span> 段航班</strong>。循环写 <code>range(k+1)</code> 而不是 <code>range(k)</code>。</li>
 <li><strong>必须用副本更新</strong>（<code>nxt = dist[:]</code>），否则会跨越限制。<strong>这是本题的核心考点。</strong></li>
 <li>起点就是终点的情况：<code>src == dst</code> 时价格应为 0；上面的写法天然正确。</li>
 <li>有平行边（同一个 <code>(u, v)</code> 有多个价格）：算法天然取最小，不需要特殊处理。</li>

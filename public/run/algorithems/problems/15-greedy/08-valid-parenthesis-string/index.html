@@ -7819,10 +7819,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lohi-on-o1" class="md-nav__link">
+  <a href="#lohi-mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：维护 lo/hi 范围（推荐，O(n) 时间、O(1) 空间）
+        解法一：维护 lo/hi 范围（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -7841,10 +7841,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dpon2" class="md-nav__link">
+  <a href="#dpmathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：集合 DP（O(n²)，思路最直观）
+        解法三：集合 DP（\(\mathcal{O}(n^{2})\)，思路最直观）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lohi-on-o1" class="md-nav__link">
+  <a href="#lohi-mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：维护 lo/hi 范围（推荐，O(n) 时间、O(1) 空间）
+        解法一：维护 lo/hi 范围（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10097,10 +10097,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dpon2" class="md-nav__link">
+  <a href="#dpmathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：集合 DP（O(n²)，思路最直观）
+        解法三：集合 DP（\(\mathcal{O}(n^{2})\)，思路最直观）
       
     </span>
   </a>
@@ -10176,86 +10176,87 @@
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">朴素做法的问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>每个 <code>'*'</code> 有 3 种可能，n 个星号就有 3ⁿ 种组合，<strong>指数级的枚举不可行</strong>。</p>
+<p>每个 <code>'*'</code> 有 3 种可能，n 个星号就有 <span class="arithmatex">\(3^{n}\)</span> 种组合，<strong>指数级的枚举不可行</strong>。</p>
 <h3 id="_4">关键思想：维护"左括号个数的可能范围"<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>不枚举每一种可能，而是维护"当前未匹配的左括号数量"的可能范围 <code>[lo, hi]</code>。</strong></p>
+<p><strong>不枚举每一种可能，而是维护"当前未匹配的左括号数量"的可能范围 <span class="arithmatex">\([\mathrm{lo}, \mathrm{hi}]\)</span>。</strong></p>
 <p>遍历每个字符，更新这个范围：</p>
 <ul>
 <li><strong>遇到 <code>'('</code></strong>：<code>lo += 1</code>，<code>hi += 1</code>（范围整体上移）；</li>
-<li><strong>遇到 <code>')'</code></strong>：<code>lo -= 1</code>，<code>hi -= 1</code>；如果 <code>hi &lt; 0</code>，说明<strong>即使把所有 <code>*</code> 都当成 <code>(</code> 也不够</strong>，直接返回 <code>False</code>；</li>
+<li><strong>遇到 <code>')'</code></strong>：<code>lo -= 1</code>，<code>hi -= 1</code>；如果 <span class="arithmatex">\(hi &lt; 0\)</span>，说明<strong>即使把所有 <span class="arithmatex">\(*\)</span> 都当成 <code>(</code> 也不够</strong>，直接返回 <code>False</code>；</li>
 <li><strong>遇到 <code>'*'</code></strong>：它有 3 种用法，所以范围会<strong>变宽</strong>：<code>lo -= 1</code>（当成 <code>)</code>），<code>hi += 1</code>（当成 <code>(</code>）。</li>
 </ul>
 <p>每轮结束时要<strong>把 <code>lo</code> 截断到不小于 0</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>lo = max(lo, 0)
-</span></code></pre></div>
-<p>因为"未匹配的左括号数"不可能是负数——如果 <code>lo &lt; 0</code>，说明"把尽可能多的 <code>*</code> 当成 <code>)</code>"会导致左括号不够，但我们<strong>可以少用一些 <code>*</code> 当右括号</strong>，所以实际的最小值应该截断到 0。</p>
+<div class="arithmatex">\[
+\mathrm{lo}\gets\max\{\mathrm{lo},0\}
+\]</div>
+<p>因为"未匹配的左括号数"不可能是负数——如果 <span class="arithmatex">\(lo &lt; 0\)</span>，说明"把尽可能多的 <span class="arithmatex">\(*\)</span> 当成 <code>)</code>"会导致左括号不够，但我们<strong>可以少用一些 <span class="arithmatex">\(*\)</span> 当右括号</strong>，所以实际的最小值应该截断到 0。</p>
 <h3 id="_5">最终判断<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>遍历结束后，只要 <code>0</code> 落在 <code>[lo, hi]</code> 范围内（即 <code>lo == 0</code>），就说明<strong>存在一种解释能让括号完全匹配</strong>。</p>
-<p><strong>为什么只看 <code>lo == 0</code> 就够？</strong> 因为 <code>hi &gt;= lo</code> 恒成立，且 <code>lo</code> 已被截断到 ≥ 0，所以 <code>lo == 0</code> 就表示"0 在可能范围内"。</p>
+<p>遍历结束后，只要 <code>0</code> 落在 <span class="arithmatex">\([\mathrm{lo}, \mathrm{hi}]\)</span> 范围内（即 <span class="arithmatex">\(lo = 0\)</span>），就说明<strong>存在一种解释能让括号完全匹配</strong>。</p>
+<p><strong>为什么只看 <span class="arithmatex">\(lo = 0\)</span> 就够？</strong> 因为 <span class="arithmatex">\(hi \ge lo\)</span> 恒成立，且 <code>lo</code> 已被截断到 不小于 0，所以 <span class="arithmatex">\(lo = 0\)</span> 就表示"0 在可能范围内"。</p>
 <h3 id="_6">这个方法的精妙之处<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p><strong>用"范围"代替"枚举"，把指数复杂度降到 O(n)。</strong> 这是本题最重要的思想，面试中必须说清"为什么维护范围就够了"。</p>
+<p><strong>用"范围"代替"枚举"，把指数复杂度降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</strong> 这是本题最重要的思想，面试中必须说清"为什么维护范围就够了"。</p>
 <h3 id="_7">解法推导与模式辨析<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>用区间代替全部状态需要先证明没有空洞。起始可行计数集合是 {0}；左括号将全体加一，右括号将合法正计数减一，星号把减一、不变、加一三种相邻区间合并，再排除负值。这些变换仍得到连续的整数区间，lo、hi 才能精确表示全部可能，而非只是一对松散上下界。</p>
-<p>例如 * ) 的可行未匹配数量先为 [0,1]，处理 ) 后为 [0,0]，可通过把 * 解释为 ( 匹配。若开头就是 )，hi 降到 −1 说明此前没有任何合法解释，后面再多星号也救不回来。结束只查 lo==0 必须建立在每一步都排除无解前缀的基础上，不能只比较最终括号总数。</p>
+<p>例如 * ) 的可行未匹配数量先为 [0,1]，处理 ) 后为 [0,0]，可通过把 * 解释为 ( 匹配。若开头就是 )，hi 降到 -1 说明此前没有任何合法解释，后面再多星号也救不回来。结束只查 lo==0 必须建立在每一步都排除无解前缀的基础上，不能只比较最终括号总数。</p>
 <h2 id="_8">代码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<h3 id="lohi-on-o1">解法一：维护 lo/hi 范围（推荐，O(n) 时间、O(1) 空间）<a class="headerlink" href="#lohi-on-o1" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span>                      <span class="c1"># 未匹配左括号数量的可能范围 [lo, hi]</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">'('</span><span class="p">:</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>                <span class="n">lo</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>                <span class="n">hi</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">')'</span><span class="p">:</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                <span class="n">lo</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">hi</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>               <span class="c1"># 即使把所有 * 都当 ( 也不够</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>                    <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            <span class="k">else</span><span class="p">:</span>                        <span class="c1"># '*'</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>                <span class="n">lo</span> <span class="o">-=</span> <span class="mi">1</span>                  <span class="c1"># 当成 ')'</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>                <span class="n">hi</span> <span class="o">+=</span> <span class="mi">1</span>                  <span class="c1"># 当成 '('</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>              <span class="c1"># 左括号数不可能为负</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="k">return</span> <span class="n">lo</span> <span class="o">==</span> <span class="mi">0</span>
+<h3 id="lohi-mathcalon-mathcalo1">解法一：维护 lo/hi 范围（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#lohi-mathcalon-mathcalo1" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span>                      <span class="c1"># 未匹配左括号数量的可能范围 [lo, hi]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">'('</span><span class="p">:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                <span class="n">lo</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                <span class="n">hi</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">')'</span><span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>                <span class="n">lo</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                <span class="n">hi</span> <span class="o">-=</span> <span class="mi">1</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>               <span class="c1"># 即使把所有 * 都当 ( 也不够</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                    <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="k">else</span><span class="p">:</span>                        <span class="c1"># '*'</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                <span class="n">lo</span> <span class="o">-=</span> <span class="mi">1</span>                  <span class="c1"># 当成 ')'</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                <span class="n">hi</span> <span class="o">+=</span> <span class="mi">1</span>                  <span class="c1"># 当成 '('</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>            <span class="n">lo</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>              <span class="c1"># 左括号数不可能为负</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="k">return</span> <span class="n">lo</span> <span class="o">==</span> <span class="mi">0</span>
 </span></code></pre></div>
 <h3 id="_9">解法二：两次贪心扫描（等价，更易理解）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p><strong>第一次从左到右</strong>：把 <code>'*'</code> 尽量当成 <code>'('</code>，检查是否有 <code>')'</code> 无法匹配；
 <strong>第二次从右到左</strong>：把 <code>'*'</code> 尽量当成 <code>')'</code>，检查是否有 <code>'('</code> 无法匹配。</p>
 <p>两次都通过 → 合法。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">bal</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>                      <span class="c1"># 从左到右，* 当作 (</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">bal</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'(*'</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="k">if</span> <span class="n">bal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">bal</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>            <span class="c1"># 从右到左，* 当作 )</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="n">bal</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'*)'</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="k">if</span> <span class="n">bal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">return</span> <span class="kc">True</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">bal</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>                      <span class="c1"># 从左到右，* 当作 (</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="n">bal</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'(*'</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="k">if</span> <span class="n">bal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">bal</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>            <span class="c1"># 从右到左，* 当作 )</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            <span class="n">bal</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'*)'</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="k">if</span> <span class="n">bal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
 <p><strong>两次扫描分别覆盖了两种"极端情况"</strong>：不合法只可能来自"某处 <code>)</code> 太多"或"某处 <code>(</code> 太多"。<strong>这个论证是解法二成立的关键。</strong></p>
-<h3 id="dpon2">解法三：集合 DP（O(n²)，思路最直观）<a class="headerlink" href="#dpon2" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="c1"># possible 保存"当前可能存在的未匹配左括号数"的集合</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">possible</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">}</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="n">nxt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'(*'</span><span class="p">:</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                    <span class="n">nxt</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">')*'</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                    <span class="n">nxt</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">possible</span> <span class="o">=</span> <span class="n">nxt</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">possible</span>
+<h3 id="dpmathcalon2">解法三：集合 DP（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，思路最直观）<a class="headerlink" href="#dpmathcalon2" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">checkValidString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="c1"># possible 保存"当前可能存在的未匹配左括号数"的集合</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="n">possible</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">}</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="n">nxt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'(*'</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                    <span class="n">nxt</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">')*'</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                    <span class="n">nxt</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="n">possible</span> <span class="o">=</span> <span class="n">nxt</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">possible</span>
 </span></code></pre></div>
-<p><strong>集合版和解法一的区别是</strong>：集合显式枚举了所有可能的值（可能有 O(n) 个），而解法一发现<strong>这些值一定构成一段连续区间</strong>，所以只用两个端点就能表示。<strong>这个"从集合到区间"的简化正是解法一的精髓。</strong></p>
+<p><strong>集合版和解法一的区别是</strong>：集合显式枚举了所有可能的值（可能有 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 个），而解法一发现<strong>这些值一定构成一段连续区间</strong>，所以只用两个端点就能表示。<strong>这个"从集合到区间"的简化正是解法一的精髓。</strong></p>
 <h2 id="_10">复杂度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10268,30 +10269,30 @@
 <tbody>
 <tr>
 <td>lo/hi 范围</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>两次扫描</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>集合 DP</td>
-<td>O(n²)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_11">易错点与面试追问<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>hi &lt; 0</code> 时要立即返回 <code>False</code></strong>（连最乐观的解释都不行）。</li>
-<li><strong>每轮都要 <code>lo = max(lo, 0)</code></strong>（左括号数不能为负）。</li>
-<li><strong>最终判断是 <code>lo == 0</code></strong>，不是 <code>lo == 0 and hi == 0</code>。</li>
-<li>空字符串返回 <code>True</code>（<code>lo = hi = 0</code>）。</li>
+<li><strong><span class="arithmatex">\(hi &lt; 0\)</span> 时要立即返回 <code>False</code></strong>（连最乐观的解释都不行）。</li>
+<li><strong>每轮都要 <span class="arithmatex">\(lo = \max (lo, 0)\)</span></strong>（左括号数不能为负）。</li>
+<li><strong>最终判断是 <span class="arithmatex">\(lo = 0\)</span></strong>，不是 <code>lo == 0 and hi == 0</code>。</li>
+<li>空字符串返回 <code>True</code>（<span class="arithmatex">\(lo = hi = 0\)</span>）。</li>
 <li><strong>追问：为什么维护范围就等价于枚举所有可能？</strong> → 因为"未匹配左括号数"的取值是<strong>连续的一段区间</strong>（每步只是整体平移或向两端扩展）。<strong>这个"状态集合是区间"的性质是解法一成立的根本原因。</strong></li>
 <li><strong>追问：如果 <code>'*'</code> 可以匹配多个字符？</strong> → 那就变成通配符匹配问题（<a href="../../14-2d-dp/99-extra-practice/">44</a>），不再是本题。</li>
-<li><strong>追问：这题和 20 Valid Parentheses 的关系？</strong> → 20 没有通配符，用栈 O(n) 就能解决；本题因为通配符引入了"不确定性"，需要用范围来覆盖所有可能。<strong>这个对比能让你体会到"不确定性"给问题带来的本质变化。</strong></li>
+<li><strong>追问：这题和 20 Valid Parentheses 的关系？</strong> → 20 没有通配符，用栈 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 就能解决；本题因为通配符引入了"不确定性"，需要用范围来覆盖所有可能。<strong>这个对比能让你体会到"不确定性"给问题带来的本质变化。</strong></li>
 </ul>
 <h2 id="_12">相关题目<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>

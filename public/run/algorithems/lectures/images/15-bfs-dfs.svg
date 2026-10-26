@@ -2,27 +2,27 @@
 <title id="title">同一张有向四点图：BFS队列与DFS调用</title><desc id="desc">边为0到1、0到2、1到3、2到3；按给定邻接顺序访问。</desc>
 <rect width="1000" height="535" fill="white"/>
 <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#475569"/></marker></defs>
-<text x="24" y="36" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" fill="#172b4d">同一张有向四点图：BFS队列与DFS调用</text>
-<rect x="100" y="120" width="52" height="44" rx="7" fill="#e7efff" stroke="#8290a4"/>
-<text x="112" y="148.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">0</text>
-<rect x="280" y="85" width="52" height="44" rx="7" fill="#e7efff" stroke="#8290a4"/>
-<text x="292" y="113.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">1</text>
-<rect x="280" y="235" width="52" height="44" rx="7" fill="#e7efff" stroke="#8290a4"/>
-<text x="292" y="263.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">2</text>
-<rect x="465" y="160" width="52" height="44" rx="7" fill="#e7efff" stroke="#8290a4"/>
-<text x="477" y="188.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">3</text>
+<text x="24" y="36" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" fill="#172b4d">同一张有向四点图：BFS队列与DFS调用</text>
+<rect x="100" y="120" width="52" height="44" rx="7" fill="#eff6ff" stroke="#8290a4"/>
+<text x="112" y="148.0" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">0</text>
+<rect x="280" y="85" width="52" height="44" rx="7" fill="#eff6ff" stroke="#8290a4"/>
+<text x="292" y="113.0" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">1</text>
+<rect x="280" y="235" width="52" height="44" rx="7" fill="#eff6ff" stroke="#8290a4"/>
+<text x="292" y="263.0" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">2</text>
+<rect x="465" y="160" width="52" height="44" rx="7" fill="#eff6ff" stroke="#8290a4"/>
+<text x="477" y="188.0" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">3</text>
 <path d="M152,135 L278,108" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
 <path d="M152,155 L278,252" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
 <path d="M332,108 L463,174" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
 <path d="M332,253 L463,190" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-<text x="565" y="98" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">邻接表：0:[1,2], 1:[3], 2:[3], 3:[]</text>
-<text x="565" y="142" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">BFS初始队列：[0]</text>
-<text x="565" y="184" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹0 → [1,2]</text>
-<text x="565" y="221" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹1 → [2,3]</text>
-<text x="565" y="258" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹2 → [3]，3已发现，不重复入队</text>
-<text x="565" y="295" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹3 → []</text>
-<text x="24" y="360" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">BFS距离：0层{0}，1层{1,2}，2层{3}。队列逐次状态不等于整层缩略图。</text>
-<text x="24" y="407" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">DFS进入顺序：0,1,3,2；完成顺序：3,1,2,0。</text>
-<text x="24" y="449" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">处理2→3时，3已经完成，不是递归栈中的祖先，因此不是回边。</text>
-<text x="24" y="495" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">若另加3→0，3遇到仍在调用栈中的0，才检测到有向环。</text>
+<text x="565" y="98" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">邻接表：0:[1,2], 1:[3], 2:[3], 3:[]</text>
+<text x="565" y="142" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">BFS初始队列：[0]</text>
+<text x="565" y="184" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹0 → [1,2]</text>
+<text x="565" y="221" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹1 → [2,3]</text>
+<text x="565" y="258" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹2 → [3]，3已发现，不重复入队</text>
+<text x="565" y="295" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">弹3 → []</text>
+<text x="24" y="360" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">BFS距离：0层{0}，1层{1,2}，2层{3}。队列逐次状态不等于整层缩略图。</text>
+<text x="24" y="407" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">DFS进入顺序：0,1,3,2；完成顺序：3,1,2,0。</text>
+<text x="24" y="449" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">处理2→3时，3已经完成，不是递归栈中的祖先，因此不是回边。</text>
+<text x="24" y="495" xml:space="preserve" style="white-space:pre" font-family="system-ui,Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">若另加3→0，3遇到仍在调用栈中的0，才检测到有向环。</text>
 </svg>

@@ -10162,25 +10162,25 @@
 <tbody>
 <tr>
 <td>迭代</td>
-<td>O(n + m)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归</td>
-<td>O(n + m)</td>
-<td>O(n + m)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n + m)\)</span>（递归栈）</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>收尾别忘了 <code>tail.next = l1 if l1 else l2</code></strong>，否则后半段会丢。</li>
-<li>比较用 <code>&lt;=</code> 才能保证"相等时先取 l1"，这是一种稳定性，题目不要求但值得说明。</li>
+<li>比较用 <span class="arithmatex">\(\le\)</span> 才能保证"相等时先取 l1"，这是一种稳定性，题目不要求但值得说明。</li>
 <li>空链表的处理：如果一个为空，直接返回另一个（上面的写法天然正确）。</li>
 <li><strong>追问：合并 k 个有序链表？</strong> → <a href="../10-merge-k-sorted-lists/">23 Merge k Sorted Lists</a>，用最小堆或分治归并。</li>
 <li><strong>追问：如果要求不修改原链表（深拷贝）？</strong> → 需要新建节点。</li>
-<li><strong>追问：如果是归并排序链表？</strong> → <a href="https://leetcode.com/problems/sort-list/">148 Sort List</a>，快慢指针找中点 + 本题的合并 + 递归，就能实现 O(n log n) 的链表排序。</li>
-<li><strong>追问：如果两个链表长度差距极大？</strong> → 复杂度仍是 O(n + m)，因为必须走完较长的那条。</li>
+<li><strong>追问：如果是归并排序链表？</strong> → <a href="https://leetcode.com/problems/sort-list/">148 Sort List</a>，快慢指针找中点 + 本题的合并 + 递归，就能实现 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 的链表排序。</li>
+<li><strong>追问：如果两个链表长度差距极大？</strong> → 复杂度仍是 <span class="arithmatex">\(\mathcal{O}(n + m)\)</span>，因为必须走完较长的那条。</li>
 </ul>
 <h2 id="_10">相关题目<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>

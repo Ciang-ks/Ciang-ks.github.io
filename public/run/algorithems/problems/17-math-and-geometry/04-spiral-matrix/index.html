@@ -10114,12 +10114,12 @@
 <p>为什么？因为<strong>前面的边界收缩可能已经让区间变成空的</strong>。典型例子：</p>
 <ul>
 <li><strong>只剩一行</strong>（<code>top == bottom</code>）：走完第 1 步后 <code>top &gt; bottom</code>，此时不应该再走第 3 步（否则会把这一行重复输出）；</li>
-<li><strong>只剩一列</strong>（<code>left == right</code>）：走完第 2 步后 <code>left &gt; right</code>，此时不应该再走第 4 步。</li>
+<li><strong>只剩一列</strong>（<span class="arithmatex">\(\mathrm{left} = \mathrm{right}\)</span>）：走完第 2 步后 <span class="arithmatex">\(\mathrm{left} &gt; \mathrm{right}\)</span>，此时不应该再走第 4 步。</li>
 </ul>
 <p><strong>漏掉这两个 <code>if</code> 是本题最常见的错误</strong>，务必理解它们防的是什么。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>每轮四条边共同覆盖当前外圈，收缩之后未输出区域仍是一个矩形，这是只用四个边界就足够的原因。沿顶行走完立即 top+1，使随后的右列从新 top 开始，避免右上角输出两次；其他角同理由收边顺序负责去重。</p>
-<p>外层 while 只说明本轮开始非空，不能保证走完两条边后还有剩余。一行或一列时尤其需要重新判断。可以用 1×4、4×1、3×3 三种形状手动追边界，最后中心只能输出一次。若换成有障碍、不规则区域的路径，未访问部分未必仍为矩形，四边界摘要就不足以表示搜索状态。</p>
+<p>外层 while 只说明本轮开始非空，不能保证走完两条边后还有剩余。一行或一列时尤其需要重新判断。可以用 <span class="arithmatex">\(1\times4\)</span>、<span class="arithmatex">\(4\times1\)</span>、<span class="arithmatex">\(3\times3\)</span> 三种形状手动追边界，最后中心只能输出一次。若换成有障碍、不规则区域的路径，未访问部分未必仍为矩形，四边界摘要就不足以表示搜索状态。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：四边界收缩（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10173,7 +10173,7 @@
 </span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>方向数组 + "撞墙转向"的写法很通用</strong>（机器人问题、蛇形遍历都能用），但需要额外的 <code>visited</code> 数组，空间是 O(mn)。</p>
+<p><strong>方向数组 + "撞墙转向"的写法很通用</strong>（机器人问题、蛇形遍历都能用），但需要额外的 <code>visited</code> 数组，空间是 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10186,13 +10186,13 @@
 <tbody>
 <tr>
 <td>四边界收缩</td>
-<td>O(m · n)</td>
-<td>O(1)（不计输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计输出）</td>
 </tr>
 <tr>
 <td>方向数组模拟</td>
-<td>O(m · n)</td>
-<td>O(m · n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10202,9 +10202,9 @@
 <li>注意循环里的<strong>步长方向</strong>：第 3 步是 <code>range(right, left - 1, -1)</code>（倒序），第 4 步是 <code>range(bottom, top - 1, -1)</code>（倒序）。</li>
 <li>空矩阵要返回 <code>[]</code>。</li>
 <li>单行、单列、单元素的矩阵都要正确（这正是两个 <code>if</code> 要防的情况）。</li>
-<li><strong>追问：如何生成螺旋矩阵（填入 1..n²）？</strong> → <a href="https://leetcode.com/problems/spiral-matrix-ii/">59 Spiral Matrix II</a>，框架完全相同，只是把"读取"改成"写入"。</li>
+<li><strong>追问：如何生成螺旋矩阵（填入 1..<span class="arithmatex">\(n^{2}\)</span>）？</strong> → <a href="https://leetcode.com/problems/spiral-matrix-ii/">59 Spiral Matrix II</a>，框架完全相同，只是把"读取"改成"写入"。</li>
 <li><strong>追问：如何从外向内逐层处理？</strong> → 本题的四个边界正好对应"一层"，很多矩阵题（如 <a href="https://leetcode.com/problems/maximum-number-of-ones/">1183</a>）都用这个分层思路。</li>
-<li><strong>追问：这题的时空复杂度？</strong> → 每个元素访问一次，O(mn)；边界收缩只用 4 个变量，额外空间 O(1)。</li>
+<li><strong>追问：这题的时空复杂度？</strong> → 每个元素访问一次，<span class="arithmatex">\(\mathcal{O}(mn)\)</span>；边界收缩只用 4 个变量，额外空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

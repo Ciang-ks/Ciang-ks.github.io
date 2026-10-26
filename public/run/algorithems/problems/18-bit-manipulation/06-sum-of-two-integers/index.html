@@ -10124,32 +10124,33 @@
 <h1 id="371-sum-of-two-integers">371. Sum of Two Integers · 两整数之和<a class="headerlink" href="#371-sum-of-two-integers" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Bit Manipulation</code> ｜ <a href="https://leetcode.com/problems/sum-of-two-integers/">LeetCode 371</a> ｜ <a href="https://neetcode.io/problems/sum-of-two-integers">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>计算两个整数之和，<strong>不能使用 <code>+</code> 和 <code>-</code> 运算符</strong>。</p>
+<p>计算两个整数之和，<strong>不能使用 <span class="arithmatex">\(+\)</span> 和 <code>-</code> 运算符</strong>。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: a = 1, b = 2      输出: 3
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: a = 2, b = 3      输出: 5
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">核心：把加法拆成"无进位和"+"进位"<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>对照二进制的加法规则（<code>0+0=0</code>、<code>0+1=1</code>、<code>1+0=1</code>、<code>1+1=10</code>），可以发现：</p>
+<p>对照二进制的加法规则（<span class="arithmatex">\(0+0=0\)</span>、<span class="arithmatex">\(0+1=1\)</span>、<span class="arithmatex">\(1+0=1\)</span>、<span class="arithmatex">\(1+1=10\)</span>），可以发现：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>无进位和（本位结果） = a ^ b            # 异或：不同为 1，相同为 0
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>进位                 = (a &amp; b) &lt;&lt; 1     # 只有"两个都是 1"才产生进位，且要左移一位
 </span></code></pre></div>
-<p>于是 <code>a + b</code> 可以写成：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>a + b = (a ^ b) + ((a &amp; b) &lt;&lt; 1)
-</span></code></pre></div>
-<p>但这个式子右边又有 <code>+</code>，所以我们要<strong>反复迭代</strong>，直到"进位变成 0"：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>while b != 0:
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    carry = (a &amp; b) &lt;&lt; 1        # 计算进位
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    a = a ^ b                   # 无进位和
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    b = carry                   # 把进位当成新的加数，继续
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>return a
+<p>于是 <span class="arithmatex">\(a + b\)</span> 可以写成：</p>
+<div class="arithmatex">\[
+a+b=(a\oplus b)+2(a\mathbin{\&amp;}b)
+\]</div>
+<p>但这个式子右边又有 <span class="arithmatex">\(+\)</span>，所以我们要<strong>反复迭代</strong>，直到"进位变成 0"：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>while b != 0:
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    carry = (a &amp; b) &lt;&lt; 1        # 计算进位
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    a = a ^ b                   # 无进位和
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    b = carry                   # 把进位当成新的加数，继续
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>return a
 </span></code></pre></div>
 <p><strong>这就是硬件加法器（半加器 + 全加器）的原理</strong>，面试中能说出这一点非常加分。</p>
 <h3 id="python">Python 的特殊处理（本题最容易出问题的地方）<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
 <p><strong>Python 的整数是任意精度的</strong>，所以：</p>
 <ol>
 <li><strong>负数在 Python 里表现为"无限位的补码"</strong>（例如 <code>-1</code> 的二进制是无限个 1），所以 <code>a &amp; b</code> 不会自然截断；</li>
-<li>某些含负数的组合（例如 −1 与 1）若不截断，会让进位不断向高位传播，循环无法结束。</li>
+<li>某些含负数的组合（例如 -1 与 1）若不截断，会让进位不断向高位传播，循环无法结束。</li>
 </ol>
 <p>标准的处理办法是：</p>
 <ol>
@@ -10160,41 +10161,41 @@
 <p><strong>"用掩码把 Python 的无限精度整数限制成 32 位"是本题的核心技巧</strong>，也是 Python 做位运算题的通用模式。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>每一轮都保持 a+b 的低 32 位等于原目标：异或保存无进位位，按位与再左移保存待处理进位。将 carry 作为新 b 后，下一轮继续合并冲突位；进位只向高位移动，固定宽度下溢出最高位便丢弃，因此最多经过与位宽同阶的轮数。</p>
-<p>以 3+1 为例：011 与 001 先变成 010 和 010，再变成 000 和 100，最后得到 100。Python 对 −1+1 若不截断，进位可能不断追着无限高位的符号位向左传播。掩码计算的是模 2³² 的位模式，最后最高位为 1 时减 2³² 才解释成负数；只有真实和在有符号范围内，才与普通整数加法完全相等。</p>
+<p>以 3+1 为例：011 与 001 先变成 010 和 010，再变成 000 和 100，最后得到 100。Python 对 -1+1 若不截断，进位可能不断追着无限高位的符号位向左传播。掩码计算的是模 <span class="arithmatex">\(2^{32}\)</span> 的位模式，最后最高位为 1 时减 <span class="arithmatex">\(2^{32}\)</span> 才解释成负数；只有真实和在有符号范围内，才与普通整数加法完全相等。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="32">解法一：迭代 + 32 位掩码（推荐）<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="c1"># 把 a、b 限制在 32 位无符号范围内</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">a</span> <span class="o">&amp;=</span> <span class="n">MASK</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">b</span> <span class="o">&amp;=</span> <span class="n">MASK</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="n">carry</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>    <span class="c1"># 进位（必须加掩码，否则会无限增长）</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>               <span class="c1"># 无进位和</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="n">b</span> <span class="o">=</span> <span class="n">carry</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="c1"># 如果符号位是 1，说明结果是负数，转回 Python 的负数表示</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="c1"># 把 a、b 限制在 32 位无符号范围内</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">a</span> <span class="o">&amp;=</span> <span class="n">MASK</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">b</span> <span class="o">&amp;=</span> <span class="n">MASK</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="n">carry</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>    <span class="c1"># 进位（必须加掩码，否则会无限增长）</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span>               <span class="c1"># 无进位和</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="n">b</span> <span class="o">=</span> <span class="n">carry</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="c1"># 如果符号位是 1，说明结果是负数，转回 Python 的负数表示</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="_6">解法二：用"边加边减"绕过限制（技巧性写法）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="c1"># 用 sum 也不行？那用位运算的另一种思路：加上再减去</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="c1"># 这里演示一个和位运算无关的"绕道"写法，仅作思路参考</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</span></code></pre></div>
+<p><strong><code>sum([a, b])</code> 在 LeetCode 上能通过</strong>（因为题目只禁止了 <span class="arithmatex">\(+\)</span> 和 <code>-</code> 运算符），但这明显不是出题人的本意。<strong>面试中写这个会被直接追问"能不能不用内置函数"，所以只作为应急。</strong></p>
+<h3 id="_7">解法三：递归写法（等价，更接近数学定义）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="c1"># 用 sum 也不行？那用位运算的另一种思路：加上再减去</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="c1"># 这里演示一个和位运算无关的"绕道"写法，仅作思路参考</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
-</span></code></pre></div>
-<p><strong><code>sum([a, b])</code> 在 LeetCode 上能通过</strong>（因为题目只禁止了 <code>+</code> 和 <code>-</code> 运算符），但这明显不是出题人的本意。<strong>面试中写这个会被直接追问"能不能不用内置函数"，所以只作为应急。</strong></p>
-<h3 id="_7">解法三：递归写法（等价，更接近数学定义）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">getSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">MASK</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSum</span><span class="p">((</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">MASK</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">)</span> <span class="k">else</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSum</span><span class="p">((</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">,</span> <span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">MASK</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="_8">复杂度<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>
@@ -10208,13 +10209,13 @@
 <tbody>
 <tr>
 <td>迭代</td>
-<td>O(1)（最多 32 轮）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（最多 32 轮）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归</td>
-<td>O(1)（最多 32 层）</td>
-<td>O(32)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（最多 32 层）</td>
+<td><span class="arithmatex">\(\mathcal{O}(32)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10224,10 +10225,10 @@
 <li><strong>最后要把 32 位无符号结果转回有符号</strong>（<code>a - (1 &lt;&lt; 32)</code>），否则负数会返回一个巨大的正数。</li>
 <li><strong><code>a</code> 和 <code>b</code> 在进入循环前就要掩码</strong>，把负数转成 32 位无符号表示。</li>
 <li><strong>循环条件用 <code>while b:</code></strong>（进位为 0 时结束）。</li>
-<li><strong>追问：为什么 <code>a ^ b</code> 是无进位和？</strong> → 对照真值表：<code>1+1</code> 应该是 <code>10</code>（进位），但异或给出 <code>0</code>（本位），正好是"不含进位"的结果。</li>
+<li><strong>追问：为什么 <span class="arithmatex">\(a \oplus  b\)</span> 是无进位和？</strong> → 对照真值表：<span class="arithmatex">\(1+1\)</span> 应该是 <code>10</code>（进位），但异或给出 <code>0</code>（本位），正好是"不含进位"的结果。</li>
 <li><strong>追问：为什么进位是 <code>(a &amp; b) &lt;&lt; 1</code>？</strong> → 只有"两个都是 1"才产生进位，而且进位要加到<strong>高一位</strong>上，所以左移一位。</li>
 <li><strong>追问：这题和硬件的加法器有什么关系？</strong> → <strong>这正是全加器的逻辑</strong>：用一个异或门算本位、一个与门算进位。<strong>能说出这个联系是很大的加分项。</strong></li>
-<li><strong>追问：能不能用同样的思路做减法？</strong> → 可以，<code>a - b = a + (-b)</code>，而 <code>-b = ~b + 1</code>（补码）。</li>
+<li><strong>追问：能不能用同样的思路做减法？</strong> → 可以，<span class="arithmatex">\(a - b = a + (-b)\)</span>，而 <span class="arithmatex">\(-b = ~b + 1\)</span>（补码）。</li>
 </ul>
 <h2 id="_10">相关题目<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>

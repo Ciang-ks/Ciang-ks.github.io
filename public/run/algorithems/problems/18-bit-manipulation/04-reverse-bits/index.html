@@ -8659,10 +8659,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ao32" class="md-nav__link">
+  <a href="#amathcalo32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 A：逐位搬移（推荐，O(32)）
+        方法 A：逐位搬移（推荐，\(\mathcal{O}(32)\)）
       
     </span>
   </a>
@@ -8670,10 +8670,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bolog-32-o1" class="md-nav__link">
+  <a href="#bmathcalolog-32-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 B：分治法（O(log 32) = O(1)，进阶）
+        方法 B：分治法（\(\mathcal{O}(\log 32)\) = \(\mathcal{O}(1)\)，进阶）
       
     </span>
   </a>
@@ -9992,10 +9992,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ao32" class="md-nav__link">
+  <a href="#amathcalo32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 A：逐位搬移（推荐，O(32)）
+        方法 A：逐位搬移（推荐，\(\mathcal{O}(32)\)）
       
     </span>
   </a>
@@ -10003,10 +10003,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bolog-32-o1" class="md-nav__link">
+  <a href="#bmathcalolog-32-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法 B：分治法（O(log 32) = O(1)，进阶）
+        方法 B：分治法（\(\mathcal{O}(\log 32)\) = \(\mathcal{O}(1)\)，进阶）
       
     </span>
   </a>
@@ -10151,7 +10151,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出:     00111001011110000010100101000000
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="ao32">方法 A：逐位搬移（推荐，O(32)）<a class="headerlink" href="#ao32" title="Permanent link">&para;</a></h3>
+<h3 id="amathcalo32">方法 A：逐位搬移（推荐，<span class="arithmatex">\(\mathcal{O}(32)\)</span>）<a class="headerlink" href="#amathcalo32" title="Permanent link">&para;</a></h3>
 <p>从右往左<strong>逐位取出</strong> <code>n</code> 的最低位，放到结果的<strong>从左往右</strong>对应位置上：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>result = 0
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>循环 32 次：
@@ -10159,7 +10159,7 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    n &gt;&gt;= 1                                # n 右移，处理下一位
 </span></code></pre></div>
 <p><strong>关键点：<code>result &lt;&lt; 1</code> 可以为待填入的位"腾出位置"</strong>，而 <code>n &amp; 1</code> 取出的是当前最低位。<strong>"结果的左移"和"输入的右移"合起来就是"颠倒"。</strong></p>
-<h3 id="bolog-32-o1">方法 B：分治法（O(log 32) = O(1)，进阶）<a class="headerlink" href="#bolog-32-o1" title="Permanent link">&para;</a></h3>
+<h3 id="bmathcalolog-32-mathcalo1">方法 B：分治法（<span class="arithmatex">\(\mathcal{O}(\log 32)\)</span> = <span class="arithmatex">\(\mathcal{O}(1)\)</span>，进阶）<a class="headerlink" href="#bmathcalolog-32-mathcalo1" title="Permanent link">&para;</a></h3>
 <p>不断交换"左右两半"的位：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1. 交换 16 位为单位的两半：((n &amp; 0xFFFF) &lt;&lt; 16) | ((n &gt;&gt; 16) &amp; 0xFFFF)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2. 交换 8 位为单位的两半
@@ -10215,13 +10215,13 @@
 <tbody>
 <tr>
 <td>逐位搬移</td>
-<td>O(1)（固定 32 次）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（固定 32 次）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>分治法</td>
-<td>O(1)（固定 5 次）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（固定 5 次）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>

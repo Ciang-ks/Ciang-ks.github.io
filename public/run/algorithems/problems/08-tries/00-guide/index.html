@@ -10245,7 +10245,7 @@
 
 <h1 id="tries">Tries（字典树）· 解题手册<a class="headerlink" href="#tries" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>Trie 用"路径"存字符串：从根到某个节点走过的一串字符，就是它代表的前缀。<strong>它的价值是把"在词典里找前缀"从 O(词典大小 × 长度) 降到 O(长度)</strong>——与词典里有多少词无关。</p>
+<p>Trie 用"路径"存字符串：从根到某个节点走过的一串字符，就是它代表的前缀。<strong>它的价值是把"在词典里找前缀"从 <span class="arithmatex">\(\mathcal{O}(词典大小 \times 长度)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(长度)\)</span></strong>——与词典里有多少词无关。</p>
 </blockquote>
 <h2 id="_1">一、从题面提出候选，再核对条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>已学基础：<a href="../../../lectures/13-tries/">13-Trie与前缀结构</a>。下面将讲义中的结构性质用于选择解法。</p>
@@ -10272,7 +10272,7 @@
 <tr>
 <td>单字符通配符查询</td>
 <td>状态为节点加模式位置，通配符枚举孩子</td>
-<td>普通查询 O(L) 不能套到多分支最坏情况</td>
+<td>普通查询 <span class="arithmatex">\(\mathcal{O}(L)\)</span> 不能套到多分支最坏情况</td>
 </tr>
 <tr>
 <td>网格同时找多个词</td>
@@ -10387,7 +10387,7 @@
 </span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>            <span class="n">dfs</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
 </span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>Trie 在这里的作用是剪枝</strong>：某个前缀在字典里不存在，整个方向都不用走。这是把 O(格子数 × 4^长度 × 单词数) 降到可接受水平的关键。</p>
+<p><strong>Trie 在这里的作用是剪枝</strong>：某个前缀在字典里不存在，整个方向都不用走。这是把 <span class="arithmatex">\(\mathcal{O}(格子数 \times 4^长度 \times 单词数)\)</span> 降到可接受水平的关键。</p>
 <h2 id="_3">四、从读题到写码：三步流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>确认真的需要前缀能力</strong>：只需要"整个词在不在" → 用集合，别用 Trie。</li>
@@ -10442,7 +10442,7 @@
 <p><strong>复杂度要说清</strong>："最坏情况取决于词典规模"——全 <code>.</code> 的查询必须遍历所有节点。<strong>主动指出这一点是加分项。</strong></p>
 <h3 id="3-word-search-ii212">3. Word Search II（212）<a class="headerlink" href="#3-word-search-ii212" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："在网格中找出所有能在里面对上的单词"。</p>
-<p><strong>候选思路</strong>：对每个词单独搜一遍网格是 O(W · m · n · 4^L)，太慢。把所有词建成 Trie，从每个起点枚举路径，以共享前缀检查和提前剪枝减少重复搜索。</p>
+<p><strong>候选思路</strong>：对每个词单独搜一遍网格是 <span class="arithmatex">\(\mathcal{O}(W \cdot m \cdot n \cdot 4^L)\)</span>，太慢。把所有词建成 Trie，从每个起点枚举路径，以共享前缀检查和提前剪枝减少重复搜索。</p>
 <p><strong>为什么 Trie 能省这么多？</strong> 因为它<strong>合并了公共前缀</strong>：<code>"oath"</code> 和 <code>"oat"</code> 共享 <code>o→a→t</code> 这条路径，网格上只需走一次。</p>
 <p><strong>三个关键细节</strong>：</p>
 <ol>
@@ -10463,23 +10463,23 @@
 <tbody>
 <tr>
 <td>插入长度 L 的单词</td>
-<td>O(L)</td>
-<td>O(L)</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
 </tr>
 <tr>
 <td>查询长度 L 的单词</td>
-<td>O(L)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>通配符查询（211）</td>
-<td>最坏 O(词典规模)</td>
-<td>O(L)</td>
+<td>最坏 <span class="arithmatex">\(\mathcal{O}(词典规模)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
 </tr>
 <tr>
 <td>Word Search II</td>
-<td>O(m·n·4^L)，Trie 剪枝后远小</td>
-<td>O(总词长)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m\cdot n\cdot 4^L)\)</span>，Trie 剪枝后远小</td>
+<td><span class="arithmatex">\(\mathcal{O}(总词长)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10494,7 +10494,7 @@
 <li><strong>用集合代替 Trie</strong>——遇到"前缀"需求时会失效。</li>
 </ol>
 <h2 id="_7">八、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>"我用字典树。每个节点有一个孩子映射和一个 <code>is_end</code> 标志。插入和查询都是沿字符逐层下行，代价是 O(单词长度)，与字典规模无关。<code>is_end</code> 用来区分完整单词和前缀；查询复杂度与词典里有多少词无关，这是 Trie 相对哈希表的核心优势。"</p>
+<p>"我用字典树。每个节点有一个孩子映射和一个 <code>is_end</code> 标志。插入和查询都是沿字符逐层下行，代价是 <span class="arithmatex">\(\mathcal{O}(单词长度)\)</span>，与字典规模无关。<code>is_end</code> 用来区分完整单词和前缀；查询复杂度与词典里有多少词无关，这是 Trie 相对哈希表的核心优势。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Trie 相比哈希表，在什么场景下才有优势？</li>

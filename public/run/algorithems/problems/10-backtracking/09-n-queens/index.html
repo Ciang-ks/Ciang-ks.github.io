@@ -5637,10 +5637,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        用三个集合做 O(1) 冲突检测
+        用三个集合做 \(\mathcal{O}(1)\) 冲突检测
       
     </span>
   </a>
@@ -9981,10 +9981,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        用三个集合做 O(1) 冲突检测
+        用三个集合做 \(\mathcal{O}(1)\) 冲突检测
       
     </span>
   </a>
@@ -10124,13 +10124,13 @@
 <h1 id="51-n-queens-n">51. N-Queens · N 皇后<a class="headerlink" href="#51-n-queens-n" title="Permanent link">&para;</a></h1>
 <p><code>Hard</code> ｜ <code>Backtracking</code> ｜ <a href="https://leetcode.com/problems/n-queens/">LeetCode 51</a> ｜ <a href="https://neetcode.io/problems/n-queens">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>在 <code>n × n</code> 的棋盘上放 <code>n</code> 个皇后，使它们<strong>互相不能攻击</strong>（不在同一行、同一列、同一条对角线上）。返回所有合法的摆法，用 <code>'Q'</code> 和 <code>'.'</code> 表示。</p>
+<p>在 <span class="arithmatex">\(n\times n\)</span> 的棋盘上放 <code>n</code> 个皇后，使它们<strong>互相不能攻击</strong>（不在同一行、同一列、同一条对角线上）。返回所有合法的摆法，用 <code>'Q'</code> 和 <code>'.'</code> 表示。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: n = 4
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [[".Q..","...Q","Q...","..Q."], ["..Q.","Q...","...Q",".Q.."]]
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>核心简化：一行一行地放。</strong> 因为每行只能放一个皇后，所以"第 <code>row</code> 行放哪一列"就是每一层的选择——<strong>这直接把行冲突消掉了</strong>，搜索树上只剩"列 / 两条对角线"三种约束。</p>
-<h3 id="o1">用三个集合做 O(1) 冲突检测<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">用三个集合做 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 冲突检测<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -10154,9 +10154,9 @@
 </tbody>
 </table>
 <blockquote>
-<p><strong>对角线的这两个不变量是本题的关键技巧</strong>：在棋盘上，沿 ↘ 方向走一步是 <code>(r+1, c+1)</code>，所以 <code>r - c</code> 不变；沿 ↙ 方向走一步是 <code>(r+1, c-1)</code>，所以 <code>r + c</code> 不变。</p>
+<p><strong>对角线的这两个不变量是本题的关键技巧</strong>：在棋盘上，沿 ↘ 方向走一步是 <span class="arithmatex">\((r+1, c+1)\)</span>，所以 <code>r - c</code> 不变；沿 ↙ 方向走一步是 <span class="arithmatex">\((r+1, c-1)\)</span>，所以 <span class="arithmatex">\(r + c\)</span> 不变。</p>
 </blockquote>
-<p>于是冲突检测变成三次哈希查询，全是 O(1)。这比"每次遍历已放置的皇后逐个检查"从 O(n) 降到 O(1)。</p>
+<p>于是冲突检测变成三次哈希查询，全是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。这比"每次遍历已放置的皇后逐个检查"从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <h3 id="_3">回溯框架<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>backtrack(row):
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    if row == n: 记录一个解
@@ -10265,20 +10265,20 @@
 <tbody>
 <tr>
 <td>集合 / 数组回溯</td>
-<td>O(n!)（带剪枝，实际远小于 n!）</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n!)\)</span>（带剪枝，实际远小于 n!）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>位运算</td>
-<td>O(n!)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n!)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <p>搜索树上每一层的可选列数递减（且还要满足对角线约束），所以实际复杂度和"合法解的个数"同阶。</p>
 <h2 id="_10">易错点与面试追问<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>row - col</code> 和 <code>row + col</code> 的不变量要记牢</strong>：这是把 O(n) 的冲突检测降到 O(1) 的关键。</li>
+<li><strong><code>row - col</code> 和 <code>row + col</code> 的不变量要记牢</strong>：这是把 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的冲突检测降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 的关键。</li>
 <li>用数组实现时，<code>row - col</code> 要加偏移 <code>n - 1</code> 防止负数下标。</li>
 <li><strong>撤销操作必须完整</strong>：棋盘恢复 <code>'.'</code>、三个集合（或数组）都要恢复。</li>
 <li>记录结果时要用 <code>'.'.join</code> 或在放置棋子的同时构造字符串；不要记录 <code>board</code> 的引用。</li>

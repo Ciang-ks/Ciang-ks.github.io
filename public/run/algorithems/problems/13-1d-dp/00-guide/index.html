@@ -10515,7 +10515,7 @@
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">+</span> <span class="n">prev2</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">return</span> <span class="n">prev2</span>
 </span></code></pre></div>
-<p>当 <code>dp[i]</code> 只依赖前一两项时，用滚动变量把空间从 O(n) 降到 O(1)——<strong>这是面试官最爱追问的优化点</strong>。</p>
+<p>当 <code>dp[i]</code> 只依赖前一两项时，用滚动变量把空间从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>——<strong>这是面试官最爱追问的优化点</strong>。</p>
 <h2 id="_4">三、四个家族与它们的模板<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1">家族 1 线性递推（斐波那契型）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">climb_stairs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -10577,7 +10577,7 @@
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">prev2</span><span class="p">,</span> <span class="n">prev1</span> <span class="o">=</span> <span class="n">prev1</span><span class="p">,</span> <span class="n">cur</span>
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">return</span> <span class="n">prev1</span>
 </span></code></pre></div>
-<p><strong><code>dp</code> 长度取 <code>n + 1</code>、<code>dp[i]</code> 表示 <code>s[:i]</code></strong>——这样 <code>dp[0]</code> 自然表示空串，边界最好写。</p>
+<p><strong><code>dp</code> 长度取 <span class="arithmatex">\(n + 1\)</span>、<code>dp[i]</code> 表示 <code>s[:i]</code></strong>——这样 <code>dp[0]</code> 自然表示空串，边界最好写。</p>
 <h3 id="4-i">家族 4 子序列型（"以 i 结尾"）<a class="headerlink" href="#4-i" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">length_of_lis</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -10597,7 +10597,7 @@
 <h2 id="_5">四、逐题推演：从题面到思路<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1-climbing-stairs70">1. Climbing Stairs（70）<a class="headerlink" href="#1-climbing-stairs70" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："每次爬 1 或 2 级，求到第 n 级的方法数"。</p>
-<p><strong>候选思路</strong>：定义 <code>dp[i]</code> = 到第 i 级的方法数。<strong>最后一步只能来自 i-1 或 i-2</strong> → <code>dp[i] = dp[i-1] + dp[i-2]</code>。这就是斐波那契。</p>
+<p><strong>候选思路</strong>：定义 <code>dp[i]</code> = 到第 i 级的方法数。<strong>最后一步只能来自 i-1 或 i-2</strong> → <span class="arithmatex">\(dp[i] = dp[i-1] + dp[i-2]\)</span>。这就是斐波那契。</p>
 <p><strong>走一遍示例</strong>：<code>n = 4</code></p>
 <table>
 <thead>
@@ -10619,28 +10619,29 @@
 </tr>
 </tbody>
 </table>
-<p><strong>关键细节</strong>：<code>n ≤ 2</code> 直接返回 n（即 <code>dp[0] = 1, dp[1] = 1</code> 时也可）；空间可以压到 O(1)。</p>
-<p><strong>追问准备</strong>："一次可以爬 1..m 级？" → <code>dp[i] = sum(dp[i-k] for k in 1..m)</code>，可以用滑动窗口优化到 O(n)。"n 很大？" → 矩阵快速幂，O(log n)。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(n \le 2\)</span> 直接返回 n（即 <span class="arithmatex">\(dp[0] = 1, dp[1] = 1\)</span> 时也可）；空间可以压到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
+<p><strong>追问准备</strong>："一次可以爬 1..m 级？" → <span class="arithmatex">\(\mathrm{dp}[i]=\sum_{k=1}^{\min(i,m)}\mathrm{dp}[i-k]\)</span>，可以用滑动窗口优化到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。"n 很大？" → 矩阵快速幂，<span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <h3 id="2-min-cost-climbing-stairs746">2. Min Cost Climbing Stairs（746）<a class="headerlink" href="#2-min-cost-climbing-stairs746" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："从第 i 级往上爬要花 cost[i]，可以从第 0 或第 1 级出发"。</p>
 <p><strong>候选思路</strong>：与 70 同结构，只是把"计数"换成"取最小值"。</p>
 <p><strong>走到第 i 级的最小花费</strong>（注意是"到达"而不是"离开"）：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
-</span></code></pre></div>
-<p><strong>走一遍示例</strong>：<code>cost = [10,15,20]</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>dp[0] = 0, dp[1] = 0（可以直接站在这两级，不付钱）
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>dp[2] = min(0+15, 0+10) = 10
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>dp[3] = min(10+20, 0+15) = 15
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>答案 dp[3] = 15        ← 注意答案是 dp[n]，不是 dp[n-1]
+<div class="arithmatex">\[
+\mathrm{dp}[i]=\min\{\mathrm{dp}[i-1]+\mathrm{cost}[i-1],\mathrm{dp}[i-2]+\mathrm{cost}[i-2]\}
+\]</div>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{cost} = [10,15,20]\)</span></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>dp[0] = 0, dp[1] = 0（可以直接站在这两级，不付钱）
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>dp[2] = min(0+15, 0+10) = 10
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>dp[3] = min(10+20, 0+15) = 15
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>答案 dp[3] = 15        ← 注意答案是 dp[n]，不是 dp[n-1]
 </span></code></pre></div>
 <p><strong>关键细节</strong>：加的是"<strong>出发那一级</strong>"的费用（<code>cost[i-1]</code>、<code>cost[i-2]</code>），不是 <code>cost[i]</code>；<strong>答案是 <code>dp[n]</code></strong>（"爬到顶部"意味着越过最后一级）。</p>
 <h3 id="3-house-robber198">3. House Robber（198）<a class="headerlink" href="#3-house-robber198" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："不能偷相邻的房子，求最大金额"。</p>
 <p><strong>候选思路</strong>：对每间房子做分类讨论——<strong>偷它 / 不偷它</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>dp[i] = max(dp[i-1],            # 不偷第 i 间
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>            dp[i-2] + nums[i])  # 偷第 i 间，那就不能偷 i-1
-</span></code></pre></div>
-<p><strong>走一遍示例</strong>：<code>nums = [2,7,9,3,1]</code></p>
+<div class="arithmatex">\[
+\mathrm{dp}[i]=\max\{\mathrm{dp}[i-1],\mathrm{dp}[i-2]+\mathrm{nums}[i]\}
+\]</div>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [2,7,9,3,1]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10664,48 +10665,49 @@
 </tbody>
 </table>
 <p>答案 12（偷 2 + 9 + 1）。</p>
-<p><strong>关键细节</strong>：第二项必须是 <code>dp[i-2]</code>（因为偷了 i 就不能偷 i-1）；空数组返回 0；空间可压到 O(1)。</p>
+<p><strong>关键细节</strong>：第二项必须是 <code>dp[i-2]</code>（因为偷了 i 就不能偷 i-1）；空数组返回 0；空间可压到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p><strong>另一种写法（双状态）</strong>：<code>rob_cur, skip_cur = skip_cur + x, max(rob_cur, skip_cur)</code>——<strong>这套"偷/不偷"双状态在 213、309 等变体里都能用</strong>。</p>
 <h3 id="4-house-robber-ii213">4. House Robber II（213）<a class="headerlink" href="#4-house-robber-ii213" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："房子排成一个环，首尾相邻"。</p>
 <p><strong>候选思路</strong>：环的麻烦只在首尾。<strong>关键观察：最优解一定满足"不偷第一间"或"不偷最后一间"中的至少一个</strong>（因为两者不能同时偷）。于是拆成两条链：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>答案 = max( rob_line(nums[:-1]), rob_line(nums[1:]) )
+<div class="arithmatex">\[
+\mathrm{ans}=\max\{\operatorname{rob\_line}(\mathrm{nums}[:-1]),\operatorname{rob\_line}(\mathrm{nums}[1:])\}
+\]</div>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [2,3,2]\)</span></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>rob_line([2,3]) → max(2,3) = 3
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>rob_line([3,2]) → max(3,2) = 3
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>答案 3 ✓（偷中间那间）
 </span></code></pre></div>
-<p><strong>走一遍示例</strong>：<code>nums = [2,3,2]</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rob_line([2,3]) → max(2,3) = 3
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>rob_line([3,2]) → max(3,2) = 3
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>答案 3 ✓（偷中间那间）
-</span></code></pre></div>
-<p><strong>关键细节</strong>：<strong><code>n == 1</code> 必须特判</strong>（否则两个子问题都是空数组，返回 0）；这个"固定首尾状态再拆"的技巧对 918 环形子数组同样适用。</p>
+<p><strong>关键细节</strong>：<strong><span class="arithmatex">\(n = 1\)</span> 必须特判</strong>（否则两个子问题都是空数组，返回 0）；这个"固定首尾状态再拆"的技巧对 918 环形子数组同样适用。</p>
 <h3 id="5-longest-palindromic-substring5">5. Longest Palindromic Substring（5）<a class="headerlink" href="#5-longest-palindromic-substring5" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最长回文子串"。</p>
-<p><strong>候选思路</strong>：<strong>中心扩展</strong>最直观——回文的中心有两类（单字符 / 两个字符之间），共 <code>2n-1</code> 个中心，每个中心向两边扩展。</p>
+<p><strong>候选思路</strong>：<strong>中心扩展</strong>最直观——回文的中心有两类（单字符 / 两个字符之间），共 <span class="arithmatex">\(2n-1\)</span> 个中心，每个中心向两边扩展。</p>
 <p><strong>走一遍示例</strong>：<code>s = "babad"</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>中心 i=1（字符 'a'）: 向左 'b'、向右 'b' → 得到 "bab"（长度 3）
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>中心在 s[0] 和 s[1] 之间: 'b','a' 不同 → 放弃
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>各中心比较后最长是 3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>中心 i=1（字符 'a'）: 向左 'b'、向右 'b' → 得到 "bab"（长度 3）
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>中心在 s[0] 和 s[1] 之间: 'b','a' 不同 → 放弃
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>各中心比较后最长是 3
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>两类中心都要枚举</strong>（奇数长度和偶数长度）；O(n) 的 Manacher 算法知道存在即可，面试不需要手写。</p>
-<p><strong>对照记忆</strong>：区间 DP 的写法也成立（<code>dp[i][j] = (s[i]==s[j]) and (j-i&lt;=2 or dp[i+1][j-1])</code>），但空间 O(n²)，不如中心扩展。</p>
+<p><strong>关键细节</strong>：<strong>两类中心都要枚举</strong>（奇数长度和偶数长度）；<span class="arithmatex">\(\mathcal{O}(n)\)</span> 的 Manacher 算法知道存在即可，面试不需要手写。</p>
+<p><strong>对照记忆</strong>：区间 DP 的写法也成立（<code>dp[i][j] = (s[i]==s[j]) and (j-i&lt;=2 or dp[i+1][j-1])</code>），但空间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，不如中心扩展。</p>
 <h3 id="6-palindromic-substrings647">6. Palindromic Substrings（647）<a class="headerlink" href="#6-palindromic-substrings647" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："统计回文子串的个数"。</p>
 <p><strong>候选思路</strong>：5 题的模板，<strong>每成功扩展一步就计数 +1</strong>。</p>
 <p><strong>为什么"按中心枚举"能不重不漏？</strong> 因为<strong>每个回文子串都有唯一的中心</strong>（由奇偶长度决定），所以按中心统计刚好一一对应。</p>
 <p><strong>走一遍示例</strong>：<code>s = "aaa"</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>中心 0（'a'）: 扩展到 "a"（1）→ 越界，停。计数 1
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>中心 0 和 1 之间: "aa"（1）→ 越界。计数 1
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>中心 1（'a'）: "a"（1）→ "aaa"（2）→ 越界。计数 2
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>中央（1 和 2 之间）: "aa"（1）
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>中心 2: "a"（1）
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>合计 6 ✓
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>中心 0（'a'）: 扩展到 "a"（1）→ 越界，停。计数 1
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>中心 0 和 1 之间: "aa"（1）→ 越界。计数 1
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>中心 1（'a'）: "a"（1）→ "aaa"（2）→ 越界。计数 2
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>中央（1 和 2 之间）: "aa"（1）
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>中心 2: "a"（1）
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>合计 6 ✓
 </span></code></pre></div>
 <p><strong>关键细节</strong>：计数在 <code>while</code> <strong>循环体内</strong>；空字符串返回 0。</p>
 <h3 id="7-decode-ways91">7. Decode Ways（91）<a class="headerlink" href="#7-decode-ways91" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："数字串按 A=1..Z=26 解码，求方案数"。</p>
 <p><strong>候选思路</strong>：字符串切分型 DP，<code>dp[i]</code> = 前 i 个字符的解码方式数。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>dp[i] = (dp[i-1] if s[i-1] != '0' else 0)
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>      + (dp[i-2] if 10 &lt;= int(s[i-2:i]) &lt;= 26 else 0)
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{dp}[i]=\mathbf{1}_{s[i-1]\ne\texttt{0}}\,\mathrm{dp}[i-1]+\mathbf{1}_{i\ge2,\;10\le\operatorname{int}(s[i-2:i])\le26}\,\mathrm{dp}[i-2]
+\]</div>
 <p><strong>走一遍示例</strong>：<code>s = "226"</code></p>
 <table>
 <thead>
@@ -10736,35 +10738,35 @@
 <td>2</td>
 <td>"22"</td>
 <td>dp[1]=1</td>
-<td><code>22</code>≤26 → dp[0]=1</td>
+<td><code>22</code>不大于26 → dp[0]=1</td>
 <td>2</td>
 </tr>
 <tr>
 <td>3</td>
 <td>"226"</td>
 <td>dp[2]=2</td>
-<td><code>26</code>≤26 → dp[1]=1</td>
+<td><code>26</code>不大于26 → dp[1]=1</td>
 <td>3</td>
 </tr>
 </tbody>
 </table>
-<p><strong>关键细节</strong>：<code>s</code> 以 <code>'0'</code> 开头直接返回 0；<code>'0'</code> 不能单独解码；<strong><code>dp[0] = 1</code> 是人为定义</strong>，它让 <code>"12"</code> 这类能用两位解码的情况正确计数。</p>
+<p><strong>关键细节</strong>：<code>s</code> 以 <code>'0'</code> 开头直接返回 0；<code>'0'</code> 不能单独解码；<strong><span class="arithmatex">\(dp[0] = 1\)</span> 是人为定义</strong>，它让 <code>"12"</code> 这类能用两位解码的情况正确计数。</p>
 <h3 id="8-coin-change322">8. Coin Change（322）<a class="headerlink" href="#8-coin-change322" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："硬币数量无限，求凑出金额的最少硬币数"。</p>
 <p><strong>候选思路</strong>：<strong>完全背包</strong>（物品可重复用 → 内层<strong>正序</strong>）。</p>
 <p><strong>走一遍示例</strong>：<code>coins = [1,2,5]</code>，<code>amount = 11</code>（从金额 0 递推到 11）</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>dp[0] = 0
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>dp[1] = dp[0] + 1 = 1
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>dp[2] = min(dp[1], dp[0]) + 1 = 1
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>dp[5] = 1（用一枚 5）
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>dp[11] = dp[10] + 1 = 3
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>dp[0] = 0
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>dp[1] = dp[0] + 1 = 1
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>dp[2] = min(dp[1], dp[0]) + 1 = 1
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>dp[5] = 1（用一枚 5）
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>dp[11] = dp[10] + 1 = 3
 </span></code></pre></div>
 <p><strong>关键细节</strong>：其余状态初始化为 <code>inf</code>（不是 0，否则会出现"不存在的解"）；<code>dp[amount]</code> 仍是 <code>inf</code> 时返回 -1。</p>
-<p><strong>追问准备</strong>："为什么不能用贪心（每次选最大的硬币）？" → 反例 <code>coins = [1,3,4]</code>、<code>amount = 6</code>：贪心得到 <code>4+1+1 = 3</code> 枚，最优是 <code>3+3 = 2</code> 枚。</p>
+<p><strong>追问准备</strong>："为什么不能用贪心（每次选最大的硬币）？" → 反例 <code>coins = [1,3,4]</code>、<code>amount = 6</code>：贪心得到 <span class="arithmatex">\(4+1+1 = 3\)</span> 枚，最优是 <span class="arithmatex">\(3+3 = 2\)</span> 枚。</p>
 <h3 id="9-maximum-product-subarray152">9. Maximum Product Subarray（152）<a class="headerlink" href="#9-maximum-product-subarray152" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："乘积最大的连续子数组"。</p>
 <p><strong>候选思路</strong>：和 53 题（和最大）不同的是——<strong>乘法里负负得正，所以局部最小可能变成全局最大</strong>，必须<strong>同时维护 max 和 min</strong>。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [-2, 3, -4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [-2, 3, -4]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10799,7 +10801,7 @@
 </tr>
 </tbody>
 </table>
-<p>24 = (-2) × 3 × (-4)，正是"最小乘以负数变成最大"。</p>
+<p><span class="arithmatex">\(24=(-2)\times3\times(-4)\)</span>，正是"最小乘以负数变成最大"。</p>
 <p><strong>关键细节</strong>：更新时必须<strong>先算好 <code>new_max</code> 和 <code>new_min</code> 再赋值</strong>（否则会用到已覆盖的旧值）；<code>best</code> 初始化为 <code>nums[0]</code>（数组可能全是负数）。</p>
 <h3 id="10-word-break139">10. Word Break（139）<a class="headerlink" href="#10-word-break139" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："字符串能否拆分成词典中的单词"。</p>
@@ -10834,7 +10836,7 @@
 <h3 id="11-longest-increasing-subsequence300">11. Longest Increasing Subsequence（300）<a class="headerlink" href="#11-longest-increasing-subsequence300" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最长递增子序列（可以不连续）"。</p>
 <p><strong>候选思路</strong>：子序列型 DP，<strong><code>dp[i]</code> = 以 <code>nums[i]</code> 结尾的 LIS 长度</strong>。<strong>注意"以 i 结尾"这个定义意味着答案是 <code>max(dp)</code>，不是 <code>dp[-1]</code>。</strong></p>
-<p><strong>走一遍示例</strong>：<code>nums = [10,9,2,5,3,7,101,18]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [10,9,2,5,3,7,101,18]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10883,18 +10885,18 @@
 </tr>
 </tbody>
 </table>
-<p><strong>进阶 O(n log n) 写法（耐心排序）</strong>：维护 <code>tails[k] = 长度为 k+1 的递增子序列的最小结尾值</code>，对每个 <code>x</code> 用 <code>bisect_left</code> 找到第一个 ≥ x 的位置并替换。</p>
+<p><strong>进阶 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 写法（耐心排序）</strong>：维护 <code>tails[k] = 长度为 k+1 的递增子序列的最小结尾值</code>，对每个 <code>x</code> 用 <code>bisect_left</code> 找到第一个 不小于 x 的位置并替换。</p>
 <p><strong>关键细节</strong>：<code>tails</code> 不保证是原数组中的一条真实 LIS，它只记录每个长度的最优结尾——<strong>这一点经常被追问</strong>；严格递增要用 <code>bisect_left</code>。</p>
 <h3 id="12-partition-equal-subset-sum416">12. Partition Equal Subset Sum（416）<a class="headerlink" href="#12-partition-equal-subset-sum416" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："能否分成两个和相等的子集"。</p>
-<p><strong>候选思路</strong>：设总和为 <code>total</code>，问题等价于"<strong>能否选出和为 <code>total / 2</code> 的子集</strong>" → <strong>0/1 背包</strong>（每个元素最多用一次 → 内层<strong>倒序</strong>）。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,5,11,5]</code>，<code>total = 22</code>，<code>target = 11</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>处理 1 → 可达 {0, 1}
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>处理 5 → {0, 1, 5, 6}
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>处理 11 → {0, 1, 5, 6, 11, 12, ...} → 11 可达 ✓
+<p><strong>候选思路</strong>：设总和为 <code>total</code>，问题等价于"<strong>能否选出和为 <span class="arithmatex">\(\mathrm{total} / 2\)</span> 的子集</strong>" → <strong>0/1 背包</strong>（每个元素最多用一次 → 内层<strong>倒序</strong>）。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,5,11,5]\)</span>，<code>total = 22</code>，<code>target = 11</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>处理 1 → 可达 {0, 1}
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>处理 5 → {0, 1, 5, 6}
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>处理 11 → {0, 1, 5, 6, 11, 12, ...} → 11 可达 ✓
 </span></code></pre></div>
 <p><strong>关键细节</strong>：<strong><code>total</code> 是奇数直接返回 False</strong>；<strong>内层必须倒序</strong>（正序会变成完全背包，答案错）；<code>dp[0] = True</code>。</p>
-<p><strong>追问准备</strong>："为什么这是 NP 问题还能多项式求解？" → 因为 DP 的复杂度是 <code>O(n · target)</code>，是<strong>伪多项式</strong>；如果数值用二进制表示且极大，问题就是 NP-完全的。<strong>这个回答很能体现理论功底。</strong></p>
+<p><strong>追问准备</strong>："为什么这是 NP 问题还能多项式求解？" → 因为 DP 的复杂度是 <span class="arithmatex">\(\mathcal{O}(n \cdot  target)\)</span>，是<strong>伪多项式</strong>；如果数值用二进制表示且极大，问题就是 NP-完全的。<strong>这个回答很能体现理论功底。</strong></p>
 <h2 id="_6">五、复杂度速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10909,74 +10911,74 @@
 <tr>
 <td>Climbing Stairs</td>
 <td>线性递推</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Min Cost Climbing Stairs</td>
 <td>线性递推</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>House Robber</td>
 <td>线性递推</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>House Robber II</td>
 <td>拆成两条链</td>
-<td>O(n)</td>
-<td>切片版 O(n)，边界索引版 O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td>切片版 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，边界索引版 <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Longest Palindromic Substring</td>
 <td>中心扩展</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Palindromic Substrings</td>
 <td>中心扩展</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Decode Ways</td>
 <td>字符串 DP</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Coin Change</td>
 <td>完全背包</td>
-<td>O(amount · n)</td>
-<td>O(amount)</td>
+<td><span class="arithmatex">\(\mathcal{O}(amount \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(amount)\)</span></td>
 </tr>
 <tr>
 <td>Maximum Product Subarray</td>
 <td>双状态</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Word Break</td>
 <td>最长词长 L 限定转移</td>
-<td>最多 O(nL) 候选，Python 字符处理最坏 O(nL²)</td>
-<td>O(n) 加词典</td>
+<td>最多 <span class="arithmatex">\(\mathcal{O}(nL)\)</span> 候选，Python 字符处理最坏 <span class="arithmatex">\(\mathcal{O}(nL^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span> 加词典</td>
 </tr>
 <tr>
 <td>Longest Increasing Subsequence</td>
 <td>子序列型 / 二分</td>
-<td>O(n²) / O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> / <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Partition Equal Subset Sum</td>
 <td>0/1 背包</td>
-<td>O(n · sum)</td>
-<td>O(sum)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot \mathrm{sum})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\mathrm{sum})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10992,7 +10994,7 @@
 <li><strong>乘法类只维护 max</strong>，漏掉 min。</li>
 </ol>
 <h2 id="_8">七、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"我定义 <code>dp[i]</code> 为……。转移方程是……。初始状态是 <code>dp[0] = ……</code>。因为 <code>dp[i]</code> 只依赖更小的下标，所以从小到大遍历即可。时间 O(n)，空间 O(n)，其中空间可以用滚动变量压到 O(1)。"</p>
+<p>"我定义 <code>dp[i]</code> 为……。转移方程是……。初始状态是 <span class="arithmatex">\(dp[0] = \cdots \cdots\)</span>。因为 <code>dp[i]</code> 只依赖更小的下标，所以从小到大遍历即可。时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，其中空间可以用滚动变量压到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。"</p>
 <h2 id="30">八、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>"以 i 结尾"和"前 i 个"这两种状态定义有什么区别？</li>

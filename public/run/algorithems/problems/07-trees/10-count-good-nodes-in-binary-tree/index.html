@@ -10100,7 +10100,7 @@
 <p><strong>注意根节点一定是好节点</strong>（路径上只有它自己），而上面的写法天然满足这一点：初始 <code>max_so_far = -inf</code>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>一个节点是否合格只取决于祖先路径，不取决于旁边分支的值，所以 max_so_far 应随递归参数传递，而不应是整个遍历过程中不断增大的全局最大值。左子树中见过的大数，不应该污染右子树的判断。</p>
-<p>例如根 3、左孩子 10、右孩子 4，三个节点都是好节点；若全局最大值在访问 10 后变成 10，就会错误排除 4。相等也合格，因此判断用≥。这是“路径约束向下传、子树答案数量向上相加”的组合，不意味着整道题只能有一种递归方向。</p>
+<p>例如根 3、左孩子 10、右孩子 4，三个节点都是好节点；若全局最大值在访问 10 后变成 10，就会错误排除 4。相等也合格，因此判断用不小于。这是“路径约束向下传、子树答案数量向上相加”的组合，不意味着整道题只能有一种递归方向。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：递归 + 传递路径最大值（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10161,24 +10161,24 @@
 <tbody>
 <tr>
 <td>递归</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>迭代 DFS</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
 <p>每个节点访问一次。</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>判断条件是 <code>&gt;=</code> 而不是 <code>&gt;</code></strong>：题目说"没有比它更大的值"，所以等于最大值也是好节点。用 <code>&gt;</code> 会漏掉相等的情况。</li>
+<li><strong>判断条件是 <span class="arithmatex">\(\ge\)</span> 而不是 <span class="arithmatex">\(&gt;\)</span></strong>：题目说"没有比它更大的值"，所以等于最大值也是好节点。用 <span class="arithmatex">\(&gt;\)</span> 会漏掉相等的情况。</li>
 <li><code>max_so_far</code> 要<strong>往孩子传新值</strong>，不能传原值（否则孙子节点的判断基准就错了）。</li>
 <li>初始值要用 <code>float('-inf')</code>，这样根节点一定会被计入，不需要特判。</li>
 <li>如果树中所有值都为负数，<code>float('-inf')</code> 依然正确；用 0 作为初始值就会出错。</li>
-<li><strong>追问：如果要统计"严格大于路径上所有值"的节点？</strong> → 把 <code>&gt;=</code> 改成 <code>&gt;</code>。</li>
+<li><strong>追问：如果要统计"严格大于路径上所有值"的节点？</strong> → 把 <span class="arithmatex">\(\ge\)</span> 改成 <span class="arithmatex">\(&gt;\)</span>。</li>
 <li><strong>追问：如果要求返回这些节点本身？</strong> → 把计数改成收集节点。</li>
 <li><strong>追问：这题和 98 Validate BST 的相似之处？</strong> → 两者都是"自顶向下传递约束"，只是 98 传的是<strong>上下界</strong>，本题传的是<strong>下界（最大值）</strong>。<strong>把这两题放在一起理解，自顶向下递归就通了。</strong></li>
 </ul>

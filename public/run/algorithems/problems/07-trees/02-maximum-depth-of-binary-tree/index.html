@@ -10150,29 +10150,29 @@
 <tbody>
 <tr>
 <td>递归 DFS</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>BFS</td>
-<td>O(n)</td>
-<td>O(w)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(w)\)</span></td>
 </tr>
 <tr>
 <td>迭代 DFS</td>
-<td>O(n)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>平衡树时 O(h) = O(log n)；退化成链时 O(h) = O(n)。</p>
+<p>平衡树时 <span class="arithmatex">\(\mathcal{O}(h)\)</span> = <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>；退化成链时 <span class="arithmatex">\(\mathcal{O}(h)\)</span> = <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>空树深度是 0</strong>（按"节点数"定义）。若按"边数"算就是 -1，注意看题。</li>
 <li>别把 <code>max</code> 写成 <code>min</code>——那是 <a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/">111 Minimum Depth</a>。</li>
-<li><strong>最小深度有个坑</strong>：不能简单写 <code>1 + min(left, right)</code>。因为只有一个孩子时，另一个孩子的深度是 0，会把答案算错（例如 <code>1 -&gt; 2 -&gt; 3</code> 的最小深度应是 3 而不是 1）。</li>
-<li><strong>追问：递归会不会栈溢出？</strong> → 链状树的递归深度是 O(n)，Python 默认限制约 1000，深树要改成迭代版本或提高 <code>sys.setrecursionlimit</code>。</li>
-<li><strong>追问：求最大深度和求直径的区别？</strong> → 深度只用一条腿（<code>max</code>），直径要用两条腿（<code>left + right</code>）。</li>
+<li><strong>最小深度有个坑</strong>：不能简单写 <span class="arithmatex">\(1 + \min (\mathrm{left}, \mathrm{right})\)</span>。因为只有一个孩子时，另一个孩子的深度是 0，会把答案算错（例如 <code>1 -&gt; 2 -&gt; 3</code> 的最小深度应是 3 而不是 1）。</li>
+<li><strong>追问：递归会不会栈溢出？</strong> → 链状树的递归深度是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，Python 默认限制约 1000，深树要改成迭代版本或提高 <code>sys.setrecursionlimit</code>。</li>
+<li><strong>追问：求最大深度和求直径的区别？</strong> → 深度只用一条腿（<code>max</code>），直径要用两条腿（<span class="arithmatex">\(\mathrm{left} + \mathrm{right}\)</span>）。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

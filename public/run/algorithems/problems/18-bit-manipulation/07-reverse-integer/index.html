@@ -10168,7 +10168,7 @@
 <h1 id="7-reverse-integer">7. Reverse Integer · 整数反转<a class="headerlink" href="#7-reverse-integer" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Bit Manipulation</code> / Math ｜ <a href="https://leetcode.com/problems/reverse-integer/">LeetCode 7</a> ｜ <a href="https://neetcode.io/problems/reverse-integer">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>反转一个 32 位有符号整数的各位数字。<strong>如果反转后超出 32 位有符号整数范围 <code>[-2³¹, 2³¹ - 1]</code>，返回 0。</strong></p>
+<p>反转一个 32 位有符号整数的各位数字。<strong>如果反转后超出 32 位有符号整数范围 <span class="arithmatex">\([-2^{31},2^{31}-1]\)</span>，返回 0。</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: x = 123       输出: 321
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: x = -123      输出: -321
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>输入: x = 1534236469 → 0（反转后溢出）
@@ -10182,11 +10182,11 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    result = result * 10 + digit  # 把 digit 接到 result 的末尾
 </span></code></pre></div>
 <h3 id="_4">关键：溢出判断<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>因为结果必须落在 <code>[-2³¹, 2³¹-1] = [-2147483648, 2147483647]</code> 内，所以<strong>在把 <code>digit</code> 接上去之前要检查</strong>：</p>
+<p>因为结果必须落在 <span class="arithmatex">\([-2^{31},2^{31}-1]=[-2147483648,2147483647]\)</span> 内，所以<strong>在把 <code>digit</code> 接上去之前要检查</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>如果 result &gt; (2³¹ - 1) // 10 = 214748364              → 溢出
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>如果 result == 214748364 且 digit &gt; 7                  → 溢出
 </span></code></pre></div>
-<p><strong>为什么要在"接上去之前"检查？</strong> 因为一旦 <code>result * 10</code> 溢出，在某些语言里就会得到错误的值，之后再判断已经晚了。<strong>Python 无此问题，但面试中必须能说出 C++/Java 的处理方式。</strong></p>
+<p><strong>为什么要在"接上去之前"检查？</strong> 因为一旦 <span class="arithmatex">\(\mathrm{result} * 10\)</span> 溢出，在某些语言里就会得到错误的值，之后再判断已经晚了。<strong>Python 无此问题，但面试中必须能说出 C++/Java 的处理方式。</strong></p>
 <h3 id="python">Python 的便利<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
 <p>Python 的整数是任意精度的，所以可以<strong>先算出完整结果，再检查是否超出范围</strong>：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10201,10 +10201,10 @@
 </span></code></pre></div>
 <p>这样代码短很多。<strong>但要主动说明"这是 Python 的特性，在 C++/Java 里必须在计算过程中判断"。</strong></p>
 <h3 id="python_1">注意 Python 取模的符号<a class="headerlink" href="#python_1" title="Permanent link">&para;</a></h3>
-<p><strong>当除数为正数 10 时，Python 的 <code>%</code> 返回 0..9 的余数</strong>（<code>-123 % 10 = 7</code>），这和 C++/Java（返回 <code>-3</code>）不同。</p>
+<p><strong>当除数为正数 10 时，Python 的 <code>%</code> 返回 0..9 的余数</strong>（<span class="arithmatex">\(-123 \% 10 = 7\)</span>），这和 C++/Java（返回 <code>-3</code>）不同。</p>
 <p>所以直接用 <code>x % 10</code> 处理负数时，<strong>结果会是正数</strong>，最后需要根据原数的符号再决定结果的正负。常见的处理方式是先取绝对值再处理，最后加上符号。</p>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>反转的是十进制有效数字，符号最后恢复，原来末尾的零变成前导零后自然消失。例如 −120→−21，0→0。Python 对负数整除是向下取整，−1//10 仍为 −1，因此直接对负 x 使用 while x 和 x//=10 不仅数字不对，还可能不终止；先取绝对值能把每步归约到非负问题。</p>
+<p>反转的是十进制有效数字，符号最后恢复，原来末尾的零变成前导零后自然消失。例如 -120→-21，0→0。Python 对负数整除是向下取整，-1//10 仍为 -1，因此直接对负 x 使用 while x 和 x//=10 不仅数字不对，还可能不终止；先取绝对值能把每步归约到非负问题。</p>
 <p>范围判断要区分正负：正数最大绝对值为 2147483647，负数可到 2147483648。追加 digit 前检查 result&gt;limit//10，或相等且 digit&gt;limit%10，即可避免产生超限的中间十进制结果。这比仅在最后检查更符合“不能依赖更宽整数”的实现目标；固定宽度语言处理最小负数的 abs 还要另作防护，不能直接照搬 Python 的任意精度行为。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="python_2">解法一：Python 风格（先算完再判断溢出，推荐）<a class="headerlink" href="#python_2" title="Permanent link">&para;</a></h3>
@@ -10267,23 +10267,23 @@
 <tbody>
 <tr>
 <td>逐位处理</td>
-<td>O(log x)（最多 10 位）</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log x)\)</span>（最多 10 位）</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>字符串版</td>
-<td>O(log x)</td>
-<td>O(log x)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log x)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\log x)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>溢出必须返回 0</strong>（不是返回 INT_MAX / INT_MIN，也不是不检查）。</li>
-<li><strong>Python 的 <code>%</code> 和 C++/Java 不同</strong>：Python 的 <code>-123 % 10 = 7</code>，所以要特别小心符号处理。</li>
+<li><strong>Python 的 <code>%</code> 和 C++/Java 不同</strong>：Python 的 <span class="arithmatex">\(-123 \% 10 = 7\)</span>，所以要特别小心符号处理。</li>
 <li><strong>末尾是 0 的情况</strong>（比如 <code>120</code> → <code>21</code>）要正确处理，上面的写法天然处理。</li>
 <li><code>x = 0</code> 时返回 0；<code>x</code> 是负数时符号要保持。</li>
-<li><strong>追问：为什么是 <code>&gt; 7</code> 和 <code>&lt; -8</code>？</strong> → 因为 <code>INT_MAX = 2147483647</code> 的末位是 7，<code>INT_MIN = -2147483648</code> 的末位是 8。<strong>这个细节很能体现对边界值的熟悉程度。</strong></li>
+<li><strong>追问：为什么是 <span class="arithmatex">\(&gt; 7\)</span> 和 <span class="arithmatex">\(&lt; -8\)</span>？</strong> → 因为 <code>INT_MAX = 2147483647</code> 的末位是 7，<code>INT_MIN = -2147483648</code> 的末位是 8。<strong>这个细节很能体现对边界值的熟悉程度。</strong></li>
 <li><strong>追问：如果题目要求"不能存 64 位整数"？</strong> → 那就必须在计算<strong>过程中</strong>判断溢出（解法二），不能像 Python 那样先算完再判断。<strong>这是面试中经常被追问的点。</strong></li>
 <li><strong>追问：如果是反转二进制位？</strong> → <a href="../04-reverse-bits/">190 Reverse Bits</a>，思路类似但用位运算。</li>
 </ul>

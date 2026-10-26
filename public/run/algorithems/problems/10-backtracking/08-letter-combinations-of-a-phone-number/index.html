@@ -10103,8 +10103,8 @@
 <li><code>itertools.product</code> 一行搞定（Pythonic，但面试中要说明原理）。</li>
 </ul>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>把 digits=23 展开为 {a,b,c}×{d,e,f}，每个答案恰好从每组取一个字母，且组的顺序固定。递归深度 i 因而直接决定这次该用哪组候选，无需 start 或 used：不同数字即使都允许某个相同字符，也不存在“同一输入元素不可重复”的限制。</p>
-<p>path 长度始终等于 i，走完最后一组再 join 成字符串。若有 a 个三字母键、b 个四字母键，结果数为 3ᵃ4ᵇ，复制每个长度为 d 的结果还需 O(d)。空输入按题目接口返回 []，是业务约定；不能仅凭空笛卡尔积的数学定义就改成包含一个空字符串。</p>
+<p>把 digits=23 展开为 <span class="arithmatex">\(\{a,b,c\}\times\{d,e,f\}\)</span>，每个答案恰好从每组取一个字母，且组的顺序固定。递归深度 i 因而直接决定这次该用哪组候选，无需 start 或 used：不同数字即使都允许某个相同字符，也不存在“同一输入元素不可重复”的限制。</p>
+<p>path 长度始终等于 i，走完最后一组再 join 成字符串。若有 a 个三字母键、b 个四字母键，结果数为 <span class="arithmatex">\(3^a4^b\)</span>，复制每个长度为 d 的结果还需 <span class="arithmatex">\(\mathcal{O}(d)\)</span>。空输入按题目接口返回 []，是业务约定；不能仅凭空笛卡尔积的数学定义就改成包含一个空字符串。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：回溯（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10172,18 +10172,18 @@
 <tbody>
 <tr>
 <td>回溯</td>
-<td>O(N · L)，L 为数字个数</td>
-<td>O(L)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(N \cdot L)\)</span>，L 为数字个数</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span>（递归栈）</td>
 </tr>
 <tr>
 <td>迭代累乘</td>
-<td>O(N · L)</td>
-<td>O(N · L)（中间结果）</td>
+<td><span class="arithmatex">\(\mathcal{O}(N \cdot L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(N \cdot L)\)</span>（中间结果）</td>
 </tr>
 <tr>
 <td><code>product</code></td>
-<td>O(N · L)</td>
-<td>O(N · L)</td>
+<td><span class="arithmatex">\(\mathcal{O}(N \cdot L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(N \cdot L)\)</span></td>
 </tr>
 </tbody>
 </table>

@@ -10365,7 +10365,7 @@
 
 <h1 id="arrays-hashing">Arrays &amp; Hashing · 解题手册<a class="headerlink" href="#arrays-hashing" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>这一族题的共同点：<strong>问题看起来需要"两两比较"，但用一张哈希表就能把"查找"从 O(n) 降到 O(1)</strong>。读完题先在脑子里问一句"我的瓶颈是不是'找得太慢'"，如果是，哈希表通常就是答案。</p>
+<p>这一族题的共同点：<strong>问题看起来需要"两两比较"，但用一张哈希表就能把"查找"从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span></strong>。读完题先在脑子里问一句"我的瓶颈是不是'找得太慢'"，如果是，哈希表通常就是答案。</p>
 </blockquote>
 <h2 id="_1">一、从题面提出候选，再核对条件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>已学基础：<a href="../../../lectures/02-arrays-amortization/">02-数组与摊销分析</a>、<a href="../../../lectures/03-hashing/">03-哈希表</a>。下面将讲义中的结构性质用于选择解法。</p>
@@ -10401,7 +10401,7 @@
 </tr>
 </tbody>
 </table>
-<p>写代码前先给每个键和值命名：seen[x] 是位置、次数还是布尔信息？哈希查询通常按期望 O(1) 计，新构造长字符串键仍需计入构造与哈希的字符成本。</p>
+<p>写代码前先给每个键和值命名：seen[x] 是位置、次数还是布尔信息？哈希查询通常按期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 计，新构造长字符串键仍需计入构造与哈希的字符成本。</p>
 <h2 id="_2">二、这一族的共同本质<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>暴力解的骨架几乎都是同一个形状：<strong>两层循环，内层在"找某个东西"</strong>。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -10409,7 +10409,7 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="k">if</span> <span class="n">条件</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            <span class="o">...</span>
 </span></code></pre></div>
-<p>哈希表做的只有一件事：<strong>把内层的线性扫描替换成一次 O(1) 查询</strong>。于是三种常见瓶颈对应三种武器：</p>
+<p>哈希表做的只有一件事：<strong>把内层的线性扫描替换成一次 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 查询</strong>。于是三种常见瓶颈对应三种武器：</p>
 <table>
 <thead>
 <tr>
@@ -10441,9 +10441,9 @@
    - 查"补数/配对" → <code>dict</code>（值 → 下标 / 次数）
    - "分组" → 设计 key 后用 <code>defaultdict(list)</code>
    - 值域小且确定 → 计数数组
-   - 值域是 <code>1..n</code> 且要求 O(1) 空间 → 原地标记</li>
+   - 值域是 <code>1..n</code> 且要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间 → 原地标记</li>
 <li><strong>补边界</strong>：空数组、单元素、全相同、含负数、存在重复元素。</li>
-<li><strong>报复杂度并说出取舍</strong>："时间从 O(n²) 降到 O(n)，代价是 O(n) 额外空间；若还要求常数额外空间，需检查是否允许修改输入、是否满足原地标记值域；排序的辅助空间也要按具体实现计算。"</li>
+<li><strong>报复杂度并说出取舍</strong>："时间从 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，代价是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间；若还要求常数额外空间，需检查是否允许修改输入、是否满足原地标记值域；排序的辅助空间也要按具体实现计算。"</li>
 </ol>
 <h2 id="_4">四、五个常用模板与使用条件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1">模板 1 存在性判断<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -10465,7 +10465,7 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">seen</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>                 <span class="c1"># 后写</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">return</span> <span class="p">[]</span>
 </span></code></pre></div>
-<p><strong>"先查后写"是这套模板的灵魂</strong>：如果先写再查，当 <code>target == 2 * x</code> 时会把同一个元素用两次。</p>
+<p><strong>"先查后写"是这套模板的灵魂</strong>：如果先写再查，当 <span class="arithmatex">\(\mathrm{target} = 2 * x\)</span> 时会把同一个元素用两次。</p>
 <h3 id="3-key">模板 3 规范化 key 分组<a class="headerlink" href="#3-key" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -10476,27 +10476,28 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">groups</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 </span></code></pre></div>
-<p><strong>关键在设计 key</strong>：异位词用 <code>tuple(sorted(s))</code>；按对角线分组用 <code>r - c</code>；按斜对角线分组用 <code>r + c</code>。</p>
+<p><strong>关键在设计 key</strong>：异位词用 <code>tuple(sorted(s))</code>；按对角线分组用 <code>r - c</code>；按斜对角线分组用 <span class="arithmatex">\(r + c\)</span>。</p>
 <h3 id="4">模板 4 前缀和 + 哈希（结合示例走一遍）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：统计"和恰好为 k 的连续子数组"的个数（含负数，不能用滑动窗口）。</p>
 <p><strong>推导</strong>：设 <code>prefix[i]</code> 为前 i 个元素之和，那么子数组 <code>(j, i]</code> 的和等于 <code>prefix[i] - prefix[j]</code>。要求它等于 k，等价于</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prefix[j] = prefix[i] - k
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{prefix}[j]=\mathrm{prefix}[i]-k
+\]</div>
 <p><strong>于是遍历时只需要问一句</strong>："历史上出现过多少个前缀和等于 <code>prefix[i] - k</code>？"——这正是哈希表的强项。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">subarray_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">count</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>                     <span class="c1"># 空前缀（让从下标 0 开始的区间能被计入）</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="n">prefix</span> <span class="o">+=</span> <span class="n">x</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">res</span> <span class="o">+=</span> <span class="n">count</span><span class="p">[</span><span class="n">prefix</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>     <span class="c1"># 有多少个历史前缀能凑出 k</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">count</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">return</span> <span class="n">res</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">subarray_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">count</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>                     <span class="c1"># 空前缀（让从下标 0 开始的区间能被计入）</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">prefix</span> <span class="o">+=</span> <span class="n">x</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">res</span> <span class="o">+=</span> <span class="n">count</span><span class="p">[</span><span class="n">prefix</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>     <span class="c1"># 有多少个历史前缀能凑出 k</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">count</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>对照示例</strong>：<code>nums = [1, 2, 3]</code>，<code>k = 3</code>。</p>
+<p><strong>对照示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1, 2, 3]\)</span>，<code>k = 3</code>。</p>
 <table>
 <thead>
 <tr>
@@ -10535,32 +10536,32 @@
 </tr>
 </tbody>
 </table>
-<p>答案是 2，正确。<strong>注意 <code>count[0] = 1</code> 不能省</strong>，否则 <code>[1,2]</code> 会漏掉。</p>
+<p>答案是 2，正确。<strong>注意 <span class="arithmatex">\(\mathrm{count}[0] = 1\)</span> 不能省</strong>，否则 <code>[1,2]</code> 会漏掉。</p>
 <h3 id="5">模板 5 原地哈希与符号标记<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">first_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="c1"># 把 nums[i] 换到它"该在"的位置 nums[i] - 1</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">while</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>            <span class="n">target</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">target</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">first_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="c1"># 把 nums[i] 换到它"该在"的位置 nums[i] - 1</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">while</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="n">target</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">target</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
 </span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_disappeared</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="c1"># 值域是 1..n 时，用"取负数"表示"这个值出现过"</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="n">idx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_disappeared</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="c1"># 值域是 1..n 时，用"取负数"表示"这个值出现过"</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="n">idx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>两个式子都要记住</strong>：<code>while</code> 里的交换要带 <code>nums[nums[i]-1] != nums[i]</code> 防止重复值死循环；标记时读值要先 <code>abs()</code>。</p>
+<p><strong>两个式子都要记住</strong>：<code>while</code> 里的交换要带 <span class="arithmatex">\(\mathrm{nums}[\mathrm{nums}[i]-1] \ne \mathrm{nums}[i]\)</span> 防止重复值死循环；标记时读值要先 <code>abs()</code>。</p>
 <h2 id="_5">五、逐题推演：从题面到思路<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1-contains-duplicate217">1. Contains Duplicate（217）<a class="headerlink" href="#1-contains-duplicate217" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：判断"是否存在重复元素"，不要求返回位置。</p>
-<p><strong>候选思路</strong>：存在性 → <code>set</code>。退一步想，排序后相邻比较也能做，代价是 O(n log n)。</p>
+<p><strong>候选思路</strong>：存在性 → <code>set</code>。退一步想，排序后相邻比较也能做，代价是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</p>
 <p><strong>走一遍示例</strong>：<code>[1,2,3,1]</code></p>
 <ul>
 <li>遇到 <code>1</code>，集合里没有 → 放入；</li>
@@ -10615,13 +10616,13 @@
 <h3 id="3-two-sum1">3. Two Sum（1）<a class="headerlink" href="#3-two-sum1" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：找"两个数和为 target"，要返回<strong>下标</strong>。</p>
 <p><strong>候选思路</strong>：把"找另一个数"转成"查补数" → 哈希表边遍历边存。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [2,7,11,15]</code>，<code>target = 9</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [2,7,11,15]\)</span>，<code>target = 9</code></p>
 <ul>
-<li><code>i=0, x=2</code>：需要 <code>7</code>，表里没有 → 存 <code>{2:0}</code>；</li>
-<li><code>i=1, x=7</code>：需要 <code>2</code>，表里有，下标 0 → 返回 <code>[0, 1]</code>。</li>
+<li><span class="arithmatex">\(i=0, x=2\)</span>：需要 <code>7</code>，表里没有 → 存 <code>{2:0}</code>；</li>
+<li><span class="arithmatex">\(i=1, x=7\)</span>：需要 <code>2</code>，表里有，下标 0 → 返回 <code>[0, 1]</code>。</li>
 </ul>
 <p><strong>关键细节</strong>：<strong>先查后写</strong>。如果先写再查，<code>target = 4</code> 且数组为 <code>[2,2]</code> 时会返回 <code>[1,1]</code>。</p>
-<p><strong>对照记忆</strong>：数组<strong>有序</strong>时（167）应该换成双指针，空间从 O(n) 降到 O(1)——有序时可以优先评估双指针，以减少额外空间。</p>
+<p><strong>对照记忆</strong>：数组<strong>有序</strong>时（167）应该换成双指针，空间从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>——有序时可以优先评估双指针，以减少额外空间。</p>
 <h3 id="4-group-anagrams49">4. Group Anagrams（49）<a class="headerlink" href="#4-group-anagrams49" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："把互为异位词的字符串分到同一组"。</p>
 <p><strong>候选思路</strong>：分组 → 设计一个"同组必然相同、异组必然不同"的 key。异位词的天然 key 是"排序后的字符串"或"字符计数元组"。</p>
@@ -10649,26 +10650,27 @@
 </tbody>
 </table>
 <p>key 相同的落到同一个桶，得到 3 组。</p>
-<p><strong>关键细节</strong>：key 必须是<strong>可哈希</strong>的类型。用列表当 key 会直接抛 <code>TypeError: unhashable type</code>，必须转成 <code>tuple</code>。另外要能说出"排序 key 是 O(k log k)，计数 key 是 O(k)"。</p>
+<p><strong>关键细节</strong>：key 必须是<strong>可哈希</strong>的类型。用列表当 key 会直接抛 <code>TypeError: unhashable type</code>，必须转成 <code>tuple</code>。另外要能说出"排序 key 是 <span class="arithmatex">\(\mathcal{O}(k \log k)\)</span>，计数 key 是 <span class="arithmatex">\(\mathcal{O}(k)\)</span>"。</p>
 <h3 id="5-top-k-frequent-elements347">5. Top K Frequent Elements（347）<a class="headerlink" href="#5-top-k-frequent-elements347" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：求"出现频率前 k 高的元素"，顺序不限。</p>
-<p><strong>候选思路</strong>：先计数；再按频率取 Top-K。<strong>关键观察：频率的取值范围是 <code>[1, n]</code></strong>，值域有限且连续 → 可以用<strong>桶排序</strong>把 O(n log n) 降到 O(n)。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,1,1,2,2,3]</code>，<code>k = 2</code></p>
-<p>计数结果：<code>1→3</code>、<code>2→2</code>、<code>3→1</code>。桶数组长度 <code>n+1 = 7</code>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>buckets[3] = [1]
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>buckets[2] = [2]
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>buckets[1] = [3]
+<p><strong>候选思路</strong>：先计数；再按频率取 Top-K。<strong>关键观察：频率的取值范围是 <code>[1, n]</code></strong>，值域有限且连续 → 可以用<strong>桶排序</strong>把 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,1,1,2,2,3]\)</span>，<code>k = 2</code></p>
+<p>计数结果：<code>1→3</code>、<code>2→2</code>、<code>3→1</code>。桶数组长度 <span class="arithmatex">\(n+1 = 7\)</span>：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>buckets[3] = [1]
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>buckets[2] = [2]
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>buckets[1] = [3]
 </span></code></pre></div>
 <p>从高频往低频扫，先拿到 1，再拿到 2，凑够 k 个即返回。</p>
 <p><strong>关键细节</strong>：桶的长度是 <code>len(nums) + 1</code>（最大频率可能等于数组长度），不是 <code>len(count) + 1</code>。</p>
-<p><strong>追问准备</strong>："数据是流式的" → 改用大小为 k 的小顶堆，每次插入 O(log k)。</p>
+<p><strong>追问准备</strong>："数据是流式的" → 改用大小为 k 的小顶堆，每次插入 <span class="arithmatex">\(\mathcal{O}(\log k)\)</span>。</p>
 <h3 id="6-product-of-array-except-self238">6. Product of Array Except Self（238）<a class="headerlink" href="#6-product-of-array-except-self238" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>：求"除自身外所有元素的乘积"，<strong>禁止除法</strong>，要求 O(n)。</p>
+<p><strong>题面信号</strong>：求"除自身外所有元素的乘积"，<strong>禁止除法</strong>，要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>候选思路</strong>：题目禁止除法；直接总乘积除自身也不能完整处理零。将排除当前位置的元素拆成左右两段，各自聚合后相乘，就能统一处理零与负数：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>res[i] = (左边所有数的乘积) × (右边所有数的乘积)
-</span></code></pre></div>
+<div class="arithmatex">\[
+\mathrm{res}[i]=\left(\prod_{j&lt;i}\mathrm{nums}[j]\right)\left(\prod_{j&gt;i}\mathrm{nums}[j]\right)
+\]</div>
 <p>于是一趟正向算出"左边乘积"，一趟反向乘上"右边乘积"。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,2,3,4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,2,3,4]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10682,38 +10684,38 @@
 <tr>
 <td>0</td>
 <td>1</td>
-<td>×(2·3·4)=24</td>
+<td><span class="arithmatex">\(1\times(2\cdot3\cdot4)=24\)</span></td>
 <td>24</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td>×(3·4)=12</td>
+<td><span class="arithmatex">\(1\times(3\cdot4)=12\)</span></td>
 <td>12</td>
 </tr>
 <tr>
 <td>2</td>
-<td>1·2=2</td>
-<td>×4=8</td>
+<td><span class="arithmatex">\(1\cdot2=2\)</span></td>
+<td><span class="arithmatex">\(2\times4=8\)</span></td>
 <td>8</td>
 </tr>
 <tr>
 <td>3</td>
-<td>1·2·3=6</td>
-<td>×1=6</td>
+<td><span class="arithmatex">\(1\cdot2\cdot3=6\)</span></td>
+<td><span class="arithmatex">\(6\times1=6\)</span></td>
 <td>6</td>
 </tr>
 </tbody>
 </table>
-<p><strong>关键细节</strong>：<code>res[0] = 1</code> 代表"左边没有元素，乘积是乘法的单位元"；第二趟必须<strong>倒序</strong>且"先用后乘"。</p>
-<p><strong>这个"把区间拆成左半 + 右半，两趟扫描合并"的模板可以推广</strong>：42 接雨水的"前缀最大值 × 后缀最大值"就是同一个骨架。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(\mathrm{res}[0] = 1\)</span> 代表"左边没有元素，乘积是乘法的单位元"；第二趟必须<strong>倒序</strong>且"先用后乘"。</p>
+<p><strong>这个"把区间拆成左半 + 右半，两趟扫描合并"的模板可以推广</strong>：42 接雨水的“前缀最大值与后缀最大值”就是同一个骨架。</p>
 <h3 id="7-valid-sudoku36">7. Valid Sudoku（36）<a class="headerlink" href="#7-valid-sudoku36" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："校验 9×9 棋盘是否合法"，三类约束：行、列、3×3 宫。</p>
+<p><strong>题面信号</strong>："校验 <span class="arithmatex">\(9\times9\)</span> 棋盘是否合法"，三类约束：行、列、<span class="arithmatex">\(3\times3\)</span> 宫。</p>
 <p><strong>候选思路</strong>：三类约束 → 三张哈希表，一次遍历全查完。</p>
 <p><strong>走一遍示例</strong>：格子 <code>(4, 7)</code> 上的数字 <code>5</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>行：rows[4] 里有没有 '5'
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>列：cols[7] 里有没有 '5'
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>宫：(4//3, 7//3) = (1, 2) → boxes[(1,2)] 里有没有 '5'
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>行：rows[4] 里有没有 '5'
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>列：cols[7] 里有没有 '5'
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>宫：(4//3, 7//3) = (1, 2) → boxes[(1,2)] 里有没有 '5'
 </span></code></pre></div>
 <p>三处都没有重复就登记，任何一处冲突立即返回 <code>False</code>。</p>
 <p><strong>关键细节</strong>：<strong>宫的索引是 <code>(r // 3, c // 3)</code>，不是 <code>(r % 3, c % 3)</code></strong>——后者只是块内的相对坐标。这是本题第一大坑。</p>
@@ -10721,17 +10723,17 @@
 <h3 id="8-encode-and-decode-strings271">8. Encode and Decode Strings（271）<a class="headerlink" href="#8-encode-and-decode-strings271" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：把字符串列表编码成一个字符串，再原样解码。<strong>输入可以包含任意字符</strong>。</p>
 <p><strong>候选思路</strong>：任何"选一个特殊分隔符"的方案都能被构造输入击穿（比如输入里真的含有那个分隔符）。正确做法是<strong>长度前缀</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>"lint" → "4#lint"
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>""     → "0#"
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>"a#b"  → "3#a#b"
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>"lint" → "4#lint"
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>""     → "0#"
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>"a#b"  → "3#a#b"
 </span></code></pre></div>
 <p>解码时先读到 <code>#</code> 拿到长度 <code>k</code>，再精确读 <code>k</code> 个字符——<strong>知道长度，后面出现什么字符都无所谓</strong>。</p>
 <p><strong>关键细节</strong>：长度可能是多位数，所以要循环读到 <code>#</code> 为止；<strong>空列表编码成 <code>""</code>，解码回 <code>[]</code></strong>，游标写法天然正确。</p>
 <p><strong>这个思路的工业对应</strong>：HTTP 分块传输、protobuf、Redis 的 RESP 协议都用长度而不是分隔符来界定边界。<strong>面试中能提这一句很加分。</strong></p>
 <h3 id="9-longest-consecutive-sequence128">9. Longest Consecutive Sequence（128）<a class="headerlink" href="#9-longest-consecutive-sequence128" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："最长连续序列"，要求 O(n)，元素在原数组中的位置无关。</p>
-<p><strong>候选思路</strong>：排序是 O(n log n)，不符合要求；但"连续"意味着可以<strong>用集合做 O(1) 查找</strong>。关键优化是<strong>只从序列起点扩展</strong>。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [100, 4, 200, 1, 3, 2]</code></p>
+<p><strong>题面信号</strong>："最长连续序列"，要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，元素在原数组中的位置无关。</p>
+<p><strong>候选思路</strong>：排序是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，不符合要求；但"连续"意味着可以<strong>用集合做 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 查找</strong>。关键优化是<strong>只从序列起点扩展</strong>。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [100, 4, 200, 1, 3, 2]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10764,7 +10766,7 @@
 </tbody>
 </table>
 <p>答案是 4。</p>
-<p><strong>关键细节</strong>：<strong>复杂度为什么是 O(n)？</strong> 外层 O(n)；内层 <code>while</code> 只在"x 是起点"时执行，而每个元素最多作为一个序列的成员被访问一次，所以内层总次数 ≤ n。<strong>这是本题必答的追问。</strong></p>
+<p><strong>关键细节</strong>：<strong>复杂度为什么是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？</strong> 外层 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；内层 <code>while</code> 只在"x 是起点"时执行，而每个元素最多作为一个序列的成员被访问一次，所以内层总次数 不大于 n。<strong>这是本题必答的追问。</strong></p>
 <h2 id="_6">六、复杂度速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10779,56 +10781,56 @@
 <tr>
 <td>Contains Duplicate</td>
 <td>集合</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Valid Anagram</td>
 <td>计数数组</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Two Sum</td>
 <td>边遍历边查</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Group Anagrams</td>
 <td>规范化 key</td>
-<td>O(n·k log k)</td>
-<td>O(n·k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n\cdot k \log k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n\cdot k)\)</span></td>
 </tr>
 <tr>
 <td>Top K Frequent</td>
 <td>计数 + 桶排序</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Product Except Self</td>
-<td>前缀 × 后缀</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td>前后缀分解</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Valid Sudoku</td>
 <td>三张哈希表</td>
-<td>O(81)</td>
-<td>O(81)</td>
+<td><span class="arithmatex">\(\mathcal{O}(81)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(81)\)</span></td>
 </tr>
 <tr>
 <td>Encode/Decode</td>
 <td>长度前缀</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Longest Consecutive</td>
 <td>集合 + 起点判断</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10839,23 +10841,23 @@
 <li><strong>Two Sum 的"先查后写"</strong>顺序写反。</li>
 <li><strong>Valid Sudoku 的宫索引</strong>写成 <code>(r % 3, c % 3)</code>。</li>
 <li><strong>桶排序的桶长度</strong>写成 <code>len(count) + 1</code>。</li>
-<li><strong>前缀和忘记 <code>count[0] = 1</code></strong>（空前缀）。</li>
+<li><strong>前缀和忘记 <span class="arithmatex">\(\mathrm{count}[0] = 1\)</span></strong>（空前缀）。</li>
 <li><strong>Encode/Decode 用固定分隔符</strong>而不是长度前缀。</li>
-<li><strong>Longest Consecutive 漏掉 <code>x - 1 not in set</code> 的起点判断</strong>，复杂度退化成 O(n²)。</li>
-<li><strong>在循环里调用 <code>sorted</code></strong>：会让复杂度悄悄升到 O(n² log n)。</li>
+<li><strong>Longest Consecutive 漏掉 <code>x - 1 not in set</code> 的起点判断</strong>，复杂度退化成 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
+<li><strong>在循环里调用 <code>sorted</code></strong>：会让复杂度悄悄升到 <span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>。</li>
 <li><strong>以为"有负数就不能用哈希"</strong>——哈希和前缀和对负数完全没问题，只有滑动窗口才要求非负。</li>
 </ol>
 <h2 id="_8">八、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p><strong>开场</strong>："最直接的做法是两层循环枚举所有对，时间 O(n²)。"
+<p><strong>开场</strong>："最直接的做法是两层循环枚举所有对，时间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。"
 <strong>找瓶颈</strong>："瓶颈在于每次查找都要线性扫描一遍。"
-<strong>换武器</strong>："用哈希表把查找降到 O(1)，整体降到 O(n)，代价是 O(n) 额外空间。"
-<strong>处理追问</strong>："如果要求 O(1) 额外空间，我会核对输入是否可修改与值域范围，再考虑常数空间排序或原地标记；Python list.sort 不能直接承诺 O(1) 辅助空间。"</p>
+<strong>换武器</strong>："用哈希表把查找降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，整体降到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，代价是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间。"
+<strong>处理追问</strong>："如果要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间，我会核对输入是否可修改与值域范围，再考虑常数空间排序或原地标记；Python list.sort 不能直接承诺 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 辅助空间。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>什么时候该用排序而不是哈希？什么时候必须用哈希？</li>
 <li><code>Counter(s) == Counter(t)</code> 判断异位词，为什么是对的？</li>
-<li>前缀和模板里 <code>count[0] = 1</code> 去掉会出什么错？</li>
-<li>Longest Consecutive Sequence 为什么是 O(n) 而不是 O(n²)？</li>
+<li>前缀和模板里 <span class="arithmatex">\(\mathrm{count}[0] = 1\)</span> 去掉会出什么错？</li>
+<li>Longest Consecutive Sequence 为什么是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 而不是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>？</li>
 <li>不借助额外空间，怎么判断数组里有没有重复元素？</li>
 <li>为什么 Product Except Self 要禁用除法？</li>
 </ol>

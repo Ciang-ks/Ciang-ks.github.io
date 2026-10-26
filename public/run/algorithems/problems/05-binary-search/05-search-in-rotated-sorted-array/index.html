@@ -3671,10 +3671,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：直接线性查找（O(n)，仅作兜底）
+        解法三：直接线性查找（\(\mathcal{O}(n)\)，仅作兜底）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：直接线性查找（O(n)，仅作兜底）
+        解法三：直接线性查找（\(\mathcal{O}(n)\)，仅作兜底）
       
     </span>
   </a>
@@ -10080,18 +10080,18 @@
 <h1 id="33-search-in-rotated-sorted-array">33. Search in Rotated Sorted Array · 搜索旋转排序数组<a class="headerlink" href="#33-search-in-rotated-sorted-array" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Binary Search</code> ｜ <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">LeetCode 33</a> ｜ <a href="https://neetcode.io/problems/find-target-in-rotated-sorted-array">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>一个<strong>互不相同</strong>的升序数组被旋转过（例如 <code>[0,1,2,4,5,6,7]</code> → <code>[4,5,6,7,0,1,2]</code>），在 O(log n) 时间内找出 <code>target</code> 的下标，不存在返回 -1。</p>
+<p>一个<strong>互不相同</strong>的升序数组被旋转过（例如 <code>[0,1,2,4,5,6,7]</code> → <code>[4,5,6,7,0,1,2]</code>），在 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 时间内找出 <code>target</code> 的下标，不存在返回 -1。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [4,5,6,7,0,1,2], target = 0     输出: 4
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: nums = [4,5,6,7,0,1,2], target = 3     输出: -1
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>数组整体无序，但有一个关键性质：</p>
 <blockquote>
-<p><strong>以 <code>mid</code> 为界，<code>[lo, mid]</code> 和 <code>[mid, hi]</code> 中至少有一半是完全有序的。</strong></p>
+<p><strong>以 <code>mid</code> 为界，<span class="arithmatex">\([\mathrm{lo}, \mathrm{mid}]\)</span> 和 <span class="arithmatex">\([\mathrm{mid}, \mathrm{hi}]\)</span> 中至少有一半是完全有序的。</strong></p>
 </blockquote>
 <p>于是每轮二分分三步：</p>
 <ol>
-<li><strong>判断哪半边有序</strong>：若 <code>nums[lo] &lt;= nums[mid]</code>，则左半边 <code>[lo, mid]</code> 是升序的；否则右半边 <code>[mid, hi]</code> 是升序的。</li>
+<li><strong>判断哪半边有序</strong>：若 <span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{nums}[\mathrm{mid}]\)</span>，则左半边 <span class="arithmatex">\([\mathrm{lo}, \mathrm{mid}]\)</span> 是升序的；否则右半边 <span class="arithmatex">\([\mathrm{mid}, \mathrm{hi}]\)</span> 是升序的。</li>
 <li><strong>判断 target 是否落在那个有序的半边里</strong>（用有序区间的两个端点做比较）。</li>
 <li>落在里面 → 在那一半继续搜；否则 → 丢弃那一半，去另一半找。</li>
 </ol>
@@ -10151,8 +10151,8 @@
 </span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
-<p>两次二分，仍是 O(log n)，但代码更长。<strong>解法一更受面试官青睐</strong>，因为它一次性完成。</p>
-<h3 id="on">解法三：直接线性查找（O(n)，仅作兜底）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<p>两次二分，仍是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，但代码更长。<strong>解法一更受面试官青睐</strong>，因为它一次性完成。</p>
+<h3 id="mathcalon">解法三：直接线性查找（<span class="arithmatex">\(\mathcal{O}(n)\)</span>，仅作兜底）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">return</span> <span class="n">nums</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="k">if</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
@@ -10169,27 +10169,27 @@
 <tbody>
 <tr>
 <td>一次二分判断有序半边</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>两次二分</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>线性查找</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>nums[lo] &lt;= nums[mid]</code> 中的 <code>&lt;=</code> 不能写成 <code>&lt;</code></strong>：当 <code>lo == mid</code>（区间只剩一个元素附近）时，左半边只有一个元素，必须判定为"有序"。</li>
-<li><strong>判断 target 是否落在有序半边时，两个边界比较的等号要配套</strong>：左半边用 <code>nums[lo] &lt;= target &lt; nums[mid]</code>，右半边用 <code>nums[mid] &lt; target &lt;= nums[hi]</code>。因为 <code>nums[mid] == target</code> 已经在前面处理过了。</li>
+<li><strong><span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{nums}[\mathrm{mid}]\)</span> 中的 <span class="arithmatex">\(\le\)</span> 不能写成 <span class="arithmatex">\(&lt;\)</span></strong>：当 <span class="arithmatex">\(lo = \mathrm{mid}\)</span>（区间只剩一个元素附近）时，左半边只有一个元素，必须判定为"有序"。</li>
+<li><strong>判断 target 是否落在有序半边时，两个边界比较的等号要配套</strong>：左半边用 <span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{target} &lt; \mathrm{nums}[\mathrm{mid}]\)</span>，右半边用 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{target} \le \mathrm{nums}[hi]\)</span>。因为 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] = \mathrm{target}\)</span> 已经在前面处理过了。</li>
 <li>别忘了 <code>nums[lo]</code> 每次迭代都会变，不能把它缓存在循环外。</li>
-<li><strong>追问：如果数组里有重复元素？</strong> → <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/">81 Search in Rotated Sorted Array II</a>。当 <code>nums[lo] == nums[mid] == nums[hi]</code> 时无法判断哪边有序，只能 <code>lo += 1; hi -= 1</code> 缩小范围，最坏 O(n)。</li>
+<li><strong>追问：如果数组里有重复元素？</strong> → <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/">81 Search in Rotated Sorted Array II</a>。当 <span class="arithmatex">\(\mathrm{nums}[lo] = \mathrm{nums}[\mathrm{mid}] = \mathrm{nums}[hi]\)</span> 时无法判断哪边有序，只能 <code>lo += 1; hi -= 1</code> 缩小范围，最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 <li><strong>追问：如果旋转了多次（等价于旋转一次）？</strong> → 多次旋转等于一次，性质不变。</li>
 <li><strong>追问：如果要同时找最小值和某个目标？</strong> → 先找旋转点（153），再在对应区间二分。</li>
 </ul>

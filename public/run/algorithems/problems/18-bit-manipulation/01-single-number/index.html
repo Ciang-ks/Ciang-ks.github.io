@@ -8603,10 +8603,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：异或（推荐，O(1) 空间）
+        解法一：异或（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -8614,10 +8614,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1_1" class="md-nav__link">
+  <a href="#mathcalo1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：数学求和（也需要 O(1) 空间，但要处理溢出）
+        解法二：数学求和（也需要 \(\mathcal{O}(1)\) 空间，但要处理溢出）
       
     </span>
   </a>
@@ -8625,10 +8625,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：哈希集合（O(n) 空间，直观但不符合要求）
+        解法三：哈希集合（\(\mathcal{O}(n)\) 空间，直观但不符合要求）
       
     </span>
   </a>
@@ -9987,10 +9987,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：异或（推荐，O(1) 空间）
+        解法一：异或（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -9998,10 +9998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1_1" class="md-nav__link">
+  <a href="#mathcalo1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：数学求和（也需要 O(1) 空间，但要处理溢出）
+        解法二：数学求和（也需要 \(\mathcal{O}(1)\) 空间，但要处理溢出）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：哈希集合（O(n) 空间，直观但不符合要求）
+        解法三：哈希集合（\(\mathcal{O}(n)\) 空间，直观但不符合要求）
       
     </span>
   </a>
@@ -10080,17 +10080,16 @@
 <h1 id="136-single-number">136. Single Number · 只出现一次的数字<a class="headerlink" href="#136-single-number" title="Permanent link">&para;</a></h1>
 <p><code>Easy</code> ｜ <code>Bit Manipulation</code> ｜ <a href="https://leetcode.com/problems/single-number/">LeetCode 136</a> ｜ <a href="https://neetcode.io/problems/single-number">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>数组中除了<strong>一个元素只出现一次</strong>之外，其他元素都出现<strong>两次</strong>。找出那个只出现一次的元素。要求 O(n) 时间、O(1) 额外空间。</p>
+<p>数组中除了<strong>一个元素只出现一次</strong>之外，其他元素都出现<strong>两次</strong>。找出那个只出现一次的元素。要求 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [4,1,2,1,2]
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: 4
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>这是异或运算最经典的应用。</strong></p>
 <p>异或的三条性质：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>a ^ a = 0        # 相同抵消
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>a ^ 0 = a        # 与 0 异或不变
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>a ^ b = b ^ a    # 交换律（还有结合律）
-</span></code></pre></div>
+<div class="arithmatex">\[
+a\oplus a=0,\qquad a\oplus0=a,\qquad a\oplus b=b\oplus a
+\]</div>
 <p>所以把数组里所有元素<strong>依次异或</strong>起来：</p>
 <ul>
 <li>成对出现的元素会互相抵消（变成 0）；</li>
@@ -10101,31 +10100,31 @@
 <p>异或逐位相当于对 1 的出现次数取奇偶，所以偶数份相同值可抵消，顺序不重要。这个模型依赖题目保证“其他数恰好两次、一个数恰好一次”；若有两个数各一次，只异或全部会得到它们的混合值，不能直接输出任意一个。</p>
 <p>例如 [4,1,2,1,2] 的结果是 4，无需排序或哈希计数，额外状态只有一个累积值。如果其他数出现三次，奇偶消去也不再适用，需要按位计数取模等新方法。模式匹配的信号应是出现次数与代数消去规则一致，而不是看到“只出现一次”就无条件写异或。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：异或（推荐，O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：异或（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">singleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="n">result</span> <span class="o">^=</span> <span class="n">x</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">return</span> <span class="n">result</span>
+</span></code></pre></div>
+<h3 id="mathcalo1_1">解法二：数学求和（也需要 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间，但要处理溢出）<a class="headerlink" href="#mathcalo1_1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">singleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="n">result</span> <span class="o">^=</span> <span class="n">x</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="c1"># 2 * sum(set(nums)) - sum(nums) = 只出现一次的那个数</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="o1_1">解法二：数学求和（也需要 O(1) 空间，但要处理溢出）<a class="headerlink" href="#o1_1" title="Permanent link">&para;</a></h3>
+<p><strong>利用了 <code>set</code>，所以空间是 <span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>——不满足题目要求，但思路很巧妙，可以提一句作为对照。</p>
+<h3 id="mathcalon">解法三：哈希集合（<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间，直观但不符合要求）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">singleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="c1"># 2 * sum(set(nums)) - sum(nums) = 只出现一次的那个数</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span></code></pre></div>
-<p><strong>利用了 <code>set</code>，所以空间是 O(n)</strong>——不满足题目要求，但思路很巧妙，可以提一句作为对照。</p>
-<h3 id="on">解法三：哈希集合（O(n) 空间，直观但不符合要求）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">singleNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                <span class="n">seen</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>      <span class="c1"># 第二次出现就删掉</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">return</span> <span class="n">seen</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="n">seen</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>      <span class="c1"># 第二次出现就删掉</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">return</span> <span class="n">seen</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </span></code></pre></div>
 <h2 id="_5">复杂度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
@@ -10139,30 +10138,30 @@
 <tbody>
 <tr>
 <td>异或</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>数学求和</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>哈希集合</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_6">易错点与面试追问<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>初始值必须是 0</strong>（因为 <code>0 ^ x = x</code>）。</li>
+<li><strong>初始值必须是 0</strong>（因为 <span class="arithmatex">\(0 ^ x = x\)</span>）。</li>
 <li><strong>不需要担心溢出</strong>（异或不会产生"更大的数"）。</li>
 <li>数组长度为 1 时返回该元素，写法天然正确。</li>
 <li><strong>追问：如果其他元素都出现三次呢？</strong> → <a href="https://leetcode.com/problems/single-number-ii/">137 Single Number II</a>，需要<strong>按位统计</strong>：对每一位统计 1 的个数，模 3 之后就能得到答案的那一位。</li>
-<li><strong>追问：如果</strong>有两个<strong>元素只出现一次呢？</strong> → <a href="https://leetcode.com/problems/single-number-iii/">260 Single Number III</a>，先把所有数异或，得到 <code>a ^ b</code>，再取它最低位的 1 把数组分成两组，每组各含一个答案。</li>
+<li><strong>追问：如果</strong>有两个<strong>元素只出现一次呢？</strong> → <a href="https://leetcode.com/problems/single-number-iii/">260 Single Number III</a>，先把所有数异或，得到 <span class="arithmatex">\(a \oplus  b\)</span>，再取它最低位的 1 把数组分成两组，每组各含一个答案。</li>
 <li><strong>追问：如果其他元素都出现两次、但只有一个元素出现次数</strong>不确定<strong>？</strong> → 异或不再适用，需要哈希计数。</li>
-<li><strong>追问：为什么异或能"抵消"？</strong> → 因为它满足交换律、结合律，且 <code>a ^ a = 0</code>。<strong>面试中要能说清这三条性质。</strong></li>
+<li><strong>追问：为什么异或能"抵消"？</strong> → 因为它满足交换律、结合律，且 <span class="arithmatex">\(a \oplus  a = 0\)</span>。<strong>面试中要能说清这三条性质。</strong></li>
 </ul>
 <h2 id="_7">相关题目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>

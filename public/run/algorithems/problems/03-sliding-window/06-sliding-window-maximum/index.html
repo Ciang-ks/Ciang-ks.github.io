@@ -3052,10 +3052,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-n" class="md-nav__link">
+  <a href="#mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：大顶堆（O(n log n)，思路简单）
+        解法二：大顶堆（\(\mathcal{O}(n \log n)\)，思路简单）
       
     </span>
   </a>
@@ -3063,10 +3063,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#onk" class="md-nav__link">
+  <a href="#mathcalonk" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：暴力（O(nk)，用于对照）
+        解法三：暴力（\(\mathcal{O}(nk)\)，用于对照）
       
     </span>
   </a>
@@ -9998,10 +9998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-log-n" class="md-nav__link">
+  <a href="#mathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：大顶堆（O(n log n)，思路简单）
+        解法二：大顶堆（\(\mathcal{O}(n \log n)\)，思路简单）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#onk" class="md-nav__link">
+  <a href="#mathcalonk" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：暴力（O(nk)，用于对照）
+        解法三：暴力（\(\mathcal{O}(nk)\)，用于对照）
       
     </span>
   </a>
@@ -10085,21 +10085,21 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [3,3,5,5,6,7]
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>暴力</strong>：每个窗口扫一遍求最大值，O(nk)。当 k 很大时不可接受。</p>
-<p><strong>大顶堆</strong>：把 <code>(值, 下标)</code> 放进堆，每次弹出堆顶；如果堆顶下标已滑出窗口就丢弃。O(n log n)，可以接受但不是最优。</p>
-<p><strong>单调队列（最优解，O(n)）</strong>：</p>
+<p><strong>暴力</strong>：每个窗口扫一遍求最大值，<span class="arithmatex">\(\mathcal{O}(nk)\)</span>。当 k 很大时不可接受。</p>
+<p><strong>大顶堆</strong>：把 <code>(值, 下标)</code> 放进堆，每次弹出堆顶；如果堆顶下标已滑出窗口就丢弃。<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，可以接受但不是最优。</p>
+<p><strong>单调队列（最优解，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）</strong>：</p>
 <p>维护一个<strong>双端队列</strong>，里面存的是<strong>下标</strong>，并且对应的值<strong>单调递减</strong>。它承载这样一个事实：</p>
 <blockquote>
-<p>如果 <code>nums[j] &lt;= nums[i]</code> 且 <code>j &lt; i</code>，那么 <code>j</code> 永远不会再成为任何窗口的最大值——因为 <code>i</code> 比它新、比它大，从当前右端起，未来仍包含 <code>j</code> 的窗口也包含 <code>i</code>。<strong><code>j</code> 可以直接丢掉。</strong></p>
+<p>如果 <span class="arithmatex">\(\mathrm{nums}[j] \le \mathrm{nums}[i]\)</span> 且 <span class="arithmatex">\(j &lt; i\)</span>，那么 <code>j</code> 永远不会再成为任何窗口的最大值——因为 <code>i</code> 比它新、比它大，从当前右端起，未来仍包含 <code>j</code> 的窗口也包含 <code>i</code>。<strong><code>j</code> 可以直接丢掉。</strong></p>
 </blockquote>
 <p>于是维护规则是：</p>
 <ol>
 <li><strong>入队前弹出队尾所有不大于 <code>nums[r]</code> 的元素</strong>（它们被 <code>r</code> 淘汰了）；</li>
 <li>把 <code>r</code> 入队；</li>
-<li><strong>若队首下标已滑出窗口</strong>（<code>dq[0] &lt;= r - k</code>），弹出队首；</li>
+<li><strong>若队首下标已滑出窗口</strong>（<span class="arithmatex">\(dq[0] \le r - k\)</span>），弹出队首；</li>
 <li>窗口大小达到 <code>k</code> 后，<strong>队首就是当前窗口最大值</strong>。</li>
 </ol>
-<p>因为每个下标最多入队一次、出队一次，总复杂度 O(n)。</p>
+<p>因为每个下标最多入队一次、出队一次，总复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>单调队列同时维护两种顺序：下标从队头到队尾递增，保证可以按过期时间删除；数值递减，保证队头是剩余候选最大值。新来的 i 若不小于旧候选 j，且 i&gt;j，那么从当前右端起，未来仍包含 j 的窗口也一定包含 i，而 i 更晚过期，j 就被永久支配。</p>
 <p>这个结论只针对当前及未来的窗口，不能声称过去所有包含 j 的窗口也都包含 i。还要区分“队头过期”和“队尾被更优候选淘汰”：前者由窗口左界决定，后者由数值与新旧关系共同决定。维护最小值可反转数值比较；若要窗口中位数，没有这样单个新值永久支配旧值的关系，需其他结构。</p>
@@ -10125,7 +10125,7 @@
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h3 id="on-log-n">解法二：大顶堆（O(n log n)，思路简单）<a class="headerlink" href="#on-log-n" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon-log-n">解法二：大顶堆（<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，思路简单）<a class="headerlink" href="#mathcalon-log-n" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10140,7 +10140,7 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h3 id="onk">解法三：暴力（O(nk)，用于对照）<a class="headerlink" href="#onk" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalonk">解法三：暴力（<span class="arithmatex">\(\mathcal{O}(nk)\)</span>，用于对照）<a class="headerlink" href="#mathcalonk" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">maxSlidingWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">return</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
@@ -10157,32 +10157,32 @@
 <tbody>
 <tr>
 <td>单调队列</td>
-<td>O(n)</td>
-<td>O(k)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span></td>
 </tr>
 <tr>
 <td>大顶堆</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>暴力</td>
-<td>O(nk)</td>
-<td>O(1)（不计输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(nk)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计输出）</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">易错点与面试追问<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>队列里存下标而不是值</strong>，否则无法判断是否滑出窗口。</li>
-<li><code>while dq and nums[dq[-1]] &lt;= x</code> 用的是 <code>&lt;=</code>（弹掉相等元素）：这样队列内的值严格递减，长度更短。用 <code>&lt;</code> 也不会错，但队列里会堆积重复值。</li>
+<li><code>while dq and nums[dq[-1]] &lt;= x</code> 用的是 <span class="arithmatex">\(\le\)</span>（弹掉相等元素）：这样队列内的值严格递减，长度更短。用 <span class="arithmatex">\(&lt;\)</span> 也不会错，但队列里会堆积重复值。</li>
 <li><strong>过期判断要放在入队之后</strong>：先加入新元素、再清理队首，顺序反了可能在窗口只有 k-1 个元素时误删。</li>
-<li><code>dq[0] &lt;= r - k</code> 表示"队首下标已经不在当前窗口 <code>[r-k+1, r]</code> 内"。</li>
-<li>结果数组长度是 <code>n - k + 1</code>。</li>
+<li><span class="arithmatex">\(dq[0] \le r - k\)</span> 表示"队首下标已经不在当前窗口 <span class="arithmatex">\([r-k+1, r]\)</span> 内"。</li>
+<li>结果数组长度是 <span class="arithmatex">\(n - k + 1\)</span>。</li>
 <li><strong>追问：如果要求滑动窗口的最小值？</strong> → 把比较符号反过来即可（维护递增队列）。</li>
 <li><strong>追问：如果需要同时输出最大和最小？</strong> → 维护两个单调队列。</li>
 <li><strong>追问：单调队列和单调栈的区别？</strong> → 栈只在一端操作，常用于"下一个更大元素"类问题（739、84）；队列两端都能操作，适合"窗口内极值"。</li>
-<li><strong>追问：为什么每个元素最多进出队一次？</strong> → 这正是 O(n) 的来源，面试时必须能说出来。</li>
+<li><strong>追问：为什么每个元素最多进出队一次？</strong> → 这正是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的来源，面试时必须能说出来。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

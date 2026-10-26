@@ -7780,10 +7780,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：记录最后位置 + 贪心扩展（推荐，O(n)）
+        解法一：记录最后位置 + 贪心扩展（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：记录最后位置 + 贪心扩展（推荐，O(n)）
+        解法一：记录最后位置 + 贪心扩展（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10177,7 +10177,7 @@
 <p>切分目标是段数尽量多，而不是只找任意合法切法。当前段遇到的每个字符都会承诺“必须包含其最后一次出现”，向右扫描又可能遇到带来更远承诺的新字符，所以 end 要持续更新，不能只用段首字符的最后位置。</p>
 <p>例如 abac 中，a 把边界推到 2，途中 b 的最后位置为 1，不再扩大；扫描到 2 时得到 aba，余下 c 独立成段。此时延后切分仍可能合法，却会合并原本能分开的段，不能增加段数。所以选择的是最早合法边界，反复这样切才实现最多段。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="on">解法一：记录最后位置 + 贪心扩展（推荐，O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法一：记录最后位置 + 贪心扩展（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">partitionLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">last</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)}</span>   <span class="c1"># 每个字符最后出现的位置</span>
@@ -10225,21 +10225,21 @@
 <tbody>
 <tr>
 <td>字典 + 贪心</td>
-<td>O(n)</td>
-<td>O(字符集大小)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(字符集大小)\)</span></td>
 </tr>
 <tr>
 <td>数组 + 贪心</td>
-<td>O(n)</td>
-<td>O(1)（26 个槽位）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（26 个槽位）</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>end = max(end, last[c])</code> 必须写在判断 <code>i == end</code> 之前</strong>，否则会漏掉"当前字符把边界推得更远"的情况。</li>
-<li><strong>长度是 <code>end - start + 1</code></strong>（闭区间），不要写成 <code>end - start</code>。</li>
-<li><strong>切分后要更新 <code>start = i + 1</code></strong>。</li>
+<li><strong><code>end = max(end, last[c])</code> 必须写在判断 <span class="arithmatex">\(i = \mathrm{end}\)</span> 之前</strong>，否则会漏掉"当前字符把边界推得更远"的情况。</li>
+<li><strong>长度是 <span class="arithmatex">\(\mathrm{end} - \mathrm{start} + 1\)</span></strong>（闭区间），不要写成 <code>end - start</code>。</li>
+<li><strong>切分后要更新 <span class="arithmatex">\(\mathrm{start} = i + 1\)</span></strong>。</li>
 <li>各片段长度之和应等于 <code>len(s)</code>，可以做基本自检。</li>
 <li><strong>追问：如何输出具体的片段内容？</strong> → 记录 <code>start</code> 和 <code>end</code>，最后切片。</li>
 <li><strong>追问：如果要"尽可能少的片段"？</strong> → 那就全部放在一段里（1 个片段）。<strong>注意题目要的是尽量多。</strong></li>

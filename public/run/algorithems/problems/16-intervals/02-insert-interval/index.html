@@ -7998,10 +7998,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：三段式扫描（推荐，O(n)）
+        解法一：三段式扫描（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -8020,10 +8020,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#merge-intervalson-log-n" class="md-nav__link">
+  <a href="#merge-intervalsmathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：直接套用 Merge Intervals（O(n log n)，没利用"已排序"）
+        解法三：直接套用 Merge Intervals（\(\mathcal{O}(n \log n)\)，没利用"已排序"）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：三段式扫描（推荐，O(n)）
+        解法一：三段式扫描（推荐，\(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#merge-intervalson-log-n" class="md-nav__link">
+  <a href="#merge-intervalsmathcalon-log-n" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：直接套用 Merge Intervals（O(n log n)，没利用"已排序"）
+        解法三：直接套用 Merge Intervals（\(\mathcal{O}(n \log n)\)，没利用"已排序"）
       
     </span>
   </a>
@@ -10164,12 +10164,12 @@
 <p><strong>两个端点都要取极值</strong>，因为新区间可能被已有区间完全包裹（比如把 <code>[3,4]</code> 插进 <code>[[1,5]]</code> 里）。</p>
 <h3 id="3">阶段 3：把剩下的区间（都在新区间右边）加入结果<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>合并完成后，把 <code>newInterval</code> 加进去，再接上剩余的区间。</p>
-<p><strong>三个阶段恰好覆盖所有情况，且每个区间只被处理一次</strong>，所以是 O(n)。</p>
+<p><strong>三个阶段恰好覆盖所有情况，且每个区间只被处理一次</strong>，所以是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>线性三阶段同时依赖原区间按左端点有序且互不重叠。先移走完全在左侧的区间后，每个后续 start≤new_end 的区间都与正在扩大的新区间相交；new_end 扩大又可能接上更后面的区间，所以循环条件必须读取更新后的边界。</p>
+<p>线性三阶段同时依赖原区间按左端点有序且互不重叠。先移走完全在左侧的区间后，每个后续 start不大于new_end 的区间都与正在扩大的新区间相交；new_end 扩大又可能接上更后面的区间，所以循环条件必须读取更新后的边界。</p>
 <p>例如向 [[1,2],[4,5],[7,8]] 插入 [2,7]，会依次连接成 [1,8]，不能只按最初交集列表合并一部分。若输入本身允许相互重叠，阶段一直接输出就可能保留旧冲突，应先统一合并或换通用 Merge Intervals。当前结果中的部分旧区间与输入共享列表对象，若后续需要独立修改输出，可在加入时复制。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="on">解法一：三段式扫描（推荐，O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法一：三段式扫描（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intervals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">newInterval</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
@@ -10209,7 +10209,7 @@
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newInterval</span><span class="p">)</span>                       <span class="c1"># 新区间在所有区间右边</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h3 id="merge-intervalson-log-n">解法三：直接套用 Merge Intervals（O(n log n)，没利用"已排序"）<a class="headerlink" href="#merge-intervalson-log-n" title="Permanent link">&para;</a></h3>
+<h3 id="merge-intervalsmathcalon-log-n">解法三：直接套用 Merge Intervals（<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>，没利用"已排序"）<a class="headerlink" href="#merge-intervalsmathcalon-log-n" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intervals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">newInterval</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">intervals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">intervals</span> <span class="o">+</span> <span class="p">[</span><span class="n">newInterval</span><span class="p">])</span>
@@ -10221,7 +10221,7 @@
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>这个写法也对，但复杂度是 O(n log n)</strong>。题目特意说明"原数组已排序"，就是想让你做到 O(n)；<strong>面试中写这个版本会被追问"能不能利用已排序的性质"。</strong></p>
+<p><strong>这个写法也对，但复杂度是 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></strong>。题目特意说明"原数组已排序"，就是想让你做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；<strong>面试中写这个版本会被追问"能不能利用已排序的性质"。</strong></p>
 <h2 id="_6">复杂度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10234,13 +10234,13 @@
 <tbody>
 <tr>
 <td>三段式扫描</td>
-<td>O(n)</td>
-<td>O(n)（输出）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（输出）</td>
 </tr>
 <tr>
 <td>排序 + 合并</td>
-<td>O(n log n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10251,9 +10251,9 @@
 <li><strong>合并时 <code>new_start</code> 和 <code>new_end</code> 都要更新</strong>，因为新区间可能被已有区间完全包含。</li>
 <li><code>newInterval</code> 可能落在所有区间的右边，所以最后要 <code>append</code> 一次。</li>
 <li>空 <code>intervals</code> 时直接返回 <code>[newInterval]</code>，三段式天然处理。</li>
-<li><strong>追问：如果原数组没有排序？</strong> → 只能 O(n log n) 排序后再处理。</li>
+<li><strong>追问：如果原数组没有排序？</strong> → 只能 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 排序后再处理。</li>
 <li><strong>追问：如果要插入多个区间？</strong> → 把它们和原数组合并再排序，然后做一次 56 题。</li>
-<li><strong>追问：这题和 56 Merge Intervals 的关系？</strong> → <strong>56 是"排序后合并"，57 是"已排序所以可以做到 O(n)"</strong>。把 57 理解成 56 的优化版就通了。</li>
+<li><strong>追问：这题和 56 Merge Intervals 的关系？</strong> → <strong>56 是"排序后合并"，57 是"已排序所以可以做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>"</strong>。把 57 理解成 56 的优化版就通了。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>

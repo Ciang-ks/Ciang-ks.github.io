@@ -2386,7 +2386,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：前缀 × 后缀（推荐）
+        解法一：前后缀分解（推荐）
       
     </span>
   </a>
@@ -9979,7 +9979,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：前缀 × 后缀（推荐）
+        解法一：前后缀分解（推荐）
       
     </span>
   </a>
@@ -10059,7 +10059,7 @@
 <p><code>Medium</code> ｜ <code>Arrays &amp; Hashing</code> ｜ <a href="https://leetcode.com/problems/product-of-array-except-self/">LeetCode 238</a> ｜ <a href="https://neetcode.io/problems/products-of-array-discluding-self">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>给定整数数组 <code>nums</code>，返回数组 <code>res</code>，其中 <code>res[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外所有元素的乘积。</p>
-<p><strong>约束：不能用除法，并且要在 O(n) 时间内完成。</strong></p>
+<p><strong>约束：不能用除法，并且要在 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间内完成。</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [1, 2, 3, 4]
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: [24, 12, 8, 6]
 </span></code></pre></div>
@@ -10071,46 +10071,47 @@
 </ol>
 <p>题目要求不用除法；零还说明“总乘积直接除自身”不是完整的一般解法。若允许除法，可以另按零的数量分类，但本题用前后缀统一处理。</p>
 <p><strong>换个角度</strong>：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>res[i] = (nums[0] × … × nums[i-1]) × (nums[i+1] × … × nums[n-1])
-</span></code></pre></div>
-<p>也就是 <strong>答案 = 左边的乘积 × 右边的乘积</strong>。于是拆成两趟扫描：</p>
+<div class="arithmatex">\[
+\mathrm{res}[i]=\left(\prod_{j=0}^{i-1}\mathrm{nums}[j]\right)\left(\prod_{j=i+1}^{n-1}\mathrm{nums}[j]\right)
+\]</div>
+<p>也就是 <span class="arithmatex">\(\text{答案}=\text{左侧乘积}\times\text{右侧乘积}\)</span>。于是拆成两趟扫描：</p>
 <ol>
-<li><strong>正向扫描</strong>：<code>res[i]</code> 先存"<code>i</code> 左边所有元素的乘积"。<code>res[0] = 1</code>，因为左边没有元素，1 是乘法的单位元。</li>
+<li><strong>正向扫描</strong>：<code>res[i]</code> 先存"<code>i</code> 左边所有元素的乘积"。<span class="arithmatex">\(\mathrm{res}[0] = 1\)</span>，因为左边没有元素，1 是乘法的单位元。</li>
 <li><strong>反向扫描</strong>：用滚动变量 <code>suffix</code> 记录"<code>i</code> 右边所有元素的乘积"，乘进 <code>res[i]</code>。</li>
 </ol>
-<p>两趟各 O(n)，不使用除法，也不需要额外数组（输出数组本身不计入空间复杂度）。</p>
+<p>两趟各 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不使用除法，也不需要额外数组（输出数组本身不计入空间复杂度）。</p>
 <p>这个"<strong>把区间拆成左半 + 右半，两趟扫描合并</strong>"的思路，是前缀/后缀类问题的通用模板。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>真正可复用的结构是“把排除当前位置的范围拆成两个互不相交部分”，这里用乘法合并。第一遍写 res[i] 时，prefix 必须只包含下标&lt;i 的值，所以先赋值、后乘 nums[i]；第二遍同理，先把右侧乘积乘入答案，再把自身加入 suffix。这个先后顺序就是“排除自己”的代码表达。</p>
 <p>用 [2,0,3] 手推：左乘积为 [1,2,0]，右侧补入后成为 [0,6,0]。空的一侧取 1，让边界与普通位置统一。它与前缀和相似，但并非所有区间统计都能作差或相除；能否用两个前缀恢复中间区间，必须另证可逆性。这里直接组合左右结果，因此零也无需特判。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="_5">解法一：前缀 × 后缀（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">productExceptSelf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="c1"># 第一趟：res[i] = nums[i] 左边所有元素的乘积</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">prefix</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="n">prefix</span> <span class="o">*=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="c1"># 第二趟：乘上 nums[i] 右边所有元素的乘积</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="n">suffix</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="n">suffix</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            <span class="n">suffix</span> <span class="o">*=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="k">return</span> <span class="n">res</span>
+<h3 id="_5">解法一：前后缀分解（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">productExceptSelf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="c1"># 第一趟：res[i] = nums[i] 左边所有元素的乘积</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">prefix</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="n">prefix</span> <span class="o">*=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="c1"># 第二趟：乘上 nums[i] 右边所有元素的乘积</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">suffix</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="n">suffix</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">suffix</span> <span class="o">*=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
 <h3 id="_6">解法二：用除法的写法（错误示例，用来理解约束）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">productExceptSelf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="n">total</span> <span class="o">*=</span> <span class="n">x</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">total</span> <span class="o">//</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>   <span class="c1"># 恰有一个 0 时，该零位置通常应为非零乘积，这里却返回 0</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">productExceptSelf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="n">total</span> <span class="o">*=</span> <span class="n">x</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">total</span> <span class="o">//</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>   <span class="c1"># 恰有一个 0 时，该零位置通常应为非零乘积，这里却返回 0</span>
 </span></code></pre></div>
 <p>例如 [2,0,3] 应返回 [0,6,0]，该错误版本却返回全零；有两个及以上零时，答案本来就是全零。这说明要具体检查反例，不能只说“遇到零都会错”。</p>
 <h2 id="_7">复杂度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -10124,9 +10125,9 @@
 </thead>
 <tbody>
 <tr>
-<td>前缀 × 后缀</td>
-<td>O(n)</td>
-<td>O(1)（输出数组不计入）</td>
+<td>前后缀分解</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（输出数组不计入）</td>
 </tr>
 <tr>
 <td>除法</td>
@@ -10137,17 +10138,17 @@
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>res</code> 初始化为 <code>[1] * n</code>；<code>res[0] = 1</code> 代表"左边没有元素，乘积为单位元"，这是乘法版的空区间约定。</li>
+<li><code>res</code> 初始化为 <code>[1] * n</code>；<span class="arithmatex">\(\mathrm{res}[0] = 1\)</span> 代表"左边没有元素，乘积为单位元"，这是乘法版的空区间约定。</li>
 <li>第二趟必须<strong>倒序</strong>，且 <code>suffix</code> 要"先用后乘"：先用当前值乘 <code>res[i]</code>，再更新 <code>suffix</code>。写反会整体算错。</li>
 <li><strong>追问：为什么不能用除法？</strong> → 题目明确禁止；若无此约束，零可分类处理。前后缀法无需除法，也自然覆盖零和负数。</li>
 <li><strong>追问：数组里有 0、有负数呢？</strong> → 本解法不关心具体数值，乘法天然兼容。</li>
 <li><strong>追问：如果换成 max / 其他运算？</strong> → 前缀/后缀模板依赖运算<strong>可结合且能"左右拼接"</strong>。例如 max 也可用负无穷作为空侧单位元，合并左右最大值得到“排除自己后的最大值”。可结合且存在合适空侧值即可这样拼接；不需要运算可逆。</li>
-<li><strong>追问：空间还能压吗？</strong> → 输出必须占 O(n)，额外空间已只剩两个变量，已经是理论最优。</li>
+<li><strong>追问：空间还能压吗？</strong> → 输出必须占 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，额外空间已只剩两个变量，已经是理论最优。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../13-1d-dp/09-maximum-product-subarray/">152 Maximum Product Subarray</a> —— 同样是"遍历中维护累积量"</li>
-<li><a href="../../02-two-pointers/05-trapping-rain-water/">42 Trapping Rain Water</a> —— 前缀最大值 × 后缀最大值，模板高度相似</li>
+<li><a href="../../02-two-pointers/05-trapping-rain-water/">42 Trapping Rain Water</a> —— 前缀最大值与后缀最大值，模板高度相似</li>
 <li><a href="https://leetcode.com/problems/product-of-the-last-k-numbers/">1352 Product of the Last K Numbers</a></li>
 </ul>
 

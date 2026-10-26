@@ -10566,7 +10566,7 @@
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p><strong>两个优化缺一不可</strong>：路径压缩 + 按秩合并，使单次操作接近 O(1)。<strong>并查集的使用信号</strong>：无向图 + "动态加边" + "判连通/找环/数连通块"。</p>
+<p><strong>两个优化缺一不可</strong>：路径压缩 + 按秩合并，使单次操作接近 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。<strong>并查集的使用信号</strong>：无向图 + "动态加边" + "判连通/找环/数连通块"。</p>
 <h2 id="_4">三、从读题到写码：四步流程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>建模</strong>：节点是什么？边是什么？</li>
@@ -10602,14 +10602,14 @@
 <p><strong>关键细节</strong>：每个格子贡献 1，所以不会重复计数；空网格返回 0。</p>
 <h3 id="4-pacific-atlantic-water-flow417">4. Pacific Atlantic Water Flow（417）<a class="headerlink" href="#4-pacific-atlantic-water-flow417" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："水能从格子流到哪些海洋，求两个海洋都能到达的格子"。</p>
-<p><strong>候选思路</strong>：正向从每个格子搜太慢（O(m²n²)）。<strong>反向思考</strong>——从两个海洋的边界出发，逆着水流方向（往<strong>高度不低于当前</strong>的地方爬），能到达的格子就是"能流到这个海洋"的格子。</p>
-<p><strong>为什么反向可行？</strong> 因为正向是"从高往低（或平）流"，反过来就是"从低往高（或平）走"。<strong>起点只有边界的 O(m+n) 个，且每个格子最多被访问两次</strong>，所以是 O(mn)。</p>
-<p><strong>走一遍示例</strong>：<code>heights[1][1] = 2</code></p>
+<p><strong>候选思路</strong>：正向从每个格子搜太慢（<span class="arithmatex">\(\mathcal{O}(m^{2}n^{2})\)</span>）。<strong>反向思考</strong>——从两个海洋的边界出发，逆着水流方向（往<strong>高度不低于当前</strong>的地方爬），能到达的格子就是"能流到这个海洋"的格子。</p>
+<p><strong>为什么反向可行？</strong> 因为正向是"从高往低（或平）流"，反过来就是"从低往高（或平）走"。<strong>起点只有边界的 <span class="arithmatex">\(\mathcal{O}(m+n)\)</span> 个，且每个格子最多被访问两次</strong>，所以是 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{heights}[1][1] = 2\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>从太平洋边界（左列 1、上排 1、2、2、3、5）出发向上爬，能到 (1,1)
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>从大西洋边界（右列 5、4、1、5、4 等）出发向上爬，也能到 (1,1)
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>→ (1,1) 同时在两个集合里 → 计入答案
 </span></code></pre></div>
-<p><strong>关键细节</strong>：逆流条件是 <code>heights[nr][nc] &gt;= heights[r][c]</code>（<strong>等号要保留</strong>，题目允许流到等高的格子）；两个集合取交集。</p>
+<p><strong>关键细节</strong>：逆流条件是 <span class="arithmatex">\(\mathrm{heights}[nr][nc] \ge \mathrm{heights}[r][c]\)</span>（<strong>等号要保留</strong>，题目允许流到等高的格子）；两个集合取交集。</p>
 <h3 id="5-surrounded-regions130">5. Surrounded Regions（130）<a class="headerlink" href="#5-surrounded-regions130" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："把所有被 X 完全包围的 O 变成 X"。</p>
 <p><strong>候选思路</strong>：正向判断"是否被包围"很麻烦。<strong>反向思考</strong>——<strong>与边界连通的 O 是安全的</strong>，永远不会被翻转。</p>
@@ -10650,7 +10650,7 @@
 <p><strong>题面信号</strong>："输出一种可行的修课顺序"。</p>
 <p><strong>候选思路</strong>：207 + 把弹出的顺序记录下来。<strong>答案不唯一</strong>，任意拓扑序都可接受。</p>
 <p><strong>关键细节</strong>：有环返回 <code>[]</code>；DFS 版要"后序记录 + 最后反转"（后序保证节点排在它所有后代之后，反转后前驱就在前面）。</p>
-<p><strong>追问准备</strong>："要求字典序最小的拓扑序？" → 把队列换成小顶堆，复杂度变 O((V+E) log V)。</p>
+<p><strong>追问准备</strong>："要求字典序最小的拓扑序？" → 把队列换成小顶堆，复杂度变 <span class="arithmatex">\(\mathcal{O}((V+E) \log V)\)</span>。</p>
 <h3 id="10-redundant-connection684">10. Redundant Connection（684）<a class="headerlink" href="#10-redundant-connection684" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："树多了一条边，找出这条边"。</p>
 <p><strong>候选思路</strong>：<strong>"不断加边 + 判断两端是否已连通"</strong> 是并查集的定义场景。遍历每条边尝试合并：两端已在同一集合 → 这条边就是多余的。</p>
@@ -10659,7 +10659,7 @@
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>union(1,3) → 成功，合并 {1,2,3}
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>union(2,3) → find(2)==find(3) → 返回 [2,3]
 </span></code></pre></div>
-<p><strong>关键细节</strong>：并查集数组要开 <code>n+1</code>（节点从 1 开始）；<code>find</code> 要路径压缩、<code>union</code> 要按秩合并。</p>
+<p><strong>关键细节</strong>：并查集数组要开 <span class="arithmatex">\(n+1\)</span>（节点从 1 开始）；<code>find</code> 要路径压缩、<code>union</code> 要按秩合并。</p>
 <h3 id="11-number-of-connected-components323">11. Number of Connected Components（323）<a class="headerlink" href="#11-number-of-connected-components323" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："无向图连通分量个数"。</p>
 <p><strong>候选思路</strong>：并查集（<code>count</code> 初值 n，每次成功合并减一），或者 DFS/BFS 数遍历次数。</p>
@@ -10691,17 +10691,17 @@
 <tr>
 <td>枚举 26 字母</td>
 <td>对每个位置试 a-z，看结果是否在词典里</td>
-<td>Python 构造新词计入后 O(26N·L²)</td>
+<td>Python 构造新词计入后 <span class="arithmatex">\(\mathcal{O}(26N\cdot L^{2})\)</span></td>
 </tr>
 <tr>
 <td>模式索引</td>
 <td>生成模式并建桶，遍历后清空桶避免重复扫描</td>
-<td>Python 字符串切片与哈希计入后为 O(N·L²)</td>
+<td>Python 字符串切片与哈希计入后为 <span class="arithmatex">\(\mathcal{O}(N\cdot L^{2})\)</span></td>
 </tr>
 </tbody>
 </table>
 <p><strong>两种都可以</strong>，模式索引避免了 26 倍的常数，更适合词典大、单词长的场景。</p>
-<p><strong>进阶</strong>：双向 BFS 从起点和终点同时扩展，每次扩展较小的一侧，搜索空间从 <code>b^d</code> 降到 <code>b^(d/2)</code>。</p>
+<p><strong>进阶</strong>：双向 BFS 从起点和终点同时扩展，每次扩展较小的一侧，搜索空间从 <span class="arithmatex">\(b^d\)</span> 降到 <span class="arithmatex">\(b^{d/2}\)</span>。</p>
 <p><strong>关键细节</strong>：<code>endWord</code> 不在词典里直接返回 0；返回的是<strong>单词个数</strong>（例子里是 5，对应 4 次转换）；visited 要在入队时标记。</p>
 <h2 id="_6">五、复杂度速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
@@ -10716,67 +10716,67 @@
 <tr>
 <td>Number of Islands</td>
 <td>网格 DFS/BFS</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Clone Graph</td>
 <td>哈希表 + 遍历</td>
-<td>O(V+E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>Max Area of Island</td>
 <td>网格 DFS 计数</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Pacific Atlantic</td>
 <td>反向 DFS</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Surrounded Regions</td>
 <td>反向 DFS + 标记</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Rotting Oranges</td>
 <td>多源 BFS</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Walls and Gates</td>
 <td>多源 BFS</td>
-<td>O(mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(mn)\)</span></td>
 </tr>
 <tr>
 <td>Course Schedule</td>
 <td>拓扑排序</td>
-<td>O(V+E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>Course Schedule II</td>
 <td>拓扑排序</td>
-<td>O(V+E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>Redundant Connection</td>
 <td>并查集</td>
-<td>O(n α(n))</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \alpha (n))\)</span></td>
 </tr>
 <tr>
 <td>Connected Components</td>
 <td>并查集 / DFS</td>
-<td>O(V+E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>Graph Valid Tree</td>
 <td>并查集 / DFS</td>
-<td>O(V+E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V+E)\)</span></td>
 </tr>
 <tr>
 <td>Word Ladder</td>
 <td>BFS + 模式索引</td>
-<td>O(N·L²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(N\cdot L^{2})\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10793,7 +10793,7 @@
 <li><strong>无向图 DFS 判环时没排除父节点边</strong>。</li>
 </ol>
 <h2 id="_8">七、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"我把问题抽象成图：每个格子是一个节点，上下左右相邻的格子之间有边。然后用 DFS 遍历每个连通块，遍历时把访问过的格子标成 '#' 避免重复访问。每个格子只被访问一次，所以总复杂度 O(m·n)。"</p>
+<p>"我把问题抽象成图：每个格子是一个节点，上下左右相邻的格子之间有边。然后用 DFS 遍历每个连通块，遍历时把访问过的格子标成 '#' 避免重复访问。每个格子只被访问一次，所以总复杂度 <span class="arithmatex">\(\mathcal{O}(m\cdot n)\)</span>。"</p>
 <h2 id="30">八、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>为什么"从边界反向搜索"比"从每个格子正向搜索"更高效（417、130）？</li>

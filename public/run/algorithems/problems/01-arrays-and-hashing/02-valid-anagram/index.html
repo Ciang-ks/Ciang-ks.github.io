@@ -2293,10 +2293,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序（O(n) 额外空间）
+        解法三：排序（\(\mathcal{O}(n)\) 额外空间）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：排序（O(n) 额外空间）
+        解法三：排序（\(\mathcal{O}(n)\) 额外空间）
       
     </span>
   </a>
@@ -10089,19 +10089,19 @@
 <p>第一件事先做剪枝：<strong>长度不同直接返回 <code>False</code></strong>，省掉后面所有工作。</p>
 <p>之后有三条路：</p>
 <ol>
-<li><strong>排序后比较</strong>：<code>sorted(s) == sorted(t)</code>，代码最短，O(n log n)。</li>
-<li><strong>哈希计数</strong>：<code>Counter(s) == Counter(t)</code>，O(n)，能处理任意 Unicode 字符。</li>
-<li><strong>固定长度计数数组</strong>：因为题目限定小写字母，可以用长度 26 的数组，一个加一个减，最后看是否全为 0。O(n)，常数最小，是面试官最想看到的写法（如果限定字母表）。</li>
+<li><strong>排序后比较</strong>：<code>sorted(s) == sorted(t)</code>，代码最短，<span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。</li>
+<li><strong>哈希计数</strong>：<code>Counter(s) == Counter(t)</code>，<span class="arithmatex">\(\mathcal{O}(n)\)</span>，能处理任意 Unicode 字符。</li>
+<li><strong>固定长度计数数组</strong>：因为题目限定小写字母，可以用长度 26 的数组，一个加一个减，最后看是否全为 0。<span class="arithmatex">\(\mathcal{O}(n)\)</span>，常数最小，是面试官最想看到的写法（如果限定字母表）。</li>
 </ol>
 <p>选择哪个取决于约束条件，这正是可以主动展示思考的地方：</p>
 <ul>
 <li>题目说 "consists of lowercase English letters" → 计数数组</li>
 <li>题目说 "contains Unicode characters" → <code>Counter</code></li>
-<li>小写字母且要求 O(1) 辅助空间 → 26 槽计数；Python sorted 会新建列表，不能按 O(1) 空间计</li>
+<li>小写字母且要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 辅助空间 → 26 槽计数；Python sorted 会新建列表，不能按 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间计</li>
 </ul>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>判断异位词时，字符顺序是可以忽略的信息，字符种类和重数却都必须保留。[a,a,b] 与 [a,b,b] 的字符集合相同，但不是异位词，这正是“集合判存在”需要升级成“频次向量”的原因。计数向量可看成字符串在这种等价关系下的代表：两个向量相同，当且仅当每个字符都恰好能一一配对。</p>
-<p>diff 的每个槽表示“s 中该字符个数−t 中该字符个数”。例如 s="aab"、t="aba"，a、b 的差最终都为 0，与字符扫描顺序无关。这个模式会迁移到 Group Anagrams 的分组键，以及 Permutation in String 的窗口比较；后者还需维护连续位置和固定窗口长度，本题只比较整串。</p>
+<p>diff 的每个槽表示“s 中该字符个数-t 中该字符个数”。例如 s="aab"、t="aba"，a、b 的差最终都为 0，与字符扫描顺序无关。这个模式会迁移到 Group Anagrams 的分组键，以及 Permutation in String 的窗口比较；后者还需维护连续位置和固定窗口长度，本题只比较整串。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="26">解法一：长度 26 计数数组（推荐，字母表固定时）<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10124,7 +10124,7 @@
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isAnagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">and</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="n">Counter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="on">解法三：排序（O(n) 额外空间）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：排序（<span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isAnagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -10141,18 +10141,18 @@
 <tbody>
 <tr>
 <td>计数数组</td>
-<td>O(n)</td>
-<td>O(1)（26 个槽位）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（26 个槽位）</td>
 </tr>
 <tr>
 <td>Counter</td>
-<td>O(n)</td>
-<td>O(k)，k 为不同字符数</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(k)\)</span>，k 为不同字符数</td>
 </tr>
 <tr>
 <td>排序</td>
-<td>O(n log n)</td>
-<td>O(n)（Python 的 <code>sorted</code> 会新建列表）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（Python 的 <code>sorted</code> 会新建列表）</td>
 </tr>
 </tbody>
 </table>

@@ -10149,10 +10149,10 @@
 <li>全部合并成功，最后检查"连通分量数是否等于 1"（或者等价地检查"成功合并了 n-1 次"）。</li>
 </ul>
 <h3 id="bdfsbfs">方法 B：DFS/BFS + 边数检查<a class="headerlink" href="#bdfsbfs" title="Permanent link">&para;</a></h3>
-<p>先检查 <code>len(edges) == n - 1</code>，再从节点 0 出发做一次遍历：<strong>如果访问到的节点数等于 n，就是合法的树</strong>（因为连通与 n−1 条边合起来才保证无环）。</p>
+<p>先检查 <code>len(edges) == n - 1</code>，再从节点 0 出发做一次遍历：<strong>如果访问到的节点数等于 n，就是合法的树</strong>（因为连通与 n-1 条边合起来才保证无环）。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>成功合并一条无环边，分量数就从 c 变成 c−1。由 n 个孤点出发，若 n−1 条边全部合并成功，最后恰有一个分量，于是“边数正确且无环”足够推出连通。反过来，若 n−1 条边已连通，每一条都用于减少分量，便没有形成环的余量。</p>
-<p>这也解释了为何需要两个条件：三角环外加孤点虽然边数是 n−1，却未连通。DFS 对无向图判环时，沿原边返回父节点不能算新环，需传父节点或用边编号识别；本题先检查边数再检查连通，可避免单独写这套判环逻辑。结论针对无向图和至少一个节点，不要套到课程依赖图。</p>
+<p>成功合并一条无环边，分量数就从 c 变成 c-1。由 n 个孤点出发，若 n-1 条边全部合并成功，最后恰有一个分量，于是“边数正确且无环”足够推出连通。反过来，若 n-1 条边已连通，每一条都用于减少分量，便没有形成环的余量。</p>
+<p>这也解释了为何需要两个条件：三角环外加孤点虽然边数是 n-1，却未连通。DFS 对无向图判环时，沿原边返回父节点不能算新环，需传父节点或用边编号识别；本题先检查边数再检查连通，可避免单独写这套判环逻辑。结论针对无向图和至少一个节点，不要套到课程依赖图。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：并查集（推荐，一趟搞定）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10238,13 +10238,13 @@
 <tbody>
 <tr>
 <td>并查集</td>
-<td>O((n + E) · α(n)) ≈ O(n + E)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}((n + E) \cdot \alpha (n))\)</span> 约为 <span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>DFS</td>
-<td>O(n + E)</td>
-<td>O(n + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n + E)\)</span></td>
 </tr>
 </tbody>
 </table>

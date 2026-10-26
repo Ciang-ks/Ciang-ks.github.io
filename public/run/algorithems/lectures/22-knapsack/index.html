@@ -1925,10 +1925,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#onw" class="md-nav__link">
+  <a href="#mathcalonw" class="md-nav__link">
     <span class="md-ellipsis">
       
-        伪多项式：为什么 O(nW) 不算多项式
+        伪多项式：为什么 \(\mathcal{O}(nW)\) 不算多项式
       
     </span>
   </a>
@@ -10154,10 +10154,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#onw" class="md-nav__link">
+  <a href="#mathcalonw" class="md-nav__link">
     <span class="md-ellipsis">
       
-        伪多项式：为什么 O(nW) 不算多项式
+        伪多项式：为什么 \(\mathcal{O}(nW)\) 不算多项式
       
     </span>
   </a>
@@ -10221,7 +10221,7 @@
 <p><strong>阅读起点</strong>：第 20 讲：状态、基例与转移；第 2 讲：数组覆盖；本讲解释不可达初值。</p>
 <p><strong>首读范围</strong>：先看二维 0/1 状态再压缩；先做最少硬币，后做组合计数；伪多项式可先读例子。</p>
 <p>这一讲用同一个套路把这类问题引出来：<strong>先端出一个看起来很有道理的贪心，再当场看着它翻车。</strong></p>
-<p>先看切钢条。一根长 <code>L</code> 的钢条，每个长度 <code>ℓ</code> 有售价 <code>v(ℓ)</code>，问怎么切最赚钱。最顺手的想法是"每单位长度卖得最贵的，多切几段就好"。取 <code>L = 7</code>、<code>v = [0, 1, 10, 13, 18, 20, 31, 32]</code>。单位长度最贵的是长度 6（<code>31/6 ≈ 5.17</code>），切成 <code>[6, 1]</code> 得 <code>31 + 1 = 32</code>；而 <code>2 + 2 + 3</code> 得 <code>10 + 10 + 13 = 33</code>。<strong>贪心少赚了一块。</strong></p>
+<p>先看切钢条。一根长 <code>L</code> 的钢条，每个长度 <span class="arithmatex">\(\ell\)</span> 有售价 <span class="arithmatex">\(v(\ell)\)</span>，问怎么切最赚钱。最顺手的想法是"每单位长度卖得最贵的，多切几段就好"。取 <span class="arithmatex">\(L=7\)</span>、<span class="arithmatex">\(v = [0, 1, 10, 13, 18, 20, 31, 32]\)</span>。单位长度最贵的是长度 6（<span class="arithmatex">\(31/6 \approx 5.17\)</span>），切成 <code>[6, 1]</code> 得 <span class="arithmatex">\(31 + 1 = 32\)</span>；而 <span class="arithmatex">\(2 + 2 + 3\)</span> 得 <span class="arithmatex">\(10 + 10 + 13 = 33\)</span>。<strong>贪心少赚了一块。</strong></p>
 <p>再看一种相关任务：背包有固定容量，每种物品给出重量和价值，各有无限多件，每件只能整件放入，要求总重量不超过容量、总价值尽量大。下面会用容量 10 的具体数据说明，优先拿单位重量价值最高的物品也可能失败。</p>
 <p>这一讲要处理的，就是被这两个反例否掉的那一类问题——<strong>选物品</strong>。</p>
 <h2 id="_1">两个反例是怎么坏掉的<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -10259,35 +10259,34 @@
 </tr>
 </tbody>
 </table>
-<p>单位重量最值钱的是 Taco（<code>13/3 ≈ 4.33</code>），所以贪心会抓 3 个 Taco：重量 9、价值 <strong>39</strong>。但装 2 个 Taco 加 2 个灯泡，重量正好 10、价值 <strong>42</strong>——<strong>贪心输给了"留一点空位给灯泡"的那个组合。</strong></p>
+<p>单位重量最值钱的是 Taco（<span class="arithmatex">\(13/3 \approx 4.33\)</span>），所以贪心会抓 3 个 Taco：重量 9、价值 <strong>39</strong>。但装 2 个 Taco 加 2 个灯泡，重量正好 10、价值 <strong>42</strong>——<strong>贪心输给了"留一点空位给灯泡"的那个组合。</strong></p>
 <p><strong>局部最优和全局最优在这里脱钩了。</strong> 所以背包问题必须换一种问法（第 24 讲会给出一个"贪心确实成立"的对照问题：活动选择）。</p>
 <p><img alt="无界背包的反例" src="../figures/22-knapsack-tacos.png" /></p>
 <p>容量为 10，每种物品都有无限份。3 个 Taco 重 9、值 39；改成 2 个 Taco 加 2 个灯泡，重 10、值 42。单位价值最高不代表剩余容量也能得到最好利用。</p>
 <h2 id="_2">先定义“剩余容量还能得到多少价值”<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>先固定一种模型：物品有正整数重量、非负价值，每种无限件，求<strong>总重量不超过 j</strong>的最大价值。<code>dp[j]</code> 是这个最优值，不要求恰好装满。容量为 0 时价值 0；对非零容量还允许什么都不选，因此应把候选 0 放进去：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>dp[j] = max(0, max over wᵢ≤j of (dp[j−wᵢ]+vᵢ))
-</span></code></pre></div>
-<p>这个方程怎样得到？非空方案里任选一件作为最后放入的物品 i，取走它后，其他物品总重量不超过 j−wᵢ，最多获得 dp[j−wᵢ]；再把它放回，价值增加 vᵢ。枚举每种能装下的物品并取最大，就覆盖所有非空方案；再和空方案的 0 比较即可。因为重量为正，依赖的容量都更小，可按 j 从小到大计算。</p>
+<div class="arithmatex">\[
+\mathrm{dp}[j]=\max\left(\{0\}\cup\{\mathrm{dp}[j-w_i]+v_i:w_i\le j\}\right)
+\]</div>
+<p>这个方程怎样得到？非空方案里任选一件作为最后放入的物品 i，取走它后，其他物品总重量不超过 j-<span class="arithmatex">\(w_{i}\)</span>，最多获得 dp[j-<span class="arithmatex">\(w_{i}\)</span>]；再把它放回，价值增加 <span class="arithmatex">\(v_{i}\)</span>。枚举每种能装下的物品并取最大，就覆盖所有非空方案；再和空方案的 0 比较即可。因为重量为正，依赖的容量都更小，可按 j 从小到大计算。</p>
 <p>接下来改变一条限制：<strong>每件只能选一次</strong>，称为 0/1 背包，0 表示不选、1 表示选一次。这时“容量是多少”就不够：相同剩余容量，已经用过的物品不同，后续选择也不同。先定义二维状态 <code>F[i][j]</code>：<strong>只用前 i 件、重量不超过 j 的最大价值</strong>。第 i 件重量 w、价值 v：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>不选：F[i−1][j]
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>选它：F[i−1][j−w]+v   （仅在 j≥w 时）
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>F[i][j] = 两者最大值
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>F[0][j] = 0
-</span></code></pre></div>
+<div class="arithmatex">\[
+F[i][j]=\begin{cases}F[i-1][j],&amp;j&lt;w,\\\max\{F[i-1][j],F[i-1][j-w]+v\},&amp;j\ge w.\end{cases}\qquad F[0][j]=0
+\]</div>
 <p>先把这个定义逐字译成二维代码，再讨论节省空间：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">knapsack_01_table</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">capacity</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># 两个列表等长；重量为正整数，价值非负，capacity&gt;=0。</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">w</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>      <span class="c1"># 不选本件</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">w</span><span class="p">:</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">capacity</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">knapsack_01_table</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">capacity</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># 两个列表等长；重量为正整数，价值非负，capacity&gt;=0。</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">w</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">capacity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>      <span class="c1"># 不选本件</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">w</span><span class="p">:</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">capacity</span><span class="p">]</span>
 </span></code></pre></div>
-<p>只有一件重量 2、价值 3、容量 4 时，第 0 行全是 0，第 1 行为 [0,0,3,3,3]。容量 4 也只能拿这一件，所以值是 3 而不是 6。时间 O(nW)、空间 O(nW)，W 是容量。</p>
+<p>只有一件重量 2、价值 3、容量 4 时，第 0 行全是 0，第 1 行为 [0,0,3,3,3]。容量 4 也只能拿这一件，所以值是 3 而不是 6。时间 <span class="arithmatex">\(\mathcal{O}(nW)\)</span>、空间 <span class="arithmatex">\(\mathcal{O}(nW)\)</span>，W 是容量。</p>
 <p>这才是 0/1 背包的来源。一维数组不是凭空省去 i，而是在逐件处理时覆盖上一行；哪些格子已被覆盖，决定当前物品会不会用第二次。</p>
 <p>例如只有一件 <code>(重量2,价值3)</code>，容量4：倒序先算 j=4，只能读取上一行 dp[2]=0，得到3；正序先让 dp[2]=3，再算 dp[4]=dp[2]+3=6，等于把同一件拿了两次。</p>
 <h2 id="_3">内层循环的方向，就是"物品能不能重复用"<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -10305,47 +10304,47 @@
 <tr>
 <td><strong>正序</strong> <code>for j in range(w, W+1)</code></td>
 <td><strong>完全背包</strong>（物品可重复取）</td>
-<td>算 <code>dp[j]</code> 时用到的 <code>dp[j−w]</code> 可能在这一轮已经被更新过，等价于"同一物品又用了一次"</td>
+<td>算 <code>dp[j]</code> 时用到的 <span class="arithmatex">\(\mathrm{dp}[j-w]\)</span> 可能在这一轮已经被更新过，等价于"同一物品又用了一次"</td>
 </tr>
 <tr>
-<td><strong>倒序</strong> <code>for j in range(W, w−1, −1)</code></td>
+<td><strong>倒序</strong> <code>for j in range(W, w-1, -1)</code></td>
 <td><strong>0/1 背包</strong>（每件最多一次）</td>
-<td><code>dp[j−w]</code> 还是上一轮（还没考虑物品 i 时）的值，本轮的物品 i 不会被重复使用</td>
+<td><span class="arithmatex">\(\mathrm{dp}[j-w]\)</span> 还是上一轮（还没考虑物品 i 时）的值，本轮的物品 i 不会被重复使用</td>
 </tr>
 </tbody>
 </table>
 <p>这个口诀只用于“外层逐件/逐类物品、内层容量、覆盖同一数组”的实现；二维方程、初值和目标仍需分别确认。 写背包题时先问自己一句"这件东西能不能用第二次"，方向就定了。</p>
 <h2 id="_4">从价值、最少数量到可行性与计数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="coin-change">完全背包求最小：Coin Change<a class="headerlink" href="#coin-change" title="Permanent link">&para;</a></h3>
-<p>输入 coins 列出可用硬币面额，每种有无限枚，amount 是要<strong>恰好凑出</strong>的金额。返回所需的最少硬币枚数；凑不出返回 −1，金额为 0 返回 0。例如 coins=[1,2,5]、amount=11，可用 5+5+1，答案为 3；coins=[2]、amount=3 无解。面额为正整数，amount≥0。</p>
-<p>这与无界背包一样允许重复选，但目标从“价值最大”变成“枚数最少”，且必须恰好凑出金额。令 F[i][j] 表示“只用前 i 种硬币，恰好凑 j 的最少枚数”。初始 F[0][0]=0，其余为 ∞。处理面额 c 时只有两类：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>不用这种硬币：F[i−1][j]
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>至少用一枚：F[i][j−c]+1   （j≥c）
-</span></code></pre></div>
-<p>第二项仍在<strong>当前行 i</strong>，因为移走一枚后还能再用 c。它依赖当前行更小的金额，所以 j 必须递增。覆盖成一维数组时，dp[j] 更新前是上一行的“不用”，dp[j−c] 则已经是当前行的“还能再用”。这正是下面代码的两个候选：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">coin_change</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span> <span class="o">*</span> <span class="n">amount</span>          <span class="c1"># dp[0] = 0，其余先当作不可达</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># 正序 → 完全背包</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INF</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<p>输入 coins 列出可用硬币面额，每种有无限枚，amount 是要<strong>恰好凑出</strong>的金额。返回所需的最少硬币枚数；凑不出返回 -1，金额为 0 返回 0。例如 coins=[1,2,5]、amount=11，可用 5+5+1，答案为 3；coins=[2]、amount=3 无解。面额为正整数，amount不小于0。</p>
+<p>这与无界背包一样允许重复选，但目标从“价值最大”变成“枚数最少”，且必须恰好凑出金额。令 F[i][j] 表示“只用前 i 种硬币，恰好凑 j 的最少枚数”。初始 F[0][0]=0，其余为 无穷大。处理面额 c 时只有两类：</p>
+<div class="arithmatex">\[
+F[i][j]=\min\{F[i-1][j],F[i][j-c]+1\}\quad(j\ge c)
+\]</div>
+<p>第二项仍在<strong>当前行 i</strong>，因为移走一枚后还能再用 c。它依赖当前行更小的金额，所以 j 必须递增。覆盖成一维数组时，dp[j] 更新前是上一行的“不用”，dp[j-c] 则已经是当前行的“还能再用”。这正是下面代码的两个候选：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">coin_change</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">INF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span> <span class="o">*</span> <span class="n">amount</span>          <span class="c1"># dp[0] = 0，其余先当作不可达</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># 正序 → 完全背包</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INF</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
 <p><strong>为什么初值是 <code>inf</code> 而不是 0？</strong> 因为 0 意味着"凑不出来也有 0 枚硬币"，那所有金额都会变成"可达"。这里的 <code>inf</code> 是一个占位符，代表"目前为止无解"。</p>
 <h3 id="coin-change-ii">完全背包求组合数：Coin Change II<a class="headerlink" href="#coin-change-ii" title="Permanent link">&para;</a></h3>
 <p>输入仍是互不重复的正整数面额 coins 和非负金额 amount，每种硬币无限枚，这次返回恰好凑出金额的<strong>组合数量</strong>。只看各面额用了几枚，不区分拿取顺序。例如 coins=[1,2]、amount=3 有两种：1+1+1、1+2；2+1 与 1+2 算同一种。金额 0 有一种空组合，凑不出则是 0 种。</p>
 <p>函数沿用 LeetCode 的 <code>change(amount,coins)</code> 参数顺序，与前一题 coin_change(coins,amount) 不同。例如本例调用为 <code>change(3,[1,2])</code>，返回 2。</p>
 <p>定义 F[i][j] 为“只用前 i 种硬币凑出 j 的组合数”。先固定允许的硬币种类，再逐步增加金额，才能避免把不同拿取顺序重复计数：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">change</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">coins</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>                          <span class="c1"># 凑出 0 元有 1 种方式（什么都不选）</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>                    <span class="c1"># 外层物品</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="c1"># 内层容量，正序</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">change</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">coins</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>                          <span class="c1"># 凑出 0 元有 1 种方式（什么都不选）</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>                    <span class="c1"># 外层物品</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="c1"># 内层容量，正序</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span>
 </span></code></pre></div>
-<p>计数也可用同样的两类推导：F[i][j]=F[i−1][j]+F[i][j−c]。第一类完全不用 c，第二类至少有一枚 c，移走一枚后与金额 j−c 的组合一一对应；两类没有交集，所以相加不会重复。</p>
+<p>计数也可用同样的两类推导：F[i][j]=F[i-1][j]+F[i][j-c]。第一类完全不用 c，第二类至少有一枚 c，移走一枚后与金额 j-c 的组合一一对应；两类没有交集，所以相加不会重复。</p>
 <p><strong>这题还藏着一个高频考点：内外层的顺序决定了"组合数"还是"排列数"。</strong></p>
 <table>
 <thead>
@@ -10358,12 +10357,12 @@
 <tbody>
 <tr>
 <td>外层物品、内层容量</td>
-<td><strong>组合数</strong>（<code>1+2</code> 与 <code>2+1</code> 算一种）</td>
+<td><strong>组合数</strong>（<span class="arithmatex">\(1+2\)</span> 与 <span class="arithmatex">\(2+1\)</span> 算一种）</td>
 <td>逐件决定"这个物品用几个"，物品之间的先后不被区分</td>
 </tr>
 <tr>
 <td>外层容量、内层物品</td>
-<td><strong>排列数</strong>（<code>1+2</code> 与 <code>2+1</code> 算两种）</td>
+<td><strong>排列数</strong>（<span class="arithmatex">\(1+2\)</span> 与 <span class="arithmatex">\(2+1\)</span> 算两种）</td>
 <td>每一层都在决定"最后一步用哪个物品"，顺序被区分</td>
 </tr>
 </tbody>
@@ -10372,79 +10371,79 @@
 <h3 id="01-partition-equal-subset-sum">0/1 背包求可行性：Partition Equal Subset Sum<a class="headerlink" href="#01-partition-equal-subset-sum" title="Permanent link">&para;</a></h3>
 <p>输入正整数数组 nums，问能否把所有元素分成两组，使两组和相同；每个位置必须且只能归入一组，不要求两组各自在原数组中连续。返回 True 或 False。例如 <code>[1,5,11,5]</code> 可分为 <code>[11]</code> 与 <code>[1,5,5]</code>。</p>
 <p>若总和 total 是奇数，两组整数和不可能各占一半；否则只需选择一些位置凑成 target=total//2，其余元素自然也凑成 target。dp[j] 表示已处理的元素能否选出和 j，每个位置最多选一次，所以一维实现倒序更新：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_partition</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">if</span> <span class="n">total</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">target</span> <span class="o">=</span> <span class="n">total</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>                       <span class="c1"># 一个都不选，和为 0 可达</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 倒序 → 0/1 背包</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">x</span><span class="p">]:</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">target</span><span class="p">]:</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_partition</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">if</span> <span class="n">total</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">target</span> <span class="o">=</span> <span class="n">total</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>                       <span class="c1"># 一个都不选，和为 0 可达</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   <span class="c1"># 倒序 → 0/1 背包</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">x</span><span class="p">]:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">target</span><span class="p">]:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
 </span></code></pre></div>
 <p>三个要能说出口的点：总和是奇数直接返回 <code>False</code>；内层必须倒序（正序会变成"元素可重复使用"）；<code>dp[0] = True</code> 是整条递推链的起点。</p>
 <h3 id="01-target-sum">0/1 背包求方案数：Target Sum<a class="headerlink" href="#01-target-sum" title="Permanent link">&para;</a></h3>
-<p>给定非负整数数组 nums 和整数 target，要在<strong>每个位置</strong>前放一个 + 或 −，返回最终和为 target 的符号分配数量。例如 nums=[1,1,1]、target=1 有三种：−1+1+1、+1−1+1、+1+1−1。两个相同数若在不同位置，选择哪一个加负号仍算不同方案。</p>
-<p>设所有加正号的数之和为 P，加负号的数的原值之和为 N。那么 P−N=target，而 P+N=total，两式相加得 2P=total+target。于是只需数“能选出和 P 的位置子集”有多少个：选中的加正号，其他的加负号。P 必须是 0..total 内的整数，否则无解。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_target_sum_ways</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="c1"># 设带 + 号的数之和为 P，带 − 号的为 N：P − N = target，P + N = total</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="c1"># 于是 P = (total + target) / 2</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">total</span> <span class="ow">or</span> <span class="p">(</span><span class="n">total</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="k">return</span> <span class="mi">0</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">total</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>        <span class="c1"># 倒序 → 0/1 背包</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">x</span><span class="p">]</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">P</span><span class="p">]</span>
+<p>给定非负整数数组 nums 和整数 target，要在<strong>每个位置</strong>前放一个 + 或 -，返回最终和为 target 的符号分配数量。例如 nums=[1,1,1]、target=1 有三种：-1+1+1、+1-1+1、+1+1-1。两个相同数若在不同位置，选择哪一个加负号仍算不同方案。</p>
+<p>设所有加正号的数之和为 P，加负号的数的原值之和为 N。那么 P-N=target，而 P+N=total，两式相加得 2P=total+target。于是只需数“能选出和 P 的位置子集”有多少个：选中的加正号，其他的加负号。P 必须是 0..total 内的整数，否则无解。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_target_sum_ways</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="c1"># 设带 + 号的数之和为 P，带 − 号的为 N：P − N = target，P + N = total</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># 于是 P = (total + target) / 2</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">total</span> <span class="ow">or</span> <span class="p">(</span><span class="n">total</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">return</span> <span class="mi">0</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">total</span> <span class="o">+</span> <span class="n">target</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>        <span class="c1"># 倒序 → 0/1 背包</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">x</span><span class="p">]</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">P</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>"把每个数分配 + 或 −"（<code>2ⁿ</code> 种）被转化成了"选出和为 P 的子集"（O(nP) 的伪多项式时间）</strong>，这个转化值得单独记住。</p>
+<p><strong>"把每个数分配 + 或 -"（<span class="arithmatex">\(2^{n}\)</span> 种）被转化成了"选出和为 P 的子集"（<span class="arithmatex">\(\mathcal{O}(nP)\)</span> 的伪多项式时间）</strong>，这个转化值得单独记住。</p>
 <h3 id="ones-and-zeroes">容量有两个维度：Ones and Zeroes<a class="headerlink" href="#ones-and-zeroes" title="Permanent link">&para;</a></h3>
 <p>输入仅含 0、1 的字符串列表 strs，以及两个非负预算 m、n。每个字符串位置最多选一次，所选字符串合计至多含 m 个 0、n 个 1，求最多能选几个字符串。例如 strs=["10","0","1"]、m=n=1，可选 "0" 和 "1" 两个，比只选 "10" 更好。</p>
 <p>一个字符串同时消耗两种预算，因此用 dp[i][j] 表示“0 的预算至多 i、1 的预算至多 j 时最多能选几个”。它们是预算上限，不要求恰好用完。每次选一个字符串，收益增加 1，两个预算分别扣除它的 0、1 个数：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_max_form</span><span class="p">(</span><span class="n">strs</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="c1"># dp[i][j] = 至多用 i 个 0 和 j 个 1，最多能挑出几个字符串</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strs</span><span class="p">:</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="n">zeros</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        <span class="n">ones</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">zeros</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="k">if</span> <span class="n">zeros</span> <span class="o">&gt;</span> <span class="n">m</span> <span class="ow">or</span> <span class="n">ones</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>            <span class="k">continue</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>        <span class="c1"># 两个维度都倒序（仍是 0/1）</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ones</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">zeros</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">ones</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">find_max_form</span><span class="p">(</span><span class="n">strs</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="c1"># dp[i][j] = 至多用 i 个 0 和 j 个 1，最多能挑出几个字符串</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strs</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">zeros</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">ones</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">zeros</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">if</span> <span class="n">zeros</span> <span class="o">&gt;</span> <span class="n">m</span> <span class="ow">or</span> <span class="n">ones</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="k">continue</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>        <span class="c1"># 两个维度都倒序（仍是 0/1）</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ones</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">zeros</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">ones</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>容量多一维，状态就多一维，其余不变</strong>——这是"维度扩展"的标准做法。</p>
 <h2 id="_5">"恰好装满"和"不超过容量"是两件事<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>同一道背包题，问法的细微差别会直接改变初值：</p>
 <ul>
-<li><strong>恰好凑出 j</strong>：初值随目标变化。最少个数用 <code>+inf</code>，最大价值用 <code>−inf</code>，可行性用 False，方案数用 0；dp[0] 分别为 0、0、True、1；</li>
+<li><strong>恰好凑出 j</strong>：初值随目标变化。最少个数用 <code>+inf</code>，最大价值用 <code>-inf</code>，可行性用 False，方案数用 0；dp[0] 分别为 0、0、True、1；</li>
 <li><strong>容量不超过 j</strong>：<code>dp[j]</code> 表示"最多用 j 的容量"，若目标是最大价值且价值非负，全部初始化为 0（什么都不装也是合法方案）；其他目标仍要按状态含义设置初值。</li>
 </ul>
-<p>Coin Change 问的是"恰好凑出 amount"，凑不出要返回 −1，所以用 <code>inf</code>；经典背包问"容量不超过 W 的最大价值"，就全部从 0 开始。<strong>判据只有一句话：题目要的是"恰好"还是"至多"。</strong></p>
+<p>Coin Change 问的是"恰好凑出 amount"，凑不出要返回 -1，所以用 <code>inf</code>；经典背包问"容量不超过 W 的最大价值"，就全部从 0 开始。<strong>判据只有一句话：题目要的是"恰好"还是"至多"。</strong></p>
 <h2 id="_6">先估计能不能跑得动<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>若有n种正面额、目标W，Coin Change与Coin Change II都至多n×(W+1)次更新，时间O(nW)，一维表空间O(W)。n是种类数，不是最终硬币个数。组合计数默认coins无重复面额，否则把同一种硬币当两类会重复计数；0或负面额也不符合这个递推模型。</p>
-<p>0/1等和划分同样是“元素个数×目标容量”；Target Sum默认nums非负，0可合法出现。0的正号与负号是不同方案，所以处理0时 <code>dp[j]+=dp[j]</code> 应翻倍，不能为“优化”跳过它。</p>
+<p>若有n种正面额、目标W，Coin Change与Coin Change II都至多<span class="arithmatex">\(n(W+1)\)</span>次更新，时间<span class="arithmatex">\(\mathcal{O}(nW)\)</span>，一维表空间<span class="arithmatex">\(\mathcal{O}(W)\)</span>。n是种类数，不是最终硬币个数。组合计数默认coins无重复面额，否则把同一种硬币当两类会重复计数；0或负面额也不符合这个递推模型。</p>
+<p>0/1等和划分同样是<span class="arithmatex">\(\text{元素个数}\times\text{目标容量}\)</span>；Target Sum默认nums非负，0可合法出现。0的正号与负号是不同方案，所以处理0时 <code>dp[j]+=dp[j]</code> 应翻倍，不能为“优化”跳过它。</p>
 <h2 id="_7">两种循环顺序，各自怎样证明<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>上面按硬币种类处理的代码，可对 i、j 证明：不用面额 c 的最优方案来自上一行；用了 c 的方案去掉一枚后，必须是当前行金额 j−c 的最优方案，否则可替换成更少硬币的方案。两类覆盖全部可能；反过来，每个有限候选都真能构造一个合法方案。由 i 递增、当前行 j 递增的计算顺序，所有依赖已得到正确答案。</p>
+<p>上面按硬币种类处理的代码，可对 i、j 证明：不用面额 c 的最优方案来自上一行；用了 c 的方案去掉一枚后，必须是当前行金额 j-c 的最优方案，否则可替换成更少硬币的方案。两类覆盖全部可能；反过来，每个有限候选都真能构造一个合法方案。由 i 递增、当前行 j 递增的计算顺序，所有依赖已得到正确答案。</p>
 <p>也可以先枚举金额，再枚举“最后一枚硬币”：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">coin_change_by_amount</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">amount</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>            <span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span> <span class="k">else</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">coin_change_by_amount</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">amount</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>            <span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>                <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span> <span class="k">else</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span>
 </span></code></pre></div>
-<p>这次可直接对金额归纳：最优方案去掉最后一枚 c 后，剩余 j−c 必须也最优；枚举全部 c 就不会漏。两版都求最小值，重复遇到相同组合不改变 min，结果相同。但若把 min 改成求和，按最后一枚分类会把不同排列分别计数，不能再声称数的是组合。</p>
+<p>这次可直接对金额归纳：最优方案去掉最后一枚 c 后，剩余 j-c 必须也最优；枚举全部 c 就不会漏。两版都求最小值，重复遇到相同组合不改变 min，结果相同。但若把 min 改成求和，按最后一枚分类会把不同排列分别计数，不能再声称数的是组合。</p>
 <h2 id="_8">手工走一遍<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p><strong>完全背包求最少硬币</strong>：<code>coins = [1, 2, 5]</code>，<code>amount = 11</code>。</p>
 <table>
@@ -10457,7 +10456,7 @@
 <tbody>
 <tr>
 <td>初始</td>
-<td><code>[0, ∞, ∞, ∞, ∞, ∞, ∞, ∞, ∞, ∞, ∞, ∞]</code></td>
+<td><span class="arithmatex">\([0,\infty,\ldots,\infty]\)</span></td>
 </tr>
 <tr>
 <td>用 1</td>
@@ -10473,8 +10472,8 @@
 </tr>
 </tbody>
 </table>
-<p>答案是 3（<code>5 + 5 + 1</code>）。</p>
-<p><strong>0/1 背包求可行性</strong>：<code>nums = [1, 5, 11, 5]</code>，<code>total = 22</code>，<code>target = 11</code>。</p>
+<p>答案是 3（<span class="arithmatex">\(5 + 5 + 1\)</span>）。</p>
+<p><strong>0/1 背包求可行性</strong>：<span class="arithmatex">\(\mathrm{nums} = [1, 5, 11, 5]\)</span>，<code>total = 22</code>，<code>target = 11</code>。</p>
 <table>
 <thead>
 <tr>
@@ -10503,22 +10502,22 @@
 </table>
 <p>11 可达，返回 <code>True</code>（分成 <code>[1, 5, 5]</code> 与 <code>[11]</code>）。</p>
 <p><strong>组合数与排列数的差别</strong>：<code>coins = [1, 2, 5]</code>，<code>amount = 5</code>。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>外层物品、内层容量（组合数）：
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  用 1: dp = [1, 1, 1, 1, 1, 1]
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  用 2: dp = [1, 1, 2, 2, 3, 3]
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  用 5: dp = [1, 1, 2, 2, 3, 4]      ← dp[5] = 4
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>外层容量、内层物品（排列数）：
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  dp[5] = 9
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>外层物品、内层容量（组合数）：
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  用 1: dp = [1, 1, 1, 1, 1, 1]
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  用 2: dp = [1, 1, 2, 2, 3, 3]
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  用 5: dp = [1, 1, 2, 2, 3, 4]      ← dp[5] = 4
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>外层容量、内层物品（排列数）：
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>  dp[5] = 9
 </span></code></pre></div>
 <p>四个组合可写为 1+1+1+1+1、1+1+1+2、1+2+2、5。排列中，三个 1 和一个 2 有四种顺序，两个 2 和一个 1 有三种顺序，再加全 1 与单个 5，共 4+3+1+1=9 种。相对于这四个代表写法，多出的五种是 1+1+2+1、1+2+1+1、2+1+1+1、2+1+2、2+2+1。</p>
-<h2 id="onw">伪多项式：为什么 O(nW) 不算多项式<a class="headerlink" href="#onw" title="Permanent link">&para;</a></h2>
-<p>这里必须先停下来想清楚一个问题：<strong><code>O(nW)</code> 到底算不算多项式时间？</strong></p>
-<p>先看切钢条。输入的规模是 <code>L + 1</code> 个整数（一个 L，加一张长度 L 的价格表），<code>O(L²)</code> 相对于输入规模是常数次多项式，所以它<strong>是</strong>多项式时间算法。再看子集和：输入只有 n 个整数和一个目标 T，<code>O(nT)</code> 里的 T 是<strong>数值</strong>——写下 T 只需要 <code>log T</code> 个比特。当 T 很大时（比如 <code>T ≈ 2ⁿ</code>），<code>O(nT)</code> 相对于输入长度就是指数级的。</p>
+<h2 id="mathcalonw">伪多项式：为什么 <span class="arithmatex">\(\mathcal{O}(nW)\)</span> 不算多项式<a class="headerlink" href="#mathcalonw" title="Permanent link">&para;</a></h2>
+<p>这里必须先停下来想清楚一个问题：<strong><span class="arithmatex">\(\mathcal{O}(nW)\)</span> 到底算不算多项式时间？</strong></p>
+<p>先看切钢条。输入的规模是 <span class="arithmatex">\(L + 1\)</span> 个整数（一个 L，加一张长度 L 的价格表），<span class="arithmatex">\(\mathcal{O}(L^{2})\)</span> 相对于输入规模是常数次多项式，所以它<strong>是</strong>多项式时间算法。再看子集和：输入只有 n 个整数和一个目标 T，<span class="arithmatex">\(\mathcal{O}(nT)\)</span> 里的 T 是<strong>数值</strong>——写下 T 只需要 <span class="arithmatex">\(\log T\)</span> 个比特。当 T 很大时（比如 <span class="arithmatex">\(T \approx 2^{n}\)</span>），<span class="arithmatex">\(\mathcal{O}(nT)\)</span> 相对于输入长度就是指数级的。</p>
 <blockquote>
 <p><strong>伪多项式时间（pseudopolynomial）</strong>：运行时间被"输入规模<strong>和</strong>输入整数的大小"的常数次多项式同时界定。</p>
 </blockquote>
-<p>第 28 讲会定义 NP 完全；这里先把它理解为一类尚无已知多项式时间通用算法的问题。这样就能解释一句听起来自相矛盾的话：<strong>"子集和是 NP 完全的"和"子集和有 O(nT) 的 DP 解法"并不冲突</strong>——后者是伪多项式的，只有当整数被多项式界定时才算多项式。</p>
-<p>顺带一提，计数排序 O(n+U) 在 U 为数值范围时也可能依赖巨大数值；基数排序则是 O(d(n+b))，d 是位数、b 是基数，不能一概称为伪多项式。<strong>面试里主动说出"这是伪多项式"，比背下转移方程更能显示你真的理解了复杂度。</strong></p>
+<p>第 28 讲会定义 NP 完全；这里先把它理解为一类尚无已知多项式时间通用算法的问题。这样就能解释一句听起来自相矛盾的话：<strong>"子集和是 NP 完全的"和"子集和有 <span class="arithmatex">\(\mathcal{O}(nT)\)</span> 的 DP 解法"并不冲突</strong>——后者是伪多项式的，只有当整数被多项式界定时才算多项式。</p>
+<p>顺带一提，计数排序 <span class="arithmatex">\(\mathcal{O}(n+U)\)</span> 在 U 为数值范围时也可能依赖巨大数值；基数排序则是 <span class="arithmatex">\(\mathcal{O}(d(n+b))\)</span>，d 是位数、b 是基数，不能一概称为伪多项式。<strong>面试里主动说出"这是伪多项式"，比背下转移方程更能显示你真的理解了复杂度。</strong></p>
 <h2 id="_9">它在题库里长什么样<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10532,7 +10531,7 @@
 <tr>
 <td><a href="../../problems/13-1d-dp/08-coin-change/">Coin Change</a></td>
 <td>完全背包（求最小）</td>
-<td><code>inf</code> 初值，不可达返回 −1</td>
+<td><code>inf</code> 初值，不可达返回 -1</td>
 </tr>
 <tr>
 <td><a href="../../problems/14-2d-dp/04-coin-change-ii/">Coin Change II</a></td>
@@ -10547,7 +10546,7 @@
 <tr>
 <td><a href="../../problems/14-2d-dp/05-target-sum/">Target Sum</a></td>
 <td>0/1 背包（方案数）</td>
-<td>数学转化 <code>P = (total + target) / 2</code></td>
+<td>数学转化 <span class="arithmatex">\(P = (\mathrm{total} + \mathrm{target}) / 2\)</span></td>
 </tr>
 <tr>
 <td><a href="../../problems/13-1d-dp/10-word-break/">Word Break</a></td>
@@ -10573,39 +10572,41 @@
 </table>
 <h2 id="_10">从讲义走到代码<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>预算与容量选择可以建成背包模型；先确定物品能否重复，以及是否必须恰好装满。</p>
-<p>先运行二维 knapsack_01_table([2],[3],4)，答案 3；把当前行与上一行标在纸上，再试一维倒序。随后做 <a href="../../problems/13-1d-dp/08-coin-change/">Coin Change</a>，coins=[2]、amount=3 应为 −1，[1,2,5]、11 应为 3。</p>
+<p>先运行二维 knapsack_01_table([2],[3],4)，答案 3；把当前行与上一行标在纸上，再试一维倒序。随后做 <a href="../../problems/13-1d-dp/08-coin-change/">Coin Change</a>，coins=[2]、amount=3 应为 -1，[1,2,5]、11 应为 3。</p>
 <p>最后做 <a href="../../problems/14-2d-dp/04-coin-change-ii/">Coin Change II</a>，coins=[1,2]、amount=3 应有 2 个组合：1+1+1、1+2。若得到 3，检查是否按最后一枚硬币计数，从而把 2+1 又算了一次。</p>
 <h2 id="_11">练习<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 对无界背包，写出 DP 的状态定义与转移方程。</p>
 <p>令 <code>dp[w]</code> 表示“总重量不超过 w 的最大价值”。转移是枚举最后放入的物品：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>dp[w] = max(0, max over i with wᵢ ≤ w of (dp[w − wᵢ] + vᵢ)),  dp[0] = 0
-</span></code></pre></div>
-<p><strong>因为物品可以重复取，所以 <code>dp[w − wᵢ]</code> 允许已经用过物品 i</strong>——落到实现上，就是内层正序。时间 <code>O(nW)</code>，空间 <code>O(W)</code>。</p>
+<div class="arithmatex">\[
+\mathrm{dp}[w]=\max\left(\{0\}\cup\{\mathrm{dp}[w-w_i]+v_i:w_i\le w\}\right),\qquad \mathrm{dp}[0]=0
+\]</div>
+<p><strong>因为物品可以重复取，所以 <span class="arithmatex">\(\mathrm{dp}[w-w_i]\)</span> 允许已经用过物品 i</strong>——落到实现上，就是内层正序。时间 <span class="arithmatex">\(\mathcal{O}(nW)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(W)\)</span>。</p>
 <p><strong>2.</strong> 如果改成"每个物品最多取一次"，转移要怎么改？</p>
 <p>状态要多一维（<code>dp[i][w]</code> = 只考虑前 i 个物品），或者在一维实现里把内层改成<strong>倒序</strong>。倒序等价于"用上一轮（还没考虑当前物品）的结果"，从而保证每件只用一次。</p>
 <p><strong>3.</strong> 独立集问题：给定一张图，选出尽可能多的顶点且任意两点不相邻。用 DP 怎么做？（提示：先看"路径图"这种简单情形。）</p>
-<p>对路径图（顶点排成一条链），<code>dp[i]</code> 表示前 i 个顶点能选出的最大独立集的<strong>顶点个数</strong>。基例 dp[0]=0，非空链 dp[1]=1；下面的转移只用于 i≥2，从小到大计算，最终取 dp[n]。空图直接返回 0。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>dp[i] = max(dp[i-1],              # 不选第 i 个顶点
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>            dp[i-2] + 1)          # 选第 i 个顶点（那第 i−1 个就不能选）
-</span></code></pre></div>
+<p>对路径图（顶点排成一条链），<code>dp[i]</code> 表示前 i 个顶点能选出的最大独立集的<strong>顶点个数</strong>。基例 dp[0]=0，非空链 dp[1]=1；下面的转移只用于 i不小于2，从小到大计算，最终取 dp[n]。空图直接返回 0。</p>
+<div class="arithmatex">\[
+\mathrm{dp}[i]=\max\{\mathrm{dp}[i-1],\mathrm{dp}[i-2]+1\}
+\]</div>
 <p><strong>这和 House Robber 的转移方程一模一样</strong>——"不能偷相邻的房子"就是"路径图上的独立集"。在两道看起来无关的题之间认出同一个结构，正是这一讲想训练的能力。</p>
 <p><strong>4.</strong> 有人说"取价值/重量比最大的物品、能塞几份塞几份"，这个推理对吗？请给出反例。</p>
 <p>不对。容量 10，物品 <code>(6, 20)</code> 与 <code>(5, 12)</code>：贪心取 1 个 <code>(6,20)</code>，剩 4 装不下，价值 20；最优取 2 个 <code>(5,12)</code> 恰好装满，价值 24。<strong>贪心忽略了"剩余空间能不能被有效利用"。</strong></p>
 <p><strong>5.</strong> 切钢条的贪心为什么错？DP 状态和转移怎么写？</p>
-<p><code>L = 7</code>、<code>v = [0,1,10,13,18,20,31,32]</code>：单位价格最高的是长度 6，<code>[6,1]</code> 得 32，而 <code>2+2+3</code> 得 33。状态 <code>x(ℓ)</code> = 长度为 ℓ 的钢条能卖出的最大价值，转移是"猜第一段切多长 p"：<code>x(ℓ) = max{ v(p) + x(ℓ − p) | p ∈ [1, ℓ] }</code>，<code>x(0) = 0</code>。共 <code>L + 1</code> 个子问题，每个 <code>O(L)</code> 的工作量，<code>O(L²)</code>。</p>
-<p><strong>6.</strong> 子集和问题里 <code>x(i, t)</code> 的含义是什么？base case 是什么？</p>
-<p><code>x(i, t)</code> = "<code>A[i:]</code> 里是否存在和为 t 的子集"。转移是"猜 <code>A[i]</code> 在不在这个子集里"：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>x(i, t) = (t ≥ A[i] and x(i + 1, t − A[i])) or x(i + 1, t)
-</span></code></pre></div>
-<p>base case 是 <code>x(i, 0) = YES</code>（容量刚好装完）、<code>x(n, t&gt;0) = NO</code>（没有物品可用了）。它按 i 递减的顺序计算，共 <code>O(nT)</code> 个子问题——<strong>因为这个 T 是数值而不是比特数，它是伪多项式的。</strong></p>
+<p><span class="arithmatex">\(L=7\)</span>、<span class="arithmatex">\(v = [0,1,10,13,18,20,31,32]\)</span>：单位价格最高的是长度 6，<code>[6,1]</code> 得 32，而 <span class="arithmatex">\(2+2+3\)</span> 得 33。状态 <span class="arithmatex">\(x(\ell)\)</span> = 长度为 <span class="arithmatex">\(\ell\)</span> 的钢条能卖出的最大价值，转移是"猜第一段切多长 p"：<span class="arithmatex">\(x(\ell ) = \max { v(p) + x(\ell  - p) \vert p \in [1, \ell ] }\)</span>，<span class="arithmatex">\(x(0) = 0\)</span>。共 <span class="arithmatex">\(L + 1\)</span> 个子问题，每个 <span class="arithmatex">\(\mathcal{O}(L)\)</span> 的工作量，<span class="arithmatex">\(\mathcal{O}(L^{2})\)</span>。</p>
+<p><strong>6.</strong> 子集和问题里 <span class="arithmatex">\(x(i,t)\)</span> 的含义是什么？base case 是什么？</p>
+<p><span class="arithmatex">\(x(i,t)\)</span> = "<code>A[i:]</code> 里是否存在和为 t 的子集"。转移是"猜 <code>A[i]</code> 在不在这个子集里"：</p>
+<div class="arithmatex">\[
+x(i,t)=\bigl(t\ge A[i]\land x(i+1,t-A[i])\bigr)\lor x(i+1,t)
+\]</div>
+<p>base case 是 <span class="arithmatex">\(x(i,0)=\mathrm{True}\)</span>（容量刚好装完）、<span class="arithmatex">\(x(n, t&gt;0) = NO\)</span>（没有物品可用了）。它按 i 递减的顺序计算，共 <span class="arithmatex">\(\mathcal{O}(nT)\)</span> 个子问题——<strong>因为这个 T 是数值而不是比特数，它是伪多项式的。</strong></p>
 <p><strong>7.</strong> 实现 <code>coin_change(coins, amount)</code> 与 <code>change(amount, coins)</code>，说明它们的循环方向为什么相同、内外层顺序是否必须不同。</p>
-<p>内层都是正序（都是完全背包）。最少硬币数用 <code>min</code> 并需要 <code>inf</code> 初值；方案数用 <code>+</code> 并需要 <code>dp[0] = 1</code>，组合计数采用外层物品以避免重复计数；本讲两个函数实际都用外层物品。最少硬币也可改为外层金额，对所有最后硬币取 min，不会因为重复枚举同一组合而改变最小值。</p>
+<p>内层都是正序（都是完全背包）。最少硬币数用 <code>min</code> 并需要 <code>inf</code> 初值；方案数用 <span class="arithmatex">\(+\)</span> 并需要 <span class="arithmatex">\(dp[0] = 1\)</span>，组合计数采用外层物品以避免重复计数；本讲两个函数实际都用外层物品。最少硬币也可改为外层金额，对所有最后硬币取 min，不会因为重复枚举同一组合而改变最小值。</p>
 <p><strong>8.</strong> 实现 <code>can_partition(nums)</code>，并解释"总和是奇数直接返回 False"的依据。</p>
 <p>见上文模板。分成两个和相等的整数子集，总和必然是偶数——这是必要条件，不满足就可以立刻返回。</p>
 <p><strong>9.</strong> 实现 <code>find_target_sum_ways(nums, target)</code>，并写清数学转化的推导。</p>
-<p>见上文模板。<code>P − N = target</code> 且 <code>P + N = total</code>，两式相加得 <code>P = (total + target) / 2</code>；<code>abs(target) &gt; total</code> 或 <code>(total + target)</code> 为奇数时无解。</p>
+<p>见上文模板。<span class="arithmatex">\(P - N = \mathrm{target}\)</span> 且 <span class="arithmatex">\(P + N = \mathrm{total}\)</span>，两式相加得 <span class="arithmatex">\(P = (\mathrm{total} + \mathrm{target}) / 2\)</span>；<code>abs(target) &gt; total</code> 或 <span class="arithmatex">\((\mathrm{total} + \mathrm{target})\)</span> 为奇数时无解。</p>
 <p><strong>10.</strong> 实现 <code>last_stone_weight_ii(stones)</code>：每次取两块石头相撞（小的碎掉、大的减去小的），求最后可能剩下的最小重量。</p>
-<p>转化为"把石头分成两堆，使两堆之差最小"：<code>dp[s]</code> 表示"能否凑出和为 s 的子集"，设 <code>s*</code> 是不超过 <code>total/2</code> 的最大可达和，答案就是 <code>total − 2·s*</code>。</p>
+<p>转化为"把石头分成两堆，使两堆之差最小"：<code>dp[s]</code> 表示"能否凑出和为 s 的子集"，设 <span class="arithmatex">\(s*\)</span> 是不超过 <span class="arithmatex">\(\mathrm{total}/2\)</span> 的最大可达和，答案就是 <span class="arithmatex">\(\mathrm{total} - 2\cdot s*\)</span>。</p>
 
 
 

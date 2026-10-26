@@ -4000,10 +4000,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bo1" class="md-nav__link">
+  <a href="#bmathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：原地穿插（O(1) 额外空间，面试加分项）
+        方案 B：原地穿插（\(\mathcal{O}(1)\) 额外空间，面试加分项）
       
     </span>
   </a>
@@ -4050,10 +4050,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：原地穿插（O(1) 额外空间）
+        解法二：原地穿插（\(\mathcal{O}(1)\) 额外空间）
       
     </span>
   </a>
@@ -4061,10 +4061,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：递归 + 记忆化（写法漂亮，但空间 O(n)）
+        解法三：递归 + 记忆化（写法漂亮，但空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -9992,10 +9992,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bo1" class="md-nav__link">
+  <a href="#bmathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方案 B：原地穿插（O(1) 额外空间，面试加分项）
+        方案 B：原地穿插（\(\mathcal{O}(1)\) 额外空间，面试加分项）
       
     </span>
   </a>
@@ -10042,10 +10042,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：原地穿插（O(1) 额外空间）
+        解法二：原地穿插（\(\mathcal{O}(1)\) 额外空间）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：递归 + 记忆化（写法漂亮，但空间 O(n)）
+        解法三：递归 + 记忆化（写法漂亮，但空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10137,8 +10137,8 @@
 <li><strong>第二趟</strong>：把 <code>next</code> 和 <code>random</code> 接好——<code>map[cur].next = map[cur.next]</code>、<code>map[cur].random = map[cur.random]</code>。</li>
 </ol>
 <p>用字典把"老节点 → 新节点"的对应关系记下来之后，所有指针都可以随时查表接上，问题就消解了。</p>
-<p>时间复杂度 O(n)，空间 O(n)。</p>
-<h3 id="bo1">方案 B：原地穿插（O(1) 额外空间，面试加分项）<a class="headerlink" href="#bo1" title="Permanent link">&para;</a></h3>
+<p>时间复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<h3 id="bmathcalo1">方案 B：原地穿插（<span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间，面试加分项）<a class="headerlink" href="#bmathcalo1" title="Permanent link">&para;</a></h3>
 <p>核心技巧：<strong>把新节点直接插到对应老节点的后面</strong>，让老节点的 <code>next</code> 成为"通往新节点"的桥梁：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>原链表:   A → B → C
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>穿插后:   A → A' → B → B' → C → C'
@@ -10177,7 +10177,7 @@
 </span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="k">return</span> <span class="n">old_to_new</span><span class="p">[</span><span class="n">head</span><span class="p">]</span>
 </span></code></pre></div>
 <p><code>dict.get(None)</code> 返回 <code>None</code>，所以 <code>cur.next</code> / <code>cur.random</code> 为 <code>None</code> 时不需要特判，这是最优雅的写法。</p>
-<h3 id="o1">解法二：原地穿插（O(1) 额外空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法二：原地穿插（<span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">copyRandomList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="s1">'Optional[Node]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Optional[Node]'</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
@@ -10209,7 +10209,7 @@
 </span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
 </span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="k">return</span> <span class="n">new_head</span>
 </span></code></pre></div>
-<h3 id="on">解法三：递归 + 记忆化（写法漂亮，但空间 O(n)）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：递归 + 记忆化（写法漂亮，但空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span>
@@ -10238,18 +10238,18 @@
 <tbody>
 <tr>
 <td>哈希表两趟</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>原地穿插</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归记忆化</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>

@@ -2638,10 +2638,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：过滤后比较（代码最短，O(n) 空间）
+        解法二：过滤后比较（代码最短，\(\mathcal{O}(n)\) 空间）
       
     </span>
   </a>
@@ -9998,10 +9998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：过滤后比较（代码最短，O(n) 空间）
+        解法二：过滤后比较（代码最短，\(\mathcal{O}(n)\) 空间）
       
     </span>
   </a>
@@ -10088,15 +10088,15 @@
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>方案 A：先过滤再比较（最简洁）</strong></p>
 <p>只保留字母数字、统一转小写，得到 <code>clean</code>，然后判断 <code>clean == clean[::-1]</code>。
-缺点是需要 O(n) 额外空间。</p>
+缺点是需要 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间。</p>
 <p><strong>方案 B：左右对撞双指针（推荐）</strong></p>
 <p>左右指针从两端出发，各自<strong>跳过非字母数字字符</strong>，再比较两个字符（统一小写）。一旦不等返回 <code>False</code>；指针相遇或交错时结束，返回 <code>True</code>。</p>
 <p>两个关键细节：</p>
 <ol>
 <li><strong>跳过与比较必须配套进行</strong>：两边的跳过循环都要写在比较之前；</li>
-<li><strong>跳过之后要重新判断 <code>l &lt; r</code></strong>：因为跳过过程可能让两个指针已经交错，此时不应该再比较。</li>
+<li><strong>跳过之后要重新判断 <span class="arithmatex">\(l &lt; r\)</span></strong>：因为跳过过程可能让两个指针已经交错，此时不应该再比较。</li>
 </ol>
-<p>空间 O(1)，更贴合本题的考察意图。</p>
+<p>空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，更贴合本题的考察意图。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>回文是镜像位置上的有效字符逐对相等，因此双指针承担的是“比较已确定的一对”，不是根据大小来搜索。每次比较成功后，两端这一对可以永久移出，剩下中间部分仍是同一类问题；任一对不等就已经足够否定整串。</p>
 <p>跳过标点只是实现题目的过滤规则，不能顺便跳过某个不相等的字母。例如 "abca" 在本题中为 False，不能直接跳过 b 或 c；“最多删一个字符后回文”需要在第一次不等时分别验证两种删除分支，是另一种状态。全是标点时，有效串为空，按回文定义返回 True。</p>
@@ -10116,7 +10116,7 @@
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<h3 id="on">解法二：过滤后比较（代码最短，O(n) 空间）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法二：过滤后比较（代码最短，<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">clean</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()]</span>
@@ -10146,25 +10146,25 @@
 <tbody>
 <tr>
 <td>对撞双指针</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>过滤后比较</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>" "</code>、<code>".,"</code>、<code>""</code> 都应返回 <code>True</code>。跳过之后 <code>l &gt;= r</code>，直接返回 <code>True</code>，逻辑天然正确。</li>
-<li>两个跳过循环都必须带 <code>l &lt; r</code> 条件，否则可能越界。</li>
+<li><code>" "</code>、<code>".,"</code>、<code>""</code> 都应返回 <code>True</code>。跳过之后 <span class="arithmatex">\(l \ge r\)</span>，直接返回 <code>True</code>，逻辑天然正确。</li>
+<li>两个跳过循环都必须带 <span class="arithmatex">\(l &lt; r\)</span> 条件，否则可能越界。</li>
 <li>别忘了 <code>.lower()</code>：<code>"0P"</code> 应为 <code>False</code>，<code>"aA"</code> 应为 <code>True</code>。</li>
 <li>Python 的 <code>str.isalnum()</code> 对中文、日文等 Unicode 字符也返回 <code>True</code>；若题目限定 ASCII，需要写成 <code>c.isascii() and c.isalnum()</code>。<strong>确认字符集范围是一个很好的 clarifier。</strong></li>
 <li><strong>追问：允许删掉至多一个字符？</strong> → <a href="https://leetcode.com/problems/valid-palindrome-ii/">680 Valid Palindrome II</a>，遇到不匹配时分两支验证。</li>
-<li><strong>追问：输入是链表？</strong> → 快慢指针找中点 + 反转后半段，再逐节点比较，O(1) 空间。</li>
-<li><strong>追问：输入是数据流、不能全部读入？</strong> → 只能用栈缓冲一半，空间 O(n/2)，无法做到 O(1)。</li>
+<li><strong>追问：输入是链表？</strong> → 快慢指针找中点 + 反转后半段，再逐节点比较，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间。</li>
+<li><strong>追问：输入是数据流、不能全部读入？</strong> → 只能用栈缓冲一半，空间 <span class="arithmatex">\(\mathcal{O}(n/2)\)</span>，无法做到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

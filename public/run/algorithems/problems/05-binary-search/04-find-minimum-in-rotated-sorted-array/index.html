@@ -3654,10 +3654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：线性扫描（O(n)，用于对照；面试中不能作为最终答案）
+        解法三：线性扫描（\(\mathcal{O}(n)\)，用于对照；面试中不能作为最终答案）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：线性扫描（O(n)，用于对照；面试中不能作为最终答案）
+        解法三：线性扫描（\(\mathcal{O}(n)\)，用于对照；面试中不能作为最终答案）
       
     </span>
   </a>
@@ -10102,7 +10102,7 @@
 <h1 id="153-find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array · 寻找旋转排序数组中的最小值<a class="headerlink" href="#153-find-minimum-in-rotated-sorted-array" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Binary Search</code> ｜ <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/">LeetCode 153</a> ｜ <a href="https://neetcode.io/problems/find-minimum-in-rotated-sorted-array">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>一个<strong>严格升序</strong>数组被旋转了若干次（例如 <code>[0,1,2,4,5,6,7]</code> → <code>[4,5,6,7,0,1,2]</code>），找出其中的最小元素。要求 O(log n)。</p>
+<p>一个<strong>严格升序</strong>数组被旋转了若干次（例如 <code>[0,1,2,4,5,6,7]</code> → <code>[4,5,6,7,0,1,2]</code>），找出其中的最小元素。要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: nums = [3,4,5,1,2]      输出: 1
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输入: nums = [4,5,6,7,0,1,2]  输出: 0
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>输入: nums = [11,13,15,17]    输出: 11
@@ -10114,16 +10114,16 @@
 </blockquote>
 <p><strong>二分的做法</strong>：每次比较 <code>nums[mid]</code> 和 <code>nums[hi]</code>（本实现以右端点为参照）：</p>
 <ul>
-<li><strong>若 <code>nums[mid] &gt; nums[hi]</code></strong>：说明 <code>mid</code> 在第一段（较大段），最小值一定在 <code>mid</code> 的<strong>右侧</strong>，所以 <code>lo = mid + 1</code>；</li>
-<li><strong>若 <code>nums[mid] &lt; nums[hi]</code></strong>：说明从 <code>mid</code> 到 <code>hi</code> 是升序的，最小值一定在 <code>mid</code> 的<strong>左侧或就是 mid 本身</strong>，所以 <code>hi = mid</code>。</li>
+<li><strong>若 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &gt; \mathrm{nums}[hi]\)</span></strong>：说明 <code>mid</code> 在第一段（较大段），最小值一定在 <code>mid</code> 的<strong>右侧</strong>，所以 <span class="arithmatex">\(lo = \mathrm{mid} + 1\)</span>；</li>
+<li><strong>若 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{nums}[hi]\)</span></strong>：说明从 <code>mid</code> 到 <code>hi</code> 是升序的，最小值一定在 <code>mid</code> 的<strong>左侧或就是 mid 本身</strong>，所以 <span class="arithmatex">\(hi = \mathrm{mid}\)</span>。</li>
 </ul>
-<p>循环结束时 <code>lo == hi</code>，指向的就是最小值。</p>
+<p>循环结束时 <span class="arithmatex">\(lo = hi\)</span>，指向的就是最小值。</p>
 <h3 id="_3">右端点参照为什么方便<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>在元素互异且 lo&lt;hi 时，mid&lt;hi，两者不会相等。mid 比右端大表示断口在其右侧；mid 比右端小则表示右半有序，但 mid 仍可能是最小值，所以保留 mid。这套规则也自然覆盖当前区间完全有序的情况。</p>
 <p>以左端点为参照也能设计正确写法，下面解法二就先检查当前区间是否有序，再决定该保留哪半；不能直接替换参照端点而沿用同样的大小分支。</p>
 <h3 id="_4">解法推导与模式辨析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>本题想找的是断点，不是在当前区间查询某个已知目标。比较右端点的作用是判定 mid 到 hi 是否跨过从大值跳回小值的断口：若 mid 更大，最小值不可能在 mid 及其左边；否则右半本身升序，mid 仍可能最小，应保留下来。</p>
-<p>例如 [4,5,1,2,3] 先以 1 与 3 比较，保留 mid 后继续左查；若误写 hi=mid−1，会直接删掉答案。元素互异保证 lo&lt;hi 时两者不相等，重复值版本可能无法排除一半，最坏线性。也可以以左端点为参照设计正确算法，但必须配套判断当前区间是否本来有序。</p>
+<p>例如 [4,5,1,2,3] 先以 1 与 3 比较，保留 mid 后继续左查；若误写 hi=mid-1，会直接删掉答案。元素互异保证 lo&lt;hi 时两者不相等，重复值版本可能无法排除一半，最坏线性。也可以以左端点为参照设计正确算法，但必须配套判断当前区间是否本来有序。</p>
 <h2 id="_5">代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">解法一：二分（推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10150,9 +10150,9 @@
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>                <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>        <span class="c1"># 旋转点在 (mid, hi]</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">lo</span><span class="p">]</span>
 </span></code></pre></div>
-<p><strong>为什么 <code>nums[lo] &gt; nums[hi]</code> 是有效判断？</strong> 因为数组要么完全有序（此时 <code>nums[lo] &lt; nums[hi]</code>），要么被旋转过（此时第一段的最小值 <code>nums[lo]</code> 一定大于第二段的最大值 <code>nums[hi]</code>）。这个条件一旦不成立，<code>nums[lo]</code> 就是最小值，可以直接退出。</p>
-<p>两种写法都是 O(log n)，但<strong>解法一更短、收缩方向更统一</strong>，面试中优先写解法一。</p>
-<h3 id="on">解法三：线性扫描（O(n)，用于对照；面试中不能作为最终答案）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<p><strong>为什么 <span class="arithmatex">\(\mathrm{nums}[lo] &gt; \mathrm{nums}[hi]\)</span> 是有效判断？</strong> 因为数组要么完全有序（此时 <span class="arithmatex">\(\mathrm{nums}[lo] &lt; \mathrm{nums}[hi]\)</span>），要么被旋转过（此时第一段的最小值 <code>nums[lo]</code> 一定大于第二段的最大值 <code>nums[hi]</code>）。这个条件一旦不成立，<code>nums[lo]</code> 就是最小值，可以直接退出。</p>
+<p>两种写法都是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，但<strong>解法一更短、收缩方向更统一</strong>，面试中优先写解法一。</p>
+<h3 id="mathcalon">解法三：线性扫描（<span class="arithmatex">\(\mathcal{O}(n)\)</span>，用于对照；面试中不能作为最终答案）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">findMin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -10169,22 +10169,22 @@
 <tbody>
 <tr>
 <td>二分</td>
-<td>O(log n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>线性扫描</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>hi = mid</code> 不能写成 <code>hi = mid - 1</code>：<code>mid</code> 本身可能就是最小值。</li>
+<li><span class="arithmatex">\(hi = \mathrm{mid}\)</span> 不能写成 <span class="arithmatex">\(hi = \mathrm{mid} - 1\)</span>：<code>mid</code> 本身可能就是最小值。</li>
 <li>循环条件用 <code>while lo &lt; hi</code>（收敛到一个点），返回 <code>nums[lo]</code>。</li>
-<li>单个元素、未旋转的数组都要能正确处理。未旋转时 <code>nums[mid] &lt; nums[hi]</code> 恒成立，<code>hi</code> 一路收缩到 0，正确。</li>
-<li><strong>追问：如果数组中有重复元素？</strong> → <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/">154 Find Minimum in Rotated Sorted Array II</a>。此时 <code>nums[mid] == nums[hi]</code> 无法判断方向，只能 <code>hi -= 1</code> 缩小范围，最坏复杂度退化到 O(n)。<strong>这正说明"严格升序"这个条件是必要的。</strong></li>
+<li>单个元素、未旋转的数组都要能正确处理。未旋转时 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{nums}[hi]\)</span> 恒成立，<code>hi</code> 一路收缩到 0，正确。</li>
+<li><strong>追问：如果数组中有重复元素？</strong> → <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/">154 Find Minimum in Rotated Sorted Array II</a>。此时 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] = \mathrm{nums}[hi]\)</span> 无法判断方向，只能 <code>hi -= 1</code> 缩小范围，最坏复杂度退化到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。<strong>这正说明"严格升序"这个条件是必要的。</strong></li>
 <li><strong>追问：为什么要用右端点做锚点？</strong> → 上面已经解释，务必能讲清。</li>
 <li><strong>追问：如何用同样的思路在旋转数组里查找某个值？</strong> → 见下一题 <a href="../05-search-in-rotated-sorted-array/">33</a>，思路是"先判断哪半边有序，再看 target 是否落在其中"。</li>
 </ul>

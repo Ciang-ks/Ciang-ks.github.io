@@ -10180,8 +10180,9 @@
 <p>Project B 现在确实保留 validation：模型只在 train fit，validation 用于研究选择，test 用于最后报告。项目与 Qlib/LEAN/vectorbt 的边界见 <a href="../ARCHITECTURE/"><code>../ARCHITECTURE.md</code></a>。</p>
 <h2 id="_3">标签和时间约束<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>每月 <code>t</code> 的 label 是未来一个月收益减去同日横截面均值：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>label(i,t) = future_return(i,t→t+1) - mean_i(future_return(i,t→t+1))
-</span></code></pre></div>
+<div class="arithmatex">\[
+y_{i,t}=r_{i,t+1}-\frac{1}{N_t}\sum_{j=1}^{N_t}r_{j,t+1}
+\]</div>
 <p><code>published_at &lt; decision_date</code> 的文本才可进入 <code>t</code> 的 feature。<code>period_of_report</code> 不等于 <code>published_at</code>；真实 SEC 适配时必须保留 accession/document hash、发布日期、修订版本和实体 ID。任何 embedding、词表、标准化、缺失填补都只能在训练窗口拟合。</p>
 <h2 id="milestone">六个 milestone（第二个项目日之后仍需完成验收）<a class="headerlink" href="#milestone" title="Permanent link">&para;</a></h2>
 <h3 id="milestone-0-label-audit3045">Milestone 0 — 任务合同与 label audit（30–45 分钟）<a class="headerlink" href="#milestone-0-label-audit3045" title="Permanent link">&para;</a></h3>
@@ -10224,7 +10225,7 @@
 <li>阅读 <code>text_features.py</code>，写出 positive/negative/uncertainty/length 每个字段的 schema、单位和缺失行为。</li>
 <li>随机抽样至少 20 条文本，人工核对计数和 signed sentiment；记录 false positive/false negative。</li>
 <li>比较 market-only 与 market+lexical 的 coverage、rank IC、成本后结果和分组稳定性。</li>
-<li>加入一个不会使用未来信息的文本变化特征（例如首次出现的风险词），明确其 as-of 规则。</li>
+<li>加入一个不会使用未来信息的文本变化特征（例如首次出现的风险词），明确其 <span class="arithmatex">\(as-of\)</span> 规则。</li>
 <li>做 lexical ablation：去掉 uncertainty、只保留 sentiment、只保留长度。</li>
 </ol>
 <p><strong>[AGENT ACTION]</strong></p>

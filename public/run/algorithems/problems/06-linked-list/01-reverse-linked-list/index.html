@@ -3899,10 +3899,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代（推荐，O(1) 空间）
+        解法一：迭代（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代（推荐，O(1) 空间）
+        解法一：迭代（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10155,7 +10155,7 @@
 <p>链表反转改变的是节点之间的 next，不是交换节点值。循环开始时，可以从 prev 沿 next 读出已反转前缀，从 cur 沿旧 next 读出尚未处理的后缀；两部分合起来包含全部原节点，且没有节点丢失。</p>
 <p>保存 nxt 后，cur.next 才能安全改写，因为返回未处理后缀的入口已经另存。例如 1→2→3 的第一轮得到 prev=1→None、cur=2→3。递归版最后必须让原头的 next=None，否则原来的第一、第二节点可能互相指回形成环。这个“先保留外部入口，再改内部连接”的原则会直接用于分组反转和重排链表。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：迭代（推荐，O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：迭代（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reverseList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">prev</span><span class="p">,</span> <span class="n">cur</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">head</span>
@@ -10201,18 +10201,18 @@
 <tbody>
 <tr>
 <td>迭代</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归</td>
-<td>O(n)</td>
-<td>O(n)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span>（递归栈）</td>
 </tr>
 <tr>
 <td>头插法</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>

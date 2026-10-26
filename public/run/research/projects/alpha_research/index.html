@@ -10135,9 +10135,9 @@
 <ul>
 <li>观察窗口：60 个交易日 momentum；</li>
 <li>交易频率：每 20 个交易日重新计算一次目标权重；</li>
-<li>风险缩放：<code>momentum / rolling_volatility</code>，再做绝对权重上限；</li>
-<li>执行：信号在日期 <code>t</code> 形成，<code>t+1</code> 才使用该目标权重获得收益；</li>
-<li>成本：<code>turnover × cost_bps</code>，比较 0、10、25、50 bps；</li>
+<li>风险缩放：<span class="arithmatex">\(\mathrm{momentum}/\mathrm{rolling\_volatility}\)</span>，再做绝对权重上限；</li>
+<li>执行：信号在日期 <code>t</code> 形成，<span class="arithmatex">\(t+1\)</span> 才使用该目标权重获得收益；</li>
+<li>成本：<span class="arithmatex">\(\mathrm{cost}_t=\mathrm{turnover}_t c_{\mathrm{bps}}10^{-4}\)</span>，比较 0、10、25、50 bps；</li>
 <li>benchmark：同一资产集合的等权持有；</li>
 <li>primary metrics：net return、annualized volatility、Sharpe、maximum drawdown、turnover；gross 结果只作诊断。</li>
 </ul>
@@ -10216,7 +10216,7 @@
 <p><strong>[STUDENT ACTION]</strong></p>
 <ol>
 <li>逐行解释 <code>momentum / volatility → normalized weights → cap → forward fill</code>。</li>
-<li>检查每个日期的单名权重是否满足 <code>|w_i|≤0.25</code>，gross exposure、net exposure 和资产集中度如何变化。</li>
+<li>检查每个日期的单名权重是否满足 <span class="arithmatex">\(\vert w_i\vert \le 0.25\)</span>，gross exposure、net exposure 和资产集中度如何变化。</li>
 <li>比较 raw momentum、横截面 rank 和 inverse-vol 三种 mapping；一次只改一个因素。</li>
 <li>对 <code>rebalance_every=20</code> 和 <code>60</code> 做 ablation，报告信号变化、换手和成本后的结果。</li>
 <li>画目标权重、gross/net exposure 和各资产平均绝对权重。</li>
@@ -10232,7 +10232,7 @@
 <p><strong>上下文</strong>：研究收益只有在说明成交时点、换手和成本后才具有交易含义。</p>
 <p><strong>[STUDENT ACTION]</strong></p>
 <ol>
-<li>运行四种成本；确认成本提高不能提高净收益，且成本差异等于 turnover 乘 bps。</li>
+<li>运行四种成本；确认成本提高不能提高净收益，且成本差异等于换手乘基点差再乘 <span class="arithmatex">\(10^{-4}\)</span>。</li>
 <li>同时报告 gross/net return、equity、最大回撤、恢复时间、平均和 P95 turnover。</li>
 <li>写出 market order、limit order、TWAP、VWAP、POV、implementation shortfall 的适用条件。</li>
 <li>增加一个简单的 <code>order/ADV</code> 非线性成本实验（可在新模块中实现），比较线性 bps 的偏差。</li>
@@ -10282,9 +10282,9 @@
 <h2 id="_4">研究诊断与交付<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>这些检查把 Man AHL、AQR、WorldQuant BRAIN 和 Quant Wiki 的公开启发落到项目中，不要求复刻任何公司的内部系统：</p>
 <ol>
-<li><strong>Alpha decay</strong>：对 20/60/120 日 momentum 计算不同持有期的 IC 和 top-bottom spread，画衰减曲线；固定 primary horizon，不能挑最好的一条曲线。</li>
+<li><strong>Alpha decay</strong>：对 20、60、120 日 momentum 计算不同持有期的 IC 和 top-bottom spread，画衰减曲线；固定 primary horizon，不能挑最好的一条曲线。</li>
 <li><strong>Breadth/相关性</strong>：计算各资产 signal-return correlation、组合有效下注数和压力期相关性；解释为什么 8 个资产不等于 8 个独立机会。</li>
-<li><strong>TCA</strong>：把 <code>turnover × bps</code> 拆成 spread、fee、impact、delay/opportunity cost 的教学表，并增加 <code>order/ADV</code> 压力情景；原有线性成本保留为单元测试 baseline。</li>
+<li><strong>TCA</strong>：把 <span class="arithmatex">\(\mathrm{turnover}\,c_{\mathrm{bps}}10^{-4}\)</span> 拆成 spread、fee、impact、delay/opportunity cost 的教学表，并增加 <code>order/ADV</code> 压力情景；原有线性成本保留为单元测试 baseline。</li>
 <li><strong>Production gate</strong>：在 memo 中增加 <code>data → signal → portfolio → replay → paper/shadow → monitoring</code> 的 gate 表，写出成本翻倍、覆盖率下降、相关性上升时的停止条件。</li>
 </ol>
 <p>Alpha decay、有效下注数和组合规则见<a href="../../lectures/05-strategies-alpha/">策略与 Alpha</a>；成本拆解见<a href="../../lectures/06-portfolio-execution/">组合、执行与风险</a>，阶段门见<a href="../../lectures/09-research-communication/">研究交付</a>。</p>

@@ -10093,14 +10093,14 @@
 <p><strong>核心定理：BST 的中序遍历结果是严格升序的。</strong> 所以"第 k 小的元素"就是<strong>中序遍历中第 k 个被访问的节点</strong>。</p>
 <p>三种实现：</p>
 <ol>
-<li><strong>递归中序</strong>：遍历全部，收集到数组后取第 <code>k-1</code> 个。简单但空间 O(n)。</li>
-<li><strong>迭代中序（推荐）</strong>：用栈模拟中序，访问到第 k 个就<strong>立刻返回</strong>，不需要遍历整棵树。时间 O(h + k)，空间 O(h)。</li>
+<li><strong>递归中序</strong>：遍历全部，收集到数组后取第 <code>k-1</code> 个。简单但空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
+<li><strong>迭代中序（推荐）</strong>：用栈模拟中序，访问到第 k 个就<strong>立刻返回</strong>，不需要遍历整棵树。时间 <span class="arithmatex">\(\mathcal{O}(h + k)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(h)\)</span>。</li>
 <li><strong>带计数的递归</strong>：递归中序时计数，到 k 就提前返回。</li>
 </ol>
 <p>性能上第 2、3 种更好，因为它们在<strong>找到答案后就停止</strong>。第 2 种尤其适合面试——<strong>它同时展示了"会用栈做迭代中序"这个基本功</strong>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>“第 k 小”能变成“第 k 个访问”只因为这是一棵 BST。栈记录尚未访问、但左侧可能还有更小值的祖先；一路压左链后，弹出的节点就是当前最小未访问节点，再转入它的右子树继续。</p>
-<p>如果树极不平衡，即使只找最小值也可能先走 n 层，所以时间应是 O(h+k)，不能无条件写 O(log n+k)。若反复做排名查询，给每个节点维护子树节点数，就可以根据左子树大小跳过整块；但插入、删除时必须同步更新计数，单次中序提前停止并不自动得到动态顺序统计树。</p>
+<p>如果树极不平衡，即使只找最小值也可能先走 n 层，所以时间应是 <span class="arithmatex">\(\mathcal{O}(h+k)\)</span>，不能无条件写 <span class="arithmatex">\(\mathcal{O}(\log n+k)\)</span>。若反复做排名查询，给每个节点维护子树节点数，就可以根据左子树大小跳过整块；但插入、删除时必须同步更新计数，单次中序提前停止并不自动得到动态顺序统计树。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">解法一：迭代中序，找到即停（推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10166,31 +10166,31 @@
 <tbody>
 <tr>
 <td>迭代中序</td>
-<td>O(h + k)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h + k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>递归中序（提前停）</td>
-<td>O(h + k)</td>
-<td>O(h)</td>
+<td><span class="arithmatex">\(\mathcal{O}(h + k)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(h)\)</span></td>
 </tr>
 <tr>
 <td>全量中序</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>需要先"下降到最左"用掉 O(h)，然后每访问一个节点用 O(1)，所以是 O(h + k)。</p>
+<p>需要先"下降到最左"用掉 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，然后每访问一个节点用 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，所以是 <span class="arithmatex">\(\mathcal{O}(h + k)\)</span>。</p>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>中序遍历的顺序不能搞错</strong>：是"左 → 根 → 右"，所以要一路向左压栈，而不是向右。</li>
 <li><code>k</code> 是 <strong>1-based</strong>，计数到 0 时返回。</li>
 <li>迭代写法里 <code>while stack or cur</code> 两个条件缺一不可。</li>
-<li><strong>追问：如果 BST 会被频繁修改，需要多次查询第 k 小？</strong> → 在每个节点维护"子树节点数"，查询变成 O(h) 的"树上游走"（类似找第 k 大的分治），<a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">230 的进阶版</a>。</li>
-<li><strong>追问：如果是普通二叉树？</strong> → 只能用 O(n) 的堆或排序。</li>
-<li><strong>追问：为什么不能直接"数左子树的节点数"？</strong> → 如果只做一次查询，那需要对每个节点统计子树大小，是 O(n) 预处理；对单次查询不如中序 O(h + k)。</li>
-<li><strong>追问：如何求第 k 大？</strong> → 中序遍历的反向版本（右 → 根 → 左），或者求第 <code>n - k + 1</code> 小。</li>
+<li><strong>追问：如果 BST 会被频繁修改，需要多次查询第 k 小？</strong> → 在每个节点维护"子树节点数"，查询变成 <span class="arithmatex">\(\mathcal{O}(h)\)</span> 的"树上游走"（类似找第 k 大的分治），<a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">230 的进阶版</a>。</li>
+<li><strong>追问：如果是普通二叉树？</strong> → 只能用 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的堆或排序。</li>
+<li><strong>追问：为什么不能直接"数左子树的节点数"？</strong> → 如果只做一次查询，那需要对每个节点统计子树大小，是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 预处理；对单次查询不如中序 <span class="arithmatex">\(\mathcal{O}(h + k)\)</span>。</li>
+<li><strong>追问：如何求第 k 大？</strong> → 中序遍历的反向版本（右 → 根 → 左），或者求第 <span class="arithmatex">\(n - k + 1\)</span> 小。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

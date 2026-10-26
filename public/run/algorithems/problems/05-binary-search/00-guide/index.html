@@ -10294,7 +10294,7 @@
 <tr>
 <td>有序序列精确查找或边界</td>
 <td>定义区间开闭及返回含义，证明比较能排除一半</td>
-<td>精确命中可停，首个≥x 则要继续向左</td>
+<td>精确命中可停，首个不小于x 则要继续向左</td>
 </tr>
 <tr>
 <td>最小参数使条件成立</td>
@@ -10351,7 +10351,7 @@
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">return</span> <span class="n">lo</span>
 </span></code></pre></div>
-<p><strong><code>(lo + hi + 1) // 2</code> 是防死循环的关键</strong>：当区间更新写成 <code>lo = mid</code> 时必须向上取整；写成 <code>hi = mid</code> 时必须向下取整。</p>
+<p><strong><code>(lo + hi + 1) // 2</code> 是防死循环的关键</strong>：当区间更新写成 <span class="arithmatex">\(lo = \mathrm{mid}\)</span> 时必须向上取整；写成 <span class="arithmatex">\(hi = \mathrm{mid}\)</span> 时必须向下取整。</p>
 <h3 id="4">模板 4 二分答案<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">binary_search_answer</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">feasible</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
@@ -10367,14 +10367,14 @@
 <ol>
 <li><strong>答案在哪个集合里？</strong> 下标？某个值？"答案本身"（二分答案）？</li>
 <li><strong><code>check(mid)</code> 的返回值是什么？</strong> 它把候选空间切成"一定不可能"和"可能是答案"两半。</li>
-<li><strong>最终答案是 <code>lo</code> 还是 <code>hi</code>？</strong> 若 <code>check</code> 为真时执行 <code>hi = mid</code>，答案就是收敛后的 <code>lo</code>。</li>
+<li><strong>最终答案是 <code>lo</code> 还是 <code>hi</code>？</strong> 若 <code>check</code> 为真时执行 <span class="arithmatex">\(hi = \mathrm{mid}\)</span>，答案就是收敛后的 <code>lo</code>。</li>
 </ol>
-<p><strong>万能写法原则</strong>：让 <code>lo</code> 永远指向"可能是答案的最小位置"、<code>hi</code> 指向"可能是答案的最大位置"，保证两者始终在候选区间内，循环结束时 <code>lo == hi</code> 就是答案。</p>
+<p><strong>万能写法原则</strong>：让 <code>lo</code> 永远指向"可能是答案的最小位置"、<code>hi</code> 指向"可能是答案的最大位置"，保证两者始终在候选区间内，循环结束时 <span class="arithmatex">\(lo = hi\)</span> 就是答案。</p>
 <h2 id="_4">四、逐题推演：从题面到思路<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1-binary-search704">1. Binary Search（704）<a class="headerlink" href="#1-binary-search704" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>：升序数组找目标下标，要求 O(log n)。</p>
+<p><strong>题面信号</strong>：升序数组找目标下标，要求 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <p><strong>候选思路</strong>：标准二分。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [-1,0,3,5,9,12]</code>，<code>target = 9</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [-1,0,3,5,9,12]\)</span>，<code>target = 9</code></p>
 <table>
 <thead>
 <tr>
@@ -10401,9 +10401,9 @@
 </table>
 <p><strong>关键细节</strong>：空数组时 <code>hi = -1</code>，循环不执行直接返回 -1；有重复元素时本题返回任意一个即可，要找第一个/最后一个得用边界模板。</p>
 <h3 id="2-search-a-2d-matrix74">2. Search a 2D Matrix（74）<a class="headerlink" href="#2-search-a-2d-matrix74" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>：每行升序，且下一行首元素 &gt; 上一行尾元素；要求 O(log(mn))。</p>
+<p><strong>题面信号</strong>：每行升序，且下一行首元素 &gt; 上一行尾元素；要求 <span class="arithmatex">\(\mathcal{O}(\log (mn))\)</span>。</p>
 <p><strong>候选思路</strong>：这两个条件合起来等价于"<strong>按行拼接后整体升序</strong>"，所以就是一维二分，只是访问元素时把一维下标映射回二维。</p>
-<p><strong>走一遍示例</strong>：<code>m = 3, n = 4</code>，<code>target = 3</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(m = 3, n = 4\)</span>，<code>target = 3</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>一维下标 mid = 5 → 行 5 // 4 = 1，列 5 % 4 = 1 → matrix[1][1] = 11
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>11 &gt; 3 → hi = 4
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>mid = 2 → 行 0，列 2 → matrix[0][2] = 5 &gt; 3 → hi = 1
@@ -10411,23 +10411,23 @@
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>mid = 1 → 行 0，列 1 → 3 → 命中
 </span></code></pre></div>
 <p><strong>关键细节</strong>：<code>row = mid // n</code>、<code>col = mid % n</code>（<strong><code>n</code> 是列数</strong>，写成 <code>m</code> 就全错）。</p>
-<p><strong>追问准备</strong>：若行、列分别有序，但行与下一行之间不能直接拼接成升序，可用 240 题的阶梯搜索，O(m+n)。若只有各行有序、列完全无约束，则可逐行二分，不能安全阶梯排除整列。</p>
+<p><strong>追问准备</strong>：若行、列分别有序，但行与下一行之间不能直接拼接成升序，可用 240 题的阶梯搜索，<span class="arithmatex">\(\mathcal{O}(m+n)\)</span>。若只有各行有序、列完全无约束，则可逐行二分，不能安全阶梯排除整列。</p>
 <h3 id="3-koko-eating-bananas875">3. Koko Eating Bananas（875）<a class="headerlink" href="#3-koko-eating-bananas875" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："求<strong>最小的</strong>速度 k，使 h 小时内能吃完"。<strong>"最小的 k 使条件成立"就是二分答案的信号。</strong></p>
 <p><strong>候选思路</strong>：对答案 k 二分。需要三样东西：</p>
 <ol>
-<li><strong>范围</strong>：<code>lo = 1</code>，<code>hi = max(piles)</code>——上界为什么不是 <code>sum(piles)</code>？因为<strong>吃得比最大堆还快没有任何额外收益</strong>，只会白白放大搜索空间；</li>
-<li><strong>可行函数</strong>：<code>hours(k) = Σ ceil(p/k)</code>，向上取整写成 <code>(p + k - 1) // k</code>；</li>
+<li><strong>范围</strong>：<code>lo = 1</code>，<span class="arithmatex">\(hi = \max (\mathrm{piles})\)</span>——上界为什么不是 <code>sum(piles)</code>？因为<strong>吃得比最大堆还快没有任何额外收益</strong>，只会白白放大搜索空间；</li>
+<li><strong>可行函数</strong>：<span class="arithmatex">\(\mathrm{hours}(k)=\sum_{p\in\mathrm{piles}}\lceil p/k\rceil\)</span>，向上取整写成 <code>(p + k - 1) // k</code>；</li>
 <li><strong>单调性</strong>：<code>k</code> 越大，<code>hours(k)</code> 越小——<strong>这就是能用二分的根据</strong>。</li>
 </ol>
-<p><strong>走一遍示例</strong>：<code>piles = [3,6,7,11]</code>，<code>h = 8</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{piles} = [3,6,7,11]\)</span>，<code>h = 8</code></p>
 <table>
 <thead>
 <tr>
 <th>k</th>
 <th>各堆耗时</th>
 <th>总耗时</th>
-<th>≤ 8？</th>
+<th>不大于 8？</th>
 </tr>
 </thead>
 <tbody>
@@ -10446,17 +10446,17 @@
 </tbody>
 </table>
 <p>所以最小可行速度是 4。</p>
-<p><strong>关键细节</strong>：<code>while lo &lt; hi</code>（收敛到一个点）；<code>hi = mid</code> 不能写成 <code>mid - 1</code>（<code>mid</code> 本身可能是答案）。</p>
+<p><strong>关键细节</strong>：<code>while lo &lt; hi</code>（收敛到一个点）；<span class="arithmatex">\(hi = \mathrm{mid}\)</span> 不能写成 <code>mid - 1</code>（<code>mid</code> 本身可能是答案）。</p>
 <p><strong>同一套骨架的三道题</strong>：1011 装船、410 切数组。<strong>它们的代码结构完全一致，只有 <code>feasible</code> 不同。</strong></p>
 <h3 id="4-find-minimum-in-rotated-sorted-array153">4. Find Minimum in Rotated Sorted Array（153）<a class="headerlink" href="#4-find-minimum-in-rotated-sorted-array153" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："升序数组被旋转，找最小值"。</p>
 <p><strong>候选思路</strong>：数组被分成两段升序区间，最小值是第二段的第一个元素。<strong>用右端点作参照系</strong>：</p>
 <ul>
-<li><code>nums[mid] &gt; nums[hi]</code> → <code>mid</code> 在第一段（较大那段），最小值在右侧 → <code>lo = mid + 1</code>；</li>
-<li><code>nums[mid] &lt; nums[hi]</code> → <code>mid</code> 到 <code>hi</code> 单调，最小值在左侧或就是 <code>mid</code> → <code>hi = mid</code>。</li>
+<li><span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &gt; \mathrm{nums}[hi]\)</span> → <code>mid</code> 在第一段（较大那段），最小值在右侧 → <span class="arithmatex">\(lo = \mathrm{mid} + 1\)</span>；</li>
+<li><span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{nums}[hi]\)</span> → <code>mid</code> 到 <code>hi</code> 单调，最小值在左侧或就是 <code>mid</code> → <span class="arithmatex">\(hi = \mathrm{mid}\)</span>。</li>
 </ul>
-<p><strong>为什么不比较左端点？</strong> 因为 <code>nums[mid] &gt; nums[lo]</code> 有歧义：<code>[1,2,3]</code> 和 <code>[3,1,2]</code> 都可能满足，无法判断 <code>mid</code> 在哪一段。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [4,5,6,7,0,1,2]</code></p>
+<p><strong>为什么不比较左端点？</strong> 因为 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &gt; \mathrm{nums}[lo]\)</span> 有歧义：<code>[1,2,3]</code> 和 <code>[3,1,2]</code> 都可能满足，无法判断 <code>mid</code> 在哪一段。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [4,5,6,7,0,1,2]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10491,13 +10491,13 @@
 </tr>
 </tbody>
 </table>
-<p><code>lo == hi == 4</code>，返回 <code>nums[4] = 0</code>。</p>
-<p><strong>关键细节</strong>：<code>hi = mid</code> 不能写成 <code>hi = mid - 1</code>；未旋转的数组也天然正确。</p>
-<p><strong>追问准备</strong>："有重复元素？" → 154 题，<code>nums[mid] == nums[hi]</code> 时只能 <code>hi -= 1</code>，最坏退化成 O(n)——<strong>这正说明"严格升序"是必要条件</strong>。</p>
+<p><span class="arithmatex">\(lo = hi = 4\)</span>，返回 <span class="arithmatex">\(\mathrm{nums}[4] = 0\)</span>。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(hi = \mathrm{mid}\)</span> 不能写成 <span class="arithmatex">\(hi = \mathrm{mid} - 1\)</span>；未旋转的数组也天然正确。</p>
+<p><strong>追问准备</strong>："有重复元素？" → 154 题，<span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] = \mathrm{nums}[hi]\)</span> 时只能 <code>hi -= 1</code>，最坏退化成 <span class="arithmatex">\(\mathcal{O}(n)\)</span>——<strong>这正说明"严格升序"是必要条件</strong>。</p>
 <h3 id="5-search-in-rotated-sorted-array33">5. Search in Rotated Sorted Array（33）<a class="headerlink" href="#5-search-in-rotated-sorted-array33" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："旋转数组里找 target 的下标"。</p>
-<p><strong>候选思路</strong>：以 <code>mid</code> 为界，<code>[lo, mid]</code> 和 <code>[mid, hi]</code> <strong>至少有一半是完全有序的</strong>。判断哪半边有序，再看 target 是否落在其中。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [4,5,6,7,0,1,2]</code>，<code>target = 0</code></p>
+<p><strong>候选思路</strong>：以 <code>mid</code> 为界，<span class="arithmatex">\([\mathrm{lo}, \mathrm{mid}]\)</span> 和 <span class="arithmatex">\([\mathrm{mid}, \mathrm{hi}]\)</span> <strong>至少有一半是完全有序的</strong>。判断哪半边有序，再看 target 是否落在其中。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [4,5,6,7,0,1,2]\)</span>，<code>target = 0</code></p>
 <table>
 <thead>
 <tr>
@@ -10514,7 +10514,7 @@
 <td>0, 6</td>
 <td>3</td>
 <td>7</td>
-<td><code>nums[0]=4 &lt;= 7</code>，左半有序</td>
+<td><span class="arithmatex">\(\mathrm{nums}[0]=4 \le 7\)</span>，左半有序</td>
 <td><code>0</code> 不在 <code>[4, 7)</code></td>
 <td>lo = 4</td>
 </tr>
@@ -10522,7 +10522,7 @@
 <td>4, 6</td>
 <td>5</td>
 <td>1</td>
-<td><code>nums[4]=0 &lt;= 1</code>，左半有序</td>
+<td><span class="arithmatex">\(\mathrm{nums}[4]=0 \le 1\)</span>，左半有序</td>
 <td><code>0</code> 在 <code>[0, 1)</code> 里</td>
 <td>hi = mid - 1 = 4</td>
 </tr>
@@ -10536,33 +10536,30 @@
 </tr>
 </tbody>
 </table>
-<p><strong>关键细节</strong>：<code>nums[lo] &lt;= nums[mid]</code> 的 <strong><code>&lt;=</code> 不能写成 <code>&lt;</code></strong>（<code>lo == mid</code> 时要判定为"有序"）；两个边界比较的等号要配套：左半用 <code>nums[lo] &lt;= target &lt; nums[mid]</code>，右半用 <code>nums[mid] &lt; target &lt;= nums[hi]</code>。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{nums}[\mathrm{mid}]\)</span> 的 <strong><span class="arithmatex">\(\le\)</span> 不能写成 <span class="arithmatex">\(&lt;\)</span></strong>（<span class="arithmatex">\(lo = \mathrm{mid}\)</span> 时要判定为"有序"）；两个边界比较的等号要配套：左半用 <span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{target} &lt; \mathrm{nums}[\mathrm{mid}]\)</span>，右半用 <span class="arithmatex">\(\mathrm{nums}[\mathrm{mid}] &lt; \mathrm{target} \le \mathrm{nums}[hi]\)</span>。</p>
 <h3 id="6-time-based-key-value-store981">6. Time Based Key-Value Store（981）<a class="headerlink" href="#6-time-based-key-value-store981" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："按时间戳存储，查询时返回不超过给定时刻的最近值"。</p>
-<p><strong>候选思路</strong>：题目保证"同一 key 的 timestamp 严格递增"，所以<strong>每个 key 的记录天然有序</strong>，查询就是"找最后一个 ≤ t 的记录" → <strong>右边界二分</strong>。</p>
+<p><strong>候选思路</strong>：题目保证"同一 key 的 timestamp 严格递增"，所以<strong>每个 key 的记录天然有序</strong>，查询就是"找最后一个 不大于 t 的记录" → <strong>右边界二分</strong>。</p>
 <p><strong>走一遍示例</strong>：<code>set("foo","bar",1)</code>、<code>set("foo","bar2",4)</code>，<code>get("foo", 3)</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>列表: [(1,"bar"), (4,"bar2")]
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>二分找最后一个 timestamp &lt;= 3 → 下标 0 → 返回 "bar"
 </span></code></pre></div>
 <p><strong>关键细节</strong>：要返回"最近的更早时刻"，不是"最近一次 set"（所以是二分而不是直接取最后一个）；key 不存在或所有时间都大于查询时间时返回 <code>""</code>。</p>
 <h3 id="7-median-of-two-sorted-arrays4">7. Median of Two Sorted Arrays（4）<a class="headerlink" href="#7-median-of-two-sorted-arrays4" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>："两个有序数组的中位数，要求 O(log(m+n))"。<strong>看到 log，就往二分上想。</strong></p>
-<p><strong>候选思路</strong>：合并是 O(m+n)，不行。换个角度——<strong>在"合并后的数组中间"划一条分割线</strong>，这条线同时把两个数组各切成两半。合法的分割线满足：</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>左半部分元素总数 = (m + n + 1) // 2
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>A左的最大值 &lt;= B右的最小值
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>B左的最大值 &lt;= A右的最小值
-</span></code></pre></div>
-<p>在<strong>较短的数组</strong>上二分"左边取几个"，<code>j = half - i</code> 就唯一确定了。判据是两条交叉比较：<code>A左 &gt; B右</code> 说明 <code>i</code> 太大；<code>B左 &gt; A右</code> 说明 <code>i</code> 太小。</p>
+<p><strong>题面信号</strong>："两个有序数组的中位数，要求 <span class="arithmatex">\(\mathcal{O}(\log (m+n))\)</span>"。<strong>看到 log，就往二分上想。</strong></p>
+<p><strong>候选思路</strong>：合并是 <span class="arithmatex">\(\mathcal{O}(m+n)\)</span>，不行。换个角度——<strong>在"合并后的数组中间"划一条分割线</strong>，这条线同时把两个数组各切成两半。合法的分割线满足：</p>
+<div class="arithmatex">\[
+L=\left\lfloor\frac{m+n+1}{2}\right\rfloor,\qquad\max(A_L)\le\min(B_R),\quad\max(B_L)\le\min(A_R)
+\]</div>
+<p>在<strong>较短的数组</strong>上二分"左边取几个"，<code>j = half - i</code> 就唯一确定了。判据是两条交叉比较：<span class="arithmatex">\(A左 &gt; B右\)</span> 说明 <code>i</code> 太大；<span class="arithmatex">\(B左 &gt; A右\)</span> 说明 <code>i</code> 太小。</p>
 <p><strong>走一遍示例</strong>：<code>nums1 = [1,3]</code>，<code>nums2 = [2]</code>，<code>total = 3</code>，<code>half = 2</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>i = 1 时 j = 1：
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>A左 = 1, A右 = 3, B左 = 2, B右 = +inf
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>A左(1) &lt;= B右(inf) ✓，B左(2) &lt;= A右(3)? 不成立 → B左 &gt; A右 → i 太小 → lo = 2
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>i = 2 时 j = 0：
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>A左 = 3, A右 = inf, B左 = -inf, B右 = 2
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>A左(3) &lt;= B右(2)? 不成立 → i 太大 → hi = 1
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>... 最终 i = 1 合法，total 为奇数 → 答案是 max(A左, B左) = 2.0
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>先交换，使较短数组 A=[2]，B=[1,3]，half=2。
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>第一次：i=0，j=2；A左=-inf，A右=2，B左=3，B右=+inf。
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>B左 &gt; A右，A 左侧取得太少，所以 lo=1。
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>第二次：i=1，j=1；A左=2，A右=+inf，B左=1，B右=3。
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>两个交叉比较都成立；总长度为奇数，中位数 max(2,1)=2。
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>必须在较短数组上二分</strong>（保证 <code>j</code> 不越界）；<code>half = (total + 1) // 2</code> 的 <code>+1</code> 让奇数情况下左半多一个元素；边界用 <code>±inf</code> 哨兵。</p>
+<p><strong>关键细节</strong>：<strong>必须在较短数组上二分</strong>（保证 <code>j</code> 不越界）；<code>half = (total + 1) // 2</code> 的 <span class="arithmatex">\(+1\)</span> 让奇数情况下左半多一个元素；边界用 <code>±inf</code> 哨兵。</p>
 <h2 id="_5">五、复杂度速查<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10576,58 +10573,58 @@
 <tr>
 <td>Binary Search</td>
 <td>标准二分</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>Search a 2D Matrix</td>
 <td>下标映射</td>
-<td>O(log mn)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log mn)\)</span></td>
 </tr>
 <tr>
 <td>Koko Eating Bananas</td>
 <td>二分答案</td>
-<td>O(n log max)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log \max )\)</span></td>
 </tr>
 <tr>
 <td>Find Minimum in Rotated</td>
 <td>旋转数组</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>Search in Rotated</td>
 <td>旋转数组</td>
-<td>O(log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span></td>
 </tr>
 <tr>
 <td>Time Based KV Store</td>
 <td>右边界二分</td>
-<td>O(log n) 每次查询</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 每次查询</td>
 </tr>
 <tr>
 <td>Median of Two Sorted Arrays</td>
 <td>二分划分</td>
-<td>O(log min(m, n))</td>
+<td><span class="arithmatex">\(\mathcal{O}(\log \min (m, n))\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_6">六、易错点速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>死循环</strong>：区间更新写成 <code>lo = mid</code> 时，<code>mid</code> 必须向上取整。</li>
+<li><strong>死循环</strong>：区间更新写成 <span class="arithmatex">\(lo = \mathrm{mid}\)</span> 时，<code>mid</code> 必须向上取整。</li>
 <li><strong><code>hi</code> 取 <code>n-1</code> 还是 <code>n</code></strong>：答案可能"越界"时取 <code>n</code>。</li>
-<li><strong><code>while lo &lt; hi</code> 还是 <code>&lt;=</code></strong>：闭区间查元素用 <code>&lt;=</code>，找边界用 <code>&lt;</code>。</li>
+<li><strong><code>while lo &lt; hi</code> 还是 <span class="arithmatex">\(\le\)</span></strong>：闭区间查元素用 <span class="arithmatex">\(\le\)</span>，找边界用 <span class="arithmatex">\(&lt;\)</span>。</li>
 <li><strong>二分答案的上界选错</strong>（875 要取 <code>max(piles)</code> 而不是 <code>sum(piles)</code>）。</li>
-<li>旋转数组里 <strong><code>nums[lo] &lt;= nums[mid]</code> 的 <code>&lt;=</code> 写成 <code>&lt;</code></strong>。</li>
-<li>浮点二分不能用 <code>==</code>，要固定迭代次数或判断区间宽度。</li>
-<li><strong>忘了验证 <code>nums[lo] == target</code></strong>（边界模板返回的是"位置"，不是"是不是目标"）。</li>
+<li>旋转数组里 <strong><span class="arithmatex">\(\mathrm{nums}[lo] \le \mathrm{nums}[\mathrm{mid}]\)</span> 的 <span class="arithmatex">\(\le\)</span> 写成 <span class="arithmatex">\(&lt;\)</span></strong>。</li>
+<li>浮点二分不能用 <span class="arithmatex">\(=\)</span>，要固定迭代次数或判断区间宽度。</li>
+<li><strong>忘了验证 <span class="arithmatex">\(\mathrm{nums}[lo] = \mathrm{target}\)</span></strong>（边界模板返回的是"位置"，不是"是不是目标"）。</li>
 </ol>
 <h2 id="_7">七、面试话术<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>"答案的范围是 [lo, hi]。我写一个判断函数：给定 k，验证是否可行。这个性质是单调的——k 越大越容易满足——所以可以对 k 二分。每次取中点判断，把不可能的一半排除，复杂度 O(n log(范围))。"</p>
+<p>"答案的范围是 [lo, hi]。我写一个判断函数：给定 k，验证是否可行。这个性质是单调的——k 越大越容易满足——所以可以对 k 二分。每次取中点判断，把不可能的一半排除，复杂度 <span class="arithmatex">\(\mathcal{O}(n \log (范围))\)</span>。"</p>
 <h2 id="30">八、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
-<li>什么情况下必须用 <code>while lo &lt; hi</code> 而不是 <code>&lt;=</code>？</li>
+<li>什么情况下必须用 <code>while lo &lt; hi</code> 而不是 <span class="arithmatex">\(\le\)</span>？</li>
 <li>什么情况下 <code>mid</code> 要写成 <code>(lo + hi + 1) // 2</code>？</li>
 <li>二分答案题里，"单调性"具体指什么性质单调？</li>
-<li>旋转数组里怎么在 O(1) 判断哪一半有序？</li>
+<li>旋转数组里怎么在 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 判断哪一半有序？</li>
 <li>875 的上界为什么取 <code>max(piles)</code> 而不是 <code>sum(piles)</code>？</li>
 </ol>
 

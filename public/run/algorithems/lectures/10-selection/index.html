@@ -1462,10 +1462,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        选读：最坏情况也是 O(n) 的选择
+        选读：最坏情况也是 \(\mathcal{O}(n)\) 的选择
       
     </span>
   </a>
@@ -9933,10 +9933,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        选读：最坏情况也是 O(n) 的选择
+        选读：最坏情况也是 \(\mathcal{O}(n)\) 的选择
       
     </span>
   </a>
@@ -10032,11 +10032,11 @@
 <h1 id="10">第 10 讲 · 选择与中位数<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 8 讲：partition；堆方法可等第 12 讲回读。</p>
 <p><strong>首读范围</strong>：先统一第 k 小与下标；中位数的中位数是进阶。</p>
-<p>这一讲从一个问题出发，再一步步把它拆开：给定 n 个互不相同的数和整数 k，找出第 k 小的那个（k-Select）。例子是 <code>A = [6,4,8,9,5,2,1]</code>、<code>k = 3</code>，答案是 4。</p>
-<p>自然的思路是这样：先给一个 <code>O(n log n)</code> 的算法，再想办法把 <code>k = 1</code>、<code>k = 2</code> 做到 <code>O(n)</code>。至于一般的 k 能不能也做到 <code>O(n)</code>——<strong>这很棘手</strong>，但答案是肯定的，后面会看到。</p>
+<p>这一讲从一个问题出发，再一步步把它拆开：给定 n 个互不相同的数和整数 k，找出第 k 小的那个（k-Select）。例子是 <span class="arithmatex">\(A = [6,4,8,9,5,2,1]\)</span>、<code>k = 3</code>，答案是 4。</p>
+<p>自然的思路是这样：先给一个 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 的算法，再想办法把 <code>k = 1</code>、<code>k = 2</code> 做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。至于一般的 k 能不能也做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>——<strong>这很棘手</strong>，但答案是肯定的，后面会看到。</p>
 <p>这一讲就沿着这条线走。</p>
 <h2 id="_1">先排序，或只维护前两个最小值<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>排序后取第 k 个是 <code>Θ(n log n)</code>，够用，但做了远比必要多的工作——我们不需要整个有序数组，只要一个位置。</p>
+<p>排序后取第 k 个是 <span class="arithmatex">\(\Theta (n \log n)\)</span>，够用，但做了远比必要多的工作——我们不需要整个有序数组，只要一个位置。</p>
 <p>先把两个特例写成已经熟悉的扫描。求最小值只保留 min1；求第二小再保留 min2。下面仍假设元素互异且至少两个：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">second_smallest</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -10049,11 +10049,11 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="n">min2</span> <span class="o">=</span> <span class="n">x</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">return</span> <span class="n">min2</span>
 </span></code></pre></div>
-<p>处理完每个前缀，min1、min2 就是它的两个最小值。每个新数至多比较两次，时间 O(n)；这里 A[2:] 会复制切片，改用下标遍历即可把额外空间保持为 O(1)。一般的 k 也能维护 k 个候选，但用什么结构来更新，要等第 12 讲的堆。现在先用已经学过的划分，直接寻找指定位置。</p>
+<p>处理完每个前缀，min1、min2 就是它的两个最小值。每个新数至多比较两次，时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；这里 A[2:] 会复制切片，改用下标遍历即可把额外空间保持为 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。一般的 k 也能维护 k 个候选，但用什么结构来更新，要等第 12 讲的堆。现在先用已经学过的划分，直接寻找指定位置。</p>
 <h2 id="_2">只递归一侧<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>借用第 8 讲的划分：设标杆最后落在下标 p，目标升序下标为 index。若 p=index，标杆就是答案；若 index<p，答案在左侧；若 index>p，答案在右侧。下面的代码始终按从 0 开始的下标比较。</p>
 <p><strong>只递归一侧</strong>，这就是快速选择：</p>
-<p>下面的代码独立包含划分函数。题面 k 是第几小（从 1 开始），<code>quickselect(A, index)</code> 的第二个参数是升序下标（从 0 开始）；求第 3 小要传 2。调用要求 <code>0≤index&lt;len(A)</code>，并会原地修改 A；本节随机复杂度分析先假设元素互异。</p>
+<p>下面的代码独立包含划分函数。题面 k 是第几小（从 1 开始），<code>quickselect(A, index)</code> 的第二个参数是升序下标（从 0 开始）；求第 3 小要传 2。调用要求 <code>0&lt;=index&lt;len(A)</code>，并会原地修改 A；本节随机复杂度分析先假设元素互异。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">partition</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
@@ -10079,30 +10079,31 @@
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            <span class="n">hi</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
 </span></code></pre></div>
-<p>先假设每次恰好对半分：选择只保留一侧，代价是 <code>n+n/2+n/4+…&lt;2n</code>。这是直觉，<strong>不能把随机标杆直接写成固定的 n/2 递归式</strong>。</p>
-<p>现在假设元素互异。当前有 m 个元素，随机标杆落在排名中间约一半的概率至少为一个正常数（忽略取整时为 1/2），成功后剩余规模至多约 <code>3m/4</code>。等到一次这种好划分，期望尝试约 2 次；期间区间只会缩小，每次至多 O(m) 工作。因此每个规模阶段的期望代价是 O(m)，总和受 <code>O(n)×(1+3/4+(3/4)²+…)</code> 控制，为 O(n)。与扫描下界合起来是 Θ(n)。最坏仍为 Θ(n²)。</p>
+<p>先假设每次恰好对半分：选择只保留一侧，代价是 <span class="arithmatex">\(n+n/2+n/4+\cdots &lt;2n\)</span>。这是直觉，<strong>不能把随机标杆直接写成固定的 n/2 递归式</strong>。</p>
+<p>现在假设元素互异。当前有 m 个元素，随机标杆落在排名中间约一半的概率至少为一个正常数（忽略取整时为 1/2），成功后剩余规模至多约 <span class="arithmatex">\(3m/4\)</span>。等到一次这种好划分，期望尝试约 2 次；期间区间只会缩小，每次至多 <span class="arithmatex">\(\mathcal{O}(m)\)</span> 工作。因此每个规模阶段的期望代价是 <span class="arithmatex">\(\mathcal{O}(m)\)</span>，总和受 <span class="arithmatex">\(\mathcal{O}(n)\times (1+3/4+(3/4)^{2}+\cdots )\)</span> 控制，为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。与扫描下界合起来是 <span class="arithmatex">\(\Theta (n)\)</span>。最坏仍为 <span class="arithmatex">\(\Theta (n^{2})\)</span>。</p>
 <p><img alt="选择算法只递归一侧" src="../figures/10-select-partition.png" /></p>
 <p>图中标杆为 6，左侧有 4 个更小的数，所以它是第 5 小。图中 k 从 1 开始表示名次；代码 index 从 0 开始表示下标。一次划分后只保留包含目标名次的那一侧。</p>
-<h2 id="on">选读：最坏情况也是 O(n) 的选择<a class="headerlink" href="#on" title="Permanent link">&para;</a></h2>
+<h2 id="mathcalon">选读：最坏情况也是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的选择<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h2>
 <p>中位数就是排好序后居中的数：五个数 <code>[8,1,6,2,5]</code> 排成 <code>[1,2,5,6,8]</code>，中位数为 5。下面每组取这个中间值，再在这些代表中找中位数，目的是选一个两侧都不会太小的标杆；它不一定是原数组的真中位数。</p>
 <p><img alt="中位数的中位数：分组、取中位数、再取中位数" src="../images/10-median-of-medians.svg" /></p>
-<p>随机化给的是期望 O(n)，仍有极小概率退化。1973 年有五位作者给出了一个确定性算法，思路是"<strong>先花 O(n) 猜一个足够好的标杆</strong>"：</p>
+<p>随机化给的是期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，仍有极小概率退化。1973 年有五位作者给出了一个确定性算法，思路是"<strong>先花 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 猜一个足够好的标杆</strong>"：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1. 把 n 个元素分成 ⌈n/5⌉ 组，每组 5 个
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2. 每组排序（5 个元素是常数时间），取每组的【中位数】
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>3. 递归调用本算法，求出"这些中位数的中位数"，记作 x
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>4. 用 x 作标杆划分
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>5. 判断第 k 小在左、右还是就是 x，只递归一侧
 </span></code></pre></div>
-<p><strong>为什么能丢掉约三成？</strong> 暂设组完整：至少约一半的组中位数不小于 x，而每个这样的组有 3 个元素不小于该组中位数，因此至少约 <code>3×(n/5)/2=3n/10</code> 个元素不小于 x；另一侧对称。把不足 5 个的尾组及 x 所在组扣除，严格说是 <code>3n/10−O(1)</code>，于是继续搜索的一侧最多 <code>7n/10+O(1)</code> 个。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>T(n) ≤ T(⌈n/5⌉) + T(7n/10+O(1)) + cn
-</span></code></pre></div>
-<p>第一项是“选标杆”也要递归，第二项才是“搜索答案”。忽略取整后，若更小规模满足 <code>T(m)≤Cm</code>，右边至多 <code>0.9Cn+cn</code>；取 C 足够大，剩下的 <code>0.1Cn</code> 能付清 cn。把小规模纳入基例即可证明 O(n)。这里两个子问题大小不同，不能直接套第 1 讲的标准主定理。</p>
-<p>若每组 3 个，同一数法只能保证淘汰约 n/3，得到 <code>T(n)≤T(n/3)+T(2n/3)+O(n)</code>，这个界只能推出 O(n log n)。这说明<strong>这套简单证明</strong>用 5 个一组才能得到线性界，不是在证明所有三元分组算法都不可能线性。</p>
+<p><strong>为什么能丢掉约三成？</strong> 暂设组完整：至少约一半的组中位数不小于 x，而每个这样的组有 3 个元素不小于该组中位数，因此至少约 <span class="arithmatex">\(3\times (n/5)/2=3n/10\)</span> 个元素不小于 x；另一侧对称。把不足 5 个的尾组及 x 所在组扣除，严格说是 <span class="arithmatex">\(3n/10-\mathcal{O}(1)\)</span>，于是继续搜索的一侧最多 <span class="arithmatex">\(7n/10+\mathcal{O}(1)\)</span> 个。</p>
+<div class="arithmatex">\[
+T(n)\le T(\lceil n/5\rceil)+T(7n/10+\mathcal{O}(1))+cn
+\]</div>
+<p>第一项是“选标杆”也要递归，第二项才是“搜索答案”。忽略取整后，若更小规模满足 <span class="arithmatex">\(T(m)\le Cm\)</span>，右边至多 <span class="arithmatex">\(0.9Cn+cn\)</span>；取 C 足够大，剩下的 <code>0.1Cn</code> 能付清 cn。把小规模纳入基例即可证明 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。这里两个子问题大小不同，不能直接套第 1 讲的标准主定理。</p>
+<p>若每组 3 个，同一数法只能保证淘汰约 n/3，得到 <span class="arithmatex">\(T(n)\le T(n/3)+T(2n/3)+\mathcal{O}(n)\)</span>，这个界只能推出 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>。这说明<strong>这套简单证明</strong>用 5 个一组才能得到线性界，不是在证明所有三元分组算法都不可能线性。</p>
 <h2 id="_3">下界<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>求最小值至少需要 <code>n − 1</code> 次比较：除了最终的最小值本身，其他 <code>n−1</code> 个元素都必须在某次比较里"输掉"，否则算法无法知道它们不是最小。</p>
-<p>对一般无序数组的中位数问题，本讲只需要 Ω(n) 的读取下界：若还有未读元素，改变它可能改变中位数，算法就无法保证答案。结合最坏 O(n) 的确定性选择，已经得到最优量级 Θ(n)。更精细的比较次数下界属于选读，不影响这里的结论。</p>
+<p>求最小值至少需要 <span class="arithmatex">\(n-1\)</span> 次比较：除了最终的最小值本身，其他 <span class="arithmatex">\(n-1\)</span> 个元素都必须在某次比较里"输掉"，否则算法无法知道它们不是最小。</p>
+<p>对一般无序数组的中位数问题，本讲只需要 <span class="arithmatex">\(\Omega (n)\)</span> 的读取下界：若还有未读元素，改变它可能改变中位数，算法就无法保证答案。结合最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的确定性选择，已经得到最优量级 <span class="arithmatex">\(\Theta (n)\)</span>。更精细的比较次数下界属于选读，不影响这里的结论。</p>
 <h2 id="_4">走一遍<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><code>A = [6,4,8,9,5,2,1]</code>，求第 3 小（下标 2）：</p>
+<p><span class="arithmatex">\(A = [6,4,8,9,5,2,1]\)</span>，求第 3 小（下标 2）：</p>
 <table>
 <thead>
 <tr>
@@ -10138,18 +10139,18 @@
 </tbody>
 </table>
 <h2 id="12">选读：第 12 讲之后，用堆维护候选<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
-<p>维护至多 k 个候选的最大堆是 <code>O(n log(k+1))</code>，<code>k</code> 很小时很实用：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">kth_smallest_heap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>      <span class="c1"># 弹掉这 k 个里最大的</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="o">-</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<p>维护至多 k 个候选的最大堆是 <span class="arithmatex">\(\mathcal{O}(n \log (k+1))\)</span>，<code>k</code> 很小时很实用：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">kth_smallest_heap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>      <span class="c1"># 弹掉这 k 个里最大的</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="o">-</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
-<p><code>k = 1</code> 时它退化成"求最小值"，只扫一遍，<code>O(n)</code>；<code>k = 2</code> 时它在维护两个数，也是 <code>O(n)</code>。</p>
-<p>每次暂存新值后，超出 k 个就弹掉最大值，因此保留的始终是当前最小的 k 个。k 要满足 1≤k≤len(A)。</p>
+<p><code>k = 1</code> 时它退化成"求最小值"，只扫一遍，<span class="arithmatex">\(\mathcal{O}(n)\)</span>；<code>k = 2</code> 时它在维护两个数，也是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p>每次暂存新值后，超出 k 个就弹掉最大值，因此保留的始终是当前最小的 k 个。k 要满足 1不大于k不大于len(A)。</p>
 <h2 id="_5">静态还是动态？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>选择问题的特例是求中位数：奇数长度取第 <code>(n+1)//2</code> 小；偶数长度若采用中间两数的平均，需取第 <code>n//2</code> 与 <code>n//2+1</code> 小。它的用途很多——稳健统计、给快速排序找完美标杆、流式数据的实时分析。</p>
 <p>但要注意数据的形态：</p>
@@ -10164,13 +10165,13 @@
 <tbody>
 <tr>
 <td>求第 k 大</td>
-<td>快速选择，期望 O(n)</td>
-<td>大小为 k 的堆，O(log k) 每次</td>
+<td>快速选择，期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td>大小为 k 的堆，<span class="arithmatex">\(\mathcal{O}(\log k)\)</span> 每次</td>
 </tr>
 <tr>
 <td>求中位数</td>
-<td>快速选择，期望 O(n)</td>
-<td>双堆，O(log n) 每次</td>
+<td>快速选择，期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td>双堆，<span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 每次</td>
 </tr>
 </tbody>
 </table>
@@ -10180,16 +10181,16 @@
 <p>先检查 quickselect([6,4,8,9,5,2,1],2) 返回 4，参数 2 表示升序下标。再做 <a href="../../problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/">Kth Largest Element in an Array</a>：[3,2,1,5,6,4] 的第 2 大，应查下标 4 并返回 5。</p>
 <p>每轮记录 lo、hi、p，确认 index 始终是整个数组的目标下标，不随区间左端改变。用 sorted(A)[index] 对照小输入；若要保留原数组，先复制再选择。</p>
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p><strong>1.</strong> 给 k-Select 一个 <code>O(n log n)</code> 算法；给 1-Select 与 2-Select 各一个 <code>O(n)</code> 算法；再证明 1-Select 至少需要 <code>n − 1</code> 次比较。</p>
+<p><strong>1.</strong> 给 k-Select 一个 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span> 算法；给 1-Select 与 2-Select 各一个 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 算法；再证明 1-Select 至少需要 <span class="arithmatex">\(n-1\)</span> 次比较。</p>
 <p>前两问见上文。下界见本节。</p>
-<p><strong>2.</strong> 一般 k 的 <code>O(n)</code> 算法（先自己想）。</p>
-<p>快速选择。随机快速选择期望 O(n)，保证最坏 O(n) 则用中位数的中位数。不能假设每轮恰好减半。</p>
+<p><strong>2.</strong> 一般 k 的 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 算法（先自己想）。</p>
+<p>快速选择。随机快速选择期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，保证最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 则用中位数的中位数。不能假设每轮恰好减半。</p>
 <p><strong>3.</strong> 如果输入已经排好序，找第 k 小需要几次比较？</p>
 <p>0 次——题面 k 从 1 开始，直接返回 <code>A[k-1]</code>。<strong>这又一次说明最坏情况是对所有输入取最大。</strong></p>
-<p><strong>4.</strong> 为什么"求第 k 小"不能靠"建堆 + 弹 k 次"做到 O(n)？</p>
-<p>建堆确实是 O(n)，但每弹一次是 <code>O(log n)</code>，弹 k 次就是 <code>O(k log n)</code>。选择算法的思想是<strong>不要维护整体顺序，只保留足够定位第 k 个的信息</strong>。</p>
-<p><strong>5.</strong> 实现 <code>find_kth_largest(nums, k)</code>（第 k <strong>大</strong>），要求期望 O(n)。</p>
-<p>"第 k 大"是升序的第 <code>n − k</code> 个位置，其余照搬快速选择。</p>
+<p><strong>4.</strong> 为什么"求第 k 小"不能靠"建堆 + 弹 k 次"做到 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？</p>
+<p>建堆确实是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，但每弹一次是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>，弹 k 次就是 <span class="arithmatex">\(\mathcal{O}(k \log n)\)</span>。选择算法的思想是<strong>不要维护整体顺序，只保留足够定位第 k 个的信息</strong>。</p>
+<p><strong>5.</strong> 实现 <code>find_kth_largest(nums, k)</code>（第 k <strong>大</strong>），要求期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
+<p>"第 k 大"是升序的第 <span class="arithmatex">\(n-k\)</span> 个位置，其余照搬快速选择。</p>
 
 
 

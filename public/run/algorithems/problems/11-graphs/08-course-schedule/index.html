@@ -10144,7 +10144,7 @@
 </span></code></pre></div>
 <p><strong>为什么这个方法能检测环？</strong> 因为环上的节点入度永远不会降到 0，所以它们永远不会被处理，最终"处理过的节点数"会小于总数。<strong>这句话是本题的核心论证。</strong></p>
 <h3 id="bdfs">方法 B：DFS + 三色标记<a class="headerlink" href="#bdfs" title="Permanent link">&para;</a></h3>
-<p>用 <code>0/1/2</code> 表示"未访问 / 正在访问 / 已完成"：</p>
+<p>用 <span class="arithmatex">\(0/1/2\)</span> 表示"未访问 / 正在访问 / 已完成"：</p>
 <ul>
 <li>如果 DFS 过程中遇到一个<strong>状态为 1（正在访问）</strong>的节点，说明回到了自己 → 有环；</li>
 <li>访问完一个节点的所有邻居后，把它标记为 2（完成）。</li>
@@ -10227,7 +10227,7 @@
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                <span class="k">return</span> <span class="kc">False</span>               <span class="c1"># 还有课修不了 → 有环</span>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></code></pre></div>
-<p>这个写法逻辑最直白，但复杂度是 O(n² + n·E)，<strong>只适合用来理解 Kahn 算法的思想</strong>。</p>
+<p>这个写法逻辑最直白，但复杂度是 <span class="arithmatex">\(\mathcal{O}(n^{2} + n\cdot E)\)</span>，<strong>只适合用来理解 Kahn 算法的思想</strong>。</p>
 <h2 id="_5">复杂度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10240,18 +10240,18 @@
 <tbody>
 <tr>
 <td>Kahn</td>
-<td>O(V + E)</td>
-<td>O(V + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
 </tr>
 <tr>
 <td>DFS 三色</td>
-<td>O(V + E)</td>
-<td>O(V + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
 </tr>
 <tr>
 <td>暴力删除</td>
-<td>O(n² + n·E)</td>
-<td>O(V + E)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} + n\cdot E)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(V + E)\)</span></td>
 </tr>
 </tbody>
 </table>

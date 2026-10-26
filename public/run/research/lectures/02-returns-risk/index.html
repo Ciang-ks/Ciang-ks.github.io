@@ -10775,12 +10775,12 @@
 </ul>
 <h2 id="1">1. 从价格到收益<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="11-simple-return">1.1 Simple return（简单收益）<a class="headerlink" href="#11-simple-return" title="Permanent link">&para;</a></h3>
-<p>价格从 <span class="arithmatex">\(P_{t-1}\)</span> 变到 <span class="arithmatex">\(P_t\)</span>，简单收益为：</p>
+<p>价格从 <span class="arithmatex">\(P_{t-1}\)</span> 变到 P_t，简单收益为：</p>
 <div class="arithmatex">\[
 r_t=\frac{P_t-P_{t-1}}{P_{t-1}}=\frac{P_t}{P_{t-1}}-1.
 \]</div>
 <p>价格 100 变 110，收益为 10%；价格 110 变回 100，收益为 <span class="arithmatex">\(-9.09\%\)</span>，不是 <span class="arithmatex">\(-10\%\)</span>。因为收益作用于不同的本金，百分比变化不可简单相加。</p>
-<p>如果资产支付现金股息 <span class="arithmatex">\(D_t\)</span>，总收益（total return）应使用：</p>
+<p>如果资产支付现金股息 D_t，总收益（total return）应使用：</p>
 <div class="arithmatex">\[
 r^{total}_t=\frac{P_t+D_t-P_{t-1}}{P_{t-1}}.
 \]</div>
@@ -10795,7 +10795,7 @@ g_t=\log(P_t)-\log(P_{t-1})=\log(1+r_t).
 \]</div>
 <p>但投资者最终财富仍按简单收益复利。年化平均对数收益和年化简单收益不是同一个数量。日收益很小时二者接近，日波动大、杠杆高或持有期长时应明确使用哪一种。</p>
 <p><img alt="100 到 50 再回到 100 的往返路径上两种收益口径的累加差异" src="../figures/ch02_simple_vs_log.png" /></p>
-<p><strong>图 2-1｜simple 与 log 的可加性差异。</strong> 价格走 100 → 50 → 100，财富最终没有变化。simple return 累加给出 +50%（-50% + 100%），与事实矛盾；log return 累加给出 0（-69.3% + 69.3%），与往返一致。多期建模用 log，向投资者报告用 simple，二者不能混写。数据类型：合成三点路径（专为暴露可加性差异而设）。</p>
+<p><strong>图 2-1｜simple 与 log 的可加性差异。</strong> 价格从 100 到 50 再回 100，财富没有变化。简单收益直接相加却为 50%，对数收益相加为 0。多期财富应使用简单收益连乘，或先累加对数收益再取指数，不能把两种公式混用。数据类型：三点合成路径。</p>
 <h3 id="13-excess-return">1.3 Excess return（超额收益）<a class="headerlink" href="#13-excess-return" title="Permanent link">&para;</a></h3>
 <p>相对无风险利率或 benchmark 的收益常写成：</p>
 <div class="arithmatex">\[
@@ -10803,7 +10803,7 @@ r^{excess}_t=r_t-r_{f,t},\qquad r^{active}_t=r_{p,t}-r_{b,t}.
 \]</div>
 <p>Sharpe 研究通常使用 excess return；information ratio（信息比率）使用 active return。把二者混用会让风险调整后的结论失真。</p>
 <h2 id="2">2. 复利、财富曲线和路径<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>初始财富 <span class="arithmatex">\(W_0\)</span>，每期净收益为 <span class="arithmatex">\(r_t\)</span>，则：</p>
+<p>初始财富 W_0，每期净收益为 r_t，则：</p>
 <div class="arithmatex">\[
 W_T=W_0\prod_{t=1}^{T}(1+r_t).
 \]</div>
@@ -10814,7 +10814,7 @@ W_T=W_0\prod_{t=1}^{T}(1+r_t).
 </ul>
 <p>这说明 arithmetic mean（算术平均）不等于 geometric mean（几何平均）。波动本身会产生 volatility drag（波动拖累）。在固定平均收益下，路径越不稳定，复利结果可能越差。</p>
 <p><img alt="相同平均日收益、不同波动的两条合成财富路径" src="../figures/ch02_vol_drag.png" /></p>
-<p><strong>图 2-2｜波动拖累：均值相同，终点不同。</strong> 两条合成路径的算术平均日收益相同，但高波动路径的终点财富明显更低，比值约等于每天 σ²/2 的拖累累积。下半部分的收益直方图显示二者均值几乎一样：只看“平均收益”会完全漏掉这个差异。数据类型：确定性合成路径（固定 seed），用于说明几何平均与算术平均的差别。</p>
+<p><strong>图 2-2｜波动拖累：均值相同，终点不同。</strong> 两组日收益被调整为相同的样本算术均值，高波动组的复利终值仍更低。小收益近似下，平均对数收益约为 <span class="arithmatex">\(\bar r-s^2/2\)</span>；两条路径的预期对数增长差约为 <span class="arithmatex">\((s_H^2-s_L^2)/2\)</span>。下图使用收益率横轴展示两组分布。数据类型：固定 seed 合成样本，单次路径不代表一般保证。</p>
 <p>若一年有 <span class="arithmatex">\(N\)</span> 个交易期，观察 <span class="arithmatex">\(T\)</span> 期后的年化收益是：</p>
 <div class="arithmatex">\[
 R_{ann}=\left(\frac{W_T}{W_0}\right)^{N/T}-1.
@@ -10861,9 +10861,9 @@ r_{p,t}=\sum_{i=1}^{m}w_{i,t-1}r_{i,t}=w_{t-1}^{\top}r_t.
 \]</div>
 <p>交叉项 <span class="arithmatex">\(2w_iw_j\operatorname{Cov}(i,j)\)</span> 解释了为什么组合风险不等于各资产波动简单相加。协方差估计不稳定时，优化器会把估计噪声放大，因此实务常用 shrinkage（收缩估计）、因子模型或风险上限。</p>
 <p><img alt="两资产收益散点与不同相关系数下组合波动随权重的变化" src="../figures/ch02_correlation_diversification.png" /></p>
-<p><strong>图 2-4｜相关性如何决定分散化。</strong> 左图是相关系数约 0.6 的两资产日收益散点；右图用 §4.2 的组合方差公式画出 ρ = +0.9、+0.6、0、-0.5 四种情况下组合年化波动随权重的变化。ρ 越低，曲线越向下凹，分散化越有效；ρ 接近 1 时组合波动只是两资产波动的加权平均。数据类型：左图为固定 seed 的合成二元样本，右图为公式直接计算。</p>
+<p><strong>图 2-4｜相关性如何决定分散化。</strong> 左图为相关系数约 0.6 的合成二元样本。右图按两资产组合方差公式计算：其他条件相同，相关系数 <span class="arithmatex">\(\rho\)</span> 越低，组合的最低波动越低；<span class="arithmatex">\(\rho=1\)</span> 且权重非负时，组合波动才等于两资产波动的加权平均。数据类型：固定 seed 样本与公式计算。</p>
 <h3 id="43-beta">4.3 Beta 与因子暴露<a class="headerlink" href="#43-beta" title="Permanent link">&para;</a></h3>
-<p>对 benchmark 或因子 <span class="arithmatex">\(f_t\)</span>，资产 beta 定义为：</p>
+<p>对 benchmark 或因子 f_t，资产 beta 定义为：</p>
 <div class="arithmatex">\[
 \beta=\frac{\operatorname{Cov}(r,f)}{\operatorname{Var}(f)}.
 \]</div>
@@ -10883,7 +10883,7 @@ r_t=\alpha+\beta f_t+\epsilon_t.
 </ul>
 <p>一个 net 为 0 的多空组合仍可能有 gross 2 倍或更高，面临融资、借券和流动性风险。</p>
 <h3 id="52-turnover">5.2 Turnover 和成本<a class="headerlink" href="#52-turnover" title="Permanent link">&para;</a></h3>
-<p>权重从 <span class="arithmatex">\(w_{t-1}\)</span> 变到 <span class="arithmatex">\(w_t\)</span> 时，一种简单换手定义是：</p>
+<p>权重从 <span class="arithmatex">\(w_{t-1}\)</span> 变到 w_t 时，一种简单换手定义是：</p>
 <div class="arithmatex">\[
 TO_t=\sum_i|w_{i,t}-w_{i,t-1}|.
 \]</div>
@@ -10895,7 +10895,7 @@ r^{net}_t=r^{gross}_t-cTO_t.
 <div class="arithmatex">\[
 Cost_t=\sum_i\left(f_i|\Delta q_{i,t}|+\frac12 spread_{i,t}|\Delta q_{i,t}|+Impact_i(\Delta q_{i,t})\right),
 \]</div>
-<p>其中 <span class="arithmatex">\(f_i\)</span> 是固定费用，spread 项表示穿越买卖价差，impact 表示订单改变市场价格的成本。市场冲击通常随参与率、波动、成交量和订单大小非线性变化。</p>
+<p>其中 f_i 是固定费用，spread 项表示穿越买卖价差，impact 表示订单改变市场价格的成本。市场冲击通常随参与率、波动、成交量和订单大小非线性变化。</p>
 <h2 id="6-drawdown">6. 回撤（Drawdown）与恢复<a class="headerlink" href="#6-drawdown" title="Permanent link">&para;</a></h2>
 <p>财富曲线历史最高值：</p>
 <div class="arithmatex">\[
@@ -10905,7 +10905,7 @@ M_t=\max_{u\le t}W_u.
 <div class="arithmatex">\[
 D_t=\frac{W_t}{M_t}-1.
 \]</div>
-<p>最大回撤（maximum drawdown）是所有 <span class="arithmatex">\(D_t\)</span> 的最小值。还应记录：</p>
+<p>最大回撤（maximum drawdown）是所有 D_t 的最小值。还应记录：</p>
 <ul>
 <li>drawdown duration：从高点跌下到重新创新高的时间；</li>
 <li>time to recovery：恢复到前高所需时间；</li>
@@ -10915,7 +10915,7 @@ D_t=\frac{W_t}{M_t}-1.
 </ul>
 <p>两个策略可能有相同 Sharpe，但一个经历短促的 -20% 回撤，另一个经历多年的 -10% 平滑回撤，投资者的承受能力、保证金需求和实际风险完全不同。</p>
 <p><img alt="真实 S&amp;P 500 财富曲线与水下曲线" src="../figures/ch02_drawdown_real.png" /></p>
-<p><strong>图 2-5｜最大回撤与恢复时间。</strong> 上半部分是再基准化的财富曲线与历史峰值线，下半部分是水下曲线（drawdown）。2020-02-19 到 2020-03-23 的最大回撤约 -36.1%，约半年后恢复前高；2022 年的回撤更慢、更磨人。读图时同时记录深度、持续时间和恢复时间，三者缺一不可。数据类型：公开数据本地快照（Yahoo Finance ^GSPC）；仅用于教学。</p>
+<p><strong>图 2-5｜最大回撤与恢复时间。</strong> 上半部分是再基准化的财富曲线与历史峰值线，下半部分是水下曲线（drawdown）。2020-02-19 到 2020-03-23 的价格回撤约 -33.9%，于 2020-08-18 恢复前高；2022 年的回撤更慢、更磨人。读图时同时记录深度、持续时间和恢复时间，三者缺一不可。数据类型：公开数据本地快照（Yahoo Finance ^GSPC）；仅用于教学。</p>
 <h2 id="7-sharpesortino-information-ratio">7. Sharpe、Sortino 和 Information Ratio<a class="headerlink" href="#7-sharpesortino-information-ratio" title="Permanent link">&para;</a></h2>
 <h3 id="71-sharpe-ratio">7.1 Sharpe ratio<a class="headerlink" href="#71-sharpe-ratio" title="Permanent link">&para;</a></h3>
 <p>以每期无风险收益 <span class="arithmatex">\(r_{f,t}\)</span> 为基准：</p>
@@ -10930,10 +10930,10 @@ IR=\frac{\operatorname{mean}(r_p-r_b)}{\operatorname{std}(r_p-r_b)}.
 \]</div>
 <p>它衡量相对 benchmark 的主动管理质量。若 benchmark 选择不恰当，IR 的解释也会失效。</p>
 <h2 id="8-varcvar">8. VaR、CVaR 与压力测试<a class="headerlink" href="#8-varcvar" title="Permanent link">&para;</a></h2>
-<p><strong>Value at Risk（VaR，风险价值）</strong> 是给定持有期和置信水平下的损失分位点。例如 1 日 95% VaR = 2% 意味着按模型估计，5% 的最差日损失会超过 2%，但它不告诉你超过后会损失多少。</p>
+<p><strong>Value at Risk（VaR，风险价值）</strong> 是给定持有期和置信水平下的损失分位点。例如 1 日 95% <span class="arithmatex">\(\mathrm{VaR}_{0.95}=2\%\)</span> 意味着按模型估计，5% 的最差日损失会超过 2%，但它不告诉你超过后会损失多少。</p>
 <p><strong>Conditional VaR / Expected Shortfall（CVaR/ES）</strong> 关注超过 VaR 阈值后的平均损失，因此对尾部更敏感。计算时要明确历史窗口、是否按资产重估、是否包含成本和流动性冲击。</p>
 <p><img alt="真实日收益直方图上的 5% VaR 与 CVaR" src="../figures/ch02_var_cvar.png" /></p>
-<p><strong>图 2-6｜VaR 与 CVaR 在分布上的位置。</strong> 直方图是真实日收益的样本分布，红色竖线是 5% 分位的 VaR，橙色虚线是更差 5% 天的平均损失 CVaR。VaR 回答“坏日子从多坏开始”，CVaR 回答“坏日子平均多坏”；尾部越厚，二者差距越大。数据类型：公开数据本地快照（Yahoo Finance ^GSPC，2010 年起）；历史分位数不是未来风险承诺。</p>
+<p><strong>图 2-6｜VaR 与 ES 的符号口径。</strong> 横轴为日简单收益。灰色线画在 5% 收益分位点 <span class="arithmatex">\(q_{0.05}&lt;0\)</span>，图中报告的损失风险取正值：<span class="arithmatex">\(\mathrm{VaR}_{0.95}=-q_{0.05}\)</span>。ES 是最差 5% 样本日平均收益的相反数；它与 VaR 都按损失为正的口径报告。数据类型：公开 S&amp;P 500 本地快照，历史样本不承诺未来风险。</p>
 <p>压力测试不依赖单一概率模型，可以人为设定：股票 -10%、利率 +100 bps、美元跳升、spread 扩大三倍、成交量下降一半，然后重新估算 PnL、保证金和风险限额。它回答“如果一个有经济意义的坏情景发生，会怎样”。</p>
 <h2 id="9-benchmark">9. Benchmark、归因和可解释性<a class="headerlink" href="#9-benchmark" title="Permanent link">&para;</a></h2>
 <p>一份研究报告至少要有一个合理 benchmark：</p>
@@ -10989,7 +10989,7 @@ Var(R)=E[Var(R\mid S)]+Var(E[R\mid S]).
 \]</div>
 <p>第一项是状态内部的噪声，第二项是不同状态均值变化造成的风险。若只报告全样本标准差，就无法知道风险是一直存在还是集中在危机阶段。项目中至少按年份、波动分位数或趋势状态分组报告 <code>mean/std/drawdown</code>。</p>
 <h3 id="_2">波动缩放的假设与失败<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>常用年化近似 <code>daily_std × √252</code> 假定收益近似不相关且交易日定义稳定。自相关、重叠收益、期货非交易日、波动聚集和跳跃都会破坏它。收益均值不能简单地乘 252 当作复利收益；若要从日均值估计年化财富，应使用 <code>(1+\bar r)^{252}-1</code> 的近似并报告几何路径。面试时说明这是一个 convention/approximation，而非自然常数。</p>
+<p>常用年化近似 <span class="arithmatex">\(s_{\mathrm{daily}}\sqrt{252}\)</span> 假定收益近似不相关且交易日定义稳定。自相关、重叠收益、期货非交易日、波动聚集和跳跃都会破坏它。收益均值不能简单地乘 252 当作复利收益；若假定各日收益独立同分布，可用 <span class="arithmatex">\((1+\bar r)^{252}-1\)</span> 估计期望财富的年增长；实际已实现年化收益应由 <span class="arithmatex">\(\prod_t(1+r_t)\)</span> 的几何路径计算，二者不能互换。面试时说明这是一个 convention/approximation，而非自然常数。</p>
 <h3 id="_3">风险报告最低模板<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>每个策略、benchmark 和压力情景至少同时报告：<code>gross/net return</code>、年化波动、Sharpe/Sortino、最大回撤及恢复时间、平均/分位数换手、净/毛敞口、主要 beta、成本假设和样本区间。只有一个 Sharpe 数字无法区分高收益、高杠杆、平滑报价或幸存者偏差。</p>
 <h2 id="14">14. 本章小结<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
@@ -11022,38 +11022,40 @@ Var(R)=E[Var(R\mid S)]+Var(E[R\mid S]).
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Make the notebook runnable from research/lectures, research, or a parent workspace.</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">_here</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">_candidates</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">for</span> <span class="n">_c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_here</span><span class="p">,</span> <span class="o">*</span><span class="n">_here</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">_candidates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_c</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">]</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">for</span> <span class="n">_candidate</span> <span class="ow">in</span> <span class="n">_candidates</span><span class="p">:</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">_candidate</span> <span class="o">/</span> <span class="s2">"notebook_helpers.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"sources"</span> <span class="o">/</span> <span class="s2">"external"</span> <span class="o">/</span> <span class="s2">"data"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="n">LECTURE_DIR</span> <span class="o">=</span> <span class="n">_candidate</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="n">ROOT</span> <span class="o">=</span> <span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">break</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"请从 research、research/lectures 或包含 research 的工作区目录运行 notebook"</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">LECTURE_DIR</span><span class="p">))</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="kn">from</span><span class="w"> </span><span class="nn">notebook_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_real_market_data</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">annualized_sharpe</span><span class="p">,</span> <span class="n">max_drawdown</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">FIG_DIR</span> <span class="o">=</span> <span class="n">LECTURE_DIR</span> <span class="o">/</span> <span class="s2">"figures"</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">FIG_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"seaborn-v0_8-whitegrid"</span><span class="p">)</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROOT=</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python=</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"数据只从 sources/external/data 本地读取；要更新数据，请先保存新快照和来源说明。"</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cycler</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"axes.prop_cycle"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">"#2563eb"</span><span class="p">,</span> <span class="s2">"#64748b"</span><span class="p">,</span> <span class="s2">"#38bdf8"</span><span class="p">,</span> <span class="s2">"#1e3a8a"</span><span class="p">,</span> <span class="s2">"#93c5fd"</span><span class="p">])</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Make the notebook runnable from research/lectures, research, or a parent workspace.</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">_here</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">_candidates</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">for</span> <span class="n">_c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_here</span><span class="p">,</span> <span class="o">*</span><span class="n">_here</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">_candidates</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_c</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">,</span> <span class="n">_c</span> <span class="o">/</span> <span class="s2">"research"</span> <span class="o">/</span> <span class="s2">"lectures"</span><span class="p">]</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">for</span> <span class="n">_candidate</span> <span class="ow">in</span> <span class="n">_candidates</span><span class="p">:</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">_candidate</span> <span class="o">/</span> <span class="s2">"notebook_helpers.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"sources"</span> <span class="o">/</span> <span class="s2">"external"</span> <span class="o">/</span> <span class="s2">"data"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="n">LECTURE_DIR</span> <span class="o">=</span> <span class="n">_candidate</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">ROOT</span> <span class="o">=</span> <span class="n">_candidate</span><span class="o">.</span><span class="n">parent</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">break</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">"请从 research、research/lectures 或包含 research 的工作区目录运行 notebook"</span><span class="p">)</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">LECTURE_DIR</span><span class="p">))</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="kn">from</span><span class="w"> </span><span class="nn">notebook_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_real_market_data</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">annualized_sharpe</span><span class="p">,</span> <span class="n">max_drawdown</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">FIG_DIR</span> <span class="o">=</span> <span class="n">LECTURE_DIR</span> <span class="o">/</span> <span class="s2">"figures"</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">FIG_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"seaborn-v0_8-whitegrid"</span><span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROOT=</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python=</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"数据只从 sources/external/data 本地读取；要更新数据，请先保存新快照和来源说明。"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">market</span> <span class="o">=</span> <span class="n">load_real_market_data</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"2010"</span><span class="p">:</span><span class="s2">"2025"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">r</span> <span class="o">=</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_log_return"</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">r</span> <span class="o">=</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_return"</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">rolling_vol</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">wealth</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_return"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">drawdown</span> <span class="o">=</span> <span class="n">wealth</span> <span class="o">/</span> <span class="n">wealth</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">market</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_close"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"navy"</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">market</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_close"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2563eb"</span><span class="p">)</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"index level"</span><span class="p">)</span>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rolling_vol</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">rolling_vol</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"darkorange"</span><span class="p">)</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">rolling_vol</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.9</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"firebrick"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"90th percentile"</span><span class="p">)</span>
@@ -11067,13 +11069,13 @@ Var(R)=E[Var(R\mid S)]+Var(E[R\mid S]).
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">FIG_DIR</span> <span class="o">/</span> <span class="s2">"02_returns_risk.png"</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">summary</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">"S&amp;P 500 log returns"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">summary</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">"S&amp;P 500 simple returns"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Arithmetic mean × 252:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">252</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Geometric annualized wealth:"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">market</span><span class="p">[</span><span class="s2">"spx_return"</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span> <span class="o">**</span> <span class="p">(</span><span class="mi">252</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
 </span></code></pre></div>
 <h3 id="_4">观察和面试提示<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>√252</code> 是在特定近似下的波动缩放，不是复利公式；把算术均值乘 252 和几何财富年化放在一起比较。</li>
+<li><span class="arithmatex">\(\sqrt{252}\)</span> 是在特定近似下的波动缩放，不是复利公式；把算术均值乘 252 和几何财富年化放在一起比较。</li>
 <li>最大回撤是路径统计量。请从图上找一个“波动下降但仍未创新高”的区间，并说明为什么只报 volatility 会漏掉它。</li>
 </ul>
 

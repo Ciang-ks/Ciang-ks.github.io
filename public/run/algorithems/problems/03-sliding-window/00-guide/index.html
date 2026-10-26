@@ -10399,7 +10399,7 @@
 <tr>
 <td>最长不超过某限制的区间</td>
 <td>删除不会使约束更坏，扩张不能修复已超限的旧起点</td>
-<td>非负和≤K、无重复满足；一般含负数的和约束不满足</td>
+<td>非负和不大于K、无重复满足；一般含负数的和约束不满足</td>
 </tr>
 <tr>
 <td>最短覆盖区间</td>
@@ -10464,7 +10464,7 @@
 <li><strong>最短覆盖窗口</strong>：右端扩张前，左边已经移走的每个起点都曾得到一个合法候选。以后用同样起点配更远右端只会更长，不会改善答案；因此合法时收缩并逐个记录即可。</li>
 <li><strong>固定窗口</strong>：端点位置由固定长度决定，不要求数值和随扩张单调。</li>
 </ul>
-<p>两个指针各移动至多 n 次，仅保证窗口增删次数 O(n)；总时间还取决于每次状态更新、合法性检查的成本。</p>
+<p>两个指针各移动至多 n 次，仅保证窗口增删次数 <span class="arithmatex">\(\mathcal{O}(n)\)</span>；总时间还取决于每次状态更新、合法性检查的成本。</p>
 <h2 id="_7">四、从读题到写码：五步流程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>确认连续性</strong>：题目问的是"连续子数组/子串"吗？（不是"子序列"）</li>
@@ -10488,7 +10488,7 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="k">del</span> <span class="n">window</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span>    <span class="c1"># 删掉零计数，len(window) 才是"不同字符数"</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
 </span></code></pre></div>
-<p><strong>如果每轮重建 <code>Counter(s[l:r+1])</code>，复杂度会悄悄变成 O(n²)。</strong></p>
+<p><strong>如果每轮重建 <code>Counter(s[l:r+1])</code>，复杂度会悄悄变成 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</strong></p>
 <h3 id="2-minimum-window-substring">模板 2 覆盖型最短窗口（Minimum Window Substring）<a class="headerlink" href="#2-minimum-window-substring" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -10517,7 +10517,7 @@
 </span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
 </span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong><code>have</code> 统计的是"达标的字符种类数"，不是字符总数</strong>；加入时用 <code>==</code>、移除时用 <code>&lt;</code>，两个方向不能写反。</p>
+<p><strong><code>have</code> 统计的是"达标的字符种类数"，不是字符总数</strong>；加入时用 <span class="arithmatex">\(=\)</span>、移除时用 <span class="arithmatex">\(&lt;\)</span>，两个方向不能写反。</p>
 <h3 id="3">模板 3 单调队列求窗口最值<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -10547,13 +10547,13 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">count</span> <span class="o">+=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>        <span class="c1"># 以 r 结尾的合法子数组个数</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="k">return</span> <span class="n">count</span>
 </span></code></pre></div>
-<p><strong>"以 r 结尾的合法子数组恰好有 <code>r - l + 1</code> 个"</strong> 这个计数技巧在子数组计数类题里反复出现。</p>
+<p><strong>"以 r 结尾的合法子数组恰好有 <span class="arithmatex">\(r - l + 1\)</span> 个"</strong> 这个计数技巧在子数组计数类题里反复出现。</p>
 <h2 id="_9">六、逐题推演：从题面到思路<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="1-best-time-to-buy-and-sell-stock121">1. Best Time to Buy and Sell Stock（121）<a class="headerlink" href="#1-best-time-to-buy-and-sell-stock121" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>：只能买一次卖一次，求最大利润。</p>
 <p><strong>候选思路</strong>：这是滑动窗口的<strong>退化形式</strong>——"左指针永远指向历史最低价"。</p>
 <p><strong>关键观察</strong>：如果在第 i 天卖出，最优买入价就是<strong>第 i 天之前出现过的最低价</strong>。所以只需一次遍历，边更新最低价边算利润。</p>
-<p><strong>走一遍示例</strong>：<code>prices = [7,1,5,3,6,4]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{prices} = [7,1,5,3,6,4]\)</span></p>
 <table>
 <thead>
 <tr>
@@ -10708,7 +10708,7 @@
 </table>
 <p>最终答案是 4。</p>
 <p><strong>关键细节</strong>：先掌握每轮重新求真实 max(count)、收缩到合法的写法。保留历史最高频数的版本可能让当前窗口暂时不合法，需另证明它不会制造更长虚假纪录，见本题详解，不能只凭“条件更宽松”接受。</p>
-<p><strong>同结构题</strong>：1004 Max Consecutive Ones III（窗口长度 − 1 的个数 ≤ k）。</p>
+<p><strong>同结构题</strong>：1004 Max Consecutive Ones III（窗口长度 - 1 的个数 不大于 k）。</p>
 <h3 id="4-permutation-in-string567">4. Permutation in String（567）<a class="headerlink" href="#4-permutation-in-string567" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："s2 中是否包含 s1 的某个排列作为连续子串"。</p>
 <p><strong>候选思路</strong>：是"连续子串"+"字符频率相同" → <strong>固定长度窗口 + 频率表比较</strong>。</p>
@@ -10722,7 +10722,7 @@
 <h3 id="5-minimum-window-substring76">5. Minimum Window Substring（76）<a class="headerlink" href="#5-minimum-window-substring76" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最短的、包含 t 全部字符（含重复次数）的子串"。</p>
 <p><strong>候选思路</strong>：可变长度窗口<strong>求最短</strong> → 答案必须在 <code>while</code> 收缩循环内部更新。</p>
-<p><strong>难点</strong>：怎么 O(1) 判断"窗口已经覆盖 t"？→ <code>need</code> / <code>window</code> 两张表 + <code>have</code> 计数器。</p>
+<p><strong>难点</strong>：怎么 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 判断"窗口已经覆盖 t"？→ <code>need</code> / <code>window</code> 两张表 + <code>have</code> 计数器。</p>
 <p><strong>走一遍示例</strong>：<code>s = "ADOBECODEBANC"</code>，<code>t = "ABC"</code>，<code>required = 3</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>r 一路扩张，直到窗口 "ADOBEC" 首次让 have == 3
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>→ 进入收缩循环：记录长度 6，移出 'A'，have 降到 2，退出
@@ -10732,17 +10732,17 @@
 <p><strong>关键细节</strong>：<code>have == required</code> 时才进入收缩；<code>t</code> 里重复的字符必须计数（<code>"AA"</code> 要求窗口里有两个 A）。</p>
 <h3 id="6-sliding-window-maximum239">6. Sliding Window Maximum（239）<a class="headerlink" href="#6-sliding-window-maximum239" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："每个固定长度窗口的最大值"。</p>
-<p><strong>候选思路</strong>：窗口最值 → <strong>单调队列</strong>。普通队列拿不到最大值；每次重扫窗口是 O(nk)。</p>
-<p><strong>单调队列的淘汰依据</strong>：如果 <code>nums[j] &lt;= nums[i]</code> 且 <code>j &lt; i</code>，那么任何包含 <code>j</code> 的窗口都包含 <code>i</code>，<strong><code>j</code> 永远不可能成为最大值</strong>，可以直接丢掉。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,3,-1,-3,5,3,6,7]</code>，<code>k = 3</code></p>
+<p><strong>候选思路</strong>：窗口最值 → <strong>单调队列</strong>。普通队列拿不到最大值；每次重扫窗口是 <span class="arithmatex">\(\mathcal{O}(nk)\)</span>。</p>
+<p><strong>单调队列的淘汰依据</strong>：如果 <span class="arithmatex">\(\mathrm{nums}[j] \le \mathrm{nums}[i]\)</span> 且 <span class="arithmatex">\(j &lt; i\)</span>，那么任何包含 <code>j</code> 的窗口都包含 <code>i</code>，<strong><code>j</code> 永远不可能成为最大值</strong>，可以直接丢掉。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,3,-1,-3,5,3,6,7]\)</span>，<code>k = 3</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>r=0: 队列 [0(1)]
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>r=1: 1 比队尾的 1 大 → 弹出 0，队列 [1(3)]
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>r=1: 3 比队尾的 1 大 → 弹出 0，队列 [1(3)]
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>r=2: 队列 [1(3), 2(-1)]，窗口成形 → 最大值 3
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>r=3: 队列 [1(3), 2(-1), 3(-3)] → 最大值 3
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>r=4: 5 淘汰前面全部 → 队列 [4(5)] → 最大值 5
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>... 最终 [3,3,5,5,6,7]
 </span></code></pre></div>
-<p><strong>关键细节</strong>：队列存<strong>下标</strong>（不是值），否则无法判断是否滑出窗口；过期判断写成 <code>dq[0] &lt;= r - k</code>；先入队再清理队首。</p>
+<p><strong>关键细节</strong>：队列存<strong>下标</strong>（不是值），否则无法判断是否滑出窗口；过期判断写成 <span class="arithmatex">\(dq[0] \le r - k\)</span>；先入队再清理队首。</p>
 <h2 id="_10">七、复杂度速查<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -10758,37 +10758,37 @@
 <td>Best Time to Buy/Sell Stock</td>
 <td>可变</td>
 <td>历史最小值</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Longest Substring w/o Repeating</td>
 <td>可变（最长）</td>
 <td>字符集合 / 最近下标</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Longest Repeating Char Replacement</td>
 <td>可变（最长）</td>
 <td>频次 + 最高频</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Permutation in String</td>
 <td>固定</td>
 <td>频次表</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Minimum Window Substring</td>
 <td>可变（最短）</td>
 <td>频次 + have</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Sliding Window Maximum</td>
 <td>固定</td>
 <td>单调队列</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10796,15 +10796,15 @@
 <ol>
 <li>求最长 / 最短的<strong>答案更新位置写反</strong>。</li>
 <li><strong>忘记移除左指针处的状态</strong>，窗口状态和实际窗口不一致。</li>
-<li>窗口长度写成 <code>r - l</code>（正确是 <code>r - l + 1</code>）。</li>
-<li><strong>每轮重建 Counter</strong>，复杂度退化成 O(n²)。</li>
+<li>窗口长度写成 <code>r - l</code>（正确是 <span class="arithmatex">\(r - l + 1\)</span>）。</li>
+<li><strong>每轮重建 Counter</strong>，复杂度退化成 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</li>
 <li><code>.get(c, 0)</code> 之外的<strong>零计数键没删</strong>，导致 <code>len(window)</code> 不变而死循环。</li>
-<li><code>have</code> 的更新用 <code>==</code> 和 <code>&lt;</code>，<strong>两个方向写反</strong>。</li>
+<li><code>have</code> 的更新用 <span class="arithmatex">\(=\)</span> 和 <span class="arithmatex">\(&lt;\)</span>，<strong>两个方向写反</strong>。</li>
 <li><strong>含负数还硬用滑窗求和</strong>。</li>
 <li>单调队列<strong>存值不存下标</strong>。</li>
 </ol>
 <h2 id="_12">九、面试话术<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>"这是一个连续子串问题，我用滑动窗口。右指针不断扩张，当窗口不再满足条件时移动左指针收缩。由于'窗口合法'这个性质对收缩是单调的——子窗口一定也合法——所以两个指针都只向右移动，总复杂度 O(n)。窗口内我用一个长度 26 的计数数组维护字符频次，加入和移除都是 O(1)。"</p>
+<p>"这是一个连续子串问题，我用滑动窗口。右指针不断扩张，当窗口不再满足条件时移动左指针收缩。由于'窗口合法'这个性质对收缩是单调的——子窗口一定也合法——所以两个指针都只向右移动，总复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。窗口内我用一个长度 26 的计数数组维护字符频次，加入和移除都是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。"</p>
 <h2 id="30">十、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>为什么滑窗求最长和求最短的"更新答案"位置不同？</li>

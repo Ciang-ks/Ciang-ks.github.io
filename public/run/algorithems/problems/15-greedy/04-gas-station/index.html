@@ -7685,10 +7685,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on-o1" class="md-nav__link">
+  <a href="#mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：一趟贪心（推荐，O(n) 时间、O(1) 空间）
+        解法一：一趟贪心（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -7696,10 +7696,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：暴力枚举（O(n²)，用于对照）
+        解法二：暴力枚举（\(\mathcal{O}(n^{2})\)，用于对照）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on-o1" class="md-nav__link">
+  <a href="#mathcalon-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：一趟贪心（推荐，O(n) 时间、O(1) 空间）
+        解法一：一趟贪心（推荐，\(\mathcal{O}(n)\) 时间、\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10042,10 +10042,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on2" class="md-nav__link">
+  <a href="#mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：暴力枚举（O(n²)，用于对照）
+        解法二：暴力枚举（\(\mathcal{O}(n^{2})\)，用于对照）
       
     </span>
   </a>
@@ -10136,7 +10136,7 @@
 <p><strong>反过来，如果 <code>sum(gas) &gt;= sum(cost)</code>，则一定有解</strong>；存在性本身不依赖题目对答案唯一性的保证。<strong>这个"总量判断"是本题的第一个关键点。</strong></p>
 <p><strong>观察 2（如何找起点）</strong>：从某个起点出发，一旦累计油量变成负数，说明<strong>从起点到这个点之间的任何一个位置都不能作为起点</strong>。</p>
 <p>为什么？因为从中间某点出发时，你"少了前面那段积累的油"，只会更早断油。<strong>所以可以直接把起点跳到"断油位置的下一个位置"，重新开始累计。</strong></p>
-<p><strong>这个"一旦失败就跳到下一个位置"的论证是本题的贪心核心</strong>，用反证法很容易证明：如果从 <code>i</code> 出发在 <code>j</code> 处断油，那么从任何 <code>i &lt; k &lt;= j</code> 出发都不会更好（因为从 <code>i</code> 到 <code>k</code> 的油量是非负的，去掉它只会让情况更糟）。</p>
+<p><strong>这个"一旦失败就跳到下一个位置"的论证是本题的贪心核心</strong>，用反证法很容易证明：如果从 <code>i</code> 出发在 <code>j</code> 处断油，那么从任何 <span class="arithmatex">\(i &lt; k \le j\)</span> 出发都不会更好（因为从 <code>i</code> 到 <code>k</code> 的油量是非负的，去掉它只会让情况更糟）。</p>
 <h3 id="_4">一趟扫描即可<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>于是算法只有 6 行：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>total = cur = start = 0
@@ -10149,10 +10149,10 @@
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>return start if total &gt;= 0 else -1
 </span></code></pre></div>
 <h3 id="_5">解法推导与模式辨析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>设 d[i]=gas[i]−cost[i]，从 s 出发第一次在 j 失败，则 s 到任一中间起点 k 之前的累计和都≥0；从 k 到 j 的和等于失败总和减去这段非负前缀，仍&lt;0，所以 s..j 全部可以排除。这里“第一次失败”不可省略，否则被减掉的前缀未必非负。</p>
-<p>总和≥0 保证存在起点，与题目是否保证答案唯一无关：从累计前缀和的一个最低点之后出发，直到末尾净值都不低于起点，绕回前部时再加上非负总和，也不会欠油。扫描重置 start 正是在寻找这样的低谷之后。这个论证依赖油箱无容量上限、加油可全部保留；若油箱容量有限，总量充足不再充分。</p>
+<p>设 d[i]=gas[i]-cost[i]，从 s 出发第一次在 j 失败，则 s 到任一中间起点 k 之前的累计和都不小于0；从 k 到 j 的和等于失败总和减去这段非负前缀，仍&lt;0，所以 s..j 全部可以排除。这里“第一次失败”不可省略，否则被减掉的前缀未必非负。</p>
+<p>总和不小于0 保证存在起点，与题目是否保证答案唯一无关：从累计前缀和的一个最低点之后出发，直到末尾净值都不低于起点，绕回前部时再加上非负总和，也不会欠油。扫描重置 start 正是在寻找这样的低谷之后。这个论证依赖油箱无容量上限、加油可全部保留；若油箱容量有限，总量充足不再充分。</p>
 <h2 id="_6">代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="on-o1">解法一：一趟贪心（推荐，O(n) 时间、O(1) 空间）<a class="headerlink" href="#on-o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon-mathcalo1">解法一：一趟贪心（推荐，<span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalon-mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">canCompleteCircuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">cost</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">total</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10167,7 +10167,7 @@
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="n">start</span> <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </span></code></pre></div>
-<h3 id="on2">解法二：暴力枚举（O(n²)，用于对照）<a class="headerlink" href="#on2" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon2">解法二：暴力枚举（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，用于对照）<a class="headerlink" href="#mathcalon2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">canCompleteCircuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">cost</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span>
@@ -10212,23 +10212,23 @@
 <tbody>
 <tr>
 <td>一趟贪心</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>暴力枚举</td>
-<td>O(n²)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_9">易错点与面试追问<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>total</code> 和 <code>cur</code> 都要维护</strong>：<code>total</code> 用来判断"有没有解"，<code>cur</code> 用来找"起点在哪"。</li>
-<li><strong><code>cur &lt; 0</code> 时把起点设为 <code>i + 1</code></strong>，并且把 <code>cur</code> 重置为 0。</li>
-<li><strong>最后返回的是 <code>start</code>（不做取模）</strong>：因为 <code>start</code> 最多等于 <code>n</code>，而当 <code>total &gt;= 0</code> 时 <code>start</code> 一定小于 <code>n</code>（题目保证唯一解）。</li>
+<li><strong><code>cur &lt; 0</code> 时把起点设为 <span class="arithmatex">\(i + 1\)</span></strong>，并且把 <code>cur</code> 重置为 0。</li>
+<li><strong>最后返回的是 <code>start</code>（不做取模）</strong>：因为 <code>start</code> 最多等于 <code>n</code>，而当 <span class="arithmatex">\(\mathrm{total} \ge 0\)</span> 时 <code>start</code> 一定小于 <code>n</code>（题目保证唯一解）。</li>
 <li><strong>可行性必须在最后判断</strong>：不能在中途就返回 -1。</li>
-<li><strong>追问：为什么"从 i 出发断油，那么 i 到 j 之间的任何点都不能作为起点"？</strong> → 用反证法：假设从 <code>k</code>（<code>i &lt; k &lt;= j</code>）出发可以成功，那么从 <code>i</code> 出发时的油量是"从 i 到 k 的净油量 + 从 k 出发的油量"，而"从 i 到 k 的净油量 ≥ 0"（因为在 <code>k</code> 之前没有断油），所以从 <code>i</code> 出发也应该成功，矛盾。<strong>这个论证面试中一定要能说清。</strong></li>
+<li><strong>追问：为什么"从 i 出发断油，那么 i 到 j 之间的任何点都不能作为起点"？</strong> → 用反证法：假设从 <code>k</code>（<span class="arithmatex">\(i &lt; k \le j\)</span>）出发可以成功，那么从 <code>i</code> 出发时的油量是"从 i 到 k 的净油量 + 从 k 出发的油量"，而"从 i 到 k 的净油量 不小于 0"（因为在 <code>k</code> 之前没有断油），所以从 <code>i</code> 出发也应该成功，矛盾。<strong>这个论证面试中一定要能说清。</strong></li>
 <li><strong>追问：为什么总油量足够就一定有解？</strong> → 因为可以证明"总油量非负时，从某个点出发一定不会断油"（本质是"前缀和的最小值之后"就是合法的起点）。<strong>面试中能主动提这一点很加分。</strong></li>
 <li><strong>追问：如果没有"最多一个解"这个保证呢？</strong> → 算法依然正确，只是可能返回多个解中的这一个。</li>
 </ul>

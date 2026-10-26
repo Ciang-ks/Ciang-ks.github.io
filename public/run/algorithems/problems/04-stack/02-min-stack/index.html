@@ -10080,13 +10080,13 @@
 <h1 id="155-min-stack">155. Min Stack · 最小栈<a class="headerlink" href="#155-min-stack" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Stack</code> ｜ <a href="https://leetcode.com/problems/min-stack/">LeetCode 155</a> ｜ <a href="https://neetcode.io/problems/minimum-stack">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>设计一个栈，支持 <code>push</code>、<code>pop</code>、<code>top</code>，以及 <strong><code>getMin()</code> 返回栈中最小元素</strong>，要求所有操作都是 <strong>O(1)</strong>。</p>
+<p>设计一个栈，支持 <code>push</code>、<code>pop</code>、<code>top</code>，以及 <strong><code>getMin()</code> 返回栈中最小元素</strong>，要求所有操作都是 <strong><span class="arithmatex">\(\mathcal{O}(1)\)</span></strong>。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>push(-2), push(0), push(-3), getMin() → -3
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pop(),    top()   → 0,        getMin() → -2
 </span></code></pre></div>
 <h2 id="_2">思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>为什么不能在 <code>getMin()</code> 里扫一遍？</strong> 那样是 O(n)，违反题目要求。</p>
-<p><strong>为什么不能在 <code>pop()</code> 时重新求最小值？</strong> 同样会退化成 O(n)。</p>
+<p><strong>为什么不能在 <code>getMin()</code> 里扫一遍？</strong> 那样是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，违反题目要求。</p>
+<p><strong>为什么不能在 <code>pop()</code> 时重新求最小值？</strong> 同样会退化成 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <p><strong>正确思路：让"每个栈元素都知道自己所在状态下的最小值"。</strong></p>
 <p>有两种实现：</p>
 <p><strong>方案 A：主栈 + 最小栈（双栈）</strong></p>
@@ -10095,7 +10095,7 @@
 <p><strong>方案 B：存元组（值, 当前最小值）</strong></p>
 <p>只用一个栈，每个位置存 <code>(值, 到该位置为止的最小值)</code>。这是方案 A 的紧凑写法，代码更短。</p>
 <p><strong>方案 C：只保存最小值变化的最小栈</strong></p>
-<p>只在"新元素不大于当前最小值"时才压入 <code>min_stack</code>，<code>pop</code> 时如果弹出的值等于 <code>min_stack</code> 栈顶才弹 <code>min_stack</code>。空间是 O(n) 最坏但常数更小。<strong>注意要用 <code>&lt;=</code> 而不是 <code>&lt;</code></strong>，否则重复的相等最小值会被提前弹掉。</p>
+<p>只在"新元素不大于当前最小值"时才压入 <code>min_stack</code>，<code>pop</code> 时如果弹出的值等于 <code>min_stack</code> 栈顶才弹 <code>min_stack</code>。空间是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 最坏但常数更小。<strong>注意要用 <span class="arithmatex">\(\le\)</span> 而不是 <span class="arithmatex">\(&lt;\)</span></strong>，否则重复的相等最小值会被提前弹掉。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>只保存一个全局最小值的问题在 pop 时暴露：压入 3、1、2 后最小值为 1，依次弹出 2、1，就需要恢复成 3。栈允许撤销最近状态，因此应随每一层保存当时的最小值，让 pop 同时撤销一层摘要，而非重新搜索历史。</p>
 <p>双栈同步版本中，第 i 个最小值槽对应主栈前 i+1 项的最小值，这是 getMin 能只看栈顶的保证。稀疏最小栈只是压缩重复摘要的另一实现，必须处理相等的两个最小值；它没有使用“过期时才删除”的堆式惰性删除。若新增任意位置删除，栈的撤销顺序被打破，本题结构就不再足够。</p>
@@ -10173,20 +10173,20 @@
 <tbody>
 <tr>
 <td>push / pop / top / getMin</td>
-<td>O(1)</td>
-<td>O(n) 总计</td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span> 总计</td>
 </tr>
 </tbody>
 </table>
 <h2 id="_8">易错点与面试追问<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>pop</code> 时两个栈必须同步</strong>，否则 <code>getMin</code> 会返回已经出栈元素留下的旧值。</li>
-<li>解法三中 <code>val &lt;= self.min_stack[-1]</code> 必须用 <code>&lt;=</code>：如果只写 <code>&lt;</code>，压入两个相同的较小值时 <code>min_stack</code> 里只有一个，pop 掉一个后最小值就丢了。</li>
+<li>解法三中 <code>val &lt;= self.min_stack[-1]</code> 必须用 <span class="arithmatex">\(\le\)</span>：如果只写 <span class="arithmatex">\(&lt;\)</span>，压入两个相同的较小值时 <code>min_stack</code> 里只有一个，pop 掉一个后最小值就丢了。</li>
 <li><code>__init__</code> 中要把成员变量初始化好；LeetCode 会连续调用多个测试用例，不要用类变量保存状态。</li>
 <li><strong>追问：如何同时支持 getMax？</strong> → 再维护一个 max_stack，代价是空间。</li>
 <li><strong>追问：如何支持"删除栈中间的元素"？</strong> → 单栈做不到，需要双向链表 + 哈希表（就是 <a href="../../06-linked-list/09-lru-cache/">146 LRU Cache</a> 的结构）。</li>
-<li><strong>追问：如何做到 O(1) 空间？</strong> → 经典解法是"存差值"：栈里存 <code>val - min</code>，用差值符号判断是否需要更新 min；但代码晦涩，实际面试中双栈更受欢迎。</li>
-<li><strong>追问：如果元素会被修改？</strong> → 单调栈无法增量维护，需要换成平衡树 / 有序集合，操作变成 O(log n)。</li>
+<li><strong>追问：如何做到 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间？</strong> → 经典解法是"存差值"：栈里存 <code>val - min</code>，用差值符号判断是否需要更新 min；但代码晦涩，实际面试中双栈更受欢迎。</li>
+<li><strong>追问：如果元素会被修改？</strong> → 单调栈无法增量维护，需要换成平衡树 / 有序集合，操作变成 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</li>
 </ul>
 <h2 id="_9">相关题目<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>

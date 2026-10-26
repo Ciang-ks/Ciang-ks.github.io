@@ -10022,11 +10022,11 @@
 <h1 id="11">第 11 讲 · 二叉搜索树与平衡树<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
 <p><strong>阅读起点</strong>：第 6 讲：查找范围；第 7 讲：递归；本讲引入树节点术语。</p>
 <p><strong>首读范围</strong>：先掌握 BST 全子树约束；AVL 与红黑树选读。</p>
-<p>第 3 讲的哈希表支持期望 O(1) 的按键查询，但不维护键的大小顺序。若不额外建索引，以下需求往往还要扫描或排序：找最小/最大的键、找"比 k 大的最小键"、按顺序遍历、回答"键落在 <code>[a,b]</code> 范围内的有哪些"。</p>
-<p>数组能保持有序（二分是 <code>O(log n)</code>），但插到中间是 O(n)。目标是让单键查找、插入、删除、前驱后继查询为 O(log n)。输出 m 个范围内的键还需计入输出成本，目标为 O(log n+m)。</p>
+<p>第 3 讲的哈希表支持期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 的按键查询，但不维护键的大小顺序。若不额外建索引，以下需求往往还要扫描或排序：找最小/最大的键、找"比 k 大的最小键"、按顺序遍历、回答"键落在 <code>[a,b]</code> 范围内的有哪些"。</p>
+<p>数组能保持有序（二分是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>），但插到中间是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。目标是让单键查找、插入、删除、前驱后继查询为 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。输出 m 个范围内的键还需计入输出成本，目标为 <span class="arithmatex">\(\mathcal{O}(\log n+m)\)</span>。</p>
 <h2 id="_1">把二分搬到链式结构上<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><img alt="在 BST 里查找 4" src="../figures/11-bst-search.png" /></p>
-<p>图中的树根为 5，右孩子为 7；查找 4 沿 5→3→4。图中 search(4.5) 停在 4，表示最后访问的节点；下面精确查找函数遇到空孩子返回 None，表示不存在。两种接口回答的问题不同。下面插删练习另用右孩子为 9 的树。</p>
+<p>图中的树根为 5，右孩子为 7；查找 4 沿 5→3→4。精确查找 4.5 会在节点 4 后走到空孩子，返回 <code>None</code>。图与下方函数使用相同接口。下面插删练习另用右孩子为 9 的树。</p>
 <p>树由节点与连接组成：根是入口，节点可以有左、右两个孩子；没有孩子的节点叫叶子。从一个节点沿孩子连接能到达的所有节点，加上它自身，构成以它为根的子树。下面的 5 是根，3 和 9 是它的两个孩子，3 的子树包含 3、1、4。</p>
 <p>先看下面这棵树：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>           5
@@ -10034,7 +10034,7 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      1   4  6
 </span></code></pre></div>
 <p>并强调 BST 的性质是："对任意节点 n，<code>n.key</code> 大于左子树中<strong>所有</strong>键，小于右子树中<strong>所有</strong>键。"注意加粗的两个字。</p>
-<p>每次比较只保留一棵可能含目标的子树，这与二分的排除思路相同；但两棵子树未必各含一半节点，所以复杂度应先记 O(h)，不能仅因“左右二选一”就写成 O(log n)。</p>
+<p>每次比较只保留一棵可能含目标的子树，这与二分的排除思路相同；但两棵子树未必各含一半节点，所以复杂度应先记 <span class="arithmatex">\(\mathcal{O}(h)\)</span>，不能仅因“左右二选一”就写成 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
 <p>高度按从当前节点到叶子的最长路径的<strong>边数</strong>计算，单节点高 0。这里用 <code>key</code> 存键，LeetCode 常用 <code>val</code>，迁移时要统一字段。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">BSTNode</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
@@ -10077,7 +10077,7 @@
 </span></code></pre></div>
 <p>以查找 4 为例：4&lt;5 走左边，4&gt;3 走右边，到达 4。找到后返回节点对象，读 <code>.key</code> 才得到键值；失败返回 None。查 8 则沿 5→9→6，6 的右孩子为空，结束。</p>
 <p>调用必须写 <code>root=insert(root,key)</code>，删除也写 <code>root=delete(root,key)</code>，因为空树插入或删除根可能改变入口。这是普通BST的插删，尚未维护AVL高度或做平衡旋转。</p>
-<p><code>O(树高)</code>。<strong>麻烦在于树高可能失控</strong>：按升序插入 <code>1,2,3,…</code>，树会退化成一条链，<code>O(log n)</code> 变成 <code>O(n)</code>。所以后面要讲平衡。</p>
+<p><span class="arithmatex">\(\mathcal{O}(树高)\)</span>。<strong>麻烦在于树高可能失控</strong>：按升序插入 <code>1,2,3,…</code>，树会退化成一条链，<span class="arithmatex">\(\mathcal{O}(\log n)\)</span> 变成 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。所以后面要讲平衡。</p>
 <h2 id="_2">删除的三种情况<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>任务是 <code>delete(root,k)</code>：从树中删除键 k，返回修改后的根；不存在 k 就保持原树。先按查找规则走到目标，再看它的孩子数。叶子可直接断开；只有一个孩子，就让那个孩子接替它的位置；有两个孩子时，直接断开会丢掉两棵子树，因此先找一个适合接替的键，再删除那个键原来的节点。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -10113,14 +10113,14 @@
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">return</span> <span class="n">out</span>
 </span></code></pre></div>
 <p>为什么？中序的顺序是"左子树 → 根 → 右子树"，而左子树的所有键都小于根、右子树都大于根；对树高归纳即得。</p>
-<p>这条性质是很多题的核心：找第 k 小只需中序遍历到第 k 个就停（<code>O(h+k)</code>），验证 BST 只需检查中序序列严格递增。</p>
+<p>这条性质是很多题的核心：找第 k 小只需中序遍历到第 k 个就停（<span class="arithmatex">\(\mathcal{O}(h+k)\)</span>），验证 BST 只需检查中序序列严格递增。</p>
 <h2 id="bst">验证 BST 时最容易犯的错<a class="headerlink" href="#bst" title="Permanent link">&para;</a></h2>
 <p>看下面这棵树：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>           6
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        3     9
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>      1   4  5
 </span></code></pre></div>
-<p>它<strong>不是</strong> BST——5 出现在 9 的左子树里，而 5 &lt; 6。但如果你只比较父子：5 作为 9 的左孩子确实满足 <code>5 &lt; 9</code>，检查会通过。</p>
+<p>它<strong>不是</strong> BST——5 出现在 9 的左子树里，而 5 &lt; 6。但如果你只比较父子：5 作为 9 的左孩子确实满足 <span class="arithmatex">\(5 &lt; 9\)</span>，检查会通过。</p>
 <p>上下界初值用 <code>float('-inf')</code> 与 <code>float('inf')</code>，分别表示比任何有限键更小、更大的界限，因此根一开始不受有限范围限制。</p>
 <p><strong>下面用沿路径传递上下界的方法验证，避免只比较父子。</strong> 也可以利用上一节的中序递增性质。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_bst</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -10136,7 +10136,7 @@
 <h2 id="_4">用旋转保持平衡<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><img alt="AVL 左旋前后的指针变化" src="../images/11-avl-rotate.svg" /></p>
 <p>AVL 树在 BST 上再加一条约束：<strong>任意节点的左右子树高度差不超过 1</strong>。插入删除之后若违反，就用旋转修回来。</p>
-<p>第一次阅读先理解旋转保持中序次序。本节只实现一次左旋，完整 AVL 插删还需要沿路径更新高度、判断失衡并选择旋转。图与代码都演示左旋：y 的右孩子 x 上位，x 原来的左子树转交 y；要求右孩子存在。空树高度为−1，叶高0。返回的新子树根要由调用者接回父节点。</p>
+<p>第一次阅读先理解旋转保持中序次序。本节只实现一次左旋，完整 AVL 插删还需要沿路径更新高度、判断失衡并选择旋转。图与代码都演示左旋：y 的右孩子 x 上位，x 原来的左子树转交 y；要求右孩子存在。空树高度为-1，叶高0。返回的新子树根要由调用者接回父节点。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">_update</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">left_h</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">height</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">right_h</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">height</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
@@ -10153,10 +10153,10 @@
 </span></code></pre></div>
 <p>旋转为何不破坏 BST？左旋前，中间子树的所有键介于 y.key 与 x.key 之间；把它从 x 的左边转到 y 的右边，仍满足这个范围。其余子树没有改变，中序排列也没改变。高度字段必须原本正确，旋转后再先更新旧根、后更新新根；前面的普通 insert 没维护高度，不能直接当 AVL 插入使用。</p>
 <p>四种失衡情形按“失衡节点较高的孩子在哪边、这个孩子哪边更高”区分。比如"左孩子的右子树太高"（左右情形），就先对左孩子左旋（变成"左左"），再对自己右旋。</p>
-<p><strong>为什么持续满足 AVL 约束就能保证树高 O(log n)？</strong> 一次局部旋转不是整个结论，还要沿更新路径恢复所有节点的平衡。 设高度为 h 的 AVL 树最少有 <code>N(h)</code> 个节点。要造"最稀疏"的 AVL，根的左右子树高度差必须恰好是 1，于是 <code>N(h) = N(h−1) + N(h−2) + 1</code>，基例 N(−1)=0、N(0)=1。因 N(h−1)≥N(h−2)，每隔两层至少翻倍：N(h)≥2N(h−2)+1，所以 n≥N(h) 随 h 至少指数增长，反推 h=O(log n)。</p>
+<p><strong>AVL 为什么能保证树高 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>？</strong> 插删后需要沿更新路径恢复平衡。设高度按边数计，高度为 <span class="arithmatex">\(h\)</span> 的 AVL 树最少有 <span class="arithmatex">\(N(h)\)</span> 个节点；最稀疏时左右子树高度为 <span class="arithmatex">\(h-1\)</span> 与 <span class="arithmatex">\(h-2\)</span>，所以 <span class="arithmatex">\(N(h)=N(h-1)+N(h-2)+1\)</span>，基例为 <span class="arithmatex">\(N(-1)=0\)</span>、<span class="arithmatex">\(N(0)=1\)</span>。由单调性有 <span class="arithmatex">\(N(h)\ge2N(h-2)+1\)</span>，节点数随高度至少按指数增长，反推 <span class="arithmatex">\(h=\mathcal{O}(\log n)\)</span>。一次局部旋转保持中序顺序，整条更新路径的平衡约束共同保证高度界。</p>
 <h3 id="_5">选读：红黑树也用局部约束限制树高<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>红黑树在 BST 节点上增加红、黑两种颜色：根为黑色，空孩子按黑色处理；红节点的孩子不能为红；从任一节点到所有后代空孩子的路径上，黑节点数相同，称为黑高相同。</p>
-<p>若每条根到空孩子的路径上都有 b 个普通黑节点（不计末尾的空孩子），红节点不能相邻使任何路径至多穿过约 2b 个普通节点；另一方面，每条分支都要达到相同黑高，至少需要 2^b−1 个普通节点。因此 n≥2^b−1，b≤log₂(n+1)，树高便是 O(log n)。它与 AVL 都通过额外约束防止长链，具体更新时的染色与旋转可以单独学习。</p>
+<p>若每条根到空孩子的路径上都有 b 个普通黑节点（不计末尾的空孩子），红节点不能相邻使任何路径至多穿过约 2b 个普通节点；另一方面，每条分支都要达到相同黑高，至少需要 <span class="arithmatex">\(2^b\)</span>-1 个普通节点。因此 n不小于<span class="arithmatex">\(2^b\)</span>-1，b不大于<span class="arithmatex">\(\log _{2}\)</span>(n+1)，树高便是 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。它与 AVL 都通过额外约束防止长链，具体更新时的染色与旋转可以单独学习。</p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>动态有序索引需要前驱、后继与范围查询，平衡搜索树维护的是这类顺序信息。</p>
 <p>先插入 [5,3,9,1,4,6]，中序结果应为 [1,3,4,5,6,9]；删除 5 后应为 [1,3,4,6,9]。先跑通普通树的插删，再学旋转。</p>
@@ -10165,13 +10165,13 @@
 <p><strong>1.</strong> 在上面那棵 BST 里插入 7 和 8 会落在哪？删除 4 与删除 3 分别会发生什么？另一棵树为什么不是 BST？</p>
 <p>插入 7：5 → 右到 9 → 左到 6 → 右，插在 6 的右孩子。插入 8：再往右，插在 7 的右孩子。删除 4 是叶子，直接删；若在原树上删除 3，它有两个孩子 1 与 4，用后继 4 替换键，再删除原来的 4。图中第二棵树不是 BST，因为 5 在 9 的左子树里却小于 6——<strong>只比较父子是发现不了的。</strong></p>
 <p><strong>2.</strong> 怎么写一个正确的"验证 BST"？复杂度？</p>
-<p>见上文，<code>O(n)</code> 时间、<code>O(h)</code> 空间。等价做法是中序遍历检查严格递增。</p>
+<p>见上文，<span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(h)\)</span> 空间。等价做法是中序遍历检查严格递增。</p>
 <p><strong>3.</strong> 一棵有 n 个节点的 BST，高度最小和最大分别是多少？分别对应什么插入顺序？</p>
-<p>n≥1 时，最小 <code>⌈log₂(n+1)⌉−1</code>：让节点尽量逐层从左向右填满，形成下一讲要定义的完全二叉树。例如 1..7 按 [4,2,6,1,3,5,7] 插入，高度为 2。最大 <code>n−1</code>：按升序或降序插入形成一条链。<strong>这就是需要平衡的原因。</strong></p>
+<p>n不小于1 时，最小 <span class="arithmatex">\(\lceil \log _{2}(n+1)\rceil -1\)</span>：让节点尽量逐层从左向右填满，形成下一讲要定义的完全二叉树。例如 1..7 按 [4,2,6,1,3,5,7] 插入，高度为 2。最大 <span class="arithmatex">\(n-1\)</span>：按升序或降序插入形成一条链。<strong>这就是需要平衡的原因。</strong></p>
 <p><strong>4.</strong> 如果允许多个相同的键，有哪几种处理方式？</p>
-<p>一是每个节点存一个计数；二是把节点扩展成链表；三是约定"相等的键一律往右走"。用计数最容易与旋转兼容。把相等键一律向右插可能形成长链，且旋转后未必继续满足这一约定，不能直接承诺 O(log n)。</p>
-<p><strong>5.</strong> 给定一棵 BST，返回所有落在 <code>[a, b]</code> 范围内的键，要求时间 <code>O(h + m)</code>（m 是结果个数）。</p>
-<p>用剪枝的中序遍历：node 为空就返回；只有 node.key&gt;a 时才递归左子树；随后若 <code>a&lt;=node.key&lt;=b</code>，把 node.key 加入结果；最后只有 node.key&lt;b 时才递归右子树。当前节点的收集步骤夹在左右递归之间，才能得到升序结果。所访问的节点是输出节点及范围两端的搜索路径，因此为 O(h+m)。</p>
+<p>一是每个节点存一个计数；二是把节点扩展成链表；三是约定"相等的键一律往右走"。用计数最容易与旋转兼容。把相等键一律向右插可能形成长链，且旋转后未必继续满足这一约定，不能直接承诺 <span class="arithmatex">\(\mathcal{O}(\log n)\)</span>。</p>
+<p><strong>5.</strong> 给定一棵 BST，返回所有落在 <code>[a, b]</code> 范围内的键，要求时间 <span class="arithmatex">\(\mathcal{O}(h + m)\)</span>（m 是结果个数）。</p>
+<p>用剪枝的中序遍历：node 为空就返回；只有 node.key&gt;a 时才递归左子树；随后若 <code>a&lt;=node.key&lt;=b</code>，把 node.key 加入结果；最后只有 node.key&lt;b 时才递归右子树。当前节点的收集步骤夹在左右递归之间，才能得到升序结果。所访问的节点是输出节点及范围两端的搜索路径，因此为 <span class="arithmatex">\(\mathcal{O}(h+m)\)</span>。</p>
 
 
 

@@ -7662,10 +7662,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dpon2" class="md-nav__link">
+  <a href="#dpmathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：DP（O(n²)，会超时，用于对照）
+        解法三：DP（\(\mathcal{O}(n^{2})\)，会超时，用于对照）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dpon2" class="md-nav__link">
+  <a href="#dpmathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：DP（O(n²)，会超时，用于对照）
+        解法三：DP（\(\mathcal{O}(n^{2})\)，会超时，用于对照）
       
     </span>
   </a>
@@ -10159,7 +10159,7 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>最后返回 True
 </span></code></pre></div>
 <h3 id="_4">为什么贪心是对的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>关键性质：可达性具有"前缀封闭"的性质</strong>——如果位置 <code>i</code> 可达，那么所有 <code>j &lt; i</code> 也都可达（因为每次允许选择不超过最大跳长的任意较短落点，可达范围逐段相接）。</p>
+<p><strong>关键性质：可达性具有"前缀封闭"的性质</strong>——如果位置 <code>i</code> 可达，那么所有 <span class="arithmatex">\(j &lt; i\)</span> 也都可达（因为每次允许选择不超过最大跳长的任意较短落点，可达范围逐段相接）。</p>
 <p>所以在遍历到 <code>i</code> 时，"<code>i</code> 之前的所有位置都已经被考虑过了"，它们的跳跃范围已经全部合并进 <code>farthest</code> 里了。<strong>因此 <code>farthest</code> 就是"到目前为止能到达的最远位置"，没有遗漏。</strong></p>
 <p><strong>这个论证是本题的核心</strong>，面试时要说清楚。</p>
 <h3 id="_5">另一种视角：从后往前<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10172,7 +10172,7 @@
 <p>两种写法都对，前向版本的覆盖右界可进一步扩展为 Jump Game II 的分层右界；后向版本适合从目标反推可达性。</p>
 <h3 id="_6">解法推导与模式辨析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>nums[i] 表示最多可跳多少步，允许选择较短落点；因此可达集合可由前缀 [0,farthest] 表示。它成立的原因是每个可达点贡献一整段落点，与已知前缀相接，而不是一次跳跃真的经过并停在所有中间位置。</p>
-<p>扫描 i 前先检查 i≤farthest，只有可达点的跳力才可用于扩展。比如 [0,100] 中下标 1 的大数完全无效，不能先更新再检查。若规则改为“必须恰好跳 nums[i] 步”，可达位置就可能有空洞，单个 farthest 不能表达；若目标改成最少跳数，还需记录每一跳的层边界。</p>
+<p>扫描 i 前先检查 i不大于farthest，只有可达点的跳力才可用于扩展。比如 [0,100] 中下标 1 的大数完全无效，不能先更新再检查。若规则改为“必须恰好跳 nums[i] 步”，可达位置就可能有空洞，单个 farthest 不能表达；若目标改成最少跳数，还需记录每一跳的层边界。</p>
 <h2 id="_7">代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">解法一：从前往后维护最远可达（推荐）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10195,7 +10195,7 @@
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                <span class="n">goal</span> <span class="o">=</span> <span class="n">i</span>                  <span class="c1"># 目标前移到 i</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">return</span> <span class="n">goal</span> <span class="o">==</span> <span class="mi">0</span>
 </span></code></pre></div>
-<h3 id="dpon2">解法三：DP（O(n²)，会超时，用于对照）<a class="headerlink" href="#dpon2" title="Permanent link">&para;</a></h3>
+<h3 id="dpmathcalon2">解法三：DP（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，会超时，用于对照）<a class="headerlink" href="#dpmathcalon2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">canJump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -10220,13 +10220,13 @@
 <tbody>
 <tr>
 <td>贪心</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>DP</td>
-<td>O(n²)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10234,8 +10234,8 @@
 <ul>
 <li><strong><code>farthest</code> 初始化为 0</strong>（下标 0 可达），不是 <code>nums[0]</code>——但两者在 <code>i = 0</code> 那一轮会等价。</li>
 <li><strong>判断 <code>i &gt; farthest</code> 要放在更新之前</strong>，否则会错误地允许"从不可达的位置起跳"。</li>
-<li><code>nums = [0]</code> 时应该返回 <code>True</code>（起点就是终点），上面的代码天然正确。</li>
-<li><code>nums = [0, 1]</code> 应该返回 <code>False</code>（从 0 出发只能跳 0 步）。</li>
+<li><span class="arithmatex">\(\mathrm{nums} = [0]\)</span> 时应该返回 <code>True</code>（起点就是终点），上面的代码天然正确。</li>
+<li><span class="arithmatex">\(\mathrm{nums} = [0, 1]\)</span> 应该返回 <code>False</code>（从 0 出发只能跳 0 步）。</li>
 <li><strong>追问：如何求"最少跳跃次数"？</strong> → <a href="../03-jump-game-ii/">45 Jump Game II</a>，需要额外维护"当前层的边界"。</li>
 <li><strong>追问：如果跳跃次数有限制？</strong> → 变成"带约束的最短路"，DP 或 BFS。</li>
 <li><strong>追问：这题和 45 的关系？</strong> → <strong>同一套"最远可达"的思想</strong>，45 只是从"能不能到"升级到"最少几步到"。</li>

@@ -5434,15 +5434,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#i-start-not-usedi-1" class="md-nav__link">
+  <a href="#i-mathrmstart-not-usedi-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、去重：i &gt; start 与 not used[i-1]
+        四、去重：\(i &gt; \mathrm{start}\) 与 not used[i-1]
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、去重：i &gt; start 与 not used[i-1]">
+    <nav class="md-nav" aria-label="四、去重：\(i &gt; \mathrm{start}\) 与 not used[i-1]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -10168,15 +10168,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#i-start-not-usedi-1" class="md-nav__link">
+  <a href="#i-mathrmstart-not-usedi-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、去重：i &gt; start 与 not used[i-1]
+        四、去重：\(i &gt; \mathrm{start}\) 与 not used[i-1]
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、去重：i &gt; start 与 not used[i-1]">
+    <nav class="md-nav" aria-label="四、去重：\(i &gt; \mathrm{start}\) 与 not used[i-1]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -10487,7 +10487,7 @@
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p><strong>"传 <code>i</code> 还是 <code>i + 1</code>"决定元素能不能复用</strong>——这是 39 和 40 的核心差异。</p>
+<p><strong>"传 <code>i</code> 还是 <span class="arithmatex">\(i + 1\)</span>"决定元素能不能复用</strong>——这是 39 和 40 的核心差异。</p>
 <h3 id="3">母题 3 排列型<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">permute</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">res</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -10509,7 +10509,7 @@
 </span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="n">backtrack</span><span class="p">()</span>
 </span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<h2 id="i-start-not-usedi-1">四、去重：<code>i &gt; start</code> 与 <code>not used[i-1]</code><a class="headerlink" href="#i-start-not-usedi-1" title="Permanent link">&para;</a></h2>
+<h2 id="i-mathrmstart-not-usedi-1">四、去重：<span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 与 <code>not used[i-1]</code><a class="headerlink" href="#i-mathrmstart-not-usedi-1" title="Permanent link">&para;</a></h2>
 <p>当输入含重复元素时，标准做法是"<strong>排序 + 同层跳过</strong>"。</p>
 <h3 id="_4">子集 / 组合去重<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -10518,10 +10518,10 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">continue</span>                          <span class="c1"># 同一层里，跳过重复的兄弟</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="o">...</span>
 </span></code></pre></div>
-<p><strong>为什么是 <code>i &gt; start</code> 而不是 <code>i &gt; 0</code>？</strong></p>
+<p><strong>为什么是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 而不是 <span class="arithmatex">\(i &gt; 0\)</span>？</strong></p>
 <ul>
-<li><code>i &gt; start</code> 判断的是"<strong>同一层</strong>"：前面已经用相同的值做过分岔，整个子树都是重复的 → 跳过；</li>
-<li>写成 <code>i &gt; 0</code> 会误伤"上一层选了 <code>nums[i-1]</code>、这一层选 <code>nums[i]</code>"这种<strong>合法</strong>的跨层选择。以 <code>[1,2,2]</code> 为例，正确答案 <code>[2,2]</code> 正是这种跨层选择。</li>
+<li><span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 判断的是"<strong>同一层</strong>"：前面已经用相同的值做过分岔，整个子树都是重复的 → 跳过；</li>
+<li>写成 <span class="arithmatex">\(i &gt; 0\)</span> 会误伤"上一层选了 <code>nums[i-1]</code>、这一层选 <code>nums[i]</code>"这种<strong>合法</strong>的跨层选择。以 <code>[1,2,2]</code> 为例，正确答案 <code>[2,2]</code> 正是这种跨层选择。</li>
 </ul>
 <p><strong>口诀：同层去重看 <code>start</code>，跨层允许重复选。</strong></p>
 <h3 id="_5">排列去重（条件更绕）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -10538,14 +10538,14 @@
 <li>明确输出全部方案、一个方案、可行性还是计数，判断是否需要搜索及能否合并重复状态。</li>
 <li><strong>判断是哪一型</strong>：子集（每个节点都记录）/ 组合（选够条件就记录）/ 排列（长度够就记录）/ 分割（切完整个输入才记录）。</li>
 <li><strong>确定"选择"的边界</strong>：<code>start</code> 索引还是 <code>used</code> 数组？</li>
-<li><strong>决定是否可重复选取</strong>：传 <code>i</code> 还是 <code>i + 1</code>。</li>
-<li><strong>加剪枝</strong>：排序后能 <code>break</code> 的就 <code>break</code>；能用集合 O(1) 判定冲突的就别遍历。</li>
+<li><strong>决定是否可重复选取</strong>：传 <code>i</code> 还是 <span class="arithmatex">\(i + 1\)</span>。</li>
+<li><strong>加剪枝</strong>：排序后能 <code>break</code> 的就 <code>break</code>；能用集合 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 判定冲突的就别遍历。</li>
 </ol>
 <h2 id="_7">六、逐题推演：从题面到思路<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="1-subsets78">1. Subsets（78）<a class="headerlink" href="#1-subsets78" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："返回所有子集（幂集）"。</p>
-<p><strong>候选思路</strong>：子集 = 对每个元素做"选或不选"的二元决策 → 决策树有 2ⁿ 个叶子。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,2,3]</code></p>
+<p><strong>候选思路</strong>：子集 = 对每个元素做"选或不选"的二元决策 → 决策树有 <span class="arithmatex">\(2^{n}\)</span> 个叶子。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,2,3]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>path=[]        → 记录 []
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> 选 1 → [1]    → 记录 [1]
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>   选 2 → [1,2] → 记录；选 3 → [1,2,3] 记录
@@ -10568,19 +10568,19 @@
 <p><strong>题面信号</strong>："所有排列（元素互不相同）"。</p>
 <p><strong>候选思路</strong>：排列关心顺序，所以<strong>每层都要从头扫描</strong>，用 <code>used</code> 标记已用元素。</p>
 <p><strong>和组合的本质区别</strong>：组合用 <code>start</code> 限制"只往后选"；排列必须扫描全数组，靠 <code>used</code> 去重。</p>
-<p><strong>关键细节</strong>：<code>used[i] = False</code> 的撤销不能忘；结果个数是 <code>n!</code>，这是问题本身的下界。</p>
+<p><strong>关键细节</strong>：<code>used[i] = False</code> 的撤销不能忘；结果个数是 <span class="arithmatex">\(n!\)</span>，这是问题本身的下界。</p>
 <h3 id="4-subsets-ii90">4. Subsets II（90）<a class="headerlink" href="#4-subsets-ii90" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："数组可能含重复元素，返回所有<strong>不重复</strong>子集"。</p>
 <p><strong>候选思路</strong>：母题 1 + 去重。<strong>先排序</strong>，再加一行 <code>if i &gt; start and nums[i] == nums[i-1]: continue</code>。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [1,2,2]</code>（已排序）</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [1,2,2]\)</span>（已排序）</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>第一层 i=0 选 1 → 后面处理 [2,2]
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>第一层 i=1 选 2 → 后面处理 [2] → 得到 [2,2] ✓
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>第一层 i=2 时 nums[2]==nums[1] 且 i&gt;start → 跳过（否则会重复产出以第二个 2 开头的全部子树）
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<code>i &gt; start</code> 的写法见第四节；另一种更彻底的写法是"按每个不同值取几个"来决策，搜索树上不会产生任何重复分支。</p>
+<p><strong>关键细节</strong>：<span class="arithmatex">\(i &gt; \mathrm{start}\)</span> 的写法见第四节；另一种更彻底的写法是"按每个不同值取几个"来决策，搜索树上不会产生任何重复分支。</p>
 <h3 id="5-combination-sum-ii40">5. Combination Sum II（40）<a class="headerlink" href="#5-combination-sum-ii40" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："数组可能含重复，每个元素只能用一次，求所有和为 target 的组合"。</p>
-<p><strong>候选思路</strong>：39 和 90 的合体——<strong>传 <code>i + 1</code></strong>（不可重复选）+ <strong>同层去重那行 <code>continue</code></strong>。</p>
+<p><strong>候选思路</strong>：39 和 90 的合体——<strong>传 <span class="arithmatex">\(i + 1\)</span></strong>（不可重复选）+ <strong>同层去重那行 <code>continue</code></strong>。</p>
 <table>
 <thead>
 <tr>
@@ -10606,7 +10606,7 @@
 <h3 id="6-word-search79">6. Word Search（79）<a class="headerlink" href="#6-word-search79" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："网格中是否存在一条路径拼出单词，同一格不能重复使用"。</p>
 <p><strong>候选思路</strong>：网格回溯。<strong>访问状态直接标在网格上</strong>（改成 <code>'#'</code>），省掉 <code>visited</code> 数组。</p>
-<p><strong>走一遍示例</strong>：在 3×4 网格里找 <code>"ABCCED"</code></p>
+<p><strong>走一遍示例</strong>：在 <span class="arithmatex">\(3\times4\)</span> 网格里找 <code>"ABCCED"</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>从 (0,0)='A' 出发 → 右到 'B' → 右到 'C' → 下到 'C' → 下到 'E' → 左到 'D'
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>途中每个格子都先改成 '#'，回溯时恢复
 </span></code></pre></div>
@@ -10621,7 +10621,7 @@
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        切 "aa"（回文）→ start=2 → 切 "b" → 得到 ["aa","b"] ✓
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        切 "aab"（非回文）→ 剪掉
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<code>end</code> 的范围是 <code>start+1</code> 到 <code>len(s)</code>；<strong>先用 DP 预处理回文表</strong>可以把每次回文判断从 O(n) 降到 O(1)，整体从 O(n·2ⁿ) 降到 O(n² + 方案数·n)。</p>
+<p><strong>关键细节</strong>：<code>end</code> 的范围是 <span class="arithmatex">\(\mathrm{start}+1\)</span> 到 <code>len(s)</code>；<strong>先用 DP 预处理回文表</strong>可以把每次回文判断从 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，整体从 <span class="arithmatex">\(\mathcal{O}(n\cdot 2^{n})\)</span> 降到 <span class="arithmatex">\(\mathcal{O}(n^{2} + 方案数\cdot n)\)</span>。</p>
 <p><strong>对照</strong>：132 题求最少回文分割次数，可把到同一边界的多种路径合并，只保留最少次数；本题输出所有分割，不能只保留最优一份。输出要求会影响状态内容，但不是唯一的算法选择条件。</p>
 <h3 id="8-letter-combinations-of-a-phone-number17">8. Letter Combinations of a Phone Number（17）<a class="headerlink" href="#8-letter-combinations-of-a-phone-number17" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："电话号码能拼出哪些字母组合"。</p>
@@ -10636,7 +10636,7 @@
 <h3 id="9-n-queens51">9. N-Queens（51）<a class="headerlink" href="#9-n-queens51" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："n 皇后，互不攻击"。</p>
 <p><strong>候选思路</strong>：<strong>一行一行放</strong>，这样自动消除了行冲突，只剩列和两条对角线三种约束。</p>
-<p><strong>用三个集合做 O(1) 冲突检测</strong>：</p>
+<p><strong>用三个集合做 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 冲突检测</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>列冲突    → 列号 col
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>主对角线  → row - col（沿 ↘ 走一步，这个值不变）
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>副对角线  → row + col（沿 ↙ 走一步，这个值不变）
@@ -10645,7 +10645,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>row=0, col=1 → cols={1}, diag1={-1}, diag2={1}
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>row=1 尝试 col=0/1/2/3：col=3 不冲突 → 继续
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>row=2 只剩 col=0 → 继续
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>row=3 全部冲突 → 回退 row=2，换列 → 也冲突 → 回退 row=1 换列
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>row=3 可选 col=2 → 四行均已放置，记录一个解
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>... 最终得到 ".Q..","...Q","Q...","..Q."
 </span></code></pre></div>
 <p><strong>关键细节</strong>：<code>row - col</code> 用数组实现时要加偏移 <code>n - 1</code> 防负下标；<strong>撤销操作必须完整</strong>（棋盘 + 三个集合都恢复）。</p>
@@ -10662,28 +10662,28 @@
 <tbody>
 <tr>
 <td>子集</td>
-<td>2ⁿ</td>
-<td>O(n · 2ⁿ)</td>
+<td><span class="arithmatex">\(2^{n}\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot 2^{n})\)</span></td>
 </tr>
 <tr>
 <td>排列</td>
 <td>n!</td>
-<td>O(n · n!)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \cdot n!)\)</span></td>
 </tr>
 <tr>
 <td>组合总和（可复用正数）</td>
 <td>取决于候选数与 target/min值</td>
-<td>递归深度至多 target/min值，不能仅按输入长度套 2ⁿ</td>
+<td>递归深度至多 target/min值，不能仅按输入长度套 <span class="arithmatex">\(2^{n}\)</span></td>
 </tr>
 <tr>
 <td>生成括号</td>
-<td>卡特兰数 Cₙ</td>
-<td>O(Cₙ · n)</td>
+<td>卡特兰数 <span class="arithmatex">\(C_{n}\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(C_{n} \cdot n)\)</span></td>
 </tr>
 <tr>
 <td>N 皇后</td>
 <td>约 n!</td>
-<td>O(n!)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n!)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10691,18 +10691,18 @@
 <ol>
 <li><strong>忘记撤销选择</strong>（<code>path.pop()</code> / <code>used[i] = False</code> / 恢复网格）。</li>
 <li><strong><code>res.append(path)</code> 而不是 <code>path[:]</code></strong>（最高频错误）。</li>
-<li><strong>去重条件用 <code>i &gt; 0</code> 而不是 <code>i &gt; start</code></strong>。</li>
-<li><strong>可重复选 vs 不可重复选传参写错</strong>（<code>i</code> vs <code>i + 1</code>）。</li>
+<li><strong>去重条件用 <span class="arithmatex">\(i &gt; 0\)</span> 而不是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span></strong>。</li>
+<li><strong>可重复选 vs 不可重复选传参写错</strong>（<code>i</code> vs <span class="arithmatex">\(i + 1\)</span>）。</li>
 <li><strong>剪枝前忘记排序</strong>（<code>break</code> 只有在有序时才正确，否则要用 <code>continue</code>）。</li>
 <li>131 的回文检查与预处理成本要分别计入；可先写直接检查，再按需要优化。</li>
-<li><strong>N 皇后的对角线索引搞错</strong>（是 <code>r - c</code> 与 <code>r + c</code>）。</li>
+<li><strong>N 皇后的对角线索引搞错</strong>（是 <code>r - c</code> 与 <span class="arithmatex">\(r + c\)</span>）。</li>
 </ol>
 <h2 id="_10">九、面试话术<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>"这是一个枚举所有方案的问题，我用回溯。每一层决定一个位置放什么，用 <code>start</code> 索引保证不重复枚举同一种组合。进入递归前做选择，返回后撤销。输入有重复元素时我会先排序，然后同一层跳过相同值——条件是 <code>i &gt; start and nums[i] == nums[i-1]</code>。我会按这道题的分支数、递归深度与输出复制成本估算复杂度；子集、排列和可复用组合的规模不能混算。"</p>
 <h2 id="30">十、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>子集、组合、排列三者的递归模板差在哪一行？</li>
-<li>去重为什么必须先排序？条件为什么是 <code>i &gt; start</code>？</li>
+<li>去重为什么必须先排序？条件为什么是 <span class="arithmatex">\(i &gt; \mathrm{start}\)</span>？</li>
 <li>为什么 <code>res.append(path[:])</code> 不能写成 <code>res.append(path)</code>？</li>
 <li>什么情况下应该用 DP 而不是回溯？</li>
 <li>N 皇后的两条对角线分别用什么量来表示？</li>

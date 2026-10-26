@@ -10375,8 +10375,8 @@
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">cur</span><span class="p">)</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="n">ans</span>
 </span></code></pre></div>
-<p><strong>最关键的一点：同一时刻"结束"要排在"开始"之前。</strong> 因为本题约定半开区间 <code>[start, end)</code>——一场会议 10 点结束，另一场 10 点开始，可以共用同一间会议室。<code>(time, delta)</code> 元组排序天然让 <code>-1</code> 排在 <code>+1</code> 前面，正好符合这个约定。</p>
-<p><strong>如果题目是闭区间</strong>（比如 2406），把每个 <code>end</code> 换成 <code>end + 1</code> 就能复用这个模板。</p>
+<p><strong>最关键的一点：同一时刻"结束"要排在"开始"之前。</strong> 因为本题约定半开区间 <span class="arithmatex">\([\mathrm{start}, \mathrm{end})\)</span>——一场会议 10 点结束，另一场 10 点开始，可以共用同一间会议室。<code>(time, delta)</code> 元组排序天然让 <code>-1</code> 排在 <span class="arithmatex">\(+1\)</span> 前面，正好符合这个约定。</p>
+<p><strong>如果题目是闭区间</strong>（比如 2406），把每个 <code>end</code> 换成 <span class="arithmatex">\(\mathrm{end} + 1\)</span> 就能复用这个模板。</p>
 <h3 id="4">模板 4 最小堆求同时会议数<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -10393,7 +10393,7 @@
 </span></code></pre></div>
 <h2 id="_4">四、从读题到写码：四步流程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>先确认区间约定</strong>：闭区间 <code>[a, b]</code> 还是半开区间 <code>[a, b)</code>？<strong>这决定了所有边界判断用 <code>&lt;</code> 还是 <code>&lt;=</code>。</strong></li>
+<li><strong>先确认区间约定</strong>：闭区间 <code>[a, b]</code> 还是半开区间 <span class="arithmatex">\([a, b)\)</span>？<strong>这决定了所有边界判断用 <span class="arithmatex">\(&lt;\)</span> 还是 <span class="arithmatex">\(\le\)</span>。</strong></li>
 <li><strong>确定要"合并/选择/覆盖/计数"中的哪一种</strong>，据此选排序 key。</li>
 <li><strong>写扫描主体</strong>：合并就维护"当前合并区间"，选择就维护 <code>last_end</code>，计数就用扫描线或堆。</li>
 <li><strong>补边界</strong>：空数组、单区间、完全包含、首尾相接。</li>
@@ -10405,10 +10405,10 @@
 <p><strong>走一遍示例</strong>：<code>[[0,30],[5,10],[15,20]]</code>（排序后不变）</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>比较 [0,30] 和 [5,10]: 5 &lt; 30 → 重叠 → 返回 False
 </span></code></pre></div>
-<p><strong>关键细节</strong>：判断条件是 <code>start &lt; prev_end</code>（<strong>严格小于</strong>），因为半开区间下"上一场 10 点结束、这一场 10 点开始"是允许的。<strong>如果题目改成闭区间，就要用 <code>&lt;=</code>。</strong></p>
+<p><strong>关键细节</strong>：判断条件是 <code>start &lt; prev_end</code>（<strong>严格小于</strong>），因为半开区间下"上一场 10 点结束、这一场 10 点开始"是允许的。<strong>如果题目改成闭区间，就要用 <span class="arithmatex">\(\le\)</span>。</strong></p>
 <h3 id="2-insert-interval57">2. Insert Interval（57）<a class="headerlink" href="#2-insert-interval57" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："原区间列表<strong>已排序且互不重叠</strong>，插入一个新区间"。</p>
-<p><strong>候选思路</strong>：题目特意说"已排序"，就是在提示你能做到 <strong>O(n)</strong>。<strong>三段式扫描</strong>：</p>
+<p><strong>候选思路</strong>：题目特意说"已排序"，就是在提示你能做到 <strong><span class="arithmatex">\(\mathcal{O}(n)\)</span></strong>。<strong>三段式扫描</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>阶段 1：interval.end &lt; newInterval.start        → 直接放进结果
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>阶段 2：interval.start &lt;= newInterval.end       → 合并进 newInterval（两端都取极值）
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>阶段 3：剩下的（都在右边）                       → 直接接上
@@ -10420,7 +10420,7 @@
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>阶段 3：接上 [6,9]
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>答案 [[1,5],[6,9]]
 </span></code></pre></div>
-<p><strong>关键细节</strong>：阶段 1 用严格小于（<code>end &lt; start</code>），阶段 2 用带等号（<code>start &lt;= end</code>）——<strong>两个条件的等号位置必须配套</strong>；合并时 <code>start</code> 和 <code>end</code> 都要取极值（新区间可能被已有区间完全包裹）。</p>
+<p><strong>关键细节</strong>：阶段 1 用严格小于（<span class="arithmatex">\(\mathrm{end} &lt; \mathrm{start}\)</span>），阶段 2 用带等号（<span class="arithmatex">\(\mathrm{start} \le \mathrm{end}\)</span>）——<strong>两个条件的等号位置必须配套</strong>；合并时 <code>start</code> 和 <code>end</code> 都要取极值（新区间可能被已有区间完全包裹）。</p>
 <h3 id="3-merge-intervals56">3. Merge Intervals（56）<a class="headerlink" href="#3-merge-intervals56" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："合并所有重叠区间"。</p>
 <p><strong>候选思路</strong>：<strong>按左端点排序</strong> + 一次扫描。排序后"当前区间是否与上一个合并结果重叠"只需要比较一个端点。</p>
@@ -10447,7 +10447,7 @@
 <h3 id="5-meeting-rooms-ii253">5. Meeting Rooms II（253）<a class="headerlink" href="#5-meeting-rooms-ii253" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："最少需要几间会议室" = "最多同时有几场会议"。</p>
 <p><strong>候选思路</strong>：两种做法都要会。</p>
-<p><strong>做法 A 扫描线</strong>：把区间拆成 <code>(start, +1)</code> 和 <code>(end, -1)</code> 两类事件，排序后累加 <code>cur</code>，<strong>最大值就是答案</strong>。同一时刻"结束"必须排在"开始"之前（半开区间约定）。</p>
+<p><strong>做法 A 扫描线</strong>：把区间拆成 <span class="arithmatex">\((\mathrm{start}, +1)\)</span> 和 <code>(end, -1)</code> 两类事件，排序后累加 <code>cur</code>，<strong>最大值就是答案</strong>。同一时刻"结束"必须排在"开始"之前（半开区间约定）。</p>
 <p><strong>做法 B 最小堆</strong>：按开始时间排序，堆里存"正在进行的会议的结束时间"；每场会议开始前把已经结束的弹出，<strong>堆的大小就是此刻同时进行的会议数</strong>。</p>
 <p><strong>走一遍示例</strong>：<code>intervals = [[0,30],[5,10],[15,20]]</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>扫描线事件（排序后）: (0,+1) (5,+1) (10,-1) (15,+1) (20,-1) (30,-1)
@@ -10456,20 +10456,20 @@
 <p><strong>关键细节</strong>：堆解法里判断是 <code>heap[0] &lt;= start</code>（带等号，结束时刻等于开始时刻可以复用）；扫描线里如果区间是闭区间，要把开始事件排在结束事件之前。</p>
 <h3 id="6-minimum-interval-to-include-each-query1851">6. Minimum Interval to Include Each Query（1851）<a class="headerlink" href="#6-minimum-interval-to-include-each-query1851" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："对每个查询点，找包含它的最短区间"。</p>
-<p><strong>候选思路</strong>：对每个查询暴力扫所有区间是 O(nq)。<strong>关键突破是"离线"</strong>——查询之间互相独立，所以可以<strong>把查询排序后一起处理</strong>，最后再按原顺序输出答案。</p>
+<p><strong>候选思路</strong>：对每个查询暴力扫所有区间是 <span class="arithmatex">\(\mathcal{O}(nq)\)</span>。<strong>关键突破是"离线"</strong>——查询之间互相独立，所以可以<strong>把查询排序后一起处理</strong>，最后再按原顺序输出答案。</p>
 <p><strong>算法</strong>：</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>1. 区间按左端点排序；查询按数值排序（同时记录原始下标）
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>2. 用一个指针把"左端点 &lt;= 当前查询"的区间压入最小堆（键是区间长度）
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>3. 把堆中"右端点 &lt; 当前查询"的区间弹出（它们已经过期）
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>4. 堆顶就是覆盖该查询点的最短区间；堆空则为 -1
 </span></code></pre></div>
-<p><strong>为什么能 O((n+q) log n)？</strong> 因为查询值是递增的，所以"区间的加入"和"区间的过期"都是单调的——每个区间最多进堆一次、出堆一次。</p>
+<p><strong>为什么能 <span class="arithmatex">\(\mathcal{O}((n+q) \log n)\)</span>？</strong> 因为查询值是递增的，所以"区间的加入"和"区间的过期"都是单调的——每个区间最多进堆一次、出堆一次。</p>
 <p><strong>走一遍示例</strong>：<code>intervals = [[1,4],[2,3],[3,4]]</code>，<code>queries = [2,3,4]</code>（排序后仍是 2,3,4）</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>查询 2: 压入 [1,4]（长 4）、[2,3]（长 2）；堆顶长 2 → 答案 2
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>查询 3: 压入 [3,4]（长 2）；弹掉右端点 &lt; 3 的（没有）→ 堆顶长 2 → 答案 2
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>查询 4: 弹掉右端点 &lt; 4 的（[2,3]）→ 堆顶长 2（[3,4]）→ 答案 2
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>必须记录查询的原始下标</strong>（最后要按原顺序输出）；过期条件是 <code>right &lt; q</code>（严格小于，<code>right == q</code> 时区间仍然覆盖）；堆里存 <code>(长度, 右端点)</code>。</p>
+<p><strong>关键细节</strong>：<strong>必须记录查询的原始下标</strong>（最后要按原顺序输出）；过期条件是 <span class="arithmatex">\(\mathrm{right} &lt; q\)</span>（严格小于，<span class="arithmatex">\(\mathrm{right} = q\)</span> 时区间仍然覆盖）；堆里存 <code>(长度, 右端点)</code>。</p>
 <p><strong>追问准备</strong>："为什么可以离线？" → 因为查询之间没有依赖；如果必须实时作答，就需要线段树等在线结构。</p>
 <h2 id="_6">六、复杂度速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
@@ -10484,32 +10484,32 @@
 <tr>
 <td>Meeting Rooms</td>
 <td>左端点</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Insert Interval</td>
 <td>已排序</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Merge Intervals</td>
 <td>左端点</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Non-overlapping Intervals</td>
 <td>右端点</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Meeting Rooms II</td>
 <td>扫描线 / 堆</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Minimum Interval to Include Query</td>
 <td>离线 + 堆</td>
-<td>O(n log n+q log q+(n+q)log(n+1))</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n+q \log q+(n+q)\log (n+1))\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10517,14 +10517,14 @@
 <ol>
 <li><strong>排序 key 选错</strong>（区间题失分的第一大原因）。</li>
 <li><strong>合并时忘记 <code>max</code></strong>。</li>
-<li><strong>闭区间 / 半开区间的约定没确认</strong>，导致 <code>&lt;</code> 与 <code>&lt;=</code> 用错。</li>
+<li><strong>闭区间 / 半开区间的约定没确认</strong>，导致 <span class="arithmatex">\(&lt;\)</span> 与 <span class="arithmatex">\(\le\)</span> 用错。</li>
 <li><strong>扫描线里同一时刻的先后没处理</strong>。</li>
 <li><strong>435 返回 <code>count</code> 而不是 <code>n - count</code></strong>。</li>
-<li><strong>253 堆解法漏掉 <code>&lt;=</code> 的等号</strong>，会议室数量算多。</li>
+<li><strong>253 堆解法漏掉 <span class="arithmatex">\(\le\)</span> 的等号</strong>，会议室数量算多。</li>
 <li><strong>1851 忘记记录查询的原始下标</strong>。</li>
 </ol>
 <h2 id="_8">八、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"区间问题我一般先排序。这题要合并重叠区间，所以我按左端点排序；排序后一次线性扫描，如果当前区间的起点不超过上一个合并区间的终点，就合并（终点取较大者）。时间 O(n log n)（瓶颈在排序），空间 O(n)。"</p>
+<p>"区间问题我一般先排序。这题要合并重叠区间，所以我按左端点排序；排序后一次线性扫描，如果当前区间的起点不超过上一个合并区间的终点，就合并（终点取较大者）。时间 <span class="arithmatex">\(\mathcal{O}(n \log n)\)</span>（瓶颈在排序），空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>为什么"选择最多不重叠区间"按右端点排序，而"合并区间"按左端点排序？</li>

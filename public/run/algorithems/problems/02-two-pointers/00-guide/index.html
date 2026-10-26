@@ -10340,7 +10340,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>           <span class="c1"># 和太大 → 需要更小的数</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="p">[]</span>
 </span></code></pre></div>
-<p><strong>移动依据必须能证明</strong>。以 Two Sum II 为例：当 <code>nums[l] + nums[r] &lt; target</code> 时，由于数组有序，<code>nums[l]</code> 与任何 <code>≤ r</code> 的位置相加都不会更大，所以 <code>nums[l]</code> <strong>不可能出现在任何可行解里</strong>，可以安全丢弃。</p>
+<p><strong>移动依据必须能证明</strong>。以 Two Sum II 为例：当 <span class="arithmatex">\(\mathrm{nums}[l] + \mathrm{nums}[r] &lt; \mathrm{target}\)</span> 时，由于数组有序，<code>nums[l]</code> 与任何 <span class="arithmatex">\(\le r\)</span> 的位置相加都不会更大，所以 <code>nums[l]</code> <strong>不可能出现在任何可行解里</strong>，可以安全丢弃。</p>
 <h3 id="2">形态 2 快慢指针（同向）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">remove_element</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">slow</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10456,22 +10456,22 @@
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>l 指到空格 → 跳过；r 指到 'm' → 比较 A/m？继续推进
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>... 一直推进到中间相遇 → True
 </span></code></pre></div>
-<p><strong>关键细节</strong>：两个跳过循环都必须带 <code>l &lt; r</code> 条件，防止越界；<code>" "</code>、<code>".,"</code>、<code>""</code> 都应返回 <code>True</code>（跳过之后 <code>l &gt;= r</code> 天然正确）。</p>
-<p><strong>追问准备</strong>："允许删除一个字符？" → 680，遇到不匹配时分两支验证 <code>[l+1, r]</code> 或 <code>[l, r-1]</code>。</p>
+<p><strong>关键细节</strong>：两个跳过循环都必须带 <span class="arithmatex">\(l &lt; r\)</span> 条件，防止越界；<code>" "</code>、<code>".,"</code>、<code>""</code> 都应返回 <code>True</code>（跳过之后 <span class="arithmatex">\(l \ge r\)</span> 天然正确）。</p>
+<p><strong>追问准备</strong>："允许删除一个字符？" → 680，遇到不匹配时分两支验证 <span class="arithmatex">\([l+1, r]\)</span> 或 <span class="arithmatex">\([l, r-1]\)</span>。</p>
 <h3 id="2-two-sum-ii167">2. Two Sum II（167）<a class="headerlink" href="#2-two-sum-ii167" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>：数组<strong>已排序</strong>；要求 O(1) 额外空间；返回 <strong>1-based 下标</strong>。</p>
-<p><strong>候选思路</strong>：有序 + 求一对 → 对撞指针。哈希也能做，但用了 O(n) 空间，<strong>题目给了"有序"就是在暗示双指针</strong>。</p>
+<p><strong>题面信号</strong>：数组<strong>已排序</strong>；要求 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间；返回 <strong>1-based 下标</strong>。</p>
+<p><strong>候选思路</strong>：有序 + 求一对 → 对撞指针。哈希也能做，但用了 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间，<strong>题目给了"有序"就是在暗示双指针</strong>。</p>
 <p><strong>走一遍示例</strong>：<code>numbers = [2,7,11,15]</code>，<code>target = 9</code></p>
 <ul>
-<li><code>l=0(2), r=3(15)</code>：和 17 &gt; 9 → <code>r--</code>（15 太大，它配最小的 2 都超了）</li>
-<li><code>l=0(2), r=2(11)</code>：和 13 &gt; 9 → <code>r--</code></li>
-<li><code>l=0(2), r=1(7)</code>：和 9 → 返回 <code>[1, 2]</code></li>
+<li><span class="arithmatex">\(l=0(2), r=3(15)\)</span>：和 17 &gt; 9 → <code>r--</code>（15 太大，它配最小的 2 都超了）</li>
+<li><span class="arithmatex">\(l=0(2), r=2(11)\)</span>：和 13 &gt; 9 → <code>r--</code></li>
+<li><span class="arithmatex">\(l=0(2), r=1(7)\)</span>：和 9 → 返回 <code>[1, 2]</code></li>
 </ul>
-<p><strong>关键细节</strong>：返回 <code>[l + 1, r + 1]</code>；循环写 <code>l &lt; r</code> 而不是 <code>&lt;=</code>（同一元素不能用两次）。</p>
+<p><strong>关键细节</strong>：返回 <code>[l + 1, r + 1]</code>；循环写 <span class="arithmatex">\(l &lt; r\)</span> 而不是 <span class="arithmatex">\(\le\)</span>（同一元素不能用两次）。</p>
 <h3 id="3-3sum15">3. 3Sum（15）<a class="headerlink" href="#3-3sum15" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："找出所有和为 0 的三元组，且不能重复"。</p>
 <p><strong>候选思路</strong>：kSum 降维 —— <strong>排序 + 固定第一个数 + 对剩下的做 Two Sum II</strong>。排序还顺带解决了去重。</p>
-<p><strong>走一遍示例</strong>：<code>nums = [-1,0,1,2,-1,-4]</code>，排序后 <code>[-4,-1,-1,0,1,2]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{nums} = [-1,0,1,2,-1,-4]\)</span>，排序后 <code>[-4,-1,-1,0,1,2]</code></p>
 <table>
 <thead>
 <tr>
@@ -10509,12 +10509,12 @@
 </tbody>
 </table>
 <p>答案 <code>[[-1,-1,2],[-1,0,1]]</code>。</p>
-<p><strong>关键细节</strong>：<code>i</code> 从 <code>1</code> 开始时判断 <code>nums[i] == nums[i-1]</code> 才跳过；<code>nums[i] &gt; 0</code> 时可以直接 <code>break</code>（后面全是正数）。</p>
+<p><strong>关键细节</strong>：<code>i</code> 从 <code>1</code> 开始时判断 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span> 才跳过；<span class="arithmatex">\(\mathrm{nums}[i] &gt; 0\)</span> 时可以直接 <code>break</code>（后面全是正数）。</p>
 <h3 id="4-container-with-most-water11">4. Container With Most Water（11）<a class="headerlink" href="#4-container-with-most-water11" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："两端竖线围成容器，求最大水量"。</p>
-<p><strong>候选思路</strong>：面积 = <code>min(高) × 宽</code>，两端决定 → 对撞指针，<strong>每次移动较矮的一边</strong>。</p>
-<p><strong>为什么移动较矮的？</strong> 假设 <code>height[l] &lt; height[r]</code>，那么所有"以 <code>l</code> 为左端点"的容器：宽度最大就是当前值，高度上限被 <code>height[l]</code> 锁死。<strong>当前这个已经是 <code>l</code> 能给出的最大值</strong>，所以 <code>l</code> 可以永久丢弃。</p>
-<p><strong>走一遍示例</strong>：<code>height = [1,8,6,2,5,4,8,3,7]</code></p>
+<p><strong>候选思路</strong>：面积 = <code>min(高) * 宽</code>，两端决定 → 对撞指针，<strong>每次移动较矮的一边</strong>。</p>
+<p><strong>为什么移动较矮的？</strong> 假设 <span class="arithmatex">\(\mathrm{height}[l] &lt; \mathrm{height}[r]\)</span>，那么所有"以 <code>l</code> 为左端点"的容器：宽度最大就是当前值，高度上限被 <code>height[l]</code> 锁死。<strong>当前这个已经是 <code>l</code> 能给出的最大值</strong>，所以 <code>l</code> 可以永久丢弃。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{height} = [1,8,6,2,5,4,8,3,7]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>l=0(1), r=8(7)：min=1，宽 8 → 面积 8，移动 l（较矮）
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>l=1(8), r=8(7)：min=7，宽 7 → 面积 49，移动 r
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>l=1(8), r=7(3)：min=3，宽 6 → 面积 18，移动 r
@@ -10523,8 +10523,8 @@
 <p><strong>关键细节</strong>：面积公式里的 <code>min</code> 不能省；两边相等时移动哪边都可以（新的一侧高度不可能超过当前值）。</p>
 <h3 id="5-trapping-rain-water42">5. Trapping Rain Water（42）<a class="headerlink" href="#5-trapping-rain-water42" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："柱子之间能存多少水"。</p>
-<p><strong>候选思路</strong>：单点水量 = <code>min(左侧最高, 右侧最高) - height[i]</code>。直接算需要前后缀数组（O(n) 空间）；<strong>双指针版本可以省掉数组</strong>：当 <code>left_max &lt; right_max</code> 时，左侧水位已经被 <code>left_max</code> 锁死，可以立刻结算。</p>
-<p><strong>走一遍示例</strong>：<code>height = [0,1,0,2,1,0,1,3,2,1,2,1]</code></p>
+<p><strong>候选思路</strong>：单点水量 = <code>min(左侧最高, 右侧最高) - height[i]</code>。直接算需要前后缀数组（<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间）；<strong>双指针版本可以省掉数组</strong>：当 <code>left_max &lt; right_max</code> 时，左侧水位已经被 <code>left_max</code> 锁死，可以立刻结算。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{height} = [0,1,0,2,1,0,1,3,2,1,2,1]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>关键看 i=2（高 0）：左侧最高 1，右侧存在高度 3 的柱子
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>→ 水位 = min(1, 3) = 1，存水 1 - 0 = 1
 </span></code></pre></div>
@@ -10545,48 +10545,48 @@
 <tr>
 <td>Valid Palindrome</td>
 <td>对撞</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Two Sum II</td>
 <td>对撞</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>3Sum</td>
 <td>排序 + 对撞</td>
-<td>O(n²)</td>
-<td>Python 排序最坏 O(n)，输出另计</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td>Python 排序最坏 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，输出另计</td>
 </tr>
 <tr>
 <td>Container With Most Water</td>
 <td>对撞</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Trapping Rain Water</td>
 <td>对撞 + 前缀极值</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="_7">七、易错点速查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>去重的比较对象</strong>：<code>nums[i] == nums[i-1]</code>（和前一个已选值比），不是和后一个比。</li>
+<li><strong>去重的比较对象</strong>：<span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span>（和前一个已选值比），不是和后一个比。</li>
 <li><strong>命中后的去重顺序</strong>：先记录答案 → 再移动指针 → 再跳过重复值。</li>
-<li><strong><code>while l &lt; r</code> 还是 <code>&lt;=</code></strong>：两数之和不能取同一元素，用 <code>&lt;</code>。</li>
+<li><strong><code>while l &lt; r</code> 还是 <span class="arithmatex">\(\le\)</span></strong>：两数之和不能取同一元素，用 <span class="arithmatex">\(&lt;\)</span>。</li>
 <li><strong>容器问题漏掉 <code>min</code></strong>。</li>
-<li><strong>Valid Palindrome 的跳过循环漏掉 <code>l &lt; r</code></strong>。</li>
+<li><strong>Valid Palindrome 的跳过循环漏掉 <span class="arithmatex">\(l &lt; r\)</span></strong>。</li>
 <li><strong>3Sum 返回的是值</strong>，Two Sum II 返回的是 <strong>1-based 下标</strong>。</li>
 <li><strong>排序会改变下标</strong>：若题目要求返回原下标，要先把 <code>(值, 下标)</code> 配对再排序。</li>
-<li><strong>有序数组不要习惯性用哈希</strong>：先想想双指针能不能把空间降到 O(1)。</li>
+<li><strong>有序数组不要习惯性用哈希</strong>：先想想双指针能不能把空间降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</li>
 </ol>
 <h2 id="_8">八、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"我先排序，然后固定第一个数，剩下部分用左右双指针。因为数组有序，和偏小时只能移动左指针让和变大——这是安全的，因为右指针左移只会让和更小。总复杂度 O(n²)，空间 O(1)（不计排序）。去重需要在固定值和双指针命中两处各做一次。"</p>
+<p>"我先排序，然后固定第一个数，剩下部分用左右双指针。因为数组有序，和偏小时只能移动左指针让和变大——这是安全的，因为右指针左移只会让和更小。总复杂度 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计排序）。去重需要在固定值和双指针命中两处各做一次。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
 <li>为什么无序的 Two Sum 用哈希，而有序的 Two Sum II 用双指针？</li>

@@ -10086,7 +10086,7 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：不需要真的循环删除——一次遍历就等价（想想 <code>"abba"</code>：处理完 <code>bb</code> 后 <code>aa</code> 会再次相遇，这正是栈的天然行为）。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/">1209 Remove All Adjacent Duplicates in String II</a> 要求消除连续 k 个相同字符，栈里改存 <code>(字符, 连续个数)</code>。</p>
 </blockquote>
@@ -10108,14 +10108,14 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">nxt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums1</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：栈里剩下未匹配的元素不需要处理，<code>get(x, -1)</code> 自动兜底。</p>
-<p><strong>复杂度</strong>：时间 O(n + m)，空间 O(m)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n + m)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(m)\)</span>。</p>
 <hr />
 <h2 id="3-71-simplify-path">3. 71 Simplify Path<a class="headerlink" href="#3-71-simplify-path" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/simplify-path/">LeetCode 71</a> ｜ <strong>Medium</strong></p>
 <p><strong>题目</strong>：化简 Unix 风格的绝对路径。</p>
-<p>规则：<code>..</code> 回退到上一级（已在根目录则忽略），<code>.</code> 表示当前目录（忽略），多个连续 <code>/</code> 视为一个，结果必须以 <code>/</code> 开头且不含多余的 <code>/</code>。</p>
+<p>规则：<code>..</code> 回退到上一级（已在根目录则忽略），<code>.</code> 表示当前目录（忽略），多个连续 <span class="arithmatex">\(/\)</span> 视为一个，结果必须以 <span class="arithmatex">\(/\)</span> 开头且不含多余的 <span class="arithmatex">\(/\)</span>。</p>
 <p><strong>为什么放这里</strong>：栈处理"层级结构"的代表题，和括号匹配是同一类思维。</p>
-<p><strong>思路提示</strong>：按 <code>/</code> 切分，过滤掉空串和 <code>"."</code>；遇到 <code>".."</code> 且栈非空就弹出；其余入栈。最后用 <code>"/"</code> 连接。</p>
+<p><strong>思路提示</strong>：按 <span class="arithmatex">\(/\)</span> 切分，过滤掉空串和 <code>"."</code>；遇到 <code>".."</code> 且栈非空就弹出；其余入栈。最后用 <code>"/"</code> 连接。</p>
 <p><strong>方法辨析</strong>：栈项是路径分量，不是单个字符；.. 撤销一个已有分量，... 则是普通文件名。这里处理绝对路径，根目录再遇 .. 保持根；相对路径的 .. 语义不同，不能无条件用同一规则。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">simplifyPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -10130,8 +10130,8 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">return</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="s1">'/'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>易错点</strong>：<code>"..".startswith(".")</code> 之类的模糊判断会出错，必须精确比较；根目录下 <code>..</code> 要忽略而不是报错；最后一定要以 <code>/</code> 开头。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)。</p>
+<p><strong>易错点</strong>：<code>"..".startswith(".")</code> 之类的模糊判断会出错，必须精确比较；根目录下 <code>..</code> 要忽略而不是报错；最后一定要以 <span class="arithmatex">\(/\)</span> 开头。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="4-394-decode-string">4. 394 Decode String<a class="headerlink" href="#4-394-decode-string" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/decode-string/">LeetCode 394</a> ｜ <strong>Medium</strong></p>
@@ -10143,7 +10143,7 @@
 <ul>
 <li>遇到数字：读出完整的数字（可能多位），压入 <code>count_stack</code>；</li>
 <li>遇到 <code>[</code>：把当前累积的串压入 <code>str_stack</code>，重置当前串和计数；</li>
-<li>遇到 <code>]</code>：把 <code>str_stack</code> 弹出的前缀 + 当前串 × 次数；</li>
+<li>遇到 <code>]</code>：把 <code>str_stack</code> 弹出的前缀，与重复指定次数的当前串拼接；</li>
 <li>遇到字母：追加到当前串。</li>
 </ul>
 <p><strong>方法辨析</strong>：左括号暂停外层构造，栈保存外层前缀与重复次数；右括号把完整内层展开结果交回父层，因此嵌套次序符合后进先出。多位次数必须逐位累积，输出长度也可能远大于输入，时间与内存至少要计入展开结果。</p>
@@ -10169,16 +10169,16 @@
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="k">return</span> <span class="n">cur</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：数字可能是多位（<code>"12[a]"</code>），不能只取一位；<code>[</code> 时要保存"进入前的字符串"而不是清空丢弃。</p>
-<p><strong>复杂度</strong>：时间 O(输出长度)，空间 O(嵌套深度 + 输出长度)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(输出长度)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(嵌套深度 + 输出长度)\)</span>。</p>
 <hr />
 <h2 id="5-227-basic-calculator-ii">5. 227 Basic Calculator II<a class="headerlink" href="#5-227-basic-calculator-ii" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/basic-calculator-ii/">LeetCode 227</a> ｜ <strong>Medium</strong></p>
-<p><strong>题目</strong>：实现一个支持 <code>+ - * /</code> 和空格的整数表达式求值（无括号），除法向零截断。</p>
+<p><strong>题目</strong>：实现一个支持 <span class="arithmatex">\(+ - * /\)</span> 和空格的整数表达式求值（无括号），除法向零截断。</p>
 <p><strong>为什么放这里</strong>：表达式求值的标准套路，也是 150 题的自然延伸。</p>
 <p><strong>思路提示</strong>：扫描字符串，用 <code>num</code> 累积当前数字，用 <code>op</code> 记住<strong>上一个运算符</strong>：</p>
 <ul>
-<li>遇到 <code>+</code> / <code>-</code>：把 <code>+num</code> / <code>-num</code> 直接压栈（延迟到后面处理乘除）；</li>
-<li>遇到 <code>*</code> / <code>/</code>：立刻和栈顶结算（因为乘除优先级高），把结果压栈；</li>
+<li>遇到 <span class="arithmatex">\(+\)</span> / <code>-</code>：把 <code>+num</code> / <code>-num</code> 直接压栈（延迟到后面处理乘除）；</li>
+<li>遇到 <span class="arithmatex">\(*\)</span> / <span class="arithmatex">\(/\)</span>：立刻和栈顶结算（因为乘除优先级高），把结果压栈；</li>
 <li>结束后把栈内所有元素相加。</li>
 </ul>
 <p>这个"把加减变成带符号入栈、乘除即时结算"的技巧，可以一次性解决优先级问题，不需要真正实现优先级的比较。</p>
@@ -10205,7 +10205,7 @@
 </span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：末尾的数字必须被结算（所以判断里有 <code>i == len(s) - 1</code>）；空格需要跳过（<code>c in '+-*/'</code> 天然不匹配空格）；除法截断方向。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="6-32-longest-valid-parentheses">6. 32 Longest Valid Parentheses<a class="headerlink" href="#6-32-longest-valid-parentheses" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/longest-valid-parentheses/">LeetCode 32</a> ｜ <strong>Hard</strong></p>
@@ -10216,7 +10216,7 @@
 <li>遇到 <code>(</code>：压入下标；</li>
 <li>遇到 <code>)</code>：弹出一个下标。若栈变空（说明这个 <code>)</code> 多余），把当前下标压入作为新的基准；否则当前合法长度就是 <code>i - stack[-1]</code>。</li>
 </ul>
-<p>另一个等价解法是正向反向各扫一遍、用计数器判断（空间 O(1)），可以当作加分答案。</p>
+<p>另一个等价解法是正向反向各扫一遍、用计数器判断（空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>），可以当作加分答案。</p>
 <p><strong>方法辨析</strong>：栈底下标表示当前可用区间之前最近的断点，其余项是未匹配左括号的位置。匹配后距离最近未匹配位置，才是一整段有效括号长度；栈清空时重置基准，避免跨过一个多余右括号。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">longestValidParentheses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -10234,7 +10234,7 @@
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：初始的 <code>-1</code> 不能省；栈空时的处理（把当前下标作为新基准）是关键；注意答案是长度而不是下标差。</p>
-<p><strong>复杂度</strong>：时间 O(n)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <hr />
 <h2 id="7-85-maximal-rectangle">7. 85 Maximal Rectangle<a class="headerlink" href="#7-85-maximal-rectangle" title="Permanent link">&para;</a></h2>
 <p><a href="https://leetcode.com/problems/maximal-rectangle/">LeetCode 85</a> ｜ <strong>Hard</strong></p>
@@ -10270,7 +10270,7 @@
 </span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>        <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>易错点</strong>：遇到 <code>'0'</code> 时高度必须清零（不能沿用上一行的值）；矩阵元素是字符 <code>'1'</code> 而不是整数；每次都重新调用一次 <code>largest</code>。</p>
-<p><strong>复杂度</strong>：时间 O(mn)，空间 O(n)。</p>
+<p><strong>复杂度</strong>：时间 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</p>
 <blockquote>
 <p>变体：<a href="https://leetcode.com/problems/maximal-square/">221 Maximal Square</a> 把"矩形"换成"正方形"，用朴素 DP 更简单；<a href="https://leetcode.com/problems/count-submatrices-with-all-ones/">1504 Count Submatrices With All Ones</a> 则是计数版本。</p>
 </blockquote>

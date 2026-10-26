@@ -6372,10 +6372,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prim-on" class="md-nav__link">
+  <a href="#prim-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：Prim（推荐，空间 O(n)）
+        解法一：Prim（推荐，空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -6383,10 +6383,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kruskal-on2" class="md-nav__link">
+  <a href="#kruskal-mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：Kruskal + 并查集（空间 O(n²)，代码直观）
+        解法二：Kruskal + 并查集（空间 \(\mathcal{O}(n^{2})\)，代码直观）
       
     </span>
   </a>
@@ -6394,10 +6394,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prim-on2" class="md-nav__link">
+  <a href="#prim-mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：Prim 的 O(n²) 数组版（不用堆，适合稠密图）
+        解法三：Prim 的 \(\mathcal{O}(n^{2})\) 数组版（不用堆，适合稠密图）
       
     </span>
   </a>
@@ -10053,10 +10053,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prim-on" class="md-nav__link">
+  <a href="#prim-mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：Prim（推荐，空间 O(n)）
+        解法一：Prim（推荐，空间 \(\mathcal{O}(n)\)）
       
     </span>
   </a>
@@ -10064,10 +10064,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kruskal-on2" class="md-nav__link">
+  <a href="#kruskal-mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法二：Kruskal + 并查集（空间 O(n²)，代码直观）
+        解法二：Kruskal + 并查集（空间 \(\mathcal{O}(n^{2})\)，代码直观）
       
     </span>
   </a>
@@ -10075,10 +10075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prim-on2" class="md-nav__link">
+  <a href="#prim-mathcalon2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：Prim 的 O(n²) 数组版（不用堆，适合稠密图）
+        解法三：Prim 的 \(\mathcal{O}(n^{2})\) 数组版（不用堆，适合稠密图）
       
     </span>
   </a>
@@ -10146,7 +10146,7 @@
 <h1 id="1584-min-cost-to-connect-all-points">1584. Min Cost to Connect All Points · 连接所有点的最小费用<a class="headerlink" href="#1584-min-cost-to-connect-all-points" title="Permanent link">&para;</a></h1>
 <p><code>Medium</code> ｜ <code>Advanced Graphs</code> / MST ｜ <a href="https://leetcode.com/problems/min-cost-to-connect-all-points/">LeetCode 1584</a> ｜ <a href="https://neetcode.io/problems/min-cost-to-connect-points">NeetCode</a></p>
 <h2 id="_1">题目大意<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定平面上的若干点，连接两点的费用是<strong>曼哈顿距离</strong> <code>|x1-x2| + |y1-y2|</code>。求把所有点连通所需的<strong>最小总费用</strong>。</p>
+<p>给定平面上的若干点，连接两点的费用是<strong>曼哈顿距离</strong> <span class="arithmatex">\(\vert x1-x2\vert + \vert y1-y2\vert\)</span>。求把所有点连通所需的<strong>最小总费用</strong>。</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入: points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>输出: 20
 </span></code></pre></div>
@@ -10160,9 +10160,9 @@
 <li>每次弹出距离最小的节点，如果它还没进树，就把它加入树、累加费用，并把"它到所有树外点的距离"推进堆；</li>
 <li>直到所有点都进树。</li>
 </ol>
-<p><strong>为什么适合本题？</strong> 因为点之间的边有 O(n²) 条，<strong>显式构造所有边再排序（Kruskal）会占用 O(n²) 的空间</strong>；Prim 可以按需计算距离；若用每点一个最佳费用的数组版，额外空间为 O(n)。下面保留所有候选边的堆版最坏仍占 O(n²)，不能混用两种实现的空间结论。</p>
+<p><strong>为什么适合本题？</strong> 因为点之间的边有 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 条，<strong>显式构造所有边再排序（Kruskal）会占用 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 的空间</strong>；Prim 可以按需计算距离；若用每点一个最佳费用的数组版，额外空间为 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。下面保留所有候选边的堆版最坏仍占 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，不能混用两种实现的空间结论。</p>
 <h3 id="bkruskal">方案 B：Kruskal<a class="headerlink" href="#bkruskal" title="Permanent link">&para;</a></h3>
-<p>构造所有点对的边（O(n²) 条），按距离排序，用并查集逐个合并。<strong>代码更直观，但空间是 O(n²)。</strong></p>
+<p>构造所有点对的边（<span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 条），按距离排序，用并查集逐个合并。<strong>代码更直观，但空间是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>。</strong></p>
 <h3 id="prim-dijkstra">关键点：Prim 和 Dijkstra 的区别<a class="headerlink" href="#prim-dijkstra" title="Permanent link">&para;</a></h3>
 <p>堆里存的东西不同：</p>
 <ul>
@@ -10172,9 +10172,9 @@
 <p>代码几乎一样，<strong>理解这个区别是本题最大的收获</strong>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>这里优化的是连接全部点所用边的总费用，而不是某个源点到各点的距离。存在环时删去一条环边仍连通且不会增加费用，所以可寻找生成树。Prim 每次选树内到树外最便宜的一条跨界边；将它加入某个最优树，若形成环，删去环中另一条跨同一界面的边，费用不会变大，这给出安全选择的交换论证。</p>
-<p>当前代码把每个新点到所有树外点的边都入堆，允许同一目标出现多条候选，所以最坏堆空间是 O(n²)，时间 O(n² log n)。要实现 O(n²) 时间、O(n) 额外空间，可维护每个树外点的最佳连接费用，每轮线性找最小点再更新费用；完全图通常不需要堆。不能将该版本的空间结论直接写到当前懒删候选堆代码上。</p>
+<p>当前代码把每个新点到所有树外点的边都入堆，允许同一目标出现多条候选，所以最坏堆空间是 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，时间 <span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>。要实现 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 时间、<span class="arithmatex">\(\mathcal{O}(n)\)</span> 额外空间，可维护每个树外点的最佳连接费用，每轮线性找最小点再更新费用；完全图通常不需要堆。不能将该版本的空间结论直接写到当前懒删候选堆代码上。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="prim-on">解法一：Prim（推荐，空间 O(n)）<a class="headerlink" href="#prim-on" title="Permanent link">&para;</a></h3>
+<h3 id="prim-mathcalon">解法一：Prim（推荐，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>）<a class="headerlink" href="#prim-mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">heapq</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10200,7 +10200,7 @@
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
-<h3 id="kruskal-on2">解法二：Kruskal + 并查集（空间 O(n²)，代码直观）<a class="headerlink" href="#kruskal-on2" title="Permanent link">&para;</a></h3>
+<h3 id="kruskal-mathcalon2">解法二：Kruskal + 并查集（空间 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span>，代码直观）<a class="headerlink" href="#kruskal-mathcalon2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minCostConnectPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
@@ -10231,7 +10231,7 @@
 </span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
 </span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="k">return</span> <span class="n">total</span>
 </span></code></pre></div>
-<h3 id="prim-on2">解法三：Prim 的 O(n²) 数组版（不用堆，适合稠密图）<a class="headerlink" href="#prim-on2" title="Permanent link">&para;</a></h3>
+<h3 id="prim-mathcalon2">解法三：Prim 的 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span> 数组版（不用堆，适合稠密图）<a class="headerlink" href="#prim-mathcalon2" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">minCostConnectPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
@@ -10272,18 +10272,18 @@
 <tbody>
 <tr>
 <td>Prim（堆，保留候选边）</td>
-<td>O(n² log n)</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 <tr>
 <td>Kruskal</td>
-<td>O(n² log n)（排序 n² 条边）</td>
-<td>O(n²)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2} \log n)\)</span>（排序 <span class="arithmatex">\(n^{2}\)</span> 条边）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
 </tr>
 <tr>
 <td>Prim（数组）</td>
-<td>O(n²)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10292,7 +10292,7 @@
 <li><strong>Prim 的堆里存的是"到生成树的距离"，不是"从起点的累计距离"</strong>。这是和 Dijkstra 唯一但关键的区别。</li>
 <li>跳过过期条目 <code>if visited[u]: continue</code> 不能省。</li>
 <li>Kruskal 里"边数达到 n-1 就可以停"是一个有效的提前退出（生成树恰好 n-1 条边）。</li>
-<li><code>n == 1</code> 时不需要任何边，费用为 0，两种解法都能正确处理。</li>
+<li><span class="arithmatex">\(n = 1\)</span> 时不需要任何边，费用为 0，两种解法都能正确处理。</li>
 <li><strong>追问：MST 和最短路径有什么区别？</strong> → MST 保证<strong>总权重最小</strong>（不保证任意两点间的路径最短）；最短路径保证<strong>某一对点之间的路径最短</strong>。<strong>这是两个完全不同的问题。</strong></li>
 <li><strong>追问：Kruskal 和 Prim 怎么选？</strong> → <strong>边少（稀疏图）用 Kruskal</strong>（排序便宜）；<strong>边多（稠密图）用 Prim</strong>（不需要显式列出所有边）。</li>
 <li><strong>追问：如何证明 Prim 是正确的？</strong> → 基于"切分定理"：任意一次切分中，跨越切分的最小边一定属于某个 MST。</li>

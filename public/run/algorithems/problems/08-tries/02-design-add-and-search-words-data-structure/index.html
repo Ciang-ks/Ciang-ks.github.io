@@ -10112,7 +10112,7 @@
 <p><strong><code>any(...)</code> 的短路特性很关键</strong>：一旦某条分支成功就立即返回，不会继续探索其他分支。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>普通字符让下一节点唯一确定，点号则产生分支，因此状态是 (Trie 节点,查询位置)，而不是仅靠一个字符串下标。每条边只匹配一个字符，走完整个查询后仍要检查词尾；长度不足或过长都不能用路径存在代替完整单词存在。</p>
-<p>若词典有 app、apple，a.. 可匹配 app，而 a. 不能匹配不存在的 ap。点号多时，可能访问当前深度内的大量节点，最坏成本取决于分支总数，不能继续套普通 Trie 的 O(L)。这里没有 * 的可变长度语义，所以不需要正则匹配中“保留同一模式位置、继续消费字符”的转移。</p>
+<p>若词典有 app、apple，a.. 可匹配 app，而 a. 不能匹配不存在的 ap。点号多时，可能访问当前深度内的大量节点，最坏成本取决于分支总数，不能继续套普通 Trie 的 <span class="arithmatex">\(\mathcal{O}(L)\)</span>。这里没有 * 的可变长度语义，所以不需要正则匹配中“保留同一模式位置、继续消费字符”的转移。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="trie-dfs">解法一：Trie + DFS（推荐）<a class="headerlink" href="#trie-dfs" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TrieNode</span><span class="p">:</span>
@@ -10207,18 +10207,18 @@
 <tbody>
 <tr>
 <td><code>addWord</code></td>
-<td>O(L)</td>
-<td>O(L)</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
 </tr>
 <tr>
 <td><code>search</code>（无 <code>.</code>）</td>
-<td>O(L)</td>
-<td>O(1)（DFS 用 O(L) 栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span>（DFS 用 <span class="arithmatex">\(\mathcal{O}(L)\)</span> 栈）</td>
 </tr>
 <tr>
 <td><code>search</code>（全 <code>.</code>）</td>
-<td>最坏 O(26^L) 或 O(字典中该长度的词数 × L)</td>
-<td>O(L)</td>
+<td>最坏 <span class="arithmatex">\(\mathcal{O}(26^L)\)</span> 或 <span class="arithmatex">\(\mathcal{O}(字典中该长度的词数 \times L)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(L)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10229,9 +10229,9 @@
 <li><code>.</code> 分支必须遍历 <code>node.children.values()</code>，<strong>不能只看某一个孩子</strong>。</li>
 <li><code>any(...)</code> 是生成器表达式，会<strong>短路</strong>；如果用列表推导 <code>any([...])</code> 会先把所有分支都算完，失去剪枝效果。<strong>这个细节值得在面试中指出。</strong></li>
 <li>递归的深度是单词长度，通常安全。</li>
-<li><strong>追问：最坏复杂度是多少？</strong> → 全 <code>.</code> 查询时需要探索所有节点，最坏是 O(节点总数)。</li>
+<li><strong>追问：最坏复杂度是多少？</strong> → 全 <code>.</code> 查询时需要探索所有节点，最坏是 <span class="arithmatex">\(\mathcal{O}(节点总数)\)</span>。</li>
 <li><strong>追问：如何优化全通配符查询？</strong> → 可以在每个节点缓存"该子树下所有单词"，用空间换时间。</li>
-<li><strong>追问：支持 <code>*</code>（匹配任意长度）怎么做？</strong> → <a href="https://leetcode.com/problems/wildcard-matching/">44 Wildcard Matching</a> 是 DP 问题；在 Trie 上则是"跳到所有后代节点"，需要额外处理。</li>
+<li><strong>追问：支持 <span class="arithmatex">\(*\)</span>（匹配任意长度）怎么做？</strong> → <a href="https://leetcode.com/problems/wildcard-matching/">44 Wildcard Matching</a> 是 DP 问题；在 Trie 上则是"跳到所有后代节点"，需要额外处理。</li>
 <li><strong>追问：这题和 208 的关系？</strong> → 本题就是 208 加上"通配符"这一个新特性，其余结构完全一致。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>

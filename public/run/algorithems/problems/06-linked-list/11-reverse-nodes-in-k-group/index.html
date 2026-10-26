@@ -4168,10 +4168,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代 + 分组探测（推荐，O(1) 空间）
+        解法一：迭代 + 分组探测（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -4190,10 +4190,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：先转成数组再拼接（O(n) 空间，面试中不推荐）
+        解法三：先转成数组再拼接（\(\mathcal{O}(n)\) 空间，面试中不推荐）
       
     </span>
   </a>
@@ -10009,10 +10009,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o1" class="md-nav__link">
+  <a href="#mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法一：迭代 + 分组探测（推荐，O(1) 空间）
+        解法一：迭代 + 分组探测（推荐，\(\mathcal{O}(1)\) 空间）
       
     </span>
   </a>
@@ -10031,10 +10031,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on" class="md-nav__link">
+  <a href="#mathcalon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        解法三：先转成数组再拼接（O(n) 空间，面试中不推荐）
+        解法三：先转成数组再拼接（\(\mathcal{O}(n)\) 空间，面试中不推荐）
       
     </span>
   </a>
@@ -10123,9 +10123,9 @@
 <p>因为题目要求"不足 k 个保持原样"。如果在反转过程中才发现不够 k 个，就需要额外反向操作恢复原状，增加连接管理的难度。所以<strong>先走一遍确认够数，再动手反转</strong>。</p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>整链反转在 None 停止，本题局部反转必须在预先确定的 group_next 停止，并保留组前的连接入口。令 prev 初始为 group_next，反转时原组首的 next 就会先接到下一组，不需要结束后再寻找后继。</p>
-<p>对 1→2→3→4→5、k=2，第一组反转后 group_prev 接到 2，原组首 1 成为组尾并接 3；第二组同样得到 4→3，最后 5 不足两项保持不动。外层 group_prev 每次更新为旧组首，代表已经完成的结果末尾。探测和反转各扫描一次当前组，总工作仍是 O(n)，不是 O(nk)，因为组之间没有重叠。</p>
+<p>对 1→2→3→4→5、k=2，第一组反转后 group_prev 接到 2，原组首 1 成为组尾并接 3；第二组同样得到 4→3，最后 5 不足两项保持不动。外层 group_prev 每次更新为旧组首，代表已经完成的结果末尾。探测和反转各扫描一次当前组，总工作仍是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，不是 <span class="arithmatex">\(\mathcal{O}(nk)\)</span>，因为组之间没有重叠。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="o1">解法一：迭代 + 分组探测（推荐，O(1) 空间）<a class="headerlink" href="#o1" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalo1">解法一：迭代 + 分组探测（推荐，<span class="arithmatex">\(\mathcal{O}(1)\)</span> 空间）<a class="headerlink" href="#mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reverseKGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">dummy</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
@@ -10176,7 +10176,7 @@
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverseKGroup</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>  <span class="c1"># 原头节点变成组尾，接上递归结果</span>
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="k">return</span> <span class="n">prev</span>
 </span></code></pre></div>
-<h3 id="on">解法三：先转成数组再拼接（O(n) 空间，面试中不推荐）<a class="headerlink" href="#on" title="Permanent link">&para;</a></h3>
+<h3 id="mathcalon">解法三：先转成数组再拼接（<span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间，面试中不推荐）<a class="headerlink" href="#mathcalon" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reverseKGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -10205,18 +10205,18 @@
 <tbody>
 <tr>
 <td>迭代</td>
-<td>O(n)</td>
-<td>O(1)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>递归</td>
-<td>O(n)</td>
-<td>O(n/k)（递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n/k)\)</span>（递归栈）</td>
 </tr>
 <tr>
 <td>数组</td>
-<td>O(n)</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10228,7 +10228,7 @@
 <li><code>group_prev</code> 要更新为"原来的组首"（也就是现在的组尾），这样才能继续下一组。</li>
 <li><code>k = 1</code> 时应该原样返回；<code>k</code> 大于链表长度时也应该原样返回。上面的代码都天然处理。</li>
 <li><strong>追问：如果不足 k 个也要翻转？</strong> → 去掉探测步骤，改成"翻转剩余全部"即可（就是 <a href="https://leetcode.com/problems/reverse-linked-list-ii/">92 Reverse Linked List II</a> 的推广）。</li>
-<li><strong>追问：迭代和递归哪个更好？</strong> → 迭代空间 O(1)，递归空间 O(n/k)。工程上优先迭代。</li>
+<li><strong>追问：迭代和递归哪个更好？</strong> → 迭代空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，递归空间 <span class="arithmatex">\(\mathcal{O}(n/k)\)</span>。工程上优先迭代。</li>
 <li><strong>追问：这题在实际中的用途？</strong> → 类似"分批处理链表"，比如分页展示、分批提交事务。</li>
 </ul>
 <h2 id="_8">相关题目<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>

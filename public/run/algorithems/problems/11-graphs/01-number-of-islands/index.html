@@ -10117,16 +10117,16 @@
 <li>遇到 <code>'1'</code> 就说明发现了一个新岛屿 → 答案 +1；</li>
 <li>从该格子出发做一次 DFS/BFS，<strong>把整个岛屿都"淹掉"</strong>（标记为 <code>'0'</code> 或 <code>'#'</code>），保证以后不会再被重复计数。</li>
 </ol>
-<p><strong>关键技巧：就地修改网格来标记 visited</strong>，不需要额外的 <code>visited</code> 矩阵。这样做空间是 O(1)（不计递归栈），代码也更短。</p>
+<p><strong>关键技巧：就地修改网格来标记 visited</strong>，不需要额外的 <code>visited</code> 矩阵。这样做空间是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>（不计递归栈），代码也更短。</p>
 <h3 id="dfs-bfs">用 DFS 还是 BFS<a class="headerlink" href="#dfs-bfs" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>DFS</strong>：代码最短，但递归深度可能达到岛屿面积。一个 300×300 全是陆地的网格，递归深度可能达到 90000，<strong>Python 默认会栈溢出</strong>；</li>
-<li><strong>BFS</strong>：用队列代替递归栈，更安全。队列最坏空间可达 O(mn)，取决于搜索前沿形状，不应统一按周长估算。</li>
+<li><strong>DFS</strong>：代码最短，但递归深度可能达到岛屿面积。一个 <span class="arithmatex">\(300\times300\)</span> 全是陆地的网格，递归深度可能达到 90000，<strong>Python 默认会栈溢出</strong>；</li>
+<li><strong>BFS</strong>：用队列代替递归栈，更安全。队列最坏空间可达 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>，取决于搜索前沿形状，不应统一按周长估算。</li>
 </ul>
 <p><strong>面试中建议：优先写 BFS（更安全），或者写 DFS 并主动说明"如果网格很大，递归深度可能有风险，我会改成 BFS"。</strong></p>
 <h3 id="_3">解法推导与模式辨析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>网格隐含一张图：每个陆地格是节点，上下左右的陆地间有边；岛屿就是这张无向图的连通分量。外层遇到尚未标记的陆地才增加岛数，内层遍历负责一次标完其整个分量。因此一个岛有多少分叉或内部回路，都只增加一次计数。</p>
-<p>标记在继续探索邻居之前完成，避免相邻格互相递归。这里标记永久保留，和单词搜索中“返回后恢复”的路径约束不同：本题只问属于哪个连通块，后来再从同一个格子出发不会获得新信息。就地标记节约 visited，但递归栈或队列仍可能占 O(mn)，输入也会被改动；若调用方还需原图，应改用独立访问标记。</p>
+<p>标记在继续探索邻居之前完成，避免相邻格互相递归。这里标记永久保留，和单词搜索中“返回后恢复”的路径约束不同：本题只问属于哪个连通块，后来再从同一个格子出发不会获得新信息。就地标记节约 visited，但递归栈或队列仍可能占 <span class="arithmatex">\(\mathcal{O}(mn)\)</span>，输入也会被改动；若调用方还需原图，应改用独立访问标记。</p>
 <h2 id="_4">代码<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="dfs">解法一：DFS（最简洁）<a class="headerlink" href="#dfs" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -10223,18 +10223,18 @@
 <tbody>
 <tr>
 <td>DFS</td>
-<td>O(m · n)</td>
-<td>O(m · n)（最坏递归栈）</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span>（最坏递归栈）</td>
 </tr>
 <tr>
 <td>BFS</td>
-<td>O(m · n)</td>
-<td>O(min(m, n))（队列上限）</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(\min (m, n))\)</span>（队列上限）</td>
 </tr>
 <tr>
 <td>并查集</td>
-<td>O(m · n · α)</td>
-<td>O(m · n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n \cdot \alpha )\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(m \cdot n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10247,7 +10247,7 @@
 <li>网格可能是空的（<code>[]</code>）或第一行为空，要处理好。</li>
 <li><strong>追问：如何求最大岛屿面积？</strong> → <a href="../03-max-area-of-island/">695</a>，把计数改成累加面积。</li>
 <li><strong>追问：如果岛屿定义包含斜向相邻？</strong> → 把方向数组改成 8 个方向。</li>
-<li><strong>追问：如果网格超大（10⁶ × 10⁶）？</strong> → 需要并查集 + 流式处理，或用外部存储。<strong>纯 BFS 会爆内存。</strong></li>
+<li><strong>追问：如果网格超大（<span class="arithmatex">\(10^6\times10^6\)</span>）？</strong> → 需要并查集 + 流式处理，或用外部存储。<strong>纯 BFS 会爆内存。</strong></li>
 <li><strong>追问：如何求每个岛屿的周长？</strong> → <a href="https://leetcode.com/problems/island-perimeter/">463 Island Perimeter</a>，对每个陆地格数"四条边里有几条挨着水或边界"。</li>
 <li><strong>追问：DFS 和 BFS 哪个更好？</strong> → 网格题里 BFS 更安全（不受递归深度限制）；如果求最短距离（如 994、286）必须用 BFS。</li>
 </ul>

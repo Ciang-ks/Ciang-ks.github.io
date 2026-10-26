@@ -3243,10 +3243,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-o1" class="md-nav__link">
+  <a href="#4-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        模板 4 O(1) 取最小值的栈
+        模板 4 \(\mathcal{O}(1)\) 取最小值的栈
       
     </span>
   </a>
@@ -10202,10 +10202,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-o1" class="md-nav__link">
+  <a href="#4-mathcalo1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        模板 4 O(1) 取最小值的栈
+        模板 4 \(\mathcal{O}(1)\) 取最小值的栈
       
     </span>
   </a>
@@ -10452,7 +10452,7 @@
 <ol>
 <li><strong>判断是不是"最近相关性"</strong>：如果答案只和"最近的一个还没被处理的东西"有关，栈就对了。</li>
 <li><strong>决定栈里存什么</strong>：需要算距离/宽度时<strong>必须存下标</strong>；只做配对时存值即可。</li>
-<li><strong>写清弹出条件</strong>：<code>&lt;</code> 还是 <code>&lt;=</code>？这决定了"严格更大"还是"不小于"。</li>
+<li><strong>写清弹出条件</strong>：<span class="arithmatex">\(&lt;\)</span> 还是 <span class="arithmatex">\(\le\)</span>？这决定了"严格更大"还是"不小于"。</li>
 <li><strong>处理收尾</strong>：栈里剩下的元素怎么办？（加哨兵最省事）</li>
 </ol>
 <h2 id="_4">四、常用模板与使用条件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -10494,7 +10494,7 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
 <p><strong>哨兵的作用</strong>：左哨兵保证栈永不为空（省掉 <code>if not stack</code>），右哨兵保证结束时所有柱子都被弹空（省掉收尾循环）。</p>
-<h3 id="4-o1">模板 4 O(1) 取最小值的栈<a class="headerlink" href="#4-o1" title="Permanent link">&para;</a></h3>
+<h3 id="4-mathcalo1">模板 4 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 取最小值的栈<a class="headerlink" href="#4-mathcalo1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MinStack</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>              <span class="c1"># (值, 到目前为止的最小值)</span>
@@ -10523,10 +10523,10 @@
 </span></code></pre></div>
 <p><strong>关键细节</strong>：遍历结束必须检查 <code>not stack</code>（否则 <code>"((("</code> 会被误判为 <code>True</code>）；右括号出现时栈空也要返回 <code>False</code>；<strong>不能用"三种括号数量相等"来判断</strong>（<code>"([)]"</code> 数量都对但嵌套非法）。</p>
 <h3 id="2-min-stack155">2. Min Stack（155）<a class="headerlink" href="#2-min-stack155" title="Permanent link">&para;</a></h3>
-<p><strong>题面信号</strong>：设计一个栈，要求 <code>getMin()</code> 也是 O(1)。</p>
-<p><strong>候选思路</strong>：O(1) 意味着<strong>不能现算</strong>。要么维护一个"同步的最小值栈"，要么在每个元素里带一个"截至此处的最小值"。</p>
-<p><strong>为什么不能只在 pop 时重算？</strong> 那就变成 O(n) 了。<strong>为什么用元组就能同步？</strong> 因为"最小值"是一个随栈深度单调变化的量，压栈时算一次就够了。</p>
-<p><strong>关键细节</strong>：<code>pop</code> 时两个结构必须同步；若用"懒删除"的最小栈，压栈判断必须用 <code>&lt;=</code>（否则重复的最小值会被提前弹掉）。</p>
+<p><strong>题面信号</strong>：设计一个栈，要求 <code>getMin()</code> 也是 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
+<p><strong>候选思路</strong>：<span class="arithmatex">\(\mathcal{O}(1)\)</span> 意味着<strong>不能现算</strong>。要么维护一个"同步的最小值栈"，要么在每个元素里带一个"截至此处的最小值"。</p>
+<p><strong>为什么不能只在 pop 时重算？</strong> 那就变成 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 了。<strong>为什么用元组就能同步？</strong> 因为"最小值"是一个随栈深度单调变化的量，压栈时算一次就够了。</p>
+<p><strong>关键细节</strong>：<code>pop</code> 时两个结构必须同步；若用"懒删除"的最小栈，压栈判断必须用 <span class="arithmatex">\(\le\)</span>（否则重复的最小值会被提前弹掉）。</p>
 <p><strong>追问准备</strong>："如何同时支持 getMax？" → 再维护一个 max 栈；"如何删除中间元素？" → 双向链表 + 哈希表（就是 LRU）。</p>
 <h3 id="3-evaluate-reverse-polish-notation150">3. Evaluate Reverse Polish Notation（150）<a class="headerlink" href="#3-evaluate-reverse-polish-notation150" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："逆波兰表达式求值"。</p>
@@ -10539,7 +10539,7 @@
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>* → 弹出 3（右）、3（左），算 3*3=9 → [9]
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>答案 9
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>先弹出的是右操作数</strong>，<code>-</code> 和 <code>/</code> 顺序不能反；Python 的 <code>//</code> 是向下取整，负数除法要用 <code>int(a / b)</code> 才能向零截断；判断"是不是运算符"用 <code>t in "+-*/"</code>，不要用 <code>isdigit()</code>（负号会误判）。</p>
+<p><strong>关键细节</strong>：<strong>先弹出的是右操作数</strong>，<code>-</code> 和 <span class="arithmatex">\(/\)</span> 顺序不能反；Python 的 <code>//</code> 是向下取整，负数除法要用 <code>int(a / b)</code> 才能向零截断；判断"是不是运算符"用 <code>t in "+-*/"</code>，不要用 <code>isdigit()</code>（负号会误判）。</p>
 <h3 id="4-generate-parentheses22">4. Generate Parentheses（22）<a class="headerlink" href="#4-generate-parentheses22" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："生成所有合法的 n 对括号组合"。</p>
 <p><strong>候选思路</strong>：要<strong>枚举所有方案</strong> → 回溯（不是栈）。剪枝条件来自括号的性质：<strong>任何前缀里，右括号数量不能超过左括号数量</strong>。</p>
@@ -10556,7 +10556,7 @@
 <p><strong>题面信号</strong>："对每一天，还要等几天才会遇到更高的温度"。</p>
 <p><strong>候选思路</strong>：这是"<strong>右边第一个比它大的元素</strong>" → 单调栈的教科书场景。</p>
 <p><strong>单调栈的推理</strong>：栈里存"还没找到答案的日子"，气温递减。新来的 <code>x</code> 一次把比它小的全部结算——<strong>因为这些天再也遇不到更早的更高温度了</strong>。</p>
-<p><strong>走一遍示例</strong>：<code>T = [73,74,75,71,69,72,76,73]</code></p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(T = [73,74,75,71,69,72,76,73]\)</span></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>i=1 (74): 73 &lt; 74 → 弹出 0，res[0]=1；栈 [1(74)]
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>i=2 (75): 74 &lt; 75 → 弹出 1，res[1]=1；栈 [2(75)]
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>i=3 (71): 入栈 → [2(75), 3(71)]
@@ -10566,11 +10566,11 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>i=7 (73): 入栈
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>结果 [1,1,4,2,1,1,0,0]
 </span></code></pre></div>
-<p><strong>关键细节</strong>：<strong>栈里存下标</strong>（要算天数差）；未找到更高温度的位置保持初始值 0；复杂度 O(n) 的依据是"每个下标最多进出栈各一次"。</p>
+<p><strong>关键细节</strong>：<strong>栈里存下标</strong>（要算天数差）；未找到更高温度的位置保持初始值 0；复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 的依据是"每个下标最多进出栈各一次"。</p>
 <h3 id="6-car-fleet853">6. Car Fleet（853）<a class="headerlink" href="#6-car-fleet853" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："车不能超车，求最终形成几个车队"。</p>
-<p><strong>候选思路</strong>：先算每辆车"单独开到终点需要的时间"；<strong>从最靠近终点的车开始处理</strong>（所以按位置降序排序）。后车如果时间 ≤ 前车，说明它会追上并并队。</p>
-<p><strong>走一遍示例</strong>：<code>target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]</code></p>
+<p><strong>候选思路</strong>：先算每辆车"单独开到终点需要的时间"；<strong>从最靠近终点的车开始处理</strong>（所以按位置降序排序）。后车如果时间 不大于 前车，说明它会追上并并队。</p>
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{target} = 12, \mathrm{position} = [10,8,0,5,3], \mathrm{speed} = [2,4,1,1,3]\)</span></p>
 <p>按位置降序：<code>(10,2)</code>、<code>(8,4)</code>、<code>(5,1)</code>、<code>(3,3)</code>、<code>(0,1)</code></p>
 <table>
 <thead>
@@ -10591,7 +10591,7 @@
 <tr>
 <td>(8, 4)</td>
 <td>1.0</td>
-<td>≤ 1.0 → 并队</td>
+<td>不大于 1.0 → 并队</td>
 <td>1</td>
 </tr>
 <tr>
@@ -10603,7 +10603,7 @@
 <tr>
 <td>(3, 3)</td>
 <td>3.0</td>
-<td>≤ 7.0 → 并队</td>
+<td>不大于 7.0 → 并队</td>
 <td>2</td>
 </tr>
 <tr>
@@ -10615,20 +10615,20 @@
 </tbody>
 </table>
 <p>答案 3。</p>
-<p><strong>关键细节</strong>：<strong>必须按位置降序</strong>（从最靠近终点的车开始）；比较用 <code>&lt;=</code>（同时到达也算并队）；时间要用浮点除法。</p>
+<p><strong>关键细节</strong>：<strong>必须按位置降序</strong>（从最靠近终点的车开始）；比较用 <span class="arithmatex">\(\le\)</span>（同时到达也算并队）；时间要用浮点除法。</p>
 <h3 id="7-largest-rectangle-in-histogram84">7. Largest Rectangle in Histogram（84）<a class="headerlink" href="#7-largest-rectangle-in-histogram84" title="Permanent link">&para;</a></h3>
 <p><strong>题面信号</strong>："柱状图中最大的矩形面积"。</p>
 <p><strong>候选思路</strong>：任何最优矩形都可以描述成"<strong>以某根柱子 <code>j</code> 的高度为高，向左右扩展到第一个比它矮的柱子为止</strong>"。于是问题变成"对每根柱子找左右第一个更矮的位置" → 单调栈。</p>
-<p><strong>走一遍示例</strong>：<code>heights = [2,1,5,6,2,3]</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>加哨兵后: [0,2,1,5,6,2,3,0]
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>i=3（值 5）时，栈顶是 (2,5)，5 &gt; 1 → 弹出 j=2
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    h = 5，左边界 = 新栈顶下标 1（值 2），右边界 = 3
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    w = 3 - 1 - 1 = 1 → 面积 5
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>i=4（值 6）时，弹出 j=3（值 6）：w = 4-2-1 = 1 → 面积 6
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>i=5（值 2）时，弹出 j=4（值 5）：w = 5-2-1 = 2 → 面积 10 ✓
+<p><strong>走一遍示例</strong>：<span class="arithmatex">\(\mathrm{heights} = [2,1,5,6,2,3]\)</span></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>加哨兵后：[0,2,1,5,6,2,3,0]
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>i=2，高度 1：弹出 j=1（高 2），左边界 0、右边界 2，面积 2×1=2
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>i=3、4：高度 5、6 依次入栈
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>i=5，高度 2：先弹 j=4（高 6），宽 5-3-1=1，面积 6
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>             再弹 j=3（高 5），宽 5-2-1=2，面积 10
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>i=7，末尾哨兵 0：结算剩余柱子，最大面积仍为 10
 </span></code></pre></div>
 <p>最终答案 10。</p>
-<p><strong>关键细节</strong>：栈存<strong>下标</strong>；宽度是 <code>i - stack[-1] - 1</code>；<strong>双哨兵不能漏</strong>。弹出条件用 <code>&gt;</code>（严格大于）时，相等的柱子会在第二次弹出时用更宽的区间结算，同样正确。</p>
+<p><strong>关键细节</strong>：栈存<strong>下标</strong>；宽度是 <code>i - stack[-1] - 1</code>；<strong>双哨兵不能漏</strong>。弹出条件用 <span class="arithmatex">\(&gt;\)</span>（严格大于）时，相等的柱子会在第二次弹出时用更宽的区间结算，同样正确。</p>
 <p><strong>迁移</strong>：逐行把它当直方图调用一次，就是 85 Maximal Rectangle。</p>
 <h2 id="_6">六、复杂度速查<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
@@ -10645,43 +10645,43 @@
 <td>Valid Parentheses</td>
 <td>配对</td>
 <td>左括号</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Min Stack</td>
 <td>设计</td>
 <td>(值, 当前最小值)</td>
-<td>每次 O(1)</td>
+<td>每次 <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
 </tr>
 <tr>
 <td>Evaluate RPN</td>
 <td>求值</td>
 <td>操作数</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Generate Parentheses</td>
 <td>回溯</td>
 <td>计数状态</td>
-<td>O(4ⁿ/√n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(4^{n}/\sqrt n)\)</span></td>
 </tr>
 <tr>
 <td>Daily Temperatures</td>
 <td>单调栈</td>
 <td>下标</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 <tr>
 <td>Car Fleet</td>
 <td>排序 + 单调</td>
 <td>车队到达时间</td>
-<td>O(n log n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n \log n)\)</span></td>
 </tr>
 <tr>
 <td>Largest Rectangle</td>
 <td>单调栈 + 哨兵</td>
 <td>下标</td>
-<td>O(n)</td>
+<td><span class="arithmatex">\(\mathcal{O}(n)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -10690,17 +10690,17 @@
 <li>配对类<strong>忘记检查"遍历结束后栈为空"</strong>。</li>
 <li>逆波兰<strong>搞反左右操作数</strong>；负数除法截断方向弄错。</li>
 <li><strong>单调栈存值而不是下标</strong>（要算距离/宽度时必须存下标）。</li>
-<li><strong>弹出条件 <code>&lt;</code> 与 <code>&lt;=</code> 的选择</strong>没想清楚，导致相等元素处理不当。</li>
+<li><strong>弹出条件 <span class="arithmatex">\(&lt;\)</span> 与 <span class="arithmatex">\(\le\)</span> 的选择</strong>没想清楚，导致相等元素处理不当。</li>
 <li><strong>直方图类忘记加哨兵</strong>，导致收尾逻辑缺失。</li>
 <li>Min Stack 的 <code>pop</code> <strong>没有同步两个结构</strong>。</li>
 <li>22 题<strong>误用栈而不是回溯</strong>（这里要枚举方案，不是验证）。</li>
-<li><strong>误以为单调栈的 <code>while</code> 让它变成 O(n²)</strong>——每个下标最多进出栈各一次，总计 O(n)。</li>
+<li><strong>误以为单调栈的 <code>while</code> 让它变成 <span class="arithmatex">\(\mathcal{O}(n^{2})\)</span></strong>——每个下标最多进出栈各一次，总计 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。</li>
 </ol>
 <h2 id="_8">八、面试话术<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>"这类题需要找'最近的、还没被处理的元素'，所以我用单调栈。栈里存下标，保持单调递减。遍历到新元素时，把栈顶比它小的都弹出并结算——因为新元素就是它们右边第一个更大的元素。每个下标最多进出栈一次，所以总复杂度 O(n)，空间 O(n)。"</p>
+<p>"这类题需要找'最近的、还没被处理的元素'，所以我用单调栈。栈里存下标，保持单调递减。遍历到新元素时，把栈顶比它小的都弹出并结算——因为新元素就是它们右边第一个更大的元素。每个下标最多进出栈一次，所以总复杂度 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>。"</p>
 <h2 id="30">九、30 秒自测<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ol>
-<li>单调栈里有 <code>while</code>，为什么整体仍是 O(n)？</li>
+<li>单调栈里有 <code>while</code>，为什么整体仍是 <span class="arithmatex">\(\mathcal{O}(n)\)</span>？</li>
 <li>84 题里，为什么弹出栈顶时"以它为高的矩形"宽度就已经确定了？</li>
 <li>Min Stack 为什么不能在 <code>pop</code> 时重新求最小值？</li>
 <li>22 题为什么是回溯而不是栈的模拟？</li>

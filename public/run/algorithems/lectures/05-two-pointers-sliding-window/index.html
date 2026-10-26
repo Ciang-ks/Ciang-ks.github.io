@@ -10025,8 +10025,8 @@
 <p>第 3 讲用字典加速寻找配对值。如果数组已经有序，或问题要求处理连续的一段，还可以用两个整数下标标记扫描位置，这就是本讲的“双指针”。它们的移动利用了某种只朝一个方向变化的关系，例如有序数组向右数值不会变小。每次移动都遵守一条规则：<strong>每次移动指针，都必须能说清"被我丢掉的那个候选，为什么不可能出现在答案里"。</strong></p>
 <h2 id="_1">从有序数组里找一对数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><img alt="对撞指针每一步排除掉一个候选" src="../images/05-two-pointers.svg" /></p>
-<p>给定升序数组 <code>A</code> 和目标 <code>t</code>，找一对下标使两数之和为 <code>t</code>，要求只允许 O(1) 额外空间。</p>
-<p>暴力枚举所有对是 <code>Θ(n²)</code>，瓶颈很清楚：内层在"找一个特定的值"。通常我们会用哈希表把每次补数查询降到期望 O(1)——但哈希表要 <code>Θ(n)</code> 空间，<strong>违反了 O(1) 的约束</strong>。</p>
+<p>给定升序数组 <code>A</code> 和目标 <code>t</code>，找一对下标使两数之和为 <code>t</code>，要求只允许 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 额外空间。</p>
+<p>暴力枚举所有对是 <span class="arithmatex">\(\Theta (n^{2})\)</span>，瓶颈很清楚：内层在"找一个特定的值"。通常我们会用哈希表把每次补数查询降到期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span>——但哈希表要 <span class="arithmatex">\(\Theta (n)\)</span> 空间，<strong>违反了 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 的约束</strong>。</p>
 <p>关键在于题目多给了一个条件：<strong>数组是有序的</strong>。这个条件必须用上。</p>
 <p>让两个指针从两端出发：</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">two_sum_sorted</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -10042,8 +10042,8 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="p">[]</span>
 </span></code></pre></div>
 <p>本函数返回从0开始的下标；LeetCode Two Sum II的题面要求从1开始，提交时要对两个结果各加1。这只是接口差别，移动与证明不变。</p>
-<p>凭什么可以这样移动？假设 <code>A[l] + A[r] &lt; t</code>。因为数组升序，对任意 <code>j ≤ r</code> 都有 <code>A[j] ≤ A[r]</code>，所以 <code>A[l] + A[j] ≤ A[l] + A[r] &lt; t</code>。也就是说 <strong><code>A[l]</code> 和 <code>l..r</code> 里任何元素搭配都太小</strong>，而小于 <code>l</code> 的下标在之前的迭代里已经被同样的论证排除了。<strong>所以 <code>A[l]</code> 可以安全地永久丢弃。</strong></p>
-<p>对称地，<code>A[l] + A[r] &gt; t</code> 时 <code>A[r]</code> 可以丢弃。</p>
+<p>凭什么可以这样移动？假设 <span class="arithmatex">\(A[l] + A[r] &lt; t\)</span>。因为数组升序，对任意 <span class="arithmatex">\(j \le r\)</span> 都有 <span class="arithmatex">\(A[j] \le A[r]\)</span>，所以 <span class="arithmatex">\(A[l] + A[j] \le A[l] + A[r] &lt; t\)</span>。也就是说 <strong><code>A[l]</code> 和 <code>l..r</code> 里任何元素搭配都太小</strong>，而小于 <code>l</code> 的下标在之前的迭代里已经被同样的论证排除了。<strong>所以 <code>A[l]</code> 可以安全地永久丢弃。</strong></p>
+<p>对称地，<span class="arithmatex">\(A[l] + A[r] &gt; t\)</span> 时 <code>A[r]</code> 可以丢弃。</p>
 <p>这就是双指针的证明模板：<strong>每一步都说明被丢掉的那个候选，它的所有可能搭配都不满足条件。</strong> 面试里把这句话说出来，比代码写得漂亮更有价值。</p>
 <h2 id="_2">三种形态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>对撞指针</strong>：两个指针从两端往中间走。前提是数组有序，或问题有"两端向中间收缩"的性质。</p>
@@ -10057,10 +10057,10 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">return</span> <span class="n">slow</span>          <span class="c1"># slow 就是新长度</span>
 </span></code></pre></div>
 <p><strong><code>slow</code> 的语义是"下一个待写位置"</strong>——想清这一点，所有"原地删除/压缩"的题都是同一个模板。</p>
-<p>这个函数返回有效前缀的长度，不会真的缩短列表。例如 A=[3,2,2,3]、val=3，返回 2；只读取 A[:2]，它等于 [2,2]，后面残留值无需清理。fast 扫过的每个保留值恰好被写一次，时间 O(n)、额外空间 O(1)。</p>
+<p>这个函数返回有效前缀的长度，不会真的缩短列表。例如 A=[3,2,2,3]、val=3，返回 2；只读取 A[:2]，它等于 [2,2]，后面残留值无需清理。fast 扫过的每个保留值恰好被写一次，时间 <span class="arithmatex">\(\mathcal{O}(n)\)</span>、额外空间 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。</p>
 <p><strong>分离指针</strong>：两个序列各一个，用于归并，第 7 讲会给出完整实现。</p>
 <h2 id="_3">三个“移动依据”的例子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>先区分两个容易混淆的水量问题。<strong>盛最多水的容器（Container With Most Water）</strong>给定非负高度数组 height，下标是横坐标，每个值是一条竖线的高度；选择两条线与横轴围成容器，返回最大面积。端点 l、r 围成的面积是 <code>(r−l)×min(height[l],height[r])</code>。例如 <code>[1,2,1]</code> 选两端，面积为 2。</p>
+<p>先区分两个容易混淆的水量问题。<strong>盛最多水的容器（Container With Most Water）</strong>给定非负高度数组 height，下标是横坐标，每个值是一条竖线的高度；选择两条线与横轴围成容器，返回最大面积。端点 l、r 围成的面积是 <span class="arithmatex">\((r-l)\min(\mathrm{height}[l],\mathrm{height}[r])\)</span>。例如 <code>[1,2,1]</code> 选两端，面积为 2。</p>
 <p><strong>接雨水（Trapping Rain Water）</strong>则把每个值看成宽度为 1 的柱子，问雨后所有柱子之间总共能积多少水。例如 <code>[2,0,2]</code> 中间能积 2 单位水。这里要逐格求水量并相加，不能只选两根柱子算一个容器。</p>
 <p>两题都能从两端向内扫描，但每次移动的理由不同：</p>
 <table>
@@ -10089,8 +10089,8 @@
 </tr>
 </tbody>
 </table>
-<p>第二个值得展开一句。设 <code>height[l] &lt; height[r]</code>。考虑所有以 <code>l</code> 为左端点的容器：宽度最大就是当前的 <code>r − l</code>（右端点不能再右移），高度上限是 <code>height[l]</code>（<code>min</code> 被较矮的左线锁死）。<strong>所以当前这个已经是以 <code>l</code> 为左端点时的最优解</strong>，<code>l</code> 可以永久丢弃。</p>
-<p>对接雨水，某一格的水位受两侧最高柱子中较矮的那个限制；该格水量是这个水位减去自身高度，最低为 0。先设 l、r 之间尚未结算，left_max、right_max 分别记录两端已经扫描到的最高柱子。若 left_max&lt;right_max，就向右读下一根左侧柱子：它比 left_max 低时，右侧已有更高柱子，水量可确定；它比 left_max 高时，这一格本身不能积水，只需更新左侧最高值。两种情况统一写成“移动 l、更新 left_max、累加 left_max−height[l]”。另一侧对称。</p>
+<p>第二个值得展开一句。设 <span class="arithmatex">\(\mathrm{height}[l] &lt; \mathrm{height}[r]\)</span>。考虑所有以 <code>l</code> 为左端点的容器：宽度最大就是当前的 <span class="arithmatex">\(r-l\)</span>（右端点不能再右移），高度上限是 <code>height[l]</code>（<code>min</code> 被较矮的左线锁死）。<strong>所以当前这个已经是以 <code>l</code> 为左端点时的最优解</strong>，<code>l</code> 可以永久丢弃。</p>
+<p>对接雨水，某一格的水位受两侧最高柱子中较矮的那个限制；该格水量是这个水位减去自身高度，最低为 0。先设 l、r 之间尚未结算，left_max、right_max 分别记录两端已经扫描到的最高柱子。若 left_max&lt;right_max，就向右读下一根左侧柱子：它比 left_max 低时，右侧已有更高柱子，水量可确定；它比 left_max 高时，这一格本身不能积水，只需更新左侧最高值。两种情况统一写成“移动 l、更新 left_max、累加 left_max-height[l]”。另一侧对称。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trap</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">height</span><span class="p">:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="mi">0</span>
@@ -10112,7 +10112,7 @@
 <h2 id="_4">从"找一对"到"找一段"：滑动窗口<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><img alt="滑动窗口的扩大与收缩" src="../images/05-sliding-window.svg" /></p>
 <p>换个问题：给定字符串 <code>s</code>，求不含重复字符的最长<strong>连续子串</strong>的长度。</p>
-<p>暴力做法是枚举所有子串再检查，瓶颈在于"每次都重新检查整段"。改成维护一个窗口 <code>[l, r]</code>：<code>r</code> 一路向右扩张，一旦窗口里出现重复字符，就移动 <code>l</code> 直到重新合法。</p>
+<p>暴力做法是枚举所有子串再检查，瓶颈在于"每次都重新检查整段"。改成维护一个窗口 <span class="arithmatex">\([l, r]\)</span>：<code>r</code> 一路向右扩张，一旦窗口里出现重复字符，就移动 <code>l</code> 直到重新合法。</p>
 <p>这里 <code>set()</code> 创建空集合，<code>window.add(c)</code> 加入字符，<code>window.remove(c)</code> 删除已存在的字符。不能把空集合写成 <code>{}</code>，那会创建没有 add 方法的字典。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">window</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
@@ -10124,10 +10124,10 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">return</span> <span class="n">best</span>
 </span></code></pre></div>
-<p>先区分“集合”和“待加入字符”：每轮开始，window 恰好装着无重复的 <code>s[l:r]</code>，<strong>还不含</strong>当前字符 c。若 c 已存在，就删除左端直到旧 c 被删掉，再加入新 c；此时 window 才对应闭区间 <code>[l,r]</code>。</p>
-<p>为什么不会漏掉最长答案？已被丢弃的某个左端 k，之前必因窗口出现重复而不合法；在右端继续扩张时，那两个重复字符仍在，k 不会重新合法。因此左端不必回退。修复结束后 l 是当前 r 下最靠左的合法起点，<code>r−l+1</code> 就是以 r 结尾的最长合法长度；遍历全部 r 并取最大，才覆盖全局最优。</p>
+<p>先区分“集合”和“待加入字符”：每轮开始，window 恰好装着无重复的 <code>s[l:r]</code>，<strong>还不含</strong>当前字符 c。若 c 已存在，就删除左端直到旧 c 被删掉，再加入新 c；此时 window 才对应闭区间 <span class="arithmatex">\([l,r]\)</span>。</p>
+<p>为什么不会漏掉最长答案？已被丢弃的某个左端 k，之前必因窗口出现重复而不合法；在右端继续扩张时，那两个重复字符仍在，k 不会重新合法。因此左端不必回退。修复结束后 l 是当前 r 下最靠左的合法起点，<span class="arithmatex">\(r-l+1\)</span> 就是以 r 结尾的最长合法长度；遍历全部 r 并取最大，才覆盖全局最优。</p>
 <p>手推 <code>abba</code>：r=0 得 <code>[0,0]='a'</code>；r=1 得 <code>[0,1]='ab'</code>；r=2 要加入 b，先删 a 仍有旧 b，必须再删 b，最终 <code>[2,2]='b'</code>；r=3 得 <code>[2,3]='ba'</code>。这也解释 while 为什么不能改成只缩一次的 if。</p>
-<p>右端走n次、左端总共最多n次，集合操作按期望 O(1) 计，总时间期望 O(n)，空间 O(min(n,字符种类数))。图采用同一个 abba 例子。</p>
+<p>右端走n次、左端总共最多n次，集合操作按期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span> 计，总时间期望 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，空间 <span class="arithmatex">\(\mathcal{O}(\min (n,字符种类数))\)</span>。图采用同一个 abba 例子。</p>
 <h3 id="_5">更新答案时，窗口必须符合当前题目的要求<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>先把第二个任务说完整：给定<strong>正数数组</strong> nums 和正目标 target，找和至少为 target 的最短非空连续子数组，返回长度；不存在则返回 0。连续意味着不能跳过中间元素。因为元素为正，右端加入元素只会增大和，左端移除元素只会减小和，这才允许逐步收缩。</p>
 <p>对于这里两种常见模板，目标和收缩条件都不同：最长无重复子串在“重复时”缩；正数数组的最短达标和在“仍达标时”缩。更新位置必须和该时刻的合法性配套，不能只挪一行就变成另一题。</p>
@@ -10152,7 +10152,7 @@
 <p>例如 target=7、nums=[2,3,4]，加入4后和为9，先记录长度3；删2后和为7，仍合法，记录长度2；再删3后和为4才停止。答案必须在丢弃一个合法窗口之前记录。</p>
 <p>反过来，<strong>如果数组含负数，不能直接套“和太大就缩小”的可变窗口模板</strong>——加一个负数会让和变小，"和太大就移左指针"的推理不再保证不漏解。固定长度窗口仍可以滚动求和；“和恰好为 k”的计数可以用前缀和加哈希。要按具体目标选择工具。</p>
 <h2 id="3sum-two-sum">选读：固定一个数，把 3Sum 化为 Two Sum<a class="headerlink" href="#3sum-two-sum" title="Permanent link">&para;</a></h2>
-<p>3Sum 的输入是整数数组，要求选三个不同下标，使数值之和为 0，返回所有不同的<strong>数值三元组</strong>，不返回下标。输入可以有重复值，例如 <code>[-1,-1,2]</code> 可选两个不同位置的 −1；但同样的 <code>[-1,-1,2]</code> 在答案里只能出现一次。思路是<strong>排序 + 固定第一个数 + 对剩下的做 Two Sum II</strong>。<code>nums.sort()</code> 会直接把传入列表改成升序；排序后相同值必然相邻，因此与前一个值比较就能跳过重复候选，不需要再搜索它是否已经处理过。</p>
+<p>3Sum 的输入是整数数组，要求选三个不同下标，使数值之和为 0，返回所有不同的<strong>数值三元组</strong>，不返回下标。输入可以有重复值，例如 <code>[-1,-1,2]</code> 可选两个不同位置的 -1；但同样的 <code>[-1,-1,2]</code> 在答案里只能出现一次。思路是<strong>排序 + 固定第一个数 + 对剩下的做 Two Sum II</strong>。<code>nums.sort()</code> 会直接把传入列表改成升序；排序后相同值必然相邻，因此与前一个值比较就能跳过重复候选，不需要再搜索它是否已经处理过。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">three_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[],</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -10178,7 +10178,7 @@
 </span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>                <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
 </span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="k">return</span> <span class="n">res</span>
 </span></code></pre></div>
-<p>本代码在固定值和命中后的左右值两处去重。其他实现也可只跳一侧的重复并另行保证唯一性；要说明自己的版本如何避免重复。 第一处防"相同的固定值重复开分支"，第二处防"命中后左右指针停在相同值上"。另外注意去重判断写的是 <code>nums[i] == nums[i-1]</code>——和<strong>前一个已选值</strong>比，不是和后一个比。</p>
+<p>本代码在固定值和命中后的左右值两处去重。其他实现也可只跳一侧的重复并另行保证唯一性；要说明自己的版本如何避免重复。 第一处防"相同的固定值重复开分支"，第二处防"命中后左右指针停在相同值上"。另外注意去重判断写的是 <span class="arithmatex">\(\mathrm{nums}[i] = \mathrm{nums}[i-1]\)</span>——和<strong>前一个已选值</strong>比，不是和后一个比。</p>
 <p>走一遍 <code>[-1,0,1,2,-1,-4]</code>（排序后 <code>[-4,-1,-1,0,1,2]</code>）：<code>i = 0</code> 时固定 <code>-4</code>，需要凑 4，双指针够不到；<code>i = 1</code> 固定第一个 <code>-1</code>，能凑出 <code>(-1,0,1)</code> 和 <code>(-1,-1,2)</code>；<code>i = 2</code> 又是 <code>-1</code>，被去重跳过；<code>i = 3</code> 固定 <code>0</code>，只剩 <code>[1,2]</code> 和为 3，不行。答案两组。</p>
 <h2 id="_6">从讲义走到代码<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>一段连续事件中不允许 ID 重复时，可以用左右边界维护当前合法片段。</p>
@@ -10186,12 +10186,12 @@
 <p>手推 abba→2、bbbbb→1、空串→0；第二个 b 到来时应删两次。最后试正数最短达标窗口 [2,3,4]、目标 7，答案 2，比较两个问题更新答案的时刻。</p>
 <h2 id="_7">练习<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><strong>1.</strong> 为什么无序的 Two Sum 用哈希，而有序的 Two Sum II 用双指针？</p>
-<p>无序时"谁是补数"没有任何可利用的顺序信息，直接扫描每次查找要 O(n)，用哈希把单次查询降到期望 O(1)，代价是 O(n) 空间。有序时"和偏小就右移左指针"这个推理成立，于是空间降到 O(1)。<strong>关键在于题目给的"有序"是一个信息，必须用掉。</strong></p>
+<p>无序时"谁是补数"没有任何可利用的顺序信息，直接扫描每次查找要 <span class="arithmatex">\(\mathcal{O}(n)\)</span>，用哈希把单次查询降到期望 <span class="arithmatex">\(\mathcal{O}(1)\)</span>，代价是 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 空间。有序时"和偏小就右移左指针"这个推理成立，于是空间降到 <span class="arithmatex">\(\mathcal{O}(1)\)</span>。<strong>关键在于题目给的"有序"是一个信息，必须用掉。</strong></p>
 <p><strong>2.</strong> Container With Most Water 里如果两边一样高，移动哪一边？</p>
 <p>都行。两边等高时，无论丢弃哪一边，新指针处的柱子可能更高，但被保留的旧端点仍限制着“固定这一旧端点”的所有更窄容器，而宽度一定变小，所以当前容器已经是这一侧的最优解。</p>
 <p><strong>3.</strong> 为什么"和为 k 的子数组计数"在数组含负数时不能用滑动窗口？</p>
-<p>这里按和收缩的模板要求窗口和有相应的单调性。含负数时加入一个负数会让和变小，"和太大就移左指针"不再保证不漏解。改用前缀和 + 哈希：若 pre[r+1]−pre[l]=k，则查先前的 pre[l]=pre[r+1]−k。</p>
-<p><strong>4.</strong> 实现 <code>min_subarray_len(target, nums)</code>：找出和 ≥ target 的最短连续子数组长度，不存在返回 0。</p>
+<p>这里按和收缩的模板要求窗口和有相应的单调性。含负数时加入一个负数会让和变小，"和太大就移左指针"不再保证不漏解。改用前缀和 + 哈希：若 pre[r+1]-pre[l]=k，则查先前的 pre[l]=pre[r+1]-k。</p>
+<p><strong>4.</strong> 实现 <code>min_subarray_len(target, nums)</code>：找出和 不小于 target 的最短连续子数组长度，不存在返回 0。</p>
 <p>这是“最短窗口”模板，答案要在 <code>while</code> <strong>内部</strong>更新。<code>float('inf')</code> 表示正无穷，比任何有限长度都大，用来代表“尚未找到答案”；一旦遇到合法窗口，min 就会把它换成有限长度。若扫描结束仍为无穷，就返回 0。后面的 <code>float('-inf')</code> 对称地表示负无穷，比任何有限值都小。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_subarray_len</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">l</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
