@@ -3351,10 +3351,8 @@
 <li><strong>数学归纳</strong>：定义谓词 <span class="arithmatex">\( P(n) \)</span> → 证基础情形 → 证 <span class="arithmatex">\( P(n) \Rightarrow P(n+1) \)</span>（或强归纳）。</li>
 <li><strong>反证法</strong>：假设命题为假，推出矛盾。</li>
 </ol>
-<p><span id="sec-逻辑与脑筋急转弯"></span></p>
 <h2 id="sec-整数进制与代数重建">整数、进制与代数重建<a class="headerlink" href="#sec-整数进制与代数重建" title="Permanent link">&para;</a></h2>
 <p>先表示待求数量，再用因子、同余或低阶代数关系恢复未知量。</p>
-<p><span id="q8"></span></p>
 <h3 id="problem-978a31476ef9">Q1 · 阶乘尾零<a class="headerlink" href="#problem-978a31476ef9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：素因子估值与Legendre求和</p>
 <p><strong>题目</strong>：100!（100 的阶乘）末尾有多少个连续的 0？</p>
@@ -3365,7 +3363,6 @@
 <p>所以 5 的总个数为 <span class="arithmatex">\(20 + 4 =\)</span> <strong>24</strong>，即 100! 末尾有 <strong>24 个 0</strong>。</p>
 <p>一般 <span class="arithmatex">\(n!\)</span> 中素因子 <span class="arithmatex">\(p\)</span> 的个数为 <span class="arithmatex">\(v_p(n!)=\sum_{j\ge1}\lfloor n/p^j\rfloor\)</span>：每个 <span class="arithmatex">\(p\)</span> 的倍数至少贡献一个，<span class="arithmatex">\(p^2\)</span> 的倍数再贡献一个，逐层相加。若用 <span class="arithmatex">\(b=\prod_i p_i^{e_i}\)</span> 进制表示，末尾零数为 <span class="arithmatex">\(\min_i\lfloor v_{p_i}(n!)/e_i\rfloor\)</span>。十进制中 <span class="arithmatex">\(v_2\ge v_5\)</span>，才可只数5。</p>
 </details>
-<p><span id="q31"></span></p>
 <h3 id="problem-afdf169542c9">Q2 · 被 9 整除<a class="headerlink" href="#problem-afdf169542c9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：进制展开的模数同余</p>
 <p><strong>题目</strong>：给定任意整数，给出判断它能否被 9 整除的规则并证明。</p>
@@ -3374,7 +3371,6 @@
 <p>写 <span class="arithmatex">\(a=\sum_{j=0}^k a_j10^j\)</span>。因为 <span class="arithmatex">\(10\equiv1\pmod9\)</span>，所以 <span class="arithmatex">\(a\equiv\sum_j a_j\pmod9\)</span>，两数同余便同时能或不能被9整除。这一同余直接给出充分和必要两个方向。
 一般 <span class="arithmatex">\(b\)</span> 进制数满足 <span class="arithmatex">\(b\equiv1\pmod{b-1}\)</span>，因此模 <span class="arithmatex">\(b-1\)</span> 的余数等于数字和的余数。另有 <span class="arithmatex">\(b\equiv-1\pmod{b+1}\)</span>，故模 <span class="arithmatex">\(b+1\)</span> 等于各位交错和。十进制被11整除的规则因此是 <span class="arithmatex">\(a_0-a_1+a_2-\cdots\)</span> 被11整除；这里交错和与原数同余，不要求二者作为整数相等。</p>
 </details>
-<p><span id="q35"></span></p>
 <h3 id="problem-e4dad12caf1f">Q3 · <span class="arithmatex">\( \sqrt{2} \)</span> 是无理数<a class="headerlink" href="#problem-e4dad12caf1f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：既约分数反证与素因子指数奇偶</p>
 <p><strong>题目</strong>：证明 <span class="arithmatex">\( \sqrt{2} \)</span> 是无理数。（有理数是能表示为两个整数之比的数，否则为无理数。）</p>
@@ -3385,7 +3381,6 @@
 <p>但 <span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 都是偶数与"<span class="arithmatex">\( m \)</span>、<span class="arithmatex">\( n \)</span> 互质"矛盾。所以 <span class="arithmatex">\( \sqrt{2} \)</span> 必是无理数。<span class="arithmatex">\(\square\)</span></p>
 <p>同样方法可推广：若正整数 <span class="arithmatex">\(d\)</span> 不是完全平方数，至少有一素因子 <span class="arithmatex">\(p\)</span> 在其分解中指数为奇数。若 <span class="arithmatex">\(\sqrt d=m/n\)</span>，则 <span class="arithmatex">\(m^2=dn^2\)</span> 的左边含 <span class="arithmatex">\(p\)</span> 指数为偶数，右边为“奇数加偶数”、仍为奇数，矛盾。因此 <span class="arithmatex">\(\sqrt d\)</span> 无理。完全平方数的平方根则是整数，形成充要判别。</p>
 </details>
-<p><span id="q38"></span></p>
 <h3 id="problem-5be2509f3d3f">Q4 · 立方心算与立方根的线性近似<a class="headerlink" href="#problem-5be2509f3d3f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：Newton迭代：二项式展开与立方根线性近似</p>
 <p><strong>题目</strong>：(1) 心算 <span class="arithmatex">\(15^3\)</span>，并把 <span class="arithmatex">\(16^3\)</span> 表成2的幂；(2) 用已知整数立方和一阶近似估计 <span class="arithmatex">\(\sqrt[3]{5000}\)</span>，再解释如何提高精度。</p>
@@ -3400,7 +3395,6 @@
 按牛顿法再迭代 <span class="arithmatex">\(x_{k+1}=x_k-(x_k^3-5000)/(3x_k^2)\)</span>，可得约17.099759；保留两位小数为17.10。一般 <span class="arithmatex">\(\sqrt[3]{a^3+\delta}\)</span> 在 <span class="arithmatex">\(|\delta|\ll a^3\)</span> 时可先用 <span class="arithmatex">\(a+\delta/(3a^2)\)</span>，再以展开的余项或牛顿迭代控制误差。</p>
 <p>线性近似相当于把立方曲线在已知整数处换成切线。一般Newton局部收敛与二分保护的条件见<a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/#problem-39cc1ac88041">Q90 · 求根算法比较</a>；平方根具有更直接的<a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/#problem-81e789d4433f">Q89 · 牛顿法求 <span class="arithmatex">\( \sqrt{37} \)</span></a>，浮点尺度问题则由<a href="../09_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/#problem-4c9ff19bb2d4">Q1129 · Newton平方根：尺度归一化、收敛与浮点停止</a>处理。</p>
 </details>
-<p><span id="q22"></span></p>
 <h3 id="problem-bb937c348839">Q5 · 缺失的整数<a class="headerlink" href="#problem-bb937c348839" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：前两幂和恢复二次方程根</p>
 <p><strong>题目</strong>：从 1 到 100 中取走 2 个整数，剩下 98 个不同的整数。有什么好办法找出缺失的这两个整数？</p>
@@ -3418,7 +3412,6 @@ x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{1
 </details>
 <h2 id="sec-抽屉原理图关系与空间分格">抽屉原理、图关系与空间分格<a class="headerlink" href="#sec-抽屉原理图关系与空间分格" title="Permanent link">&para;</a></h2>
 <p>构造最大失败配置或有限分类，再用数量界证明必然性。</p>
-<p><span id="q25"></span></p>
 <h3 id="problem-96b514db9337">Q6 · 配对袜子<a class="headerlink" href="#problem-96b514db9337" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：最大无配对配置的抽屉原理</p>
 <p><strong>题目</strong>：抽屉里有 2 只红袜、20 只黄袜、31 只蓝袜。你是个忙碌健忘的 MIT学生，随手从抽屉里抓了一把袜子想配一双。假设每只袜子被取到的概率相同，最少抓几只才能<strong>保证</strong>有一双同色袜子？</p>
@@ -3428,7 +3421,6 @@ x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{1
 <p>注意与数量无关：红袜只有 2 只、黄袜 20 只、蓝袜 31 只都不影响答案——最坏情形是抓的前 3 只恰好三色各一。</p>
 <p>一般有 <span class="arithmatex">\(k\)</span> 种非空颜色且每色至少两只，要保证同色一对需 <span class="arithmatex">\(k+1\)</span> 只；前 <span class="arithmatex">\(k\)</span> 只各色一只说明下界。若有些颜色仅一只，能取到的最大无配对集合仍是每个非空颜色一只，但是否有足够总量取到 <span class="arithmatex">\(k+1\)</span> 要另行确认。“保证”由最坏配置决定，不使用各只被抽概率相等这一条件。</p>
 </details>
-<p><span id="q26"></span></p>
 <h3 id="problem-14abb8137a3f">Q7 · 握手<a class="headerlink" href="#problem-14abb8137a3f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：图的度数取值与抽屉原理</p>
 <p><strong>题目</strong>：你受邀参加一个有 25 名队友的欢迎会。每名队友都与你握手欢迎你。由于屋里不少人彼此不认识，其他人之间也有大量随机握手。在不知道总握手次数的情况下，你能否断言：场上至少有两个人握手的次数恰好相同？</p>
@@ -3437,7 +3429,6 @@ x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{1
 <p>场上有 26 人。每个人都至少与你握过手，至多与其余 25 人握手——所以每人的握手次数 <span class="arithmatex">\( \in \{1, 2, \ldots, 25\} \)</span>，共 25 种取值。</p>
 <p>26 只"鸽"（26 个人），25 个"巢"（可能的握手次数）。由鸽巢原理，<strong>至少两人握手次数相同</strong>。</p>
 </details>
-<p><span id="q27"></span></p>
 <h3 id="problem-76935da657f4">Q8 · 见过面吗？<a class="headerlink" href="#problem-76935da657f4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：边双色分类的Ramsey六点证明</p>
 <p><strong>题目</strong>：证明：若一个聚会上有 6 个人，则要么至少 3 人聚会前彼此认识，要么至少 3 人聚会前彼此不认识。</p>
@@ -3455,7 +3446,6 @@ x^2+y^2 = \sum_{n=1}^{100} n^2 - \sum_{i=1}^{98} z_i^2 = \frac{100^3}{3}+\frac{1
 <p>同样成立。<span class="arithmatex">\(\square\)</span></p>
 <p>（这正是拉姆齐数 <span class="arithmatex">\( R(3,3) = 6 \)</span> 的初等证明。）</p>
 </details>
-<p><span id="q28"></span></p>
 <h3 id="problem-5c13ddcebc1c">Q9 · 方格上的蚂蚁<a class="headerlink" href="#problem-5c13ddcebc1c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：空间分格与外接圆覆盖</p>
 <p><strong>题目</strong>：边长为 1 的正方形上有 51 只蚂蚁。你有一只半径为 <span class="arithmatex">\( 1/7 \)</span> 的圆玻璃杯。能否把杯子放在正方形的某个位置，保证罩住至少 3 只蚂蚁？</p>
@@ -3479,7 +3469,6 @@ r\ge\lceil\log_2M\rceil.
 \]</div>
 <p>取 <span class="arithmatex">\(2^{\lceil\log_2M\rceil}\)</span> 个签位的平衡二叉赛表，以轮空补足空位，就能在 <span class="arithmatex">\(\lceil\log_2M\rceil\)</span> 轮内完成 <span class="arithmatex">\(M-1\)</span> 场比赛。</p>
 </details>
-<p><span id="q5"></span></p>
 <h3 id="problem-b709f89d49d7">Q11 · 红黑牌赌局<a class="headerlink" href="#problem-b709f89d49d7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：异色移除后的颜色数差守恒</p>
 <p><strong>题目</strong>：一家赌场用一副标准 52 张牌设一个牌局。规则：每次翻开两张牌，若两张都是黑色，归入庄家的牌堆；若都是红色，归入你的牌堆；若一黑一红，弃掉。如此重复直到 52 张牌全部处理完。若你牌堆里的牌更多，你赢 100 美元；否则（包括平局）不得分。赌场允许你自己开价。你愿意付多少钱玩这个游戏？</p>
@@ -3490,7 +3479,6 @@ r\ge\lceil\log_2M\rceil.
 <p><strong>结论：一分钱都不该付。</strong></p>
 <p>若记红红对数为 <span class="arithmatex">\(R\)</span>、黑黑对数为 <span class="arithmatex">\(B\)</span>、异色对数为 <span class="arithmatex">\(M\)</span>，牌数守恒给 <span class="arithmatex">\(2R+M=26\)</span>、<span class="arithmatex">\(2B+M=26\)</span>，相减即 <span class="arithmatex">\(R=B\)</span>。一般初始红黑数之差为 <span class="arithmatex">\(r-b\)</span> 时，必有 <span class="arithmatex">\(2(R-B)=r-b\)</span>；随机发牌次序只改变具体配对，不改变这一关系。</p>
 </details>
-<p><span id="q15"></span></p>
 <h3 id="problem-45e39cedbbd7">Q12 · 最后的球<a class="headerlink" href="#problem-45e39cedbbd7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：颜色数量奇偶不变量</p>
 <p><strong>题目</strong>：袋中有 20 个蓝球和 14 个红球。每次随机取出两球（每球被取概率相等），不放回，而是：若两球同色，向袋中补 1 个蓝球；若异色，补 1 个红球。蓝球红球供应无限。不断重复此过程，袋中最后剩下的那个球是什么颜色？若袋中最初是 20 个蓝球和 13 个红球呢？</p>
@@ -3505,7 +3493,6 @@ r\ge\lceil\log_2M\rceil.
 <p>注意：<span class="arithmatex">\( R \)</span> 要么不变要么减少 2，所以红球数的奇偶性永远不变！初始 14 为偶数 <span class="arithmatex">\( \Rightarrow \)</span> 最后剩下的一个球不可能是红球（红球数只能为偶数或 0）。又知总球数每次减 1，直到剩 1 球。两者结合：<strong>最后的球必是蓝色</strong>。</p>
 <p>同理，若初始红球数为奇数（如 13 个），<strong>最后的球必是红色</strong>。</p>
 </details>
-<p><span id="q94"></span></p>
 <h3 id="problem-f20ce282045b">Q13 · 排列乘积的奇偶性<a class="headerlink" href="#problem-f20ce282045b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：排列值与索引的奇偶配对</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(A_1,\ldots,A_n\)</span> 是 <span class="arithmatex">\(1,\ldots,n\)</span> 的排列。(1) 证明奇数 <span class="arithmatex">\(n\)</span> 时 <span class="arithmatex">\(\prod_i(A_i-i)\)</span> 为偶数；(2) 偶数 <span class="arithmatex">\(n\)</span> 时是否有固定奇偶；(3) 改成 <span class="arithmatex">\(A_i+i\)</span> 是否改变结论；(4) 对 <span class="arithmatex">\(n\ge2\)</span>，证明 <span class="arithmatex">\(\prod_i(A_i-2i)\)</span> 总是偶数，并讨论 <span class="arithmatex">\(n=1\)</span>。</p>
@@ -3516,7 +3503,6 @@ r\ge\lceil\log_2M\rceil.
 因为 <span class="arithmatex">\(A_i+i\equiv A_i-i\pmod2\)</span>，换加号后每个因子奇偶不变，以上结论全部保留。
 当 <span class="arithmatex">\(n\ge2\)</span>，排列中必有一个值 <span class="arithmatex">\(A_j=2\)</span>，此时 <span class="arithmatex">\(A_j-2j=2(1-j)\)</span> 为偶，故总乘积为偶。<span class="arithmatex">\(n=1\)</span> 时唯一乘积为 <span class="arithmatex">\(1-2=-1\)</span>，为奇，说明此问确实需要排除该边界。</p>
 </details>
-<p><span id="q18"></span></p>
 <h3 id="problem-d7b3db07ccb5">Q14 · 分硬币堆<a class="headerlink" href="#problem-d7b3db07ccb5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：整堆翻面与正反数量恒等式</p>
 <p><strong>题目</strong>：你被蒙住双眼关在房间里，得知地上有 1000 枚硬币，其中 980 枚反面朝上、20 枚正面朝上。你无法靠触摸分辨正反面，但允许把任意数量的硬币翻面。能否把硬币分成两堆，保证两堆正面朝上的硬币数相同？</p>
@@ -3528,7 +3514,6 @@ r\ge\lceil\log_2M\rceil.
 <p><strong>结论</strong>：随机取 20 枚作为一堆，把这 20 枚<strong>全部翻面</strong>。这堆翻面后的正面数恰等于其余 980 枚中的正面数。</p>
 <p>一般 <span class="arithmatex">\(N\)</span> 枚硬币中已知恰有 <span class="arithmatex">\(H\)</span> 枚正面，不辨面地任取 <span class="arithmatex">\(H\)</span> 枚并全部翻面，仍能得到两堆正面数相同。若所取堆原有 <span class="arithmatex">\(m\)</span> 正面，翻后为 <span class="arithmatex">\(H-m\)</span>，余堆也为 <span class="arithmatex">\(H-m\)</span>。选择不需要随机，只要求抽取枚数准确且整堆翻面。</p>
 </details>
-<p><span id="q33"></span></p>
 <h3 id="problem-a9c3cc3632f9">Q15 · 硬币拆分求和<a class="headerlink" href="#problem-a9c3cc3632f9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：二元拆分树的成对计数守恒</p>
 <p><strong>题目</strong>：把 1000 枚硬币分成两堆，数出每堆枚数：若第一堆 <span class="arithmatex">\(x\)</span> 枚、第二堆 <span class="arithmatex">\(y\)</span> 枚，把乘积 xy 记录下来。然后把两堆各自继续拆分，重复计数与相乘的过程，把新的乘积加到总和上。例如把 <span class="arithmatex">\( x \)</span> 拆成 <span class="arithmatex">\( x_1 \)</span>、<span class="arithmatex">\( x_2 \)</span>，把 <span class="arithmatex">\( y \)</span> 拆成 <span class="arithmatex">\( y_1 \)</span>、<span class="arithmatex">\( y_2 \)</span>，则总和为 <span class="arithmatex">\( xy + x_1x_2 + y_1y_2 \)</span>。如此重复直到每堆只剩 1 枚（最后的 1 不计入总和）。最终总和是多少？证明无论怎么分，答案都相同。</p>
@@ -3550,7 +3535,6 @@ f(N) = x(N-x) + f(x) + f(N-x) = x(N-x) + \frac{x(x-1)}{2} + \frac{(N-x)(N-x-1)}{
 <p>代入 <span class="arithmatex">\( n = 1000 \)</span>：最终总和 <span class="arithmatex">\( = 1000\times999/2 = 499500 \)</span>。</p>
 <p>（直观理解：每一对硬币在拆分过程中恰好"相遇并被计入乘积一次"，所以总和就是所有硬币对数 <span class="arithmatex">\( \binom{1000}{2} \)</span>，与拆分顺序无关。）</p>
 </details>
-<p><span id="q43"></span></p>
 <h3 id="problem-992230c69f22">Q16 · 红酒杯里的白酒与白酒杯里的红酒<a class="headerlink" href="#problem-992230c69f22" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：混合前后体积差的物质守恒</p>
 <p><strong>题目</strong>：红酒、白酒各100毫升，先从红酒取 <span class="arithmatex">\(a\)</span> 毫升入白酒并混匀，再取混合液 <span class="arithmatex">\(b\)</span> 毫升回红酒。(1) 求两杯中异种酒量及其差的一般式；(2) 代入 <span class="arithmatex">\((a,b)=(5,5),(5,6),(6,5)\)</span>，比较两种混入量；(3) 说明白酒杯最终是否仍是纯白酒。</p>
@@ -3564,7 +3548,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 <span class="arithmatex">\((a,b)=(5,5)\)</span> 时 <span class="arithmatex">\(x=y=100/21\)</span> 毫升；<span class="arithmatex">\((5,6)\)</span> 时 <span class="arithmatex">\(x=33/7,y=40/7\)</span>，红酒杯混入白酒多1毫升；<span class="arithmatex">\((6,5)\)</span> 时 <span class="arithmatex">\(x=303/53,y=250/53\)</span>，白酒杯混入红酒多1毫升。混入量相同依赖两次移液体积相同，不依赖首次数值恰为5。
 只要 <span class="arithmatex">\(a&gt;0\)</span>、第二次未把白酒杯全部倒空，杯中仍含红酒，为混合酒，通常呈较浅红色；精确深浅不是体积守恒本身所确定的量。</p>
 </details>
-<p><span id="q32"></span></p>
 <h3 id="problem-274644d57d08">Q17 · 变色龙<a class="headerlink" href="#problem-274644d57d08" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：颜色数量差模三不变量</p>
 <p><strong>题目</strong>：遥远的小岛上有三种变色龙：红 13 只、绿 15 只、蓝 17 只。每次两种<strong>不同</strong>颜色的变色龙相遇，都会同时变成第三种颜色。例如绿遇红，双双变蓝。是否有可能所有变色龙变成同一种颜色？为什么？</p>
@@ -3587,7 +3570,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 若最后是边长2的正方形，其整数边向量<span class="arithmatex">\((a,b)\)</span>满足<span class="arithmatex">\(a^{2}+b^{2}=4\)</span>，只能是<span class="arithmatex">\((\pm 2,0)\)</span>或<span class="arithmatex">\((0,\pm 2)\)</span>。于是四个顶点在两个坐标上都同奇偶，与原不变量矛盾。因此不能。
 <strong>方法</strong>：对每个有身份的对象追踪模数不变量，并把目标的几何长度转成整数方程，不能只比较总重心。</p>
 </details>
-<p><span id="q44"></span></p>
 <h3 id="problem-58d1f66c738a">Q19 · 掰开 <span class="arithmatex">\(n\)</span> 格巧克力<a class="headerlink" href="#problem-58d1f66c738a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：每步块数增量与叠放倍增界</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 格巧克力棒，每次掰开一段，要掰多少次才能得到 <span class="arithmatex">\(n\)</span> 个单格？结果与巧克力形状有关吗？请证明。</p>
@@ -3616,7 +3598,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 <p>三维时，若一次只把一块分成两块，体块计数同样每次加1，拆成 <span class="arithmatex">\(n\)</span> 个单元恰需 <span class="arithmatex">\(n-1\)</span> 次，前提是每次沿允许的分界确实产生两块。允许叠放的 <span class="arithmatex">\(a\times b\times c\)</span> 长方体，可沿三轴分别分割，得到 <span class="arithmatex">\(\lceil\log_2a\rceil+\lceil\log_2b\rceil+\lceil\log_2c\rceil\)</span> 的上界，块数给 <span class="arithmatex">\(\lceil\log_2(abc)\rceil\)</span> 下界，两者可能不同。若一次平面切割能产生超过两块，原计数模型就改变了。</p>
 <p>三角柱形巧克力是横截面为三角形、沿长度挤出的柱体（如常见分节三角巧克力），并不是由题面唯一确定的三角格阵。要给它的精确最少次数，必须说明分节数量、可掰面、能否旋转叠放及一次动作可分几块；仅给“三角柱形”无法推出唯一数字。</p>
 </details>
-<p><span id="q11"></span></p>
 <h3 id="problem-19fb7f21ab51">Q20 · 装箱问题<a class="headerlink" href="#problem-19fb7f21ab51" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：周期染色的两色体积上界</p>
 <p><strong>题目</strong>：(1) <span class="arithmatex">\(8\times8\)</span> 棋盘去掉对角两角，能否用31块 <span class="arithmatex">\(1\times2\)</span> 骨牌铺满；(2) 能否把53块 <span class="arithmatex">\(1\times1\times4\)</span> 砖不重叠装入 <span class="arithmatex">\(6\times6\times6\)</span> 箱，要求砖棱与箱棱平行、可任意错位，不要求端点为整数。用染色或颜色体积不变量证明。</p>
@@ -3638,7 +3619,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 </details>
 <h2 id="sec-信息编码与操作构造">信息编码与操作构造<a class="headerlink" href="#sec-信息编码与操作构造" title="Permanent link">&para;</a></h2>
 <p>把观察结果编码成可区分状态，给出每个状态的唯一解释。</p>
-<p><span id="q19"></span></p>
 <h3 id="problem-f2b1456a69fd">Q21 · 贴错标签的水果袋<a class="headerlink" href="#problem-f2b1456a69fd" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：全错标签约束下的排除构造</p>
 <p><strong>题目</strong>：给你三袋水果：一袋全是苹果、一袋全是橙子、一袋是苹果和橙子的混合。每袋上都贴有标签（"苹果"、"橙子"或"混合"）。不幸的是经理告诉你<strong>所有标签都贴错了</strong>。请设计策略，通过取出最少数量的水果确定每袋内容。</p>
@@ -3653,7 +3633,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 </ul>
 <p><strong>只取 1 个水果</strong>即可确定全部三袋内容。</p>
 </details>
-<p><span id="q6"></span></p>
 <h3 id="problem-ab5381cdcc3b">Q22 · 烧绳计时<a class="headerlink" href="#problem-ab5381cdcc3b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：两端燃烧的剩余时间量</p>
 <p><strong>题目</strong>：你有两根绳子，每根都恰好烧 1 小时。但两根绳子的材质密度在不同位置不同，所以绳子的不同段燃烧速度没有保证。如何用这两根绳测出 45 分钟？</p>
@@ -3667,7 +3646,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 <p>总计恰好 <strong>45 分钟</strong>。</p>
 <p>若每根单端烧完用时 <span class="arithmatex">\(T\)</span>，上述动作依次耗 <span class="arithmatex">\(T/2\)</span> 和 <span class="arithmatex">\(T/4\)</span>，合计 <span class="arithmatex">\(3T/4\)</span>。两端燃烧将剩余燃烧“时间量”以双速消耗；无需假定绳长一半对应时间一半，但需假定两端火头按同一局部材质燃烧、点燃一端不会改变另一端局部速度。</p>
 </details>
-<p><span id="q16"></span></p>
 <h3 id="problem-8d333a311f82">Q23 · 灯泡开关<a class="headerlink" href="#problem-8d333a311f82" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：观测编码：光热状态与二进制访问</p>
 <p><strong>题目</strong>：四个初始关闭的开关仅一个控制房内灯泡，可任意操作，进房可观察亮灭并可靠区分热冷，灯泡加热与冷却有足够时间尺度。(1) 最少进房几次能认出开关；(2) 若只能看亮灭而不能判断温度，四开关最少几次，并推广到 <span class="arithmatex">\(N\)</span> 个开关。</p>
@@ -3678,7 +3656,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 一般 <span class="arithmatex">\(N\ge2\)</span> 开关只看亮灭，最少 <span class="arithmatex">\(\lceil\log_2N\rceil\)</span> 次：结果串数给下界，给开关分配互不相同的二进制码给构造。</p>
 <p>更一般地，若每次观察至多有 <span class="arithmatex">\(q\ge2\)</span> 种可区分结果，<span class="arithmatex">\(r\)</span> 次最多形成 <span class="arithmatex">\(q^r\)</span> 条结果路径，故区分 <span class="arithmatex">\(N\)</span> 个候选至少需 <span class="arithmatex">\(\lceil\log_qN\rceil\)</span> 次。这个容量上界不要求结果在概率意义上独立；达到它还要给可执行的编码操作。亮灭编码使用 <span class="arithmatex">\(q=2\)</span>，光热构造额外提供两个可靠状态。<a href="../09_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/#problem-9df13014abe0">Q1091 · 毒酒问题</a>也使用有限结果码，但资源变成并行测试者与可区分的死亡时点，不能与进房次数混同。</p>
 </details>
-<p><span id="q14"></span></p>
 <h3 id="problem-47f3cccd9961">Q24 · 密送文件<a class="headerlink" href="#problem-47f3cccd9961" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：双锁叠加后的逐次解锁协议</p>
 <p><strong>题目</strong>：你需要通过信使服务与格林尼治的同事传送文件。文件放在一个挂锁盒里运送。不幸的是信使服务不安全：任何<strong>未上锁</strong>盒子里的东西（包括你放在盒里的锁）都会在运送途中丢失。你和同事各自使用的高安全性挂锁都只有一把钥匙，且钥匙在锁的主人手里。你如何把文件安全送给同事？</p>
@@ -3693,7 +3670,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 4. 同事：用钥匙打开自己的锁，取出文件。</p>
 <p>盒子在运送途中始终处于上锁状态，文件安全送达。（这正是公钥密码学 Diffie–Hellman 思想的一个直观类比。）</p>
 </details>
-<p><span id="q12"></span></p>
 <h3 id="problem-240fb90d884b">Q25 · 日历方块<a class="headerlink" href="#problem-240fb90d884b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：必需重复数字与翻转复用</p>
 <p><strong>题目</strong>：你刚定制了两只骰子。与普通骰子不同，你在每个面上写一位数字，使得每天早晨都能把两只骰子摆成两个正面恰好显示当天的日期。必须同时使用两只骰子（即 <span class="arithmatex">\(1-9\)</span> 号要显示为 <span class="arithmatex">\(01-09\)</span>），但可以随意交换两骰的左右顺序。两个骰子的六个面上各写哪些数字？</p>
@@ -3752,7 +3728,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 </tbody>
 </table>
 </details>
-<p><span id="q21"></span></p>
 <h3 id="problem-074276d1934e">Q26 · 钟表碎片<a class="headerlink" href="#problem-074276d1934e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：等和分组与平行弦切割构造</p>
 <p><strong>题目</strong>：一只钟面（数字 <span class="arithmatex">\(1-12\)</span> 顺时针排列）从墙上摔下来摔成三片。你发现每片上的数字之和恰好相等。每片上各是哪些数字？（不允许出现奇怪的碎片形状。）</p>
@@ -3767,7 +3742,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 - 第三片：3、4、9、10（和 26）</p>
 <p>这些集合也可由两条近乎水平的平行弦实现：上弧片取11、12、1、2，下弧片取5、6、7、8，中间条形片取3、4、9、10。因此最后一片虽然在圆周上留下两段数字，整体碎片仍可以是一块普通连通的中央条带，并不要求奇异形状。</p>
 </details>
-<p><span id="q13"></span></p>
 <h3 id="problem-24407b2143b7">Q27 · 通向 Offer 的门<a class="headerlink" href="#problem-24407b2143b7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：双重转述的真值翻转</p>
 <p><strong>题目</strong>：你面前有两扇门，一扇通向你的工作 offer，另一扇通向出口。每扇门前站着一名守卫，一个永远说假话，另一个永远说真话。你只能问其中一名守卫一个是/否问题。既然你想拿到 offer，该问什么？</p>
@@ -3777,7 +3751,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 令 <span class="arithmatex">\(P\)</span> 为“当前门是offer门”。另一名守卫的回答会经历真话/假话翻转一次，当前守卫转述又经历其自身的真话/假话规则；由于两人恰一真一假，总共恰好翻转一次。因此最终回答是 <span class="arithmatex">\(\neg P\)</span>：答是说明当前门不是offer门，走另一扇；答否说明当前门就是offer门，走当前门。
 也可列四格：当前门真且问真话者→另一人说假、最终否；当前门真且问假话者→另一人说真、当前翻为否；当前门假时两种守卫都最终答是。这张真值表同时覆盖门位置与守卫身份，不依赖猜测问到哪一位。</p>
 </details>
-<p><span id="q17"></span></p>
 <h3 id="problem-8d5acbfdc1ca">Q28 · 量化薪金<a class="headerlink" href="#problem-8d5acbfdc1ca" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：随机加法掩码与模数求和</p>
 <p><strong>题目</strong>：来自 8 家不同银行的 8 名 quant 聚会喝酒。他们都想知道这群人的平均薪水，但人人谨慎谦虚，都不愿向其他人透露自己的薪水。你能设计一个策略，让他们算出平均薪水而谁也不知道别人的薪水吗？</p>
@@ -3787,7 +3760,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 每条传递值都带同一个未知掩码，单人仅凭自己收到、发出的两数之差只能得到自己的薪水。除了公开平均数本身包含的信息，诚实且互不串通的参与者不会因此获得另一人的确切薪水。私下传递是条件：若全部中间和公开，相邻两数之差会直接泄露薪水；若多人串通，也不承诺相同隐私。
 若希望有严格有限概率模型，可先约定薪水用整数单位表示、模数 <span class="arithmatex">\(M\)</span> 大于可能总薪水，选 <span class="arithmatex">\(R\)</span> 在 <span class="arithmatex">\(\{0,\ldots,M-1\}\)</span> 均匀，所有加法模 <span class="arithmatex">\(M\)</span>；每个掩码和对不知 <span class="arithmatex">\(R\)</span> 者均匀，最后减掩码后因总额小于 <span class="arithmatex">\(M\)</span> 可恢复原总额。相同构造适用于任意人数和向量数据逐坐标求和。</p>
 </details>
-<p><span id="q49"></span></p>
 <h3 id="problem-ab36a5f10712">Q29 · 四张卡片检验命题<a class="headerlink" href="#problem-ab36a5f10712" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：寻找反例的命题真值表</p>
 <p><strong>题目</strong>：四张卡片显示 7、6、<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(C\)</span>。命题：若卡片一面是元音字母，则另一面必是偶数。应翻开哪些卡片检验？为什么？</p>
@@ -3848,9 +3820,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 </details>
 <h2 id="sec-逆向博弈与对称策略">逆向博弈与对称策略<a class="headerlink" href="#sec-逆向博弈与对称策略" title="Permanent link">&para;</a></h2>
 <p>先固定偏好和输赢规则，再由小局面逆推或把对手动作一一配对。</p>
-<p><span id="q2"></span>
-<span id="q51"></span>
-<span id="problem-aabc2fab7efe"></span></p>
 <h3 id="problem-4a49bc91e47c">Q30 · 老虎与羊、狮子与肉的奇偶逆推<a class="headerlink" href="#problem-4a49bc91e47c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：吃后降一状态的奇偶逆推</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 只绝对理性的捕食者面对一只猎物，每次至多一只先吃，吃后自己成为同样的猎物。它们首先保命，安全时愿意吃；有必要时预定一个行动顺序。(1) 从小规模推导一般结果，并回答100只老虎与一只羊；(2) 将“吃后变羊”改为“吃后熟睡、被其他狮子视为肉”，结论是否改变。</p>
@@ -3860,7 +3829,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 一般先吃后状态变为 <span class="arithmatex">\(n-1\)</span> 只清醒捕食者加一只猎物。强归纳：<span class="arithmatex">\(n\)</span> 奇时 <span class="arithmatex">\(n-1\)</span> 偶，猎物安全，所以按预定次序有一只愿吃；<span class="arithmatex">\(n\)</span> 偶时 <span class="arithmatex">\(n-1\)</span> 奇，先吃者必成为随后猎物，所有人因保命优先都不吃。
 所以100只老虎时羊不被吃。狮子吃肉后熟睡的版本具有同样状态转换和偏好，仍是偶数无人吃、奇数按次序最近或优先者吃。关键是“安全时愿吃、每次最多一只行动”这些偏好和规则共同为逆推提供确定性。</p>
 </details>
-<p><span id="q58"></span></p>
 <h3 id="problem-0bbd5d1db968">Q31 · 圆桌放硬币必胜策略<a class="headerlink" href="#problem-0bbd5d1db968" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：中心首步与对称回复配对</p>
 <p><strong>题目</strong>：两人轮流在圆桌上放硬币，硬币不得重叠、不得超出桌沿，放不下者输。可选先手或后手，如何必胜？</p>
@@ -3878,8 +3846,6 @@ x=a-\frac{ab}{100+a},\qquad y=\frac{100b}{100+a},\qquad x-y=a-b.
 <p>镜像回复不会与旧硬币重叠，因为旧局面除中心硬币外已成中心对称对，若回复位置与某枚旧币相交，中心反射后对手刚放的新币就与其旧对称币相交，矛盾。回复币也不会与对手新币彼此重叠：对相同圆盘，后者中心距桌心至少两倍币半径，两新中心互距至少四倍半径。
 正方形桌面和正方形硬币也可采用中心策略，前提是中心能放第一枚，并在回复中同时把位置和形状旋转180度。更一般地，桌面中心对称、硬币是中心对称凸形且中心首币可放时，反射仍保留边界合法性；两个新对称硬币若内部相交，则其凸性使中心落在其内部，与中心首币冲突。无中心对称性的桌面不能直接保证这一策略，需另找保持合法局面的配对对称或单独分析。</p>
 </details>
-<p><span id="q1"></span>
-<span id="problem-pirates-tie-consent"></span></p>
 <h3 id="problem-88822cf302ef">Q32 · 海盗分金的延续收益、投票门槛与平局偏好<a class="headerlink" href="#problem-88822cf302ef" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：逆向归纳与最低成本买票</p>
 <p><strong>题目</strong>：海盗从年长到年轻依次提出金币分配方案；提案者也投票，未通过则被处死，由下一人重新提案。所有人首先保命、其次争取更多金币。</p>
@@ -3987,7 +3953,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <p>从四人开始，若否决，下一提案者独得1000，其余继续收益均为0。当前提案者给后面的人全0，便得到自己及 <span class="arithmatex">\(m-2\)</span> 名零继续收益者共 <span class="arithmatex">\(m-1\)</span> 票，足够严格多数；自己留全部金币当然达到上界。至少半数通过时，两人的自己一票已经足够，从两人起就可独留1000，之后同样归纳。</p>
 <p>两种门槛改变两人子局；同收益偏好则决定买票要比继续收益多1还是只需持平。这两项规则须分别说明，不能把不同规则的表混用。</p>
 </details>
-<p><span id="q9"></span></p>
 <h3 id="problem-6f368b8c5c0f">Q33 · 25 匹马选前三<a class="headerlink" href="#problem-6f368b8c5c0f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：比较偏序与淘汰资格的对抗下界</p>
 <p><strong>题目</strong>：有 25 匹马，每匹速度恒定且互不相同。赛道只有 5 条道，每场比赛最多 5 匹马。要找出最快的 3 匹马，最少需要几场比赛？</p>
@@ -4002,7 +3967,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <p><strong>七场的下界不能只由“所有马都参赛”得到。</strong> 用对抗回答：在每场中让此前未输过的马都排在已输过的马之前。此前从未输过的马仍可能是全局最快，一场至多让4匹失去这个资格；要从25个可能冠军缩到1个，至少6场。若恰只用6场，每场都必须有5匹此前未输过的马，且一次消去4个冠军候选，任何重复比较已败者都会使总消去数不足24。</p>
 <p>因此六场比较结构是一棵有6个内部节点的五叉胜者树，败者不会再得到新的比较。对抗者在每场可优先令已有获胜历史的参赛马获胜，使最终冠军至少赢过两场。冠军在最后一场的第二名，与它此前最近一场的第二名都只曾输给冠军；两者从未交手，也无经过其他马的比较链确定其顺序，交换二者的真实速度仍符合所有已见赛果。因此第二名都尚不能唯一确定，更不可能确定前三。六场不能保证，结合七场构造，最少确为七场。这里冠军资格是比较证据中的“尚未输过”，不是预先知道的真实名次。</p>
 </details>
-<p><span id="q57"></span></p>
 <h3 id="problem-923b343f737e">Q34 · NIM：取最后一根者输<a class="headerlink" href="#problem-923b343f737e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：博弈与决策｜<strong>副题型</strong>：必败余数与普通反常Nim异或</p>
 <p><strong>题目</strong>：玩 NIM 游戏，取走最后一根木棍者输。最优策略是什么？</p>
@@ -4031,7 +3995,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 </details>
 <h2 id="sec-称重决策树与有符号进制">称重决策树与有符号进制<a class="headerlink" href="#sec-称重决策树与有符号进制" title="Permanent link">&para;</a></h2>
 <p>区分精确读数与天平三结果，分别用数值编码和分支容量建立最优构造。</p>
-<p><span id="q23"></span></p>
 <h3 id="problem-a7c2f5ac48f7">Q35 · 假币 I<a class="headerlink" href="#problem-a7c2f5ac48f7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：称重偏差的不同取样数编码</p>
 <p><strong>题目</strong>：有 10 袋硬币，每袋 100 枚外观相同的硬币。除了一袋之外，所有袋中每枚硬币重 10 克；而假币袋中的每枚硬币重 9 克<strong>或</strong> 11 克（整袋同重，但不知是轻是重）。使用一台能显示精确重量的电子秤，能否只称一次找出假币袋？</p>
@@ -4044,7 +4007,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <p>若无假币，总重应为 550 克。设第 <span class="arithmatex">\(i\)</span> 袋是假币袋，则其中有 <span class="arithmatex">\(i\)</span> 枚假币，实际总重为 <span class="arithmatex">\( 550 \pm i \)</span> 克。由于 <span class="arithmatex">\( i \)</span> 对每袋各不相同，由偏差 <span class="arithmatex">\( \pm i \)</span> 即可同时确定<strong>哪一袋是假币</strong>以及<strong>假币偏轻还是偏重</strong>。</p>
 <p>这不是唯一答案：只要从各袋取的枚数互不相同，任何取法都行。</p>
 </details>
-<p><span id="q50"></span></p>
 <h3 id="problem-ccc1b0d720a8">Q36 · 已知偏重球的三分称量<a class="headerlink" href="#problem-ccc1b0d720a8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：已知方向的三叉决策树</p>
 <p><strong>题目</strong>：罐中九颗弹珠有一颗更重。用天平最多称三次找出它，如何做到？</p>
@@ -4065,9 +4027,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 十一球分4、4、3，先称两组4。若不平衡，候选4颗，用2对2，再1对1，两次收尾；若平衡，候选3颗，一次1对1收尾。因此最多三次。
 一般 <span class="arithmatex">\(r\)</span> 次最多 <span class="arithmatex">\(3^r\)</span> 个候选：每次最多三结果，决策树叶节点不超过 <span class="arithmatex">\(3^r\)</span> 给信息下界；候选按尽量等大的三组分开，称同大两组，递归找重组或未称组给构造。若满 <span class="arithmatex">\(3^r\)</span> 个，恰按每组三分之一分组即可。因此三次上限为27颗、两次上限为9颗。该结论依赖偏重方向已知；未知偏轻偏重时，状态数和可实现称法都不同。</p>
 </details>
-<p><span id="q46"></span>
-<span id="q47"></span>
-<span id="problem-42c104322400"></span></p>
 <h3 id="problem-3d276268dd1d">Q37 · 砝码与有符号数位的最少编码<a class="headerlink" href="#problem-3d276268dd1d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：平衡进制：状态计数下界与最少砝码构造</p>
 <p><strong>题目</strong>：(1) 整数砝码只放物体对侧时，最少几种能称出1至 <span class="arithmatex">\(N\)</span>，如何解码；(2) 允许天平两侧放置、每个砝码至多用一次时，最少几种，如何构造；(3) 若每种数允许使用两次，推广相应下界与进制；(4) 将通法用于1至40、1至50、1至64，给出64的有符号表示，并说明应用。</p>
@@ -4080,7 +4039,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <strong>每种最多用 <span class="arithmatex">\(m\)</span> 次。</strong> 净系数可为 <span class="arithmatex">\(-m,\ldots,m\)</span>，信息界为 <span class="arithmatex">\((2m+1)^k\ge2N+1\)</span>。取 <span class="arithmatex">\((2m+1)\)</span> 的各次幂，同样用相接区间证明连续覆盖半径 <span class="arithmatex">\(((2m+1)^k-1)/2\)</span>，达到下界。<span class="arithmatex">\(m=2\)</span> 时是平衡五进制，1、5、25三种已覆盖 <span class="arithmatex">\([-62,62]\)</span>，所以1至40及1至50都只需三种；例如 <span class="arithmatex">\(40=2\cdot25-2\cdot5\)</span>。
 砝码双侧放置与整数有符号编码是同一模型：每种砝码的取向或使用次数就是一个数位，信息计数给最少种数，进制算法给可执行构造。</p>
 </details>
-<p><span id="q29"></span></p>
 <h3 id="problem-05b8685217b7">Q38 · 假币 II<a class="headerlink" href="#problem-05b8685217b7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：平衡进制：精确总重量的唯一解码</p>
 <p><strong>题目</strong>：有 5 袋硬币，每袋 100 枚。每枚硬币重 9 克、10 克或 11 克；每袋内的硬币等重，但不知道每袋装的是哪一种。你有一台能显示精确重量的电子秤。最少需要称几次才能确定每袋硬币的类型？</p>
@@ -4130,7 +4088,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <p>一般 <span class="arithmatex">\(k\)</span> 袋、每袋至少 <span class="arithmatex">\(3^{k-1}\)</span> 枚时，分别取 <span class="arithmatex">\(1,3,\ldots,3^{k-1}\)</span> 枚，用实际重量减去全按10克的基准重量，得到 <span class="arithmatex">\(\sum_i c_i3^{i-1}\)</span>，<span class="arithmatex">\(c_i\in\{-1,0,1\}\)</span>。若两个系数向量给同一偏差，最高不同位的贡献绝对值至少 <span class="arithmatex">\(3^j\)</span>，低位总差至多 <span class="arithmatex">\(2\sum_{i&lt;j}3^i=3^j-1\)</span>，不能抵消，故编码唯一。解码时取偏差模3：余0取系数0、余1取1、余2取-1，再减去该系数并除3，逐位恢复袋型。</p>
 <p>偏差的取值是精确重量，单次观察可以区分远多于三个状态。这与<a href="#problem-3d276268dd1d">Q37 · 砝码与有符号数位的最少编码</a>共用数位唯一性，但不是“每称一次只有三种结果”的天平决策树；本题数位表示各袋的重量类型，砝码题数位表示已知物重所需的放置方向。</p>
 </details>
-<p><span id="q7"></span></p>
 <h3 id="problem-15b4c87d755d">Q39 · 12 球称重<a class="headerlink" href="#problem-15b4c87d755d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：带轻重符号的候选分支树</p>
 <p><strong>题目</strong>：你有 12 个外观相同的球，其中一个要么偏重要么偏轻（不知道是哪种）。使用一台只能显示哪边托盘更重的天平，如何用 3 次称量找出坏球？</p>
@@ -4158,7 +4115,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 </details>
 <h2 id="sec-递推级数与前缀构造">递推、级数与前缀构造<a class="headerlink" href="#sec-递推级数与前缀构造" title="Permanent link">&para;</a></h2>
 <p>保留下一步所需的最小状态，并给出初值、容量或收敛条件。</p>
-<p><span id="q41"></span></p>
 <h3 id="problem-9ef95dec58cb">Q40 · 睡莲铺满池塘<a class="headerlink" href="#problem-9ef95dec58cb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：指数增长的逆向对数时间</p>
 <p><strong>题目</strong>：睡莲每秒面积翻倍，60秒恰铺满池塘。(1) 何时铺满四分之一；(2) 若每 <span class="arithmatex">\(\Delta\)</span> 秒增长为原来的 <span class="arithmatex">\(b&gt;1\)</span> 倍，满池时刻为 <span class="arithmatex">\(T\)</span>，求达到满池比例 <span class="arithmatex">\(f\in(0,1]\)</span> 的时刻。</p>
@@ -4167,7 +4123,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 <p>每往前退一秒，面积减半，所以60秒前一秒是一半，前两秒是四分之一，答案为58秒。
 一般按指数增长插值，<span class="arithmatex">\(A(t)/A(T)=b^{(t-T)/\Delta}\)</span>。令该比例等于 <span class="arithmatex">\(f\)</span>，取对数得 <span class="arithmatex">\(t=T+\Delta\log_b f\)</span>。<span class="arithmatex">\(b=2,\Delta=1,f=1/4\)</span> 时就是 <span class="arithmatex">\(60-2\)</span>。若只允许离散观察时刻，所求恰达到的时间还需落在 <span class="arithmatex">\(\Delta\)</span> 的网格上。</p>
 </details>
-<p><span id="q10"></span></p>
 <h3 id="problem-01a4391d8775">Q41 · 无穷幂塔<a class="headerlink" href="#problem-01a4391d8775" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：微积分｜<strong>副题型</strong>：固定点方程与有界单调迭代</p>
 <p><strong>题目</strong>：用有限幂塔递推 <span class="arithmatex">\(t_1=x,t_{n+1}=x^{t_n}\)</span> 定义无穷幂塔，<span class="arithmatex">\(x&gt;0\)</span>。(1) 若极限为2，求 <span class="arithmatex">\(x\)</span> 并证明该值确实收敛到2；(2) 若希望极限为4，候选底数是多少，递推实际会怎样；(3) 说明一般收敛区间。</p>
@@ -4178,7 +4133,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 若要求 <span class="arithmatex">\(L=4\)</span>，固定点方程同样给 <span class="arithmatex">\(x=4^{1/4}=\sqrt2\)</span>。但这正是上一递推，实际极限为2，不能得到4；4是同一映射的另一固定点，未被该初值吸引。其局部导数为 <span class="arithmatex">\(x^4\log x=2\log2&gt;1\)</span>，也显示该固定点不稳定。
 一般正底数有限幂塔收敛的充要范围为 <span class="arithmatex">\(e^{-e}\le x\le e^{1/e}\)</span>。对固定点，映射导数为 <span class="arithmatex">\(L\log x=\log L\)</span>，稳定范围对应 <span class="arithmatex">\(|\log L|\le1\)</span>，端点需单独用递推收敛性处理；不能仅有上界而遗漏低底数可能产生的振荡。</p>
 </details>
-<p><span id="q34"></span></p>
 <h3 id="problem-2e449f6e3dda">Q42 · 赛道加油<a class="headerlink" href="#problem-2e449f6e3dda" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：循环净油量的最小前缀和</p>
 <p><strong>题目</strong>：假设你在一条单向环形赛道上。赛道上随机放置着 <span class="arithmatex">\(N\)</span> 罐汽油，各罐汽油总量恰好够你的车跑整整一圈。假设你的车油箱初始为空，但你可以把车放在赛道任意位置，并沿途拾取油罐加油。你总能选到一个出发位置使车跑完一整圈吗？</p>
@@ -4188,7 +4142,6 @@ h_m=\lceil m/2\rceil\quad\text{或}\quad h_m=\lfloor m/2\rfloor+1.
 定义前缀和 <span class="arithmatex">\(S_0=0,S_j=\sum_{i=1}^jz_i\)</span>，从 <span class="arithmatex">\(S_0,\ldots,S_{N-1}\)</span> 中取一个最小值 <span class="arithmatex">\(S_k\)</span>，就在罐 <span class="arithmatex">\(k+1\)</span> 出发。未绕过编号端点前，走到罐 <span class="arithmatex">\(j+1\)</span> 前的油量为 <span class="arithmatex">\(S_j-S_k\ge0\)</span>；绕回后油量为 <span class="arithmatex">\((S_N-S_k)+S_j=S_j-S_k\ge0\)</span>。因此每个罐间路段都能完成，而在路段内油量单调下降，终点不负也保证途中不负。
 所以总能找到出发点；扫描一次所有前缀和即可在 <span class="arithmatex">\(O(N)\)</span> 时间构造。总油量若严格多于一圈所需，仍有 <span class="arithmatex">\(S_N\ge0\)</span>，跨编号端点后的油量多出 <span class="arithmatex">\(S_N\)</span>，相同最小前缀证明仍成立；若总油量不足，则任何起点都不能跑完。</p>
 </details>
-<p><span id="q45"></span></p>
 <h3 id="problem-2822ed2df47c">Q43 · 轮流饮用的等比级数与周期分配<a class="headerlink" href="#problem-2822ed2df47c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：周期余量乘积与等比级数</p>
 <p><strong>题目</strong>：一品脱饮料由 <span class="arithmatex">\(k\)</span> 人轮流喝，第 <span class="arithmatex">\(i\)</span> 人每次喝当前余量的 <span class="arithmatex">\(a_i\in(0,1]\)</span>。(1) 推导每人的最终饮用量和总量；(2) 两人各喝一半、各喝三分之一、各喝 <span class="arithmatex">\(1/n\)</span> 时分别如何；(3) 三人各喝一半，以及两人依次喝一半与三分之一时如何。</p>
@@ -4202,7 +4155,6 @@ D_i=\frac{a_i\prod_{j&lt;i}(1-a_j)}{1-q}.
 两人同取比例 <span class="arithmatex">\(a\)</span> 时，<span class="arithmatex">\(D_1=1/(2-a),D_2=(1-a)/(2-a)\)</span>。各喝一半得 <span class="arithmatex">\(2/3,1/3\)</span>；各喝三分之一得 <span class="arithmatex">\(3/5,2/5\)</span>；各喝 <span class="arithmatex">\(1/n\)</span> 得 <span class="arithmatex">\(n/(2n-1),(n-1)/(2n-1)\)</span>，每个有限 <span class="arithmatex">\(n\ge1\)</span> 下总量都喝完。
 三人各取一半时，一轮比例为 <span class="arithmatex">\(1/2,1/4,1/8\)</span>、余量 <span class="arithmatex">\(q=1/8\)</span>，所以最终为 <span class="arithmatex">\(4/7,2/7,1/7\)</span>。两人比例分别为 <span class="arithmatex">\(1/2,1/3\)</span> 时，第一轮得到 <span class="arithmatex">\(1/2,1/6\)</span>，余 <span class="arithmatex">\(1/3\)</span>，最终得到 <span class="arithmatex">\(3/4,1/4\)</span>，第一人多喝 <span class="arithmatex">\(1/2\)</span> 品脱。</p>
 </details>
-<p><span id="q24"></span></p>
 <h3 id="problem-5e7a26b38343">Q44 · 玻璃球<a class="headerlink" href="#problem-5e7a26b38343" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：首次试验分支的楼层容量递推</p>
 <p><strong>题目</strong>：你在一栋 100 层的楼里拿有两个玻璃球。把球从窗户扔出：若楼层号小于 <span class="arithmatex">\(X\)</span>，球不会碎；若楼层号大于等于 <span class="arithmatex">\(X\)</span>，球必碎。你想确定 <span class="arithmatex">\(X\)</span>。什么策略能使<strong>最坏情形下的投掷次数</strong>最少？</p>
@@ -4226,7 +4178,6 @@ F(e,t)=F(e-1,t-1)+F(e,t-1)+1,\quad F(0,t)=F(e,0)=0.
 \]</div>
 <p>由Pascal恒等式归纳，<span class="arithmatex">\(F(e,t)=\sum_{j=1}^e\binom tj\)</span>。两球时为 <span class="arithmatex">\(t+\binom t2=t(t+1)/2\)</span>，同时证明14次的构造与最少性；一般楼层 <span class="arithmatex">\(H\)</span> 时取使 <span class="arithmatex">\(F(e,t)\ge H\)</span> 的最小 <span class="arithmatex">\(t\)</span>。首投位置选择为当前安全下界加 <span class="arithmatex">\(F(e-1,t-1)+1\)</span>，即可递归构造策略。</p>
 </details>
-<p><span id="q48"></span></p>
 <h3 id="problem-a31b4c8d7aaa">Q45 · 条带骨牌铺法、轮廓状态与快速递推<a class="headerlink" href="#problem-a31b4c8d7aaa" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：首列分解、缺角状态与矩阵快速幂</p>
 <p><strong>题目</strong>：用 <span class="arithmatex">\(2\times1\)</span> 多米诺骨牌无缝、不重叠铺满给定网格。</p>
@@ -4300,7 +4251,6 @@ A_{n-2}&amp;=A_{n-4}+2B_{n-3},
 </details>
 <h2 id="sec-公开知识猜帽与信号计数">公开知识、猜帽与信号计数<a class="headerlink" href="#sec-公开知识猜帽与信号计数" title="Permanent link">&para;</a></h2>
 <p>明确每个人看见什么、能传什么，再证明安全性与最终完成。</p>
-<p><span id="q4"></span></p>
 <h3 id="problem-8526a55fd680">Q47 · 生日推理<a class="headerlink" href="#problem-8526a55fd680" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：公开不知道的逐轮候选删除</p>
 <p><strong>题目</strong>：你和同事都知道老板 <span class="arithmatex">\(A\)</span> 的生日是以下 10 个日期之一：</p>
@@ -4317,7 +4267,6 @@ A_{n-2}&amp;=A_{n-4}+2B_{n-3},
 </ul>
 <p>助理写下的是 <strong>9 月 1 日</strong>。</p>
 </details>
-<p><span id="q30"></span></p>
 <h3 id="problem-ee6c68afa7fc">Q48 · 顺序猜帽的模数编码<a class="headerlink" href="#problem-ee6c68afa7fc" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：模数总和编码：公开信号与自身颜色恢复</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(N\)</span> 人各能看见所有别人的帽色，按任意公开顺序依次猜自己的帽色，答对获释。现场只准回答一种颜色，其他人均可听见，事先可商议。帽色有 <span class="arithmatex">\(q\ge2\)</span> 种。(1) 设计保证至少 <span class="arithmatex">\(N-1\)</span> 人正确的策略并证明最优；(2) 比较100人两色、三色版本，给出一次解码例子。</p>
@@ -4329,7 +4278,6 @@ A_{n-2}&amp;=A_{n-4}+2B_{n-3},
 100人两色时，第一人报告其余99人的红帽数奇偶，保证99人；若各帽独立均匀，第一人自己答对概率为 <span class="arithmatex">\(1/2\)</span>。三色仍保证99人，第一人答对概率 <span class="arithmatex">\(1/3\)</span>。统一红0、绿1、蓝2：若第一人报告总和余2，而某人看见其余98人总分103，则自己编码为 <span class="arithmatex">\((2-103)\bmod3=1\)</span>，即绿帽，因为 <span class="arithmatex">\(103+1=104\equiv2\pmod3\)</span>。</p>
 <p>首人传的是他能看见的 <span class="arithmatex">\(N-1\)</span> 顶帽子的和，不包含他自己的未知颜色。<a href="#problem-51b5d35da8f6">Q49 · 彩虹帽子</a>禁止这条现场信道，必须把不同总和假设分派给不同人；两者不能互相借用通信权限。</p>
 </details>
-<p><span id="q36"></span></p>
 <h3 id="problem-51b5d35da8f6">Q49 · 彩虹帽子<a class="headerlink" href="#problem-51b5d35da8f6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：模数总和编码：无通信的余数假设覆盖</p>
 <p><strong>题目</strong>：7 名囚徒获得明天获释的机会。行刑者将在每人头上放一顶帽子，帽子可以是彩虹七色中的任意一种，颜色完全由行刑者随意决定。每名囚徒能看到其他 6 人的帽色，但看不到自己的。他们之间不得以任何形式交流，否则立即处死。然后每名囚徒写下对自己帽色的猜测。<strong>若至少一人猜对</strong>，所有人立即获释；否则全部处死。他们有一晚上商量策略。存在保证他们获释的策略吗？</p>
@@ -4358,7 +4306,6 @@ g_s\equiv s-\sum_{k\ne s}x_k\equiv x_s\pmod7.
 <p>第 <span class="arithmatex">\(i\)</span> 人只见 <span class="arithmatex">\(x_{i+1},x_{i+2},\ldots\)</span>，把前 <span class="arithmatex">\(i\)</span> 位全填0就得到可由其观测确定的串 <span class="arithmatex">\(y^{(i)}\)</span>。它与真实串只可能在前 <span class="arithmatex">\(i\)</span> 位不同，故 <span class="arithmatex">\([y^{(i)}]=[x]\)</span>。所以每个人虽填入不同长度的前缀，却确实选中同一个预定代表；猜测规则 <span class="arithmatex">\(g_i=R([y^{(i)}])_i\)</span> 不依赖自己的未知帽色，也没有听取其他人的回答。</p>
 <p>错误集合恰为 <span class="arithmatex">\(\{i:x_i\ne R([x])_i\}\)</span>，按等价类定义有限。该有限数依配置而变，没有统一的常数上界；也不保证能算出最后一名错误者的编号。选择公理在这里用于同时给所有等价类选代表，不是对无限帽色求一个未定义的奇偶和。</p>
 </details>
-<p><span id="q54"></span></p>
 <h3 id="problem-1a0fad54c04c">Q51 · 蓝眼睛岛民<a class="headerlink" href="#problem-1a0fad54c04c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：公共知识起点与沉默归纳</p>
 <p><strong>题目</strong>：岛上 50 个聪明人，眼睛为蓝或棕色。规则：能百分之百确定自己眼睛为蓝色者，须当晚午夜自杀；岛上无镜子、无人可告知你的眼睛颜色，且你必须经逻辑推断确知。起初什么都没发生。某天外来者当众宣布"岛上至少有一个蓝眼睛的人"，之后会发生什么？</p>
@@ -4382,9 +4329,6 @@ g_s\equiv s-\sum_{k\ne s}x_k\equiv x_s\pmod7.
 <p><strong>概率阈值追问的模型。</strong> 仅说“相同先验概率”尚不足以给出唯一答案，还要说明眼色是否独立、先验联合分布、声明如何产生以及 <span class="arithmatex">\(p\)</span> 的取值。若补充独立 <span class="arithmatex">\(\operatorname{Bernoulli}(q)\)</span>、<span class="arithmatex">\(0&lt;q&lt;1\)</span>，记 <span class="arithmatex">\(\theta=p/100\)</span>，并规定后验达到 <span class="arithmatex">\(\theta\)</span> 即行动，则可给完整递推：对所有 <span class="arithmatex">\(2^{50}\)</span> 种配置赋先验权 <span class="arithmatex">\(q^k(1-q)^{50-k}\)</span>，公开声明后删除零蓝世界；每天每人在与其所见49顶眼色及公开历史一致的世界中计算自己为蓝的条件概率，判断当晚动作；听到实际动作集合后，删掉所有预测动作不一致的世界，再进入下一天。</p>
 <p>在该独立模型中，若 <span class="arithmatex">\(\theta\le q\)</span>，凡看见至少一蓝者的后验仍是 <span class="arithmatex">\(q\)</span>，看不见蓝者因声明后验为1，所以所有人第一晚都会行动（包括棕眼睛者）。若 <span class="arithmatex">\(q&lt;\theta\le1\)</span>，看到至少一蓝者在其“自己为棕”的世界尚未被排除前后验仍为 <span class="arithmatex">\(q\)</span>，被排除后跳到1；于是仍按 <span class="arithmatex">\(n\)</span> 蓝第 <span class="arithmatex">\(n\)</span> 晚的归纳进行。若眼色先验相关，观察别人的眼色即可改变自己的后验，不能套用这两种结论。</p>
 </details>
-<p><span id="q20"></span>
-<span id="q55"></span>
-<span id="problem-c62e5379be71"></span></p>
 <h3 id="problem-8c6abbcf065f">Q52 · 房间信号的唯一计数、缓存容量与等待时间<a class="headerlink" href="#problem-8c6abbcf065f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：唯一信号缓存与首步等待时间方程</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(N\ge2\)</span> 人分住不同房间，只能在事先约定策略。每次一人被带到公共房间，可读写其中的公共状态，回去后可记住自己的经历。有人正确宣布“所有人都来过”则全员获释，误报则全员受罚。</p>
@@ -4456,7 +4400,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 </details>
 <h2 id="sec-几何展开面积与覆盖">几何展开、面积与覆盖<a class="headerlink" href="#sec-几何展开面积与覆盖" title="Permanent link">&para;</a></h2>
 <p>用展开、中心对称、体积或缩放把几何限制转成可计算关系。</p>
-<p><span id="q52"></span></p>
 <h3 id="problem-b3a098b3f011">Q53 · 抛锚与游泳池水位<a class="headerlink" href="#problem-b3a098b3f011" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：浮力的重量排水与体积排水比较</p>
 <p><strong>题目</strong>：你坐在游泳池的小船上，把锚抛入水中，池水水位如何变化？</p>
@@ -4478,7 +4421,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 漂浮冰融化时，原来排水 <span class="arithmatex">\(m/\rho_w\)</span>，融水体积若也按相同液体密度计算，恰为 <span class="arithmatex">\(m/\rho_w\)</span>，因此理想模型中水位不变。海水和淡融水密度不同若要保留，则变化为 <span class="arithmatex">\(m(1/\rho_{\rm melt}-1/\rho_{\rm sea})\)</span>，淡水密度较低时有小幅增加；它与常见的等密度理想化答案使用不同精度。
 泳池便于假定固定容器、无水流出、无蒸发及相同水质，从排水体积直接推水位；同样条件下湖泊也遵守同一结论，容器名称本身没有改变浮力规律。</p>
 </details>
-<p><span id="q39"></span></p>
 <h3 id="problem-bd295f3981a9">Q54 · 涂漆小立方的分层计数与比例极限<a class="headerlink" href="#problem-bd295f3981a9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：内外补集与角棱面分层</p>
 <p><strong>题目</strong>：一个 <span class="arithmatex">\( 4\times4\times4 \)</span> 的立方体由 <span class="arithmatex">\( 1\times1\times1 \)</span> 小立方组成。在外表面涂漆后，有多少个小立方上有漆？</p>
@@ -4506,7 +4448,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 \]</div>
 <p>涂漆块主要随表面积 <span class="arithmatex">\(n^2\)</span> 增长，而总块数随体积 <span class="arithmatex">\(n^3\)</span> 增长。<span class="arithmatex">\(n=1\)</span> 时唯一小块有六个面涂漆，需单独处理，不套上述分层公式。</p>
 </details>
-<p><span id="q40"></span></p>
 <h3 id="problem-a9cd0844ee3a">Q55 · 蚂蚁走立方体对角<a class="headerlink" href="#problem-a9cd0844ee3a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：表面展开的平面最短路</p>
 <p><strong>题目</strong>：蚂蚁要从体积 <span class="arithmatex">\( 1\ \text{m}^3 \)</span> 的立方体的一个角走到对角，沿表面走最短路径要走多远？</p>
@@ -4531,7 +4472,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 \]</div>
 <p>它们对应选择哪两边合并成展开矩形的一边；与只沿棱的 <span class="arithmatex">\(a+b+c\)</span>、穿内部的 <span class="arithmatex">\(\sqrt{a^2+b^2+c^2}\)</span> 分属不同路径约束。</p>
 </details>
-<p><span id="q56"></span></p>
 <h3 id="problem-4ab27fe26d03">Q56 · 平分大矩形减小矩形<a class="headerlink" href="#problem-4ab27fe26d03" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：中心对称等分与面积连续平移</p>
 <p><strong>题目</strong>：大矩形内完全包含一个小矩形，且两者共用一条直边。画一条直线平分"大矩形减去小矩形"的面积。</p>
@@ -4575,7 +4515,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 <p>两车相对接近速度是 <span class="arithmatex">\(u+v\)</span>，所以相遇用时 <span class="arithmatex">\(T=D/(u+v)\)</span>。只要苍蝇在这段时间一直以速度 <span class="arithmatex">\(w\)</span> 飞，无论折返多少次，总路程都是 <span class="arithmatex">\(wT=wD/(u+v)\)</span>。
 本题 <span class="arithmatex">\(T=60/(30+30)=1\)</span> 小时，苍蝇飞45英里。把每段折返的长度相加会得到等比级数，但总时间守恒已把所有段一次合并，不必先计算无穷多次相遇。</p>
 </details>
-<p><span id="q3"></span></p>
 <h3 id="problem-8d9f7b030ddf">Q60 · 四人过桥<a class="headerlink" href="#problem-8d9f7b030ddf" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：转运方案分类与最短总时间</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(C\)</span>、<span class="arithmatex">\(D\)</span> 四人要过一条河，唯一的通道是一座旧桥，桥最多同时承 2 人。天黑无火把不能过桥，而他们只有一支火把，所以每次只能按较慢者的速度行走。<span class="arithmatex">\(A\)</span> 最慢需 10 分钟，<span class="arithmatex">\(B\)</span> 需 5 分钟，<span class="arithmatex">\(C\)</span> 需 2 分钟，<span class="arithmatex">\(D\)</span> 需 1 分钟。全部过桥最短需要多少时间？</p>
@@ -4606,7 +4545,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 <p>这也给四人的通式 <span class="arithmatex">\(\min(a+3b+d,2a+b+c+d)\)</span>。其下界可按最慢两人是否同过分类：若同过，要把火把送回且最终送走两快者，额外至少需一次 <span class="arithmatex">\(a\)</span> 和三次 <span class="arithmatex">\(b\)</span>；若分开过，两次慢人过桥至少花 <span class="arithmatex">\(c+d\)</span>，两次必要返回至少 <span class="arithmatex">\(2a\)</span>，最后余下两快者过桥至少 <span class="arithmatex">\(b\)</span>。上述两构造分别达到对应下界。
 本题 <span class="arithmatex">\((a,b,c,d)=(1,2,5,10)\)</span>，两式为17、19，故最少17分钟。具体是C、D过2分钟，D回1分钟，A、B过10分钟，C回2分钟，C、D再过2分钟。</p>
 </details>
-<p><span id="q42"></span></p>
 <h3 id="problem-00e056681cfb">Q61 · 两圈平均时速 60 的悖论<a class="headerlink" href="#problem-00e056681cfb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：等路程耗时相加的调和平均</p>
 <p><strong>题目</strong>：赛道一圈 1 英里。第一圈平均 <span class="arithmatex">\(30 mph\)</span>，第二圈需多快才能使两圈平均时速达到 <span class="arithmatex">\(60 mph\)</span>？</p>
@@ -4627,7 +4565,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 <p>本题第一圈 <span class="arithmatex">\(v_1=30\)</span>，目标60。由时间看，两英里以60跑需2分钟，第一圈已花2分钟，第二圈没有正时间可用；由公式看，<span class="arithmatex">\(v_2=\bar vv_1/(2v_1-\bar v)\)</span> 的分母为零，所以任何有限速度均做不到，只能在 <span class="arithmatex">\(v_2\to\infty\)</span> 时逼近60。
 若第二圈上限120，平均速度随 <span class="arithmatex">\(v_2\)</span> 增加而增加，最大为 <span class="arithmatex">\(2\cdot30\cdot120/(30+120)=48\)</span> 英里/小时。两速度的算术平均只适用于等时段，等路程的两个时段耗时不同，不能直接平均速度。</p>
 </details>
-<p><span id="q37"></span></p>
 <h3 id="problem-aca0ce1aea85">Q62 · 钟面指针夹角（3:15）<a class="headerlink" href="#problem-aca0ce1aea85" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：角速度差与模三百六十方程</p>
 <p><strong>题目</strong>：3:15 时，时钟的时针与分针之间夹角是多少度？</p>
@@ -4650,7 +4587,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 </details>
 <h2 id="sec-费米估计与数量级模型">费米估计与数量级模型<a class="headerlink" href="#sec-费米估计与数量级模型" title="Permanent link">&para;</a></h2>
 <p>每个估计先定义单位与口径，把输入假设的范围传到结果。</p>
-<p><span id="q59"></span></p>
 <h3 id="problem-7cd3b32ac265">Q63 · 费米估计：加油站数量<a class="headerlink" href="#problem-7cd3b32ac265" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：年度需求除以单站吞吐量</p>
 <p><strong>题目</strong>：估计一个国家或城市的加油站数量，给出可推广的需求与单站吞吐量模型，并用一组明确假设示范。</p>
@@ -4659,7 +4595,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 <p>先估总加油需求，再除以单站服务能力。若人口 <span class="arithmatex">\(P\)</span>、人均车辆数 <span class="arithmatex">\(c\)</span>、每车年加油次数 <span class="arithmatex">\(f\)</span>，则年加油需求为 <span class="arithmatex">\(Pcf\)</span> 次；若每站每天可完成 <span class="arithmatex">\(s\)</span> 次、每年营业 <span class="arithmatex">\(d\)</span> 天，站数估计为 <span class="arithmatex">\(N\approx Pcf/(sd)\)</span>。也可直接用“平均每站服务多少人口”合并参数。
 例如仅作演算假设：人口6000万、每5000人支撑一站，则估 <span class="arithmatex">\(60000000/5000=12000\)</span> 站。若服务人口在4000至8000间，区间便为7500至15000站。人口、车拥有率、跨区交通和单站容量各自影响哪一个参数，应在解释时对应说明；这是模型中的假设值，并非把它们当成当前统计事实。</p>
 </details>
-<p><span id="q60"></span></p>
 <h3 id="problem-cfb40989458b">Q64 · 费米估计：钢琴调音师<a class="headerlink" href="#problem-cfb40989458b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：逻辑推理｜<strong>副题型</strong>：服务总需求除以人员生产率</p>
 <p><strong>题目</strong>：估计牛津有多少位钢琴调音师。</p>
@@ -4693,7 +4628,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
 </details>
 <h2 id="sec-有限分装的概率优化">有限分装的概率优化<a class="headerlink" href="#sec-有限分装的概率优化" title="Permanent link">&para;</a></h2>
 <p>把抽样机制写成目标函数，先固定容量优化成分，再比较整数边界。</p>
-<p><span id="q53"></span></p>
 <h3 id="problem-99b9d3b58557">Q67 · 两袋取球的最优分装<a class="headerlink" href="#problem-99b9d3b58557" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：不变量与对称性｜<strong>副题型</strong>：固定袋容量端点优化与整数分配递推</p>
 <p><strong>题目</strong>：100 个球（50 白 50 黑）与两个袋子，你可任意分装；随后我任选一袋并从中任取一球，取黑我胜、取白你胜。你如何分装使获胜概率最大？</p>
@@ -4855,8 +4789,6 @@ E(21,0)=\frac{157888813}{705432}\approx223.8186147\text{ 天}.
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

@@ -3627,7 +3627,6 @@
 </table>
 <h2 id="sec-一期权定价基础与BS模型">一、模型假设与 BS 推导<a class="headerlink" href="#sec-一期权定价基础与BS模型" title="Permanent link">&para;</a></h2>
 <p>先明确支付、可交易工具与自融资条件，再从复制或风险中性期望得到定价方程；区分历史动态与定价测度。</p>
-<p><span id="q269"></span></p>
 <h3 id="problem-18cc2f2242ca">Q1006 · BS 公式的假设<a class="headerlink" href="#problem-18cc2f2242ca" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：可复制市场假设与欧式对数正态定价</p>
 <p><strong>题目</strong>：Black-Scholes 公式背后有哪些假设？</p>
@@ -3640,7 +3639,6 @@ C=S\Phi(d_1)-Ke^{-r\tau}\Phi(d_2).
 <p>主要假设为：股票按连续路径 GBM 演化，常数比例波动率已知；无风险借贷利率已知且常数；可以连续、自融资地交易股票和现金，证券可分割且允许所需卖空、借贷；没有交易成本、税收及资金约束；不存在套利，复制策略满足可容许性与可积性条件。不分红是该写法的假设，连续分红可用 <span class="arithmatex">\(q\)</span> 扩展。</p>
 <p>真实漂移 <span class="arithmatex">\(\mu\)</span> 不必等于 <span class="arithmatex">\(r\)</span>，它会在 Delta 复制中消去。随机波动率、跳跃、离散交易或融资约束会改变复制问题。确定性时变利率、波动率则仍可借积分利率、积分方差推广，不必一律抛弃定价框架。</p>
 </details>
-<p><span id="q354"></span></p>
 <h3 id="problem-8da740308aed">Q1007 · 期权有哪些用途<a class="headerlink" href="#problem-8da740308aed" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：风险转移、观点敞口与现金流套利识别</p>
 <p><strong>题目</strong>：期权可以有什么用途？</p>
@@ -3666,11 +3664,6 @@ C=S\Phi(d_1)-Ke^{-r\tau}\Phi(d_2).
 <p>银行可能替客户做市，同时对冲库存，也可能有经授权的自营或相对价值交易；个人可以用保护性 put、备兑 call 对冲，也可能买期权投机。不能仅按“银行”或“个人”身份判定用途。
 “大多数参与者属于哪类”需要指定市场、时间与按成交量、资金或人数计算的口径，题面不足以给统一占比。评估某银行时，应看具体交易台、客户业务与持仓目的。</p>
 </details>
-<p><span id="q268"></span>
-<span id="q274"></span>
-<span id="q275"></span>
-<span id="problem-71f5734da422"></span>
-<span id="problem-0d25764bd6a7"></span></p>
 <h3 id="problem-6f1f915a8ab9">Q1008 · 从自融资复制到 Black–Scholes–Merton 方程<a class="headerlink" href="#problem-6f1f915a8ab9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：Itô 展开与扩散项匹配的自融资复制</p>
 <p><strong>题目</strong>：设股票价格满足 <span class="arithmatex">\(dS=\mu Sdt+\sigma SdW\)</span>，连续股息率为 <span class="arithmatex">\(q\)</span>，现金账户满足 <span class="arithmatex">\(dB=rBdt\)</span>，系数为常数。</p>
@@ -3707,9 +3700,6 @@ V(t,S)=e^{-r(T-t)}\mathbb E^Q[f(S_T)\mid S_t=S].
 \]</div>
 <p>在光滑性及可积增长条件下，Feynman–Kac 定理使该期望满足上面的 PDE 与 <span class="arithmatex">\(V(T,S)=f(S)\)</span>。不同收益共用 PDE，终端条件与空间边界必须随收益改变。风险中性动态是复制与无套利的结果，不能直接把现实概率当成 <span class="arithmatex">\(Q\)</span>。</p>
 </details>
-<p><span id="q311"></span>
-<span id="q325"></span>
-<span id="problem-e1a75bdcae6e"></span></p>
 <h3 id="problem-67a71f8c0ff6">Q1009 · 历史漂移、均值回归与完备市场定价<a class="headerlink" href="#problem-67a71f8c0ff6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：Girsanov 漂移替换与路径二次变差</p>
 <p><strong>题目</strong>：可交易不分红股票的历史动态为 <span class="arithmatex">\(dS=b(t,S)dt+\sigma S\,dW^P\)</span>。</p>
@@ -3735,7 +3725,6 @@ dW^Q=dW^P+\lambda_tdt,\qquad
 <p><strong>3. 研究观点。</strong> 同 <span class="arithmatex">\(S,K,T,r,q,\sigma\)</span> 的两个 BS/两态完备模型给同一期权价格，真实跑赢观点不改变复制成本。若存在不同跳跃/尾部分布、股息、信用、融资、借券约束或不完备风险，仅“当前价格和历史波动率相同”则不足以推出期权同价。</p>
 <p><strong>4. 同一噪声的限制。</strong> 若 <span class="arithmatex">\(dS_i/S_i=\mu_i dt+\sigma dW\)</span>，同一时刻持有等金额多头一只、空头另一只，初始净值与扩散敞口均为 0，漂移为两者差乘该金额。若 <span class="arithmatex">\(\mu_1-\mu_2\)</span> 已知且非零，就有瞬时套利。因此不同历史漂移的单资产比较不能随意拼成这种完全相同噪声的联合无套利市场。</p>
 </details>
-<p><span id="q270"></span></p>
 <h3 id="problem-be688a348e02">Q1010 · 风险中性推导 BS 公式<a class="headerlink" href="#problem-be688a348e02" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：风险中性对数正态截断积分</p>
 <p><strong>题目</strong>：用风险中性概率测度推导不付息股票欧式 call 的 Black-Scholes 公式。</p>
@@ -3760,7 +3749,6 @@ V(t) = e^{-r\tau}E[V(T)] = SN(d_1) - Ke^{-r\tau}N(d_2)\;\blacksquare
 \]</div>
 <p>由推导过程还可见：<span class="arithmatex">\( N(d_2) = 1 - N(-d_2) \)</span> 正是风险中性测度下 call 到期实值的概率。</p>
 </details>
-<p><span id="q273"></span></p>
 <h3 id="problem-6ff6f73d3549">Q1011 · 一般收益的 BS 边界与闭式公式验证<a class="headerlink" href="#problem-6ff6f73d3549" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：GBM 显式解、收益渐近与 PDE 代回</p>
 <p><strong>题目</strong>：设风险中性动态 <span class="arithmatex">\(dS=(r-q)Sdt+\sigma SdW^Q\)</span>，<span class="arithmatex">\(\sigma&gt;0\)</span>，<span class="arithmatex">\(\tau=T-t\)</span>。</p>
@@ -3817,7 +3805,6 @@ C=Se^{-q\tau}\Phi(d_1)-Ke^{-r\tau}\Phi(d_2),
 </details>
 <h2 id="sec-期权无套利关系与价格性质">二、无套利关系与价格性质<a class="headerlink" href="#sec-期权无套利关系与价格性质" title="Permanent link">&para;</a></h2>
 <p>由逐状态现金流恒等式与收益支配建立平价、套利界和凸性，再讨论期限、分红及参数极限。</p>
-<p><span id="q265"></span></p>
 <h3 id="problem-77937ce8422f">Q1012 · 看涨看跌平价<a class="headerlink" href="#problem-77937ce8422f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：终值恒等式与预付远期复制</p>
 <p><strong>题目</strong>：写出并证明<strong>不付息股票</strong>欧式期权的看涨看跌平价。</p>
@@ -3843,7 +3830,6 @@ S-K\le C_A-P_A\le S-Ke^{-r\tau}.
 \]</div>
 <p>提前行权权利使 put 可能带额外溢价；带分红或负利率时，应重新推导相应界。</p>
 </details>
-<p><span id="q281"></span></p>
 <h3 id="problem-3cac30a49a9f">Q1013 · 有界看跌与无界看涨为何能同价<a class="headerlink" href="#problem-3cac30a49a9f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：远期平值平价与尾部可积性</p>
 <p><strong>题目</strong>：不付息股票上，执行价等于远期价的欧式 call 与 put 同价，但 put 的收益有界、call 无界，如何解释？说明 BS 终值密度的尾部衰减、肥尾模型的含义，以及 Bachelier 模型下是否仍有这一问题。</p>
@@ -3861,7 +3847,6 @@ f(s)=\frac1{sw\sqrt{2\pi}}\exp\left[-\frac{(\log s-m)^2}{2w^2}\right],\quad s&gt
 <p>其右尾比任何幂函数衰减快，所以所有正阶矩有限，call 可积；但比形如 <span class="arithmatex">\(e^{-cs}\)</span> 的指数尾慢，不能说其对股价的尾部是高斯衰减。“肥尾”必须相对于某个基准说明；幂尾、混合分布或跳跃模型会赋予极端变化更高概率，是否可定价还需检查相关矩和鞅条件。</p>
 <p><strong>正态终值。</strong> Bachelier 模型中 <span class="arithmatex">\(S_T=F+vZ\)</span> 允许负值，所以 put 也不再以 <span class="arithmatex">\(K\)</span> 为上界：当 <span class="arithmatex">\(S_T\to-\infty\)</span> 时 <span class="arithmatex">\((K-S_T)^+\to\infty\)</span>。两个收益均可积，平价仍成立；在 <span class="arithmatex">\(K=F\)</span> 时由正态对称性，call、put 都为 <span class="arithmatex">\(Dv/\sqrt{2\pi}\)</span>。</p>
 </details>
-<p><span id="q267"></span></p>
 <h3 id="problem-13f9d4bacffe">Q1014 · 两只看跌价格成比例时的套利判据<a class="headerlink" href="#problem-13f9d4bacffe" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：零成本组合的逐状态收益与支持条件</p>
 <p><strong>题目</strong>：同一不付息股票、同到期日的欧式 put，行权价 80、90 的价格分别为 8、9。是否存在套利？构造零成本组合逐状态判断，并区分一般非负股价模型与非退化 Black–Scholes 模型。</p>
@@ -3880,7 +3865,6 @@ s,&amp;0\le s&lt;80,\\
 <p>但一般非负股票模型下，仅由两个报价不能断言存在套利。反例：零利率时令风险中性 <span class="arithmatex">\(S_T\)</span> 以 0.1 概率为 0、以 0.9 概率为 100，则股票现价为 90，两 put 价格恰为 <span class="arithmatex">\(0.1\cdot80=8\)</span>、<span class="arithmatex">\(0.1\cdot90=9\)</span>，组合在所有可能状态均为 0，并无套利。
 这两个报价满足 <span class="arithmatex">\(P(80)/80=P(90)/90\)</span>，没有违反非严格凸性；能否判为套利还要看严格盈利状态是否可能发生。</p>
 </details>
-<p><span id="q266"></span></p>
 <h3 id="problem-f1462b98c8a6">Q1015 · 不分红美式看涨的延后行权证明<a class="headerlink" href="#problem-f1462b98c8a6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：平价保护价值、支配策略与 Jensen</p>
 <p><strong>题目</strong>：股票不分红，利率 <span class="arithmatex">\(r\ge0\)</span>。证明美式 call 可不提前行权而持有到期，并给出平价、替代策略及风险中性凸性三种解释。等号、负利率及分红时应如何判断？</p>
@@ -3907,11 +3891,6 @@ e^{-r\tau}\mathbb E[f(S_T)\mid S_t]
 <p>同样论证适用于任意拟提前行权时点，故持有到期是最优策略之一，美式与欧式同价。退化模型可以出现行权与继续同价，不能一概把所有不等式写成严格。</p>
 <p>负利率下行权价的贴现方向改变；分红时持股可获得股息，保留期权可能错失这笔现金流。离散股息可能使除息前行权有利，连续股息率模型则可能有持续的提前行权区域。put 的保护与融资结构不同，也可能提前行权。</p>
 </details>
-<p><span id="q280"></span>
-<span id="q283"></span>
-<span id="q300"></span>
-<span id="problem-618a5885bb76"></span>
-<span id="problem-ff2def9be1c0"></span></p>
 <h3 id="problem-a5fe85fdcbf6">Q1016 · 看涨价格界、垂直价差与期限条件<a class="headerlink" href="#problem-a5fe85fdcbf6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：逐点支付支配、静态超复制与条件Jensen</p>
 <p><strong>题目</strong>：股票不付息、价格非负，现金可按常数利率 <span class="arithmatex">\(r\)</span> 双向借贷。记欧式看涨价格为 <span class="arithmatex">\(C(K,T)\)</span>，<span class="arithmatex">\(D=e^{-r\tau}\)</span>。</p>
@@ -3990,7 +3969,6 @@ e^{-r\delta}E^Q[(S_{T_2}-K)^+\mid\mathcal F_{T_1}]
 <p>最后一步使用 <span class="arithmatex">\(r\ge0\)</span>。再贴现到今天取期望，即 <span class="arithmatex">\(C(K,T_2)\ge C(K,T_1)\)</span>。也可用美式的行权集合随到期日扩张，以及无分红非负利率下美式call与欧式同价来证明。</p>
 <p>若分红或允许负利率，条件远期或行权价贴现方向改变，第二个不等式可能失败。例如 <span class="arithmatex">\(\sigma=0,r=0,q&gt;0\)</span>，且两个期限均实值，欧式call为 <span class="arithmatex">\(Se^{-q\tau}-K\)</span>，反而随期限下降。这里比较固定今天现价的不同到期合约，不是沿随机现价路径的价格单调性。</p>
 </details>
-<p><span id="q285"></span></p>
 <h3 id="problem-a6c8e6b6c10b">Q1017 · 执行价凸性、蝶式与现货凸性<a class="headerlink" href="#problem-a6c8e6b6c10b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：凸收益的静态组合与 GBM 比例耦合</p>
 <p><strong>题目</strong>：证明欧式看涨价格关于执行价凸，并描述草图。为什么到期收益非负的可交易组合此前价格不能为负？列出凸函数的斜率性质，并在 BS 模型中证明看涨关于现货也凸。</p>
@@ -4005,7 +3983,6 @@ e^{-r\delta}E^Q[(S_{T_2}-K)^+\mid\mathcal F_{T_1}]
 <p>草图随 <span class="arithmatex">\(K\)</span> 下降，斜率非减（越来越接近 0）；<span class="arithmatex">\(K=0\)</span> 时价格为预付远期 <span class="arithmatex">\(S\)</span>，<span class="arithmatex">\(K\to\infty\)</span> 时趋 0。凸函数的割线斜率非减；在可微点切线位于图像下方，二次可微时二阶导非负。等间距的蝶式 <span class="arithmatex">\(C(K-h)-2C(K)+C(K+h)\)</span> 因此非负。</p>
 <p>BS 中可将终值写为 <span class="arithmatex">\(S_T=SM\)</span>，其中正随机因子 <span class="arithmatex">\(M\)</span> 的分布不依赖当前 <span class="arithmatex">\(S\)</span>。固定 <span class="arithmatex">\(M\)</span>，<span class="arithmatex">\((SM-K)^+\)</span> 关于 <span class="arithmatex">\(S\)</span> 凸，取贴现期望仍凸。该证明依赖这种比例耦合；不能仅由收益凸就不加条件地推广到任意现货依赖模型。</p>
 </details>
-<p><span id="q264"></span></p>
 <h3 id="problem-c08c7e704eff">Q1018 · 期权价格方向<a class="headerlink" href="#problem-c08c7e704eff" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：收益支配、比较静态与行权集合包含</p>
 <p><strong>题目</strong>：当 <span class="arithmatex">\( S \)</span>、<span class="arithmatex">\( K \)</span>、<span class="arithmatex">\( \tau \)</span>、<span class="arithmatex">\( \sigma \)</span>、<span class="arithmatex">\( r \)</span>、<span class="arithmatex">\( D \)</span> 变化时，香草欧式/美式期权的价格如何变化？</p>
@@ -4070,7 +4047,6 @@ e^{-r\delta}E^Q[(S_{T_2}-K)^+\mid\mathcal F_{T_1}]
 </table>
 <p><strong><span class="arithmatex">\(\tau\)</span> 对欧式期权的影响不确定</strong>：若两个到期日之间有大额派息，在除息日前到期的短期欧式 call 可能比长期的更值钱；深度实值欧式 put 也是短期更值钱（能更早行权，货币时间价值）。<strong>注意</strong>：这张比较表假设其他因素不变——现实中各因素相关（如大幅降息常引发股市上涨、推高股价，对期权价值产生相反影响）。</p>
 </details>
-<p><span id="q276"></span></p>
 <h3 id="problem-de229d2bd161">Q1019 · 香草与数字期权的草图特征<a class="headerlink" href="#problem-de229d2bd161" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：导数符号、端点极限与到期收益收敛</p>
 <p><strong>题目</strong>：在常参数 BS 模型中，说明应怎样画出：香草 call、put 关于现货的曲线；数字 call、put 关于现货的曲线；香草价格关于波动率的曲线。无分红且 <span class="arithmatex">\(r\ge0\)</span> 时，剩余期限缩短会怎样改变香草 call 曲线？给出足以定位草图的斜率、曲率和极限。</p>
@@ -4112,7 +4088,6 @@ e^{-r\delta}E^Q[(S_{T_2}-K)^+\mid\mathcal F_{T_1}]
 <p>无分红且 <span class="arithmatex">\(r\ge0\)</span>，固定今天现价比较不同到期日时，长 call 不低于短 call。因此从一年、半年缩短到一天时，价格曲线逐渐下降并贴近折线 <span class="arithmatex">\((S-K)^+\)</span>；到期前折角被平滑，到期时 Delta 形成阶梯。不能据此断言沿随机现价路径，价格一定随日历时间下降。</p>
 <p>固定 <span class="arithmatex">\(\tau,S,K\)</span>，香草 call、put 的 Vega 为正，所以关于 <span class="arithmatex">\(\sigma\)</span> 都递增；但其二阶导 Volga 可变号，不能一概画成凸曲线。零波动边界为 <span class="arithmatex">\((Se^{-q\tau}-Ke^{-r\tau})^+\)</span> 与其看跌对应值；无分红的大波动 call 极限为 <span class="arithmatex">\(S\)</span>，put 极限为 <span class="arithmatex">\(Ke^{-r\tau}\)</span>。</p>
 </details>
-<p><span id="q279"></span></p>
 <h3 id="problem-5f68ef2c1bce">Q1020 · BS 看涨的零波动、大波动与长期极限<a class="headerlink" href="#problem-5f68ef2c1bce" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：正态 CDF 渐近与确定性终值极限</p>
 <p><strong>题目</strong>：不分红股票，<span class="arithmatex">\(S,K&gt;0\)</span>、<span class="arithmatex">\(r\ge0\)</span>。在 BS 模型中求：</p>
@@ -4137,11 +4112,6 @@ C\longrightarrow S.
 </details>
 <h2 id="sec-平值近似与正态终值">三、平值近似与正态终值<a class="headerlink" href="#sec-平值近似与正态终值" title="Permanent link">&para;</a></h2>
 <p>把平值收益化为正态正部积分，区分绝对标准差、比例波动率、年化参数及名义金额。</p>
-<p><span id="q272"></span>
-<span id="q278"></span>
-<span id="q324"></span>
-<span id="problem-f03afb4cdf74"></span>
-<span id="problem-0083037ca303"></span></p>
 <h3 id="problem-050c8763773f">Q1021 · 平值期权的价格展开、隐波反解与名义换算<a class="headerlink" href="#problem-050c8763773f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：平值BS恒等式、中心展开与单调反演</p>
 <p><strong>题目</strong>：不分红股票先取 <span class="arithmatex">\(r=0\)</span>、<span class="arithmatex">\(K=S&gt;0\)</span>，到期剩余 <span class="arithmatex">\(\tau&gt;0\)</span>，总比例波动率 <span class="arithmatex">\(w=\sigma\sqrt\tau\)</span>。</p>
@@ -4191,7 +4161,6 @@ C=v\int_0^\infty z\phi(z)dz=\frac v{\sqrt{2\pi}},\qquad
 <p>若利率低但非零，<span class="arithmatex">\(C-P=S(1-e^{-r\tau})\)</span>，两者不再必相等。近似需同时检查 <span class="arithmatex">\(w\)</span> 小及利率项 <span class="arithmatex">\(|r|\tau\)</span> 相对波动贡献足够小；不满足时用完整公式。</p>
 <p>若没有期权报价，可用历史对数收益标准差按交易日数平方根年化，或用已实现方差、GARCH等估计历史/预测波动率；这些不自动等于隐含波动率，也不能从历史数据唯一恢复风险中性权利金。</p>
 </details>
-<p><span id="q282"></span></p>
 <h3 id="problem-87f129aa27bd">Q1022 · 正态股价下 ATM 看涨的期望价值<a class="headerlink" href="#problem-87f129aa27bd" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：正态正部积分与同平值价格校准</p>
 <p><strong>题目</strong>：若 <span class="arithmatex">\(T\)</span> 时刻股价服从 <span class="arithmatex">\(N(S_0,\sigma^{2})\)</span>，到期日为 <span class="arithmatex">\(T\)</span> 的平价欧式看涨期权的期望价值是多少？</p>
@@ -4241,7 +4210,6 @@ S_{T}=S_{0}+\sigma N(0,1),
 </details>
 <h2 id="sec-二希腊字母与对冲">四、希腊字母与动态对冲<a class="headerlink" href="#sec-二希腊字母与对冲" title="Permanent link">&para;</a></h2>
 <p>用偏导描述局部风险，并明确波动率单位、资金成本、调仓时点与离散对冲误差。</p>
-<p><span id="q288"></span></p>
 <h3 id="problem-6eaeaf45b3d7">Q1023 · Delta 对冲实践<a class="headerlink" href="#problem-6eaeaf45b3d7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：Delta 股票头寸与现金账户自融资</p>
 <p><strong>题目</strong>：你刚买入 GM 股票的欧式 call，打算动态对冲以消除 GM 股价波动的风险。如何对冲？对冲后 GM 股价突然上涨，你如何再平衡？</p>
@@ -4256,9 +4224,6 @@ S\uparrow \Rightarrow d_1\uparrow \Rightarrow \Delta\uparrow
 <p><strong>局限</strong>：delta 对冲只复制了期权的价值与斜率（一阶）；要对冲曲率，还需对冲 <strong>gamma</strong>。</p>
 <p>在连续路径、无摩擦且模型准确的 BS 理想条件下，随时间自融资更新 Delta 已足以复制香草期权；Gamma 反映离散再平衡与跳跃时留下的二阶风险，用其他期权对冲 Gamma 是降低这些现实误差的方法。不能把“瞬时曲率未被固定股票头寸抵消”误读为“BS 动态 Delta 不能复制”。</p>
 </details>
-<p><span id="q286"></span>
-<span id="q287"></span>
-<span id="problem-08fe20503bef"></span></p>
 <h3 id="problem-51b863c9bdbd">Q1024 · 香草Delta的链式推导与平值到期极限<a class="headerlink" href="#problem-51b863c9bdbd" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：正态密度抵消、平价与Delta极限</p>
 <p><strong>题目</strong>：常参数BS模型中，<span class="arithmatex">\(S,K,\sigma,\tau&gt;0\)</span>，连续股息率为 <span class="arithmatex">\(q\)</span>。</p>
@@ -4302,7 +4267,6 @@ d_1=\left(\frac r\sigma+\frac\sigma2\right)\sqrt\tau.
 <p><strong>固定实值程度的极限。</strong> 若 <span class="arithmatex">\(S&gt;K\)</span> 固定，正的 <span class="arithmatex">\(\log(S/K)/(\sigma\sqrt\tau)\)</span> 主导，<span class="arithmatex">\(d_1\to+\infty\)</span>，call Delta趋1；若 <span class="arithmatex">\(S&lt;K\)</span>，则趋0。put的对应极限为0和 <span class="arithmatex">\(-1\)</span>。这说明短期期权的Delta曲线向执行价处的阶梯集中，而不是声称每条随机价格路径上的Delta随时间单调。</p>
 <p>有连续股息时，对半比较的自然基准为 <span class="arithmatex">\(e^{-q\tau}/2\)</span>：相对于它的方向由 <span class="arithmatex">\(d_1\)</span> 正负决定；相对于绝对数值 <span class="arithmatex">\(1/2\)</span> 还须保留前因子。若“平值”采用远期平值 <span class="arithmatex">\(K=Se^{(r-q)\tau}\)</span>，则 <span class="arithmatex">\(d_1=\sigma\sqrt\tau/2\)</span>，不同于现货平值。实际股票头寸与现金再平衡见<a href="#problem-6eaeaf45b3d7">Q1023 · Delta 对冲实践</a>。</p>
 </details>
-<p><span id="q290"></span></p>
 <h3 id="problem-be9178b51596">Q1025 · Delta 中性后的瞬时曲率收益与融资损益<a class="headerlink" href="#problem-be9178b51596" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：凸函数切线余项与自融资二阶展开</p>
 <p><strong>题目</strong>：买入不付息股票的欧式 call，并卖空 <span class="arithmatex">\(\Delta=C_S\)</span> 股。假设隐含波动率等参数不变。</p>
@@ -4328,9 +4292,6 @@ d\Pi_{\rm excess}
 \]</div>
 <p>若实际与模型波动率一致，这个理想连续对冲的超额漂移为 0；曲率收益被时间价值及资金成本平衡，所以不是套利。实际离散调仓、跳跃、隐波变动和成本还会产生额外损益。</p>
 </details>
-<p><span id="q289"></span>
-<span id="q294"></span>
-<span id="problem-c87bfe3b6ad6"></span></p>
 <h3 id="problem-1c2d1e74955f">Q1026 · Gamma 的期限集中、零曲率与对冲成本<a class="headerlink" href="#problem-1c2d1e74955f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：Delta 再求导、到期渐近与曲率损益</p>
 <p><strong>题目</strong>：在常参数 BS 模型中，讨论香草 call、put 的 Gamma。</p>
@@ -4355,7 +4316,6 @@ d\Pi_{\rm excess}
 <p><strong>2. 对冲。</strong> 一次小变动后 Delta 变化约为 <span class="arithmatex">\(\Gamma\,\Delta S\)</span>，因此高 Gamma 需要频繁、大量调仓。固定旧 Delta 的头寸在股价瞬时变动中保留约 <span class="arithmatex">\(\tfrac12\Gamma(\Delta S)^2\)</span> 的曲率损益。长 Gamma 的动态股票对冲倾向于上涨后卖、下跌后买，但期权本身通常付出时间价值与交易成本；短 Gamma 的调仓方向相反。临近到期 ATM 的 Gamma 尖峰使离散对冲误差、成交冲击与跳跃风险尤其突出。</p>
 <p><strong>3. 零 Gamma。</strong> 股票、现金及 <span class="arithmatex">\(aS+b\)</span> 型仿射支付的复制价值恒有 Gamma 为 0；同执行价、同到期的 long call、short put 合成远期，也恒为 0。更复杂期权可能只在个别状态出现拐点、Gamma 为 0，这不等于整个合约可当作仿射头寸处理。</p>
 </details>
-<p><span id="q291"></span></p>
 <h3 id="problem-240a33e517b1">Q1027 · 欧式 Theta 为正的条件与美式比较<a class="headerlink" href="#problem-240a33e517b1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：期限偏导公式与深实值渐近</p>
 <p><strong>题目</strong>：Theta 定义为当前日历时间偏导 <span class="arithmatex">\(V_t\)</span>，固定当前现价及其他参数。欧式 call、put 何时可能有正 Theta？美式期权又如何？说明所需利率、分红及时间齐次条件。</p>
@@ -4382,7 +4342,6 @@ d\Pi_{\rm excess}
 <p>可为正。负利率也会改变普通符号结论。</p>
 <p>常参数、时间齐次且允许从今天起随时行权的美式合约，增加剩余期限只扩张可选停止时刻集合，价值不减，因此对 <span class="arithmatex">\(\tau\)</span> 的导数非负、Theta 非正；立即行权区可能为 0。若有绝对日期的离散股息或时变参数，应先固定比较口径，不能无条件套这个时间齐次结论。</p>
 </details>
-<p><span id="q292"></span></p>
 <h3 id="problem-06bf3f5ca266">Q1028 · Vega<a class="headerlink" href="#problem-06bf3f5ca266" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：波动率偏导与密度峰值比较</p>
 <p><strong>题目</strong>：写出欧式期权的 vega；哪类期权对波动率变化最敏感？</p>
@@ -4400,7 +4359,6 @@ K=S\exp[(r-q+\sigma^2/2)\tau].
 \]</div>
 <p>因此通常在平值附近最敏感；不能把所有不同名义、现价或期限的期权只按“是否 ATM”比较。固定现价和执行价，<span class="arithmatex">\(\tau\downarrow0\)</span> 时 Vega 趋 0，包括 ATM 情形；跨期限的全局单调性还受分红、贴现和实值程度影响。</p>
 </details>
-<p><span id="q296"></span></p>
 <h3 id="problem-88eb4cbc5c23">Q1029 · 期权价格齐次性与 Vega、Gamma 的缩放<a class="headerlink" href="#problem-88eb4cbc5c23" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：现价执行价同比缩放的一次齐次性</p>
 <p><strong>题目</strong>：其他条件相同，现价、执行价均为 100 的平值 call 与均为 200 的平值 call，哪只 Vega 更高？先不用闭式公式解释。若两只股票随后都上涨或下跌 <span class="arithmatex">\(10\%\)</span>，比例是否改变？两只 Gamma 又怎样比较？</p>
@@ -4419,7 +4377,6 @@ C(aS,aK,\sigma,\tau)=aC(S,K,\sigma,\tau).
 \]</div>
 <p>因此 200 那只的 Gamma 是另一只的一半。比较的是每一份、相同股数名义；若改为相同货币名义本金，还需按合约份数再调整。</p>
 </details>
-<p><span id="q297"></span></p>
 <h3 id="problem-e2a8c1fa0da6">Q1030 · Vega 中性与 Gamma 中性的条件<a class="headerlink" href="#problem-e2a8c1fa0da6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：线性敏感度约束与同期限比例恒等式</p>
 <p><strong>题目</strong>：如何用香草 call、put 调整组合至 Vega 中性？在 BS 模型中它是否自动 Gamma 中性？分别讨论共同到期日、不同到期日，以及不同执行价使用不同隐波的情形。若不完全相信 BS，该结论是否仍成立？</p>
@@ -4442,7 +4399,6 @@ n=-\nu_0/\nu_h
 \]</div>
 <p>通常不为 0。若各执行价采用不同隐波、或波动参数是整条曲面的特定扰动，比例也不同。跳跃、随机波动率及模型偏差下，更不能把 Vega 中性当成 Gamma 中性，须分别计算并以两个独立约束对冲。</p>
 </details>
-<p><span id="q293"></span></p>
 <h3 id="problem-f7fc203c3ab0">Q1031 · Monte Carlo Greeks 的差分、路径与似然比法<a class="headerlink" href="#problem-f7fc203c3ab0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：希腊字母与对冲｜<strong>副题型</strong>：参数微分位置、score 权重与方差控制</p>
 <p><strong>题目</strong>：给定定价方法，比较有限差分、路径微分、似然比法计算 Greeks 的条件与优缺点。写出 BS 中 Delta、Gamma 与波动率 score 的似然比权重；解释 Malliavin 微积分和重要性抽样如何帮助不连续收益。</p>
@@ -4485,7 +4441,6 @@ Z=\frac{\log(x/S)-(r-\sigma^2/2)\tau}{\sigma\sqrt\tau}.
 </details>
 <h2 id="sec-三奇异期权与期权组合">五、触障与多资产期权<a class="headerlink" href="#sec-三奇异期权与期权组合" title="Permanent link">&para;</a></h2>
 <p>先区分终值事件与路径触碰、现金支付与资产支付，再用反射、停止鞅或计价基准变换定价。</p>
-<p><span id="q307"></span></p>
 <h3 id="problem-bd8498d7a095">Q1032 · 有限期触碰支付与到期数字的比较<a class="headerlink" href="#problem-bd8498d7a095" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：事件包含、强马尔可夫性与反射</p>
 <p><strong>题目</strong>：利率为 0、不分红股票现价 20。A 在未来一年内首次超过 30 即支付 1，B 仅在年末股价超过 30 时支付 1。比较两者价格。分别讨论零漂移算术 Brownian 与零利率 GBM，并推广写出带漂移对数过程的触碰概率。</p>
@@ -4510,7 +4465,6 @@ P\!\left(\sup_{0\le u\le\tau}X_u\ge a\right)
 \]</div>
 <p>第一项是终值已在障碍上方的概率；第二项由将终值仍在下方的触障路径反射，配上漂移密度比 <span class="arithmatex">\(e^{2ma/\sigma^2}\)</span> 得到。GBM 取 <span class="arithmatex">\(m=-\sigma^2/2,H/S=30/20,\tau=1\)</span>。未给 <span class="arithmatex">\(\sigma\)</span> 时能比较大小，但不能算唯一数值。</p>
 </details>
-<p><span id="q298"></span></p>
 <h3 id="problem-795182190530">Q1033 · 触及行权价得 $1 的一元期权<a class="headerlink" href="#problem-795182190530" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：有界停止鞅与永续触障概率</p>
 <p><strong>题目</strong>：假设利率为零，某不付息股票现价 $1。当股价首次到达 <span class="arithmatex">\( \$H \)</span>（<span class="arithmatex">\( H &gt; 1 \)</span>）时你可以行权并获得 $1。这个期权今天值多少钱？</p>
@@ -4530,7 +4484,6 @@ P\!\left(\sup_{0\le u\le\tau}X_u\ge a\right)
 <p><strong>复制解释。</strong> 买 <span class="arithmatex">\(1/H\)</span> 股并持有到 <span class="arithmatex">\(\tau_H\)</span>，届时股值恰1可支付；永不到达时也无支付，所持资产长期趋0。它解释同一成本。若试图用“借股票买低价期权”单独证明下界，还需检查永不到达时的负债与交易可容许性，不能只分析会触及的分支。</p>
 <p><span class="arithmatex">\(S_0=s\le H\)</span> 时同理价为 <span class="arithmatex">\(s/H\)</span>，<span class="arithmatex">\(s\ge H\)</span> 已可立即领取1。<span class="arithmatex">\(\sigma=0\)</span> 且 <span class="arithmatex">\(s&lt;H\)</span> 时永不到达、价为0，是需要单独排除的退化情形；有限到期的一触碰价也不等于这个永续结果。</p>
 </details>
-<p><span id="q306"></span></p>
 <h3 id="problem-6e15bd495282">Q1034 · 向下障碍两种期权的草图<a class="headerlink" href="#problem-6e15bd495282" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：路径敲入敲出互补与障碍 PDE 边界</p>
 <p><strong>题目</strong>：某看涨期权仅在 spot 从未跌破障碍 <span class="arithmatex">\(B\)</span> 时才有 payoff：画其价值关于 spot 的草图；若改为"仅当 spot 曾跌破 <span class="arithmatex">\(B\)</span> 时才 payoff"再画一次，并说明两图的关系。</p>
@@ -4558,7 +4511,6 @@ P\!\left(\sup_{0\le u\le\tau}X_u\ge a\right)
 \]</div>
 <p>例如 <span class="arithmatex">\(r&gt;q\)</span> 且 Delta为正时，边界 Gamma 为负；<span class="arithmatex">\(r=q\)</span> 时可趋0。到期角点、离散监控、回扣会改变这些边界论证，因此不能无条件说“接近障碍Gamma一定正无穷”。</p>
 </details>
-<p><span id="q295"></span></p>
 <h3 id="problem-aebae7a35fa7">Q1035 · 双不触碰与双一触碰的波动敏感性<a class="headerlink" href="#problem-aebae7a35fa7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：存活事件的时间变换与路径互补</p>
 <p><strong>题目</strong>：现价严格位于两个固定障碍 <span class="arithmatex">\(L&lt;U\)</span> 之间。双不触碰到期仅当整段路径未触及任一障碍时支付 1；双一触碰到期在任一障碍曾触及时支付 1。</p>
@@ -4584,7 +4536,6 @@ V_{\rm DNT}+V_{\rm DOT}=e^{-r\tau},\qquad
 <p><strong>3. 适用边界。</strong> 若固定 <span class="arithmatex">\(r-q\ne0\)</span>，业务时间漂移含 <span class="arithmatex">\((r-q)/\sigma^2\)</span>，改变波动率还改变该漂移，不能沿用嵌套事件证明。例如零波动的确定性路径若会越过上障碍，存活概率为 0；加入适量随机波动却可能产生留在区间内的路径，说明不能对所有持有成本无条件断言负 Vega。</p>
 <p>若触障即支付，则价值为 <span class="arithmatex">\(\mathbb E[e^{-r(\eta-t)}\mathbf1_{\{\eta\le T\}}]\)</span>，不再是到期数字的同一贴现，两个价格不再相加为 <span class="arithmatex">\(e^{-r\tau}\)</span>，敏感度也不再简单互为相反数。</p>
 </details>
-<p><span id="q303"></span></p>
 <h3 id="problem-c0e8064c360d">Q1036 · 交换期权<a class="headerlink" href="#problem-c0e8064c360d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：股票计价测度与比值有效波动率</p>
 <p><strong>题目</strong>：如何为到期支付 <span class="arithmatex">\( \max(S_{T,1} - S_{T,2}, 0) \)</span> 的交换期权（exchange option）定价？设 <span class="arithmatex">\( S_1 \)</span>、<span class="arithmatex">\( S_2 \)</span> 为不付息股票，均服从几何布朗运动、相关系数 <span class="arithmatex">\( \rho \)</span>。</p>
@@ -4624,7 +4575,6 @@ C_t=S_{2,t}E^{(2)}[(R_T-1)^+\mid\mathcal F_t].
 \]</div>
 <p>计算这个对数正态截断期望即得上面的 Margrabe 公式。若有效波动率 <span class="arithmatex">\(\sigma_s=0\)</span>，比值不再随机，价格直接为 <span class="arithmatex">\((S_1-S_2)^+\)</span>，应取这个退化极限，而非代入含零分母的 <span class="arithmatex">\(d_1,d_2\)</span>。</p>
 </details>
-<p><span id="q310"></span></p>
 <h3 id="problem-840875a6c110">Q1037 · 两资产指示期权对 <span class="arithmatex">\( S_1 \)</span> 波动率的敏感<a class="headerlink" href="#problem-840875a6c110" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：对数价格差的正态概率与参数偏导</p>
 <p><strong>题目</strong>：某期权 <span class="arithmatex">\(T\)</span> 时刻 payoff 为 <span class="arithmatex">\(1\{S_1&gt;S_2\}\)</span>，否则为 0。若 <span class="arithmatex">\(S_1\)</span> 的波动率增大，期权价值如何变化？</p>
@@ -4660,7 +4610,6 @@ z=\frac{m+\tfrac12(\sigma_2^2-\sigma_1^2)\tau}{\sqrt{v\tau}}.
 </details>
 <h2 id="sec-幂支付与截断矩">六、幂支付与对数正态截断矩<a class="headerlink" href="#sec-幂支付与截断矩" title="Permanent link">&para;</a></h2>
 <p>利用 GBM 的正态指数矩和截断矩处理非线性支付；所有 Greeks 都须说明相对哪个可交易变量。</p>
-<p><span id="q299"></span></p>
 <h3 id="problem-503b6997ad9a">Q1038 · 对数正态的完整幂矩、截断矩与倒数支付<a class="headerlink" href="#problem-503b6997ad9a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：幂矩定价：正态指数配方与阈值截断</p>
 <p><strong>题目</strong>：不分红股票在风险中性测度下满足 <span class="arithmatex">\(dS=rSdt+\sigma SdW^Q\)</span>，当前 <span class="arithmatex">\(S&gt;0\)</span>，<span class="arithmatex">\(\sigma&gt;0\)</span>、<span class="arithmatex">\(\tau=T-t&gt;0\)</span>。</p>
@@ -4718,7 +4667,6 @@ M_p(k)=e^{-r\tau}S^p e^{p(r-\sigma^2/2)\tau}
 \]</div>
 <p>一般函数 <span class="arithmatex">\(S^p\)</span> 并不自带一个可交易、自融资的价格过程，因此其风险中性漂移不必等于 <span class="arithmatex">\(r\)</span>。复制仍要使用原股票与现金，不能把 <span class="arithmatex">\(S^p\)</span> 的瞬时数值直接当成另一只无分红股票套公式。</p>
 </details>
-<p><span id="q304"></span></p>
 <h3 id="problem-a7475cf057bc">Q1039 · 平方看涨的截断矩、变坐标PDE与Greeks<a class="headerlink" href="#problem-a7475cf057bc" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：幂矩定价：幂坐标变换与二阶链式Greeks</p>
 <p><strong>题目</strong>：在无分红Black–Scholes模型中，<span class="arithmatex">\(S&gt;0,K&gt;0\)</span>，到期支付 <span class="arithmatex">\((S_T^2-K)^+\)</span>。</p>
@@ -4788,7 +4736,6 @@ U_V=A\Phi(D_1),\qquad U_{VV}=\frac{A\phi(D_1)}{2\sigma V\sqrt\tau}.
 \]</div>
 <p>这些偏导在 <span class="arithmatex">\(\tau,\sigma&gt;0\)</span> 使用；到期或零波动时先取价格的确定性/终值极限，不能直接代入零分母。</p>
 </details>
-<p><span id="q305"></span></p>
 <h3 id="problem-cb0f7fa88315">Q1040 · 股票加权看涨的截断矩与股票计价测度<a class="headerlink" href="#problem-cb0f7fa88315" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：幂矩定价：股票加权支付与股票计价测度</p>
 <p><strong>题目</strong>：BS 模型中不分红股票，合约到期支付 <span class="arithmatex">\(S_T(S_T-K)^+\)</span>。</p>
@@ -4830,7 +4777,6 @@ V=S\,\mathbb E^{S}[(S_T-K)^+\mid\mathcal F_t].
 </details>
 <h2 id="sec-四复制定价与模型无关对冲">七、期权合成、数字支付与隐含分布<a class="headerlink" href="#sec-四复制定价与模型无关对冲" title="Permanent link">&para;</a></h2>
 <p>连续分段线性收益由斜率跳跃合成，数字支付由价差上下逼近；执行价导数恢复尾概率和分布，再区分模型风险与曲面斜率。</p>
-<p><span id="q301"></span></p>
 <h3 id="problem-12299da69626">Q1041 · 跨式的收益、盈亏平衡与波动率暴露<a class="headerlink" href="#problem-12299da69626" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：同执行价 call put 相加与 Gamma 损益</p>
 <p><strong>题目</strong>：解释多头 straddle 的组成、到期收益及适合何种观点。它是否是纯波动率交易？为什么“已实现波动率大于隐波”不自动保证未对冲跨式盈利？</p>
@@ -4844,7 +4790,6 @@ V=S\,\mathbb E^{S}[(S_T-K)^+\mid\mathcal F_t].
 <p>跨式适合认为未来会有大幅移动、但不确定方向的观点，也具有正 Vega、正 Gamma。短期近远期平值时 <span class="arithmatex">\(C+P\approx2S\sigma_{\rm imp}\sqrt{\tau/(2\pi)}\)</span>。然而未对冲跨式的 Delta 随现价变化，终值还取决于最后落在哪里；路径曾剧烈往返、最后回到 <span class="arithmatex">\(K\)</span>，仍可损失全部权利金。因此高已实现波动率不自动保证未对冲盈利。</p>
 <p>连续 Delta 对冲后，主要波动损益与 Gamma 加权的已实现方差减定价方差有关，还受融资、跳跃、隐波变化与成本影响。若要更直接交易已实现方差，可考虑支付 <span class="arithmatex">\(N(\sigma_{\rm real}^2-K_{\rm var})\)</span> 的方差互换，但仍有合约定义、复制与尾部风险。</p>
 </details>
-<p><span id="q318"></span></p>
 <h3 id="problem-29cbb4f2f68e">Q1042 · 复制定价的价格唯一性与实际选择<a class="headerlink" href="#problem-29cbb4f2f68e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：复制定价与无套利｜<strong>副题型</strong>：同现金流组合的无套利比较</p>
 <p><strong>题目</strong>：什么是复制定价？区分静态、半静态与动态复制；动态复制有哪些实际问题？若两套组合在所有允许状态和日期的现金流相同，应按什么标准选择？</p>
@@ -4854,7 +4799,6 @@ V=S\,\mathbb E^{S}[(S_T-K)^+\mid\mathcal F_t].
 <p>静态复制在今天确定持仓，此后不交易；半静态复制允许在预先约定的日期或事件触发时调整有限次；动态复制持续按状态调仓，如 BS 股票—现金复制。相同到期的香草只能静态生成终值函数，不能无条件精确复制任意路径依赖障碍；某些障碍复制需额外对称模型与触障时调整。</p>
 <p>动态复制面临离散再平衡、交易成本、跳跃、市场深度、融资、借券及模型参数变化；它们使理想等式产生跟踪误差。两套完全相同的可交易现金流在理想市场同价；现实中可按买卖价差、成交容量、资金与保证金、交易权限、模型敏感性及故障后的可调整性比较总成本。若所谓“同样匹配”只在一个模型或少数节点成立，还需比较其他状态的误差，不能直接当作无套利等价。</p>
 </details>
-<p><span id="q317"></span></p>
 <h3 id="problem-04d1fbbfa5fb">Q1043 · 分段线性收益的斜率变化与静态合成<a class="headerlink" href="#problem-04d1fbbfa5fb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：复制定价与无套利｜<strong>副题型</strong>：基础仿射项与节点斜率跳跃</p>
 <p><strong>题目</strong>：先推导任意连续分段线性收益的股票、现金与香草 call 表示，再应用：</p>
@@ -4888,7 +4832,6 @@ f(s)=2(s-90)^+-4(s-100)^++2(s-110)^+.
 <p>在 100 支付 <span class="arithmatex">\(2\cdot10=20\)</span>，在 110 及以后恢复为 0。</p>
 <p>若节点 <span class="arithmatex">\(K_j\)</span> 还有大小为 <span class="arithmatex">\(J_j\)</span> 的收益跳跃，需再加 <span class="arithmatex">\(J_j\mathbf1_{\{s&gt;K_j\}}\)</span> 型数字支付。有限个连续香草收益不能精确生成不连续跳跃；可用窄价差近似并明确端点约定。</p>
 </details>
-<p><span id="q316"></span></p>
 <h3 id="problem-0009abb0e9ff">Q1044 · 区间数字支付的上下价差与端点原子<a class="headerlink" href="#problem-0009abb0e9ff" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：复制定价与无套利｜<strong>副题型</strong>：执行价导数：内缩外扩价差的上下复制</p>
 <p><strong>题目</strong>：同一到期日，区间数字支付为 <span class="arithmatex">\(\mathbf1_{\{A&lt;S_T&lt;B\}}\)</span>，其中 <span class="arithmatex">\(0&lt;A&lt;B\)</span>。</p>
@@ -4924,9 +4867,6 @@ e^{-r\tau}[Q(S_T=A)+Q(S_T=B)].
 <p>在 <span class="arithmatex">\(A=100,B=110\)</span> 时可取 <span class="arithmatex">\(0&lt;\epsilon&lt;5\)</span>，外扩买 <span class="arithmatex">\(100-\epsilon\)</span>、<span class="arithmatex">\(110+\epsilon\)</span> call，卖100、110 call，各数量 <span class="arithmatex">\(1/\epsilon\)</span>；内缩则用100、<span class="arithmatex">\(100+\epsilon\)</span>、<span class="arithmatex">\(110-\epsilon\)</span>、110四个执行价。交易执行价离散、数量随 <span class="arithmatex">\(1/\epsilon\)</span> 增大，也会带来实际流动性和近似风险。</p>
 <p>无端点原子时，单个数字call是 <span class="arithmatex">\(-C_K\)</span>，区间价为 <span class="arithmatex">\(-C_K(A)+C_K(B)\)</span>。有原子时，严格区间应写成“<span class="arithmatex">\(S_T&gt;A\)</span>的数字减去 <span class="arithmatex">\(S_T\ge B\)</span> 的数字”，左右导数须区分，见<a href="#problem-8bcfee0e7eac">Q1046 · 从期权价格反推风险中性密度</a>。</p>
 </details>
-<p><span id="q302"></span>
-<span id="q309"></span>
-<span id="problem-7665dd063701"></span></p>
 <h3 id="problem-50d558fa8745">Q1045 · 现金数字期权的价格曲线、对冲与 Vega<a class="headerlink" href="#problem-50d558fa8745" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：执行价导数：BS现金数字、Delta脉冲与Vega</p>
 <p><strong>题目</strong>：在带连续股息率 <span class="arithmatex">\(q\)</span> 的 BS 模型中，数字 call 到期支付 <span class="arithmatex">\(\mathbf1_{\{S_T&gt;K\}}\)</span>，数字 put 支付其补集，终值在执行价无原子。</p>
@@ -4974,7 +4914,6 @@ d_2=\frac{m}{\sigma\sqrt\tau}-\frac{\sigma\sqrt\tau}{2},\quad
 \]</div>
 <p>因此数字call的价格先凸后凹，拐点对应 <span class="arithmatex">\(d_2=-\sigma\sqrt\tau\)</span>；它与call/put数字价格相等的 <span class="arithmatex">\(d_2=0\)</span> 不是同一个位置。模型无关的价差上下复制和原子口径见<a href="#problem-0009abb0e9ff">Q1044 · 区间数字支付的上下价差与端点原子</a>，跨执行价隐波变化的修正见<a href="#problem-dcea47b7f986">Q1047 · 正态 vs 对数正态的数字期权</a>。</p>
 </details>
-<p><span id="q321"></span></p>
 <h3 id="problem-8bcfee0e7eac">Q1046 · 从期权价格反推风险中性密度<a class="headerlink" href="#problem-8bcfee0e7eac" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：执行价导数：左右尾概率与Breeden–Litzenberger测度</p>
 <p><strong>题目</strong>：不知道股价服从的随机过程，但拥有所有（连续）行权价 <span class="arithmatex">\(K\)</span> 的欧式 call 价格。能否确定股价在 <span class="arithmatex">\(T\)</span> 时刻的风险中性概率密度函数？</p>
@@ -5005,7 +4944,6 @@ Q(S_T=K)=\frac{c'_+(K)-c'_-(K)}D.
 <p>当分布有连续密度且价格二次可微时才得到上面的通常公式；一般应理解为测度恒等式 <span class="arithmatex">\(c''(dK)=D\,Q(S_T\in dK)\)</span>。给定所有行权价还隐含相同期限、相同贴现及无套利价格；有限且带噪的实盘报价需要先做保持单调性、凸性的平滑，直接数值二次差分可能放大噪声。只能恢复该期限的边际分布，不能据此唯一确定整个价格过程或路径依赖期权价格。</p>
 <p>一阶导对应<a href="#problem-0009abb0e9ff">Q1044 · 区间数字支付的上下价差与端点原子</a>，二阶导对应质量分布；两者是同一执行价方向的不同阶信息。若以带微笑的BS隐波报价，求一阶导时还须对隐波曲面求全导数，见<a href="#problem-dcea47b7f986">Q1047 · 正态 vs 对数正态的数字期权</a>。</p>
 </details>
-<p><span id="q308"></span></p>
 <h3 id="problem-dcea47b7f986">Q1047 · 正态 vs 对数正态的数字期权<a class="headerlink" href="#problem-dcea47b7f986" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：奇异期权与组合｜<strong>副题型</strong>：执行价导数：隐波曲面斜率与数字支付修正</p>
 <p><strong>题目</strong>：分别在正态模型与对数正态模型中为数字看涨期权定价，使同行权价的香草看涨价格保持不变；两个模型给出的数字期权价格有何差异？</p>
@@ -5051,7 +4989,6 @@ Q(S_T=K)=\frac{c'_+(K)-c'_-(K)}D.
 <p>当 <span class="arithmatex">\(F=K\)</span>，正态数字为 <span class="arithmatex">\(D/2\)</span>，对数正态为 <span class="arithmatex">\(D\Phi(-w/2)&lt;D/2\)</span>，数字看涨向上修正可直接证明。一般微笑表达式下，精确导数关系是 <span class="arithmatex">\(D_{\mathrm{smile}}=D_{BS}-\mathrm{Vega}\,\partial_K\hat\sigma\)</span>。其中斜率是整条校准价格曲面的隐含波动率斜率，不是“股价下降时局部比例波动率变大”就自动得到的等号。正斜率给负修正，负斜率给正修正；正态/对数正态的这种对应只是偏斜解释下的近似，不应脱离参数与曲面作无条件价格排序。</p>
 <p>无到期原子时数字看跌为 <span class="arithmatex">\(D-D_{call}\)</span>，修正正负相反；若存在 <span class="arithmatex">\(S_T=K\)</span> 的原子，要先说明等号归属。区间数字 <span class="arithmatex">\(K_1&lt;S_T&lt;K_2\)</span> 是两端数字看涨之差，其修正为 <span class="arithmatex">\(-\mathrm{Vega}(K_1)\hat\sigma'(K_1)+\mathrm{Vega}(K_2)\hat\sigma'(K_2)\)</span>，两项可能抵消，单一斜率符号不足以决定净修正。</p>
 </details>
-<p><span id="q312"></span></p>
 <h3 id="problem-3bdec628b48e">Q1048 · 找"免费对冲"论证的错误<a class="headerlink" href="#problem-3bdec628b48e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：复制定价与无套利｜<strong>副题型</strong>：Tanaka 公式与局部时间遗漏</p>
 <p><strong>题目</strong>：spot 现价 90，一年期行权价 100 的看涨，无利率，BS 完美世界对数正态。我声称可免费对冲：spot 上穿 100 时借 100 买入股票，下穿 100 时卖出并还贷；到期若期权虚值则无头寸、若实值则用行权价 100 归还贷款。该论证错在哪里？</p>
@@ -5076,7 +5013,6 @@ G_T=(S_T-K)^+-\tfrac12L_T^K(S),
 <p>少了非负的局部时间项。即使最终回到虚值，只要期间在 100 附近累计局部时间，策略仍可留下负值或资金缺口；不能把卖出所得一律当作足额还清最初借款。</p>
 <p>Brownian 路径触及某水平后会在任意短时间内反复往返。若实践中以 <span class="arithmatex">\(100+\varepsilon\)</span> 买、<span class="arithmatex">\(100-\varepsilon\)</span> 卖，每次往返亏损 <span class="arithmatex">\(2\varepsilon\)</span>，累计频繁交易并不趋向零成本；连续极限由局部时间表达。更不能先观察下一步方向后再决定本次持仓，那会使用未来信息。交易价差、离散监控和流动性会进一步影响实际表现，因此该策略并非免费对冲。</p>
 </details>
-<p><span id="q319"></span></p>
 <h3 id="problem-08e6ff7cdde6">Q1049 · <span class="arithmatex">\( 1/\min(\max(S,K_1),K_2) \)</span> 的模型无关对冲<a class="headerlink" href="#problem-08e6ff7cdde6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：复制定价与无套利｜<strong>副题型</strong>：斜率跳跃测度与连续行权价静态复制</p>
 <p><strong>题目</strong>：某衍生品 payoff 为 <span class="arithmatex">\(\dfrac{1}{\min(\max(S_{T},K_{1}),K_{2})}\)</span>（<span class="arithmatex">\(K_1&lt;K_2\)</span>）。用香草期权组合给出模型无关的对冲。</p>
@@ -5131,7 +5067,6 @@ f(s)=\frac1{K_1}-\frac{(s-K_1)^+}{K_1^2}
 </details>
 <h2 id="sec-五波动率与模型校准">八、波动率、曲面与模型选择<a class="headerlink" href="#sec-五波动率与模型校准" title="Permanent link">&para;</a></h2>
 <p>先保证报价口径与无套利约束，再从曲面反演分布、比较动态模型及其对冲误差。</p>
-<p><span id="q328"></span></p>
 <h3 id="problem-88b1c175cf78">Q1050 · 隐含波动率微笑、偏斜与真正的套利<a class="headerlink" href="#problem-88b1c175cf78" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：逐执行价反演与静态无套利蝶式</p>
 <p><strong>题目</strong>：什么是隐含波动率、微笑与偏斜？股票市场通常有什么形状，1987 年股灾后发生了什么变化？若认为微笑会消失，是否自动有套利？给出真正静态套利的判据与例子。</p>
@@ -5143,7 +5078,6 @@ f(s)=\frac1{K_1}-\frac{(s-K_1)^+}{K_1^2}
 <p><strong>微笑不等于套利。</strong> 认为它未来收敛，只是一种相对价值观点；卖高隐波、买低隐波仍有方向、Gamma、期限、尾部和模型风险。真正静态套利要违反可交易收益的约束，如执行价方向单调性、斜率界或凸性。
 例如同到期 <span class="arithmatex">\(C(90)=12,C(100)=8,C(110)=2\)</span>，买 90、110 call，卖两份 100 call，初始成本 <span class="arithmatex">\(12+2-16=-2\)</span>，到期为非负蝶式收益，形成套利。若整条价格曲线满足无套利条件，曲线有微笑本身并不提供这种组合。</p>
 </details>
-<p><span id="q327"></span></p>
 <h3 id="problem-fc6e0bb2827e">Q1051 · 定价精度、Vega 尺度与模型误差预算<a class="headerlink" href="#problem-fc6e0bb2827e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：输入敏感度误差传播与独立基准比较</p>
 <p><strong>题目</strong>：定价函数应精确到什么程度？现价 100、一年期平值 call 的 Vega 大约是多少？如果模型不准确，如何发现？说明价格单位、波动率百分点与数值误差的关系。</p>
@@ -5154,7 +5088,6 @@ f(s)=\frac1{K_1}-\frac{(s-K_1)^+}{K_1^2}
 <p>例如输入波动率不确定 0.5 个百分点，价格不确定量约为 <span class="arithmatex">\(40\cdot0.005=0.20\)</span>；数值误差应明显小于这个尺度，但最终容差还取决于用途。深实值产品的巨大内在价值可能掩盖很差的时间价值估计，不能只报占总价格的相对误差。</p>
 <p>发现问题可从三个层次入手：用可解析特例与独立数值方法比较，检查价格界、单调性、凸性与 Greeks；检查是否同时拟合可交易香草和贴现工具；在独立历史或实盘路径上观察对冲残差、压力情景与参数稳定性。数值误差小并不等于模型正确。</p>
 </details>
-<p><span id="q326"></span></p>
 <h3 id="problem-2a2ca0a43dd2">Q1052 · 均值回归下用哪个波动率<a class="headerlink" href="#problem-2a2ca0a43dd2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：年化口径统一与 Gamma 方差差损益</p>
 <p><strong>题目</strong>：统计部门称股价过去 10 年服从均值回归过程，年波动率 <span class="arithmatex">\(10\%\)</span>、日波动率 <span class="arithmatex">\(20\%\)</span>。你要卖出一个欧式期权并对冲：该用哪个波动率？</p>
@@ -5177,7 +5110,6 @@ d\Pi=\tfrac12\Gamma S^2(0.20^2-0.10^2)dt.
 <p>香草 Gamma 为正，理想模型下获得正的方差差收益。现实中估计误差、交易成本、跳跃、借贷与调仓约束会改变结果，不能只凭两项历史数字认定有可执行套利。</p>
 <p>若今天可以按10%价格静态买入完全相同合约覆盖空头，复制成本就由可交易报价决定，无需再按20%的动态复制模型计成本。若只买到近似的不同执行价、期限或条款，则仍有基差和剩余风险。</p>
 </details>
-<p><span id="q322"></span></p>
 <h3 id="problem-c9f08b019f49">Q1053 · 补偿下跳模型的凸收益价格与不完备性<a class="headerlink" href="#problem-c9f08b019f49" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：跳跃生成元与凸函数切线余项</p>
 <p><strong>题目</strong>：固定同一现价、扩散波动率、利率与到期日。在 BS 股票中加入风险中性 Poisson 固定比例下跳 <span class="arithmatex">\(0&lt;J&lt;1\)</span>。</p>
@@ -5205,7 +5137,6 @@ V(t,Js)\ge V(t,s)+V_s(t,s)(J-1)s,
 <p><strong>3. 小强度与数字。</strong> 若风险中性 <span class="arithmatex">\(\lambda\to0\)</span>、其他参数固定且跳幅有足够矩控制，终值分布趋无跳 BS，统一可积的收益价格也收敛。只让历史强度趋 0、未规定风险中性参数，则没有这一唯一结论。
 数字收益不凸，BS 数字价格的 Gamma 也会变号，切线余项可能正或负，因此没有统一的跳跃价格排序。无到期边界原子、满足相应收敛条件时，其价格仍可在小强度极限趋向 BS 数字价格；排序与收敛是两个不同问题。</p>
 </details>
-<p><span id="q323"></span></p>
 <h3 id="problem-1982ff3796d3">Q1054 · 确定性时变波动率的定价与对冲<a class="headerlink" href="#problem-1982ff3796d3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：确定性积分方差与剩余区间 RMS</p>
 <p><strong>题目</strong>：若资产具有确定性的时变波动率，如何用 Black–Scholes 理论为其期权定价？如何对冲？</p>
@@ -5257,7 +5188,6 @@ R=\int_t^Tr(u)du,\quad V=\int_t^T\sigma(u)^2du,
 <p>无分红时 <span class="arithmatex">\(C=S\Phi(d_1)-Ke^{-R}\Phi(d_2)\)</span>、<span class="arithmatex">\(\Delta=\Phi(d_1)\)</span>，债券头寸的现值是 <span class="arithmatex">\(C-\Delta S\)</span>。不能用 <span class="arithmatex">\(\sigma\)</span> 的算术时间平均替代积分方差。</p>
 <p>随机波动率下 <span class="arithmatex">\(\int\sigma^2du\)</span> 是随机的，<span class="arithmatex">\(\int\sigma dW\)</span> 一般也不能无条件视为方差固定的正态变量；若波动率噪声含股票无法张成的独立风险，还多出不能只靠股票和债券消去的 Vega 风险，需要指定其风险溢价或用其他期权校准。即使波动率与股价噪声独立、条件于整条波动率路径可用 BS 公式，最终也须对随机积分方差下的价格取期望，通常不等于在平均方差处直接代入。</p>
 </details>
-<p><span id="q320"></span></p>
 <h3 id="problem-1004a1a2b107">Q1055 · 相同平均波动率下的混合价格与 Volga<a class="headerlink" href="#problem-1004a1a2b107" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：波动混合条件化与支持区间 Jensen</p>
 <p><strong>题目</strong>：比较常数波动率 <span class="arithmatex">\(30\%\)</span> 与均值 <span class="arithmatex">\(30\%\)</span> 的随机波动参数。先明确随机参数在风险中性测度下独立抽取、整期保持常数且定价时尚未揭晓，再问哪张欧式 call 更贵。推导 Volga 符号，并给一个可以严格排序的平值情形；真正的随机波动率过程又需要什么额外条件？</p>
@@ -5285,7 +5215,6 @@ C(\sigma)=S[2\Phi(\sigma\sqrt\tau/2)-1],
 <p>这给出随机版本更便宜的明确反例。远离平值且混合支持都位于凸区时，则可得到反向比较。</p>
 <p>若波动率随时间随机变化，需给风险中性动态、与股票噪声的相关及积分方差分布；只有在适当独立条件下，才能条件于路径使用常波动的积分方差公式。仅给一个历史平均波动率甚至不足以定义唯一的混合价格。</p>
 </details>
-<p><span id="q330"></span></p>
 <h3 id="problem-b2cf43c7bd00">Q1056 · 随机波动率为何产生微笑<a class="headerlink" href="#problem-b2cf43c7bd00" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：随机时钟方差混合与累积量期限缩放</p>
 <p><strong>题目</strong>：解释随机波动率模型为什么会产生波动率微笑。</p>
@@ -5303,7 +5232,6 @@ C(\sigma)=S[2\Phi(\sigma\sqrt\tau/2)-1],
 <p><strong>跳跃扩散与 VG。</strong> 复合 Poisson 跳跃让收益分布成为不同跳跃次数的混合，跳幅偏斜决定左右尾的不对称。VG 是 Brownian motion 加漂移经 Gamma 随机时钟变换，随机业务时间同样产生非正态厚尾，因而可拟合微笑。定价时都必须使用保证贴现股票为鞅的漂移补偿。</p>
 <p><strong>期限效应。</strong> 对有限方差、独立平稳增量的跳跃或 VG 模型，累计第 <span class="arithmatex">\(k\)</span> 阶累积量随期限线性增加，因此标准化偏度约按 <span class="arithmatex">\(T^{-1/2}\)</span>、超额峰度约按 <span class="arithmatex">\(T^{-1}\)</span> 衰减，中心极限定理解释较长期微笑趋平。随机波动率若有长记忆、缓慢均值回归或持续的随机长期方差，方差混合可在所考察期限维持显著影响。但“随机波动率永不变平”不是普遍定理，遍历且短记忆的模型长期也可能趋平，具体由模型和期限范围决定。</p>
 </details>
-<p><span id="q329"></span></p>
 <h3 id="problem-ddcbd9dd9b60">Q1057 · 与微笑一致的外汇奇异期权模型<a class="headerlink" href="#problem-ddcbd9dd9b60" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：波动率与模型校准｜<strong>副题型</strong>：风险源张成、曲面校准与前向微笑比较</p>
 <p><strong>题目</strong>：有哪些能与市场微笑一致地为外汇奇异期权定价的模型？各自的优缺点是什么？</p>
@@ -5349,7 +5277,6 @@ X(t;\sigma,\nu,\theta)=b(T_{t};\theta,\sigma),
 <p>股票常有左尾崩盘偏斜，外汇两侧尾部和相对利率、币对习惯都影响微笑，利率市场还需区分正常/对数正常报价与负利率可行性。这些是建模经验，不能当成任何市场任何日期都固定不变的形状。</p>
 <p>若只能选四类中的一个，先按待报价产品对前向微笑、现货波动相关和跳跃的敏感性列需求，再比较香草校准误差、动态对冲回测、参数稳定性、无套利性、数值成本和可交易工具。局部波动率适合需要快速稳定匹配当前香草的基线；若障碍或波动率相关风险显著，随机波动率/含跳模型可能更合理，但需用可观测工具约束新增自由度。题面没有产品与误差目标，因而不存在普遍最优模型名称。</p>
 </details>
-<p><span id="q355"></span></p>
 <h3 id="problem-b80d42ba5869">Q1058 · 如何证明你的交易模型赚钱<a class="headerlink" href="#problem-b80d42ba5869" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：风险管理与组合优化｜<strong>副题型</strong>：滚动样本外估值、交易成本与容量压力</p>
 <p><strong>题目</strong>：假设你有一个自认为能赚钱的好交易模型：你会向经理展示哪些信息来支撑这一说法？</p>
@@ -5385,7 +5312,6 @@ X(t;\sigma,\nu,\theta)=b(T_{t};\theta,\sigma),
 </details>
 <h2 id="sec-六树模型与数值定价">九、离散树与模拟定价<a class="headerlink" href="#sec-六树模型与数值定价" title="Permanent link">&para;</a></h2>
 <p>两态复制给出唯一价格；多状态市场需补足风险信息，数值树则应明确正在逼近的定价模型。</p>
-<p><span id="q331"></span></p>
 <h3 id="problem-c271fa12fdd4">Q1059 · 单期两态定价的通式与风险中性概率<a class="headerlink" href="#problem-c271fa12fdd4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：树模型｜<strong>副题型</strong>：二态复制：线性支付匹配与风险中性概率</p>
 <p><strong>题目</strong>：股票现在为 <span class="arithmatex">\(S\)</span>，一期后为 <span class="arithmatex">\(S_u&gt;S_d\)</span>，现金增长因子为 <span class="arithmatex">\(R=e^{r\tau}&gt;0\)</span>，两个状态均可能。</p>
@@ -5426,7 +5352,6 @@ q=(100R-90)/20,\quad C=10q/R,\quad P=10(1-q)/R.
 \]</div>
 <p>与平价 <span class="arithmatex">\(C-P=100-100/R\)</span> 一致。</p>
 </details>
-<p><span id="q332"></span></p>
 <h3 id="problem-eef31ec17e1e">Q1060 · 真实概率、当前股价与两态复制的区别<a class="headerlink" href="#problem-eef31ec17e1e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：树模型｜<strong>副题型</strong>：二态复制：真实概率与现价的可识别性</p>
 <p><strong>题目</strong>：到期股票以真实概率 0.6 为 100、以概率 0.4 为 50，利率为 0。</p>
@@ -5471,7 +5396,6 @@ q=(100R-90)/20,\quad C=10q/R,\quad P=10(1-q)/R.
 <p><strong>3. 由增量恢复定价权重。</strong> 零利率下由 <span class="arithmatex">\(q(S+20)+(1-q)(S-10)=S\)</span> 得 <span class="arithmatex">\(q=1/3\)</span>。平值 call 上态支付 20、下态支付 0，所以价格为 <span class="arithmatex">\(20/3\)</span>。真实上行概率 0.6 不进入复制价格。</p>
 <p>这些例子使用同一套<a href="#problem-c271fa12fdd4">Q1059 · 单期两态定价的通式与风险中性概率</a>，区别在已给信息：只有真实概率时无法确定现价；给出现价后才能由可交易股票和现金确定 <span class="arithmatex">\(Q\)</span>。增量模型若解释为非负股价，还需 <span class="arithmatex">\(S\ge10\)</span>，从而下态 <span class="arithmatex">\(S-10\ge0\)</span>。</p>
 </details>
-<p><span id="q352"></span></p>
 <h3 id="problem-4899c37da595">Q1061 · 收购情景树的期权价值与概率口径<a class="headerlink" href="#problem-4899c37da595" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：全概率分支支付与风险中性识别｜<strong>公司</strong>：SIG</p>
 <p><strong>题目</strong>：某股有 50% 概率被收购。未收购时，40% 到 5、60% 到 0；被收购时，80% 到 15、20% 到 <span class="arithmatex">\(x\)</span>。现价 10，忽略利息。期权允许在全部结果揭晓后以 22 买入。</p>
@@ -5521,7 +5445,6 @@ q=(100R-90)/20,\quad C=10q/R,\quad P=10(1-q)/R.
 <p>因此 <span class="arithmatex">\(C=0.1(30-22)=0.80\)</span>。是否发生收购本身不决定行权，只有最终股价超过 22 才支付。</p>
 <p><strong>2. 真实预测概率。</strong> 零利率只取消贴现，并没有取消股票风险溢价，也不保证现价等于真实期望。因此仅凭这些真实概率不能由现价 10 推出 <span class="arithmatex">\(x=30\)</span>，也不能唯一确定无套利期权价格。若将该计算作为个人的主观期望价值，还须额外说明采用这些概率、风险中性效用与终值 <span class="arithmatex">\(x\)</span> 的假设。</p>
 </details>
-<p><span id="q333"></span></p>
 <h3 id="problem-af055b70a9c5">Q1062 · 三态树定价的不唯一性<a class="headerlink" href="#problem-af055b70a9c5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：树模型｜<strong>副题型</strong>：风险中性概率多解与超次复制</p>
 <p><strong>题目</strong>：股票今日值 100、利率为零；明天为 90、100 或 110，涨到 110 的概率为 <span class="arithmatex">\(p\)</span>、到 100 的概率为 <span class="arithmatex">\(q\)</span>。对行权价 100 的看涨期权价格能得出什么结论？</p>
@@ -5548,7 +5471,6 @@ p,1-2p,p.
 <p><strong>为什么上下界已最优。</strong> 任意股票债券组合的初值等于它在每个风险中性测度下的贴现期望。次复制收益不超过 call，故其初值不超过所有 <span class="arithmatex">\(10p\)</span> 的下确界0；超复制初值不低于所有 <span class="arithmatex">\(10p\)</span> 的上确界5。上述组合正好达到两个界，已经证明不能再改善。三状态都有正现实概率时，端点0和5会产生套利，故无套利价格是开区间 <span class="arithmatex">\((0,5)\)</span>。选定其中一点需要额外市场价格或风险偏好。</p>
 <p><strong>增加已交易期权后。</strong> 若100看涨价格为2.5，则 <span class="arithmatex">\(10p=2.5\)</span>，唯一风险中性概率为 <span class="arithmatex">\((1/4,1/2,1/4)\)</span>（按90、100、110排序）。95看涨的收益为 <span class="arithmatex">\((0,5,15)\)</span>，价格为 <span class="arithmatex">\(0/4+5/2+15/4=6.25\)</span>。也可精确复制为 <span class="arithmatex">\(\tfrac12(S-90)+\tfrac12(S-100)^+\)</span>：三状态逐点核对，初值为5加1.25。加入100看涨后，债券、股票、该期权张成三维收益空间，原来缺失的一项市场信息便被补齐。</p>
 </details>
-<p><span id="q334"></span></p>
 <h3 id="problem-17f04c4b2e60">Q1063 · 银行为何仍用三叉树<a class="headerlink" href="#problem-17f04c4b2e60" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：树模型｜<strong>副题型</strong>：风险中性局部矩匹配与过程弱收敛</p>
 <p><strong>题目</strong>：追问：既然三叉树不能给出唯一价格，银行为什么还用它来计算价格？</p>
@@ -5586,7 +5508,6 @@ p,1-2p,p.
 <p><strong>可检查的收敛条件。</strong> 若一步对数增量为 <span class="arithmatex">\(\Delta X\)</span>，需非负概率且总和1，局部均值 <span class="arithmatex">\(E\Delta X=(r-q-\sigma^2/2)\Delta t+o(\Delta t)\)</span>，局部方差 <span class="arithmatex">\(\operatorname{Var}\Delta X=\sigma^2\Delta t+o(\Delta t)\)</span>，跳幅趋零并满足排除大跳跃的条件。再配合收益的一致可积性，才可由过程弱收敛推价格收敛；美式或障碍合约还需检查停止和监控的近似。</p>
 <p>实际用于无套利定价的股票树应在每步满足 <span class="arithmatex">\(E[S_{t+\Delta t}\mid S_t]=S_te^{(r-q)\Delta t}\)</span>，或至少在极限中一致逼近该关系。也可以模拟历史测度并乘正确的似然比或随机贴现因子；只把历史概率收益按无风险利率贴现则不行。离散树不唯一的概率是由目标连续模型及矩匹配选择的，所以无需声称离散三状态市场本身完备。三叉树虽方便对齐障碍，仍可能振荡或出现负概率；二叉树可更简单更快，优劣取决于稳定性、误差和成本。</p>
 </details>
-<p><span id="q335"></span></p>
 <h3 id="problem-80fc26c673eb">Q1064 · 蒙特卡洛与二叉树的取舍<a class="headerlink" href="#problem-80fc26c673eb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：树模型｜<strong>副题型</strong>：模拟定价：状态扩维、后向递推与方差成本比较</p>
 <p><strong>题目</strong>：蒙特卡洛模拟与二叉树各适用于什么情形？何时该用哪一个？</p>
@@ -5621,7 +5542,6 @@ V_i(S,A)=\max\{g_i(S,A),e^{-r\Delta t}[pV_{i+1}(Su,A')+(1-p)V_{i+1}(Sd,A'')]\}.
 <p>均值方向通常不重组，需另设网格并插值，检查网格收敛。蒙特卡洛也以 <span class="arithmatex">\((S,A)\)</span> 为回归状态，用 Longstaff–Schwartz 估计继续价值，而非只回归现价。</p>
 <p><strong>积分与加速。</strong> 一维光滑积分可用 Gauss 求积或自适应 Gauss–Kronrod；周期解析函数的梯形法、含端点奇异性的变量代换各有优势，没有对所有被积函数都最快的方法。MC 可用控制变量、对偶变量、分层、重要性采样、条件期望与准蒙特卡洛；应按方差乘单样本成本比较。<span class="arithmatex">\(N^{-1/2}\)</span> 是独立有限方差样本的采样误差，不能把维度、路径生成成本、时间离散偏差和提前行权拟合误差都当成免费。二叉树约一阶收敛也需要收益和离散方式的正则性，数字、障碍等合约未必满足。</p>
 </details>
-<p><span id="q336"></span></p>
 <h3 id="problem-8d29949b0636">Q1065 · Longstaff–Schwartz 算法<a class="headerlink" href="#problem-8d29949b0636" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：模拟定价：继续价值回归与独立停止策略估值</p>
 <p><strong>题目</strong>：解释用蒙特卡洛为可提前行权期权定价的 Longstaff–Schwartz 算法。</p>
@@ -5651,7 +5571,6 @@ V_i(S,A)=\max\{g_i(S,A),e^{-r\Delta t}[pV_{i+1}(Su,A')+(1-p)V_{i+1}(Sd,A'')]\}.
 </details>
 <h2 id="sec-七固收远期与利率衍生品">十、贴现、债券与远期现金流<a class="headerlink" href="#sec-七固收远期与利率衍生品" title="Permanent link">&para;</a></h2>
 <p>先统一复利与年化口径，用贴现因子匹配各日期、各币种现金流，再计算敏感度与套利组合。</p>
-<p><span id="q344"></span></p>
 <h3 id="problem-2bc296cd7d2b">Q1066 · 资金翻倍的 70 法则<a class="headerlink" href="#problem-2bc296cd7d2b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：复利指数方程与对数一阶展开</p>
 <p><strong>题目</strong>：按连续复利 <span class="arithmatex">\(r\)</span> 计息的储蓄账户，为什么资金翻倍所需时间约等于 <span class="arithmatex">\(70/r\)</span>？</p>
@@ -5707,7 +5626,6 @@ V=a\sum_{k=1}^\infty v^k+b\sum_{k=1}^\infty kv^k.
 <p>每年年底依次付 1、2、3、… 对应 <span class="arithmatex">\(a=0,b=1\)</span>，现值为 <span class="arithmatex">\((1+i)/i^2\)</span>。若改为年初支付，整组现金流提前一年，现值应乘 <span class="arithmatex">\(1+i\)</span>。
 当 <span class="arithmatex">\(i\le0\)</span> 且 <span class="arithmatex">\(a,b\)</span> 至少一个为正时，非负项不趋于可求和序列，现值发散；这里不存在有限的永续现值。</p>
 </details>
-<p><span id="q340"></span></p>
 <h3 id="problem-a21ca638b056">Q1069 · 已知股息的远期复制与连续持有成本<a class="headerlink" href="#problem-a21ca638b056" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：股息剥离预付远期与现金借贷</p>
 <p><strong>题目</strong>：股票现价 1、连续无风险利率 <span class="arithmatex">\(5\%\)</span>，半年后确定支付 0.10 现金股息，求一年期远期价。推导多个已知现金股息及连续股息率的通式，并解释为何有些银行使用远期价为期权报价。</p>
@@ -5732,7 +5650,6 @@ F=Se^{(r-q)\tau}.
 \]</div>
 <p>使用可交易远期报价，可把融资与预期股息集中进远期及贴现因子，便于跨产品统一报价；这不消除利率风险，尤其随机利率下还需正确的远期测度与波动率参数。</p>
 </details>
-<p><span id="q341"></span></p>
 <h3 id="problem-9d8ac6359935">Q1070 · 外汇远期的覆盖利率平价与双向套利<a class="headerlink" href="#problem-9d8ac6359935" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：币种现金流匹配与借贷换汇复制</p>
 <p><strong>题目</strong>：明确报价 <span class="arithmatex">\(S\)</span> 为每 1 EUR 的 USD 价格。本币 USD、外币 EUR 的无风险连续利率分别为 <span class="arithmatex">\(r_d,r_f\)</span>，求一年期公允远期 <span class="arithmatex">\(F\)</span>；若采用年复利，又如何表示？分别构造市场远期报价高于、低于公允值时的套利。远期汇率是否必然等于未来汇率的最好预测？</p>
@@ -5754,7 +5671,6 @@ Se^{r_dT}-F_me^{r_fT}&gt;0.
 <p>两种套利都需可按所给利率借贷并忽略价差、信用与资本约束。</p>
 <p>远期由覆盖利率关系与可交易融资决定。历史测度下未来汇率均值还包含风险溢价，因此远期不必等于历史条件期望，也不保证是统计上最好的预测。</p>
 </details>
-<p><span id="q277"></span></p>
 <h3 id="problem-6d0dac131187">Q1071 · 外汇看涨看跌的货币反转与名义本金<a class="headerlink" href="#problem-6d0dac131187" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：逐币种现金流等价与倒数汇率</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(X\)</span> 表示 1 AUD 的 USD 价格，合约允许到期卖出 100 万 AUD、买入 80 万 USD。</p>
@@ -5778,8 +5694,6 @@ H_{\rm AUD}=\frac{H_{\rm USD}}{X_T}
 <p><strong>2. 即期报价。</strong> <span class="arithmatex">\(X_0=0.75\)</span> USD/AUD 时，反向即期为 <span class="arithmatex">\(Y_0=4/3\)</span> AUD/USD；执行价反转为 <span class="arithmatex">\(1/0.8=1.25\)</span>，名义从 100 万 AUD 换为 80 万 USD。现价与执行价不能用同一个比例混写。两币种的今天价格满足 <span class="arithmatex">\(V_{\rm USD}=X_0V_{\rm AUD}\)</span>，但风险中性测度也随计价货币改变。</p>
 <p><strong>3. 提前行权。</strong> 在 USD 计价下，持有 AUD 对应赚取 AUD 利率，形式上类似支付连续股息的资产；反向也有相应的本、外币利率。两种利率影响提前交割的融资收益，故无分红、非负利率股票看涨的结论不能直接照搬。</p>
 </details>
-<p><span id="q343"></span>
-<span id="problem-a7e8bbb883c7"></span></p>
 <h3 id="problem-7cd5f56f0065">Q1072 · 贴现因子比与单利、复利远期报价<a class="headerlink" href="#problem-7cd5f56f0065" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：现金流拼接与远期利率报价转换</p>
 <p><strong>题目</strong>：1. 给定正的零息债价格 <span class="arithmatex">\(P(0,T)\)</span>，推导区间 <span class="arithmatex">\([T_1,T_2]\)</span> 的远期累积因子，并分别换成有效年复利率与年化单利率。
@@ -5832,7 +5746,6 @@ f_{\rm simple}=\frac{A-1}{\delta}.
 <p>例如第一行 <span class="arithmatex">\((1.10/1.025-1)/0.5=6/41\)</span>，分母0.5将半年累积收益年化。题给的是到各自到期日的零息即期率，不能误称为前后两个半年的远期率；计算宜保留比值的精确形式。</p>
 <p>由于 <span class="arithmatex">\(\delta&gt;0\)</span> 且贴现因子正，<span class="arithmatex">\(f_{\rm simple}\ge0\)</span> 当且仅当 <span class="arithmatex">\(A\ge1\)</span>，亦即 <span class="arithmatex">\(P(0,T_1)\ge P(0,T_2)\)</span>。有效年复利也有相同符号判据。若市场允许负利率，负远期不自动构成套利；额外假定所有区间远期非负，才要求零息债价格随期限不增。</p>
 </details>
-<p><span id="q345"></span></p>
 <h3 id="problem-c1bd105a258a">Q1073 · 普通互换的现金流价格与平价互换率<a class="headerlink" href="#problem-c1bd105a258a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：浮动腿贴现望远镜与年金权重</p>
 <p><strong>题目</strong>：设互换在 <span class="arithmatex">\(T_1,\ldots,T_n\)</span> 支付，区间为 <span class="arithmatex">\([T_0,T_n]\)</span>，名义本金 <span class="arithmatex">\(N\)</span>，年化计息长度为 <span class="arithmatex">\(\delta_i\)</span>。给出收浮付固互换现值、平价互换率及其远期利率加权平均表达式。权重和是多少？普通互换需用 LMM 定价吗？说明单曲线与多曲线口径。</p>
@@ -5862,7 +5775,6 @@ K_*=\frac{\sum_i\delta_iD_{i+1}F_i}{\sum_i\delta_iD_{i+1}}.
 \]</div>
 <p>此时浮动腿一般不能直接化为同一组贴现因子的首尾差。若某期浮息已定盘，还需用已知定盘值替代该期远期。</p>
 </details>
-<p><span id="q342"></span></p>
 <h3 id="problem-65a7c99af906">Q1074 · Black 远期公式与计价基准<a class="headerlink" href="#problem-65a7c99af906" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：到期债券测度下的对数正态积分</p>
 <p><strong>题目</strong>：说明用远期 <span class="arithmatex">\(F\)</span> 表示欧式 call 价格的 Black 公式及推导条件。用远期报价比直接使用现货有什么好处？若期权到期 <span class="arithmatex">\(T\)</span> 而对应远期交割在更晚的 <span class="arithmatex">\(U\)</span>，为什么必须先写清实际支付？</p>
@@ -5881,7 +5793,6 @@ X_T=F\exp[-w^2/2+wZ],\quad Z\sim N(0,1),
 <p>普通股票 <span class="arithmatex">\(T\)</span> 到期期权可用交割日同为 <span class="arithmatex">\(T\)</span> 的远期 <span class="arithmatex">\(F_t^T\)</span> 与 <span class="arithmatex">\(P(t,T)\)</span> 表示，把股息和融资集中在输入中；随机利率下，模型假设应落在相应远期测度，不能直接把现货历史波动率当作 <span class="arithmatex">\(\sigma_F\)</span>。</p>
 <p>若行权后实际获得 <span class="arithmatex">\(U\)</span> 日交割的远期，<span class="arithmatex">\(T\)</span> 时经济价值是 <span class="arithmatex">\(P(T,U)(F_T^U-K)^+\)</span>，其价格可在 <span class="arithmatex">\(U\)</span> 远期测度下写成 <span class="arithmatex">\(P(t,U)\mathbb E^U[(F_T^U-K)^+]\)</span>。若合同却在 <span class="arithmatex">\(T\)</span> 直接现金支付 <span class="arithmatex">\((F_T^U-K)^+\)</span>，贴现与测度关系不同；没有说明支付定义就不能盲目套同一折现因子。</p>
 </details>
-<p><span id="q338"></span></p>
 <h3 id="problem-cf4b1fb2ad90">Q1075 · 期货与远期<a class="headerlink" href="#problem-cf4b1fb2ad90" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：每日盯市现金流与随机利率协方差</p>
 <p><strong>题目</strong>：期货与远期有什么区别？若标的资产价格与利率强正相关、且利率随机，期货与远期哪个价格更高？为什么？</p>
@@ -5901,9 +5812,6 @@ F_{\rm fut}-F_{\rm fwd}
 \]</div>
 <p>若高标的价格通常伴随较高累计利率，贴现因子与终值价格倾向负相关，期货报价往往高于远期；反向相关则相反。这是现金流协方差的结论，单说某一时刻相关系数为正不足以保证任意模型的整体符号。比较的是交割报价；新开的公允远期和期货合约初始价值均可为 0。</p>
 </details>
-<p><span id="q337"></span>
-<span id="q347"></span>
-<span id="problem-ca7199b89164"></span></p>
 <h3 id="problem-24adeda893ba">Q1076 · 现金流久期、波动换算与逆浮动债复制<a class="headerlink" href="#problem-24adeda893ba" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：贴现求导、美元敏感度相加与有符号现金流复制</p>
 <p><strong>题目</strong>：1. 债券在时点 <span class="arithmatex">\(t_i&gt;0\)</span> 支付非负现金流 <span class="arithmatex">\(CF_i\)</span>，以年名义收益率 <span class="arithmatex">\(y\)</span>、每年 <span class="arithmatex">\(m\)</span> 次复利贴现，<span class="arithmatex">\(1+y/m&gt;0\)</span>。推导Macaulay久期、修正久期、凸性、美元久期和DV01，给零息债及正现金流久期界。
@@ -5963,9 +5871,6 @@ D_\$^{\rm inv}=4D_\$^{\rm fix}-3D_\$^{\rm flt}\approx1497.97914,
 </details>
 <h2 id="sec-利率模型与共同测度">十一、利率模型与共同测度<a class="headerlink" href="#sec-利率模型与共同测度" title="Permanent link">&para;</a></h2>
 <p>短率与市场模型使用不同状态和计价基准；风险中性漂移、完整状态与校准条件须一起给出。</p>
-<p><span id="q339"></span>
-<span id="q346"></span>
-<span id="problem-9cd11a9db0ab"></span></p>
 <h3 id="problem-61838726c77b">Q1077 · 利率模型的状态选择、均值回归与曲线拟合<a class="headerlink" href="#problem-61838726c77b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：短率SDE、分布支持与市场校准比较</p>
 <p><strong>题目</strong>：1. 区分短率模型与直接刻画期限结构的模型，并比较均衡参数模型和以当前曲线为输入的模型。给Vasicek、CIR、Ho–Lee、Hull–White的动态。
@@ -6028,7 +5933,6 @@ V_i=e^{-r_i\Delta t}\sum_jp_{ij}V_{i+1,j},
 <p>Markov函数模型先设低维驱动 <span class="arithmatex">\(d\boldsymbol x_t=\lambda(t)d\boldsymbol W_t\)</span>，再把市场利率、债券表示为时间与 <span class="arithmatex">\(\boldsymbol x\)</span> 的函数，以兼顾格点速度和市场校准。代价是低维曲线动态可能不足以描述某些奇异风险。</p>
 <p>今天的价格拟合是相对定价和对冲的基础约束；在已校准模型之间，未来相关性、曲线形状和前向波动动态又决定奇异产品表现。应按产品需要同时衡量校准、动态、稳定性和计算成本，没有脱离用途的绝对优先项。</p>
 </details>
-<p><span id="q349"></span></p>
 <h3 id="problem-7919189b6568">Q1078 · LMM 的马尔可夫性条件<a class="headerlink" href="#problem-7919189b6568" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：完整 SDE 状态与低维实现条件</p>
 <p><strong>题目</strong>：在什么条件下 LIBOR 市场模型（LMM 或 BGM）是马尔可夫的？</p>
@@ -6056,7 +5960,6 @@ d\boldsymbol L_t=\boldsymbol b(t,\boldsymbol L_t)dt+
 <p>所有利率都成为同一高斯驱动 <span class="arithmatex">\(Z_t\)</span> 与时间的函数，便于低维树计算。精确 LMM 的漂移积分依赖过去的整条利率轨迹，不能仅凭可分离波动率就把整个模型压成一个当前 Brownian 值。预测—校正只是一种数值离散，不会自动证明严格的低维 Markov 实现。</p>
 <p>随机波动率 BGM 中，若波动率因子 <span class="arithmatex">\(v_t\)</span> 自身是有限维 Markov SDE，联合状态 <span class="arithmatex">\((\boldsymbol L_t,v_t)\)</span> 通常是 Markov；只看 <span class="arithmatex">\(\boldsymbol L_t\)</span> 一般不是。若波动率含非有限维记忆，则还需增加历史状态，不能无条件称为有限维 Markov。判断时应给出完整状态与系数，不能只用模型名称下结论。</p>
 </details>
-<p><span id="q348"></span></p>
 <h3 id="problem-726fe53cd8ea">Q1079 · LMM的计价基准、终端测度漂移与模拟定价<a class="headerlink" href="#problem-726fe53cd8ea" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：固收与利率｜<strong>副题型</strong>：相邻债券比换测度与相对漂移累加</p>
 <p><strong>题目</strong>：令 <span class="arithmatex">\(T_0&lt;\cdots&lt;T_N\)</span>、<span class="arithmatex">\(\delta_j=T_{j+1}-T_j\)</span>，标准正对数正态LMM中的区间远期利率为</p>
@@ -6130,8 +6033,6 @@ V_{\rm new}=V_{\rm old}\left(1+\sum_iw_ir_i\right).
 \]</div>
 <p>权重应使用这段收益开始前的权重。</p>
 </details>
-<p><span id="problem-4cad8e1700b0"></span>
-<span id="problem-factor-return-arithmetic"></span></p>
 <h3 id="problem-1f54a5e1ee40">Q1081 · 因子预期收益、利率敏感度与融资杠杆<a class="headerlink" href="#problem-1f54a5e1ee40" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：金融因子定价｜<strong>副题型</strong>：因子风险溢价分解、固定条件偏导与股本杠杆</p>
 <p><strong>题目</strong>：因子载荷和因子风险溢价均已给定，采用一期预期收益模型，忽略税费、违约及交易限制。</p>
@@ -6199,7 +6100,6 @@ V_n=V_0\prod_{j=1}^n(1+\ell r_j).
 \]</div>
 <p>两天先 <span class="arithmatex">\(+a\)</span>、后 <span class="arithmatex">\(-a\)</span> 时为 <span class="arithmatex">\(V_0(1-\ell^2a^2)\)</span>，说明波动损耗随杠杆平方变化。</p>
 </details>
-<p><span id="q351"></span></p>
 <h3 id="problem-b449ef24574e">Q1083 · VaR 及其缺陷<a class="headerlink" href="#problem-b449ef24574e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：风险管理与组合优化｜<strong>副题型</strong>：损失分位数、离散违约与尾均值</p>
 <p><strong>题目</strong>：简述 VaR 是什么。用 VaR 度量衍生品风险有什么潜在缺陷？</p>
@@ -6219,7 +6119,6 @@ V_n=V_0\prod_{j=1}^n(1+\ell r_j).
 \]</div>
 <p>连续分布、无分位点原子时才可直接写成最坏尾部的条件均值。上例单张 CDS 的 <span class="arithmatex">\(95\%\)</span> VaR 虽为 0，但 ES 为 <span class="arithmatex">\(0.03\times1M/0.05=0.6M\)</span>，更清楚显示分位数之外的尾部损失。</p>
 </details>
-<p><span id="q353"></span></p>
 <h3 id="problem-f1d7e7fc36b1">Q1084 · 股票与期权的单位资金风险弹性<a class="headerlink" href="#problem-f1d7e7fc36b1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：风险管理与组合优化｜<strong>副题型</strong>：Delta 弹性、组合抵消与非线性风险</p>
 <p><strong>题目</strong>：以一天为短风险期，比较一份 call 与一股股票，以及相同资金投入的风险。使用 Delta 占价值的比例，讨论 put、call put 组合及低净值组合。给出 BS call Delta 的推导要点，并说明该指标的局限。</p>
@@ -6240,7 +6139,6 @@ V_n=V_0\prod_{j=1}^n(1+\ell r_j).
 组合 Delta 为各头寸 Delta 的和，价值也应带符号相加；跨式可有很小 Delta，但 Gamma、Vega 仍很大。若组合净值为 0 或极小，<span class="arithmatex">\(\Delta/V\)</span> 不定义或被分母放大，不能当作完整风险排名。</p>
 <p>短期 Delta 近似没有覆盖 Gamma、隐波、跳跃、流动性与最大损失；比较风险应明确单份、同资金、同保证金或同 Delta 的口径。</p>
 </details>
-<p><span id="q350"></span></p>
 <h3 id="problem-9359788c8831">Q1085 · 组合优化<a class="headerlink" href="#problem-9359788c8831" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：风险管理与组合优化｜<strong>副题型</strong>：两资产方差二次型最小化</p>
 <p><strong>题目</strong>：用两只股票 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 构建简单组合。两者期望收益同为 <span class="arithmatex">\(12\%\)</span>；<span class="arithmatex">\(A\)</span> 收益标准差 <span class="arithmatex">\(20\%\)</span>、<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(30\%\)</span>；收益相关系数 <span class="arithmatex">\(50\%\)</span>。如何在两股之间分配投资使组合风险最小？再推广到协方差矩阵正定、只要求权重和为 1 的 <span class="arithmatex">\(N\)</span> 资产最小方差组合，并说明不许卖空时的变化。</p>
@@ -6277,7 +6175,6 @@ w_*=\frac{\Sigma^{-1}\mathbf1}{\mathbf1^\top\Sigma^{-1}\mathbf1},
 \]</div>
 <p>若还要求各权重非负，通式可能违反约束，需要在边界和活跃资产集合上解凸二次规划；两资产时可把无约束最优权重截到 <span class="arithmatex">\([0,1]\)</span>。若另要求目标收益，应增加收益等式，不能继续无条件用仅预算公式。</p>
 </details>
-<p><span id="q284"></span></p>
 <h3 id="problem-95f02b42d9d0">Q1086 · 98 分位下跌下的看涨价值<a class="headerlink" href="#problem-95f02b42d9d0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期权定价基础｜<strong>副题型</strong>：历史分位冲击与剩余期限重新定价</p>
 <p><strong>题目</strong>：当股价发生 98 分位（<span class="arithmatex">\(98th\)</span> percentile）的下跌时，看涨期权的价值是多少？</p>
@@ -6412,8 +6309,6 @@ S_h^{(2\%)}=S_0\exp[(\mu-\sigma^2/2)h+\sigma\sqrt h\,\Phi^{-1}(0.02)].
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

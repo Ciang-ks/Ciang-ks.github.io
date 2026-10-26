@@ -3705,7 +3705,6 @@
 </table>
 <h2 id="sec-一位运算与二进制编码">位运算与有限信息编码<a class="headerlink" href="#sec-一位运算与二进制编码" title="Permanent link">&para;</a></h2>
 <p>从二进制表示与有限观测容量出发，再构造相应操作或编码。</p>
-<p><span id="q357"></span></p>
 <h3 id="problem-1daa7bc830e3">Q1087 · 判断 2 的幂<a class="headerlink" href="#problem-1daa7bc830e3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：位运算与编码｜<strong>副题型</strong>：二进制最低位消除</p>
 <p><strong>题目</strong>：如何判断一个整数是 2 的幂？</p>
@@ -3715,7 +3714,6 @@
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="mi">-1</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p><span id="q356"></span></p>
 <h3 id="problem-bac11bbb4e26">Q1088 · 无暂存变量交换<a class="headerlink" href="#problem-bac11bbb4e26" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：位运算与编码｜<strong>副题型</strong>：可逆运算与别名分析</p>
 <p><strong>题目</strong>：如何在不使用额外存储空间的情况下交换两个整数 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span>？</p>
@@ -3737,7 +3735,6 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
 </span></code></pre></div>
 </details>
-<p><span id="q358"></span></p>
 <h3 id="problem-1bf1840a079b">Q1089 · 常数乘法的移位加减分解<a class="headerlink" href="#problem-1bf1840a079b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：位运算与编码｜<strong>副题型</strong>：二进制分解与有符号数字表示</p>
 <p><strong>题目</strong>：不用乘法运算符计算整数 <span class="arithmatex">\(7x\)</span>。再说明如何为一般已知整数常数 <span class="arithmatex">\(c\)</span> 构造移位加减式，并明确C++中的有效数值范围。</p>
@@ -3746,7 +3743,6 @@
 <p>因为 <span class="arithmatex">\(7=2^3-1\)</span>，有 <span class="arithmatex">\(7x=(x\ll3)-x\)</span>。一般把 <span class="arithmatex">\(c\)</span> 展开为 <span class="arithmatex">\(\sum_jb_j2^j\)</span>，得到 <span class="arithmatex">\(cx=\sum_{j:b_j=1}(x\ll j)\)</span>。若 <span class="arithmatex">\(c\)</span> 的二进制有长串1，可改用差，例如 <span class="arithmatex">\(31=32-1\)</span>，减少加法次数；对负常数再变号。</p>
 <p>这些等式首先是整数代数恒等式。实际代码须避免移位和中间运算溢出，移位计数也必须小于类型位宽。跨语言标准的稳妥实现可对无符号类型操作，接受按模 <span class="arithmatex">\(2^w\)</span> 结果；若要有符号精确结果，应先检查范围并使用足够宽的类型。编译器通常也会为常数乘法自动选择合适指令，手写移位未必更快。</p>
 </details>
-<p><span id="q359"></span></p>
 <h3 id="problem-54bb3d2038ad">Q1090 · 任意概率 <span class="arithmatex">\(p\)</span> 的游戏<a class="headerlink" href="#problem-54bb3d2038ad" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：概率构造｜<strong>副题型</strong>：二进制展开与首次差异</p>
 <p><strong>题目</strong>：给你一枚公平硬币，能否设计一个简单游戏使你获胜的概率是任意给定的 <span class="arithmatex">\( p \)</span>（<span class="arithmatex">\( 0 &lt; p &lt; 1 \)</span>）？</p>
@@ -3765,7 +3761,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>某些 <span class="arithmatex">\( p \)</span>（如 <span class="arithmatex">\( 1/3 = 0.010101\ldots \)</span>）的二进制展开是无穷级数——随着 <span class="arithmatex">\( i \)</span> 增大，出现 <span class="arithmatex">\( s_i \neq p_i \)</span> 的概率趋于 1。若序列有限（如 <span class="arithmatex">\( 1/4 = 0.01 \)</span>）且走到最后仍相等（<span class="arithmatex">\( s = p \)</span>），判负（对 <span class="arithmatex">\( 1/4 \)</span>，只有 00 判胜，01、10、11 都判负）。此模拟的获胜概率恰为 <span class="arithmatex">\( p \)</span>。</p>
 <p>令 <span class="arithmatex">\(U=\sum_{i\ge1}s_i2^{-i}\)</span>，独立公平比特使 <span class="arithmatex">\(U\sim U(0,1)\)</span>。首次不同的二进制位决定 <span class="arithmatex">\(U&lt;p\)</span>，故中奖概率为 <span class="arithmatex">\(p\)</span>；无限完全相同的概率为0。若 <span class="arithmatex">\(T\)</span> 为首次不同的位置，<span class="arithmatex">\(P(T&gt;k)=2^{-k}\)</span>，所以 <span class="arithmatex">\(ET=\sum_{k\ge0}2^{-k}=2\)</span>。有限展开时可更早结束；一般无限展开算法还要求能够取得 <span class="arithmatex">\(p\)</span> 的所需二进制位。</p>
 </details>
-<p><span id="q360"></span></p>
 <h3 id="problem-9df13014abe0">Q1091 · 毒酒问题<a class="headerlink" href="#problem-9df13014abe0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：位运算与编码｜<strong>副题型</strong>：有限观测编码：并行测试与死亡时间码字｜<strong>公司</strong>：Two Sigma</p>
 <p><strong>题目</strong>：生日派对备有 1000 瓶酒。派对前 20 小时酒厂紧急通知：其中一瓶被下毒。你有 10 只小白鼠可用于测试。毒药极强：任何剂量都会在<strong>恰好 18 小时</strong>后杀死小鼠，18 小时之前没有任何症状。能否在派对前用 10 只小鼠<strong>确保</strong>找出毒酒？</p>
@@ -3783,7 +3778,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 </details>
 <h2 id="sec-二数组查找与数据结构">数组扫描、查找与集合维护<a class="headerlink" href="#sec-二数组查找与数据结构" title="Permanent link">&para;</a></h2>
 <p>先识别输入的有序性、取值范围及可用空间，再决定扫描、二分或辅助集合。</p>
-<p><span id="q361"></span></p>
 <h3 id="problem-828fc4d8a10e">Q1092 · 有序数组去重<a class="headerlink" href="#problem-828fc4d8a10e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：有序扫描与双指针</p>
 <p><strong>题目</strong>：给定有序数组，写代码提取其中的唯一元素。例如 <code>[1, 1, 3, 3, 3, 5, 5, 5, 9, 9, 9, 9]</code> 应得 <code>[1, 3, 5, 9]</code>。</p>
@@ -3804,7 +3798,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 </span></code></pre></div>
 <p>复杂度 <span class="arithmatex">\(\Theta (n)\)</span>。（注：C++ STL 已有通用算法 <code>unique</code> / <code>unique_copy</code>。）</p>
 </details>
-<p><span id="q372"></span></p>
 <h3 id="problem-c6d180f39e2e">Q1093 · 判断 <span class="arithmatex">\(0..N-1\)</span> 中的重复元素<a class="headerlink" href="#problem-c6d180f39e2e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：原地置换与归位不变量</p>
 <p><strong>题目</strong>：整数向量 <span class="arithmatex">\(v\)</span> 有 <span class="arithmatex">\(N\)</span> 个元素、每个都在 0 到 <span class="arithmatex">\(N-1\)</span> 的闭区间内。写一个判断是否存在重复数的算法（无需保留数组、可只给思路）。</p>
@@ -3842,7 +3835,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>由于至少需要查看 <span class="arithmatex">\(N\)</span> 个输入元素，任何确定性算法的时间下界都是 <span class="arithmatex">\(\Omega(N)\)</span>，所以上述线性时间已达到渐近最优。</p>
 <p>扩大值域为 <span class="arithmatex">\([0,M]\)</span> 后，原地归位算法的数组下标可能越界，不能原样使用。可选哈希集合（期望线性时间、<span class="arithmatex">\(O(N)\)</span>存储）、排序后比较相邻项（<span class="arithmatex">\(O(N\log N)\)</span>时间），或 <span class="arithmatex">\(M+1\)</span> 位的位图。选择取决于 <span class="arithmatex">\(M/N\)</span>、是否可改输入、可用内存、缓存和I/O成本，以及需不需要最坏时间保证；并不存在独立于场景的“时间总比内存重要”。</p>
 </details>
-<p><span id="q369"></span></p>
 <h3 id="problem-f7a914b30bba">Q1094 · 万中缺一<a class="headerlink" href="#problem-f7a914b30bba" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：异或消去与整数求和</p>
 <p><strong>题目</strong>：给定前 10000 个数中的 9999 个，写一个内存与计算都高效的程序找出缺失的数。</p>
@@ -3873,7 +3865,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>完整和公式可由正序、倒序相加得到 <span class="arithmatex">\(2\sum_{i=1}^Ni=N(N+1)\)</span>。若按代码先计算32位有符号 <span class="arithmatex">\(N(N+1)\)</span>，<span class="arithmatex">\(N=46341\)</span> 时中间乘积已溢出，尽管最后除2后的和仍可能可表示；使用64位中间量或先把偶因子除2可延后溢出。32位最终和在 <span class="arithmatex">\(N=65536\)</span> 时也超界。</p>
 <p>不依赖和的方案是把 <span class="arithmatex">\(1,\ldots,N\)</span> 与输入全部异或：每个已出现值成对抵消，剩下缺失值。时间 <span class="arithmatex">\(O(N)\)</span>、额外空间 <span class="arithmatex">\(O(1)\)</span>，且不发生加法溢出。这要求输入确实互异且只缺一个；任意脏数据不能仅凭异或检出。</p>
 </details>
-<p><span id="q367"></span></p>
 <h3 id="problem-7d39c74d940f">Q1095 · 和为 <span class="arithmatex">\(m\)</span> 的元素对<a class="headerlink" href="#problem-7d39c74d940f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数据结构｜<strong>副题型</strong>：频数哈希与无序对除重｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：如何找出大小为 <span class="arithmatex">\(n\)</span> 的数组中，元素之和等于某数 <span class="arithmatex">\(m\)</span> 的元素对的个数？</p>
@@ -3887,7 +3878,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>总体 <strong><span class="arithmatex">\(O(n)\)</span> 时间、<span class="arithmatex">\(O(n)\)</span> 空间</strong>。</p>
 <p>也可一趟完成：扫描到 <span class="arithmatex">\(x\)</span> 时，先把历史频数 <span class="arithmatex">\(\mathrm{cnt}[m-x]\)</span> 加入答案，再执行 <span class="arithmatex">\(\mathrm{cnt}[x]++\)</span>。因为只与先前位置配对，每个无序下标对恰在较晚位置被访问时计入一次，自动处理重复值和 <span class="arithmatex">\(2x=m\)</span> 的情况。结果可能达到 <span class="arithmatex">\(N(N-1)/2\)</span>，计数类型要足够宽；哈希线性时间是期望界。</p>
 </details>
-<p><span id="q371"></span></p>
 <h3 id="problem-c95958e1920a">Q1096 · 直方图程序<a class="headerlink" href="#problem-c95958e1920a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数据结构｜<strong>副题型</strong>：区间分桶与在线矩更新</p>
 <p><strong>题目</strong>：实现一个直方图（histogram）生成程序。</p>
@@ -3945,7 +3935,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p><strong>追问的统一表示。</strong> 对递增边界 <span class="arithmatex">\(b_0&lt;\cdots&lt;b_K\)</span>，以 <span class="arithmatex">\([b_j,b_{j+1})\)</span> 分桶，最后一个桶包含右端点。非等宽桶用二分定位，单个样本 <span class="arithmatex">\(O(\log K)\)</span>。每桶维护计数 <span class="arithmatex">\(c\)</span> 和和 <span class="arithmatex">\(s\)</span>，均值为 <span class="arithmatex">\(s/c\)</span>；也可在线更新 <span class="arithmatex">\(\mu\leftarrow\mu+(x-\mu)/(c+1)\)</span>，空桶均值需单独约定。二维直方图分别定位两坐标，累加二维计数矩阵。</p>
 <p>等宽桶宽可参考 <span class="arithmatex">\(h=2\operatorname{IQR}(x)n^{-1/3}\)</span> 的Freedman–Diaconis规则，若IQR为0应退到其他规则。分位数边界能使各桶样本数接近；画非等宽密度直方图时高度应除以桶宽，确保柱面积而非高度之和反映概率。</p>
 </details>
-<p><span id="q363"></span></p>
 <h3 id="problem-06d4d29f76e8">Q1097 · 未知大小数组找首个非零<a class="headerlink" href="#problem-06d4d29f76e8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：指数扩张与二分边界</p>
 <p><strong>题目</strong>：给定数组：从开始到某位置全为 0，其后全为非零。若不知道数组大小，如何找到第一个非零元素的位置？</p>
@@ -3954,7 +3943,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p><strong>指数跳跃 + 二分</strong>。从第 1 个元素开始：若为 0 查第 2 个；若第 2 个为 0 查第 4 个……第 <span class="arithmatex">\( i \)</span> 步查第 <span class="arithmatex">\( 2^i \)</span> 个元素，直到 <span class="arithmatex">\( 2^i \)</span> 处元素非零。然后取中点 <span class="arithmatex">\( (2^i + 2^{i-1})/2 \)</span> 处：若为 0，搜索范围缩至 <span class="arithmatex">\( [(2^i+2^{i-1})/2, 2^i] \)</span>；否则缩至 <span class="arithmatex">\( [2^{i-1}, (2^i+2^{i-1})/2] \)</span>……每次把范围减半——本质是二分搜索。若第一个非零元素在位置 <span class="arithmatex">\(n\)</span>，复杂度 <strong><span class="arithmatex">\(\Theta (\log n)\)</span></strong>。</p>
 <p>边界语义不可省略：有限数组必须提供可识别的“越界”结果，或保证非零元素最终存在且探测安全。一般化为单调谓词 <span class="arithmatex">\(P(i)\)</span> 从假变真，先检查 <span class="arithmatex">\(i=0\)</span>，再在 <span class="arithmatex">\(1,2,4,\ldots\)</span> 探测；首次真点为 <span class="arithmatex">\(2^k\)</span> 时，答案在 <span class="arithmatex">\((2^{k-1},2^k]\)</span> 内，用保持“左假右真”的二分查找即可。扩张和二分各 <span class="arithmatex">\(O(\log(n+1))\)</span> 次探测。</p>
 </details>
-<p><span id="q364"></span></p>
 <h3 id="problem-dfa12d76ee54">Q1098 · 行列递增矩阵查找<a class="headerlink" href="#problem-dfa12d76ee54" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：单调矩阵的行列排除</p>
 <p><strong>题目</strong>：一个 <span class="arithmatex">\( n\times n \)</span> 数字方阵：每行从左到右递增，每列从上到下递增。设计算法在方阵中查找给定数字 <span class="arithmatex">\( x \)</span>，复杂度是多少？</p>
@@ -3969,7 +3957,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>每一步都消去一整行或一整列。搜索至多 <strong><span class="arithmatex">\(2n\)</span> 步，复杂度 <span class="arithmatex">\(O(n)\)</span></strong>。</p>
 <p>同一方法适用于 <span class="arithmatex">\(m\times n\)</span> 矩形矩阵。从右上角 <span class="arithmatex">\((0,n-1)\)</span> 出发：当前值大于目标则整列在下方都更大，左移一列；小于目标则整行在左侧都更小，下移一行；相等则找到。每次至少排除一行或一列，最多 <span class="arithmatex">\(m+n-1\)</span> 次比较，故时间 <span class="arithmatex">\(O(m+n)\)</span>、额外空间 <span class="arithmatex">\(O(1)\)</span>。非严格单调和重复值也不影响存在性查找。</p>
 </details>
-<p><span id="q366"></span></p>
 <h3 id="problem-afc241076eec">Q1099 · 找 <span class="arithmatex">\(k\)</span> 个最大元素<a class="headerlink" href="#problem-afc241076eec" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：排序与搜索｜<strong>副题型</strong>：分区选择与有界最小堆｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：如何在大小为 <span class="arithmatex">\(n\)</span> 的数组中找出 <span class="arithmatex">\(k\)</span> 个最大元素？最高效的算法是什么？</p>
@@ -3984,7 +3971,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 </ol>
 <p><strong>结论</strong>：只求无序的前 <span class="arithmatex">\(k\)</span> 大时，Quickselect 的平均时间最优；流式数据或内存受限时，大小为 <span class="arithmatex">\(k\)</span> 的最小堆最实用。</p>
 </details>
-<p><span id="q370"></span></p>
 <h3 id="problem-37e4c1089723">Q1100 · 日期加 <span class="arithmatex">\(n\)</span> 天<a class="headerlink" href="#problem-37e4c1089723" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数组与查找｜<strong>副题型</strong>：序数日转换与周期分解</p>
 <p><strong>题目</strong>：写一个把日期增加 <span class="arithmatex">\(n\)</span> 天的算法（须稳健处理闰年与非闰年世纪）。</p>
@@ -4050,7 +4036,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 </details>
 <h2 id="sec-在线窗口树形聚合">在线窗口与树形聚合<a class="headerlink" href="#sec-在线窗口树形聚合" title="Permanent link">&para;</a></h2>
 <p>窗口和利用可逆的贡献更新，窗口极值维护单调候选；树问题先分清遍历聚合与资源所有权。</p>
-<p><span id="q362"></span></p>
 <h3 id="problem-acee1764cc24">Q1101 · 移动平均<a class="headerlink" href="#problem-acee1764cc24" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：数据结构与算法｜<strong>副题型</strong>：定长滑动窗口的增量和与过期管理</p>
 <p><strong>题目</strong>：给定长度为 <span class="arithmatex">\( m \)</span> 的大数组 <span class="arithmatex">\( A \)</span>，设计高效算法构造 <span class="arithmatex">\( n \)</span> 元移动平均数组：<span class="arithmatex">\( B_i = (A_{i-n+1} + \cdots + A_i)/n \)</span>，<span class="arithmatex">\( \forall i = n, \ldots, m \)</span>。</p>
@@ -4066,7 +4051,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>复杂度 <strong><span class="arithmatex">\(O(m)\)</span></strong>（朴素做法 <span class="arithmatex">\(O(mn)\)</span>）。</p>
 <p>一般固定窗口可加统计量 <span class="arithmatex">\(S_i=\sum_{j=i-n+1}^iw_j\)</span> 都满足 <span class="arithmatex">\(S_i=S_{i-1}-w_{i-n}+w_i\)</span>，因此不仅均值，窗口计数、平方和也能增量维护。窗口方差可由和与平方和组合，但两大数相减可能损失精度，应视数据尺度使用稳定的更新公式。</p>
 </details>
-<p><span id="q365"></span></p>
 <h3 id="problem-3a12bbe8b4b9">Q1102 · 30 分钟滚动最小值<a class="headerlink" href="#problem-3a12bbe8b4b9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：数据结构与算法｜<strong>副题型</strong>：带时间戳的单调队列与滚动最小值｜<strong>公司</strong>：Virtu</p>
 <p><strong>题目</strong>：设计一个算法为 SPX 价格数据维护一个<strong>滚动 30 分钟最小值</strong>：代码会在随机时刻被查询最小值，同时会在随机时刻收到完全随机的价格数据。如何设计高效算法？</p>
@@ -4083,7 +4067,6 @@ p = 0.p_1p_2\cdots = p_12^{-1} + p_22^{-2} + \cdots,\qquad p_i\in\{0,1\}
 <p>每个点入队一次，随后从队尾被支配删除或从队首过期删除一次。因此 <span class="arithmatex">\(n\)</span> 次插入、<span class="arithmatex">\(q\)</span> 次查询合计 <span class="arithmatex">\(O(n+q)\)</span>，两种操作合起来是<strong>摊还 <span class="arithmatex">\(O(1)\)</span></strong>。单次插入可能清空队尾，长时间无查询后的第一次查询也可能清掉整条队列，所以单次操作最坏可达 <span class="arithmatex">\(O(w)\)</span>；只有在完成过期清理后读取队首是严格 <span class="arithmatex">\(O(1)\)</span>。空间 <span class="arithmatex">\(O(w)\)</span> 中 <span class="arithmatex">\(w\)</span> 是窗口内样本数；若采样率无上限，它不是固定常数。</p>
 <p>若确实允许迟到事件，一条刚到达的旧低价不能永久删除更新的高价：旧点可能更早过期。因此需先规定迟到容忍时间，用水位线缓冲成有序流；或用按时间索引、子树存价格最小值的平衡树，支持插入与区间最小值查询，各 <span class="arithmatex">\(O(\log n)\)</span>。</p>
 </details>
-<p><span id="q373"></span></p>
 <h3 id="problem-813aca368abe">Q1103 · 二叉树的后序聚合与显式栈遍历<a class="headerlink" href="#problem-813aca368abe" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：数据结构｜<strong>副题型</strong>：后序树形聚合与显式栈遍历</p>
 <p><strong>题目</strong>：二叉树每个节点存一个数，且有零、一个或两个子节点。</p>
@@ -4142,7 +4125,6 @@ s=v+s_L+s_R,\qquad h=1+\max(h_L,h_R),
 <p><strong>2. 同一框架对应不同聚合操作。</strong> 递归版本按后序先取得左右结果，显式栈版本先序累加，同时携带深度；它们计算同一三个量。每节点恰处理一次，时间 <span class="arithmatex">\(O(n)\)</span>。二叉树深度优先待访问栈为 <span class="arithmatex">\(O(h)\)</span>，退化为单链时递归栈可到 <span class="arithmatex">\(O(n)\)</span>；显式栈避免函数调用栈溢出风险，但复制与析构是否递归还取决于拥有节点的树类。空树返回 <span class="arithmatex">\((0,0,\text{nullopt})\)</span>，若接口必须返回非空最大值，可在空时抛异常。</p>
 <p><strong>3. 遍历不接管所有权。</strong> <code>const NodeView*</code> 是借用视图，指向的节点必须在整个遍历中存活且结构不变。改成向量下标或只读迭代器时，聚合递推不变；泛型求和需要加法及零元，最大值需要合适次序，这些要求不能由“任意T”自动得到。树的创建、销毁、深复制与只读迭代器由另一道值语义问题负责。</p>
 </details>
-<p><span id="q374"></span></p>
 <h3 id="problem-e230321f137f">Q1104 · 二叉树类的值语义、模板与只读迭代器<a class="headerlink" href="#problem-e230321f137f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：数据结构｜<strong>副题型</strong>：RAII深复制、树的值语义与只读迭代器</p>
 <p><strong>题目</strong>：设计可为空的二叉树类。</p>
@@ -4245,7 +4227,6 @@ s=v+s_L+s_R,\qquad h=1+\max(h_L,h_R),
 </details>
 <h2 id="sec-三排序随机与在线算法">排序、选择与均匀排列<a class="headerlink" href="#sec-三排序随机与在线算法" title="Permanent link">&para;</a></h2>
 <p>区分排序、部分选择与随机排列的输出目标；复杂度论证与工程约束一并考虑。</p>
-<p><span id="q379"></span></p>
 <h3 id="problem-cb3164aa1158">Q1105 · 同时求最大最小<a class="headerlink" href="#problem-cb3164aa1158" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：排序与搜索｜<strong>副题型</strong>：成对比较与胜负分组</p>
 <p><strong>题目</strong>：如何用不超过 <span class="arithmatex">\( 3n/2 \)</span> 次比较同时找出无序数组的最大值和最小值？</p>
@@ -4260,11 +4241,6 @@ s=v+s_L+s_R,\qquad h=1+\max(h_L,h_R),
 <p>总计最多 <span class="arithmatex">\( n/2 + 2(n/2 - 1) = 3n/2 - 2 \le 3n/2 \)</span> 次比较。</p>
 <p>若 <span class="arithmatex">\(n\)</span> 为奇数，先以一个元素同时初始化当前最小值和最大值，再把余下 <span class="arithmatex">\(n-1\)</span> 项配对；每对用一次分大小，再分别与当前两极值比较，共 <span class="arithmatex">\(3(n-1)/2\)</span> 次。偶数时第一对初始化两极值用一次，其余对各用三次，共 <span class="arithmatex">\(3n/2-2\)</span>。统一为 <span class="arithmatex">\(\lceil3n/2\rceil-2\)</span>（<span class="arithmatex">\(n\ge2\)</span>），比单独做两趟扫描节省约四分之一比较。</p>
 </details>
-<p><span id="q375"></span>
-<span id="q376"></span>
-<span id="q419"></span>
-<span id="problem-3a0d1aa33617"></span>
-<span id="problem-7f8780266c16"></span></p>
 <h3 id="problem-2759a8880f25">Q1106 · 排序：实现不变量、分治复杂度与工程选择<a class="headerlink" href="#problem-2759a8880f25" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：排序与搜索｜<strong>副题型</strong>：排序不变量、复杂度保证与稳定性权衡</p>
 <p><strong>题目</strong>：对随机访问序列实现并选择比较排序。</p>
@@ -4331,7 +4307,6 @@ EC_n=\sum_{p&lt;q}\frac2{q-p+1}
 <p>随机洗牌也能获得对应期望保证，但不能排除极小概率的二次时间。大量重复键可用三路分区；需要确定最坏 <span class="arithmatex">\(O(n\log n)\)</span> 时可用introsort，在深度过大后改堆排序。</p>
 <p><strong>3. 按约束选择接口。</strong> 数组通用排序优先 <code>std::sort</code>，需要稳定性则考虑 <code>std::stable_sort</code>；前者不保证稳定。复制输入再排序会增加 <span class="arithmatex">\(O(n)\)</span> 拷贝及存储，若可修改输入就接收非常量引用。链表可通过重连节点归并，使用 <code>std::list::sort</code>，不套用数组分区。昂贵对象可比较移动、排序索引／指针等方案。插入适合短段和近乎有序数据，堆排具有最坏界，归并稳定但通常需要缓冲，快排常有较好局部性；实际快慢还取决于数据分布和实现，须用代表性负载比较。</p>
 </details>
-<p><span id="q378"></span></p>
 <h3 id="problem-a99a13fad9f9">Q1107 · 证伪 <span class="arithmatex">\(O(n)\)</span> 排序的声称<a class="headerlink" href="#problem-a99a13fad9f9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：排序与搜索｜<strong>副题型</strong>：比较决策树与信息下界</p>
 <p><strong>题目</strong>：假设我声称有一个 <span class="arithmatex">\(\mathcal{O}(n)\)</span> 时间内给 <span class="arithmatex">\(n\)</span> 个数排序的程序，请证明我说错了。</p>
@@ -4375,7 +4350,6 @@ M\ge\frac{\log(n!)}{\log2}.
 <p><strong>堆的表示和排序过程。</strong> 最大二叉堆是一棵完全二叉树，满足父节点的键不小于两个孩子。用零基数组存储时，节点 <span class="arithmatex">\(i\)</span> 的孩子在 <span class="arithmatex">\(2i+1,2i+2\)</span>，父节点在 <span class="arithmatex">\(\lfloor(i-1)/2\rfloor\)</span>。堆只保证局部偏序，并不是有序数组。自最后一个非叶节点向根依次下沉可在 <span class="arithmatex">\(O(n)\)</span> 建堆：高度为 <span class="arithmatex">\(h\)</span> 的节点至多约 <span class="arithmatex">\(n/2^{h+1}\)</span> 个，因此总成本由 <span class="arithmatex">\(n\sum_{h\ge0}h/2^{h+1}=O(n)\)</span> 控制。随后把堆顶与当前末尾交换、缩小堆并下沉，做 <span class="arithmatex">\(n-1\)</span> 次，每次至多 <span class="arithmatex">\(O(\log n)\)</span>，就得到升序数组。</p>
 <p><strong>其他下界及其模型。</strong> 比较查找一个已排序数组中的目标，需要区分至少 <span class="arithmatex">\(n+1\)</span> 个插入位置，故最坏需要 <span class="arithmatex">\(\Omega(\log n)\)</span> 次比较。找 <span class="arithmatex">\(n\)</span> 个数的最大值至少需 <span class="arithmatex">\(n-1\)</span> 次比较，因为除胜者外，每个元素必须至少输过一次；线性扫描达到该界。无序数组精确查找的最坏输入需要访问全部 <span class="arithmatex">\(n\)</span> 项，否则未读项可能就是目标。每个下界都依赖计算模型及输入假设，不能据此否定整数计数排序等利用额外结构的线性算法。</p>
 </details>
-<p><span id="q377"></span></p>
 <h3 id="problem-9f46679506bc">Q1108 · 均匀随机洗牌<a class="headerlink" href="#problem-9f46679506bc" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：随机与在线算法｜<strong>副题型</strong>：Fisher–Yates均匀排列与交换不变量</p>
 <p><strong>题目</strong>：<strong>(a)</strong> 有一个可生成离散或连续均匀分布随机数的生成器，如何洗一副 52 张的牌使每种排列等可能？
@@ -4392,9 +4366,6 @@ M\ge\frac{\log(n!)}{\log2}.
 </details>
 <h2 id="sec-四动态规划与算法设计">递推状态与动态规划<a class="headerlink" href="#sec-四动态规划与算法设计" title="Permanent link">&para;</a></h2>
 <p>以充分状态复用子问题，区分递推公式、实现成本和数值表示。</p>
-<p><span id="q380"></span>
-<span id="q382"></span>
-<span id="problem-216f04585239"></span></p>
 <h3 id="problem-e3fe1f62c7ab">Q1109 · Fibonacci的递归成本、滚动递推与快速幂<a class="headerlink" href="#problem-e3fe1f62c7ab" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：线性递推：滚动状态、快速倍增与位复杂度</p>
 <p><strong>题目</strong>：采用 <span class="arithmatex">\(F_0=0,F_1=1,F_n=F_{n-1}+F_{n-2}\)</span>。</p>
@@ -4433,9 +4404,6 @@ F_{2k}=a(2b-a),\qquad F_{2k+1}=a^2+b^2
 <p>返回偶数或奇数所需的一对。</p>
 <p>递归适合分治和树结构；问题在于重复计算而非递归语法本身。精确 <span class="arithmatex">\(F_n\)</span> 有 <span class="arithmatex">\(\Theta(n)\)</span> 个二进制位，输出和大整数运算都不是常数成本；Binet公式使用固定浮点精度在大 <span class="arithmatex">\(n\)</span> 时会舍入错误。若初值改成 <span class="arithmatex">\(G_0=G_1=1\)</span>，则 <span class="arithmatex">\(G_n=F_{n+1}\)</span>，算法与复杂度相同。</p>
 </details>
-<p><span id="q368"></span>
-<span id="q381"></span>
-<span id="problem-1e79d8708fcb"></span></p>
 <h3 id="problem-5bd1b2996d6c">Q1110 · 最大连续子数组与单笔交易利润<a class="headerlink" href="#problem-5bd1b2996d6c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：Kadane递推与价格差分映射｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：给定非空实数数组 <span class="arithmatex">\(a_0,\ldots,a_{n-1}\)</span>。</p>
@@ -4843,7 +4811,6 @@ v'=\begin{cases}-n(v\cdot d),&amp;v\cdot d\ne0,\\v,&amp;v\cdot d=0.\end{cases}
 <p>各分量最少要放 <span class="arithmatex">\(a\)</span> 个坏人，故 <span class="arithmatex">\(M=\sum a\)</span>。若要让某分量大阵营全坏，额外需 <span class="arithmatex">\(b-a\)</span> 人；当且仅当 <span class="arithmatex">\(M+b-a&gt;4\)</span>，这个方向被排除，该大阵营才被强制诚实。若没有分量满足这个条件，则每个人都至少在一个不超过4坏人的合法世界中为坏，算法还不能保证输出任何人。</p>
 <p>跨两个分量的回答只可能令其两个阵营同向合并成 <span class="arithmatex">\((a+c,b+d)\)</span>，或交叉合并成 <span class="arithmatex">\((a+d,b+c)\)</span>；分量内部的询问结果已确定，不提供新信息。合并后最少坏人数超过4的回答不合法，应从对抗者动作中删掉。于是上述代码的“对回答取 max、对所问分量对取 min”恰是穷尽全部自适应决策树的 minimax，而不是只检查某类固定询问顺序。它返回7，结合7问构造，才证明“最少”。最坏深度不超过9，代码中的99只作足够大的初始哨兵。</p>
 </details>
-<p><span id="q384"></span></p>
 <h3 id="problem-e7a88a560166">Q1118 · 让两个机器人相撞<a class="headerlink" href="#problem-e7a88a560166" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：算法设计与证明｜<strong>副题型</strong>：有限状态轨迹与标记触发的快慢追赶</p>
 <p><strong>题目</strong>：两个机器人同时空投到整数轴上，落地后各自扔下降落伞并执行你编写的同一段代码；每行代码执行 1 秒，可用指令：左移 1 单位；右移 1 单位；GOTO 某行；若当前位置有降落伞则 GOTO 某行。写出让它们相撞的代码。</p>
@@ -4880,7 +4847,6 @@ v'=\begin{cases}-n(v\cdot d),&amp;v\cdot d\ne0,\\v,&amp;v\cdot d=0.\end{cases}
 <p><strong>二维与更高维的有限程序障碍。</strong> 即使补上上下移动指令并共享坐标方向，也不能直接照搬一维方案。考察机器人独自与原点降落伞交互的轨迹：它要么有界，要么最终是一个有限步周期反复平移，所访问位置包含在有限多条平行格点射线上。二维总可选择一个不在该轨迹及其反射中的初始位移。两机器人在遇到对方降落伞前始终执行相同程序、保持该位移，因此永远不相撞也不产生打破对称的新观测。更高维同理。允许无界内存、不同标识、随机化或更丰富传感器时需另建模型，以上不可能性只针对题给的确定性有限指令模型。</p>
 <p><strong>与链表环的联系。</strong> 主构造利用“同轨迹上的快者追上慢者”，与 Floyd 快慢指针相似。但链表在有限环上使相对步数按环长取模，必然相遇；机器人在无限轴上没有这种周期空间保证，必须先用降落伞确认追赶方向与谁在前方，不能只让两个相同程序无条件跑不同速度。</p>
 </details>
-<p><span id="q383"></span></p>
 <h3 id="problem-93ef569c12ec">Q1119 · 有限回合命中潜艇<a class="headerlink" href="#problem-93ef569c12ec" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：算法设计与搜索｜<strong>副题型</strong>：可数参数枚举与随时间缩放覆盖</p>
 <p><strong>题目</strong>：潜艇从整数轴上某点出发、每回合移动固定整数个单位；你每回合可向整数轴上某点发射一枚导弹。能否给出有限回合内必中潜艇的算法？</p>
@@ -5100,7 +5066,6 @@ C_R=v_{90}+k(v_{54}+v_{162}),\qquad C_L=v_{162}+j(v_{126}+v_{90}).
 </details>
 <h2 id="sec-五数值方法与随机数">确定性数值计算与误差<a class="headerlink" href="#sec-五数值方法与随机数" title="Permanent link">&para;</a></h2>
 <p>区分舍入误差、离散误差及计算复杂度；先固定尺度和精度目标。</p>
-<p><span id="q385"></span></p>
 <h3 id="problem-7107ba6549d0">Q1127 · Horner 算法<a class="headerlink" href="#problem-7107ba6549d0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：嵌套乘法与同时求导</p>
 <p><strong>题目</strong>：写一个算法计算 <span class="arithmatex">\( y = A_0 + A_1x + A_2x^2 + A_3x^3 + \cdots + A_nx^n \)</span>。</p>
@@ -5113,7 +5078,6 @@ y = \Big(\big(\cdots((A_nx + A_{n-1})x + A_{n-2})x + \cdots + A_2\big)x + A_1\Bi
 <p>并依次计算 <span class="arithmatex">\( B_n = A_n \)</span>、<span class="arithmatex">\( B_{n-1} = B_nx + A_{n-1} \)</span>、…、<span class="arithmatex">\( B_0 = B_1x + A_0 \)</span>，则 <span class="arithmatex">\( y = B_0 \)</span>。<strong>最多 <span class="arithmatex">\( n \)</span> 次乘法，复杂度 <span class="arithmatex">\( O(n) \)</span>。</strong></p>
 <p>逐项重新从1乘到 <span class="arithmatex">\(x^j\)</span> 才需要 <span class="arithmatex">\(O(n^2)\)</span> 乘法；若复用相邻幂，本来也可做到 <span class="arithmatex">\(O(n)\)</span>。Horner的优势是固定只需 <span class="arithmatex">\(n\)</span> 次乘加且额外空间常数。还可同时求导：从 <span class="arithmatex">\(y=A_n,d=0\)</span> 开始，按 <span class="arithmatex">\(j=n-1,\ldots,0\)</span> 依次更新 <span class="arithmatex">\(d\leftarrow dx+y\)</span>、<span class="arithmatex">\(y\leftarrow yx+A_j\)</span>，导数更新必须使用旧的 <span class="arithmatex">\(y\)</span>。这是对每一层嵌套乘法使用乘积法则，最终得到 <span class="arithmatex">\(p(x),p'(x)\)</span>。</p>
 </details>
-<p><span id="q398"></span></p>
 <h3 id="problem-963e43354c50">Q1128 · 计算 <span class="arithmatex">\(n\)</span> 阶乘<a class="headerlink" href="#problem-963e43354c50" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：乘积递推与任意精度</p>
 <p><strong>题目</strong>：写一个计算 <span class="arithmatex">\(n\)</span> 阶乘的程序。</p>
@@ -5157,7 +5121,6 @@ y = \Big(\big(\cdots((A_nx + A_{n-1})x + A_{n-2})x + \cdots + A_2\big)x + A_1\Bi
 <p>若会在一个较小的固定范围内反复调用，可预先缓存所有可表示的阶乘值。若需要精确计算大阶乘，应使用任意精度整数，而不是 <code>double</code>。</p>
 <p>二项式系数可先令 <span class="arithmatex">\(k\leftarrow\min(k,n-k)\)</span>，再由 <span class="arithmatex">\(c_0=1\)</span>、<span class="arithmatex">\(c_j=c_{j-1}(n-k+j)/j\)</span> 逐项计算。精确整数实现可先约分以防中间乘积溢出；任意精度整数仍需计入位运算成本。若要同一 <span class="arithmatex">\(n\)</span> 附近的许多值，Pascal递推 <span class="arithmatex">\(\binom nk=\binom{n-1}k+\binom{n-1}{k-1}\)</span> 可复用计算。Stirling公式为 <span class="arithmatex">\(n!\sim\sqrt{2\pi n}(n/e)^n\)</span>，对数形式适合极大 <span class="arithmatex">\(n\)</span> 的量级估计。循环无调用栈开销，通常比朴素递归快；两者算术运算次数同为 <span class="arithmatex">\(O(n)\)</span>。</p>
 </details>
-<p><span id="q402"></span></p>
 <h3 id="problem-4c9ff19bb2d4">Q1129 · Newton平方根：尺度归一化、收敛与浮点停止<a class="headerlink" href="#problem-4c9ff19bb2d4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：Newton迭代：尺度归一化与浮点停止</p>
 <p><strong>题目</strong>：不用现成的开方函数，写一个计算非负有限 <span class="arithmatex">\(x\)</span> 平方根的C++程序。推导Newton迭代、说明收敛速度，并设计对极大数、极小数和浮点停滞都合理的停止条件。再与二分法比较。</p>
@@ -5204,7 +5167,6 @@ y_{j+1}=y_j-\frac{y_j^2-x}{2y_j}=\frac12(y_j+x/y_j).
 <p>相邻迭代值的相对变化接近机器精度时停止，也覆盖舍入后不再变化的情形。该实现获得接近double精度的结果，不声称满足正确舍入的全部标准库保证。二分法只需保持区间夹住正根，线性收敛、每次约增加一位二进制精度；Newton在合理初值下更快。若输入解析发生下溢，应按接口需求另检查 <code>errno</code>，避免把无法表示的正输入当成0。</p>
 <p>局部误差的具体推导也可由<a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/#problem-81e789d4433f">Q89 · 牛顿法求 <span class="arithmatex">\( \sqrt{37} \)</span></a>承接；数学误差递推与浮点舍入下的终止测试分别承担证明。</p>
 </details>
-<p><span id="q396"></span></p>
 <h3 id="problem-975c9daddbdb">Q1130 · 处处数值稳定的 sinc 函数<a class="headerlink" href="#problem-975c9daddbdb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：Taylor局部展开与消减误差</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\( f(x)=\sin(x)/x \)</span>，写出返回 <span class="arithmatex">\( f(x) \)</span> 值的代码，要求处处行为良好（包括 <span class="arithmatex">\( x=0 \)</span> 附近）。</p>
@@ -5259,7 +5221,6 @@ g(x)=\begin{cases}e^{-1/x},&amp;x&gt;0,\\0,&amp;x\le 0.\end{cases}
 <p>若确需光滑混合，选 <span class="arithmatex">\(0&lt;a&lt;b\)</span>，令 <span class="arithmatex">\(\phi(x)=g(b^2-x^2)/[g(b^2-x^2)+g(x^2-a^2)]\)</span>。则 <span class="arithmatex">\(|x|\le a\)</span> 时为1，<span class="arithmatex">\(|x|\ge b\)</span> 时为0，分母不会同时为零。数值实现应在两个端区直接分支，不能先求 <code>sin(0)/0</code> 再乘零，NaN不会被零权重消除。</p>
 <p>标准 <code>sin</code> 通常先高精度约化到很小角度（大参数需 Payne–Hanek 等约化避免丢失相位），再用 minimax 多项式或有理逼近，结合象限还原。直接对很大的 <span class="arithmatex">\(x\)</span> 累加 Taylor 级数会出现巨大中间项和消减误差，不能作为通用实现。</p>
 </details>
-<p><span id="q399"></span></p>
 <h3 id="problem-1347b3149e49">Q1131 · 线性插值程序<a class="headerlink" href="#problem-1347b3149e49" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：分段一次基函数插值</p>
 <p><strong>题目</strong>：写一个做线性插值的程序。</p>
@@ -5317,7 +5278,6 @@ g(x)=\begin{cases}e^{-1/x},&amp;x&gt;0,\\0,&amp;x\le 0.\end{cases}
 <p>找到端点后，计算查询点在区间中的相对位置 <span class="arithmatex">\(\theta=(x-x_l)/(x_r-x_l)\)</span>，再用 <span class="arithmatex">\((1-\theta)f(x_l)+\theta f(x_r)\)</span> 得到插值或外推结果。</p>
 <p>一般 <span class="arithmatex">\(x\in[x_i,x_{i+1}]\)</span> 时，令 <span class="arithmatex">\(t=(x-x_i)/(x_{i+1}-x_i)\)</span>，插值为 <span class="arithmatex">\((1-t)y_i+ty_{i+1}\)</span>。两权重非负且和为1，故区间内不超出两端值范围。节点严格递增是分母非零的前提；先用二分找到所在区间，复杂度 <span class="arithmatex">\(O(\log n)\)</span>。若真函数二阶导有界，误差满足 <span class="arithmatex">\(f(x)-L(x)=f''(\xi)(x-x_i)(x-x_{i+1})/2\)</span>，绝对值不超过 <span class="arithmatex">\(\|f''\|_\infty h_i^2/8\)</span>。外推不享有区间内凸组合保证。</p>
 </details>
-<p><span id="q393"></span></p>
 <h3 id="problem-06350c5aa605">Q1132 · 数值积分算法及优化<a class="headerlink" href="#problem-06350c5aa605" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：求积误差阶与自适应细分</p>
 <p><strong>题目</strong>：写出数值积分算法，并说明如何优化。</p>
@@ -5369,9 +5329,6 @@ g(x)=\begin{cases}e^{-1/x},&amp;x&gt;0,\\0,&amp;x\le 0.\end{cases}
 <p>注意，代码把乘以区间长度的操作放到了循环结束后，而不是每次循环都做。一般优化循环时，应尽量把不随迭代变化的计算移到循环外。还可以预先计算起始中点，并逐次累加 <code>length</code>，从而避免循环中反复计算 <span class="arithmatex">\( a+(i+0.5)*length \)</span> 这个表达式。</p>
 <p>对足够光滑的被积函数，复合梯形误差为 <span class="arithmatex">\(O(h^2)\)</span>，复合Simpson为 <span class="arithmatex">\(O(h^4)\)</span> 且需偶数个小区间；这些阶依赖相应导数存在和有界。自适应Simpson比较一个区间结果与两个半区间结果，差约为细网格误差的15倍，因此用差除15估计误差，再把容差按子区间分配。端点奇异、振荡和不连续处应先分段或变量替换，不能机械套用平滑误差阶。多维积分则需考虑网格点数随维数指数增长，可能改用蒙特卡洛。</p>
 </details>
-<p><span id="q391"></span>
-<span id="q392"></span>
-<span id="problem-9c374c342136"></span></p>
 <h3 id="problem-09ce3ee8f1ed">Q1133 · 热方程的统一差分格式、稳定性与网格选择<a class="headerlink" href="#problem-09ce3ee8f1ed" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：中心空间差分与Fourier放大因子</p>
 <p><strong>题目</strong>：考虑 <span class="arithmatex">\(u_t=\nu u_{xx}\)</span>、<span class="arithmatex">\(\nu&gt;0\)</span>，在均匀网格求解，初值与两端边界已知。令 <span class="arithmatex">\(\alpha=\nu\Delta t/(\Delta x)^2\)</span>。</p>
@@ -5395,7 +5352,6 @@ G(\xi)=\frac{1-4(1-\vartheta)\alpha\sin^2(\xi/2)}{1+4\vartheta\alpha\sin^2(\xi/2
 <p>当 <span class="arithmatex">\(\vartheta\ge1/2\)</span> 时该线性热方程格式无条件稳定；当 <span class="arithmatex">\(\vartheta&lt;1/2\)</span> 时需 <span class="arithmatex">\(\alpha\le1/[2(1-2\vartheta)]\)</span>。前后向Euler时间一阶、空间二阶；Crank–Nicolson在光滑解下时间、空间均二阶。后者高频放大因子可接近-1，稳定并不意味着不振荡；不光滑期权终值常先做若干后向Euler半步来平滑，再切换Crank–Nicolson。</p>
 <p>在Black–Scholes模型下，可先作变量变换得到热方程，再按支付结构设置终值和空间边界。其他模型可能改变算子、自由边界或障碍条件，不能只改边界便套用同一PDE。</p>
 </details>
-<p><span id="q395"></span></p>
 <h3 id="problem-5aa338f9070e">Q1134 · 高效计算矩阵指数<a class="headerlink" href="#problem-5aa338f9070e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：有限差分与数值方法｜<strong>副题型</strong>：缩放平方与Padé逼近</p>
 <p><strong>题目</strong>：如何高效地计算矩阵指数 <span class="arithmatex">\(e^A\)</span>？</p>
@@ -5474,7 +5430,6 @@ r^{(j)}(\lambda)=f^{(j)}(\lambda),\qquad 0\le j&lt;s_\lambda.
 </details>
 <h2 id="sec-蒙特卡洛随机变量生成">蒙特卡洛、随机变量生成与降方差<a class="headerlink" href="#sec-蒙特卡洛随机变量生成" title="Permanent link">&para;</a></h2>
 <p>随机源、分布变换和估计器分开处理；误差分析须区分方差、偏差和离散化。</p>
-<p><span id="q394"></span></p>
 <h3 id="problem-d419773ad1ba">Q1135 · 离散分布抽样：累积概率、alias与随机源<a class="headerlink" href="#problem-d419773ad1ba" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机与在线算法｜<strong>副题型</strong>：CDF／alias离散抽样与随机源状态管理</p>
 <p><strong>题目</strong>：已知有限结果 <span class="arithmatex">\(v_i\)</span> 及概率 <span class="arithmatex">\(p_i\ge0\)</span>，<span class="arithmatex">\(\sum_i p_i=1\)</span>。输入随机源提供均匀分布的 <span class="arithmatex">\(U\in[0,1)\)</span>，反复抽样时各次输入独立。</p>
@@ -5520,9 +5475,6 @@ r^{(j)}(\lambda)=f^{(j)}(\lambda),\qquad 0\le j&lt;s_\lambda.
 <p><strong>3. 随机源是算法的共同前提。</strong> 均匀b位整数J可映成 <span class="arithmatex">\(J/2^b\)</span>，这是有限网格而非真正连续分布；double常使用53位有效随机位。有界整数 <code>J % N</code> 只有在 <span class="arithmatex">\(N\mid2^b\)</span> 时均匀，否则拒绝落在最大整倍数区间之外的J再取模。一般仿真可选经过检验并支持分流的PCG、Philox等，<code>mt19937</code>也可作可复现基线；安全用途需专门随机源。</p>
 <p>固定种子和生成器版本、避免每次抽样重播种，并行时划分子流；正态配对缓存也必须属于同一流。先覆盖U=0、接近1、累计边界、零概率及单点分布，再以经验频率／卡方等检查边缘分布，稀少桶需合并或用适当精确方法。频率吻合不能证明样本独立，还需考察序列及流间相关。</p>
 </details>
-<p><span id="q387"></span>
-<span id="q401"></span>
-<span id="problem-dd7111f0192e"></span></p>
 <h3 id="problem-9747471b6a1f">Q1136 · 正态抽样：逆变换、拒绝法与均匀数成本<a class="headerlink" href="#problem-9747471b6a1f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：高斯构造：逆CDF、包络拒绝与极坐标采样</p>
 <p><strong>题目</strong>：只能生成独立的 <span class="arithmatex">\(U(0,1)\)</span> 随机数，目标为 <span class="arithmatex">\(N(\mu,\sigma^2)\)</span>，<span class="arithmatex">\(\sigma&gt;0\)</span>。</p>
@@ -5594,7 +5546,6 @@ Z_2=\sqrt{-2\log U}\sin(2\pi V).
 <p>普通大批量模拟可比较极坐标法、Ziggurat及成熟库实现的尾部精度和目标硬件吞吐量。题中static缓存由所有调用者共享：换种子后可能读到另一随机流的缓存，并发还会有数据竞争。因此应让生成器对象同时拥有种子与配对缓存，各流独立管理；方法选择不能只看所用均匀数数量。</p>
 <p>上游的极坐标密度证明见<a href="../04_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%BA%8C/#problem-polar-jacobian-independence">Q384 · 径向密度的极坐标独立与正态生成</a>；若需相关正态，可将独立输出向量Z送入<a href="../02_%E5%BE%AE%E7%A7%AF%E5%88%86%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/#problem-b07670f46e38">Q105 · 生成相关正态随机变量</a>，构成 <span class="arithmatex">\(X=\mu+LZ\)</span>。生成独立Z和确定矩阵L的任务分别处理。</p>
 </details>
-<p><span id="q397"></span></p>
 <h3 id="problem-bbe5b85f403b">Q1137 · 祖母问题的蒙特卡洛代码<a class="headerlink" href="#problem-bbe5b85f403b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：随机入座模拟与对称停止</p>
 <p><strong>题目</strong>：100 名乘客登机、第 1 位随机入座，其余乘客有座则坐自己座位、否则随机：最后一位坐到自己座位的概率是多少？写出（尽量像 C++ 的）代码做蒙特卡洛模拟求该概率。</p>
@@ -5648,8 +5599,6 @@ Z_2=\sqrt{-2\log U}\sin(2\pi V).
 <p>这份实现每轮有 <span class="arithmatex">\(O(n)\)</span> 次向量查找或删除，总时间为 <span class="arithmatex">\(O(Rn^2)\)</span>、额外空间 <span class="arithmatex">\(O(n)\)</span>，<span class="arithmatex">\(R\)</span> 为模拟次数。若仅需最后一人是否成功，可只模拟由错误占座产生的链：每遇到一个被挤出的乘客，在尚未决出的座位中继续均匀抽取，直到座位1或座位 <span class="arithmatex">\(n\)</span> 首先被选中。两座位对称，所以成功概率恰为1/2；若只需这个指标，直接掷公平比特可得同分布 <span class="arithmatex">\(O(1)\)</span> 一次模拟，但不再重建完整入座过程。</p>
 <p>原模拟可用小 <span class="arithmatex">\(n\)</span> 枚举所有选择路径核对，再检查每轮没有重复占座、总人数与座数守恒。估计标准误为 <span class="arithmatex">\(\sqrt{\hat p(1-\hat p)/R}\)</span>，近似95%半宽约 <span class="arithmatex">\(0.98/\sqrt R\)</span>。观察到若干次小数不变并不是误差已受控的依据。</p>
 </details>
-<p><span id="q390"></span>
-<span id="problem-12f6a89a21db"></span></p>
 <h3 id="problem-4af54c8754aa">Q1138 · 面积蒙特卡洛、离散骰坐标与误差分解<a class="headerlink" href="#problem-4af54c8754aa" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：面积指示变量、进制网格与大数律</p>
 <p><strong>题目</strong>：希望用随机抽样估计 <span class="arithmatex">\(\pi\)</span>。</p>
@@ -5672,7 +5621,6 @@ U_k=\sum_{j=1}^kD_jn^{-j}.
 <p>每个数字串概率为 <span class="arithmatex">\(n^{-k}\)</span>，且与 <span class="arithmatex">\(\{0,1/n^k,\ldots,(n^k-1)/n^k\}\)</span> 的格点一一对应。因此 <span class="arithmatex">\(U_k\)</span> 在该网格均匀。用另一组独立掷骰生成 <span class="arithmatex">\(V_k\)</span>，重复面积判定。</p>
 <p><strong>3. 双重极限。</strong> 固定 <span class="arithmatex">\(k\)</span>，估计均值趋于 <span class="arithmatex">\(4p_k\)</span>，其中 <span class="arithmatex">\(p_k\)</span> 是有限网格内圆点的比例，它一般不等于 <span class="arithmatex">\(\pi/4\)</span>。当 <span class="arithmatex">\(k\to\infty\)</span>，Riemann和给 <span class="arithmatex">\(p_k\to\pi/4\)</span>。于是总误差分为 <span class="arithmatex">\(4(\hat p_{k,M}-p_k)\)</span> 的抽样误差与 <span class="arithmatex">\(4p_k-\pi\)</span> 的网格偏差。圆边界只经过 <span class="arithmatex">\(O(n^k)\)</span> 个小格，网格偏差为 <span class="arithmatex">\(O(n^{-k})\)</span>，抽样标准误为 <span class="arithmatex">\(O(M^{-1/2})\)</span>。同时令 <span class="arithmatex">\(k,M\)</span> 增大即可使二者趋零；有限次离散骰不产生精确的连续均匀变量。</p>
 </details>
-<p><span id="q386"></span></p>
 <h3 id="problem-be8a5fe50e11">Q1139 · 蒙特卡洛定价欧式看涨<a class="headerlink" href="#problem-be8a5fe50e11" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：风险中性终值抽样与标准误</p>
 <p><strong>题目</strong>：解释如何用蒙特卡洛模拟为欧式看涨期权定价。</p>
@@ -5689,7 +5637,6 @@ C = e^{-r(T-t)}\cdot\frac{1}{M}\sum_{k=1}^M \max(S_{T,k}-K,\ 0)
 \]</div>
 <p>对于只依赖终值的欧式看涨，无须切分路径：直接生成 <span class="arithmatex">\(S_T=S_te^{(r-\sigma^2/2)(T-t)+\sigma\sqrt{T-t}Z}\)</span>，<span class="arithmatex">\(Z\sim N(0,1)\)</span>，即可避免无用的时间步成本。记贴现收益为 <span class="arithmatex">\(Y_k\)</span>，价格估计 <span class="arithmatex">\(\bar Y\)</span> 的标准误为样本标准差 <span class="arithmatex">\(s_Y/\sqrt M\)</span>。路径依赖或非精确可模拟模型才另需时间离散，并应区分时间步偏差与抽样误差。美式期权需要条件继续价值估计，例如最小二乘蒙特卡洛，而不能只平均固定到期收益。</p>
 </details>
-<p><span id="q388"></span></p>
 <h3 id="problem-0e9b70391788">Q1140 · 蒙特卡洛方差缩减的恒等式与适用条件<a class="headerlink" href="#problem-0e9b70391788" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：对偶、控制变量、条件期望与重要性权重</p>
 <p><strong>题目</strong>：目标是估计 <span class="arithmatex">\(\mu=EX\)</span>，单次样本二阶矩有限。</p>
@@ -5712,7 +5659,6 @@ c^*=\frac{\operatorname{Cov}(X,Y)}{\operatorname{Var}Y},\qquad\operatorname{Var}
 <p><strong>3. 改变抽样权重。</strong> 若目标为 <span class="arithmatex">\(\int h(x)f(x)dx\)</span>，从 <span class="arithmatex">\(g\)</span> 抽样后使用 <span class="arithmatex">\(W=h(X)f(X)/g(X)\)</span>。必须在 <span class="arithmatex">\(hf\ne0\)</span> 的区域有 <span class="arithmatex">\(g&gt;0\)</span>，并有相应可积性，才保证 <span class="arithmatex">\(E_gW=\mu\)</span>。二阶矩为 <span class="arithmatex">\(\int h^2f^2/g\)</span>，方差是该积分减 <span class="arithmatex">\(\mu^2\)</span>。把更多质量放到重要区域常有帮助，但选错 <span class="arithmatex">\(g\)</span> 也可增大方差或造成无限方差。</p>
 <p><strong>4. 样本设计不是自动无偏。</strong> 矩匹配会让重缩放后的样本相关，并可能改变目标分布，对一般非线性收益不保证无偏；误差公式要重新分析。低差异序列是确定性求积，收敛率依赖维数、函数变差和光滑性，不能对任意不连续收益宣称 <span class="arithmatex">\(1/M\)</span> 误差。随机化准蒙特卡洛可通过独立随机化批次估计标准误。</p>
 </details>
-<p><span id="q400"></span></p>
 <h3 id="problem-b5a31f7a6e66">Q1141 · 深虚值数字期权的蒙特卡洛改进<a class="headerlink" href="#problem-b5a31f7a6e66" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：正态均值平移与似然比</p>
 <p><strong>题目</strong>：已知 <span class="arithmatex">\(T\)</span> 时刻股价服从 <span class="arithmatex">\(N(100,1)\)</span>，要用蒙特卡洛为行权价 110 的数字看涨期权定价：直接模拟会发生什么？如何改进？</p>
@@ -5759,7 +5705,6 @@ E_QY^2=e^{\mu^2}\overline\Phi(10+\mu).
 <p>用稳定的正态尾函数和 Mills 比求根，解略大于10，约 <span class="arithmatex">\(10.05\)</span>；<span class="arithmatex">\(\mu=10\)</span> 只是把一半样本移到尾部的近最优选择。直接计算 <span class="arithmatex">\(1-\Phi(20)\)</span> 会舍入为零，应使用 survival/log-survival 函数。</p>
 <p>可以对生成 <span class="arithmatex">\(Z\)</span> 的均匀变量分层，使高尾所在层获得样本，并按各层概率加权。若直接条件于 <span class="arithmatex">\(Z&gt;10\)</span> 采样，权重恰为已知 <span class="arithmatex">\(\overline\Phi(10)\)</span>，得到零方差；但这个例子的答案也已被用来构造采样器，主要用于解释理想重要性分布，复杂衍生品通常无法预先知道归一化常数。</p>
 </details>
-<p><span id="q389"></span></p>
 <h3 id="problem-ef3304597d36">Q1142 · 无解析公式的希腊字母<a class="headerlink" href="#problem-ef3304597d36" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：共同随机数与中心差分</p>
 <p><strong>题目</strong>：若某期权没有闭式定价公式，如何估计它的 delta 和 gamma？</p>
@@ -5772,7 +5717,6 @@ E_QY^2=e^{\mu^2}\overline\Phi(10+\mu).
 <p><strong>降方差要点</strong>：三个价格<strong>必须使用同一组随机数序列</strong>（common random numbers），否则差分噪声会淹没信号。</p>
 <p>设三个价格估计的单独方差均约 <span class="arithmatex">\(\sigma_f^2/M\)</span>。若独立抽样，中心差分Delta的方差约 <span class="arithmatex">\(\sigma_f^2/(2Mh^2)\)</span>，Gamma更可能按 <span class="arithmatex">\(1/(Mh^4)\)</span> 放大噪声。共同随机数使相邻价格样本高度相关，差分中共同噪声抵消；是否有效仍取决于收益连续性。中心差分截断偏差为 <span class="arithmatex">\(O(h^2)\)</span>（相应导数存在时），所以不能把 <span class="arithmatex">\(h\)</span> 无限制缩小。光滑收益可考虑逐路径求导，不连续收益可用似然比或平滑技术。</p>
 </details>
-<p><span id="q215"></span></p>
 <h3 id="problem-0811e2250b71">Q1143 · 测度变换及其在蒙特卡洛中的用途<a class="headerlink" href="#problem-0811e2250b71" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：蒙特卡洛｜<strong>副题型</strong>：Radon–Nikodym与Girsanov变换</p>
 <p><strong>题目</strong>：解释什么是测度变换（change of measure），并举例说明它在蒙特卡洛中何时有用。</p>
@@ -5900,7 +5844,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </details>
 <h2 id="sec-六C语言与内存模型">C++工具、接口与链接<a class="headerlink" href="#sec-六C语言与内存模型" title="Permanent link">&para;</a></h2>
 <p>把工具经验、函数接口与链接规则分别落实到具体情境。</p>
-<p><span id="q403"></span></p>
 <h3 id="problem-2e80fafd34f1">Q1144 · 用过哪些编译器<a class="headerlink" href="#problem-2e80fafd34f1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：工具链比较与项目证据</p>
 <p><strong>题目</strong>：你用过哪些编译器？</p>
@@ -5931,7 +5874,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </li>
 </ul>
 </details>
-<p><span id="q411"></span></p>
 <h3 id="problem-651f48b58eaa">Q1145 · C++ 编程与金融<a class="headerlink" href="#problem-651f48b58eaa" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：性能需求与语言权衡</p>
 <p><strong>题目</strong>：谈谈你对 C++ 编程与金融的了解。</p>
@@ -5956,7 +5898,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </li>
 </ul>
 </details>
-<p><span id="q404"></span></p>
 <h3 id="problem-9cf66421e4b9">Q1146 · 用过哪些设计模式<a class="headerlink" href="#problem-9cf66421e4b9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：对象协作与设计模式选择</p>
 <p><strong>题目</strong>：你用过哪些 C++ 设计模式？</p>
@@ -5988,7 +5929,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </ul>
 <p>若存在多种可行设计，应能比较它们在耦合度、可测试性、扩展性、生命周期管理与运行时成本方面的利弊。也应说明何时简单组合或函数对象比套用设计模式更合适。</p>
 </details>
-<p><span id="q405"></span></p>
 <h3 id="problem-f8950c7c81b1">Q1147 · 内联函数与宏的区别<a class="headerlink" href="#problem-f8950c7c81b1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：预处理展开与ODR内联</p>
 <p><strong>题目</strong>：C++ 中内联函数与宏有什么区别？</p>
@@ -6027,7 +5967,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>二者有限的共同点是：都能把短小逻辑写在一个地方，并有机会避免运行时函数调用开销，而不必在源代码中手工复制逻辑。</p>
 <p>宏的具体风险如 <code>#define SQUARE(x) ((x)*(x))</code>：调用 <code>SQUARE(i++)</code> 重复求值，括号也不能解决副作用。确需预处理的场景包括头文件保护、条件编译、字符串化和记号拼接；普通常量宜用 <code>constexpr</code>，泛型逻辑宜用模板。短小且定义适合放在头文件的函数可标inline，但性能取舍仍应由剖析决定，不能用关键字保证机器码展开。</p>
 </details>
-<p><span id="q410"></span></p>
 <h3 id="problem-5e8a09a0d673">Q1148 · 函数指针的声明语法<a class="headerlink" href="#problem-5e8a09a0d673" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：声明优先级与成员函数指针</p>
 <p><strong>题目</strong>：写出 C++ 声明函数指针的语法。</p>
@@ -6057,7 +5996,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>现代 C++ 还可用 <code>using FunctionPtr = A (*)(B);</code> 简化声明；若需要保存捕获型 lambda 或其他可调用对象，可考虑 <code>std::function</code>。</p>
 <p>若目标函数参数是 <code>const B&amp;</code>，指针类型必须相应为 <code>A (*)(const B&amp;)</code>，不能赋给接收 <code>B</code> 值的函数指针。非静态成员函数需保留所属类，如 <code>A (Owner::*p)(B) = &amp;Owner::method;</code>，调用为 <code>(obj.*p)(arg)</code> 或 <code>(ptr-&gt;*p)(arg)</code>；常量成员函数类型还要在括号后加 <code>const</code>。静态成员函数没有隐式对象参数，可作为普通函数指针。常见用途是回调、策略分派和与C接口交互。</p>
 </details>
-<p><span id="q434"></span></p>
 <h3 id="problem-b80c7aa45216">Q1149 · C++ 函数的 <span class="arithmatex">\(C\)</span> 链接语法<a class="headerlink" href="#problem-b80c7aa45216" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：语言链接与符号名称</p>
 <p><strong>题目</strong>：让 C++ 函数采用 <span class="arithmatex">\(C\)</span> 语言链接约定的语法是什么？</p>
@@ -6081,9 +6019,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </details>
 <h2 id="sec-对象生命周期资源语义">对象生命周期与资源语义<a class="headerlink" href="#sec-对象生命周期资源语义" title="Permanent link">&para;</a></h2>
 <p>构造顺序、子对象复制和异常清理共同决定资源是否安全。</p>
-<p><span id="q415"></span>
-<span id="q429"></span>
-<span id="problem-9cca92849609"></span></p>
 <h3 id="problem-e38f1617b28f">Q1150 · 子对象构造、逆序析构与作用域时机<a class="headerlink" href="#problem-e38f1617b28f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：子对象依赖、声明顺序与栈展开</p>
 <p><strong>题目</strong>：对含继承与成员对象的类型，先给出一般构造、析构顺序，再分析代码。</p>
@@ -6153,9 +6088,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p><strong>2. 具体输出。</strong> 代码依次输出创建Alpha、创建Beta、创建Gamma、销毁Gamma、销毁Beta、销毁Alpha。进入Gamma函数体前，Alpha基类与Beta成员已经存在；执行Gamma析构体时二者仍然可用。内层块使 <code>c</code> 在读取字符之前销毁；移除内层块后，<code>c</code> 存活到main退出，三行销毁信息会在输入完成后输出。</p>
 <p><strong>3. 未完成对象与虚分派。</strong> 构造抛异常时，完整对象没有建立，因此不会调用它自身的析构函数；仅逆序销毁已经构造成功的子对象。构造或析构期间，虚调用不会进入尚未构造或已经销毁的更派生覆盖函数。逆序销毁正是为使较晚构造对象在清理时仍可依赖较早构造的基础部分。</p>
 </details>
-<p><span id="q406"></span>
-<span id="q407"></span>
-<span id="problem-2baa70bcace7"></span></p>
 <h3 id="problem-e18f90af16ea">Q1151 · 构造失败、栈展开与析构异常<a class="headerlink" href="#problem-e18f90af16ea" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：对象生命周期、RAII清理与noexcept边界</p>
 <p><strong>题目</strong>：一个类有基类和多个RAII成员，构造函数可能分配内存或打开文件。</p>
@@ -6172,7 +6104,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p><strong>3. 异常安全不是简单catch所有异常。</strong> 基本保证指无泄漏且不变量仍成立；强保证进一步要求失败后外部可见状态与操作前相同，可采用先准备新资源再提交；不抛保证指操作保证不向外抛出异常。用catch吞掉错误却留下半更新状态，并不自动满足这些保证。</p>
 <p>普通new分配失败一般抛 <code>std::bad_alloc</code>；不抛分配形式在分配失败时返回空指针。但 <code>new(std::nothrow) T(...)</code> 若分配成功后T的构造函数抛出，构造异常仍会传播，不能把 <code>nothrow</code> 理解为整条表达式永不抛出。构造中的RAII清理规则依然相同。</p>
 </details>
-<p><span id="q433"></span></p>
 <h3 id="problem-f8409e5daace">Q1152 · 捕获代码中抛出的所有异常<a class="headerlink" href="#problem-f8409e5daace" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：异常传播与重新抛出</p>
 <p><strong>题目</strong>：如何编写代码来捕获一段代码中抛出的所有异常？</p>
@@ -6195,7 +6126,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>通常应先捕获能够有意义处理的具体异常类型，并按 <code>const</code> 引用接收，把 <code>catch (...)</code> 作为最后防线。它不能捕获进程崩溃、未定义行为或操作系统层面的所有故障。</p>
 <p>在处理器中单独写 <code>throw;</code> 会重新抛出当前异常，保留其动态类型；写 <code>throw e;</code> 会构造一个新的异常对象，若 <code>e</code> 的静态类型为基类，可能发生切片。某个 <code>catch(X)</code> 内抛出的 <code>Y</code> 不会交给与它并列的后续catch处理，而是继续向包围该处理器的外层try传播；若处理器内部再建嵌套try，才可先由内层处理。跨作用域保存当前异常可用 <code>std::exception_ptr</code> 与 <code>std::current_exception()</code>。</p>
 </details>
-<p><span id="q424"></span></p>
 <h3 id="problem-4d9528e29dbb">Q1153 · delete 与 delete[] 的区别<a class="headerlink" href="#problem-4d9528e29dbb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：分配释放配对与数组析构</p>
 <p><strong>题目</strong>：delete 与 delete[] 有什么区别？</p>
@@ -6216,11 +6146,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>混用二者会产生未定义行为，可能表现为内存泄漏、析构次数错误、堆损坏或崩溃。现代 C++ 应尽量用标准容器和智能指针，避免手写 <code>new</code>/<code>delete</code> 配对。</p>
 <p>删除空指针是合法空操作。数组删除需要正确定位分配块、调用每个元素析构，再交还与分配方式匹配的存储；单对象和数组的元数据布局可能不同。自定义 <code>operator delete</code> 只接收到释放阶段的信息，无法普遍挽回此前已发生的错误析构或错误指针调整，因此不应试图靠重载弥补混用。<code>unique_ptr&lt;T&gt;</code> 对应单对象，<code>unique_ptr&lt;T[]&gt;</code> 对应数组；标准容器通常更适合动态序列。</p>
 </details>
-<p><span id="q409"></span>
-<span id="q416"></span>
-<span id="q418"></span>
-<span id="problem-8406bafc7489"></span>
-<span id="problem-9e76fe6a1666"></span></p>
 <h3 id="problem-d20ec962011d">Q1154 · 特殊成员函数：生成规则、派生复制与所有权<a class="headerlink" href="#problem-d20ec962011d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：特殊成员生成规则与基类／成员子对象复制</p>
 <p><strong>题目</strong>：从一个值类型类出发，逐步改变其基类与成员。</p>
@@ -6251,11 +6176,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </details>
 <h2 id="sec-运行时多态动态类型">运行时多态与动态类型<a class="headerlink" href="#sec-运行时多态动态类型" title="Permanent link">&para;</a></h2>
 <p>先理解派发与销毁规则，再追踪完整程序中的动态类型与所有权。</p>
-<p><span id="q412"></span>
-<span id="q422"></span>
-<span id="q423"></span>
-<span id="problem-d28129678b31"></span>
-<span id="problem-662a4bb3010c"></span></p>
 <h3 id="problem-058ac3eadd5d">Q1155 · 虚函数：动态派发、优化与静态多态<a class="headerlink" href="#problem-058ac3eadd5d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：动态派发、间接调用成本与去虚拟化</p>
 <p><strong>题目</strong>：以期权收益接口为例，分析同一个虚调用的语义与实现。</p>
@@ -6286,7 +6206,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p><strong>3. 以可证明目标和实际负载作选择。</strong> 非虚函数目标通常在编译期已知，更易内联；但虚调用若动态类型可由 <code>final</code>、局部构造、全程序分析等证明，也可去虚拟化成直接调用。函数指针若目标未知，仍是间接调用，不能只换语法就期待内联。模板／CRTP在编译期绑定目标，利于短小热点优化，代价是实例化数量、编译成本和代码体积，也不直接替代运行时插件或异构对象集合。</p>
 <p>先确定是否需要运行时扩展，再剖析调用频率、对象数量、单次工作量及缓存行为。性能比较应使用代表性的完整负载；“虚函数必然很慢”与“函数指针必然更快”都不是可靠结论。</p>
 </details>
-<p><span id="q414"></span></p>
 <h3 id="problem-d487474572f6">Q1156 · 虚析构函数与使用时机<a class="headerlink" href="#problem-d487474572f6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：基类删除的虚析构与资源所有权</p>
 <p><strong>题目</strong>：什么是虚析构函数？何时需要它？</p>
@@ -6301,7 +6220,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>一般规则是：凡是准备作为多态基类使用、可能经基类指针删除的类型，都应有虚析构函数，通常写成 <code>virtual ~Base() = default;</code>。若类型明确禁止经基类指针删除，也可把非虚析构函数设为受保护成员。没有多态用途的值类型通常不需要虚析构函数。</p>
 <p>为没有多态需求的每个值类型都加虚析构，会引入多态对象布局和潜在间接调用，影响平凡性、布局约束与优化，因此不默认强加。若类本来已经多态，额外对象空间常已存在，但仍须考虑析构异常契约和删除方式。成本应与“允许经基类销毁”这一接口能力一起判断。</p>
 </details>
-<p><span id="q432"></span></p>
 <h3 id="problem-3ccc65260d4f">Q1157 · 多态/抽象类/指针的定义<a class="headerlink" href="#problem-3ccc65260d4f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：抽象接口、纯虚定义与指针所有权</p>
 <p><strong>题目</strong>：定义以下术语：什么是多态？什么是抽象类？什么是指针？</p>
@@ -6339,7 +6257,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>指针是保存对象或函数地址的值，可重新赋值，也可为空；现代 C++ 用 <code>nullptr</code> 表示空指针。引用是已有对象的别名，初始化后不能重新绑定，通常也不允许为空。虽然实现常以地址完成引用语义，但语言层面不应简单把引用定义为另一种指针。</p>
 <p>引用让接口直接表达“对象必须存在且不重新绑定”，也使运算符重载和泛型代码能像普通对象一样使用别名；它不提供自动生命周期延长的一般保证，仍可能悬空。智能指针在对象访问之外编码所有权，不能把裸指针、引用与拥有型智能指针的生命周期语义混为一谈。未定义的纯虚函数不能作需要函数体的限定调用；有定义时可用 <code>obj.Base::f()</code> 调用，但纯虚声明仍使类抽象。</p>
 </details>
-<p><span id="q408"></span></p>
 <h3 id="problem-0f229ace1e22">Q1158 · 复制类型未知的多态对象<a class="headerlink" href="#problem-0f229ace1e22" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：虚拟clone与所有权转移</p>
 <p><strong>题目</strong>：如何复制一个类型未知的多态对象？</p>
@@ -6368,7 +6285,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>若使用裸指针或引用作为返回类型，C++ 允许覆盖函数使用协变返回类型，即返回更具体的派生类指针或引用；但 <code>std::unique_ptr&lt;Derived&gt;</code> 与 <code>std::unique_ptr&lt;Base&gt;</code> 不属于语言层面的协变类型，因此示例中的覆盖函数仍应声明返回 <code>std::unique_ptr&lt;Base&gt;</code>。</p>
 <p>按值返回 <code>Base</code> 只保留基类子对象，派生类字段与覆盖行为会被切掉，且抽象基类根本不能实例化。<code>unique_ptr&lt;Base&gt;</code> 明确副本由调用方独占并负责销毁；基类应有虚析构。若API返回裸拥有指针，调用方必须知道释放规则，容易泄漏；借用引用则不能表达新副本的所有权。</p>
 </details>
-<p><span id="q428"></span></p>
 <h3 id="problem-e3257cee6e3d">Q1159 · 虚函数与多态的输出分析<a class="headerlink" href="#problem-e3257cee6e3d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：动态类型与对象生命周期的程序追踪</p>
 <p><strong>题目</strong>：阅读给出的代码（基类 Alpha、派生类 <span class="arithmatex">\(\operatorname{Beta} /\operatorname{Gamma}\)</span>、虚函数与指针/引用调用）：说明程序输出及原因。</p>
@@ -6456,7 +6372,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </details>
 <h2 id="sec-传参限定表达式语义">传参、限定与表达式语义<a class="headerlink" href="#sec-传参限定表达式语义" title="Permanent link">&para;</a></h2>
 <p>区分对象本身、访问路径、生命周期与表达式类型。</p>
-<p><span id="q427"></span></p>
 <h3 id="problem-5872bd7122f0">Q1160 · 按值/按引用/按指针传参<a class="headerlink" href="#problem-5872bd7122f0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：值／引用／指针传参与生命周期</p>
 <p><strong>题目</strong>：按值、按引用与按指针传参有什么区别？</p>
@@ -6477,7 +6392,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p><code>const T&amp;</code> 限制的是该访问路径，不冻结整个对象。其他可写别名可能修改同一底层对象，<code>mutable</code>成员也可在const函数内修改；因此两次读取未必永远相同。<code>const_cast</code>移除限定后，仅当底层对象原本不是const时才可合法修改。真正const对象经转换写入仍是未定义行为；并发读写还需独立满足数据竞争规则。</p>
 <p>接口中的const表示访问路径限制，完整限定规则见<a href="#problem-864cbb736f0b">Q1161 · 关于 const 的知识</a>。按值会创建独立形参，引用／指针可借用原对象；是否发生复制、对象何时销毁与能否修改这三件事应分别判断。</p>
 </details>
-<p><span id="q430"></span></p>
 <h3 id="problem-864cbb736f0b">Q1161 · 关于 const 的知识<a class="headerlink" href="#problem-864cbb736f0b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：const访问路径、重载与去限定边界</p>
 <p><strong>题目</strong>：谈谈你对 const 的了解。</p>
@@ -6517,7 +6431,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>良好的常量正确性可以明确接口契约、帮助编译器检查误修改，并允许常量对象安全使用相应接口。</p>
 <p>不能仅靠返回类型或按值返回类型的顶层const区别重载；调用者无法由实参唯一选择。成员函数末尾const却改变隐式对象参数的限定，因此 <code>T::f()</code> 与 <code>T::f() const</code> 可重载。<code>volatile</code>表示某些访问具有不可随意省略的可观察语义，常用于设备寄存器，不保证原子性、线程可见性或先后顺序；线程间共享状态应使用原子或锁。const与volatile也可组合，它们回答不同问题。</p>
 </details>
-<p><span id="q417"></span></p>
 <h3 id="problem-bc5783e4e580">Q1162 · <span class="arithmatex">\(A\)</span> 类型到 <span class="arithmatex">\(B\)</span> 类型的自动转换<a class="headerlink" href="#problem-bc5783e4e580" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：转换构造与显式转换</p>
 <p><strong>题目</strong>：C++ 中 <span class="arithmatex">\(A\)</span> 类型对象自动转换为 <span class="arithmatex">\(B\)</span> 类型对象有哪两种方式？</p>
@@ -6546,9 +6459,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>类型转换运算符的声明和定义都不在行首另写返回类型。现代 C++ 可把转换构造函数或转换运算符声明为 <code>explicit</code>，以禁止容易误触发的隐式转换。</p>
 <p>例如范围受限的句柄类可声明 <code>explicit operator bool() const</code>，允许在 <code>if(handle)</code> 中检测有效性，却阻止意外参与整数运算。转换构造通常在容易引入隐式语义变化时应标explicit；但语言保留隐式转换构造以支持自然的值转换和既有代码，不能简单把所有单参数构造都判错。一个隐式转换序列通常至多含一次用户定义转换，因此连锁的 <span class="arithmatex">\(A\to B\to C\)</span> 不能无限自动串接。</p>
 </details>
-<p><span id="q421"></span>
-<span id="q431"></span>
-<span id="problem-a3a45ea24703"></span></p>
 <h3 id="problem-03fb0a9261d2">Q1163 · static的链接、存储期、类共享状态与并发<a class="headerlink" href="#problem-03fb0a9261d2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：存储期、链接属性与初始化顺序</p>
 <p><strong>题目</strong>：从局部变量、命名空间变量/函数、类成员三个层次解释 <code>static</code>。</p>
@@ -6565,7 +6475,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p><strong>3. 线程安全与语言演进。</strong> C++11起局部static的初始化由语言保证并发只完成一次；初始化失败抛异常后，后续调用可以重试。但初始化后的修改仍须原子或互斥同步，不能因为对象是static就安全。</p>
 <p>弃用表示标准建议迁移、未来可能移除，通常仍可编译并可能发警告；移除后则不再属于对应版本标准。命名空间作用域static并未被普遍移除，也可使用匿名命名空间表达内部链接。</p>
 </details>
-<p><span id="q413"></span></p>
 <h3 id="problem-bac67611eb20">Q1164 · 实现 strcmp<a class="headerlink" href="#problem-bac67611eb20" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：终止符扫描与无符号字节比较</p>
 <p><strong>题目</strong>：实现 strcmp 函数。</p>
@@ -6604,7 +6513,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 </span></code></pre></div>
 <p>不区分大小写的简单单字节版本可逐字节应用 <code>std::tolower(static_cast&lt;unsigned char&gt;(ch))</code> 后比较；不能把负的有符号char直接传入。locale会影响转换，UTF-8的Unicode大小写折叠也不能靠逐字节tolower完成。<code>s.c_str()</code> 返回以零结尾的只读缓冲指针；不能释放它，字符串销毁或可能重分配的修改后不能继续使用。</p>
 </details>
-<p><span id="q426"></span></p>
 <h3 id="problem-243fb4dfaefd">Q1165 · 字符串反转的两个版本<a class="headerlink" href="#problem-243fb4dfaefd" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：对称交换与移动语义</p>
 <p><strong>题目</strong>：写一个 C++ 函数：输入字符串、返回反转后的新字符串；再写一个原地反转、不做任何内存分配的变体。</p>
@@ -6643,7 +6551,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>注意末元素下标是字符串长度减 1，因此右侧下标必须写成 <code>input.size() - 1 - i</code>。两种算法的时间复杂度都是 <span class="arithmatex">\(O(n)\)</span>；原地版本只需 <span class="arithmatex">\(O(1)\)</span> 额外空间。</p>
 <p>C风格数组先找终止符得到长度，再对称交换前半与后半；终止符留在原位置。返回副本适合保留输入或函数式接口，原地版本适合调用方允许修改且希望省分配的场景。一般对象向量可用 <code>std::reverse</code>，内部交换可利用移动构造与移动赋值，或类型自定义的高效swap，避免昂贵深复制。这些操作反转的是字节/元素顺序；UTF-8用户可见字符需先正确分段。</p>
 </details>
-<p><span id="q420"></span></p>
 <h3 id="problem-627135dc312a">Q1166 · int 与 float 递增作图<a class="headerlink" href="#problem-627135dc312a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：浮点间距与整数溢出</p>
 <p><strong>题目</strong>：编程题：若 <span class="arithmatex">\(x\)</span> 是 int 型，不断增大 <span class="arithmatex">\(x\)</span> 并作图，图形是什么样的？若 <span class="arithmatex">\(x\)</span> 是 float 型呢？</p>
@@ -6668,7 +6575,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
 <p>对IEEE754 binary32，精确有效位数24，<span class="arithmatex">\(2^{24}\)</span> 处向上间距为2，按最近偶数舍入不断加1会停在该量级；binary64对应53位。IEEE binary64最大有限数为 <span class="arithmatex">\((2-2^{-52})2^{1023}\approx1.7976931348623157\times10^{308}\)</span>，最小正规格正数 <span class="arithmatex">\(2^{-1022}\approx2.2250738585072014\times10^{-308}\)</span>，最小非正规格正数 <span class="arithmatex">\(2^{-1074}\approx4.9406564584124654\times10^{-324}\)</span>。</p>
 <p>可分别用 <code>std::numeric_limits&lt;double&gt;::max()</code>、<code>min()</code>、<code>denorm_min()</code> 查询；<code>min()</code>不表示最负数，最负有限数用 <code>lowest()</code>。减小误差可采用尺度归一化、避免接近大数相减、补偿求和、成对求和和融合乘加，并以误差传播分析选择精度。这些具体数值依赖类型实现，代码应查询特性而不假定所有平台相同。</p>
 </details>
-<p><span id="q425"></span></p>
 <h3 id="problem-8fb5259ef72a">Q1167 · ?: 是否冗余（condif 函数）<a class="headerlink" href="#problem-8fb5259ef72a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：C++ 语言｜<strong>副题型</strong>：thunk惰性求值与值类别保留</p>
 <p><strong>题目</strong>：一个学生声称 C++ 的 ?: 结构是冗余的，可以用其他语言特性实现，并建议用 condif(condition,<span class="arithmatex">\(i, j\)</span>) 函数替代。对整数而言两者真的没有区别吗？你是否同意该学生？</p>
@@ -6802,8 +6708,6 @@ Z_T=\frac{dQ}{dP}\bigg|_{\mathcal F_T}
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

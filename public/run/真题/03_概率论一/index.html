@@ -6961,7 +6961,6 @@
 </tbody>
 </table>
 <h2 id="sec-排列组合与样本空间">排列组合与样本空间<a class="headerlink" href="#sec-排列组合与样本空间" title="Permanent link">&para;</a></h2>
-<p><span id="sec-一计数组合与数论"></span></p>
 <p>先确认有序或无序、是否放回及等可能对象，再计算有利结果数与总结果数。</p>
 <h3 id="problem-e5e052cb866c">Q117 · 桥牌单色手牌<a class="headerlink" href="#problem-e5e052cb866c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：无放回等可能子集计数</p>
@@ -6975,8 +6974,6 @@ P(\text{指定花色})=\frac1{\binom{52}{13}}.
 \]</div>
 <p>一般地，<span class="arithmatex">\(s\)</span> 种花色、每色 <span class="arithmatex">\(r\)</span> 张，均匀抽 <span class="arithmatex">\(h\ge1\)</span> 张时，全部同一花色的概率为 <span class="arithmatex">\(s\binom rh/\binom{sr}h\)</span>；指定花色则去掉因子 <span class="arithmatex">\(s\)</span>。若 <span class="arithmatex">\(h&gt;r\)</span>，有利数为零。</p>
 </details>
-<p><span id="q115"></span>
-<span id="problem-3bf6e0747de2"></span></p>
 <h3 id="problem-67bc5fb0a0eb">Q118 · 选人<a class="headerlink" href="#problem-67bc5fb0a0eb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：无序子集与组合数｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：房间里有 10 个人，选 3 个有几种方式？</p>
@@ -7050,9 +7047,6 @@ P(\text{指定花色})=\frac1{\binom{52}{13}}.
 \]</div>
 <p>这里先选 <span class="arithmatex">\(k\)</span> 个变化坐标，其余坐标固定，再选各变化坐标的递增或递减方向并除去整体反向的二重计数。</p>
 </details>
-<p><span id="q108"></span>
-<span id="problem-689bf718fb47"></span>
-<span id="problem-957744575818"></span></p>
 <h3 id="problem-a894f067ed6e">Q124 · 五张牌的点数重数与同花计数<a class="headerlink" href="#problem-a894f067ed6e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：点数重数分拆与花色计数</p>
 <p><strong>题目</strong>：标准 52 张牌中均匀抽取五张。(1) 用点数重数描述牌型，推导相应的一般计数；(2) 求恰一对、恰两对、恰三条、葫芦、四条的手牌数和概率，其中三条不含葫芦；(3) 求五张同花但不是皇家同花顺的概率，本问仍计入其他同花顺，并解释它与点数重数分类的关系。</p>
@@ -7131,7 +7125,6 @@ N(a_1,a_2,a_3,a_4)
 <p>先选连续的三种点数，再给每种点数各选一张；减掉同花选择。八副标准牌、四花色、13 点数时，每个连续窗口有 <span class="arithmatex">\(32^3-4\cdot8^3=30720\)</span> 种。约定 <span class="arithmatex">\(A\)</span> 只作为最小点数，合法窗口共 11 个，因此概率为 <span class="arithmatex">\(337920/\binom{416}{3}\)</span>。若另问允许 <span class="arithmatex">\(A23\)</span> 与 QKA 的规则，则有 12 个窗口，概率为 <span class="arithmatex">\(368640/\binom{416}{3}\)</span>。</p>
 <p>一般取连续 <span class="arithmatex">\(h\)</span> 个线性点数，且每个点数各取一张、要求不全同花时，只要 <span class="arithmatex">\(1\le h\le R\)</span>，有利数为 <span class="arithmatex">\((R-h+1)d^h(S^h-S)\)</span>，总数为 <span class="arithmatex">\(\binom{dSR}h\)</span>。窗口由最小点数唯一决定；固定窗口内，每张牌的物理副本都可区分，故不能把同样图案的 <span class="arithmatex">\(d\)</span> 个副本合成一个。</p>
 </details>
-<p><span id="q118"></span></p>
 <h3 id="problem-3f97d5519068">Q126 · 第四个工作日是周四的概率<a class="headerlink" href="#problem-3f97d5519068" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：星期循环与模五平移</p>
 <p><strong>题目</strong>：忽略法定节假日，周一至周五为工作日；月首星期在七天中均匀。求本月第四个工作日为周四的概率。若活动安排在第 <span class="arithmatex">\(k\)</span> 个工作日，选使其最少落在周一的最小正整数 <span class="arithmatex">\(k\)</span>；第四个工作日最少落在哪些星期？另已知 2011 年 1 月 3 日是周一，在本模型中它是否为工作日？</p>
@@ -7142,7 +7135,6 @@ N(a_1,a_2,a_3,a_4)
 当 <span class="arithmatex">\(k=4\)</span> 时，较大概率落在周四，所以第四个工作日为周四的概率为 <span class="arithmatex">\(3/7\)</span>；周一、二、三、五并列最少，各为 <span class="arithmatex">\(1/7\)</span>。若只考虑工作日，周一概率最小的 <span class="arithmatex">\(k\)</span> 是所有不满足 <span class="arithmatex">\(k\equiv1\pmod5\)</span> 的正整数，最小为 2。周末从来不是工作日，概率为零。
 已知 2011 年 1 月 3 日为周一，在忽略法定节假日的本模型中，它确定是工作日，概率为 1。</p>
 </details>
-<p><span id="q560"></span></p>
 <h3 id="problem-fa708c350d10">Q127 · 三次抽样的无序重合概率<a class="headerlink" href="#problem-fa708c350d10" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：按重复类型分类与多项系数</p>
 <p><strong>题目</strong>：从 <span class="arithmatex">\(m\)</span> 种等可能标签中独立抽三次，再独立重复同一实验。忽略次序，求两次实验所得多重集合相同的概率；并说明与逐位置相同的区别。</p>
@@ -7228,7 +7220,6 @@ P(\text{合格})=\frac2{(n-1)!}.
 </details>
 <h2 id="sec-分配计数与重复对象除重">分配计数与重复对象除重<a class="headerlink" href="#sec-分配计数与重复对象除重" title="Permanent link">&para;</a></h2>
 <p>用插板、空隙、多项系数或逐元素分类描述分配，并按对象和容器是否有身份处理重复计数。</p>
-<p><span id="problem-0d280b5c2202"></span></p>
 <h3 id="problem-72890887a023">Q131 · 多状态子集与观察清单<a class="headerlink" href="#problem-72890887a023" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：逐元素互斥状态的乘法计数</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 个不同元素，每个可缺席，或以 <span class="arithmatex">\(r\)</span> 种互斥标记之一出现。(1) 求所有清单数及恰有 <span class="arithmatex">\(k\)</span> 个元素出现的清单数；(2) 用两种计数方式推出二项式恒等式，再计算六元素普通/加粗装饰子集及五标的普通/加星观察清单的数量，均含空表。</p>
@@ -7329,8 +7320,6 @@ P(|A\cap B|=j)=\frac{\binom aj\binom{n-a}{b-j}}{\binom nb}.
 <p>十一枚积木均有实物身份，全部三枚选择为 <span class="arithmatex">\(\binom{11}3=165\)</span> 种。全为奇数时，只能从标签 <span class="arithmatex">\(1,3,5,7,9\)</span> 的五枚积木中选，有 <span class="arithmatex">\(\binom53=10\)</span> 种。以全奇为补事件，至少一枚偶数的选择数为 <span class="arithmatex">\(165-10=155\)</span>。
 两枚标签 10 是两枚不同积木，选择其中任一枚都应分别计数；相同标签不等于相同对象。</p>
 </details>
-<p><span id="problem-50f6b6fb9992"></span>
-<span id="problem-finite-counting-examples"></span></p>
 <h3 id="problem-413487eb3f0d">Q140 · 重复对象排列与有标号分组的对应<a class="headerlink" href="#problem-413487eb3f0d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：多项式系数与位置集合双射</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(n_1,\ldots,n_k\)</span> 为非负整数，总和为 <span class="arithmatex">\(n\)</span>。</p>
@@ -7350,7 +7339,6 @@ P(|A\cap B|=j)=\frac{\binom aj\binom{n-a}{b-j}}{\binom nb}.
 <p><strong>2. 位置与对象身份互换。</strong> 把每个不同对象编号为 <span class="arithmatex">\(1,\ldots,n\)</span>。若编号 <span class="arithmatex">\(j\)</span> 的对象分在第 <span class="arithmatex">\(i\)</span> 组，就在类别序列第 <span class="arithmatex">\(j\)</span> 位写 <span class="arithmatex">\(i\)</span>。序列中 <span class="arithmatex">\(i\)</span> 恰出现 <span class="arithmatex">\(n_i\)</span> 次；反过来，任一这样的序列唯一确定所有组的成员。因此两种对象之间存在双射，有标号定容量分组的数量也为 <span class="arithmatex">\(n!/\prod_i n_i!\)</span>。若组无标号，还须另行考虑组之间的交换，不能直接套用这一步。</p>
 <p><strong>3. 应用。</strong> <span class="arithmatex">\(3,7,9\)</span> 个同类物品共 19 个，排列数为 <span class="arithmatex">\(19!/(3!7!9!)\)</span>。INTERVIEW 共 9 个字母，I、E 各重复两次，其余五个字母各一次，所以不同排列数为 <span class="arithmatex">\(9!/(2!2!)=90720\)</span>。</p>
 </details>
-<p><span id="q114"></span></p>
 <h3 id="problem-3642af69fb64">Q141 · 四人分 <span class="arithmatex">\(A\)</span><a class="headerlink" href="#problem-3642af69fb64" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：固定容量分组的多项系数</p>
 <p><strong>题目</strong>：52 张牌随机发给 4 名玩家，每人 13 张。每人都恰好拿到一张 <span class="arithmatex">\(A\)</span> 的概率是多少？</p>
@@ -7377,7 +7365,6 @@ P=\frac{(4!)^3}{12!/(3!)^4}=\frac{(4!)^3(3!)^4}{12!}=\frac{72}{1925}.
 \]</div>
 <p>一般 <span class="arithmatex">\(r\)</span> 种标签、每种 <span class="arithmatex">\(n\)</span> 张可区分牌，均匀发给 <span class="arithmatex">\(n\)</span> 人各 <span class="arithmatex">\(r\)</span> 张，每人各标签一张的概率为 <span class="arithmatex">\((n!)^r(r!)^n/(nr)!\)</span>。它直接延续“逐标签作一一分配，再除全体等容量分配”的计数。</p>
 </details>
-<p><span id="q116"></span></p>
 <h3 id="problem-7d622ecd87b6">Q143 · 六组牌恰好一组一 <span class="arithmatex">\(A\)</span><a class="headerlink" href="#problem-7d622ecd87b6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：固定容量分组的多项系数｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：从一副 52 张标准牌中取 6 组、每组 3 张。恰好其中一组含且仅含一张 <span class="arithmatex">\(A\)</span> 的概率是多少？ 标准牌先均匀洗牌，连续不放回发成六组；另比较所发十八张总共恰一张 <span class="arithmatex">\(A\)</span> 的概率。</p>
@@ -7461,7 +7448,6 @@ N=\frac{12!}{2!3!3!4!}=277200.
 <p>回文要求第 <span class="arithmatex">\(i\)</span> 位等于第 <span class="arithmatex">\(n+1-i\)</span> 位。只要选定前 <span class="arithmatex">\(\lceil n/2\rceil\)</span> 位，后面的对称位置就全部确定，因此回文数为 <span class="arithmatex">\(m^{\lceil n/2\rceil}\)</span>。
 全部串有 <span class="arithmatex">\(m^n\)</span> 个且等可能，所以回文概率为 <span class="arithmatex">\(m^{-\lfloor n/2\rfloor}\)</span>。<span class="arithmatex">\(n=2,3\)</span> 时都只有一对位置需要匹配，<span class="arithmatex">\(m=26\)</span> 时两种概率都为 <span class="arithmatex">\(1/26\)</span>；三字母串的中间字母无需受到限制。</p>
 </details>
-<p><span id="q558"></span></p>
 <h3 id="problem-b0b031e6e8b0">Q149 · 随机子集的逐元素四分类<a class="headerlink" href="#problem-b0b031e6e8b0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：独立子集的逐元素四状态</p>
 <p><strong>题目</strong>：从一个 <span class="arithmatex">\(n\)</span> 元集合的全部子集中，独立均匀选择 <span class="arithmatex">\(A,B\)</span>。求交集大小分布、交集非空概率及 <span class="arithmatex">\(\operatorname{Var}(|A\cap B|)/E|A\cap B|\)</span>。若另要求一个子集在指定 <span class="arithmatex">\(r\)</span> 元区域中恰好选 <span class="arithmatex">\(k\)</span> 个，有多少种子集？</p>
@@ -7500,7 +7486,6 @@ P(L=n)=\frac1{\sum_{j=0}^{n-1}1/j!}\longrightarrow e^{-1}.
 \]</div>
 <p>代入 <span class="arithmatex">\(n=26\)</span> 就是 <span class="arithmatex">\(1/\sum_{j=0}^{25}1/j!\)</span>。长度较大的串有更多排列，故长度本身不均匀，不能先把各长度赋概率 <span class="arithmatex">\(1/26\)</span>。</p>
 </details>
-<p><span id="problem-453a761b71f4"></span></p>
 <h3 id="problem-count-compositions">Q152 · 整数组成、插板法与多项式计数<a class="headerlink" href="#problem-count-compositions" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：下界平移与插板法</p>
 <p><strong>题目</strong>：(1) 求 <span class="arithmatex">\(k\)</span> 个有序非负整数之和为 <span class="arithmatex">\(n\)</span> 的解数，以及各项为正时的解数；进一步处理各项有指定下界的情形。(2) 用此法计算三个有序正整数和为 25 的解数，以及六项和的 18 次幂合并后的单项式数量。(3) 说明单项式数量与系数和的区别，求四项和的七次幂的系数和。</p>
@@ -7540,7 +7525,6 @@ P(L=n)=\frac1{\sum_{j=0}^{n-1}1/j!}\longrightarrow e^{-1}.
 \]</div>
 <p>一般 <span class="arithmatex">\(k\)</span> 个有序正奇数和为 <span class="arithmatex">\(n\)</span>，仅当 <span class="arithmatex">\(n\ge k\)</span> 且 <span class="arithmatex">\(n-k\)</span> 为偶数时可行；解数为 <span class="arithmatex">\(\binom{(n-k)/2+k-1}{k-1}\)</span>。这一步先处理奇偶可行性，再数非负组成。</p>
 </details>
-<p><span id="q165"></span></p>
 <h3 id="problem-03075f4df878">Q156 · 打击率与长打率的整数约束<a class="headerlink" href="#problem-03075f4df878" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：额外垒数分解与非负整数解</p>
 <p><strong>题目</strong>：100个打数（AB）、打击率 <span class="arithmatex">\(BA=0.300\)</span>、长打率 <span class="arithmatex">\(SLG=0.500\)</span>。</p>
@@ -7616,7 +7600,6 @@ n=10,m=6\text{ 时为 }\frac{\binom{15}5}{6^{10}}.
 \]</div>
 <p>不能用 <span class="arithmatex">\(1/n!\)</span>，因为有重复点数时，同一不降串对应的不同排列数随各点重数变化。</p>
 </details>
-<p><span id="q557"></span></p>
 <h3 id="problem-3513d44ad7b8">Q161 · 不相邻排列的空隙法<a class="headerlink" href="#problem-3513d44ad7b8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：先排普通对象再选空隙</p>
 <p><strong>题目</strong>：有 <span class="arithmatex">\(o\)</span> 个不同的普通对象、<span class="arithmatex">\(e\)</span> 个不同的特殊对象。随机排列全部对象，要求特殊对象两两不相邻。求合法排列数及概率。</p>
@@ -7682,7 +7665,6 @@ Q=\binom{11}{4}-5\binom74=330-175=155.
 \]</div>
 <p>同色球相同、盒有标号，所以按白球数向量计数；这些向量在另行给定某个随机投球机制时未必等概率。</p>
 </details>
-<p><span id="problem-df35ccc4c376"></span></p>
 <h3 id="problem-dice-sum-convolution">Q165 · 骰子和的有界组成、生成函数与递推<a class="headerlink" href="#problem-dice-sum-convolution" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：有界整数解容斥与卷积</p>
 <p><strong>题目</strong>：独立掷 <span class="arithmatex">\(r\ge1\)</span> 枚公平 <span class="arithmatex">\(m\ge1\)</span> 面骰，点数为 <span class="arithmatex">\(1,\ldots,m\)</span>，令和为 <span class="arithmatex">\(S_r\)</span>。</p>
@@ -7749,7 +7731,6 @@ c_{r+1}(s)=\sum_{v=1}^m c_r(s-v),\qquad P(S_r=s)=c_r(s)/m^r.
 在已有 <span class="arithmatex">\(\{1,2,5,6\}\)</span> 时，和值 5 和 9 仍不可达；只要再出现 3 或 4 的至少一种，就能补齐：加入 3 后，<span class="arithmatex">\(5=2+3,9=3+6\)</span>；加入 4 后，<span class="arithmatex">\(5=1+4,9=4+5\)</span>。其余和值已可由必要标签得到，例如 <span class="arithmatex">\(4=2+2,6=1+5,7=1+6,8=2+6,10=5+5\)</span>。同一面可在两次独立投掷中再次出现，所以不要求标签有两个副本。
 余下两面是不区分顺序、允许重复的二元标签多重集，从六种标签取共有 <span class="arithmatex">\(\binom{6+2-1}2=21\)</span> 种；如果都从 <span class="arithmatex">\(\{1,2,5,6\}\)</span> 取，则没有 3、4，共 <span class="arithmatex">\(\binom{4+2-1}2=10\)</span> 种。因此合法数为 <span class="arithmatex">\(21-10=11\)</span>。</p>
 </details>
-<p><span id="problem-cb6ff2b74f2c"></span></p>
 <h3 id="problem-125b4e7e0115">Q167 · 随机访问石头与恰一次下降<a class="headerlink" href="#problem-125b4e7e0115" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：递增段划分与Eulerian计数</p>
 <p><strong>题目</strong>：从最左的石头1出发，按均匀随机次序访问其他 <span class="arithmatex">\(m\)</span> 块石头。(1) 将恰一次向左跳跃化为排列的一次下降，推导一般计数；(2) 计算总共七块、八块石头的概率，并说明为什么递增段的连接要扣除特殊划分。</p>
@@ -7764,7 +7745,6 @@ A(m,1)=2^m-2-(m-1)=2^m-m-1.
 </details>
 <h2 id="sec-容斥-补集与占箱">容斥、补集与占箱<a class="headerlink" href="#sec-容斥-补集与占箱" title="Permanent link">&para;</a></h2>
 <p>把至少一次、覆盖全部或禁止出现转成补事件；交集较多时使用容斥。</p>
-<p><span id="problem-7ac0ba491226"></span></p>
 <h3 id="problem-a5b0a230b7f6">Q168 · 二进制串的前缀、后缀与重叠约束<a class="headerlink" href="#problem-a5b0a230b7f6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：固定位置约束的相容性与容斥</p>
 <p><strong>题目</strong>：长度为 <span class="arithmatex">\(n\)</span> 的二进制串，指定一个长度为 <span class="arithmatex">\(a\)</span> 的前缀和一个长度为 <span class="arithmatex">\(b\)</span> 的后缀，其中 <span class="arithmatex">\(1\le a,b\le n\)</span>。</p>
@@ -7782,7 +7762,6 @@ A(m,1)=2^m-2-(m-1)=2^m-m-1.
 \]</div>
 <p>第一例两端不重叠，得到 <span class="arithmatex">\(2^7+2^6-2^5=160\)</span>；第二例得到 <span class="arithmatex">\(2^8+2^8-2^6=448\)</span>。公式中的交集项须由具体位约束决定，不能在重叠矛盾时仍直接减去一个串。</p>
 </details>
-<p><span id="problem-b913c125734b"></span></p>
 <h3 id="problem-49de0219d598">Q169 · 方块或<span class="arithmatex">\(A\)</span>的并集<a class="headerlink" href="#problem-49de0219d598" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：两事件并集的容斥</p>
 <p><strong>题目</strong>：从标准 52 张牌中均匀抽一张，求是方块或 <span class="arithmatex">\(A\)</span> 的概率。</p>
@@ -7811,9 +7790,6 @@ A(m,1)=2^m-2-(m-1)=2^m-m-1.
 \]</div>
 <p><span class="arithmatex">\(k=1\)</span> 时为 <span class="arithmatex">\(11/15\)</span>，<span class="arithmatex">\(k=2\)</span> 时为 <span class="arithmatex">\(67/75\)</span>。一般 <span class="arithmatex">\(m\)</span> 个等可能选项、每次独立以概率 <span class="arithmatex">\(r\)</span> 完全揭示时，成功率为 <span class="arithmatex">\(1-(1-1/m)(1-r)^k\)</span>。</p>
 </details>
-<p><span id="q539"></span>
-<span id="problem-2e95a14896cf"></span>
-<span id="problem-a820268de14b"></span></p>
 <h3 id="problem-3ab0e9e59512">Q172 · 多类别覆盖的容斥与有限总体推广<a class="headerlink" href="#problem-3ab0e9e59512" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：缺失类别的容斥与覆盖计数</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\ge1\)</span> 次独立抽样，每次均匀落在 <span class="arithmatex">\(m\ge1\)</span> 个类别中，指定其中 <span class="arithmatex">\(r\)</span> 类，<span class="arithmatex">\(0\le r\le m\)</span>。</p>
@@ -7922,8 +7898,6 @@ P=1\cdot\frac34\cdot\frac24=\frac38.
 \]</div>
 <p>一般 <span class="arithmatex">\(n\)</span> 次独立等概率选 <span class="arithmatex">\(m\)</span> 类，要求全部互异，概率为 <span class="arithmatex">\((m)_n/m^n\)</span>；<span class="arithmatex">\(n&gt;m\)</span> 时为零。</p>
 </details>
-<p><span id="q111"></span>
-<span id="problem-f594bce964d7"></span></p>
 <h3 id="problem-e2fe251f3061">Q178 · 任意两人同生日与匹配指定生日<a class="headerlink" href="#problem-e2fe251f3061" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：无碰撞补集与乘积概率</p>
 <p><strong>题目</strong>：生日独立均匀分布在 365 天。求 <span class="arithmatex">\(r\)</span> 人中任意两人同生日的概率，找出首次超过 <span class="arithmatex">\(1/2\)</span> 的 <span class="arithmatex">\(r\)</span>；再求从 <span class="arithmatex">\(n\)</span> 名陌生人中找到至少一名与你同生日的概率及达到 <span class="arithmatex">\(1/2\)</span> 的最小 <span class="arithmatex">\(n\)</span>，推导两种成功率相等时的实数 <span class="arithmatex">\(n\)</span> 与 <span class="arithmatex">\(r\)</span> 的关系。</p>
@@ -7945,8 +7919,6 @@ n=\frac{\sum_{j=0}^{r-1}\log(1-j/365)}{\log(364/365)}.
 \]</div>
 <p>若人数相对天数稀疏，以 <span class="arithmatex">\(\log(1-x)\approx-x\)</span> 展开，分子约为 <span class="arithmatex">\(-r(r-1)/(2\cdot365)\)</span>，分母约为 <span class="arithmatex">\(-1/365\)</span>，所以 <span class="arithmatex">\(n\approx\binom r2\)</span>。任意两人匹配有 <span class="arithmatex">\(\binom r2\)</span> 个潜在比较，与你匹配只有 <span class="arithmatex">\(n\)</span> 个。</p>
 </details>
-<p><span id="problem-335daa51449d"></span>
-<span id="problem-a92ef1af2034"></span></p>
 <h3 id="problem-4cd50efefa99">Q179 · 任意天数与占箱界<a class="headerlink" href="#problem-4cd50efefa99" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：无碰撞补集与乘积概率</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\le m\)</span> 个有身份的球独立均匀投入 <span class="arithmatex">\(m\)</span> 个盒。求没有碰撞的精确概率，并用对数不等式给出它的指数上、下界。 计算三门课独立均匀排入十时段的冲突概率。 计算六次事件独立均匀落入六区时至少两次同区的概率。 再算三个人的生日星期独立均匀于七天时，至少两人同星期的概率。</p>
@@ -8018,9 +7990,6 @@ F(t)=t+t^2+2t^3+5t^4+14t^5+42t^6=1.
 </ol>
 <p>再条件于任意帽子排列，各人拿到的是不同帽子，帽子的沾污标记仍独立。因此前 <span class="arithmatex">\(m\)</span> 人均拿干净帽子的概率为 <span class="arithmatex">\((1-p)^m\)</span>，不依赖该排列，解除条件后仍是此值。干净帽子总数也不受分配改变，故恰有 <span class="arithmatex">\(m\)</span> 人拿到干净帽子的概率为 <span class="arithmatex">\(\binom nm(1-p)^m p^{n-m}\)</span>。</p>
 </details>
-<p><span id="q110"></span>
-<span id="problem-f395006e4ebf"></span>
-<span id="problem-03134006c8dd"></span></p>
 <h3 id="problem-e03f70cdf934">Q184 · 随机排列的固定点与错排分布<a class="headerlink" href="#problem-e03f70cdf934" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：固定点指示变量与错排容斥</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 个不同对象均匀随机排列，令 <span class="arithmatex">\(X_n\)</span> 为仍在指定对应位置的对象数；也可把两个独立均匀排列逐位置比较。</p>
@@ -8079,7 +8048,6 @@ P=\frac2{15}\cdot1+\frac{13}{15}\cdot\frac12=\frac{17}{30}.
 \]</div>
 <p>一般 <span class="arithmatex">\(r\times c\)</span> 棋盘放 <span class="arithmatex">\(k\le\min(r,c)\)</span> 辆互不攻击的车，可先选 <span class="arithmatex">\(k\)</span> 行、<span class="arithmatex">\(k\)</span> 列，再作行列的一一匹配，有 <span class="arithmatex">\(\binom rk\binom ck k!\)</span> 个有利集合，概率除以 <span class="arithmatex">\(\binom{rc}k\)</span>。</p>
 </details>
-<p><span id="q121"></span></p>
 <h3 id="problem-f671621f911f">Q187 · 两红两黑袜子的配对概率<a class="headerlink" href="#problem-f671621f911f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：无放回同色抽样与补集</p>
 <p><strong>题目</strong>：两红两黑袜子均匀不放回抽两只，求同色概率。推广为 <span class="arithmatex">\(n\)</span> 种颜色每色两只，分别抽两只、三只，求至少一对同色的概率，计算 <span class="arithmatex">\(n=10\)</span> 抽两只。另有二十红二十黑，最少取几只才能保证有同色一对？</p>
@@ -8109,7 +8077,6 @@ P(\text{至少一对})=1-\frac{2^3\binom n3}{\binom{2n}3},\qquad n\ge2.
 <summary>解答</summary>
 <p><span class="arithmatex">\(2n\)</span>个互异人分为<span class="arithmatex">\(n\)</span>个无序双人组：全排列后相邻两人一组，除去组内<span class="arithmatex">\(2^{n}\)</span>和组间<span class="arithmatex">\(n!\)</span>重排，得<span class="arithmatex">\((2n)!/(2^{n}n!)\)</span>；也可先为最小未配对者选伙伴，依次有<span class="arithmatex">\(2n-1\)</span>、<span class="arithmatex">\(2n-3\)</span>、…、1种，故等于双阶乘<span class="arithmatex">\((2n-1)!!\)</span>。</p>
 </details>
-<p><span id="q117"></span></p>
 <h3 id="problem-c5f286e2cdbb">Q190 · 洗牌错排与复原期望<a class="headerlink" href="#problem-c5f286e2cdbb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：循环类型聚合与首步分析｜<strong>公司</strong>：Optiver</p>
 <p><strong>题目</strong>：一个 shuffle 函数可以随机打乱 ABCD 中的两个字母（即随机交换一对位置）。
@@ -8282,8 +8249,6 @@ P(S_n=d)=\binom nu/2^n.
 <p>45分钟内最多完整走四步；初始距家四格，每一步最多缩短一格，至少也需四步。因此只能恰好四步到家，且四步全向家。
 第一步按题设已经确定向家，后面三步才各自有 <span class="arithmatex">\(1/2\)</span> 的成功概率，所以到家概率为 <span class="arithmatex">\((1/2)^3=1/8\)</span>。多走一步离家至少需要再用一步补回来，首次到家便需六步、60分钟，超出时限。</p>
 </details>
-<p><span id="q559"></span>
-<span id="problem-acbd031ab145"></span></p>
 <h3 id="problem-b138b87e235a">Q200 · 平分制比赛的进入路径与合法循环<a class="headerlink" href="#problem-b138b87e235a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：平分状态的合法二步循环</p>
 <p><strong>题目</strong>：两人逐分比赛，先到 <span class="arithmatex">\(r+1\)</span> 分且对手至多 <span class="arithmatex">\(r-1\)</span> 分者赢；若首次到 <span class="arithmatex">\(r:r\)</span>，之后必须领先两分才结束。(1) 求到达 <span class="arithmatex">\(r:r\)</span> 和一般 <span class="arithmatex">\(k:k\ (k\ge r)\)</span> 且此前未结束的序列数；(2) 计算网球 <span class="arithmatex">\(r=3\)</span> 到 <span class="arithmatex">\(3:3,4:4\)</span>，以及 <span class="arithmatex">\(r=5\)</span> 到 <span class="arithmatex">\(6:6\)</span> 的序列数。</p>
@@ -8296,9 +8261,6 @@ N(k,k)=\binom{2r}r2^{k-r},\qquad k\ge r.
 \]</div>
 <p>网球 <span class="arithmatex">\(r=3\)</span>：到 <span class="arithmatex">\(3:3\)</span> 有 <span class="arithmatex">\(\binom63=20\)</span> 条，到 <span class="arithmatex">\(4:4\)</span> 有40条；不能用 <span class="arithmatex">\(\binom84=70\)</span>，其中包括比分到 <span class="arithmatex">\(4:2\)</span> 后还继续的非法序列。<span class="arithmatex">\(r=5\)</span> 到 <span class="arithmatex">\(6:6\)</span> 则有 <span class="arithmatex">\(2\binom{10}5=504\)</span> 条。</p>
 </details>
-<p><span id="q235"></span>
-<span id="problem-5d21cf86eda0"></span>
-<span id="problem-a69122a67714"></span></p>
 <h3 id="problem-47b383aec96c">Q201 · 弱领先、售票找零与严格领先<a class="headerlink" href="#problem-47b383aec96c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：首次越界反射与首步条件化</p>
 <p><strong>题目</strong>：均匀随机排列 <span class="arithmatex">\(n\)</span> 张A票和 <span class="arithmatex">\(m\)</span> 张B票，其中 <span class="arithmatex">\(n\ge m\ge0\)</span>。把A、B分别记为 <span class="arithmatex">\(+1,-1\)</span>。</p>
@@ -8329,7 +8291,6 @@ P_{&gt;0}=\frac n{n+m}\cdot\frac{(n-1)-m+1}{(n-1)+1}
 \]</div>
 <p><span class="arithmatex">\(n=100,m=80\)</span> 时，允许持平的概率为 <span class="arithmatex">\(21/101\)</span>，严格领先为 <span class="arithmatex">\(20/180=1/9\)</span>。两者的差别来自是否允许中途高度为0。</p>
 </details>
-<p><span id="problem-5ca80e729ca3"></span></p>
 <h3 id="problem-04edbc785b3b">Q202 · 首次回零反射与两人正面数比较<a class="headerlink" href="#problem-04edbc785b3b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：首次触零反射与望远镜求和</p>
 <p><strong>题目</strong>：(1) 公平 <span class="arithmatex">\(\pm1\)</span> 游走从0出发，求前 <span class="arithmatex">\(N\)</span> 步始终不再回到0的概率，并完整给出反射计数。(2) 两人每轮各独立抛一枚公平币，求前 <span class="arithmatex">\(n\)</span> 轮每轮结束时累计正面数都不同的概率，说明它为何能化为第一问。起始时刻不列入比较。</p>
@@ -8393,7 +8354,6 @@ P=\frac{\binom{10}5^2-\binom{10}7^2}{2^{20}}=\frac{3069}{65536}.
 <summary>解答</summary>
 <p><span class="arithmatex">\(n\ge 2\)</span>人独立均匀出三种手势，计数<span class="arithmatex">\((X,Y,Z)\)</span>的联合<span class="arithmatex">\(PMF=n!/(x!y!z!)\cdot 3^{-n}\)</span>（<span class="arithmatex">\(x+y+z=n\)</span>）。决胜恰出现两种手势：选所缺种类3种，在另外两种的<span class="arithmatex">\(2^{n}\)</span>串中减去2种全同，概率<span class="arithmatex">\(3(2^{n}-2)/3^{n}\)</span>。<span class="arithmatex">\(n=5\)</span>为<span class="arithmatex">\(10/27\)</span>；<span class="arithmatex">\(n\to \infty\)</span>时概率趋0，因为三种全出现趋于必然。</p>
 </details>
-<p><span id="q180"></span></p>
 <h3 id="problem-9a9dc5c27df2">Q208 · 跳台阶的兔子<a class="headerlink" href="#problem-9a9dc5c27df2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：最后一步分类与步数组合</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 级楼梯每次跳一或二级，求到顶跳法数；允许三级时如何改？再定义二维版本：从 (0,0) 到 <span class="arithmatex">\((a,b)\)</span>，每步只可为 (1,0)、(0,1)、(1,1)，<span class="arithmatex">\(a,b\)</span> 为非负整数。求递推、边界及显式有限和。</p>
@@ -8436,8 +8396,6 @@ f(p)=3p^2(1-p)^2+2p^3(1-p)=3p^2-4p^3+p^4.
 \]</div>
 <p>求导 <span class="arithmatex">\(f'(p)=2p(3-6p+2p^2)\)</span>。内部临界点解 <span class="arithmatex">\(2p^2-6p+3=0\)</span>，唯一落在 <span class="arithmatex">\((0,1)\)</span> 的根为 <span class="arithmatex">\(p=(3-\sqrt3)/2\)</span>。导数在该根之前为正、之后为负，且 <span class="arithmatex">\(f(0)=f(1)=0\)</span>，因此它是全局最大点。</p>
 </details>
-<p><span id="q195"></span>
-<span id="problem-a0970ab5e84c"></span></p>
 <h3 id="problem-099e5a23fef4">Q211 · 相邻标签袜子与手套的配对递推<a class="headerlink" href="#problem-099e5a23fef4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：相邻标签配对的删除递推｜<strong>公司</strong>：Five Rings</p>
 <p><strong>题目</strong>：有 <span class="arithmatex">\(n\)</span> 种标签、每种两只可区分袜子或手套，不区分左右手。均匀随机将全部 <span class="arithmatex">\(2n\)</span> 只两两配对，标签差至多1才合法。(1) 证明相邻标签之间的交叉配对必成双出现，推导一般合法配对数与胜率递推；(2) 计算 <span class="arithmatex">\(n=3\)</span> 和 <span class="arithmatex">\(n=5\)</span> 的概率；(3) 若 <span class="arithmatex">\(n=3\)</span> 的游戏胜时净赢本金、败时亏本金，不准反向下注，说明如何将所得胜率用于非负下注决策，并指出目标与约束。</p>
@@ -8785,7 +8743,6 @@ F(N,r)=\min_{\substack{S\subseteq\{1,\ldots,N\}\\|S|=N-r}}a(S).
 <p>骰面为 <span class="arithmatex">\(2,3,5,7,11,13\)</span>，其中只有2为偶数。两个奇素数和为大于2的偶数，不是素数；两个2和为4也不行，所以必须恰有一枚是2。
 检查另一枚的五个奇素数：<span class="arithmatex">\(2+3=5,2+5=7,2+7=9,2+11=13,2+13=15\)</span>，只有3、5、11可行。它们各有两种骰子顺序，共6个有序结果，除以 <span class="arithmatex">\(6^2=36\)</span>，概率为 <span class="arithmatex">\(1/6\)</span>。</p>
 </details>
-<p><span id="problem-c0e988b5e8c1"></span></p>
 <h3 id="problem-1023c8efbfb9">Q225 · 素数和的奇偶<a class="headerlink" href="#problem-1023c8efbfb9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：唯一偶素数的奇偶分类</p>
 <p><strong>题目</strong>：从前十六个素数中均匀不放回选四个，求其和为偶数的概率。</p>
@@ -8881,7 +8838,6 @@ F(N,r)=\min_{\substack{S\subseteq\{1,\ldots,N\}\\|S|=N-r}}a(S).
 若允许退化单色罐，第一罐全白、第二罐全白或全黑时等式<span class="arithmatex">\(1=1\)</span>成立，但这违反“两色都存在”；若改<span class="arithmatex">\(n=2\)</span>则可用勾股数组，例如第二罐3白4黑、第一罐5白2黑，均7球。
 <strong>方法</strong>：相同分母消去后先检查整数可行性；这题只需识别所依赖的已知定理，不要求学习其深层证明。</p>
 </details>
-<p><span id="q113"></span></p>
 <h3 id="problem-2fab0e9d3e86">Q236 · 立方数结尾<a class="headerlink" href="#problem-2fab0e9d3e86" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：模一百展开与同余求解</p>
 <p><strong>题目</strong>：<span class="arithmatex">\( x \)</span> 是 1 到 <span class="arithmatex">\( 10^{12} \)</span> 之间的整数，<span class="arithmatex">\( x^3 \)</span> 以 11 结尾的概率是多少？</p>
@@ -8917,7 +8873,6 @@ x^3 = (a+10b)^3 = a^3 + 30a^2b + 300ab^2 + 1000b^3
 当 <span class="arithmatex">\(a\)</span> 为奇数时 <span class="arithmatex">\(4a\equiv4\)</span>：<span class="arithmatex">\(b=1,2,3,4,5,6\)</span> 分别要求 <span class="arithmatex">\(c\equiv2,0,6,4,2,0\)</span>，其中4种合法。当 <span class="arithmatex">\(a\)</span> 为偶数时 <span class="arithmatex">\(4a\equiv0\)</span>：分别要求 <span class="arithmatex">\(c\equiv6,4,2,0,6,4\)</span>，其中5种合法。
 奇数 <span class="arithmatex">\(a\)</span> 有3种、偶数 <span class="arithmatex">\(a\)</span> 有3种，故合法尾数共 <span class="arithmatex">\(3\cdot4+3\cdot5=27\)</span> 个，总尾数 <span class="arithmatex">\(6^3=216\)</span> 个等可能，因此概率为 <span class="arithmatex">\(27/216=1/8\)</span>。</p>
 </details>
-<p><span id="q112"></span></p>
 <h3 id="problem-975a17a46f62">Q239 · 小数点后第 100 位<a class="headerlink" href="#problem-975a17a46f62" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：代数共轭整数与严格误差界</p>
 <p><strong>题目</strong>：<span class="arithmatex">\( (1+\sqrt{2})^{3000} \)</span> 的小数表示中，小数点右边第 100 位数字是多少？</p>
@@ -8979,7 +8934,6 @@ N=\binom92\binom92=1296.
 <p>若每盒至多四件，十五盒至多装 <span class="arithmatex">\(15\cdot4=60\)</span> 件，这与总数61矛盾。因此每一种合法放置都至少有一盒五件以上，事件是必然事件，概率为1。
 一般 <span class="arithmatex">\(N\)</span> 件放进 <span class="arithmatex">\(m\)</span> 盒，总有一盒至少 <span class="arithmatex">\(\lceil N/m\rceil\)</span> 件；要保证一盒至少 <span class="arithmatex">\(k\)</span> 件的最小总量为 <span class="arithmatex">\(m(k-1)+1\)</span>。把每盒都放 <span class="arithmatex">\(k-1\)</span> 件说明少一件确实不能保证。</p>
 </details>
-<p><span id="problem-b7bee2d2c558"></span></p>
 <h3 id="problem-pigeonhole-worst-selection">Q243 · 生日月份的最坏人数<a class="headerlink" href="#problem-pigeonhole-worst-selection" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：最大失败配置的抽屉原理</p>
 <p><strong>题目</strong>：至少聚集多少人才能保证有七人出生在同一月份？证明最小。</p>
@@ -9039,7 +8993,6 @@ N=\binom92\binom92=1296.
 <strong>方法</strong>：先把概率化成整数方程，再用单调性和根的夹逼缩小枚举，不把大样本比例平方误当成无放回概率。</p>
 <p>同样的整数化也能处理“三红、<span class="arithmatex">\(b\)</span> 蓝，抽两张皆红的概率为一半”：<span class="arithmatex">\(\binom32/\binom{b+3}2=1/2\)</span>，即 <span class="arithmatex">\((b+3)(b+2)=12\)</span>，非负整数解唯一为 <span class="arithmatex">\(b=1\)</span>。总数增大使红红概率严格递减，因此不用逐个枚举无穷多个蓝球数。</p>
 </details>
-<p><span id="problem-96bbce94974b"></span></p>
 <h3 id="problem-86467941607b">Q249 · 平行方箱的空间抽屉界<a class="headerlink" href="#problem-86467941607b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：坐标离散化与空间抽屉上界</p>
 <p><strong>题目</strong>：边长 30 英尺的立方房间内，放置边长 4 英尺且各边与墙平行的刚性立方箱。箱子内部不得相交，但可接触，允许错位摆放。求最多能放多少个，并证明最优。 再比较大立方体棱长 20、小立方体棱长 3 的最大容纳量。</p>
@@ -9061,8 +9014,6 @@ N=\binom92\binom92=1296.
 <p>因最大二项系数是<span class="arithmatex">\(\binom m{\lfloor m/2\rfloor}\)</span>，有<span class="arithmatex">\(|\mathcal F|\le\binom m{\lfloor m/2\rfloor}\)</span>。<span class="arithmatex">\(m=7\)</span>最多35，小于70；<span class="arithmatex">\(m=8\)</span>可用全部<span class="arithmatex">\(\binom{8}{4}=70\)</span>个四语言集合，每人一种，互不包含。所以最小8。
 <strong>方法</strong>：集合化题设，用随机排列前缀的互斥性证明反链界；只用<span class="arithmatex">\(2^{m}\ge 70\)</span>会得到不够强的7。</p>
 </details>
-<p><span id="q109"></span>
-<span id="problem-3ab2f3ce11ea"></span></p>
 <h3 id="problem-threshold-lock-system">Q251 · 门限开锁与极大失败集合<a class="headerlink" href="#problem-threshold-lock-system" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：极大失败集合的门限锁构造</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 人共同保管财物，任意 <span class="arithmatex">\(t\)</span> 人能打开、少于 <span class="arithmatex">\(t\)</span> 人不能打开，所有锁都须打开，每把钥匙只开一把锁，<span class="arithmatex">\(1\le t\le n\)</span>。(1) 推导最少锁数与对称最优方案的每人钥匙数；(2) 代入五人三人开锁，以及十一名海盗至少六人才能开箱的情形。</p>
@@ -9093,7 +9044,6 @@ V(S)=\bigcup_{b\in S\setminus\{a\}}\{ab+v:v\in V(S\setminus\{a,b\})\}.
 \]</div>
 <p>集合并自动合并不同配对产生的相同和。对六个数计算得 <span class="arithmatex">\(\{28,29,31,32,35,37,40,41,44\}\)</span>，共9个；15个配对并不都给不同和，最大44与一般公式一致。</p>
 </details>
-<p><span id="q486"></span></p>
 <h3 id="problem-04550306d016">Q253 · Bollobás 集合对不等式<a class="headerlink" href="#problem-04550306d016" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：随机排列互斥事件证明集合对界</p>
 <p><strong>题目</strong>：集合对 <span class="arithmatex">\((A_i,B_i)_{i=1}^n\)</span> 满足 <span class="arithmatex">\(|A_i|=|B_i|=k\)</span>、<span class="arithmatex">\(A_i\cap B_i=\varnothing\)</span>，且 <span class="arithmatex">\(i\ne j\)</span> 时 <span class="arithmatex">\(A_i\cap B_j\ne\varnothing\)</span>。证明 <span class="arithmatex">\(n\le\binom{2k}{k}\)</span>，并构造等号例子。</p>
@@ -9118,7 +9068,6 @@ P(C\mid E)=\frac{\#(C\cap E)}{\#E}.
 <p>第一张表各行超过80000的项数分别为2、3、2、3，共10项；第三列四项均超过80000，因此条件概率为 <span class="arithmatex">\(4/10=2/5\)</span>。
 第二张表各行超过60000的项数均为2，共8项；第四列中63700、65200、66900符合，共3项，因此条件概率为 <span class="arithmatex">\(3/8\)</span>。原表的16格仍用于无条件概率，但在条件概率分子分母中同时除以16后会约掉。</p>
 </details>
-<p><span id="problem-bd505a4ab123"></span></p>
 <h3 id="problem-521b3ec90bcf">Q255 · 公平双骰的条件计数<a class="headerlink" href="#problem-521b3ec90bcf" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：组合计数与数论｜<strong>副题型</strong>：筛选条件空间后重新归一化</p>
 <p><strong>题目</strong>：独立掷两枚公平六面骰。求：(a) 同点数的概率；(b) 已知点数和不超过 4，同点数的概率；(c) 至少一枚为 6 的概率；(d) 已知两枚不同点数，恰有一枚为 6 的概率。</p>
@@ -9161,7 +9110,6 @@ P(T\le3)=\frac{\binom60+\binom61+\binom62+\binom63}{64}=\frac{1+6+15+20}{64}=\fr
 \]</div>
 <p>也可用公平币对称性：小于3和大于3的概率相等，而恰3的概率为 <span class="arithmatex">\(20/64\)</span>，因此结果为 <span class="arithmatex">\(1/2+(1/2)(20/64)\)</span>。</p>
 </details>
-<p><span id="problem-b7b3d219e1f6"></span></p>
 <h3 id="problem-e765d3c6b5d6">Q259 · 条件均匀的剩余时间<a class="headerlink" href="#problem-e765d3c6b5d6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：分布与矩｜<strong>副题型</strong>：区间长度比的条件均匀分布</p>
 <p><strong>题目</strong>：等待 <span class="arithmatex">\(U\sim U(1,5)\)</span>，已知超过两分钟，求第三分钟内结束的条件概率。</p>
@@ -9173,7 +9121,6 @@ P(U\le3\mid U&gt;2)=\frac{P(2&lt;U\le3)}{P(U&gt;2)}=\frac{(3-2)/4}{(5-2)/4}=\fra
 \]</div>
 <p>一般 <span class="arithmatex">\(U\sim U(a,b)\)</span>、<span class="arithmatex">\(a&lt;t&lt;t+h\le b\)</span>，下一段 <span class="arithmatex">\(h\)</span> 内结束的条件概率为 <span class="arithmatex">\(h/(b-t)\)</span>。它依赖已等待的 <span class="arithmatex">\(t\)</span>，故没有指数分布那样的无记忆性。</p>
 </details>
-<p><span id="q140"></span></p>
 <h3 id="problem-96f5449d041f">Q260 · 有/无放回抽两张 <span class="arithmatex">\(A\)</span><a class="headerlink" href="#problem-96f5449d041f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：有放回独立乘法与无放回连乘</p>
 <p><strong>题目</strong>：标准五十二张牌，比较有放回重洗与无放回抽样：抽两张均为 <span class="arithmatex">\(A\)</span> 的概率各是多少？二十一点仅发这两张起手牌时，双 <span class="arithmatex">\(A\)</span> 概率是多少？再求有、无放回抽三张 <span class="arithmatex">\(A\)</span> 及无放回两张恰一 <span class="arithmatex">\(A\)</span> 一 <span class="arithmatex">\(K\)</span> 的概率。</p>
@@ -9257,11 +9204,6 @@ P=\frac{\binom52\binom{20}4}{\binom{25}6}.
 \]</div>
 <p>坏电池总数固定且抽样不放回，因此这是超几何概率；直接用独立二项式 <span class="arithmatex">\(\binom62(1/5)^2(4/5)^4\)</span> 会忽略每次抽取后组成改变。</p>
 </details>
-<p><span id="problem-a383ed6375cb"></span>
-<span id="problem-e7bb99e3bd0b"></span>
-<span id="problem-467839000368"></span>
-<span id="problem-4e5562c55217"></span>
-<span id="problem-f580c59705d7"></span></p>
 <h3 id="problem-hypergeometric">Q266 · 超几何分布、阶乘矩与有限总体修正<a class="headerlink" href="#problem-hypergeometric" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：有限总体的超几何PMF</p>
 <p><strong>题目</strong>：总体 <span class="arithmatex">\(N\)</span> 件中有 <span class="arithmatex">\(K\)</span> 件目标，均匀无放回抽 <span class="arithmatex">\(n\)</span> 件，目标数为 <span class="arithmatex">\(X\)</span>。(1) 求 PMF 与支持；(2) 利用目标对的指示变量求 <span class="arithmatex">\(E\binom X2\)</span>，再推广到任意阶并推出均值、方差；(3) 解释标记重捕的计数模型与支持，并将通法用于扑克牌、有限目标是否已集齐的实例。</p>
@@ -9346,7 +9288,6 @@ P=2\frac{30}{100}\frac{70}{99}=\frac{14}{33}.
 <p>给定含最大 106 的一组，另两枚在其余五枚中均匀选，共十种；仅 (101,102)、(101,103) 太轻，所以较重概率为 <span class="arithmatex">\(4/5\)</span>。</p>
 <p>总重量为 <span class="arithmatex">\(6(101+106)/2=621\)</span>，含106的三件组要较重，组重须超过310.5，即另两件之和至少205。十种选法中仅 <span class="arithmatex">\(101+102=203\)</span>、<span class="arithmatex">\(101+103=204\)</span> 不满足；<span class="arithmatex">\(101+104=205\)</span> 已满足。因此概率 <span class="arithmatex">\(8/10=4/5\)</span>。</p>
 </details>
-<p><span id="problem-7479769b8079"></span></p>
 <h3 id="problem-93be740d27e6">Q270 · 给定成功数的序列均匀性<a class="headerlink" href="#problem-93be740d27e6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：给定成功总数后的均匀位置集合</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 次独立 <span class="arithmatex">\(\operatorname{Bernoulli} (p)\)</span> 试验，<span class="arithmatex">\(0&lt;p&lt;1\)</span>。已知总成功数恰为 <span class="arithmatex">\(k\)</span>，证明所有符合该条件的成功位置集合等概率，并求每条序列的条件概率。</p>
@@ -9414,7 +9355,6 @@ r(r-1)+g(g-1)=2rg,\quad (r-g)^2=r+g=16.
 \]</div>
 <p>于是 <span class="arithmatex">\(r-g=\pm4\)</span>，结合 <span class="arithmatex">\(r+g=16\)</span>，得到 <span class="arithmatex">\((r,g)=(10,6),(6,10)\)</span>。一般总数 <span class="arithmatex">\(N\)</span> 的两色同色概率恰为一半要求 <span class="arithmatex">\((r-g)^2=N\)</span>，所以还隐含 <span class="arithmatex">\(N\)</span> 为完全平方数及两个颜色数的整数可行性。</p>
 </details>
-<p><span id="q134"></span></p>
 <h3 id="problem-f05b76087fc5">Q276 · 取球条件概率<a class="headerlink" href="#problem-f05b76087fc5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：超几何似然的贝叶斯更新｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>：两袋红蓝球：袋 <span class="arithmatex">\(A\)</span> 有 8 蓝 4 红，袋 <span class="arithmatex">\(B\)</span> 有 4 蓝 8 红。随机选一袋，不放回地抽 3 球，看到 2 蓝 1 红。基于这一结果，当初选中的是袋 <span class="arithmatex">\(B\)</span> 的概率是多少？</p>
@@ -9439,7 +9379,6 @@ P(B\mid E)=\frac{(1/2)(48/220)}{(1/2)(112/220)+(1/2)(48/220)}=\frac3{10}.
 <summary>解答</summary>
 <p>旧货500件中75坏，新货1500件中75坏；先各半选新或旧，再同类不放回买2件。两坏概率<span class="arithmatex">\((1/2)[75\cdot 74/(500\cdot 499)+75\cdot 74/(1500\cdot 1499)]\)</span>。记旧、新两项似然为<span class="arithmatex">\(L\)</span>旧、<span class="arithmatex">\(L\)</span>新，给定两坏后为旧货的概率<span class="arithmatex">\(L\)</span>旧<span class="arithmatex">\(/(L\)</span>旧<span class="arithmatex">\(+L\)</span>新<span class="arithmatex">\()=4497/4996\)</span>。不能用<span class="arithmatex">\(0.15^{2}\)</span>与<span class="arithmatex">\(0.05^{2}\)</span>代替有限总体精确式。</p>
 </details>
-<p><span id="problem-5653014efe59"></span></p>
 <h3 id="problem-282deb9a9b9d">Q278 · 六九两色按钮的两个次序目标<a class="headerlink" href="#problem-282deb9a9b9d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：有序颜色路径的下降阶乘计数</p>
 <p><strong>题目</strong>：六个黄按钮、九个白按钮均可区分，不放回依次抽四个。求前两黄、后两白的概率，以及前两枚与后两枚的颜色多重集合相同的概率。</p>
@@ -9487,7 +9426,6 @@ P=\frac{3[\binom{14}5-2\binom75]}{\binom{21}5}.
 \]</div>
 <p>所以概率为 <span class="arithmatex">\(55/703\)</span>。先对移除后的组成条件化，而答案不依赖被移除点数，故不需要再平均不同点数情形。</p>
 </details>
-<p><span id="problem-cd0af34d6453"></span></p>
 <h3 id="problem-bfbc0ae6ea82">Q282 · 条件抽样后指定标签进入第二批<a class="headerlink" href="#problem-bfbc0ae6ea82" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：条件均匀子集与标签存活概率</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(N\)</span> 个不同标签中，有 <span class="arithmatex">\(M\)</span> 个属于指定集合 <span class="arithmatex">\(S\)</span>。先均匀不放回抽取 <span class="arithmatex">\(a\)</span> 个，已知第一批全部属于 <span class="arithmatex">\(S\)</span>；再从剩余标签中均匀抽取 <span class="arithmatex">\(b\)</span> 个。设 <span class="arithmatex">\(0\le a\le M\le N\)</span>、<span class="arithmatex">\(M\ge1\)</span>、<span class="arithmatex">\(N&gt;a\)</span>、<span class="arithmatex">\(0\le b\le N-a\)</span>。</p>
@@ -9520,7 +9458,6 @@ P(j\text{在第二批}\mid\text{第一批}\subseteq S)
 <summary>解答</summary>
 <p>10次独立正面率<span class="arithmatex">\(p\)</span>，<span class="arithmatex">\(q=1-p\)</span>。(a)前8次恰<span class="arithmatex">\(6H\)</span>与第9次<span class="arithmatex">\(H\)</span>分属不同坐标，因此独立，联合概率<span class="arithmatex">\(\binom{8}{6}p^{7}q^{2}\)</span>。(b)前4次<span class="arithmatex">\(3H\)</span>、最后3次<span class="arithmatex">\(2H\)</span>，两段不交，概率<span class="arithmatex">\(\binom{4}{3}\binom{3}{2}p^{5}q^{2}\)</span>。(c)前7次已知<span class="arithmatex">\(4H\)</span>，第二<span class="arithmatex">\(H\)</span>在第4次要求前3恰<span class="arithmatex">\(1H\)</span>、第<span class="arithmatex">\(4H\)</span>、后3恰<span class="arithmatex">\(2H\)</span>，概率<span class="arithmatex">\(\binom{3}{1}\binom{3}{2}/\binom{7}{4}=9/35\)</span>。(d)前8次<span class="arithmatex">\(5H\)</span>、最后5次（6至10）<span class="arithmatex">\(3H\)</span>，重叠6至8有<span class="arithmatex">\(j\)</span>个<span class="arithmatex">\(H\)</span>，概率<span class="arithmatex">\(\sum_{j=1}^{3}\binom{5}{5-j}\binom{3}{j}\binom{2}{3-j}p^{8-j}q^{2+j}\)</span>。不能把重叠段当独立。</p>
 </details>
-<p><span id="q561"></span></p>
 <h3 id="problem-2dcf605b4f12">Q284 · 抽取一半样本后的颜色差条件<a class="headerlink" href="#problem-2dcf605b4f12" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：取补集再换色的条件对称双射</p>
 <p><strong>题目</strong>：总体共有偶数 <span class="arithmatex">\(N\)</span> 件物品，其中红、黄各 <span class="arithmatex">\(m\)</span> 件，其余为其他类型。等概率不放回抽 <span class="arithmatex">\(N/2\)</span> 件，已知红色比黄色多 <span class="arithmatex">\(d\)</span> 件。求下一件是黄色的概率。假设该条件事件概率为正。</p>
@@ -9644,8 +9581,6 @@ P(B\text{匹配}\mid E)=\frac{10}{11}\cdot0.1+\frac1{11}\cdot1=\frac2{11}.
 <summary>解答</summary>
 <p>两次独立正面率为 <span class="arithmatex">\(p\)</span>，<span class="arithmatex">\(P(HH\mid\text{首掷为 }H)=p\)</span>，<span class="arithmatex">\(P(HH\mid\text{至少一次 }H)=p/(2-p)\)</span>，前者不小于后者，<span class="arithmatex">\(0&lt;p\le1\)</span>；公平时为 <span class="arithmatex">\(1/2\)</span> 对 <span class="arithmatex">\(1/3\)</span>。一般若 <span class="arithmatex">\(A\subset B\subset C\)</span> 且 <span class="arithmatex">\(P(B)&gt;0\)</span>，则 <span class="arithmatex">\(P(A\mid B)=P(A)/P(B)\ge P(A)/P(C)=P(A\mid C)\)</span>。<span class="arithmatex">\(p=0\)</span> 时两个条件均为零概率，不可直接定义。</p>
 </details>
-<p><span id="q128"></span>
-<span id="problem-116fbb2a4549"></span></p>
 <h3 id="problem-016fdd809f09">Q292 · 知情主持人的开门偏好与换门决策<a class="headerlink" href="#problem-016fdd809f09" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：主持人似然表与条件贝叶斯</p>
 <p><strong>题目</strong>：三扇门后的汽车先验均匀，你固定选门 1。主持人知道汽车位置，必须打开另一扇有羊的门。当汽车在门 1 时，他以概率 <span class="arithmatex">\(p\in[0,1]\)</span> 开门 2，以概率 <span class="arithmatex">\(1-p\)</span> 开门 3。</p>
@@ -9694,7 +9629,6 @@ P(B\text{匹配}\mid E)=\frac{10}{11}\cdot0.1+\frac1{11}\cdot1=\frac2{11}.
 <p>所以两种观察下换门胜率分别为 <span class="arithmatex">\(1/(1+p)\)</span> 与 <span class="arithmatex">\(1/(2-p)\)</span>。按分支加权得到 <span class="arithmatex">\((1+p)/3\cdot1/(1+p)+(2-p)/3\cdot1/(2-p)=2/3\)</span>，与总体结果一致。</p>
 <p><strong>3. 依开门号码选择。</strong> 开门 2 后坚持的获胜事件是 <span class="arithmatex">\(C_1\cap O_2\)</span>，概率为 <span class="arithmatex">\(p/3\)</span>；开门 3 后换门的获胜事件是 <span class="arithmatex">\(C_2\)</span>，概率为 <span class="arithmatex">\(1/3\)</span>。相加为 <span class="arithmatex">\((1+p)/3\le2/3\)</span>，只在 <span class="arithmatex">\(p=1\)</span> 时取等号。当 <span class="arithmatex">\(p=1/2\)</span> 时，坚持、总是换门、按所述分支选择的胜率依次为 <span class="arithmatex">\(1/3,2/3,1/2\)</span>。</p>
 </details>
-<p><span id="problem-c8ec11c0e425"></span></p>
 <h3 id="problem-c9d983c2be88">Q293 · 多门换门与完整筛选<a class="headerlink" href="#problem-c9d983c2be88" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：知情开门机制与策略事件分解</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 扇门中一辆车位置均匀。先选一门，知情主持人均匀选择 <span class="arithmatex">\(m\)</span> 扇未选羊门打开，<span class="arithmatex">\(0\le m\le n-2\)</span>。(1) 从剩余未选门中均匀换一门，成功率是多少；(2) 讨论 <span class="arithmatex">\(m=0\)</span> 与 <span class="arithmatex">\(m=n-2\)</span>，并计算 <span class="arithmatex">\(n=7,m=3\)</span>；(3) 十三张方块牌中找方块5，先选一张，主持人揭十一张非目标牌后，比较坚持与换牌。</p>
@@ -9707,7 +9641,6 @@ P(\text{换门成功})=\frac{n-1}{n(n-m-1)}.
 <p><span class="arithmatex">\(m=0\)</span> 时该值等于 <span class="arithmatex">\(1/n\)</span>，与坚持相同；<span class="arithmatex">\(m&gt;0\)</span> 才严格更大。<span class="arithmatex">\(m=n-2\)</span> 时仅剩唯一替代门，初选错误的全部概率都由它承接，成功率为 <span class="arithmatex">\((n-1)/n\)</span>。<span class="arithmatex">\(n=7,m=3\)</span> 时为 <span class="arithmatex">\(6/(7\cdot3)=2/7\)</span>。
 十三张方块牌对应 <span class="arithmatex">\(n=13,m=11\)</span>，所以坚持成功率为 <span class="arithmatex">\(1/13\)</span>，换到唯一未揭替代牌的成功率为 <span class="arithmatex">\(12/13\)</span>。主持人知情、保证不揭目标是这个计算的条件；若只因巧合揭到非目标牌，应重新写该观察的似然。</p>
 </details>
-<p><span id="problem-daa0758305d4"></span></p>
 <h3 id="problem-7cc99a74a1d0">Q294 · 盲揭示之后的对称后验<a class="headerlink" href="#problem-7cc99a74a1d0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：内容无关揭示与剩余位置交换对称</p>
 <p><strong>题目</strong>：三张牌 2、3、4 均匀随机放在左、中、右三处。你先选左边；风吹开固定的右边位置，恰好露出 2。现在目标是拿到 4，留左与换中各有多大胜率？</p>
@@ -9749,8 +9682,6 @@ P(A\text{释放}\mid\text{报B})=\frac{1/3}{(1+q)/3}=\frac1{1+q}.
 <p>令<span class="arithmatex">\(H=\)</span>伤害大象、<span class="arithmatex">\(I=\)</span>象牙库存多、<span class="arithmatex">\(D=\)</span>象牙商人。Lisa使用<span class="arithmatex">\(P(D|I)&gt;P(D)\)</span>及<span class="arithmatex">\(P(H|D)&gt;P(H|D^{c})\)</span>；Homer即使正确指出同类人中<span class="arithmatex">\(P(H|I,D)&lt;P(H|I^{c},D)\)</span>，也不能据此推出<span class="arithmatex">\(P(H|I)&lt;P(H)\)</span>。库存多同时增加了“是象牙商人”的权重，合并时可能反转；没有具体条件率只能说明推断漏洞，不能算唯一数值。</p>
 <p>例如取 <span class="arithmatex">\(P(D)=1/2\)</span>、<span class="arithmatex">\(P(I\mid D)=0.9\)</span>、<span class="arithmatex">\(P(I\mid D^c)=0.1\)</span>，于是 <span class="arithmatex">\(P(D\mid I)=0.9&gt;1/2\)</span>。令伤害率在 <span class="arithmatex">\((D,I),(D,I^c),(D^c,I),(D^c,I^c)\)</span> 四类中依次为 <span class="arithmatex">\(0.8,0.9,0.1,0.2\)</span>：每一商人类型内库存多者伤害率都较低，但 <span class="arithmatex">\(P(H\mid D)=0.81&gt;0.19=P(H\mid D^c)\)</span>，且 <span class="arithmatex">\(P(H\mid I)=0.73&gt;0.5=P(H)\)</span>。这是符合全部已给条件而合并方向相反的具体模型。</p>
 </details>
-<p><span id="q138"></span>
-<span id="problem-56049906f805"></span></p>
 <h3 id="problem-15bf827b4cb9">Q298 · 固定家庭中孩子属性报告的条件概率<a class="headerlink" href="#problem-15bf827b4cb9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：报告事件筛选权重与贝叶斯比值</p>
 <p><strong>题目</strong>：一个固定两孩家庭中，孩子性别独立且各半。每名女孩独立以概率 <span class="arithmatex">\(r\in(0,1)\)</span> 具有某属性，男孩不具有该属性；属性可解释为名字 Clarissa，或出生于三月。</p>
@@ -9785,8 +9716,6 @@ P(\text{全女}\mid\text{至少一女})=\frac{2^{-n}}{1-2^{-n}}=\frac1{2^n-1}.
 <summary>解答</summary>
 <p>可以同时<span class="arithmatex">\(P(A_{1}|B)&gt;P(A_{1}|C)\)</span>、<span class="arithmatex">\(P(A_{2}|B)&gt;P(A_{2}|C)\)</span>，却<span class="arithmatex">\(P(A_{1}\cup A_{2}|B)&lt;P(A_{1}\cup A_{2}|C)\)</span>：设<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(C\)</span>为两个同大班，<span class="arithmatex">\(B\)</span>班<span class="arithmatex">\(60\%\)</span>的人同时具有两项特征、<span class="arithmatex">\(40\%\)</span>都无，<span class="arithmatex">\(C\)</span>班各<span class="arithmatex">\(50\%\)</span>分别仅有第一或第二特征。单项<span class="arithmatex">\(0.6&gt;0.5\)</span>，并集<span class="arithmatex">\(0.6&lt;1\)</span>。关键是交集大小不同。</p>
 </details>
-<p><span id="q130"></span>
-<span id="problem-41aff043440c"></span></p>
 <h3 id="problem-b48d4fb774b6">Q300 · 唯一目标的轮流抽取与重新随机化<a class="headerlink" href="#problem-b48d4fb774b6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：目标位置奇偶计数与首步递归</p>
 <p><strong>题目</strong>：甲先乙后轮流检查对象，检查到唯一目标时游戏结束。</p>
@@ -9809,7 +9738,6 @@ p=q+(1-q)(1-p),\qquad p=\frac1{2-q}.
 \]</div>
 <p>也可每两步作为一轮，写成 <span class="arithmatex">\(p=q+(1-q)^2p\)</span>，得到同一结果。六膛一弹时 <span class="arithmatex">\(q=1/6\)</span>，先手输率为 <span class="arithmatex">\(6/11\)</span>，后手输率为 <span class="arithmatex">\(5/11\)</span>，因此应选后手；当对手先手，自己胜率为 <span class="arithmatex">\(6/11\)</span>。若 <span class="arithmatex">\(q=0\)</span>，游戏永不结束，不能把上述公式当作首次命中概率。</p>
 </details>
-<p><span id="q139"></span></p>
 <h3 id="problem-639076164e8b">Q301 · 已知空膛后的下一步条件风险<a class="headerlink" href="#problem-639076164e8b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：空格到目标的边界计数与条件样本空间</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 格循环转轮含 <span class="arithmatex">\(b\)</span> 个目标格，<span class="arithmatex">\(e=n-b&gt;0\)</span>。初始位置均匀，已知当前格为空。</p>
@@ -9868,7 +9796,6 @@ P(\text{直接前进命中}\mid\text{当前空})=\frac ce,
 <p>因此两枚相邻子弹且对手刚遇空膛时，不转轮的存活率为 <span class="arithmatex">\(3/4\)</span>，转轮为 <span class="arithmatex">\(2/3\)</span>，应直接前进。</p>
 <p><strong>3. 随机装填有不同条件分布。</strong> 若两个目标原先均匀放在六格的两个不同位置，条件于当前为空后，目标集合在剩余五格的 <span class="arithmatex">\(\binom52\)</span> 种选择中仍均匀。下一格属于目标的概率于是为 <span class="arithmatex">\(\binom41/\binom52=2/5\)</span>，而重新定位仍为 <span class="arithmatex">\(2/6=1/3\)</span>，所以此时应重新定位。一般均匀随机的 <span class="arithmatex">\(b\)</span> 个目标在已知一格为空后，任一其他指定格命中率是 <span class="arithmatex">\(b/(n-1)\)</span>（<span class="arithmatex">\(n\ge2\)</span>）。固定相邻结构不具备这种剩余格交换性。</p>
 </details>
-<p><span id="problem-84081954e2d8"></span></p>
 <h3 id="problem-adaptive-two-urn-test">Q302 · 自适应决定是否放回的两次辨别<a class="headerlink" href="#problem-adaptive-two-urn-test" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：观测路径最大似然与自适应决策</p>
 <p><strong>题目</strong>：等先验选中一只未知罐。<span class="arithmatex">\(A\)</span>有2红1黑，<span class="arithmatex">\(B\)</span>有101红100黑。观察第一球颜色后，可决定放回再抽或不放回再抽；两次后猜罐身份，猜中得1。求最优策略与成功率，并比较<span class="arithmatex">\(B\)</span>为51红50黑的牌堆版本。</p>
@@ -9944,11 +9871,7 @@ P(\text{直接前进命中}\mid\text{当前空})=\frac ce,
 <p>抽样是独立有序整数对，样本总数 <span class="arithmatex">\(n^2\)</span>，但学生目标为无序对，故非对角状态对应(a,b)、(b,a)两个同概率样本，权重2，对角只有1。权重只用于累加回答概率，不用于判定“有几个不同无序对可选”；后者仍按纤维中状态数判断。版本A总权16、版本B总权25，表内概率和为1；若完整一轮没人删除且 <span class="arithmatex">\(S\ne\varnothing\)</span>，公开信息此后不再变化，剩余权重对应永远无人能答的事件，原算法在此提示尚有无法识别的状态。</p>
 </details>
 <h2 id="sec-贝叶斯更新与后验预测">贝叶斯更新与后验预测<a class="headerlink" href="#sec-贝叶斯更新与后验预测" title="Permanent link">&para;</a></h2>
-<p><span id="sec-二条件概率与贝叶斯"></span></p>
 <p>用先验乘似然并归一化；预测下一次结果时，再按后验对各模型的预测加权。</p>
-<p><span id="q131"></span>
-<span id="problem-d3822cd1070b"></span>
-<span id="problem-5f14c766bdb8"></span></p>
 <h3 id="problem-fa5fadc53bb1">Q304 · 出租车目击案<a class="headerlink" href="#problem-fa5fadc53bb1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：二元报告似然与基础率更新｜<strong>注</strong>：Tversky &amp; Kahneman 经典题</p>
 <p><strong>题目</strong>：你是肇逃案陪审员。一天夜里一辆出租车撞人后逃逸。城中只有两家出租车公司："蓝车"与"绿车"。案发当晚在路上行驶的出租车 <span class="arithmatex">\(85\%\)</span> 是绿的、<span class="arithmatex">\(15\%\)</span> 是蓝的。目击者（一位老人，从远处窗口看到事故）声称看到的是蓝车。律师在类似当晚的条件下对他做了充分的视觉测试，证明他能以 <span class="arithmatex">\(80\%\)</span> 的准确率区分蓝车与绿车。老人看到的确实是蓝车的概率是多少？</p>
@@ -9971,7 +9894,6 @@ P(D\mid Y)=\frac{(1/4)0.9}{(1/4)0.9+(3/4)0.6}=\frac{0.225}{0.675}=\frac13.
 \]</div>
 <p>回答“是”的概率需要在两种真实状态下分别建模，不能把回答者对方块的0.9敏感度直接当成后验。</p>
 </details>
-<p><span id="q132"></span></p>
 <h3 id="problem-b58153551848">Q306 · 图书管理员还是农夫<a class="headerlink" href="#problem-b58153551848" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：二元报告似然与基础率更新｜<strong>注</strong>：Tversky &amp; Kahneman 经典题</p>
 <p><strong>题目</strong>：Steve 害羞、内向、乐于助人，温顺整洁、喜欢秩序结构和细节。仅凭这段描述，能否唯一判定他更可能是图书管理员还是农夫？再假设两职业先验人数比为1:20，符合该描述的比例分别为40%、10%，求后验概率。</p>
@@ -10007,7 +9929,6 @@ P(K\mid C)=\frac{0.6}{0.68}=\frac{15}{17}.
 \]</div>
 <p>一般知道答案先验为 <span class="arithmatex">\(\pi\)</span>、选择题有 <span class="arithmatex">\(m\)</span> 项时，该后验为 <span class="arithmatex">\(\pi/[\pi+(1-\pi)/m]\)</span>。</p>
 </details>
-<p><span id="q541"></span></p>
 <h3 id="problem-11e57dae1c90">Q309 · 带噪报告的贝叶斯后验<a class="headerlink" href="#problem-11e57dae1c90" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：二元报告似然与基础率更新</p>
 <p><strong>题目</strong>：事件 <span class="arithmatex">\(A\)</span> 的先验概率为 <span class="arithmatex">\(\pi\)</span>，其中 <span class="arithmatex">\(0&lt;\pi &lt;1\)</span>。报告者在 <span class="arithmatex">\(A\)</span> 发生和不发生两种情况下，均以概率 <span class="arithmatex">\(r\)</span> 如实报告，以概率 <span class="arithmatex">\(1-r\)</span> 报告相反结果，其中 <span class="arithmatex">\(0&lt;r&lt;1\)</span>。收到“<span class="arithmatex">\(A\)</span> 发生”的报告后，<span class="arithmatex">\(A\)</span> 的后验概率是多少？再计算 <span class="arithmatex">\(\pi =1/8\)</span>、<span class="arithmatex">\(r=1/6\)</span> 的情形。</p>
@@ -10020,7 +9941,6 @@ P(A\mid+)=\frac{\pi r}{\pi r+(1-\pi)(1-r)}.
 <p>代入 <span class="arithmatex">\(\pi =1/8\)</span>、<span class="arithmatex">\(r=1/6\)</span>，分子为 <span class="arithmatex">\(1/48\)</span>，分母为 <span class="arithmatex">\((1+35)/48\)</span>，因此后验概率为 <span class="arithmatex">\(1/36\)</span>。
 <strong>方法</strong>：分别写出两种真实状态下生成同一报告的概率，再用贝叶斯公式归一化。</p>
 </details>
-<p><span id="problem-066ddce26a52"></span></p>
 <h3 id="problem-abfdc5fdf6df">Q310 · 参加者的地点后验<a class="headerlink" href="#problem-abfdc5fdf6df" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：类别先验乘选择率后归一化</p>
 <p><strong>题目</strong>：两地点先验 0.9、0.1，参加率 0.05、0.55，已参加后求第一地点后验。</p>
@@ -10029,7 +9949,6 @@ P(A\mid+)=\frac{\pi r}{\pi r+(1-\pi)(1-r)}.
 <p>记地点为1、2，参加为 <span class="arithmatex">\(E\)</span>。两种地点且参加的联合概率分别为 <span class="arithmatex">\(0.9\cdot0.05=0.045\)</span>、<span class="arithmatex">\(0.1\cdot0.55=0.055\)</span>。所以参加总概率为0.1，参加后来自地点1的概率为 <span class="arithmatex">\(0.045/0.1=9/20\)</span>。
 一般类别先验为 <span class="arithmatex">\(\pi_i\)</span>，被选择或参加的概率为 <span class="arithmatex">\(s_i\)</span>，观察到被选择后，类别后验为 <span class="arithmatex">\(\pi_i s_i/\sum_j\pi_j s_j\)</span>。这先对各类别按参加率重新加权，再统一归一化。</p>
 </details>
-<p><span id="problem-d36058457180"></span></p>
 <h3 id="problem-4ffcfcfdb910">Q311 · 分层录取的类型后验<a class="headerlink" href="#problem-4ffcfcfdb910" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：类别先验乘选择率后归一化</p>
 <p><strong>题目</strong>：三类学生占 0.45、0.30、0.25，获得录取概率之比为 1:2:4。随机选已获录取者，求属于第三类的概率。</p>
@@ -10041,7 +9960,6 @@ P(A\mid+)=\frac{\pi r}{\pi r+(1-\pi)(1-r)}.
 \]</div>
 <p>共同未知比例常数 <span class="arithmatex">\(c\)</span> 被约去，所以给录取概率之比已经足够，无需知道每类录取率的绝对值。</p>
 </details>
-<p><span id="problem-aa04c61fce6e"></span></p>
 <h3 id="problem-6b1f8dbfc6da">Q312 · 未赢赛车的选择后验<a class="headerlink" href="#problem-6b1f8dbfc6da" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：类别先验乘选择率后归一化</p>
 <p><strong>题目</strong>：三辆车恰一辆赢，胜率为 <span class="arithmatex">\(7/10\)</span>、<span class="arithmatex">\(1/5\)</span>、<span class="arithmatex">\(1/10\)</span>。你事先等概率选一辆，已知所选未赢，求选中最慢车的概率。</p>
@@ -10061,7 +9979,6 @@ P(d4\mid2)=\frac{(1/2)(1/4)}{(1/2)(1/4)+(1/2)(1/6)}=\frac{1/4}{1/4+1/6}=\frac35.
 \]</div>
 <p>共同先验可在分子分母中约去；这不意味着骰型在见到点数后仍等概率，因为较小骰更容易给出同一指定点数。</p>
 </details>
-<p><span id="problem-5cb56564518b"></span></p>
 <h3 id="problem-f3f42da1cfd0">Q314 · 酒精依赖与肝病后验<a class="headerlink" href="#problem-f3f42da1cfd0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：交集概率除以已知边际</p>
 <p><strong>题目</strong>：就诊者 <span class="arithmatex">\(11\%\)</span> 有肝病、<span class="arithmatex">\(23\%\)</span> 酒精依赖，肝病者中 <span class="arithmatex">\(15\%\)</span> 酒精依赖。已知一位患者酒精依赖，求肝病概率。</p>
@@ -10074,7 +9991,6 @@ P(L\mid A)=\frac{0.0165}{0.23}=\frac{33}{460}.
 \]</div>
 <p><span class="arithmatex">\(P(A\mid L)\)</span> 与 <span class="arithmatex">\(P(L\mid A)\)</span> 的分母人群不同，互换条件需要乘先验、除证据边际。</p>
 </details>
-<p><span id="q488"></span></p>
 <h3 id="problem-e5fcb9a76dce">Q315 · 显性个体的隐性基因携带概率<a class="headerlink" href="#problem-e5fcb9a76dce" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：交集概率除以已知边际</p>
 <p><strong>题目</strong>：Hardy–Weinberg 平衡下，等位基因 <span class="arithmatex">\(A,a\)</span> 的频率为 <span class="arithmatex">\(\alpha,\beta\)</span>，<span class="arithmatex">\(\alpha+\beta=1\)</span>。已知个体表现显性，求其为杂合子 <span class="arithmatex">\(Aa\)</span> 的概率。</p>
@@ -10106,12 +10022,6 @@ P(F_2\mid B)=\frac{P(F_2)}{P(B)}=\frac{0.10}{0.235}=\frac{20}{47}.
 \]</div>
 <p>选择两枚的事件按“是否含特殊币”分类后再求观测似然，比把各个实物币的十种组合逐一列出更直接。</p>
 </details>
-<p><span id="q124"></span>
-<span id="q136"></span>
-<span id="q137"></span>
-<span id="problem-94939fc0921c"></span>
-<span id="problem-34e7b6207ded"></span>
-<span id="problem-d9e1fb9fb6f4"></span></p>
 <h3 id="problem-33ca8306592b">Q318 · 双面正币的后验、预测与证据阈值<a class="headerlink" href="#problem-33ca8306592b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：固定隐类型的似然比更新</p>
 <p><strong>题目</strong>：一次选定一枚硬币后始终抛同一枚：先验以概率 <span class="arithmatex">\(d\in(0,1)\)</span> 选中双面正币，否则是公平币。</p>
@@ -10190,10 +10100,6 @@ N_{\min}=\max\left\{0,\left\lceil\log_2\frac{q(1-d)}{(1-q)d}\right\rceil\right\}
 <summary>解答</summary>
 <p>先等概率选择一副按已知顺序的新牌或均匀洗乱的牌。观察到前三张恰好等于新牌固定前缀，似然分别为1和<span class="arithmatex">\(1/(52\cdot 51\cdot 50)\)</span>，故新牌后验为<span class="arithmatex">\(132600/132601\)</span>。若只观察到前三张编号递增，对52张互异全序，三张相对递增概率<span class="arithmatex">\(1/6\)</span>，新牌后验<span class="arithmatex">\(6/7\)</span>。</p>
 </details>
-<p><span id="q133"></span>
-<span id="problem-d05ce0276f51"></span>
-<span id="problem-53e578ce831c"></span>
-<span id="problem-e27fcb225ac1"></span></p>
 <h3 id="problem-c934b1287731">Q320 · 医学检测与连续证据的赔率更新<a class="headerlink" href="#problem-c934b1287731" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：条件独立重复检测的赔率更新</p>
 <p><strong>题目</strong>：某病患病率为 <span class="arithmatex">\(\pi\)</span>，检测敏感度为 <span class="arithmatex">\(s\)</span>，假阳性率为 <span class="arithmatex">\(f\)</span>，<span class="arithmatex">\(0&lt;\pi,s,f&lt;1\)</span>，各次检测给定真实病况后独立。(1) 求一次、连续 <span class="arithmatex">\(k\)</span> 次阳性的患病后验，推导赔率更新形式；(2) <span class="arithmatex">\(\pi=1\%\)</span>、敏感度与特异度均99%时，算一次及两次阳性后验；(3) 改成敏感度、特异度均95%，算两次阳性，并解释逐次与一次性更新为何相同。</p>
@@ -10233,8 +10139,6 @@ P(V\mid U,R^c)=\frac{0.16r}{0.16r+0.1[0.2r+0.9(1-r)]}=\frac{0.16r}{0.09+0.09r}.
 \]</div>
 <p>冬为 <span class="arithmatex">\(0.112/0.153=112/153\)</span>，夏为 <span class="arithmatex">\(0.032/0.108=8/27\)</span>。每一步均以题设的独立漏看、独立抛币机制生成行动，再计算所需联合路径。</p>
 </details>
-<p><span id="q135"></span>
-<span id="problem-9d939af028d1"></span></p>
 <h3 id="problem-0709bda5df62">Q322 · 涂漆立方体的红面数与重复观测<a class="headerlink" href="#problem-0709bda5df62" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：按红面数分层的重复观测后验｜<strong>公司</strong>：SIG</p>
 <p><strong>题目</strong>：把 <span class="arithmatex">\(n\times n\times n\)</span> 大立方体外表全部涂红，切成单位小块，<span class="arithmatex">\(n\ge2\)</span>。均匀选一块后独立公平掷 <span class="arithmatex">\(t\ge1\)</span> 次，每面朝上概率均为 <span class="arithmatex">\(1/6\)</span>。(1) 按红面数分类小块；(2) 已知每次朝上面都红，求来自角块的后验；(3) 计算 <span class="arithmatex">\(n=3,t=1,2\)</span>，再讨论固定 <span class="arithmatex">\(n\)</span> 时 <span class="arithmatex">\(t\to\infty\)</span>。</p>
@@ -10248,7 +10152,6 @@ P(\text{角块}\mid t\text{次均红})=\frac{8\cdot3^t}{8\cdot3^t+12(n-2)2^t+6(n
 <p>内部块的似然为零，所以不贡献分母。<span class="arithmatex">\(n=3,t=1\)</span> 时为 <span class="arithmatex">\(24/(24+24+6)=4/9\)</span>，也可看全部54个红色面中24个来自角块；<span class="arithmatex">\(t=2\)</span> 时为 <span class="arithmatex">\(72/(72+48+6)=4/7\)</span>。
 固定 <span class="arithmatex">\(n\)</span> 后，分子分母除以 <span class="arithmatex">\(3^t\)</span>，另外两项含 <span class="arithmatex">\((2/3)^t,(1/3)^t\)</span>，都趋于零，故角块后验趋于1。重复观察逐渐偏向红面更多的小块；选择小块后始终掷同一块，是这个更新的关键。</p>
 </details>
-<p><span id="problem-ad1467cbba45"></span></p>
 <h3 id="problem-516b5132f3eb">Q323 · Beta先验的Bernoulli更新与预测<a class="headerlink" href="#problem-516b5132f3eb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：Beta与Bernoulli似然的共轭更新</p>
 <p><strong>题目</strong>：未知成功率 <span class="arithmatex">\(Q\sim\operatorname{Beta}(\alpha,\beta)\)</span>，<span class="arithmatex">\(\alpha,\beta&gt;0\)</span>，给定 <span class="arithmatex">\(Q\)</span> 后各次试验独立Bernoulli。(1) 观察 <span class="arithmatex">\(n\)</span> 次中 <span class="arithmatex">\(m\)</span> 次成功，求后验密度与下一次成功概率；(2) 代入机器成功率先验 <span class="arithmatex">\(U(0,1)\)</span>，求未观察时某天工作概率及观察后的密度；(3) 代入 <span class="arithmatex">\(\operatorname{Beta}(2,2)\)</span> 先验的一次成功、一次失败。</p>
@@ -10268,7 +10171,6 @@ P(X_{n+1}=1\mid m)=\frac{B(\alpha+m+1,\beta+n-m)}{B(\alpha+m,\beta+n-m)}=\frac{\
 \]</div>
 <p>先验 <span class="arithmatex">\(\operatorname{Beta}(2,2)\)</span> 密度为 <span class="arithmatex">\(6q(1-q)\)</span>，一次成功的边际概率是 <span class="arithmatex">\(EQ=1/2\)</span>。成功后密度为 <span class="arithmatex">\(6q^2(1-q)/(1/2)=12q^2(1-q)\)</span>，即 <span class="arithmatex">\(\operatorname{Beta}(3,2)\)</span>；失败后为 <span class="arithmatex">\(12q(1-q)^2\)</span>，即 <span class="arithmatex">\(\operatorname{Beta}(2,3)\)</span>。均在 <span class="arithmatex">\((0,1)\)</span> 外取零。</p>
 </details>
-<p><span id="problem-82477f2d802b"></span></p>
 <h3 id="problem-e7c07567871d">Q324 · 新增绿球再抽出绿球<a class="headerlink" href="#problem-e7c07567871d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：增球后观测的离散模型似然</p>
 <p><strong>题目</strong>：盒中原有一个球，绿或蓝的先验各半。加入一个绿球后均匀抽出一球，发现是绿球，求剩下的球也是绿色的概率。</p>
@@ -10292,7 +10194,6 @@ P(\text{全绿囊}\mid GG)=\frac{(1/3)1}{(1/3)1+(1/3)0+(1/3)(3/14)}=\frac{14}{17
 \]</div>
 <p>混合囊第一次抽走绿后只剩三绿七球，必须使用 <span class="arithmatex">\(3/7\)</span>，而非继续用 <span class="arithmatex">\(1/2\)</span>。</p>
 </details>
-<p><span id="problem-8ab1d35c9b2e"></span></p>
 <h3 id="problem-3a5cad5aefad">Q326 · 抽盒后的再次预测<a class="headerlink" href="#problem-3a5cad5aefad" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：后验盒型加权的再次预测</p>
 <p><strong>题目</strong>：三盒分别装 BB、RR、BR，等概率选盒并均匀抽一个，已知为 <span class="arithmatex">\(B\)</span>。求盒型后验，再分别计算放回、不放回时下一球为 <span class="arithmatex">\(B\)</span> 的概率。</p>
@@ -10323,7 +10224,6 @@ P(\text{全绿囊}\mid GG)=\frac{(1/3)1}{(1/3)1+(1/3)0+(1/3)(3/14)}=\frac{14}{17
 \]</div>
 <p>一般固定地点 <span class="arithmatex">\(i\)</span> 上先验 <span class="arithmatex">\(\pi_i\)</span>、每天条件找到率 <span class="arithmatex">\(s_i\)</span>、未找到后各夜条件存活率 <span class="arithmatex">\(a_j\)</span>，连续搜该地点时第 <span class="arithmatex">\(k\)</span> 天首次找到活目标的概率为 <span class="arithmatex">\(\pi_i(1-s_i)^{k-1}(\prod_{j=1}^{k-1}a_j)s_i\)</span>。</p>
 </details>
-<p><span id="problem-fae87d06cf63"></span></p>
 <h3 id="problem-gamma-poisson-posterior">Q329 · Gamma与Poisson的共轭更新及后验估计<a class="headerlink" href="#problem-gamma-poisson-posterior" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：Gamma与Poisson似然的共轭更新</p>
 <p><strong>题目</strong>：到达率 <span class="arithmatex">\(\Lambda\sim\operatorname{Gamma}(a,\mathrm{rate}=b)\)</span>，观察时长 <span class="arithmatex">\(t\)</span> 内Poisson计数 <span class="arithmatex">\(X=x\)</span>。(1) 求后验密度与均值、MAP；(2) 解释平方损失下为何应使用后验均值；(3) 代入 <span class="arithmatex">\(\operatorname{Expo}(3),t=2,x=2\)</span>，以及粒子强度 <span class="arithmatex">\(U\sim\operatorname{Expo}(\mu),Y\mid U\sim\operatorname{Poisson}(U)\)</span> 两种表达。</p>
@@ -10457,7 +10357,6 @@ P(H_2\mid H_1)=\frac{EQ^2}{EQ}
 \]</div>
 <p>观察成功会偏向成功率较高的类型；若每次重选币，则没有这个共享类型带来的更新。</p>
 </details>
-<p><span id="problem-1060d5688651"></span></p>
 <h3 id="problem-39ba454dc0b6">Q338 · 公平币与四分之一币的混合<a class="headerlink" href="#problem-39ba454dc0b6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：条件概率与贝叶斯｜<strong>副题型</strong>：固定隐藏币型的贝叶斯更新与二项混合</p>
 <p><strong>题目</strong>：以各半概率选一枚正面率为 <span class="arithmatex">\(1/2\)</span> 或 <span class="arithmatex">\(1/4\)</span> 的硬币，再持续抛同一枚币。求两次正面后所选为公平币的后验；判断两次结果是否无条件独立；求未额外观察时十次中恰三次正面的概率。</p>
@@ -10708,8 +10607,6 @@ E(X^2\mid A)=\frac{2+20+672}{49}=\frac{694}{49}.
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

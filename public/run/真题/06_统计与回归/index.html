@@ -2634,14 +2634,12 @@
 </tbody>
 </table>
 <h2 id="sec-最小二乘-回归几何与系数关系">最小二乘、回归几何与系数关系<a class="headerlink" href="#sec-最小二乘-回归几何与系数关系" title="Permanent link">&para;</a></h2>
-<p><span id="sec-要点提示"></span></p>
 <p>以下公式中，设计矩阵 <span class="arithmatex">\(X\)</span> 含截距、列满秩，样本量为 <span class="arithmatex">\(N\)</span>，另有 <span class="arithmatex">\(p\)</span> 个解释变量。</p>
 <ul>
 <li><strong>OLS 闭式解</strong>：<span class="arithmatex">\( \hat\beta = (X^\top X)^{-1}X^\top y \)</span>；帽子矩阵 <span class="arithmatex">\( H = X(X^\top X)^{-1}X^\top \)</span>（把 <span class="arithmatex">\( y \)</span> 正交投影到 <span class="arithmatex">\( X \)</span> 的列空间）。</li>
 <li><strong>误差方差估计</strong>：<span class="arithmatex">\(\hat\sigma^2=\sum_i(y_i-\hat y_i)^2/(N-p-1)\)</span>；在经典正态线性模型下，<span class="arithmatex">\(\operatorname{Var}(\hat\beta\mid X)=\sigma^2(X^\top X)^{-1}\)</span>，而 <span class="arithmatex">\(RSS/\sigma^2\)</span> 服从自由度 <span class="arithmatex">\(N-p-1\)</span> 的卡方分布。</li>
 <li><strong>一元回归</strong>：<span class="arithmatex">\( \beta = \operatorname{Cov}(Y,X)/\operatorname{Var}(X) \)</span>，<span class="arithmatex">\( \alpha = E[Y] - \beta E[X] \)</span>；在同方差模型下，<span class="arithmatex">\( \operatorname{SE}(\hat\beta\mid X) = \sigma_\varepsilon/\sqrt{\sum_i(x_i-\bar x)^2} \)</span>，以残差标准差代替 <span class="arithmatex">\(\sigma_\varepsilon\)</span> 得到估计标准误。</li>
 </ul>
-<p><span id="q216"></span></p>
 <h3 id="problem-edb9256d6f6e">Q750 · 线性回归的假设<a class="headerlink" href="#problem-edb9256d6f6e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：条件均值模型与Gauss–Markov条件</p>
 <p><strong>题目</strong>：线性回归的主要假设有哪些？</p>
@@ -2654,9 +2652,6 @@
 <li><strong>误差依赖结构</strong>：经典模型通常假设误差在观测间不相关；时间序列中若存在自相关，应使用相应模型或稳健标准误。外生性 <span class="arithmatex">\(E[\varepsilon\mid X]=0\)</span> 是另一项独立条件，不能与“误差彼此独立”等同。</li>
 </ol>
 </details>
-<p><span id="q218"></span>
-<span id="q219"></span>
-<span id="problem-d4064417c707"></span></p>
 <h3 id="problem-ddcb55ad9352">Q751 · 秩亏、共线性与最小二乘的可识别性<a class="headerlink" href="#problem-ddcb55ad9352" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：列空间投影与方差膨胀</p>
 <p><strong>题目</strong>：给定设计矩阵 <span class="arithmatex">\(X\)</span>，考虑最小化 <span class="arithmatex">\(\|y-X\beta\|^2\)</span>。</p>
@@ -2683,9 +2678,6 @@ X^\top(X\hat\beta-y)=0.
 <p>其中 <span class="arithmatex">\(R_j^2\)</span> 是把该特征回归到其余特征得到的拟合优度。<span class="arithmatex">\(R_j^2\)</span> 接近1，说明它难以提供独立于其余特征的信息，标准误随之增大；这不等于该变量毫无预测价值。</p>
 <p><strong>3. 处理的取舍。</strong> 删除变量可消除冗余，但可能引入遗漏变量偏差。依业务含义合并变量可改善解释性；仅中心化不消除共线性。主成分回归保留方差较大的正交方向，可能舍弃预测信号。岭回归给正规矩阵加 <span class="arithmatex">\(\lambda I\)</span>，以偏差换稳定性；lasso可选择变量，但强相关变量间的选择可能不稳定。分类变量的完全冗余编码应先修正。</p>
 </details>
-<p><span id="q217"></span>
-<span id="q224"></span>
-<span id="problem-e0a0e7e18137"></span></p>
 <h3 id="problem-ca570a140938">Q752 · 双向一元回归的斜率乘积与取等条件<a class="headerlink" href="#problem-ca570a140938" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：中心化投影与Cauchy–Schwarz｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：两个非常数变量 <span class="arithmatex">\(X,Y\)</span> 分别作含截距的一元回归 <span class="arithmatex">\(Y\sim X\)</span> 和 <span class="arithmatex">\(X\sim Y\)</span>，斜率为 <span class="arithmatex">\(b,c\)</span>。</p>
@@ -2708,7 +2700,6 @@ bc=\frac{\langle x,y\rangle^2}{\|x\|^2\|y\|^2}=\rho^2\in[0,1].
 <p><strong>2. 倒数要求完全线性关系。</strong> 在斜率非零时，<span class="arithmatex">\(b=1/c\)</span> 当且仅当 <span class="arithmatex">\(bc=1\)</span>，也就是 <span class="arithmatex">\(|\rho|=1\)</span>。等号要求中心化向量成比例，故原变量存在完全仿射关系，不要求方差相等。<span class="arithmatex">\(Y\sim X\)</span> 最小化竖直残差，反向回归最小化水平残差；一般不会给出同一条直线。</p>
 <p><strong>3. 无截距的情况。</strong> 仍有斜率乘积等于未中心化向量夹角的余弦平方，因而仍在 <span class="arithmatex">\([0,1]\)</span> 内；但它一般不等于通常定义的 Pearson 相关系数平方。</p>
 </details>
-<p><span id="q220"></span></p>
 <h3 id="problem-7d4414f5380a">Q753 · 数据翻倍<a class="headerlink" href="#problem-7d4414f5380a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：正规方程的缩放不变性</p>
 <p><strong>题目</strong>：把每个数据点复制一份（数据量翻倍），回归结果会怎么变化？</p>
@@ -2737,7 +2728,6 @@ bc=\frac{\langle x,y\rangle^2}{\|x\|^2\|y\|^2}=\rho^2\in[0,1].
 </details>
 <h2 id="sec-正则化-偏差方差与泛化">正则化、偏差方差与泛化<a class="headerlink" href="#sec-正则化-偏差方差与泛化" title="Permanent link">&para;</a></h2>
 <p>用惩罚项或验证集控制模型复杂度；先区分估计偏差、预测方差与样本外误差。</p>
-<p><span id="q223"></span></p>
 <h3 id="problem-ee63c0076ff1">Q755 · 防止过拟合<a class="headerlink" href="#problem-ee63c0076ff1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：偏差方差分解与交叉验证｜<strong>公司</strong>：Virtu</p>
 <p><strong>题目</strong>：有多个协变量的线性回归中，如何防止过拟合？</p>
@@ -2777,7 +2767,6 @@ bc=\frac{\langle x,y\rangle^2}{\|x\|^2\|y\|^2}=\rho^2\in[0,1].
 \]</div>
 <p>相对于OLS，在第 <span class="arithmatex">\(j\)</span> 个右奇异向量方向的收缩因子是 <span class="arithmatex">\(d_j^2/(d_j^2+\lambda)\)</span>，各方向通常不同。</p>
 </details>
-<p><span id="q221"></span></p>
 <h3 id="problem-666c2cabace7">Q757 · lasso vs ridge 的偏差方差<a class="headerlink" href="#problem-666c2cabace7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：相关特征的收缩与变量选择｜<strong>公司</strong>：Virtu（面试重考）</p>
 <p><strong>题目</strong>：lasso 与 ridge 回归，哪个偏差更低、方差更高？在什么情形下两者的方差差异最明显？</p>
@@ -2888,7 +2877,6 @@ s_X^2=\frac1{n-1}\sum_i(X_i-\bar X)^2,\qquad
 <p>若撤去原方差上界，只保留正率指数模型，驻点才是无约束MLE <span class="arithmatex">\(50/117\)</span>。一般方差上界为<span class="arithmatex">\(v&gt;0\)</span>时，受限率MLE为 <span class="arithmatex">\(\max(n/\sum X_i,1/\sqrt v)\)</span>。</p>
 <p>受限模型的总体均值最多2，而本次样本均值2.34，导致受限估计顶在边界；这表示样本倾向于原参数域之外，不表示该样本在受限模型下概率不可能。无约束指数率的一般偏差、无偏修正与一致性见<a href="#problem-6eba8016f79d">Q785 · 指数率的极大似然</a>。</p>
 </details>
-<p><span id="q222"></span></p>
 <h3 id="problem-33a739dda45f">Q761 · 回归斜率显著性检验<a class="headerlink" href="#problem-33a739dda45f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：系数标准误与t检验｜<strong>公司</strong>：Virtu</p>
 <p><strong>题目</strong>：一元（简单）线性回归中如何检验回归斜率的显著性？</p>
@@ -2906,7 +2894,6 @@ t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}
 <p>（<span class="arithmatex">\(\hat\beta\pm2\operatorname{SE}(\hat\beta)\)</span> 是大样本下的近似 <span class="arithmatex">\(95\%\)</span> 区间。若存在异方差或相关误差，必须改用相应稳健标准误，不能仅靠样本增大修复错误的方差公式。）</p>
 <p><strong>联合检验（<span class="arithmatex">\(F\)</span> 检验）</strong>：检验一组系数可用 <span class="arithmatex">\(F=[(RSS_0-RSS_1)/(p_1-p_0)]/[RSS_1/(N-p_1-1)]\)</span>。一组高度相关的变量可能单独都不显著，但联合起来显著。</p>
 </details>
-<p><span id="q226"></span></p>
 <h3 id="problem-71f57edc4753">Q762 · 检验两样本均值<a class="headerlink" href="#problem-71f57edc4753" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：Welch标准误与均值差检验</p>
 <p><strong>题目</strong>：处理组样本均值 <span class="arithmatex">\( \bar Y^1 \)</span>、对照组样本均值 <span class="arithmatex">\( \bar Y^0 \)</span>。如何检验 <span class="arithmatex">\( \mu^1 = \mu^0 \)</span>？<span class="arithmatex">\(t\)</span> 统计量与标准误如何构造？小 <span class="arithmatex">\(t\)</span> 统计量说明什么？</p>
@@ -2937,7 +2924,6 @@ t(\mu) = \frac{\bar Y^1 - \bar Y^0 - \mu}{\hat{SE}(\bar Y^1 - \bar Y^0)}
 <li><strong>计量框架</strong>：选择偏差 <span class="arithmatex">\(=E[Y_0\mid D=1]-E[Y_0\mid D=0]\)</span>；随机化使其在期望中为零；OVB <span class="arithmatex">\(=\beta^s-\beta^l=\pi_1\gamma\)</span>。</li>
 </ul>
 <p>先明确随机抽取的单位和入样权重，再区分相关关系、选择偏差与因果效应。</p>
-<p><span id="q227"></span></p>
 <h3 id="problem-261b0692bbbc">Q763 · 随机试验与选择偏差<a class="headerlink" href="#problem-261b0692bbbc" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：潜在结果与随机分配</p>
 <p><strong>题目</strong>：观测数据中"参加医保 → 更健康"的平均因果效应为何有偏？随机分配为什么能解决？随机化之后还应做什么检查？</p>
@@ -2956,7 +2942,6 @@ E[Y\mid D{=}1]-E[Y\mid D{=}0] = E[Y_1-Y_0\mid D{=}1] + \big(E[Y_0\mid D{=}1]-E[Y
 <p><strong>随机化后的检查——平衡性检验（checking for balance）</strong>：报告两组在预先指定协变量上的标准化均值差异及其置信区间，检查是否存在明显失衡；小样本中出现偶然差异并不等于随机化失败。</p>
 <p>（若无法随机化，则退而求其次用回归 + "可观测变量选择"（CIA）假设，并按 <a href="../10_%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%81%9A%E5%B8%82/#problem-fefb82f6263f">Q1178 · 案例 3：成交还是收窄价差</a> 用 OVB 公式评估遗漏变量的威胁。）</p>
 </details>
-<p><span id="q225"></span></p>
 <h3 id="problem-be0d6768d7ac">Q764 · 短回归与长回归<a class="headerlink" href="#problem-be0d6768d7ac" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：回归与正则化｜<strong>副题型</strong>：遗漏变量投影恒等式</p>
 <p><strong>题目</strong>：遗漏变量偏差（OVB）如何量化？"短回归"（不含某控制变量）与"长回归"（含）的处理效应之差等于什么？</p>
@@ -2973,8 +2958,6 @@ OVB = \beta^s - \beta^l = (\text{遗漏变量与处理的关系}) \times (\text{
 <p><strong>引用（MHE）</strong>："OVB 公式的重要性在于：如果你声称不存在遗漏变量偏差，通常也就意味着你手上的回归正是你想要的回归，而你要的回归一般具有因果解释——换言之，你已准备好依赖 CIA（条件独立假设）对长回归估计作因果解读。"</p>
 <p>OVB 公式对没有数据支持的遗漏变量无法给出精确数值，但可以做<strong>定性推理</strong>判断偏差方向为正还是负（符号 = <span class="arithmatex">\( \pi_1 \)</span> 的符号 <span class="arithmatex">\( \times\ \gamma \)</span> 的符号）。若除少数核心控制变量外，处理效应对其他任何遗漏变量都不敏感（OVB 小），我们对回归的信心就大（稳健性）。</p>
 </details>
-<p><span id="q553"></span>
-<span id="problem-889dd1fe4893"></span></p>
 <h3 id="problem-ecc2a9823238">Q765 · 规模偏倚抽样、逆规模加权与平均群体大小<a class="headerlink" href="#problem-ecc2a9823238" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：规模加权、逆概率加权与Delta方法</p>
 <p><strong>题目</strong>：总体有 <span class="arithmatex">\(M\)</span> 个群体，大小为 <span class="arithmatex">\(s_1,\ldots,s_M\ge1\)</span>，总人数 <span class="arithmatex">\(N=\sum_js_j\)</span>。</p>
@@ -3028,11 +3011,9 @@ EC_k=\binom nk\frac{(k-1)!(n-k)!}{n!}=\frac1k,
 <p>最后，把 <span class="arithmatex">\(m\)</span> 个独立排列中的所有环汇总，总人数为 <span class="arithmatex">\(mn\)</span>，总环数为 <span class="arithmatex">\(\sum_{j=1}^mK_j\)</span>，故汇总后的组均值为 <span class="arithmatex">\(mn/\sum K_j\to n/H_n\)</span>。这里是先汇总再求比，而第一种是先在每个排列求比再平均；随机选人又按环大小加权，这解释了三个答案不同。</p>
 </details>
 <h2 id="sec-极限定理与渐近近似">极限定理与渐近近似<a class="headerlink" href="#sec-极限定理与渐近近似" title="Permanent link">&para;</a></h2>
-<p><span id="sec-统计基础要点LLNCLT置信区间"></span></p>
 <p><strong>概率 vs 统计</strong>：概率从已知参数/模型出发分析结果；统计从数据反推未知参数。建模范式：把每个数据事件视为随机变量，假设 <span class="arithmatex">\(i.i.d\)</span>.（同分布 + 独立）；构造连接参数与数据的<strong>估计量</strong>（如 Bernoulli 的 <span class="arithmatex">\(\hat{p} = \bar{X}_{n}\)</span>）；量化估计的置信水平。</p>
 <p><strong>大数定律（LLN）</strong>：弱大数定律给出 <span class="arithmatex">\(\bar X_n\xrightarrow{P}\mu\)</span>，强大数定律在更强结论下给出 <span class="arithmatex">\(\bar X_n\xrightarrow{a.s.}\mu\)</span>；二者建立理论均值与样本均值之间的桥梁。</p>
 <p><strong>中心极限定理（CLT）</strong>：<span class="arithmatex">\( \sqrt{n}(\bar X_n - \mu)/\sigma \xrightarrow{d} N(0,1) \)</span>——用于量化置信水平。</p>
-<p><span id="problem-3375e02ac23a"></span></p>
 <h3 id="problem-0da255e21023">Q767 · 二项尾概率的正态近似与连续性修正<a class="headerlink" href="#problem-0da255e21023" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：Bernoulli和的标准化与半格修正</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(H\sim\operatorname{Bin}(n,p)\)</span>，<span class="arithmatex">\(0&lt;p&lt;1\)</span>，样本量足以支持正态近似。</p>
@@ -3153,7 +3134,6 @@ P(H\ge k)\approx1-\Phi\left(\frac{k-1/2-np}{s}\right).
 <p><span class="arithmatex">\(S_{n}\sim \operatorname{Bin} (n,1/2)\)</span>，中心<span class="arithmatex">\(n/2\)</span>、标准差<span class="arithmatex">\(\sqrt{n}/2\)</span>。(a)中心<span class="arithmatex">\(\pm 10\)</span>的固定窗口概率趋0；(b)中心<span class="arithmatex">\(\pm n/10\)</span>的线性窗口概率趋1（弱大数律）；(c)中心<span class="arithmatex">\(\pm \sqrt{n}/2\)</span>的一个标准差窗口趋<span class="arithmatex">\(\Phi (1)-\Phi (-1)\approx 0.682689\)</span>。比较窗口相对<span class="arithmatex">\(\sqrt{n}\)</span>的尺度即可。</p>
 <p>一般令窗口半宽为 <span class="arithmatex">\(w_n\)</span>，标准化后半宽为 <span class="arithmatex">\(a_n=2w_n/\sqrt n\)</span>。若 <span class="arithmatex">\(a_n\to a\in(0,\infty)\)</span>，CLT给极限 <span class="arithmatex">\(2\Phi(a)-1\)</span>。若 <span class="arithmatex">\(a_n\to0\)</span>，对任意固定 <span class="arithmatex">\(\delta&gt;0\)</span>，最终窗口包含于 <span class="arithmatex">\([-\delta,\delta]\)</span>，先用CLT再令 <span class="arithmatex">\(\delta\downarrow0\)</span>，得到0。若 <span class="arithmatex">\(a_n\to\infty\)</span>，Chebyshev界 <span class="arithmatex">\(P(|H-n/2|&gt;w_n)\le n/(4w_n^2)\to0\)</span>，得到1。这覆盖三种窗口，并给出固定窗口为何不能直接把变动端点代入CLT的论证。</p>
 </details>
-<p><span id="q213"></span></p>
 <h3 id="problem-4e65aaef21ef">Q779 · 中心极限定理的内容<a class="headerlink" href="#problem-4e65aaef21ef" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：特征函数展开与Lindeberg条件</p>
 <p><strong>题目</strong>：中心极限定理说了什么？</p>
@@ -3236,7 +3216,6 @@ R_+=\frac{n_+(n_++1)}2+\sum_{i,j}J_{ij}.
 \]</div>
 <p>本题 <span class="arithmatex">\(w=(0.6,0.4)\)</span>，<span class="arithmatex">\(p_j=(5/6,1/4)\)</span>，代入即得 <span class="arithmatex">\(49/300\)</span>。这个分解也说明分裂前后加权的必要性。</p>
 </details>
-<p><span id="problem-quantile-check-loss"></span></p>
 <h3 id="problem-81811b682077">Q783 · 平方损失、绝对损失与分位数的统一最优性<a class="headerlink" href="#problem-81811b682077" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计推断｜<strong>副题型</strong>：常数平方损失、绝对损失次梯度与分位数</p>
 <p><strong>题目</strong>：依次研究不同损失如何决定最优估计。</p>
@@ -3579,8 +3558,6 @@ P(|S/k-1/q_0|&gt;0.1)\le\frac{2/k}{0.1^2}=\frac{200}k.
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

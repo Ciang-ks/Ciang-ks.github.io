@@ -7076,7 +7076,6 @@
 </tbody>
 </table>
 <h2 id="sec-状态构造-互通类与周期">状态构造、互通类与周期<a class="headerlink" href="#sec-状态构造-互通类与周期" title="Permanent link">&para;</a></h2>
-<p><span id="sec-一马尔可夫链"></span></p>
 <p>判断未来分布需要哪些信息，再由正概率转移图识别互通类、闭类与周期。</p>
 <h3 id="problem-2095b201414b">Q793 · 随机直角转向的周期<a class="headerlink" href="#problem-2095b201414b" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：模四方向状态与二部图周期</p>
@@ -7151,7 +7150,6 @@ P((r,y),(r',y'))=P_R(r,r')\mathbf1_{\{y'=\max(y,r')\}},
 \]</div>
 <p>其中 <span class="arithmatex">\(P_R\)</span> 由上文0、内部、端点三类规则给出。<span class="arithmatex">\(m=1\)</span> 时最大值从第一步起恒1，是退化例外，不应无条件声称任何参数下都非马氏。</p>
 </details>
-<p><span id="q233"></span></p>
 <h3 id="problem-9c7b541afe82">Q800 · 马尔可夫链状态的分类<a class="headerlink" href="#problem-9c7b541afe82" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：强连通分量、闭类与返回时间最大公约数</p>
 <p><strong>题目</strong>：解释马尔可夫链状态的可达性、互通、常返与瞬态的定义及判定方法；什么是吸收链？吸收概率与吸收期望时间的方程如何建立？</p>
@@ -7175,7 +7173,6 @@ P((r,y),(r',y'))=P_R(r,r')\mathbf1_{\{y'=\max(y,r')\}},
 <p>行转移矩阵为<span class="arithmatex">\(Q=\begin{pmatrix}1/2&amp;1/2&amp;0&amp;0\\1/4&amp;3/4&amp;0&amp;0\\0&amp;0&amp;1/4&amp;3/4\\0&amp;0&amp;3/4&amp;1/4\end{pmatrix}\)</span>。闭不可约类{1,2}、{3,4}内均有限常返，无瞬态。平稳分布有<span class="arithmatex">\((1/3,2/3,0,0)\)</span>、<span class="arithmatex">\((0,0,1/2,1/2)\)</span>，以及两者任意凸组合；分别在两块解<span class="arithmatex">\(\pi Q=\pi\)</span>。</p>
 <p>第一块平衡式为 <span class="arithmatex">\(\pi_1/2=\pi_2/4\)</span>，故块内比例1:2；第二块为 <span class="arithmatex">\(3\pi_3/4=3\pi_4/4\)</span>，故块内比例1:1。闭类之间没有流动，初始分配给各块的总质量可保持任意 <span class="arithmatex">\(\alpha,1-\alpha\)</span>。因此全体平稳分布为 <span class="arithmatex">\((\alpha/3,2\alpha/3,(1-\alpha)/2,(1-\alpha)/2)\)</span>、<span class="arithmatex">\(0\le\alpha\le1\)</span>。</p>
 </details>
-<p><span id="q499"></span></p>
 <h3 id="problem-1f9775055cfe">Q802 · 多组转移图的状态分类<a class="headerlink" href="#problem-1f9775055cfe" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：正概率转移图的强连通分解</p>
 <p><strong>题目</strong>：以下列出正概率后继集合，其他边概率为零。判断闭类与暂态：（<span class="arithmatex">\(a\)</span>）<span class="arithmatex">\(1\to\{1,2,3\},2\to\{2,4\},3\to\{1,3\},4\to\{2,4\},5\to\{2,4,5\}\)</span>；（<span class="arithmatex">\(b\)</span>）<span class="arithmatex">\(1\to\{1,4,5\},2\to\{1,2,3,5\},3\to\{2,3,6\},4\to\{1,4\},5\to\{4,6\},6\to\{5,6\}\)</span>；（<span class="arithmatex">\(c\)</span>）<span class="arithmatex">\(0\to\{0,4\},1\to\{0,1,2,3\},2\to\{2,3,4\},3\to\{3,5\},4\to\{0,4\},5\to\{5,6\},6\to\{3\}\)</span>。</p>
@@ -7196,7 +7193,6 @@ P((r,y),(r',y'))=P_R(r,r')\mathbf1_{\{y'=\max(y,r')\}},
 <p>(a) 中1与5双向可达，且两者的所有出边都留在 <span class="arithmatex">\(\{1,5\}\)</span>；2与4同理。因此两个闭类为 <span class="arithmatex">\(\{1,5\},\{2,4\}\)</span>，仅3暂态。</p>
 <p>(b) 中1能到4、6，而4、6均能回1，三者合成闭互通类 <span class="arithmatex">\(\{1,4,6\}\)</span>。另一闭类为 <span class="arithmatex">\(\{2,5\}\)</span>，仅3暂态。新增节点6与原块双向连通时会并入该块；如果只有从外部指向闭块的单向边，则外部节点不会并入。分类只需正概率边，块内平稳权重还需要具体转移概率。</p>
 </details>
-<p><span id="q498"></span></p>
 <h3 id="problem-7b243e3a8f41">Q804 · 互通类、周期反例与极限存在条件<a class="headerlink" href="#problem-7b243e3a8f41" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：常返闭性、周期最大公约数与极限反例</p>
 <p><strong>题目</strong>：给出有限链状态分类流程；证明常返状态不可能直接转移到不与其互通的状态；构造周期为 2 却不能两步返回的链。平稳分布存在是否保证 <span class="arithmatex">\(P^n\)</span> 收敛？</p>
@@ -7231,7 +7227,6 @@ q^2&amp;2q(1-q)&amp;(1-q)^2
 <p><span class="arithmatex">\(G\to G=2/5\)</span>、<span class="arithmatex">\(B\to B=3/5\)</span> 时，从任一状态下一次为 <span class="arithmatex">\(B\)</span> 的概率都是 <span class="arithmatex">\(3/5\)</span>。因此已见 <span class="arithmatex">\(B\)</span> 后等下一个 <span class="arithmatex">\(B\)</span> 的新增样本数为 <span class="arithmatex">\(\operatorname{Geom} (3/5)\)</span>，均值 <span class="arithmatex">\(5/3\)</span>。</p>
 <p>矩阵两行实际都为 <span class="arithmatex">\((2/5,3/5)\)</span>，所以条件于任何过去，下一状态为B的概率恒为 <span class="arithmatex">\(3/5\)</span>。从已见B后的下一时刻重新计步，<span class="arithmatex">\(P(T=k)=(2/5)^{k-1}(3/5)\)</span>、<span class="arithmatex">\(k\ge1\)</span>，因此均值 <span class="arithmatex">\(1/(3/5)=5/3\)</span>。包括下一步立即仍为B这一正时间回返。</p>
 </details>
-<p><span id="problem-6ac3a8d7cdde"></span></p>
 <h3 id="problem-70c4264b0982">Q807 · 两状态链的首次命中、正回返与平稳倒数<a class="headerlink" href="#problem-70c4264b0982" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：两状态首步几何命中与正回返的平稳倒数</p>
 <p><strong>题目</strong>：两状态链 <span class="arithmatex">\(P=\begin{pmatrix}1-a&amp;a\\b&amp;1-b\end{pmatrix}\)</span>，<span class="arithmatex">\(0\le a\le1,0&lt;b\le1\)</span>。令 <span class="arithmatex">\(T_1\)</span> 为首次命中状态1，<span class="arithmatex">\(T_1^+\)</span> 为从状态1出发的首次正时间回返。</p>
@@ -7279,8 +7274,6 @@ E_1T_1^+=1+\frac ab.
 </table>
 <p>第一行的平稳跟上比例为3/4；第二行虽下一步仍为W概率0.9，正回返均时也不是1/0.9。</p>
 </details>
-<p><span id="problem-fd253d04f796"></span>
-<span id="problem-dd5e491a0b82"></span></p>
 <h3 id="problem-ab97891c1d3a">Q808 · 一般两状态链的持续性、谱分解与信号传递<a class="headerlink" href="#problem-ab97891c1d3a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：两状态仿射递推、对称谱投影与周期边界</p>
 <p><strong>题目</strong>：状态0、1的齐次链满足 <span class="arithmatex">\(P(1\to1)=p,P(0\to1)=q\)</span>，初始 <span class="arithmatex">\(P(X_0=1)=a_0\)</span>。</p>
@@ -7321,7 +7314,6 @@ P^n=J+(2p-1)^nK
 <summary>解答</summary>
 <p>设 <span class="arithmatex">\(n\)</span> 阶转移矩阵 <span class="arithmatex">\(P\)</span> 不可约，且列和也为 1，求唯一平稳分布及其 <span class="arithmatex">\(L^{1}\)</span>、<span class="arithmatex">\(L^{2}\)</span>、<span class="arithmatex">\(L\infty\)</span> 范数，并计算 <span class="arithmatex">\(n=100\)</span> 的结果。此时，均匀向量 <span class="arithmatex">\(u=(1/n,\ldots,1/n)\)</span> 满足 <span class="arithmatex">\((uP)_j=n^{-1}\sum_iP_{ij}=1/n\)</span>，所以它是平稳分布。不可约性保证该平稳分布唯一。三个范数分别为：均匀向量有 <span class="arithmatex">\(\|u\|_1=1,\|u\|_2=1/\sqrt n,\|u\|_\infty=1/n\)</span>。<span class="arithmatex">\(n=100\)</span> 时分别为 1、<span class="arithmatex">\(1/10\)</span>、<span class="arithmatex">\(1/100\)</span>。</p>
 </details>
-<p><span id="q505"></span></p>
 <h3 id="problem-320c0b122a0e">Q810 · 十二点圆周的正回访<a class="headerlink" href="#problem-320c0b122a0e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：环的均匀平稳与Kac回返公式</p>
 <p><strong>题目</strong>：十二个等距点组成环，每步独立等概率向左右邻点走。从指定点开始，求首次正时间返回的平均步数。</p>
@@ -7407,7 +7399,6 @@ E_vT_v^+=\frac1{\pi(v)}=\frac D{d(v)}.
 \]</div>
 <p>这个平均按进入各边界格的平稳流加权，不是按右半格均匀抽起点，也不要求从每个指定右半格的首出均时都为4.2。</p>
 </details>
-<p><span id="q504"></span></p>
 <h3 id="problem-7369aefb00ba">Q813 · 可逆性、三循环判据与带权图<a class="headerlink" href="#problem-7369aefb00ba" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：逆向转移、三循环判据与详细平衡</p>
 <p><strong>题目</strong>：写出平稳链的逆向转移。若有限矩阵所有元素严格为正，证明可逆等价于所有三循环正反向概率乘积相等。求带权无向图随机游走的平稳分布。</p>
@@ -7429,8 +7420,6 @@ E_vT_v^+=\frac1{\pi(v)}=\frac D{d(v)}.
 <summary>解答</summary>
 <p>状态为<span class="arithmatex">\(G\)</span>的全部合法<span class="arithmatex">\(k\)</span>着色，均匀选一节点，再从该节点当前合法颜色均匀选一个（允许原色）。若两着色只在节点<span class="arithmatex">\(v\)</span>不同，<span class="arithmatex">\(v\)</span>所有邻居颜色相同，所以可选颜色数<span class="arithmatex">\(L_{v}\)</span>相同，正反转移均<span class="arithmatex">\(1/(nL_{v})\)</span>。其他不同状态无法一步互达，两方向均0。故转移对称，全部合法着色的均匀分布平稳且可逆。链可能不不可约，如一条边的两色着色无法改变任一端，不能无条件断言平稳唯一或从任意状态收敛到全体均匀。</p>
 </details>
-<p><span id="q509"></span>
-<span id="problem-8f9d5dc14b9d"></span></p>
 <h3 id="problem-0b96cbc80334">Q816 · Ehrenfest 移球的均值、平稳分布与周期<a class="headerlink" href="#problem-0b96cbc80334" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：Ehrenfest生灭链与二项详细平衡</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(N\ge1\)</span> 个有身份球分在两坛，每步独立均匀选一球移至另一坛，<span class="arithmatex">\(X_n\)</span> 为第一坛球数，<span class="arithmatex">\(X_0=x\)</span>。</p>
@@ -7478,7 +7467,6 @@ E[X_{n+1}\mid X_n=i]=i+(N-i)/N-i/N=(1-2/N)i+1.
 <p>共有5双鞋，出门与回门独立各半，没鞋则赤脚。状态 <span class="arithmatex">\(i\in\{0,\ldots,5\}\)</span> 为前门鞋数。内部 <span class="arithmatex">\(P_{i,i\pm1}=1/4\)</span>、<span class="arithmatex">\(P_{ii}=1/2\)</span>；端点只有向内 <span class="arithmatex">\(1/4\)</span> 及自环 <span class="arithmatex">\(3/4\)</span>。转移对称且不可约，平稳分布均匀为 <span class="arithmatex">\(1/6\)</span>。赤脚只发生于 <span class="arithmatex">\(i=0\)</span> 选前门或 <span class="arithmatex">\(i=5\)</span> 选后门，所以长期赤脚率为 <span class="arithmatex">\(1/6\)</span>。</p>
 <p>内部从前门出、后门回会使前门鞋数减1，概率 <span class="arithmatex">\(1/4\)</span>；反过来增1，也是 <span class="arithmatex">\(1/4\)</span>。出回同门或赤脚出门不会净迁移鞋子。两端也只有向内一条 <span class="arithmatex">\(1/4\)</span> 转移，因此所有相邻正反概率相同，均匀平稳。一般 <span class="arithmatex">\(r\)</span> 双鞋时质量为 <span class="arithmatex">\(1/(r+1)\)</span>，赤脚率 <span class="arithmatex">\(\pi_0/2+\pi_r/2=1/(r+1)\)</span>；五双得到 <span class="arithmatex">\(1/6\)</span>。</p>
 </details>
-<p><span id="q510"></span></p>
 <h3 id="problem-8f94f654ebbd">Q820 · 四状态维修链的平稳分布<a class="headerlink" href="#problem-8f94f654ebbd" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：生灭链相邻质量比归一化</p>
 <p><strong>题目</strong>：正常机器数为 0、1、2、3。每日转移矩阵为 <span class="arithmatex">\(P=\begin{pmatrix}.5&amp;.5&amp;0&amp;0\\.05&amp;.5&amp;.45&amp;0\\0&amp;.1&amp;.5&amp;.4\\0&amp;0&amp;.15&amp;.85\end{pmatrix}\)</span>。求平稳分布，并验证细致平衡。</p>
@@ -7498,7 +7486,6 @@ E[X_{n+1}\mid X_n=i]=i+(N-i)/N-i/N=(1-2/N)i+1.
 </details>
 <h2 id="sec-平稳流量-长期奖励与时间反演">平稳流量、长期奖励与时间反演<a class="headerlink" href="#sec-平稳流量-长期奖励与时间反演" title="Permanent link">&para;</a></h2>
 <p>把按时刻、按变动和按访问观察区分开；长期奖励由平稳权重求和，条件过去用逆向转移。</p>
-<p><span id="q502"></span></p>
 <h3 id="problem-aa3788d5bbe6">Q822 · 平稳零游程的精确长度概率<a class="headerlink" href="#problem-aa3788d5bbe6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：平稳入口流与精确游程长度</p>
 <p><strong>题目</strong>：平稳链中，时刻 <span class="arithmatex">\(m\)</span> 恰好结束一个长度为 <span class="arithmatex">\(k\ge1\)</span> 的连续零串，即前后均非零。证明概率为 <span class="arithmatex">\(\pi_0P_{00}^{k-1}(1-P_{00})^2\)</span>。</p>
@@ -7507,7 +7494,6 @@ E[X_{n+1}\mid X_n=i]=i+(N-i)/N-i/N=(1-2/N)i+1.
 <p>进入 0 的平稳流为 <span class="arithmatex">\(\sum_{i\ne0}\pi_iP_{i0}=\pi_0(1-P_{00})\)</span>。进入后继续留零 <span class="arithmatex">\(k-1\)</span> 次，再离开零的概率为 <span class="arithmatex">\(P_{00}^{k-1}(1-P_{00})\)</span>。由马氏性相乘即得；不能漏掉进入零串的边界条件。</p>
 <p>把事件写为 <span class="arithmatex">\(X_{m-k}\ne0,X_{m-k+1}=\cdots=X_m=0,X_{m+1}\ne0\)</span>。对最早的非零状态求和得到入口流；随后 <span class="arithmatex">\(k-1\)</span> 次0自环与最后离开的概率由马氏性依次相乘。若 <span class="arithmatex">\(P_{00}=1\)</span>，入口外流都为0，任何具有两侧非零边界的有限零串概率也为0。</p>
 </details>
-<p><span id="q501"></span></p>
 <h3 id="problem-f354db4ce41e">Q823 · 平稳集合流量与连续停留<a class="headerlink" href="#problem-f354db4ce41e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：平稳集合流量与离开率</p>
 <p><strong>题目</strong>：有限不可约链平稳分布 <span class="arithmatex">\(\pi\)</span>，非空真子集 <span class="arithmatex">\(A\)</span> 的每步外流为 <span class="arithmatex">\(f&gt;0\)</span>。证明外流等于内流，并求按平稳进入事件观察时，一段 <span class="arithmatex">\(A\)</span> 内、<span class="arithmatex">\(A\)</span> 外连续停留的平均长度；计算 <span class="arithmatex">\(\pi (A)=7/16\)</span>、<span class="arithmatex">\(f=9/32\)</span>。</p>
@@ -7583,7 +7569,6 @@ P(X_{n-1}=2A\mid X_n=1A)=\frac{\pi_{2A}P(2A,1A)}{\pi_{1A}}
 \]</div>
 <p>长期奖励按类内平稳分布求平均，上一手的条件分布则要用反向流量。</p>
 </details>
-<p><span id="q506"></span></p>
 <h3 id="problem-d0e82aeb28e2">Q828 · 请求后移到表头的平稳排列<a class="headerlink" href="#problem-d0e82aeb28e2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：逆时最近请求与逐次偏置排列</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 个不同项目，各次独立以 <span class="arithmatex">\(p_{i}&gt;0\)</span> 请求第 <span class="arithmatex">\(i\)</span> 项，<span class="arithmatex">\(\sum p_{i}=1\)</span>，每次将请求项移到表头、其他相对次序不变。求排列的平稳分布，化简 <span class="arithmatex">\(n=3\)</span>。</p>
@@ -7658,7 +7643,6 @@ P(X_1=4\mid X_{10}=4)
 <summary>解答</summary>
 <p>初始状态3，完整非零转移：<span class="arithmatex">\(1\to 2:1\)</span>；<span class="arithmatex">\(2\to 1:1/2\)</span>、<span class="arithmatex">\(2\to 2:1/2\)</span>；<span class="arithmatex">\(3\to 2:1/10\)</span>、<span class="arithmatex">\(3\to 3:4/10\)</span>、<span class="arithmatex">\(3\to 4:2/10\)</span>、<span class="arithmatex">\(3\to 7:3/10\)</span>；<span class="arithmatex">\(4\to 4:3/4\)</span>、<span class="arithmatex">\(4\to 5:1/4\)</span>；<span class="arithmatex">\(5\to 4:1/2\)</span>、<span class="arithmatex">\(5\to 5:1/4\)</span>、<span class="arithmatex">\(5\to 6:1/4\)</span>；<span class="arithmatex">\(6\to 5:1/2\)</span>、<span class="arithmatex">\(6\to 6:1/2\)</span>；<span class="arithmatex">\(7\to 7:1\)</span>。(a)离开3便不回，最后离开步数<span class="arithmatex">\(J\sim \operatorname{Geom} (.6)\)</span>，<span class="arithmatex">\(\operatorname{Var} J=.4/.6^{2}=10/9\)</span>。(b)首次入4时间<span class="arithmatex">\(K\)</span>以<span class="arithmatex">\(2/3\)</span>概率无限，故<span class="arithmatex">\(\mathbb{E} K=\infty\)</span>。(c)严格的<span class="arithmatex">\(10^{10}\)</span>步分布为<span class="arithmatex">\(e_{3} Q^{10^{10}}\)</span>，可用二进制矩阵快速幂精确表示；以不可分辨的小误差近似其极限为<span class="arithmatex">\((1/18,1/9,0,4/21,2/21,1/21,1/2)\)</span>。先离3落各闭类概率<span class="arithmatex">\(1/6\)</span>、<span class="arithmatex">\(1/3\)</span>、<span class="arithmatex">\(1/2\)</span>，再乘类内平稳即可。注意有限步<span class="arithmatex">\(\pi _{3}=(.4)^{10^{10}}\)</span>仍严格为正，所以极限分布用于该有限步问题时是数值近似。(d)给定永不入4，条件后的<span class="arithmatex">\(3\to 3=.4\)</span>、<span class="arithmatex">\(3\to 2=.15\)</span>、<span class="arithmatex">\(3\to 7=.45\)</span>，其他可达行不变，有限步由这个条件矩阵求幂；其极限为<span class="arithmatex">\((1/12,1/6,0,0,0,0,3/4)\)</span>。</p>
 </details>
-<p><span id="q500"></span></p>
 <h3 id="problem-9f6b61c0932f">Q833 · 多个闭类的极限矩阵<a class="headerlink" href="#problem-9f6b61c0932f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：基本矩阵吸收权重与极限矩阵</p>
 <p><strong>题目</strong>：五状态链中 1 吸收，闭类 <span class="arithmatex">\(\{2,4\}\)</span> 的子矩阵为 <span class="arithmatex">\(\begin{pmatrix}2/3&amp;1/3\\1/6&amp;5/6\end{pmatrix}\)</span>。状态 3 以 <span class="arithmatex">\(1/8\)</span> 到 1、<span class="arithmatex">\(5/8\)</span> 留在 3，其余 <span class="arithmatex">\(1/4\)</span> 到状态 2；状态 5 以各 <span class="arithmatex">\(1/3\)</span> 到 1、3、5。求 <span class="arithmatex">\(\lim P^n\)</span>。</p>
@@ -7717,8 +7701,6 @@ h_1=\frac{.2\times.8+.3\times.2}{.42}=\frac{11}{21}.
 \]</div>
 <p>均时方程只把右侧改成 <span class="arithmatex">\((1,1)\)</span>，故 <span class="arithmatex">\(t_1=(.8+.3)/.42=55/21\)</span>。两方程的右侧分别代表直接命中概率与本次耗时，含义不同。</p>
 </details>
-<p><span id="q228"></span>
-<span id="problem-53bcb0867822"></span></p>
 <h3 id="problem-882e3a8e3b07">Q839 · 破产赌局<a class="headerlink" href="#problem-882e3a8e3b07" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：有限资本边界与吸收首步方程</p>
 <p><strong>题目</strong>：玩家 <span class="arithmatex">\(M\)</span> 有 $1，玩家 <span class="arithmatex">\(N\)</span> 有 $2。每局胜者从败者处拿 $1。<span class="arithmatex">\(M\)</span> 是较强的玩家，每局胜率 <span class="arithmatex">\( 2/3 \)</span>。两人一直玩到一方破产。<span class="arithmatex">\(M\)</span> 最终获胜的概率是多少？</p>
@@ -7745,8 +7727,6 @@ P = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 1/3 &amp; 0 &amp; 2/3 &amp; 0 \
 <p>若首步到1或5，永不进4；首步到3后，删去3自环，先离开到2的概率为 <span class="arithmatex">\((1/4)/(3/4)=1/3\)</span>。因此永不进4概率 <span class="arithmatex">\(2/3+(1/3)(1/3)=7/9\)</span>。曾进入2的概率为 <span class="arithmatex">\((1/3)(1/3)=1/9\)</span>，进入后立即离开的条件概率 <span class="arithmatex">\(1/2\)</span>，故联合概率为 <span class="arithmatex">\(1/18\)</span>。</p>
 <p>首次进1恰为第3步，只能走 <span class="arithmatex">\(0\to3\to2\to1\)</span>，概率 <span class="arithmatex">\((1/3)(1/4)(1/2)=1/24\)</span>。第 <span class="arithmatex">\(n\ge1\)</span> 步仍在3，只能首步进入再连续自环，概率 <span class="arithmatex">\((1/3)(1/4)^{n-1}\)</span>。不同问题所要求的是首次进入、进入后立即离开或固定时刻占用，不能混用这些事件。</p>
 </details>
-<p><span id="q200"></span>
-<span id="problem-a5e4092b863a"></span></p>
 <h3 id="problem-e5b694c7ce2a">Q841 · 立方体游走的距离链、返回、对角首达与惰性时钟<a class="headerlink" href="#problem-e5b694c7ce2a" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：距离层聚合、目标首达与惰性回返时钟</p>
 <p><strong>题目</strong>：蚂蚁在立方体顶点间游走，每分钟均匀选一条相邻棱。</p>
@@ -7816,7 +7796,6 @@ h(1,2)=\frac{1+1/2+1/2+1/2}{4}=\frac58.
 <p>仅在最终吸收概率为 1 且均时有限时解可作为有限期望；有限链若每个暂态都有正概率路径至吸收态，则满足这些条件。</p>
 <p>五人围坐，持球者等概率向左传、向右传或自己留下并结束。令 <span class="arithmatex">\(h_{i}\)</span> 表示最终由起点留下的概率，按环上到起点距离化为 <span class="arithmatex">\(A=h_{0}\)</span>、<span class="arithmatex">\(B=h_{1}=h_{4}\)</span>、<span class="arithmatex">\(C=h_{2}=h_{3}\)</span>：<span class="arithmatex">\(3A=1+2B,3B=A+C,3C=B+C\)</span>。解得 <span class="arithmatex">\(A=5/11\)</span>、<span class="arithmatex">\(B=2/11\)</span>、<span class="arithmatex">\(C=1/11\)</span>。</p>
 </details>
-<p><span id="q232"></span></p>
 <h3 id="problem-ed9e224324e3">Q847 · 八面体上的两只蚂蚁<a class="headerlink" href="#problem-ed9e224324e3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：相对位置轨道聚合与相遇首达｜<strong>公司</strong>：Citadel</p>
 <p><strong>题目</strong>：八面体相对的两端各有一只蚂蚁。蚂蚁交替行动：轮到者以 <span class="arithmatex">\( 1/4 \)</span> 概率随机走向 4 个相邻顶点之一。直到一只蚂蚁移动到另一只所在的顶点，游戏结束。<span class="arithmatex">\(A\)</span> 先走时，游戏以"<span class="arithmatex">\(A\)</span> 移动到 <span class="arithmatex">\(B\)</span> 所在顶点"结束的概率是多少？</p>
@@ -7855,7 +7834,6 @@ P(\text{A 获胜}) = x_2 = y_1 = \boxed{\frac{2}{5}}
 <p>状态 <span class="arithmatex">\(i\)</span> 的单步奖励为 <span class="arithmatex">\(g(i)\)</span>，令 <span class="arithmatex">\(R_k=\sum_{t=0}^kg(X_t)\)</span>、<span class="arithmatex">\(m_k(i)=\mathbb E[R_k\mid X_0=i]\)</span>、<span class="arithmatex">\(v_k(i)=\operatorname{Var}(R_k\mid X_0=i)\)</span>。初值 <span class="arithmatex">\(m_0=g\)</span>、<span class="arithmatex">\(v_0=0\)</span>。按首步，<span class="arithmatex">\(m_{k+1}(i)=g(i)+\sum_jP_{ij}m_k(j)\)</span>；全方差给 <span class="arithmatex">\(v_{k+1}(i)=\sum_jP_{ij}v_k(j)+\sum_jP_{ij}m_k(j)^2-[\sum_jP_{ij}m_k(j)]^2\)</span>。每轮从旧 <span class="arithmatex">\(m,v\)</span> 同步计算新值，不能中途覆盖后混用。</p>
 <p>令下一状态为 <span class="arithmatex">\(J\)</span>，条件于 <span class="arithmatex">\(J=j\)</span>，未来总奖励与 <span class="arithmatex">\(R_k\)</span> 从 <span class="arithmatex">\(j\)</span> 出发同分布，而当前 <span class="arithmatex">\(g(i)\)</span> 为常数。因此条件均值为 <span class="arithmatex">\(g(i)+m_k(j)\)</span>、条件方差为 <span class="arithmatex">\(v_k(j)\)</span>。把它们代入 <span class="arithmatex">\(\operatorname{Var}R=E[\operatorname{Var}(R\mid J)]+\operatorname{Var}(E[R\mid J])\)</span>，第二项展开为 <span class="arithmatex">\(\sum_jP_{ij}m_k(j)^2-(\sum_jP_{ij}m_k(j))^2\)</span>，即得到递推。</p>
 </details>
-<p><span id="q503"></span></p>
 <h3 id="problem-99ebdd9a6f7f">Q850 · 暂态基本矩阵与正时间访问<a class="headerlink" href="#problem-99ebdd9a6f7f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：暂态基本矩阵与正时间访问计数</p>
 <p><strong>题目</strong>：状态 1、2、3 的暂态子矩阵为 <span class="arithmatex">\(Q=\begin{pmatrix}.4&amp;.2&amp;.1\\.1&amp;.5&amp;.2\\.3&amp;.4&amp;.2\end{pmatrix}\)</span>，剩余行概率进入吸收态 4。分别从三个暂态出发，求计入时刻零的到 3 访问数期望，以及正时间至少一次访问 3 的概率。</p>
@@ -7954,7 +7932,6 @@ F(d,a,v)=\frac d{d+a}F(d-1,a,v+1)+\frac a{d+a}[1_{v&gt;0}+F(d,a-1,(v-1)_+)].
 <p>终态零，得到<span class="arithmatex">\(F(3,9,0)=581/220\)</span>；九个到场者交换，所以指定一人无车位概率<span class="arithmatex">\(1-F/9=1399/1980\)</span>。</p>
 <p>边界为 <span class="arithmatex">\(F(d,0,v)=0\)</span>；若 <span class="arithmatex">\(d=0\)</span>，之后最多服务 <span class="arithmatex">\(\min(a,v)\)</span> 人。该递推每次使 <span class="arithmatex">\(d+a\)</span> 减1，可从这些边界逐层倒推。交换性使指定到场者获位概率等于获位人数总均值除以9，故无位概率 <span class="arithmatex">\(1-(581/220)/9=1399/1980\)</span>。不需要假定九人的获位事件独立。</p>
 </details>
-<p><span id="q231"></span></p>
 <h3 id="problem-d520eda2619f">Q857 · 彩球同色<a class="headerlink" href="#problem-d520eda2619f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：颜色比例鞅、条件变换与共识均时差分</p>
 <p><strong>题目</strong>：盒中有 <span class="arithmatex">\(n\)</span> 个球、<span class="arithmatex">\(n\)</span> 种不同颜色。每次随机取出一对球，把第一只重涂成第二只的颜色，然后放回。期望多少步后盒中所有球同色？</p>
@@ -7998,7 +7975,6 @@ q_i^0=p_i^0=1-\frac{2i(n-i)}D.
 \boxed{E[T]=(n-1)^2}.
 \]</div>
 </details>
-<p><span id="q507"></span></p>
 <h3 id="problem-268291c2bdda">Q858 · Wright–Fisher 遗传、突变与固定概率<a class="headerlink" href="#problem-268291c2bdda" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：Wright–Fisher二项转移与固定概率鞅</p>
 <p><strong>题目</strong>：无突变时 <span class="arithmatex">\(X_{n+1}\mid X_n=i\sim\mathrm{Bin}(M,i/M)\)</span>。求均值和最终固定为第一型的概率。加入突变 <span class="arithmatex">\(u,v\in(0,1)\)</span>，下一代第一型概率为 <span class="arithmatex">\((1-u)i/M+v(1-i/M)\)</span>，求长期均值并说明收敛。</p>
@@ -8007,7 +7983,6 @@ q_i^0=p_i^0=1-\frac{2i(n-i)}D.
 <p>无突变时 <span class="arithmatex">\(E[X_{n+1}\mid\mathcal F_n]=X_n\)</span>，故均值恒为 <span class="arithmatex">\(X_0=i\)</span>。有限链最终吸收到 0 或 <span class="arithmatex">\(M\)</span>，有界收敛给出固定于 <span class="arithmatex">\(M\)</span> 的概率 <span class="arithmatex">\(i/M\)</span>。含突变时每个转移概率严格正，因此有限不可约、非周期，存在唯一极限分布。<span class="arithmatex">\(m_{n+1}=(1-u-v)m_n+Mv\)</span>，固定点为 <span class="arithmatex">\(Mv/(u+v)\)</span>。需要 <span class="arithmatex">\(u,v\)</span> 严格介于 0、1；只写大于 0 并不能排除退化周期边界。</p>
 <p>含突变时令 <span class="arithmatex">\(m_*=Mv/(u+v)\)</span>，均值递推相减得 <span class="arithmatex">\(m_n=m_*+(1-u-v)^n(i-m_*)\)</span>。<span class="arithmatex">\(u,v\in(0,1)\)</span> 使 <span class="arithmatex">\(|1-u-v|&lt;1\)</span>，故长期均值为 <span class="arithmatex">\(m_*\)</span>。无突变时对每个内部 <span class="arithmatex">\(i\)</span>，下一代全部为一种类型有正概率；有限多个状态给出统一的正吸收概率下界，所以吸收时间有几何尾，有界比例鞅可在吸收后取期望。</p>
 </details>
-<p><span id="q508"></span></p>
 <h3 id="problem-b3fff5873a54">Q859 · 兄妹配对的六状态遗传链<a class="headerlink" href="#problem-b3fff5873a54" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：基因配对状态枚举与闭类吸收</p>
 <p><strong>题目</strong>：个体携带 <span class="arithmatex">\(A\)</span> 的拷贝数取 2、1、0。每代兄妹产生两名独立子代，各子代从双亲各随机继承一个等位基因，忽略性别后状态为 <span class="arithmatex">\(22,21,20,11,10,00\)</span>。求转移矩阵、固定于 22 的概率和平均吸收代数。</p>
@@ -8061,7 +8036,6 @@ ES=n\left(\frac{n-2}{n-1}\right)^{n-1}\sim n/e.
 </details>
 <h2 id="sec-模式匹配与连续游程等待">连续游程与单模式等待<a class="headerlink" href="#sec-模式匹配与连续游程等待" title="Permanent link">&para;</a></h2>
 <p>用当前成功尾串或最长匹配前缀保留重叠；重复字符与无重叠词的等待量不同。</p>
-<p><span id="q552"></span></p>
 <h3 id="problem-9ef0985084b9">Q861 · 累计达到门槛与连续游程的区别<a class="headerlink" href="#problem-9ef0985084b9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：负二项累计等待与游程状态递推</p>
 <p><strong>题目</strong>：公平硬币不断抛掷，累计正面达到 <span class="arithmatex">\(h\)</span> 个或累计反面达到 <span class="arithmatex">\(t\)</span> 个就停止，不要求连续。写期望步数递推，并求 <span class="arithmatex">\(h=t=3\)</span> 的答案。</p>
@@ -8073,8 +8047,6 @@ e_{i,j}=1+\tfrac12e_{i+1,j}+\tfrac12e_{i,j+1}.
 \]</div>
 <p>也可用尾和：<span class="arithmatex">\(P(T&gt;n)=\sum_{k=\max(0,n-t+1)}^{\min(n,h-1)}\binom nk2^{-n}\)</span>，<span class="arithmatex">\(ET=\sum_{n=0}^{h+t-2}P(T&gt;n)\)</span>。<span class="arithmatex">\(h=t=3\)</span> 时各项为 <span class="arithmatex">\(1,1,1,3/4,3/8\)</span>，总计 <span class="arithmatex">\(33/8\)</span>。连续三次相同结果的均时为 7，模型不同。累计计数遇到反面不清零；连续游程状态则会失去已有进度。</p>
 </details>
-<p><span id="q236"></span>
-<span id="problem-3f761ab04341"></span></p>
 <h3 id="problem-2af9a31e8133">Q862 · 连续成功游程的状态递推与公平赌徒证明<a class="headerlink" href="#problem-2af9a31e8133" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：连续成功游程的状态递推与公平入场赌徒法</p>
 <p><strong>题目</strong>：独立试验成功率 <span class="arithmatex">\(p\in(0,1]\)</span>，首次连续 <span class="arithmatex">\(r\ge1\)</span> 次成功时停止。</p>
@@ -8114,8 +8086,6 @@ ET=2+4+8+16+32=2^6-2=62.
 <p>失败会打断当前真钞尾串，因此简单的 <span class="arithmatex">\(5/(1/2)=10\)</span> 是累计成功的另一模型。</p>
 <p><strong>与HT比较重叠。</strong> HT不是两次同种成功游程。它没有长度一的真前后缀重合：前缀H不同于后缀T。由<a href="#problem-86f1b47d81ce">Q866 · 独立字符模式等待：重叠结构与支持可达性</a>，公平币只留下全长项 <span class="arithmatex">\(2^2=4\)</span>，所以 <span class="arithmatex">\(ET_{HT}=4\)</span>。相反，同面游程的每个非空后缀都是目标前缀，才会把各长度的概率倒数相加。</p>
 </details>
-<p><span id="q197"></span>
-<span id="problem-50afa40c4f2c"></span></p>
 <h3 id="problem-0a2526cb5312">Q864 · 连续 HH 或 TT 的停止时刻<a class="headerlink" href="#problem-0a2526cb5312" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：同面尾串状态与停止时刻PGF</p>
 <p><strong>题目</strong>：公平硬币独立投掷，首次出现 HH 或 TT 时停，<span class="arithmatex">\(N\)</span> 包含停止当次。求 <span class="arithmatex">\(N\)</span> 的 PMF、均值和方差。再改为出现 HHH 或 TTT 即停，求均值。</p>
@@ -8143,7 +8113,6 @@ ET=2+4+8+16+32=2^6-2=62.
 \]</div>
 <p><span class="arithmatex">\(N-1\)</span> 为成功率 <span class="arithmatex">\(1/2\)</span>、从 1 起的几何分布，所以 <span class="arithmatex">\(\operatorname{Var} N=2\)</span>。三连同面时，用当前连续相同面长度 1、2 建状态 <span class="arithmatex">\(e_{1}=1+(e_{1}+e_{2})/2\)</span>、<span class="arithmatex">\(e_{2}=1+e_{1}/2\)</span>，初始 <span class="arithmatex">\(e=1+e_{1}\)</span>，解 <span class="arithmatex">\(e_{1}=6\)</span>、<span class="arithmatex">\(e_{2}=4\)</span>，故初始均值 7。</p>
 </details>
-<p><span id="problem-55e8bbf1580a"></span></p>
 <h3 id="problem-814a472f3bc4">Q865 · 偏置硬币任一同面连段<a class="headerlink" href="#problem-814a472f3bc4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：偏置两类游程的双向尾串状态</p>
 <p><strong>题目</strong>：硬币各次独立，正面概率 <span class="arithmatex">\(p\in(0,1)\)</span>。首次出现连续 <span class="arithmatex">\(k\ge1\)</span> 个 <span class="arithmatex">\(H\)</span> 或连续 <span class="arithmatex">\(k\)</span> 个 <span class="arithmatex">\(T\)</span> 即停止。求期望的有限方程和显式表达，并化简公平币情形。 写出 <span class="arithmatex">\(k=2\)</span> 的闭式，另讨论 <span class="arithmatex">\(p=0\)</span> 或 1 的边界。</p>
@@ -8152,9 +8121,6 @@ ET=2+4+8+16+32=2^6-2=62.
 <p>令 <span class="arithmatex">\(H_j,T_j\)</span> 表示末尾连续同面 <span class="arithmatex">\(j\)</span> 个，<span class="arithmatex">\(H_k=T_k=0\)</span>，<span class="arithmatex">\(H_j=1+pH_{j+1}+qT_1,T_j=1+qT_{j+1}+pH_1\)</span>，初始 <span class="arithmatex">\(e=1+pH_1+qT_1\)</span>。<span class="arithmatex">\(k\ge2\)</span> 时令 <span class="arithmatex">\(A=(1-p^{k-1})/q,B=(1-q^{k-1})/p\)</span>，有 <span class="arithmatex">\(H_1=A(1+qT_1),T_1=B(1+pH_1)\)</span>，直接解两元方程；<span class="arithmatex">\(k=1\)</span> 时 <span class="arithmatex">\(e=1\)</span>。公平时简化为 <span class="arithmatex">\(2^k-1\)</span>。令 <span class="arithmatex">\(D=1-pqAB\)</span>，则 <span class="arithmatex">\(H_1=A(1+qB)/D,T_1=B(1+pA)/D\)</span>，所以 <span class="arithmatex">\(e=1+pH_1+qT_1\)</span>。所有状态有限且吸收事件在每个长为 <span class="arithmatex">\(k\)</span> 的独立区间有正概率，故期望有限，方程给出唯一有限解。</p>
 <p>正面率<span class="arithmatex">\(p\)</span>、<span class="arithmatex">\(q=1-p\)</span>，等HH或TT任何一个。用无前缀、末<span class="arithmatex">\(H\)</span>、末<span class="arithmatex">\(T\)</span>状态：<span class="arithmatex">\(E0=1+pEH+qET\)</span>，<span class="arithmatex">\(\mathbb{E} H=1+qET\)</span>，<span class="arithmatex">\(\mathbb{E} T=1+pEH\)</span>。解<span class="arithmatex">\(E0=(2+pq)/(1-pq)\)</span>，公平时3；<span class="arithmatex">\(p=0\)</span>或1也给必然2次。</p>
 </details>
-<p><span id="q198"></span>
-<span id="q533"></span>
-<span id="problem-27bedfc11e0f"></span></p>
 <h3 id="problem-86f1b47d81ce">Q866 · 独立字符模式等待：重叠结构与支持可达性<a class="headerlink" href="#problem-86f1b47d81ce" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：字符支持检查、前后缀重叠和与公平资本</p>
 <p><strong>题目</strong>：字符独立产生，字母表中字符a的概率为 <span class="arithmatex">\(p_a\)</span>。给定有限目标串 <span class="arithmatex">\(w=w_1\cdots w_m\)</span>。</p>
@@ -8266,8 +8232,6 @@ E[p^{-j}]=\frac{B(a-j,b)}{B(a,b)}\quad(a&gt;j),
 <summary>解答</summary>
 <p>公平硬币连续记录，问 HHT 是否先于 HTH。状态取已经匹配的最长后缀 <span class="arithmatex">\(\varnothing\)</span>、<span class="arithmatex">\(H\)</span>、HH、HT，令命中 HHT 的概率为 <span class="arithmatex">\(h_{0},h_{H},h_{HH},h_{HT}\)</span>。首步得 <span class="arithmatex">\(h_{0}=h_{H}\)</span>、<span class="arithmatex">\(h_{H}=(h_{HH}+h_{HT})/2\)</span>、<span class="arithmatex">\(h_{HH}=1\)</span>、<span class="arithmatex">\(h_{HT}=h_{0}/2\)</span>。因此 <span class="arithmatex">\(h_{0}=1/2+h_{0}/4\)</span>，解得 <span class="arithmatex">\(2/3\)</span>。模式等长不保证胜率各半，发生失败后应保留可复用后缀。</p>
 </details>
-<p><span id="q229"></span>
-<span id="problem-1defd94709f6"></span></p>
 <h3 id="problem-cb6216bdfe0c">Q872 · 骰子竞猜：12 vs 连续两个 7<a class="headerlink" href="#problem-cb6216bdfe0c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：非等概率字符的模式竞赛方程</p>
 <p><strong>题目</strong>：两人对掷两枚标准骰子的结果下注。玩家 <span class="arithmatex">\(A\)</span> 押"总点数 12 先出现"，玩家 <span class="arithmatex">\(B\)</span> 押"连续两次 7 先出现"。不断掷骰并记录总点数，直到一方获胜。<span class="arithmatex">\(A\)</span> 获胜的概率是多少？</p>
@@ -8298,8 +8262,6 @@ a_S = \frac{1}{36} + \frac{6}{36}a_7 + \frac{29}{36}a_S,\qquad a_7 = \frac{1}{36
 <summary>解答</summary>
 <p><span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>先赛，未参赛者下局与胜者赛，某人连胜两局停。(a)树根分<span class="arithmatex">\(A/B\)</span>，之后每节点分当前胜者再胜（叶子）或新挑战者胜（继续）；继续赢家依三人循环，例如<span class="arithmatex">\(A,C,B,A,\ldots\)</span>。(b)每场公平独立，每个长度<span class="arithmatex">\(k\ge 2\)</span>恰两条结束历史，各概率<span class="arithmatex">\(2^{-k}\)</span>，<span class="arithmatex">\(\sum_{k\ge 2}2\cdot 2^{-k}=1\)</span>；无限持续概率<span class="arithmatex">\(\lim 2^{-(k-1)}=0\)</span>，因此构成概率律。<span class="arithmatex">\((c)P(T\le 5)=15/16\)</span>。<span class="arithmatex">\(A\)</span>冠军概率<span class="arithmatex">\((1/4+1/16)/(1-1/8)=5/14\)</span>，<span class="arithmatex">\(B\)</span>同为<span class="arithmatex">\(5/14\)</span>，<span class="arithmatex">\(C\)</span>为<span class="arithmatex">\(2/7\)</span>；通过每三局一循环的几何级数求和。</p>
 </details>
-<p><span id="q230"></span>
-<span id="problem-c73ab6795777"></span></p>
 <h3 id="problem-d70fd5966cff">Q874 · HHH 与 THH 的单独等待与模式竞赛<a class="headerlink" href="#problem-d70fd5966cff" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：重叠等待差异与后缀竞赛方程</p>
 <p><strong>题目</strong>：公平币独立投掷。</p>
@@ -8404,7 +8366,6 @@ P(B\text{先出现})=
 <p>所以 <span class="arithmatex">\(A\)</span> 的最优初选是 HTH、HTT、THH、THT 之一，将 <span class="arithmatex">\(B\)</span> 的最优胜率压到 <span class="arithmatex">\(2/3\)</span>，自己仍只有 <span class="arithmatex">\(1/3\)</span>。表中的应对不必唯一，但已达所有应对中的最大值。</p>
 <p>若能选择先后手，应选后手：对先手任一三元组，后手最优胜率均至少 <span class="arithmatex">\(2/3\)</span>。先手理性选HTH、HTT、THH或THT时，博弈值为后手 <span class="arithmatex">\(2/3\)</span>、先手 <span class="arithmatex">\(1/3\)</span>，与双方真实目的“最大化胜率”一致。</p>
 </details>
-<p><span id="q182"></span></p>
 <h3 id="problem-a4c1da153793">Q876 · 掷币序列游戏<a class="headerlink" href="#problem-a4c1da153793" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：多模式后缀自动机与先出现概率</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 轮流掷一枚公平硬币（<span class="arithmatex">\(A\)</span> 先掷）。正反面序列被记录。一旦出现"正面紧跟反面"（子序列 HT），游戏结束，掷出那个 <span class="arithmatex">\(T\)</span> 的人获胜。<span class="arithmatex">\(A\)</span> 获胜的概率是多少？</p>
@@ -8445,7 +8406,6 @@ P(A|H) = \frac{1}{2}\times 0 + \frac{1}{2}\left(1 - P(A|H)\right) \Rightarrow P(
 <p>等待 6 后紧跟 5，状态取尚未匹配 <span class="arithmatex">\(e_{0}\)</span> 与末次为 6 的 <span class="arithmatex">\(e_{6}\)</span>。首步给 <span class="arithmatex">\(e_{0}=6+e_{6}\)</span>、<span class="arithmatex">\(e_{6}=1+e_{6}/6+4e_{0}/6\)</span>，解得 <span class="arithmatex">\(e_{0}=36\)</span>。遇到 6、6 后仍保留最后一个 6，不是回到零匹配；与等连续两个 6 的 42 不同。</p>
 <p>第一个方程来自 <span class="arithmatex">\(e_0=1+(5/6)e_0+(1/6)e_6\)</span>。在末次6状态，掷5直接完成，掷6保留6前缀，掷其余四点回空前缀，因此第二方程如上。代 <span class="arithmatex">\(e_6=e_0-6\)</span>，得 <span class="arithmatex">\(e_0-6=1+(e_0-6)/6+(4/6)e_0\)</span>，整理 <span class="arithmatex">\(e_0/6=6\)</span>，故总均时36。</p>
 </details>
-<p><span id="q574"></span></p>
 <h3 id="problem-f7e78920472f">Q880 · 相邻骰子点数差的等待时间<a class="headerlink" href="#problem-f7e78920472f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：最后点数状态与相邻点差首步方程</p>
 <p><strong>题目</strong>：独立掷公平 <span class="arithmatex">\(m\)</span> 面骰，直到相邻两掷绝对差为 <span class="arithmatex">\(d\)</span>，其中 <span class="arithmatex">\(1\le d&lt;m\)</span>。如何计算包含第一掷在内的总掷数期望？给出 <span class="arithmatex">\(m=6\)</span>、<span class="arithmatex">\(d=1\)</span> 和 <span class="arithmatex">\(d=2\)</span> 的结果。</p>
@@ -8475,7 +8435,6 @@ ET=1+\frac{A+B+C}{3}=\frac{377}{115}.
 <p>这是全状态方程消元后的具体值，不是每个窗口成功率 <span class="arithmatex">\(16/36\)</span> 的倒数；相邻窗口共享一次骰子，存在依赖。</p>
 <p>一般模型中，令 <span class="arithmatex">\(e_i\)</span> 为末次标签为 <span class="arithmatex">\(i\)</span> 后的剩余均时，则 <span class="arithmatex">\(e_i=1+\sum_{j:(i,j)\notin A}p_je_j\)</span>，总均时 <span class="arithmatex">\(ET=1+\sum_ip_ie_i\)</span>。令未命中转移 <span class="arithmatex">\(Q_{ij}=p_j\mathbf1_{(i,j)\notin A}\)</span>，得到 <span class="arithmatex">\((I-Q)e=\mathbf1\)</span>。从所有可达末值都能以正概率在有限步命中时，有限状态给出几何尾，解唯一且有限；否则应先识别不吸收闭类。恰差1时均时 <span class="arithmatex">\(239/51\)</span>，条件 <span class="arithmatex">\(\le1\)</span> 还接受相等，相比之下缩短为 <span class="arithmatex">\(377/115\)</span>。</p>
 </details>
-<p><span id="q575"></span></p>
 <h3 id="problem-d1f1ae65332f">Q882 · 等待一个全不重复的滑动窗口<a class="headerlink" href="#problem-d1f1ae65332f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：模式等待｜<strong>副题型</strong>：不同尾串长度与全异滑动窗口首达</p>
 <p><strong>题目</strong>：独立均匀生成 <span class="arithmatex">\(m\)</span> 种标签，直到最近连续 <span class="arithmatex">\(m\)</span> 个结果恰好全异。求平均总长度的计算方法，并与“累计集齐 <span class="arithmatex">\(m\)</span> 种标签”比较。</p>
@@ -8488,11 +8447,7 @@ e_m=0,\quad e_k=1+\frac{m-k}{m}e_{k+1}+\frac1m\sum_{j=1}^k e_j\quad(k&lt;m).
 <p>相邻两条递推式相减，令 <span class="arithmatex">\(\Delta_k=e_k-e_{k+1}\)</span>，得 <span class="arithmatex">\(\Delta_0=1,\Delta_k=m\Delta_{k-1}/(m-k)\)</span>。因 <span class="arithmatex">\(e_m=0\)</span>，有 <span class="arithmatex">\(e_0=\sum_{k=0}^{m-1}\Delta_k\)</span>。也可从 <span class="arithmatex">\(e_0=e_1+1\)</span> 连续消元得到 <span class="arithmatex">\(e_0=\sum_{k=0}^{m-1}m^{k+1}/[(m-k)\cdots m]\)</span>，等价为 <span class="arithmatex">\(\sum_{k=1}^m m^k/(m)_k\)</span>，其中 <span class="arithmatex">\((m)_k=m(m-1)\cdots(m-k+1)\)</span>。<span class="arithmatex">\(m=6\)</span> 时为 <span class="arithmatex">\(416/5\)</span>。累计集齐的均时则为 <span class="arithmatex">\(mH_m\)</span>。<strong>方法</strong>：发生重复时只删除到最近重复的位置，不应一律回到空状态。</p>
 </details>
 <h2 id="sec-随机游走-破产与反射边界">随机游走、破产与反射边界<a class="headerlink" href="#sec-随机游走-破产与反射边界" title="Permanent link">&para;</a></h2>
-<p><span id="sec-二随机游走鞅与停时"></span></p>
 <p>先确定资金边界、步长和停留规则，再用离散调和方程求命中概率与均时。</p>
-<p><span id="q183"></span>
-<span id="problem-ee7496cc6a46"></span>
-<span id="problem-5e9664f5fc2b"></span></p>
 <h3 id="problem-988b899a4a63">Q883 · 赌徒破产<a class="headerlink" href="#problem-988b899a4a63" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：有偏最近邻差分方程与双边破产</p>
 <p><strong>题目</strong>：赌徒初始资金 <span class="arithmatex">\( i \)</span> 元。每局以概率 <span class="arithmatex">\( p \)</span>（<span class="arithmatex">\( 0&lt;p&lt;1 \)</span>）赢 1 元、以概率 <span class="arithmatex">\( q = 1-p \)</span> 输 1 元。资金达到 <span class="arithmatex">\(N\)</span> 元或输光时停局。他最终达到 <span class="arithmatex">\(N\)</span> 元的概率是多少？ 计算 <span class="arithmatex">\(p=1/3\)</span>、<span class="arithmatex">\(i=7\)</span>、<span class="arithmatex">\(N=10\)</span>。再对从 0 开始、到 3 或 <span class="arithmatex">\(-4\)</span> 停止的公平单位游走，求上端命中概率和平均停止步数。 另算公平游走在 [0,10] 从 6 出发，先到 10 的概率。</p>
@@ -8565,7 +8520,6 @@ P_i = \left[1 + \frac{q}{p} + \cdots + \left(\frac{q}{p}\right)^{i-1}\right]P_1
 <p>另一种固定成本赌局：初始 <span class="arithmatex">\(m\)</span> 单位资金，每局交 1，胜时返还 <span class="arithmatex">\(c\)</span>，胜率 <span class="arithmatex">\(p\)</span>、败率 <span class="arithmatex">\(q\)</span>。若整个游戏恰赢一次，第一次胜前可败 <span class="arithmatex">\(k=0,\ldots ,m-1\)</span> 次，其后必须一直败到资金归零；每条路径恰含 <span class="arithmatex">\(m+c-1\)</span> 次败，因此概率 <span class="arithmatex">\(mpq^{m+c-1}\)</span>。<span class="arithmatex">\(m=3\)</span>、<span class="arithmatex">\(c=8\)</span>、<span class="arithmatex">\(p=0.1\)</span> 时为 <span class="arithmatex">\(0.3\cdot 0.9^{10}\)</span>。此处返还含本金口径必须明确。</p>
 <p>若唯一一次胜利之前有 <span class="arithmatex">\(k\)</span> 次失败，当前资金为 <span class="arithmatex">\(m-k\)</span>，胜利当局先付1再返 <span class="arithmatex">\(c\)</span>，余款 <span class="arithmatex">\(m-k-1+c\)</span>。之后每局都失败，共这么多次，连同之前 <span class="arithmatex">\(k\)</span> 败，失败总数恒为 <span class="arithmatex">\(m+c-1\)</span>。每个 <span class="arithmatex">\(k=0,\ldots,m-1\)</span> 对应一条独立事件，路径概率均 <span class="arithmatex">\(pq^{m+c-1}\)</span>，共有 <span class="arithmatex">\(m\)</span> 条，因此相加得公式。</p>
 </details>
-<p><span id="q201"></span></p>
 <h3 id="problem-be3f4074fc8e">Q890 · 木板上的醉汉<a class="headerlink" href="#problem-be3f4074fc8e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：对称双边吸收的二次均时</p>
 <p><strong>题目</strong>：长五米的木板安全端坐标零、危险端坐标五，从整数 <span class="arithmatex">\(x\in \{0,\ldots ,5\}\)</span> 开始，每步独立各半向左或右一米，首次到任一端即停。求生存概率；再用递推与鞅各推广到长 <span class="arithmatex">\(n\)</span> 的木板。固定距安全端 <span class="arithmatex">\(x\)</span> 比较长度，另固定距危险端 <span class="arithmatex">\(d\)</span> 比较长度，何时更长更有利？</p>
@@ -8613,7 +8567,6 @@ f(1)=\frac{4}{5},\qquad f(2)=\frac{3}{5},\qquad f(3)=\frac{2}{5},\qquad f(4)=\fr
 <p><span class="arithmatex">\(n\)</span> 点圆环从 <span class="arithmatex">\(i\)</span> 出发到 0，相当于区间 <span class="arithmatex">\([0,n]\)</span> 两端吸收，从而均时 <span class="arithmatex">\(i(n-i)\)</span>；<span class="arithmatex">\(n=100\)</span>、<span class="arithmatex">\(i=1\)</span> 得 99。</p>
 <p>把目标点0剪开成两个吸收端0与 <span class="arithmatex">\(n\)</span>，其余顶点依圆周顺序排列成线段。未触目标之前，圆环路径与线段路径一一对应。均时方程 <span class="arithmatex">\(e_i=1+(e_{i-1}+e_{i+1})/2\)</span>、<span class="arithmatex">\(e_0=e_n=0\)</span> 的二阶差分为 <span class="arithmatex">\(-2\)</span>，所以 <span class="arithmatex">\(e_i=i(n-i)\)</span>。取 <span class="arithmatex">\(i=1,n=100\)</span>，得到99步。</p>
 </details>
-<p><span id="q531"></span></p>
 <h3 id="problem-077dcb649bb7">Q893 · 带停留与反射边界的首达时间<a class="headerlink" href="#problem-077dcb649bb7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：反射、停留边界的差分方程</p>
 <p><strong>题目</strong>：（<span class="arithmatex">\(a\)</span>）<span class="arithmatex">\(0,\ldots,N\)</span> 上内部以概率 <span class="arithmatex">\(p\)</span> 向右、<span class="arithmatex">\(q\)</span> 向左，0 反射至 1，求从 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(N\)</span> 的均时。（<span class="arithmatex">\(b\)</span>）内部向左右各概率 <span class="arithmatex">\(p\in(0,1/2)\)</span>，其余原地不动，0 吸收、<span class="arithmatex">\(N\)</span> 确定反射至 <span class="arithmatex">\(N-1\)</span>，求从 <span class="arithmatex">\(i\)</span> 被吸收的概率与均时。</p>
@@ -8621,8 +8574,6 @@ f(1)=\frac{4}{5},\qquad f(2)=\frac{3}{5},\qquad f(3)=\frac{2}{5},\qquad f(4)=\fr
 <summary>解答</summary>
 <p>（<span class="arithmatex">\(a\)</span>）令 <span class="arithmatex">\(m_j=E_jT_{j+1}\)</span>，一步分析得 <span class="arithmatex">\(m_0=1,m_j=1+q(m_{j-1}+m_j)\)</span>，即 <span class="arithmatex">\(m_j=1/p+(q/p)m_{j-1}\)</span>。令 <span class="arithmatex">\(r=q/p\)</span>，<span class="arithmatex">\(p\ne q\)</span> 时 <span class="arithmatex">\(m_j=r^j+(1-r^j)/(p-q)\)</span>，到 <span class="arithmatex">\(N\)</span> 的均时为 <span class="arithmatex">\(\sum_{j=i}^{N-1}m_j\)</span>。公平时 <span class="arithmatex">\(m_j=2j+1\)</span>，均时 <span class="arithmatex">\(N^2-i^2\)</span>。（<span class="arithmatex">\(b\)</span>）吸收概率满足内部二阶差分为 0、<span class="arithmatex">\(a_0=1,a_N=a_{N-1}\)</span>，所以全为 1。均时满足 <span class="arithmatex">\(e_{i+1}-2e_i+e_{i-1}=-1/p\)</span>，边界 <span class="arithmatex">\(e_0=0,e_N=1+e_{N-1}\)</span>，故 <span class="arithmatex">\(e_i=i+i(2N-1-i)/(2p)\)</span>。反射点的等待规则与内部不同，不能沿用内部方程。</p>
 </details>
-<p><span id="q530"></span>
-<span id="problem-89dff4cf9021"></span></p>
 <h3 id="problem-4a9105665bcc">Q894 · 圆周覆盖与最后访问顶点<a class="headerlink" href="#problem-4a9105665bcc" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：区间扩展首达与圆环最后访问分布</p>
 <p><strong>题目</strong>：圆周顶点 <span class="arithmatex">\(0,1,\ldots,n\)</span>，顺时针概率 <span class="arithmatex">\(p\)</span>，逆时针 <span class="arithmatex">\(q=1-p\)</span>，从 0 出发。求首次回 0 前访问全部顶点的概率。另求 <span class="arithmatex">\(m+1\)</span> 点对称圆周中最后访问某指定 <span class="arithmatex">\(i\ne0\)</span> 的概率，并给出偏置时可计算的方程。</p>
@@ -8673,9 +8624,6 @@ E\frac1T=\sum_{n\ge0}\frac{C_n}{2\cdot4^n(2n+1)}
 <p>分部积分，端点项为 <span class="arithmatex">\(-1\)</span>，剩余 <span class="arithmatex">\(\int_0^1(1-x^2)^{-1/2}dx=\pi/2\)</span>，得 <span class="arithmatex">\(E(1/T)=\pi/2-1\)</span>。公平一维游走几乎必然到 <span class="arithmatex">\(+1\)</span>，所以这里没有漏掉永不停时的概率质量；最后 <span class="arithmatex">\(E[(T+1)/(2T)]=\pi/4\)</span>。</p>
 <p>因此第一次正面多于反面时停止，终止正面比例为 <span class="arithmatex">\((T+1)/(2T)=1/2+1/(2T)\)</span>，期望 <span class="arithmatex">\(\pi/4\approx0.785398\)</span>。这个结果只分析题设停止规则；首次正时间持平的有偏概率则为 <span class="arithmatex">\(2C_{n-1}[p(1-p)]^n\)</span>，有偏时总回返概率可能小于1。</p>
 </details>
-<p><span id="problem-ffa59ac6ed2b"></span>
-<span id="problem-2a165e820cbf"></span>
-<span id="problem-b1d6d58f1e96"></span></p>
 <h3 id="problem-1db41b75a8b9">Q897 · 无限半轴命中概率与公平游走的无穷均时<a class="headerlink" href="#problem-1db41b75a8b9" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：有限边界单调极限、半轴命中与均时下界</p>
 <p><strong>题目</strong>：整数游走从0出发，每步向右概率<span class="arithmatex">\(p\)</span>、向左<span class="arithmatex">\(q=1-p\)</span>，目标为正整数<span class="arithmatex">\(a\)</span>。</p>
@@ -8698,7 +8646,6 @@ P(T_a&lt;\infty)=\begin{cases}(p/q)^a,&amp;0&lt;p&lt;q,\\1,&amp;p\ge q.\end{case
 <p><strong>公平时的均时。</strong> 记<span class="arithmatex">\(\tau_m\)</span>为到<span class="arithmatex">\(-m\)</span>或<span class="arithmatex">\(a\)</span>的退出时间。有限桥差分方程给 <span class="arithmatex">\(E\tau_m=ma\)</span>：在长度<span class="arithmatex">\(m+a\)</span>的桥上，从<span class="arithmatex">\(m\)</span>开始均时为 <span class="arithmatex">\(m[(m+a)-m]\)</span>。到任一端不晚于首次到<span class="arithmatex">\(a\)</span>，故 <span class="arithmatex">\(ET_a\ge E\tau_m=ma\)</span> 对所有<span class="arithmatex">\(m\)</span>成立，令<span class="arithmatex">\(m\to\infty\)</span>即得 <span class="arithmatex">\(ET_a=\infty\)</span>。目标+2对应下界<span class="arithmatex">\(2m\)</span>，尽管命中概率趋1，平均等待仍无穷。</p>
 <p>有限桥可用位置鞅及平方鞅、几何尾证明合法停止，见<a href="#problem-86f5857b8293">Q901 · 桥上的醉汉</a>。其100米桥起点17的概率17/100、均时1411属于有限区间结论，不能在删去下界后照用可积性。几乎必然终止本身并不保证平均时间有限。</p>
 </details>
-<p><span id="q527"></span></p>
 <h3 id="problem-f542fef35e6c">Q898 · 整数随机游走的零常返与 PGF<a class="headerlink" href="#problem-f542fef35e6c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：首回更新生成函数与零常返判定</p>
 <p><strong>题目</strong>：证明整数上的对称简单随机游走常返却没有平稳概率分布，并求首次回原点步数的生成函数。</p>
@@ -8732,9 +8679,7 @@ G_3=1+\sum_{n=1}^{\infty}\left[\binom{2n}{n}4^{-n}\right]^3,
 <p>数值求和可递推 <span class="arithmatex">\(c_0=1,c_{n+1}=c_n(2n+1)/(2n+2)\)</span>。尾部主项由 <span class="arithmatex">\(c_n^3\sim(\pi n)^{-3/2}\)</span> 给出 <span class="arithmatex">\(2/(\pi^{3/2}\sqrt M)\)</span>，须对截断尾部作控制或加速后才报告高精度数字；直接截断得到的 <span class="arithmatex">\(f_3\)</span> 是下界。</p>
 </details>
 <h2 id="sec-鞅-可选停时与序贯检验">鞅、可选停时与序贯检验<a class="headerlink" href="#sec-鞅-可选停时与序贯检验" title="Permanent link">&para;</a></h2>
-<p><span id="sec-独立增量-访问指标与线性期望"></span></p>
 <p>先验证鞅与停止条件，再在截断停时上计算期望，并说明取极限所需的有界性或可积性。</p>
-<p><span id="q234"></span></p>
 <h3 id="problem-86f5857b8293">Q901 · 桥上的醉汉<a class="headerlink" href="#problem-86f5857b8293" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：鞅与停时｜<strong>副题型</strong>：平方鞅、有界停止与几何尾均时</p>
 <p><strong>题目</strong>：一个醉汉站在 100 米长桥的第 17 米处。每一步他以 <span class="arithmatex">\(50\%\)</span> 概率向前或向后挪 1 米。他在到达桥起点（第 0 米）之前先到达桥尾（第 100 米）的概率是多少？他到达任一端的期望步数是多少？</p>
@@ -8748,7 +8693,6 @@ ES_\tau=0,\qquad E[S_\tau^2]=E\tau.
 <p>令上端命中率为 <span class="arithmatex">\(h\)</span>，第一式为 <span class="arithmatex">\(ah-b(1-h)=0\)</span>，所以 <span class="arithmatex">\(h=b/(a+b)\)</span>。第二式给 <span class="arithmatex">\(E\tau=a^2h+b^2(1-h)=ab\)</span>。</p>
 <p>桥长100、起点17时，平移起点为0后两端是 <span class="arithmatex">\(-17,83\)</span>，故先到桥尾概率 <span class="arithmatex">\(17/(83+17)=0.17\)</span>，到任一端的均步数为 <span class="arithmatex">\(83\times17=1411\)</span>。可选停止必须连同这些有界或可积条件使用。</p>
 </details>
-<p><span id="q237"></span></p>
 <h3 id="problem-72a32fc4160e">Q902 · <span class="arithmatex">\( [0,1000] \)</span> 上的随机游走<a class="headerlink" href="#problem-72a32fc4160e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：指数鞅与随机游走边界命中</p>
 <p><strong>题目</strong>：每步独立各半 <span class="arithmatex">\(\pm 1\)</span>，在 [0,1000] 从 80 开始，到边界即停，求停在零的概率。推广从整数 <span class="arithmatex">\(k\in [0,L]\)</span> 开始，分别求公平币与上行率 <span class="arithmatex">\(q\in (0,1)\)</span> 时下端先到概率，并证明停止时间期望有限。</p>
@@ -8772,7 +8716,6 @@ p=8/100,
 <p>先证明停时的期望有限。</p>
 <p>公平时下端率 <span class="arithmatex">\(1-k/L\)</span>。有偏时记 <span class="arithmatex">\(r=(1-q)/q\)</span>；<span class="arithmatex">\(r\ne 1\)</span> 时，上端命中率 <span class="arithmatex">\((1-r^{k})/(1-r^{L})\)</span>，故下端为其补集。有限区间中，从任一内部点起，未来 <span class="arithmatex">\(L\)</span> 步全向下的概率至少 <span class="arithmatex">\((1-q)^{L}&gt;0\)</span>，必已吸收；按长 <span class="arithmatex">\(L\)</span> 的块给尾概率一个几何上界，所以平均停止时间有限。</p>
 </details>
-<p><span id="q529"></span></p>
 <h3 id="problem-15fa477275b7">Q903 · 有界调和财富与条件破产<a class="headerlink" href="#problem-15fa477275b7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：调和财富停止与Doob条件变换</p>
 <p><strong>题目</strong>：有限链在 0、<span class="arithmatex">\(N\)</span> 首达时停，每个内部状态都能以正概率沿有限路径到达边界，且内部满足 <span class="arithmatex">\(\sum _{j}jP_{ij}=i\)</span>。求从 <span class="arithmatex">\(i\)</span> 出发先到 <span class="arithmatex">\(N\)</span> 的概率。再对单位上、下行概率 <span class="arithmatex">\(p\)</span>、<span class="arithmatex">\(q=1-p\)</span>，<span class="arithmatex">\(0&lt;p&lt;1\)</span> 的赌徒，给定最终先到 <span class="arithmatex">\(N\)</span>，求内部财富 <span class="arithmatex">\(i\)</span> 的下一局赢率和条件转移。</p>
@@ -8786,8 +8729,6 @@ P_i(X_1=j,\,T_N&lt;T_0)=P_{ij}h_j
 \]</div>
 <p>除以 <span class="arithmatex">\(h_i\)</span> 得出；调和方程 <span class="arithmatex">\(h_i=\sum_jP_{ij}h_j\)</span> 又保证条件转移每行和为1。公平最近邻下 <span class="arithmatex">\(h_{i+1}/h_i=(i+1)/i\)</span>，故条件于最终成功后，当前赢率被提高为 <span class="arithmatex">\((i+1)/(2i)\)</span>。</p>
 </details>
-<p><span id="q535"></span>
-<span id="problem-1bd90005e0b8"></span></p>
 <h3 id="problem-15f316a7747e">Q904 · 首次超过一时的累计总量<a class="headerlink" href="#problem-15f316a7747e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：Wald恒等式与均匀超额积分方程</p>
 <p><strong>题目</strong>：独立 <span class="arithmatex">\(U(0,1)\)</span> 变量累加到首次超过 1，停止时间 <span class="arithmatex">\(T\)</span>，终止和 <span class="arithmatex">\(S_{T}\)</span>。求 <span class="arithmatex">\(\mathbb{E} [S_{T}]\)</span>，并从逐项指示变量解释为何可用平均增量乘平均时间。 再求超越量 <span class="arithmatex">\(\mathbb{E} [S_{T}-1]\)</span>，说明 <span class="arithmatex">\(T\)</span> 与 <span class="arithmatex">\(N(1)\)</span> 的停时区别。</p>
@@ -8796,7 +8737,6 @@ P_i(X_1=j,\,T_N&lt;T_0)=P_{ij}h_j
 <p><span class="arithmatex">\(T\)</span> 为首个累计和<span class="arithmatex">\(&gt;1\)</span> 的时刻，事件 <span class="arithmatex">\(T\ge i\)</span> 只取决于此前样本，与 <span class="arithmatex">\(X_{i}\)</span> 独立。非负性允许逐项求和，<span class="arithmatex">\(\mathbb{E} [S_{T}]=\sum \mathbb{E} [X_{i}1_{T\ge i}]=(1/2)\sum P(T\ge i)=(1/2)\mathbb{E} T=e/2\)</span>。这同时解释为什么随机停止不能未经条件检查就写 <span class="arithmatex">\(\mathbb{E} [N]\mathbb{E} [X]\)</span>。</p>
 <p>已知 <a href="../05_%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%89/#problem-afd6ba075802">Q683 · 均匀增量的首越时间与逐段积分递推</a> 的 <span class="arithmatex">\(ET=e\)</span>。<span class="arithmatex">\(T=N(1)+1\)</span> 是相对于增量滤过的停时，但 <span class="arithmatex">\(N(1)\)</span> 本身不是；由 Wald，<span class="arithmatex">\(ES_T=EU_1ET=e/2\)</span>，故平均剩余 <span class="arithmatex">\(e/2-1\)</span>。这使用 <span class="arithmatex">\(ET&lt;\infty,E|U_1|&lt;\infty\)</span>；Wald 不要求停时与增量独立，却要求其为给定增量信息的停时。</p>
 </details>
-<p><span id="q199"></span></p>
 <h3 id="problem-81ab5b2c929c">Q905 · 不均匀硬币的等待时间<a class="headerlink" href="#problem-81ab5b2c929c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：归纳与递推｜<strong>副题型</strong>：偏置硬币的公平押注与等待时间</p>
 <p><strong>题目</strong>：独立抛币，正面率 <span class="arithmatex">\(p\in (0,1]\)</span>，求首次正面、首次连续两个正面的平均次数；计算公平币四连正面的均时。另对公平币正面赢一元、反面输一元，从零财富开始在首次达到 <span class="arithmatex">\(+1\)</span> 时停，求终止概率、终止收益期望和平均停止时间，并解释与公平鞅是否矛盾。</p>
@@ -8865,7 +8805,6 @@ y=\frac{1+p}{p}.
 <p>边界全红为 1、全黑为 0，最后一张必须押，不能看到后再决定。按剩余牌数归纳，<span class="arithmatex">\(V(r,b)=r/(r+b)\)</span>：把候选式代入继续项，得到 <span class="arithmatex">\([r(r-1)+br]/[(r+b)(r+b-1)]=r/(r+b)\)</span>。停止与继续的价值相同。标准牌初始 <span class="arithmatex">\(r=b=26\)</span>，最高胜率仍为 <span class="arithmatex">\(1/2\)</span>。
 <strong>方法</strong>：观察会改变当前比例，但条件均值守恒；必须排除看到下一张后才下注，以及观察完全部牌后仍可下注等规则。</p>
 </details>
-<p><span id="q532"></span></p>
 <h3 id="problem-d45af4c328ce">Q907 · Bernoulli 成功率的序贯比较<a class="headerlink" href="#problem-d45af4c328ce" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：含停留比分差、破产错误率与Wald均时</p>
 <p><strong>题目</strong>：独立 <span class="arithmatex">\(X_i\sim\mathrm{Bernoulli}(P_1),Y_i\sim\mathrm{Bernoulli}(P_2)\)</span>。累计差首次到达 <span class="arithmatex">\(\pm M\)</span> 时停止，正端判 <span class="arithmatex">\(P_1&gt;P_2\)</span>。假设 <span class="arithmatex">\(0&lt;P_2&lt;P_1&lt;1\)</span>，求错误率和平均观测对数。</p>
@@ -8889,8 +8828,6 @@ E[N]=\frac{M}{P_1-P_2}\frac{1-r^M}{1+r^M}.
 </details>
 <h2 id="sec-泊松过程-稀释与到达竞争">泊松计数、稀释与条件分配<a class="headerlink" href="#sec-泊松过程-稀释与到达竞争" title="Permanent link">&para;</a></h2>
 <p>固定区间用独立增量，标记筛选用稀释；给定总数后使用二项或多项条件分配。</p>
-<p><span id="q147"></span>
-<span id="problem-d7004e779db3"></span></p>
 <h3 id="problem-bc1aacd1b834">Q909 · 公路上的车<a class="headerlink" href="#problem-bc1aacd1b834" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：泊松过程｜<strong>副题型</strong>：零到达概率的区间幂律</p>
 <p><strong>题目</strong>：车辆按齐次 Poisson 过程到达。若长为 <span class="arithmatex">\(T\)</span> 的区间内至少一辆车的概率为 <span class="arithmatex">\(\alpha\in(0,1)\)</span>，推导长 <span class="arithmatex">\(t\)</span> 的区间至少一辆的概率。应用于20分钟至少一辆概率 <span class="arithmatex">\(609/625\)</span>，求5分钟的结果，并以四个独立子区间解释。</p>
@@ -8918,7 +8855,6 @@ E[N]=\frac{M}{P_1-P_2}\frac{1-r^M}{1+r^M}.
 <p>若雨滴在时空中独立稀疏、强度每平方英寸每分钟20滴，5平方英寸区域<span class="arithmatex">\(t\)</span>分钟的数量可建模<span class="arithmatex">\(\operatorname{Pois} (100t)\)</span>。3秒为0.05分钟，零雨滴概率<span class="arithmatex">\(e^{-5}\)</span>。仅给平均强度还不是Poisson的证明，模型依据是独立均匀稀疏到达。</p>
 <p>时空强度乘区域面积、观察时长得到 Poisson 参数 <span class="arithmatex">\(20\times5\times t=100t\)</span>，故 <span class="arithmatex">\(P(N=k)=e^{-100t}(100t)^k/k!\)</span>。三秒等于 <span class="arithmatex">\(3/60\)</span> 分钟，对应参数 <span class="arithmatex">\(100\times3/60=5\)</span>，取 <span class="arithmatex">\(k=0\)</span> 即 <span class="arithmatex">\(e^{-5}\)</span>。计算前须把秒与分钟统一。</p>
 </details>
-<p><span id="q149"></span></p>
 <h3 id="problem-f4644189416d">Q912 · 泊松过程等车<a class="headerlink" href="#problem-f4644189416d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：泊松过程｜<strong>副题型</strong>：Poisson等待的指数尾与区间独立性</p>
 <p><strong>题目</strong>：你在车站等公交。公交车按泊松过程到站，平均间隔 10 分钟（<span class="arithmatex">\( \lambda = 0.1 \)</span>/分钟）。若公交已运行很久、你在随机时刻到站，你的期望等待时间是多少？平均而言，上一班车是几分钟前开走的？</p>
@@ -8965,7 +8901,6 @@ E[z^{K_i}]=E[(1-p_i+p_iz)^{N_i}]=e^{\lambda_itp_i(z-1)},
 <summary>解答</summary>
 <p><span class="arithmatex">\(s\le t\)</span> 时，<span class="arithmatex">\(N(t)=N(s)+[N(t)-N(s)]\)</span>，后一个增量独立于 <span class="arithmatex">\(N(s)\)</span>，所以 <span class="arithmatex">\(\operatorname{Cov}(N(s),N(t))=\operatorname{Var}(N(s))=\lambda s\)</span>。一般结果为 <span class="arithmatex">\(\lambda\min(s,t)\)</span>。速率 5、时刻 5 与 15 的协方差为 25；不能把两个累计计数误认为独立。</p>
 </details>
-<p><span id="q511"></span></p>
 <h3 id="problem-62dfae969667">Q917 · Poisson 稀释下的宾馆与员工流动<a class="headerlink" href="#problem-62dfae969667" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：泊松过程｜<strong>副题型</strong>：Poisson独立标记与多类人数分布</p>
 <p><strong>题目</strong>：每天有独立 <span class="arithmatex">\(\mathrm{Poisson}(\lambda)\)</span> 位新顾客入住，每位旧顾客次日独立以概率 <span class="arithmatex">\(p\in(0,1]\)</span> 离开。按“旧客离店后新客加入”定义每日人数 <span class="arithmatex">\(X_n\)</span>。求平稳分布、均值递推及其员工流动解释。</p>
@@ -9013,7 +8948,6 @@ E[z^{K_i}]=E[(1-p_i+p_iz)^{N_i}]=e^{\lambda_itp_i(z-1)},
 <p><span class="arithmatex">\(N=N((0,t])\)</span>，<span class="arithmatex">\(M=N((0,t+s])\)</span>，率<span class="arithmatex">\(\lambda\)</span>。<span class="arithmatex">\((a)M|N=n\)</span>等于<span class="arithmatex">\(n+\operatorname{Pois} (\lambda s)\)</span>。(b)联合质量<span class="arithmatex">\(e^{-\lambda (t+s)}(\lambda t)^{n}(\lambda s)^{m-n}/[n!(m-n)!]\)</span>，<span class="arithmatex">\(m\ge n\)</span>。<span class="arithmatex">\((c)N|M=m\sim \operatorname{Bin} (m,t/(t+s))\)</span>。(d)给定总<span class="arithmatex">\(m\)</span>，到达时刻是<span class="arithmatex">\(m\)</span>个独立均匀<span class="arithmatex">\((0,t+s)\)</span>的排序，落入前段的数量便为二项。<span class="arithmatex">\((e)M=N+\)</span>独立增量，所以<span class="arithmatex">\(E NM=\lambda t+\lambda ^{2}t(t+s)\)</span>。<span class="arithmatex">\(t+s=0\)</span>时计数恒0另列。</p>
 <p><span class="arithmatex">\(M=N+Z\)</span>，其中 <span class="arithmatex">\(Z\sim\operatorname{Poisson}(\lambda s)\)</span> 与 <span class="arithmatex">\(N\)</span> 独立。故 <span class="arithmatex">\(E[NM]=EN^2+EN\,EZ=(\lambda t)^2+\lambda t+(\lambda t)(\lambda s)\)</span>，整理即 <span class="arithmatex">\(\lambda t+\lambda^2t(t+s)\)</span>。给定总计数后的二项分布也可用联合PMF除以 <span class="arithmatex">\(P(M=m)\)</span>，所余比例为 <span class="arithmatex">\(t/(t+s)\)</span>。</p>
 </details>
-<p><span id="q513"></span></p>
 <h3 id="problem-199eedfea5be">Q923 · Poisson条件到达的次序统计量<a class="headerlink" href="#problem-199eedfea5be" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：泊松过程｜<strong>副题型</strong>：给定计数后的均匀次序统计量</p>
 <p><strong>题目</strong>：齐次速率 <span class="arithmatex">\(\lambda &gt;0\)</span> 的 Poisson 过程，在 <span class="arithmatex">\([0,t]\)</span> 内已知共 <span class="arithmatex">\(n\)</span> 次到达，求有序到达时刻联合密度及第 <span class="arithmatex">\(j\)</span> 次的边际分布。再比较确定局部可积强度 <span class="arithmatex">\(\lambda (u)\)</span> 的非齐次模型，设 <span class="arithmatex">\(\Lambda (t)=\int _{0}^{t}\lambda (u)du&gt;0\)</span>，求计数、首达和给定计数后的到达时刻分布。</p>
@@ -9044,7 +8978,6 @@ f_{T_j\mid N(t)=n}(s)=\frac{n!}{(j-1)!(n-j)!}\frac{s^{j-1}(t-s)^{n-j}}{t^n},\qua
 <p><span class="arithmatex">\(U\sim U(0,10)\)</span>、<span class="arithmatex">\(E\sim \operatorname{Expo} (1/10)\)</span>独立。随机班次先到概率<span class="arithmatex">\(P(E&lt;U)=\mathbb{E} [1-e^{-U/10}]=e^{-1}\)</span>。总等待<span class="arithmatex">\(W=\min (U,E)\)</span>，<span class="arithmatex">\(0\le t\le 10\)</span>时生存函数<span class="arithmatex">\((1-t/10)e^{-t/10}\)</span>，所以CDF为1减该式；<span class="arithmatex">\(t&lt;0\)</span>为0，<span class="arithmatex">\(t\ge 10\)</span>为1。</p>
 <p>条件于固定班车余时 <span class="arithmatex">\(U=u\)</span>，随机车先到概率为 <span class="arithmatex">\(1-e^{-u/10}\)</span>。对 <span class="arithmatex">\(u\in(0,10)\)</span> 均匀积分，<span class="arithmatex">\(P(E&lt;U)=1-(1/10)\int_0^{10}e^{-u/10}du=1-(1-e^{-1})=e^{-1}\)</span>。等待超过 <span class="arithmatex">\(t\)</span> 要求两线路都未到，独立性给 <span class="arithmatex">\(P(W&gt;t)=P(U&gt;t)P(E&gt;t)\)</span>，于是得到所列生存函数。</p>
 </details>
-<p><span id="problem-05e2a382af83"></span></p>
 <h3 id="problem-e796b5b4d984">Q926 · Gamma 观察窗的 Poisson 计数与负二项竞赛<a class="headerlink" href="#problem-e796b5b4d984" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：泊松过程｜<strong>副题型</strong>：Poisson–Gamma混合与标记流竞争</p>
 <p><strong>题目</strong>：率 <span class="arithmatex">\(\lambda&gt;0\)</span> 的 Poisson 过程独立于 <span class="arithmatex">\(T\sim\operatorname{Gamma}(r,\nu)\)</span>，<span class="arithmatex">\(r\ge1\)</span> 为整数、<span class="arithmatex">\(\nu&gt;0\)</span> 为速率。</p>
@@ -9157,7 +9090,6 @@ f_L(w)=\frac{w f_T(w)}{ET}=\mu^2w e^{-\mu w},\quad w&gt;0,
 </details>
 <h2 id="sec-连续时间链与生灭过程">连续时间链与生灭过程<a class="headerlink" href="#sec-连续时间链与生灭过程" title="Permanent link">&para;</a></h2>
 <p>从转移率写生成元；区分嵌入链的访问比例与按真实时间计算的平稳比例。</p>
-<p><span id="q517"></span></p>
 <h3 id="problem-e1e46cbbbe0d">Q933 · Yule纯生种群的分布<a class="headerlink" href="#problem-e1e46cbbbe0d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：纯生前向方程与几何分布</p>
 <p><strong>题目</strong>：初始一个个体，每个个体独立以速率 <span class="arithmatex">\(\beta &gt;0\)</span> 生育，个体不死亡。求时刻 <span class="arithmatex">\(t\)</span> 的人口分布与均值。</p>
@@ -9205,7 +9137,6 @@ m_Y(t)=y_0e^{-\nu t}+\lambda(1-p)x_0\frac{e^{at}-e^{-\nu t}}{a+\nu},\quad a+\nu\
 <p>边界为 <span class="arithmatex">\(u_{0}=0\)</span>、<span class="arithmatex">\(u_{N}=1\)</span>，<span class="arithmatex">\(w_{0}=w_{N}=0\)</span>；有限正速率模型吸收均时有限，方程有唯一有限解。</p>
 <p>从内部 <span class="arithmatex">\(i\)</span> 出发，先等一个速率 <span class="arithmatex">\(r_i\)</span> 的指数时钟，均值 <span class="arithmatex">\(1/r_i\)</span>，再以 <span class="arithmatex">\(\lambda_i/r_i\)</span> 上跳、<span class="arithmatex">\(\mu_i/r_i\)</span> 下跳。命中方向不受等待时长影响，故概率方程右侧无额外项；时间方程必须加 <span class="arithmatex">\(1/r_i\)</span>。乘 <span class="arithmatex">\(r_i\)</span> 得生成元形式 <span class="arithmatex">\(\lambda_i(u_{i+1}-u_i)+\mu_i(u_{i-1}-u_i)=0\)</span>、<span class="arithmatex">\(\lambda_i(w_{i+1}-w_i)+\mu_i(w_{i-1}-w_i)=-1\)</span>。</p>
 </details>
-<p><span id="q514"></span></p>
 <h3 id="problem-5bb29e0d4511">Q937 · CTMC 生成元、嵌入链与两状态协方差<a class="headerlink" href="#problem-5bb29e0d4511" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：生成元首步方程与两状态协方差</p>
 <p><strong>题目</strong>：给出有限 CTMC 的生成元、前后向方程及嵌入链。对 <span class="arithmatex">\(Q=\begin{pmatrix}-\lambda&amp;\lambda\\\mu&amp;-\mu\end{pmatrix}\)</span>，求转移概率及平稳时的协方差。</p>
@@ -9215,7 +9146,6 @@ m_Y(t)=y_0e^{-\nu t}+\lambda(1-p)x_0\frac{e^{at}-e^{-\nu t}}{a+\nu},\quad a+\nu\
 <p>对两状态链，令 <span class="arithmatex">\(a(t)=P(X_t=1\mid X_0=i)\)</span>，流入率 <span class="arithmatex">\(\lambda(1-a)\)</span>、流出率 <span class="arithmatex">\(\mu a\)</span>，所以 <span class="arithmatex">\(a'=\lambda-(\lambda+\mu)a\)</span>。解为 <span class="arithmatex">\(a(t)=\pi_1+(i-\pi_1)e^{-(\lambda+\mu)t}\)</span>，分别取 <span class="arithmatex">\(i=0,1\)</span> 得两行。平稳方差是 <span class="arithmatex">\(\pi_1(1-\pi_1)\)</span>，再把条件均值中的衰减系数提出协方差，得到所列指数相关。</p>
 <p>这里两状态按0、1编码，并取 <span class="arithmatex">\(\lambda,\mu&gt;0\)</span>。一般CTMC若 <span class="arithmatex">\(q_{ii}=0\)</span>，则i为吸收态、停留时间为无穷，嵌入链可约定 <span class="arithmatex">\(P_{ii}=1\)</span>，不再使用除以 <span class="arithmatex">\(-q_{ii}\)</span> 的公式。非吸收态的指数率和跳后方向由小时间概率 <span class="arithmatex">\(P(X_h=j\mid X_0=i)=q_{ij}h+o(h)\)</span> 导出：离开总率为 <span class="arithmatex">\(-q_{ii}\)</span>，各方向按其占总率的比例分配。</p>
 </details>
-<p><span id="q515"></span></p>
 <h3 id="problem-e524c52e693c">Q938 · 维修工状态扩充与生灭合并<a class="headerlink" href="#problem-e524c52e693c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：维修服务阶段扩充与可合并条件</p>
 <p><strong>题目</strong>：两台机器独立失效率 <span class="arithmatex">\(\lambda_1,\lambda_2\)</span>、修复率 <span class="arithmatex">\(\mu_1,\mu_2\)</span>。分别对独立修理工和单名 FCFS 修理工建模，并说明何时能仅记录坏机器台数。</p>
@@ -9227,7 +9157,6 @@ Q=\begin{pmatrix}-\lambda_1-\lambda_2&amp;\lambda_1&amp;\lambda_2&amp;0\\\mu_1&a
 \]</div>
 <p>单名 FCFS 修理工时，将 11 拆成“修 1、2 排队”和“修 2、1 排队”，共五状态；前者以 <span class="arithmatex">\(\mu_1\)</span> 转到 01，后者以 <span class="arithmatex">\(\mu_2\)</span> 转到 10。两机相同 <span class="arithmatex">\(\lambda_i=\lambda,\mu_i=\mu\)</span> 时，坏机数可合并：生率为 <span class="arithmatex">\((2-k)\lambda\)</span>；单修理工灭率 <span class="arithmatex">\(\mu\mathbf1_{k&gt;0}\)</span>，双修理工灭率 <span class="arithmatex">\(k\mu\)</span>。需检查同一合并块内各状态流向其他块的总速率相同，不能仅凭状态数少就合并。</p>
 </details>
-<p><span id="q516"></span></p>
 <h3 id="problem-17c87ec1eef4">Q939 · 生灭平稳分布、灭绝与首次死亡<a class="headerlink" href="#problem-17c87ec1eef4" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：生灭详细平衡、灭绝根与首次事件</p>
 <p><strong>题目</strong>：生灭率为 <span class="arithmatex">\(\lambda_i,\mu_i\)</span>。求平稳分布的通式；对线性分枝 <span class="arithmatex">\(\lambda_i=i\lambda,\mu_i=i\mu\)</span>，求从 <span class="arithmatex">\(m\)</span> 个个体出发的灭绝概率，以及首次死亡前和死亡后的人口数分布。 首次死亡的人口分布从一个个体开始，假设 <span class="arithmatex">\(\lambda\)</span>、<span class="arithmatex">\(\mu\)</span> 均正，并求死亡前后的期望。</p>
@@ -9240,7 +9169,6 @@ u=\frac\mu{\lambda+\mu}+\frac\lambda{\lambda+\mu}u^2,
 \]</div>
 <p>根为1与 <span class="arithmatex">\(\mu/\lambda\)</span>。从有限代灭绝事件的概率迭代，从0开始单调上升，极限才是最小 <span class="arithmatex">\([0,1]\)</span> 根；从 <span class="arithmatex">\(m\)</span> 个独立谱系出发便为 <span class="arithmatex">\(u^m\)</span>。首次死亡之前，在人口 <span class="arithmatex">\(j\)</span> 时出生和死亡率同乘 <span class="arithmatex">\(j\)</span>，下一事件类型的出生概率仍为 <span class="arithmatex">\(\lambda/(\lambda+\mu)\)</span>，所以此前出生数为几何失败数，推出上述 <span class="arithmatex">\(K\)</span> 分布，不能将增长的人口误当成改变事件类型概率。</p>
 </details>
-<p><span id="q512"></span></p>
 <h3 id="problem-6b37d95ae2c3">Q940 · 固定重传概率的 Aloha 不稳定性<a class="headerlink" href="#problem-6b37d95ae2c3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：大积压漂移与固定重传失稳</p>
 <p><strong>题目</strong>：每时隙新报文数 <span class="arithmatex">\(i.i.d\)</span>.，分布 <span class="arithmatex">\(a_j\)</span>，<span class="arithmatex">\(a_0+a_1&lt;1\)</span>；新报文立即尝试发送，积压报文各自以固定 <span class="arithmatex">\(p\in(0,1)\)</span> 尝试。总尝试数恰为 1 才成功。说明为何成功吞吐随大积压衰减，并证明几乎必然只有有限次成功。</p>
@@ -9269,9 +9197,6 @@ E_x\sum_{n&lt;\tau}V(X_n)\le V(x)/(1-r)&lt;\infty.
 </details>
 <h2 id="sec-更新方程-长度偏倚与更新报酬">更新方程与长度偏倚<a class="headerlink" href="#sec-更新方程-长度偏倚与更新报酬" title="Permanent link">&para;</a></h2>
 <p>正步长的命中率满足更新方程；随机时刻落入的间隔按长度加权，年龄与剩余寿命由周期面积计算。</p>
-<p><span id="q528"></span>
-<span id="problem-6c0865f73197"></span>
-<span id="problem-renewal-hit-die-sum"></span></p>
 <h3 id="problem-forward-one-two">Q941 · 正整数步长的命中更新方程与均匀步长通法<a class="headerlink" href="#problem-forward-one-two" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：更新过程｜<strong>副题型</strong>：最后一步更新、均匀步长初值与生成函数极点</p>
 <p><strong>题目</strong>：从0出发，每步独立增加一个正整数，步长概率为 <span class="arithmatex">\(p_j\)</span>。令<span class="arithmatex">\(u_n\)</span>为累计和曾恰好等于<span class="arithmatex">\(n\)</span>的概率。</p>
@@ -9310,7 +9235,6 @@ u_k=\frac23+\frac13(-1/2)^k.
 \]</div>
 <p>正偶数<span class="arithmatex">\(k\)</span>从上方递减到<span class="arithmatex">\(2/3\)</span>，正奇数从下方递增，故正整数目标中的最大值为 <span class="arithmatex">\(u_2=3/4\)</span>。</p>
 </details>
-<p><span id="q522"></span></p>
 <h3 id="problem-327e90373cd1">Q942 · 更新方程、Gamma 间隔与混合指数<a class="headerlink" href="#problem-327e90373cd1" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：更新过程｜<strong>副题型</strong>：更新卷积方程、Laplace变换与反演</p>
 <p><strong>题目</strong>：令 <span class="arithmatex">\(i.i.d\)</span>. 正间隔分布为 <span class="arithmatex">\(F\)</span>，<span class="arithmatex">\(S_n=\sum_{i=1}^nX_i,N(t)=\max\{n:S_n\le t\}\)</span>。推导更新函数。分别求整数形状 <span class="arithmatex">\(\Gamma(r,\lambda)\)</span> 间隔的计数尾概率，以及混合指数间隔的更新函数。 Gamma 的第二参数 <span class="arithmatex">\(\lambda &gt;0\)</span> 为速率、<span class="arithmatex">\(r\)</span> 为正整数。混合指数指生存函数 <span class="arithmatex">\(p e^{-at}+(1-p)e^{-bt}\)</span>，<span class="arithmatex">\(0&lt;p&lt;1\)</span>、<span class="arithmatex">\(a,b&gt;0\)</span>；每个间隔独立重选混合类型。</p>
@@ -9348,8 +9272,6 @@ u_k=\frac23+\frac13(-1/2)^k.
 <p>无限长纱线被独立长度<span class="arithmatex">\(L\)</span>分割，固定独立随机位置的标记落入的段<span class="arithmatex">\(R\)</span>按长度加权，<span class="arithmatex">\(f_{R}(l)=l f_{L}(l)/\mathbb{E} L\)</span>，故<span class="arithmatex">\(\mathbb{E} R=\mathbb{E} L^{2}/\mathbb{E} L\)</span>。<span class="arithmatex">\((a)\operatorname{Expo} (\lambda )\)</span>给<span class="arithmatex">\(2/\lambda\)</span>；<span class="arithmatex">\((b)\operatorname{Gamma} (3,\lambda )\)</span>给<span class="arithmatex">\(4/\lambda\)</span>；<span class="arithmatex">\((c)f_{L}(l)=l e^{l}\)</span>，<span class="arithmatex">\(0\le l\le 1\)</span>，已归一化，<span class="arithmatex">\(\mathbb{E} L=e-2\)</span>、<span class="arithmatex">\(\mathbb{E} L^{2}=6-2e\)</span>，所以<span class="arithmatex">\(\mathbb{E} R=(6-2e)/(e-2)\)</span>。假设取标记的平稳空间位置，不能把首段长度当长度偏差分布。</p>
 <p>最后一个密度的归一化为 <span class="arithmatex">\(\int_0^1le^l dl=[(l-1)e^l]_0^1=1\)</span>。均长 <span class="arithmatex">\(\int_0^1l^2e^l dl=[e^l(l^2-2l+2)]_0^1=e-2\)</span>；二阶矩 <span class="arithmatex">\(\int_0^1l^3e^l dl=[e^l(l^3-3l^2+6l-6)]_0^1=6-2e\)</span>。代入长度加权的矩比即得到答案，每一步使用的都是普通间隔分布的矩。</p>
 </details>
-<p><span id="q523"></span>
-<span id="problem-ee8b19ecac5e"></span></p>
 <h3 id="problem-d60b5a74d90f">Q946 · 平稳更新观察的年龄、余寿、Gamma长度偏倚与初始化<a class="headerlink" href="#problem-d60b5a74d90f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：更新过程｜<strong>副题型</strong>：周期观察面积、Gamma长度加权与平衡初始化</p>
 <p><strong>题目</strong>：独立正更新间隔X服从F，有限均值<span class="arithmatex">\(m&gt;0\)</span>；在非算术条件或适当随机相位下观察平稳更新过程。</p>
@@ -9405,7 +9327,6 @@ E L_t=\frac{2-e^{-\eta t}}\eta,
 <p>半马尔可夫模型若嵌入链平稳概率为 <span class="arithmatex">\(\nu_i\)</span>，每次访问状态 <span class="arithmatex">\(i\)</span> 的平均逗留时间为 <span class="arithmatex">\(m_i\)</span>，则时间占比为 <span class="arithmatex">\(\nu_im_i/\sum_j\nu_jm_j\)</span>。例如出租车路线选择概率决定嵌入链，等客/行车时长决定时间权重。</p>
 <p>按访问次数计长期比例为 <span class="arithmatex">\(\nu _{i}\)</span>，每次访问又平均贡献 <span class="arithmatex">\(m_{i}\)</span> 时间，故累计停留量按 <span class="arithmatex">\(\nu _{i}m_{i}\)</span> 归一化。</p>
 </details>
-<p><span id="q524"></span></p>
 <h3 id="problem-d5b3f8016559">Q948 · 理赔后重置的长期保费<a class="headerlink" href="#problem-d5b3f8016559" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：更新过程｜<strong>副题型</strong>：理赔重置的离散更新报酬</p>
 <p><strong>题目</strong>：理赔为速率 <span class="arithmatex">\(\lambda&gt;0\)</span> 的 Poisson 过程。理赔后费率为 <span class="arithmatex">\(r_1\)</span>，连续 <span class="arithmatex">\(s&gt;0\)</span> 无理赔后降为 <span class="arithmatex">\(r_0&lt;r_1\)</span>。求长期平均费率及连续高、低费率阶段的平均时长。</p>
@@ -9448,7 +9369,6 @@ E[R]=\int_0^T[1+\mu(T-x)]\lambda e^{-\lambda x}dx
 \]</div>
 <p><span class="arithmatex">\(T=0\)</span> 时没有修复、费用率为 <span class="arithmatex">\(C\lambda\)</span>，与“首次故障就买新车”的边界一致；最后导致换车的故障不计入修复次数。</p>
 </details>
-<p><span id="q525"></span></p>
 <h3 id="problem-bd318b155f6d">Q951 · 依年龄替换的更新周期<a class="headerlink" href="#problem-bd318b155f6d" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：更新过程｜<strong>副题型</strong>：年龄替换的截尾寿命积分与费用率</p>
 <p><strong>题目</strong>：寿命 <span class="arithmatex">\(T\)</span> 为正整数，<span class="arithmatex">\(P(T=k)=a_k\)</span>，失效即换新。写年龄链的转移；若存活到整数 <span class="arithmatex">\(N\)</span> 也换新，求平均周期。再对连续寿命分布 <span class="arithmatex">\(F\)</span>，失效替换费 <span class="arithmatex">\(C_f\)</span>、计划替换费 <span class="arithmatex">\(C_p\)</span>，求年龄阈值 <span class="arithmatex">\(t\)</span> 的长期费用率。</p>
@@ -9485,7 +9405,6 @@ g(t)=\frac{C_fF(t)+C_p\bar F(t)}{\int_0^t\bar F(u)du}.
 <p>两人已在各窗口接受独立<span class="arithmatex">\(\operatorname{Expo} (\lambda )\)</span>服务，Alice排下一位。残余服务仍独立<span class="arithmatex">\(\operatorname{Expo} (\lambda )\)</span>，等待首个结束均值<span class="arithmatex">\(1/(2\lambda )\)</span>；Alice自身服务均值<span class="arithmatex">\(1/\lambda\)</span>，总停留均值<span class="arithmatex">\(3/(2\lambda )\)</span>。开始服务时另一旧客残余与Alice服务同分布、独立，所以Alice最后离开概率<span class="arithmatex">\(1/2\)</span>。</p>
 <p>独立指数的最小值率相加，<span class="arithmatex">\(P(\min(S_1,S_2)&gt;t)=e^{-\lambda t}e^{-\lambda t}=e^{-2\lambda t}\)</span>，所以开始服务前均等待 <span class="arithmatex">\(1/(2\lambda)\)</span>。在该首完成时刻，另一旧客的剩余服务仍为独立率 <span class="arithmatex">\(\lambda\)</span> 指数，Alice的服务也同率独立，无并列，因此二者谁最后离开各半。初始两人中的首位已离开，不会再影响“在三人中最后”事件。</p>
 </details>
-<p><span id="q537"></span></p>
 <h3 id="problem-18d9ce3145a0">Q954 · 两条指数服务线的全部完工<a class="headerlink" href="#problem-18d9ce3145a0" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：双服务器满负载阶段与末项混合</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\ge 2\)</span> 个任务，时刻零两条服务线各启动一个；一旦完成且尚有未开工任务，立即补上，各线每次服务独立 <span class="arithmatex">\(\operatorname{Expo} (\mu _{1})\)</span>、<span class="arithmatex">\(\operatorname{Expo} (\mu _{2})\)</span>。求全部完工时间均值、方差。</p>
@@ -9494,7 +9413,6 @@ g(t)=\frac{C_fF(t)+C_p\bar F(t)}{\int_0^t\bar F(u)du}.
 <p>（<span class="arithmatex">\(a\)</span>）令 <span class="arithmatex">\(L=\mu_1+\mu_2\)</span>，前 <span class="arithmatex">\(n-1\)</span> 次完成间隔独立 <span class="arithmatex">\(Y_j\sim\mathrm{Exp}(L)\)</span>。最后剩余 <span class="arithmatex">\(Z\)</span> 以概率 <span class="arithmatex">\(\mu_1/L\)</span> 服 <span class="arithmatex">\(\mathrm{Exp}(\mu_2)\)</span>，以概率 <span class="arithmatex">\(\mu_2/L\)</span> 服 <span class="arithmatex">\(\mathrm{Exp}(\mu_1)\)</span>，且与之前间隔独立。令 <span class="arithmatex">\(z_1=\mu_1/(L\mu_2)+\mu_2/(L\mu_1)\)</span>、<span class="arithmatex">\(z_2=2\mu_1/(L\mu_2^2)+2\mu_2/(L\mu_1^2)\)</span>，则 <span class="arithmatex">\(ET=(n-1)/L+z_1\)</span>，<span class="arithmatex">\(\operatorname{Var}(T)=(n-1)/L^2+z_2-z_1^2\)</span>。同速 <span class="arithmatex">\(\mu\)</span> 时 <span class="arithmatex">\(ET=(n+1)/(2\mu)\)</span>，方差 <span class="arithmatex">\((n+3)/(4\mu^2)\)</span>。</p>
 <p>前 <span class="arithmatex">\(n-2\)</span> 次完成后立即补新任务，系统仍有两项在做；第 <span class="arithmatex">\(n-1\)</span> 次完成后只剩最后一项。每次两条独立指数时钟的最小值服从 <span class="arithmatex">\(\operatorname{Expo}(L)\)</span>，且最小值与获胜时钟的身份独立。未完成任务的残余服务时间仍为原指数分布，因此这些满负载间隔可逐次重启为独立变量。第 <span class="arithmatex">\(n-1\)</span> 次由1线完成时留下2线任务，反之亦然，产生解答中的两点混合。全期望给 <span class="arithmatex">\(EZ=z_1\)</span>，全方差或二阶矩给 <span class="arithmatex">\(\operatorname{Var}Z=z_2-z_1^2\)</span>，最后利用与先前间隔的独立性相加。</p>
 </details>
-<p><span id="q536"></span></p>
 <h3 id="problem-0ce3de3c27b8">Q955 · 三个指数任务的双处理器最优调度<a class="headerlink" href="#problem-0ce3de3c27b8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：指数竞赛后的剩余任务与调度交换</p>
 <p><strong>题目</strong>：三个独立任务服务时间 <span class="arithmatex">\(\mathrm{Exp}(\mu_i)\)</span>，<span class="arithmatex">\(\mu_1&lt;\mu_2&lt;\mu_3\)</span>。两台相同处理器、不可抢占，先启动两个，任一完成后启动第三个。应先启动哪两个以最小化平均全部完工时间？</p>
@@ -9538,7 +9456,6 @@ P(V_i&gt;u)=\frac{\nu_i e^{-\lambda_i u}-\lambda_i e^{-\nu_i u}}{\nu_i-\lambda_i
 \]</div>
 <p>若某对参数相等，取上述连续极限即可；也可直接使用 <span class="arithmatex">\(P(V_i&gt;u)=e^{-\lambda_i u}(1+\lambda_i u)\)</span>，再用 <span class="arithmatex">\(\int_0^\infty u^ke^{-cu}du=k!/c^{k+1}\)</span> 计算。这样等率情形也不会出现除以零。</p>
 </details>
-<p><span id="q518"></span></p>
 <h3 id="problem-6e2ec2981a89">Q957 · <span class="arithmatex">\(M/M/1\)</span>、多服务台与 Erlang 损失制<a class="headerlink" href="#problem-6e2ec2981a89" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：生灭平衡、Erlang归一化与Little公式</p>
 <p><strong>题目</strong>：顾客按率 <span class="arithmatex">\(\lambda&gt;0\)</span> 的Poisson流到达，每名服务员的独立服务时间服从 <span class="arithmatex">\(\operatorname{Expo}(\mu)\)</span>。</p>
@@ -9578,7 +9495,6 @@ W=\frac L\lambda=\frac1{\mu-\lambda}.
 <p>外部到达为独立Poisson流，PASTA使到达者见到满员的比例为 <span class="arithmatex">\(\pi_c\)</span>，因此拒绝率为 <span class="arithmatex">\(\pi_c\)</span>，有效进入率为 <span class="arithmatex">\(\lambda_{\rm eff}=\lambda(1-\pi_c)\)</span>。每位获准进入者无须排队，平均逗留 <span class="arithmatex">\(1/\mu\)</span>，所以 <span class="arithmatex">\(L=\lambda_{\rm eff}/\mu\)</span>。</p>
 <p>Little公式 <span class="arithmatex">\(L=\lambda_{\rm eff}W\)</span> 计算的是同一类顾客在同一系统边界内的人数与逗留。只算队列时则用 <span class="arithmatex">\(L_q=\lambda_{\rm eff}W_q\)</span>；允许无限等待的稳定系统没有拒绝，<span class="arithmatex">\(\lambda_{\rm eff}=\lambda\)</span>，而损失制须使用获准进入率。</p>
 </details>
-<p><span id="q520"></span></p>
 <h3 id="problem-f9dceb16280f">Q958 · 单服务台顾客离开后人数<a class="headerlink" href="#problem-f9dceb16280f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：指数服务窗的Poisson混合与PGF</p>
 <p><strong>题目</strong>：FCFS 单服务台，外到达为率 <span class="arithmatex">\(\lambda &gt;0\)</span> 的 Poisson 流，每次服务独立 <span class="arithmatex">\(\operatorname{Expo} (\mu )\)</span>，<span class="arithmatex">\(\mu &gt;0\)</span>。指定顾客到达时前方有 <span class="arithmatex">\(n-1\)</span> 人、<span class="arithmatex">\(n\ge 1\)</span>，当前服务余时服同速指数。求该顾客离开瞬间留下的顾客数分布与均值。</p>
@@ -9587,7 +9503,6 @@ W=\frac L\lambda=\frac1{\mu-\lambda}.
 <p>该顾客逗留时间 <span class="arithmatex">\(T\sim\Gamma(n,\mu)\)</span>，与后来到达独立。FCFS 保证后来者在他离开前都不能接受服务；<span class="arithmatex">\(X\mid T=t\sim\mathrm{Poisson}(\lambda t)\)</span>。混合后 <span class="arithmatex">\(P(X=k)=\binom{k+n-1}{k}(\mu/(\lambda+\mu))^n(\lambda/(\lambda+\mu))^k\)</span>，<span class="arithmatex">\(EX=n\lambda/\mu\)</span>。</p>
 <p>该顾客需等前方 <span class="arithmatex">\(n-1\)</span> 个指数服务再完成自己一个，所以总时长为 <span class="arithmatex">\(n\)</span> 个独立率 <span class="arithmatex">\(\mu\)</span> 指数之和。给定时长 <span class="arithmatex">\(t\)</span>，后来者数量为 <span class="arithmatex">\(\operatorname{Poisson}(\lambda t)\)</span>。积分混合 <span class="arithmatex">\(\int_0^\infty e^{-\lambda t}(\lambda t)^k/k!\cdot\mu^nt^{n-1}e^{-\mu t}/(n-1)!dt\)</span>，Gamma积分给所列负二项PMF；均值也由 <span class="arithmatex">\(EX=\lambda ET=\lambda n/\mu\)</span> 得到。无需系统预先平稳，这个结论由到达时的确定前方人数决定。</p>
 </details>
-<p><span id="q521"></span></p>
 <h3 id="problem-ad1448f66641">Q959 · 固定批量到达的平均逗留<a class="headerlink" href="#problem-ad1448f66641" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：批内位置平均、Little公式与批量队列</p>
 <p><strong>题目</strong>：每批恰 <span class="arithmatex">\(K\ge 1\)</span> 人，批次按率 <span class="arithmatex">\(\lambda &gt;0\)</span> 的 Poisson 流到达，单服务台 FCFS、同批内部顺序固定，每人服务独立 <span class="arithmatex">\(\operatorname{Expo} (\mu )\)</span>。求稳定条件和从长期到达顾客均匀抽一人的平均逗留时间。</p>
@@ -9609,7 +9524,6 @@ v=E[Av]+\operatorname{Var}(Am)=\rho v+\rho(1+\rho)m^2.
 \]</div>
 <p>解得所列均值及方差。<span class="arithmatex">\(\rho&lt;1\)</span> 保证次临界分枝的这两个矩有限；临界时虽可几乎必然结束，均值已发散，超临界还可能永不结束。</p>
 </details>
-<p><span id="q519"></span></p>
 <h3 id="problem-bd1a47f172b2">Q961 · 下一次到达前的服务完成数<a class="headerlink" href="#problem-bd1a47f172b2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：服务完成与下一到达的指数竞争</p>
 <p><strong>题目</strong>：当前 <span class="arithmatex">\(n\)</span> 条线全忙，剩余服务时间独立 <span class="arithmatex">\(\mathrm{Exp}(\mu)\)</span>。下一到达 <span class="arithmatex">\(T\sim\mathrm{Exp}(\lambda)\)</span> 独立。求其到达时仍忙的期望、全闲概率与恰有 <span class="arithmatex">\(i\)</span> 条闲的概率。</p>
@@ -9638,7 +9552,6 @@ P(K=k)=\left[\prod_{j=0}^{k-1}\frac\lambda{\lambda+(j+1)\mu}\right]\frac{(k+1)\m
 \]</div>
 <p>条件于 <span class="arithmatex">\(K=k\)</span>，由指数无记忆性和对称性，首离开者在 <span class="arithmatex">\(k+1\)</span> 人中均匀，初始者先离开的概率为 <span class="arithmatex">\(\sum_{k\ge0}P(K=k)/(k+1)\)</span>。<span class="arithmatex">\(\mu/(\lambda+\mu)\)</span> 仅表示“下一事件是初始者离开、此前无人新到达”，不是初始者最终成为首离开者的全部概率。</p>
 </details>
-<p><span id="q526"></span></p>
 <h3 id="problem-fdf38c20b676">Q963 · 独立卫星系统的数量与忙期<a class="headerlink" href="#problem-fdf38c20b676" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：排队论｜<strong>副题型</strong>：独立开关系统的二项平稳与再生忙期</p>
 <p><strong>题目</strong>：卫星发射为率 <span class="arithmatex">\(\lambda &gt;0\)</span> 的 Poisson 流，寿命独立同分布 <span class="arithmatex">\(F\)</span>、有限均值 <span class="arithmatex">\(m&gt;0\)</span>，与发射独立。从空系统开始，求时刻 <span class="arithmatex">\(t\)</span> 在轨数及平稳在轨数分布；比较零时额外指定一颗新卫星时的数量分布。再求从首次发射到再次空系统的平均忙期。</p>
@@ -9650,8 +9563,6 @@ P(K=k)=\left[\prod_{j=0}^{k-1}\frac\lambda{\lambda+(j+1)\mu}\right]\frac{(k+1)\m
 </details>
 <h2 id="sec-分枝过程与灭绝概率">分枝过程与灭绝概率<a class="headerlink" href="#sec-分枝过程与灭绝概率" title="Permanent link">&para;</a></h2>
 <p>用后代生成函数建立不动点，迭代选取最小非负解；带预算的路径事件需要扩充后代状态。</p>
-<p><span id="q181"></span>
-<span id="problem-2917b94d7cba"></span></p>
 <h3 id="problem-c88cecc0b380">Q964 · Galton–Watson 灭绝概率的最小不动点<a class="headerlink" href="#problem-c88cecc0b380" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：分枝过程｜<strong>副题型</strong>：后代PGF迭代、最小不动点与独立祖先</p>
 <p><strong>题目</strong>：Galton–Watson 过程从一个个体开始，每个个体独立产生后代数 <span class="arithmatex">\(Z\)</span>，PGF为 <span class="arithmatex">\(f(s)=E[s^Z]\)</span>。</p>
@@ -9691,10 +9602,6 @@ b_j=p[1-(1-b_j)^2]+(1-p)[1-(1-b_{j-1})^2].
 </details>
 <h2 id="sec-强化抽样与比例过程">强化抽样与比例过程<a class="headerlink" href="#sec-强化抽样与比例过程" title="Permanent link">&para;</a></h2>
 <p>从有序路径概率推导交换性和Beta混合，再分析比例鞅与后续分布。</p>
-<p><span id="q184"></span>
-<span id="q551"></span>
-<span id="problem-73122f70e5cd"></span>
-<span id="problem-2375948fadbb"></span></p>
 <h3 id="problem-ac4d499ea6c7">Q966 · Pólya 强化的分布、比例鞅与较小份额<a class="headerlink" href="#problem-ac4d499ea6c7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：强化抽样｜<strong>副题型</strong>：Pólya路径交换性、Beta混合与比例鞅</p>
 <p><strong>题目</strong>：两类初始权重 <span class="arithmatex">\(a,b&gt;0\)</span>，每次按当前权重比例抽一类，并给抽中类加1，独立随机源按此条件概率产生。令 <span class="arithmatex">\(K_n\)</span> 为之后 <span class="arithmatex">\(n\)</span> 次中第一类次数。</p>
@@ -9721,8 +9628,6 @@ E\min(J,N-J)=\frac{\lfloor N^2/4\rfloor}{N-1}\sim\frac N4.
 </details>
 <h2 id="sec-集齐-覆盖与随机下降">首次重复、集齐与随机下降<a class="headerlink" href="#sec-集齐-覆盖与随机下降" title="Permanent link">&para;</a></h2>
 <p>收集模型按新类型阶段分解；批量抽样用缺失数递推，均匀下降用访问纪录指标。</p>
-<p><span id="q534"></span>
-<span id="problem-33d704ebb231"></span></p>
 <h3 id="problem-2f582391990e">Q967 · 首次重复的精确分布<a class="headerlink" href="#problem-2f582391990e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：全异前缀尾概率与首次重复分布</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(N\)</span> 个标签独立有放回均匀抽样，首次遇到旧标签时停止，求包含重复当次的 <span class="arithmatex">\(T\)</span> 的 PMF、均值有限和，并计算 <span class="arithmatex">\(N=6\)</span>。</p>
@@ -9739,7 +9644,6 @@ P(T=t)=\frac{(N)_{t-1}}{N^{t-1}}\frac{t-1}N
 \]</div>
 <p>尾和公式给 <span class="arithmatex">\(ET=\sum_{k=0}^N(N)_k/N^k\)</span>。<span class="arithmatex">\(N=6\)</span> 时各尾概率为 <span class="arithmatex">\(1,1,5/6,5/9,5/18,5/54,5/324\)</span>，相加 <span class="arithmatex">\(1223/324\)</span>。此处任一旧点数再出现即停，与等待一个全异滑动窗口或相邻重复都不同。</p>
 </details>
-<p><span id="problem-7a30222023dc"></span></p>
 <h3 id="problem-67c0335718f5">Q968 · 逐次染色的纯死亡链与部分集齐<a class="headerlink" href="#problem-67c0335718f5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：纯死亡计数链与独立几何阶段</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(n\)</span> 个位置中最初有 <span class="arithmatex">\(r\le n\)</span> 个为红色，每次独立均匀选一处涂蓝；也可把位置理解为池中绿鱼，抓到后染蓝再放回。令 <span class="arithmatex">\(X_t\)</span> 为仍未变蓝的位置数，<span class="arithmatex">\(T\)</span> 为首次全蓝的步数。</p>
@@ -9769,9 +9673,6 @@ ET=nH_r,\qquad
 <p>完全图有 <span class="arithmatex">\(m\)</span> 个节点并允许走向自身，从初始已访问一个节点开始，覆盖全图的均时为 <span class="arithmatex">\(mH_{m-1}\)</span>；<span class="arithmatex">\(m=10\)</span> 约 28 步。若 <span class="arithmatex">\(m\)</span> 个节点不许自环，则已见 <span class="arithmatex">\(k\)</span> 个时获得新节点概率 <span class="arithmatex">\((m-k)/(m-1)\)</span>，均时为 <span class="arithmatex">\((m-1)H_{m-1}\)</span>；<span class="arithmatex">\(m=11\)</span> 约 29 步。初始节点已访问，不能把从空集开始的 <span class="arithmatex">\(mH_{m}\)</span> 直接用来计步。</p>
 <p>允许自环时，已有 <span class="arithmatex">\(k\)</span> 个点被访问后，下步新点概率 <span class="arithmatex">\((m-k)/m\)</span>，所以从初始已有1点起的均时 <span class="arithmatex">\(\sum_{k=1}^{m-1}m/(m-k)=mH_{m-1}\)</span>。禁自环时下一点从除当前点外的 <span class="arithmatex">\(m-1\)</span> 点中均匀选，新点数仍为 <span class="arithmatex">\(m-k\)</span>，因此分子改成 <span class="arithmatex">\(m-1\)</span>。<span class="arithmatex">\(m=10\)</span> 允许自环时约28.2897步，<span class="arithmatex">\(m=11\)</span> 禁自环时约29.2897步，四舍五入为28与29。</p>
 </details>
-<p><span id="q154"></span>
-<span id="problem-aef8bd9108c6"></span>
-<span id="problem-cf54600b9b4c"></span></p>
 <h3 id="problem-cba917b27288">Q970 · 均匀集齐的阶段等待、方差与渐近<a class="headerlink" href="#problem-cba917b27288" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：期望与线性性｜<strong>副题型</strong>：独立几何收集阶段与调和矩渐近</p>
 <p><strong>题目</strong>：独立有放回均匀抽取 <span class="arithmatex">\(N\ge1\)</span> 种标签，直到全部出现，令总抽数为 <span class="arithmatex">\(T\)</span>。</p>
@@ -9834,9 +9735,6 @@ ER=\sum_{j=1}^6\frac{(-1)^{j+1}\binom6j}{1-[(6-j)/6]^2}.
 <p>两个均值分别为 <span class="arithmatex">\(70219/9240\)</span> 与 <span class="arithmatex">\(1138371587/63303240\)</span>。</p>
 <p>一般共同覆盖轮数 <span class="arithmatex">\(R\)</span> 满足 <span class="arithmatex">\(R&gt;t\iff T&gt;2t\)</span>。对任意指定缺失的 <span class="arithmatex">\(j\)</span> 类，两枚骰 <span class="arithmatex">\(t\)</span> 轮全避开它们的概率为 <span class="arithmatex">\(q_j^{2t}\)</span>，容斥后对 <span class="arithmatex">\(t\ge0\)</span> 作几何求和得第一式。各自覆盖时，<span class="arithmatex">\(P(\max(T_1,T_2)&gt;t)=2P(T&gt;t)-P(T&gt;t)^2\)</span>，其中 <span class="arithmatex">\(P(T&gt;t)=\sum_jc_jq_j^t\)</span>；平方展开再逐项几何求和得到第二式，保留了两个独立收集过程的等待最大值。</p>
 </details>
-<p><span id="q192"></span>
-<span id="problem-d4342b2336b1"></span>
-<span id="problem-a7b181db52b1"></span></p>
 <h3 id="problem-506f1299a656">Q974 · 均匀下降链的调和均时、访问指标与方差<a class="headerlink" href="#problem-506f1299a656" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：随机游走｜<strong>副题型</strong>：首步差分、纪录指标独立性与调和和</p>
 <p><strong>题目</strong>：从 <span class="arithmatex">\(n\ge1\)</span> 出发，状态 <span class="arithmatex">\(i&gt;1\)</span> 时下一状态均匀于 <span class="arithmatex">\(1,\ldots,i-1\)</span>，直到1；记转移次数为 <span class="arithmatex">\(T\)</span>。</p>
@@ -9879,9 +9777,7 @@ f(x)=x(1-x)+\int_0^x f(u)du.
 <strong>方法</strong>：等待时间只靠相对顺序，支付的数值分布须另按当前最小值列积分方程。</p>
 </details>
 <h2 id="sec-动态规划-最优停止与-MDP">动态规划、最优停止与MDP<a class="headerlink" href="#sec-动态规划-最优停止与-MDP" title="Permanent link">&para;</a></h2>
-<p><span id="sec-三动态规划与最优停止"></span></p>
 <p>以完整决策状态比较立即停止与继续的价值，有限状态倒推，折扣问题还可用占用度表示。</p>
-<p><span id="problem-d58d68a5d9cc"></span></p>
 <h3 id="problem-8934c81cf47c">Q976 · 红黑加减分的最优停止<a class="headerlink" href="#problem-8934c81cf47c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：马尔可夫链｜<strong>副题型</strong>：剩余红黑牌计数与Bellman停止比较</p>
 <p><strong>题目</strong>：红黑牌各四张均匀洗牌，红加一、黑减一，不放回逐张翻，允许任意时刻停止，求起始最优收益与递推策略。再计算两红三黑的初始价值。</p>
@@ -9905,7 +9801,6 @@ f(x)=x(1-x)+\int_0^x f(u)du.
 <p>每个状态只依赖更少的牌，所以倒推覆盖全部可用策略，证明给出的策略最优；<span class="arithmatex">\(F(r,b)\)</span> 是从现在起的新增收益，实际累计收益在比较两动作时同加同减，无需另作状态。计算得到 <span class="arithmatex">\(F(4,4)=1,F(2,3)=1/5\)</span>。每次翻牌后重算继续项，正则继续、负则停，零时两者等价。</p>
 <p>两白三黑与两红三黑仅是成功颜色换名，仍为 <span class="arithmatex">\(F(2,3)=1/5\)</span>。一般初始 <span class="arithmatex">\((r_0,b_0)\)</span> 的累计收益可由当前剩余数恢复为 <span class="arithmatex">\((r_0-r)-(b_0-b)\)</span>，因此“新增价值”的状态只需要 <span class="arithmatex">\((r,b)\)</span>，不会丢掉影响最优动作的信息。</p>
 </details>
-<p><span id="q240"></span></p>
 <h3 id="problem-4cd87a56038c">Q977 · 动态纸牌博弈<a class="headerlink" href="#problem-4cd87a56038c" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：无放回纸牌状态与最优停止倒推</p>
 <p><strong>题目</strong>：赌场提供另一种纸牌游戏：标准 52 张牌（26 红 26 黑）彻底洗匀，荷官逐张发牌（不放回）。你可以随时叫停。每发一张红牌你赢 $1、每张黑牌你输 $1。最大化期望收益的最优停止规则是什么？你愿意付多少钱玩？</p>
@@ -9933,7 +9828,6 @@ P(K-1=j\mid\text{成功})=
 \]</div>
 <p>指数增量越过阈值的超额与阈值前的到达数独立，仍为 <span class="arithmatex">\(\operatorname{Expo}(\lambda)\)</span>，所以按 <span class="arithmatex">\(p^K\)</span> 加权后，成功兑现额的均值仍为 <span class="arithmatex">\(t+1/\lambda\)</span>。</p>
 </details>
-<p><span id="q239"></span></p>
 <h3 id="problem-e6d77359e099">Q979 · 动态骰子博弈<a class="headerlink" href="#problem-e6d77359e099" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：累积分数状态与骰子Bellman阈值</p>
 <p><strong>题目</strong>：赌场推出一个花哨的骰子游戏：你可以无限次掷骰，除非掷出 6。每次掷出 1 得 $1、2 得 $2、……、5 得 $5；掷出 6 则此前赢的所有钱归零、游戏结束。每次掷出 <span class="arithmatex">\(1-5\)</span> 后你可以选择拿钱走人或继续掷。你是风险中性的，最多愿意付多少钱玩这个游戏？</p>
@@ -10001,12 +9895,6 @@ P(K-1=j\mid\text{成功})=
 </span></code></pre></div>
 <p>初始价格取 <span class="arithmatex">\(V(0)\)</span>；题面给出的 6.15 是保留两位小数的结果。这里的收入是本次游戏最终带走的钱，不能再加上已在累计状态中的历史点数。</p>
 </details>
-<p><span id="q238"></span>
-<span id="q313"></span>
-<span id="q314"></span>
-<span id="q315"></span>
-<span id="problem-ee1263abb72f"></span>
-<span id="problem-e11f9aa348ad"></span></p>
 <h3 id="problem-07428d057a00">Q980 · 系列赛终值的动态复制与下注策略<a class="headerlink" href="#problem-07428d057a00" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：系列赛调和终值与自融资动态复制</p>
 <p><strong>题目</strong>：系列赛先胜 <span class="arithmatex">\(m\)</span> 场者夺冠。可逐场以1:1净赔率支持同一队，下注额依已知比分调整，初始本金 <span class="arithmatex">\(B\)</span>。假定可按任意小数金额投注，无手续费及额外限额。目标为支持队夺冠时净赚 <span class="arithmatex">\(B\)</span>、否则净亏 <span class="arithmatex">\(B\)</span>。</p>
@@ -10082,7 +9970,6 @@ b(0,0)=B\frac{\binom{2m-2}{m-1}}{2^{2m-2}}.
 <p>若本金为64美元、支持CWS，下注额与表中100美元版本按 <span class="arithmatex">\(64/100\)</span> 缩放即可。首注为 <span class="arithmatex">\(64\cdot20/64=20\)</span>，首场赢后财富 <span class="arithmatex">\(64+20=84\)</span>，输后 <span class="arithmatex">\(64-20=44\)</span>，之后继续按比分调整，最终净赚64或净亏64。</p>
 <p>若下注额事先固定，第4场前比分 <span class="arithmatex">\((3,0)\)</span> 需押12.5、<span class="arithmatex">\((2,1)\)</span> 需押37.5。二者都可能出现且复制下注唯一，所以固定的第4场金额无法同时满足，不能实现该逐路径复制。</p>
 </details>
-<p><span id="q538"></span></p>
 <h3 id="problem-992f46e40f82">Q981 · 折扣占用度与 MDP 线性规划<a class="headerlink" href="#problem-992f46e40f82" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：动态规划｜<strong>副题型</strong>：折扣占用度流量约束与策略恢复</p>
 <p><strong>题目</strong>：有限 MDP，折扣 <span class="arithmatex">\(0&lt;\alpha&lt;1\)</span>，初始分布 <span class="arithmatex">\(b\)</span>，奖励 <span class="arithmatex">\(R(i,a)\)</span>。定义 <span class="arithmatex">\(y_{ia}=E\sum_{n\ge0}\alpha^n\mathbf1_{\{X_n=i,A_n=a\}}\)</span>。推导占用度约束、最优化 LP，并解释如何恢复策略。</p>
@@ -10095,9 +9982,7 @@ b(0,0)=B\frac{\binom{2m-2}{m-1}}{2^{2m-2}}.
 <p>对 <span class="arithmatex">\(j\)</span> 求和得 <span class="arithmatex">\(\sum_{i,a}y_{ia}=1/(1-\alpha)\)</span>，因此该归一化是冗余约束。总折扣回报为 <span class="arithmatex">\(\sum_{i,a}y_{ia}R(i,a)\)</span>，在上述约束下最大化即为 LP。若 <span class="arithmatex">\(d_i=\sum_a y_{ia}&gt;0\)</span>，定义平稳随机策略 <span class="arithmatex">\(\beta_i(a)=y_{ia}/d_i\)</span>；<span class="arithmatex">\(d_i=0\)</span> 时任意选动作。该策略的占用度满足同一线性方程，因 <span class="arithmatex">\(I-\alpha P_\beta^\top\)</span> 可逆而唯一，所以恰好恢复给定 <span class="arithmatex">\(y\)</span>。有限折扣 MDP 可选确定性平稳最优策略。</p>
 </details>
 <h2 id="sec-布朗运动的增量-首达与布朗桥">布朗运动的增量、高斯矩与布朗桥<a class="headerlink" href="#sec-布朗运动的增量-首达与布朗桥" title="Permanent link">&para;</a></h2>
-<p><span id="sec-四布朗运动"></span></p>
 <p>从独立高斯增量得到协方差与联合分布；固定终点后的条件过程使用布朗桥。</p>
-<p><span id="q250"></span></p>
 <h3 id="problem-077f62a96735">Q982 · 求 <span class="arithmatex">\( E(W_s W_t) \)</span><a class="headerlink" href="#problem-077f62a96735" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：独立增量分解与正态配方MGF</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(W\)</span> 为标准布朗运动，<span class="arithmatex">\(s,t\ge 0\)</span>，求 <span class="arithmatex">\(\mathbb{E} [W_{s}W_{t}]\)</span> 及 <span class="arithmatex">\(\mathbb{E} [e^{\lambda W_{t}}]\)</span>，<span class="arithmatex">\(\lambda \in\mathbb{R}\)</span>。</p>
@@ -10110,7 +9995,6 @@ E[W_sW_t]=E[W_s^2]+E[W_s]E[W_t-W_s]=s.
 <p>交换 <span class="arithmatex">\(s,t\)</span> 得一般结论 <span class="arithmatex">\(E[W_sW_t]=\operatorname{Cov}(W_s,W_t)=\min(s,t)\)</span>。</p>
 <p>固定 <span class="arithmatex">\(t\)</span> 时 <span class="arithmatex">\(W_t\sim N(0,t)\)</span>，正态 MGF 为 <span class="arithmatex">\(E[e^{\lambda W_t}]=e^{\lambda^2t/2}\)</span>。可由配方 <span class="arithmatex">\(\lambda x-x^2/(2t)=-(x-\lambda t)^2/(2t)+\lambda^2t/2\)</span> 积分得到；<span class="arithmatex">\(t=0\)</span> 时 <span class="arithmatex">\(W_0=0\)</span>，该式也为1。</p>
 </details>
-<p><span id="q246"></span></p>
 <h3 id="problem-a4cb2e37f805">Q983 · 布朗运动与其平方的相关<a class="headerlink" href="#problem-a4cb2e37f805" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：正态奇偶矩与非线性零相关</p>
 <p><strong>题目</strong>：标准布朗运动固定 <span class="arithmatex">\(t&gt;0\)</span>，求 <span class="arithmatex">\(\operatorname{Corr}(B_t,B_t^2)\)</span>，解释不相关是否意味着独立，并讨论 <span class="arithmatex">\(t=0\)</span>。</p>
@@ -10123,9 +10007,6 @@ E[W_sW_t]=E[W_s^2]+E[W_s]E[W_t-W_s]=s.
 <p><strong>相关系数为 0</strong>（但注意：<span class="arithmatex">\( B_t \)</span> 与 <span class="arithmatex">\( B_t^2 \)</span> 显然不独立——不相关 <span class="arithmatex">\( \neq \)</span> 独立的经典例子）。</p>
 <p>由正态矩 <span class="arithmatex">\(EB_t^2=t,EB_t^4=3t^2\)</span>，<span class="arithmatex">\(\operatorname{Var}(B_t^2)=3t^2-t^2=2t^2&gt;0\)</span>，所以 <span class="arithmatex">\(t&gt;0\)</span> 时两标准差非零、相关确为0。若独立，给定 <span class="arithmatex">\(B_t\)</span> 之后 <span class="arithmatex">\(B_t^2\)</span> 的分布不应改变，但它已由该值完全确定，且平方本身非恒定，故不独立。<span class="arithmatex">\(t=0\)</span> 两者都为常数，相关系数未定义。</p>
 </details>
-<p><span id="q241"></span>
-<span id="q248"></span>
-<span id="problem-55e1ec32fc52"></span></p>
 <h3 id="problem-4d51a0c6749e">Q984 · 什么是布朗运动<a class="headerlink" href="#problem-4d51a0c6749e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：连续高斯增量定义与协方差结构</p>
 <p><strong>题目</strong>：给出标准布朗运动的完整定义，说明有限维分布、缩放随机游走联系；定义由 SDE 描述的 Itô 扩散，并解释布朗运动在金融建模中的作用。</p>
@@ -10151,7 +10032,6 @@ E\exp\left(\sum_{i=1}^mu_iW_{t_i}\right)
 <p>若 <span class="arithmatex">\(B_{1}\)</span>、<span class="arithmatex">\(B_{2}\)</span>、<span class="arithmatex">\(B_{3}\)</span> 独立，则 <span class="arithmatex">\(\operatorname{Cov} (B_{1}(1)+B_{2}(1),B_{2}(2)+B_{3}(2))=\operatorname{Cov} (B_{2}(1),B_{2}(2))=1\)</span>；若三者其实同一个过程，则结果是 4。每个边缘过程都标准，并不自动意味着它们独立。</p>
 <p>将两和的协方差展开成四项。独立模型中，三个跨不同过程的项为0，仅同一 <span class="arithmatex">\(B_2\)</span> 项为 <span class="arithmatex">\(\min(1,2)=1\)</span>。若三符号代表同一过程，则两和分别为 <span class="arithmatex">\(2B(1),2B(2)\)</span>，协方差 <span class="arithmatex">\(4\min(1,2)=4\)</span>。一般若 <span class="arithmatex">\(\operatorname{Cov}(B_i(s),B_j(t))=\rho_{ij}\min(s,t)\)</span>，结果为 <span class="arithmatex">\(\rho_{12}+\rho_{13}+1+\rho_{23}\)</span>。</p>
 </details>
-<p><span id="q247"></span></p>
 <h3 id="problem-cf1215fd2769">Q986 · 布朗运动两个时刻的异号概率<a class="headerlink" href="#problem-cf1215fd2769" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：独立增量标准化、极坐标与高斯象限公式</p>
 <p><strong>题目</strong>：标准布朗运动 <span class="arithmatex">\(B\)</span> 满足 <span class="arithmatex">\(B_0=0\)</span>。对 <span class="arithmatex">\(0&lt;s&lt;t\)</span>，求 <span class="arithmatex">\(P(B_s&gt;0,B_t&lt;0)\)</span> 的一般式，并计算 <span class="arithmatex">\(s=1,t=2\)</span>。分别说明独立增量条件积分和高斯平面旋转对称性的作用。</p>
@@ -10180,8 +10060,6 @@ P(B_s&gt;0,B_t&lt;0)
 \]</div>
 <p><span class="arithmatex">\(s=1,t=2\)</span> 时角宽为 <span class="arithmatex">\(\pi/4\)</span>，概率为 <span class="arithmatex">\(1/8\)</span>。此时也可用对称性：X正、Z负的概率为 <span class="arithmatex">\(1/4\)</span>，其符号与绝对值独立；给定该象限，两个同分布连续绝对值满足 <span class="arithmatex">\(|Z|&gt;|X|\)</span> 的概率为 <span class="arithmatex">\(1/2\)</span>，所以仍得 <span class="arithmatex">\(1/8\)</span>。</p>
 </details>
-<p><span id="q251"></span>
-<span id="problem-71193ceda14f"></span></p>
 <h3 id="problem-fe44847bdab5">Q987 · 布朗桥的构造、条件分布与中间时刻回归<a class="headerlink" href="#problem-fe44847bdab5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：终点高斯条件化、桥SDE与中间时刻再次回归</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(X_s=z+\mu s+W_s\)</span>，<span class="arithmatex">\(W\)</span>为标准布朗运动，给定 <span class="arithmatex">\(X_T=x\)</span>，<span class="arithmatex">\(T&gt;0\)</span>。</p>
@@ -10241,7 +10119,6 @@ K(s,s)-\frac{K(s,t)^2}{K(t,t)}
 </details>
 <h2 id="sec-布朗首达-反射与停止">布朗首达、反射与停止<a class="headerlink" href="#sec-布朗首达-反射与停止" title="Permanent link">&para;</a></h2>
 <p>首达分布用反射原理，双边命中用调和边值方程；停止时的期望等式先在有界停时上建立。</p>
-<p><span id="q245"></span></p>
 <h3 id="problem-8ed4a3e406d8">Q988 · 带漂移布朗运动的单下界命中概率<a class="headerlink" href="#problem-8ed4a3e406d8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：有界区间指数调和函数与单下界极限</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(X_t=\mu t+\sigma W_t\)</span>，<span class="arithmatex">\(X_0=0,\sigma&gt;0\)</span>。求最终命中 <span class="arithmatex">\(-b\)</span>（<span class="arithmatex">\(b&gt;0\)</span>）的概率，用有限上下边界后取极限证明。计算 <span class="arithmatex">\(dX=dt+dW_t\)</span> 命中 <span class="arithmatex">\(-1\)</span> 的结果。</p>
@@ -10256,9 +10133,6 @@ p_Re^{2\mu b/\sigma^2}+(1-p_R)e^{-2\mu R/\sigma^2}=1,
 <p><span class="arithmatex">\(R\to\infty\)</span> 时，“在上端R之前命中下端”的事件递增到最终命中下端的事件。若 <span class="arithmatex">\(\mu&gt;0\)</span>，极限为 <span class="arithmatex">\(e^{-2\mu b/\sigma^2}\)</span>；若 <span class="arithmatex">\(\mu&lt;0\)</span>，分子分母同除以 <span class="arithmatex">\(e^{-2\mu R/\sigma^2}\)</span>，极限为1。<span class="arithmatex">\(\mu=0\)</span> 时有限区间下端概率 <span class="arithmatex">\(R/(R+b)\to1\)</span>。</p>
 <p>本题 <span class="arithmatex">\(\mu=\sigma=b=1\)</span>，命中概率为 <span class="arithmatex">\(e^{-2}\approx0.135335\)</span>。无穷远只通过有限边界的事件极限进入证明，不作为可直接代入终点期望的状态。</p>
 </details>
-<p><span id="q242"></span>
-<span id="q244"></span>
-<span id="problem-80eb9b846c0d"></span></p>
 <h3 id="problem-08d02ec19fef">Q989 · 布朗运动有限区间退出：截断停止与漂移边值问题<a class="headerlink" href="#problem-08d02ec19fef" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：平方鞅截断停止与生成元双边命中、均时</p>
 <p><strong>题目</strong>：先设标准布朗运动从0出发，<span class="arithmatex">\(\tau_a=\inf\{t:|W_t|=a\}\)</span>。再考虑 <span class="arithmatex">\(X_t=x+\mu t+\sigma W_t\)</span>，<span class="arithmatex">\(\sigma&gt;0,l&lt;x&lt;u\)</span>，首次到两端之一时退出。</p>
@@ -10294,7 +10168,6 @@ h(0)=\frac{e^{10\mu}-1}{e^{10\mu}-e^{-6\mu}},
 \]</div>
 <p>其<span class="arithmatex">\(\mu\to0\)</span>极限仍为<span class="arithmatex">\(5/8\)</span>。单边无限区间没有这里的有界性，不能直接沿用有限均时结论。</p>
 </details>
-<p><span id="q243"></span></p>
 <h3 id="problem-95eccb978a71">Q990 · 首达时间分布<a class="headerlink" href="#problem-95eccb978a71" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：反射原理、首达密度与发散均时</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\( W(t) \)</span> 为标准维纳过程，<span class="arithmatex">\( \tau_x \)</span>（<span class="arithmatex">\( x &gt; 0 \)</span>）为首次到达水平 <span class="arithmatex">\( x \)</span> 的时间（<span class="arithmatex">\( \tau_x = \min\{t : W(t) = x\} \)</span>）。<span class="arithmatex">\( \tau_x \)</span> 的概率密度函数是什么？期望值是多少？</p>
@@ -10312,9 +10185,7 @@ f_{\tau_x}(t)=\frac{x}{\sqrt{2\pi}t^{3/2}}e^{-x^2/(2t)},\qquad t&gt;0.
 <p>一般过程 <span class="arithmatex">\(\sigma W_t\)</span> 的目标 <span class="arithmatex">\(a&gt;0\)</span>，等价于标准布朗命中 <span class="arithmatex">\(a/\sigma\)</span>，密度为 <span class="arithmatex">\(a/(\sigma\sqrt{2\pi}t^{3/2})\exp[-a^2/(2\sigma^2t)]\)</span>，仍无有限均时。</p>
 </details>
 <h2 id="sec-It-公式-鞅判定与-SDE">Itô公式与多元过程变换<a class="headerlink" href="#sec-It-公式-鞅判定与-SDE" title="Permanent link">&para;</a></h2>
-<p><span id="sec-五随机微积分与SDE"></span></p>
 <p>按二次变差保留二阶项；多元变换还要纳入交叉变差与函数定义域。</p>
-<p><span id="q254"></span></p>
 <h3 id="problem-8083c417cc54">Q991 · Itô 引理<a class="headerlink" href="#problem-8083c417cc54" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：Itô漂移分离与随机积分可积性</p>
 <p><strong>题目</strong>：叙述 Itô 引理，并用它证明 <span class="arithmatex">\( W(t)^2 - t \)</span> 与指数鞅是鞅。</p>
@@ -10334,7 +10205,6 @@ df = \left(-\tfrac{1}{2}\lambda^2 f + \tfrac{1}{2}\lambda^2 f\right)dt + \lambda
 <p><strong>记忆要点</strong>：与普通链式法则相比，Itô 引理多出的 <span class="arithmatex">\( \frac12\gamma^2\partial^2f/\partial x^2\,dt \)</span> 项来自 <span class="arithmatex">\( (dW)^2 = dt \)</span> 的二阶变差——这是随机微积分的核心特征。</p>
 <p>严格的函数条件是 <span class="arithmatex">\(f\in C^{1,2}\)</span>：时间一阶、空间二阶连续可微。漂移为0首先给连续局部鞅；若每个有限T都有 <span class="arithmatex">\(E\int_0^T|\gamma f_x|^2dt&lt;\infty\)</span>，才直接得到平方可积真鞅。平方例积分核 <span class="arithmatex">\(2W\)</span> 给 <span class="arithmatex">\(E\int_0^T4W_t^2dt=2T^2\)</span>；指数例积分核 <span class="arithmatex">\(\lambda Z_t\)</span> 给 <span class="arithmatex">\(\lambda^2\int_0^TEZ_t^2dt=\lambda^2\int_0^Te^{\lambda^2t}dt&lt;\infty\)</span>。所以这两例都满足充分条件。</p>
 </details>
-<p><span id="q262"></span></p>
 <h3 id="problem-0d9a8ceeb390">Q992 · 布朗二次变差、交叉变差与无限一次变差<a class="headerlink" href="#problem-0d9a8ceeb390" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：确定分割<span class="arithmatex">\(L^2\)</span>二次变差、交叉项与变差反证</p>
 <p><strong>题目</strong>：标准布朗运动<span class="arithmatex">\(W\)</span>沿确定分割<span class="arithmatex">\(\pi\)</span>，网格趋零。</p>
@@ -10364,7 +10234,6 @@ EH_\pi=T,\quad E(H_\pi-T)^2=2\sum_i(\Delta t_i)^2\le2T|\pi|\to0.
 <p>为使此论证同时涵盖每条非零区间，先固定有理端点<span class="arithmatex">\(a&lt;b\)</span>，对区间内<span class="arithmatex">\(2^n\)</span>等分网格，上述误差方差不超过 <span class="arithmatex">\(2(b-a)^2 2^{-n}\)</span>。Chebyshev给每个<span class="arithmatex">\(\epsilon&gt;0\)</span>的误差尾概率可求和，Borel–Cantelli推出平方和几乎必然趋<span class="arithmatex">\(b-a\)</span>。再对正有理<span class="arithmatex">\(\epsilon\)</span>及全部有理<span class="arithmatex">\(a&lt;b\)</span>取可数交，仍是概率1事件。若某条这样的路径在任意实端点非零区间上有有限一次变差，其内部有理子区间也会有有限变差、平方和趋0，与正极限矛盾。</p>
 <p>一般确定网格趋零得到的是<span class="arithmatex">\(L^2\)</span>及依概率收敛；可和方差额外给二进网格的几乎处处收敛。不能据此宣称沿所有依路径选取的分割都逐点收敛。</p>
 </details>
-<p><span id="q263"></span></p>
 <h3 id="problem-32284b412bd8">Q993 · 为什么 Itô 引理成立<a class="headerlink" href="#problem-32284b412bd8" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：可预测积分等距、局部化与加权Itô余项</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(dX=b(t,X)dt+a(t,X)dW\)</span>，<span class="arithmatex">\(f\inC^{1,2}\)</span>，说明 Itô 公式的二阶项来源，给出经停止局部化与余项控制的证明步骤。定义对平方可积适应简单过程的 Itô 积分并证明等距，解释如何延拓、其基本性质，以及一般可相对于哪些过程积分。</p>
@@ -10429,7 +10298,6 @@ P_{r_0}(T_\epsilon&lt;T_L)=
 <p>它们分别来自径向调和函数 <span class="arithmatex">\(\log r\)</span>、<span class="arithmatex">\(r^{2-d}\)</span> 在环带出口的有界停时期望。固定 <span class="arithmatex">\(L\)</span>，令 <span class="arithmatex">\(\epsilon\downarrow0\)</span>，概率趋零，说明不可能在离开外圈前命中原点。再取整数 <span class="arithmatex">\(L\to\infty\)</span>，任意有限时间的连续路径都有有限上界，所以整个过程都不命中原点。</p>
 <p>因此可去掉上述局部化。定义 <span class="arithmatex">\(\beta_t=\sum_i\int_0^t(B_s^i/R_s)dW_s^i\)</span>，它是连续局部鞅且 <span class="arithmatex">\([\beta]_t=t\)</span>，由 Lévy 刻画为一维布朗运动。平方半径的 <span class="arithmatex">\(dt\)</span> 项有两部分：<span class="arithmatex">\(2R\times(d-1)/(2R)\)</span> 给 <span class="arithmatex">\(d-1\)</span>，而 <span class="arithmatex">\(d[R]_t=dt\)</span> 再给 1，共为 <span class="arithmatex">\(d\)</span>，这一步不能漏掉二次变差修正。</p>
 </details>
-<p><span id="q249"></span></p>
 <h3 id="problem-2974bf824f73">Q996 · 布朗运动比值的分布与局部微分<a class="headerlink" href="#problem-2974bf824f73" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：布朗运动｜<strong>副题型</strong>：正态比值Jacobian与局部Itô商法则</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(W\)</span>、<span class="arithmatex">\(Z\)</span> 为从零开始的独立标准布朗运动。对固定 <span class="arithmatex">\(t&gt;0\)</span> 求 <span class="arithmatex">\(W_{t}/Z_{t}\)</span> 的分布；在 <span class="arithmatex">\(Z\)</span> 不为零的开放时间区间写局部 SDE。再设两者相关系数 <span class="arithmatex">\(\rho \in (-1,1)\)</span>，求分布、局部 SDE 与 <span class="arithmatex">\(\rho \to 1\)</span> 的极限。</p>
@@ -10471,7 +10339,6 @@ E[Z_t\mid\mathcal F_s]=Z_s e^{-\lambda^2(t-s)/2}E[e^{\lambda\Delta}]
 \]</div>
 <p>该过程正且 <span class="arithmatex">\(EZ_t=1\)</span>，故可积并适应，因而也是真鞅。这里需要条件期望，固定时刻均值不变本身不足以证明鞅。</p>
 </details>
-<p><span id="q252"></span></p>
 <h3 id="problem-f919f530a4eb">Q998 · <span class="arithmatex">\( \sqrt{t}\cdot B_t \)</span> 是否鞅<a class="headerlink" href="#problem-f919f530a4eb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：确定性时间权重与条件均值判定</p>
 <p><strong>题目</strong>：对标准布朗运动 <span class="arithmatex">\(B\)</span>，求 <span class="arithmatex">\(Z_t=\sqrt tB_t\)</span> 的均值、方差，判断是否为鞅并写出 <span class="arithmatex">\(t&gt;0\)</span> 的 SDE。推广到确定函数 <span class="arithmatex">\(h\)</span>：何时 <span class="arithmatex">\(h(t)B_t\)</span> 可相对于布朗滤过成为鞅？</p>
@@ -10485,7 +10352,6 @@ dZ_t = \frac{\partial Z_t}{\partial B_t}dB_t + \frac{\partial Z_t}{\partial t}dt
 <p>对一切 <span class="arithmatex">\( B_t \neq 0 \)</span>（概率 1）的情形，漂移项 <span class="arithmatex">\( \frac12 t^{-1/2}B_t\,dt \neq 0 \)</span>，故 <span class="arithmatex">\( Z_t \)</span> 不是鞅。</p>
 <p>用条件期望可直接判别：对 <span class="arithmatex">\(0&lt;s&lt;t\)</span>，<span class="arithmatex">\(E[\sqrt tB_t\mid\mathcal F_s]=\sqrt tB_s\)</span>，而当前值为 <span class="arithmatex">\(\sqrt sB_s\)</span>，二者并非几乎处处相等。一般 <span class="arithmatex">\(h(t)B_t\)</span> 的条件期望为 <span class="arithmatex">\(h(t)B_s\)</span>，所以在每个正时刻 <span class="arithmatex">\(s\)</span> 要求 <span class="arithmatex">\(h(t)=h(s)\)</span>，即 <span class="arithmatex">\(h\)</span> 在 <span class="arithmatex">\((0,\infty)\)</span> 上必须为常数；常数情形显然是真鞅。无条件均值始终0不能代替这个条件检验。</p>
 </details>
-<p><span id="q253"></span></p>
 <h3 id="problem-f203f5b0d8b2">Q999 · <span class="arithmatex">\( W^3 \)</span> 是否鞅<a class="headerlink" href="#problem-f203f5b0d8b2" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：三次矩条件展开与漂移补偿</p>
 <p><strong>题目</strong>：标准布朗运动 <span class="arithmatex">\(W\)</span>，判断 <span class="arithmatex">\(W_t^3\)</span> 是否为鞅。分别构造用时间积分、用 <span class="arithmatex">\(tW_t\)</span> 补偿得到的真鞅，并解释二者为何都可行。</p>
@@ -10495,7 +10361,6 @@ dZ_t = \frac{\partial Z_t}{\partial B_t}dB_t + \frac{\partial Z_t}{\partial t}dt
 <p>抵消漂移的一种方法是减时间积分：<span class="arithmatex">\(M_t=W_t^3-3\int_0^tW_sds\)</span>，则 <span class="arithmatex">\(dM_t=3W_t^2dW_t\)</span>。另一种是 <span class="arithmatex">\(N_t=W_t^3-3tW_t\)</span>，由乘积法则 <span class="arithmatex">\(d(tW_t)=W_tdt+t\,dW_t\)</span>，得到 <span class="arithmatex">\(dN_t=3(W_t^2-t)dW_t\)</span>。</p>
 <p>在任意有限区间，正态四阶矩 <span class="arithmatex">\(EW_t^4=3t^2\)</span> 使两个随机积分核均平方可积，故都是真鞅。它们的差为 <span class="arithmatex">\(3(tW_t-\int_0^tW_sds)=3\int_0^ts\,dW_s\)</span>，本身也是鞅，所以不同形式的漂移补偿可以同时成立。</p>
 </details>
-<p><span id="q259"></span></p>
 <h3 id="problem-473d8fc223e6">Q1000 · 空间特征函数构造双曲函数鞅<a class="headerlink" href="#problem-473d8fc223e6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：空间特征函数与指数时间补偿</p>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(W\)</span> 为标准布朗运动，<span class="arithmatex">\(\lambda\in\mathbb R\)</span>。求所有满足 <span class="arithmatex">\(f''=\lambda^2f\)</span> 的二阶连续可微函数，并证明 <span class="arithmatex">\(e^{-\lambda^2t/2}f(W_t)\)</span> 为真鞅。特别求 <span class="arithmatex">\(f(0)=1,f'(0)=0\)</span> 时的函数，写出其SDE与平方可积性。</p>
@@ -10509,7 +10374,6 @@ dZ_t=\lambda e^{-\lambda^2t/2}\sinh(\lambda W_t)dW_t.
 \]</div>
 <p>核的二阶矩为 <span class="arithmatex">\(\lambda^2e^{-\lambda^2t}E\sinh^2(\lambda W_t)=\frac{\lambda^2}{2}(e^{\lambda^2t}-e^{-\lambda^2t})\)</span>，在任意有限区间可积，故也由Itô等距确认是真鞅。</p>
 </details>
-<p><span id="q260"></span></p>
 <h3 id="problem-24203e4dd23e">Q1001 · 对 <span class="arithmatex">\( 2^{W_t} \)</span> 用 Itô 公式<a class="headerlink" href="#problem-24203e4dd23e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：指数Itô变换与消漂移常系数ODE</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(W\)</span> 为标准布朗运动，求 <span class="arithmatex">\(2^{W_{t}}\)</span> 的 SDE 并判断是否为鞅。对二次连续可微 <span class="arithmatex">\(g\)</span>，若 <span class="arithmatex">\(X_{t}=2^{W_{t}}g(W_{t})\)</span> 为鞅，推导 <span class="arithmatex">\(g\)</span> 的必要 ODE，解该 ODE并验证所得到过程确为鞅；解释原指数为何不是鞅。</p>
@@ -10536,9 +10400,6 @@ f^{\prime \prime}(x)=(\log(2))^{2}e^{x\log2}=(\log(2))^{2}2^{x}.
 </details>
 <h2 id="sec-几何布朗运动-OU与期权方程">几何布朗运动、OU与期权方程<a class="headerlink" href="#sec-几何布朗运动-OU与期权方程" title="Permanent link">&para;</a></h2>
 <p>用幂、对数和积分因子变换求解SDE，并把风险中性生成元作用于衍生品价值。</p>
-<p><span id="q255"></span>
-<span id="q258"></span>
-<span id="problem-2e6f66e95683"></span></p>
 <h3 id="problem-a8a84e2320db">Q1002 · 几何布朗运动的对数解与实数幂变换<a class="headerlink" href="#problem-a8a84e2320db" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：对数Itô、显式指数解与一般幂函数漂移</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(S_0&gt;0\)</span>，<span class="arithmatex">\(dS_t=\mu S_tdt+\sigma S_tdW_t\)</span>，<span class="arithmatex">\(\mu\in\mathbb R,\sigma&gt;0\)</span>。</p>
@@ -10577,7 +10438,6 @@ d(S_t^2)=(2\mu+\sigma^2)S_t^2dt+2\sigma S_t^2dW_t,
 \]</div>
 <p>S²仍为几何布朗过程，SDE漂移是 <span class="arithmatex">\(2\mu+\sigma^2\)</span>，而指数中的时间系数为 <span class="arithmatex">\(2\mu-\sigma^2\)</span>，差别来自扩散的Itô修正。k=0时Y恒为1，漂移与扩散均为0，是退化的常数过程。</p>
 </details>
-<p><span id="q257"></span></p>
 <h3 id="problem-aeef43cf8e68">Q1003 · 均值回归 SDE 的定性行为<a class="headerlink" href="#problem-aeef43cf8e68" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：线性漂移方向与均值回复稳定性</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(S_{0}&gt;0\)</span>，<span class="arithmatex">\(dS=\alpha (m-S)dt+\sigma SdW\)</span>，<span class="arithmatex">\(\alpha ,m,\sigma &gt;0\)</span>。解释均值回归与参数作用，推导 <span class="arithmatex">\(X=S^{2}\)</span> 的 SDE。假设该不分红股票可交易且存在等价风险中性定价测度，无风险利率 <span class="arithmatex">\(r\)</span> 恒定，说明其欧式看涨价格如何依赖物理漂移参数。再比较 <span class="arithmatex">\(dY=\mu Ydt+\sigma YdW\)</span> 中 <span class="arithmatex">\(\mu\)</span>、<span class="arithmatex">\(\sigma\)</span> 的作用。</p>
@@ -10599,7 +10459,6 @@ dX=2S[\alpha(m-S)dt+\sigma S dW]+\sigma^2S^2dt,
 <p>整理即得前述漂移及扩散。因 <span class="arithmatex">\(S&gt;0\)</span>，代换 <span class="arithmatex">\(S=\sqrt X\)</span> 没有符号歧义。</p>
 <p>定价部分使用题设“存在等价风险中性测度”：在其下不分红股票必须有漂移 <span class="arithmatex">\(rS\)</span>，扩散仍为 <span class="arithmatex">\(\sigma S\)</span>，所以条件终值分布与标准 BS 相同。形式上的市场风险价格为 <span class="arithmatex">\([\alpha(m-S)-rS]/(\sigma S)\)</span>，但把它写出来本身并不能保证换测度密度为真鞅；这里依赖题设的存在性，不能对任意漂移模型无条件宣称等价测度存在。</p>
 </details>
-<p><span id="q261"></span></p>
 <h3 id="problem-b79eb26ffd00">Q1004 · 求解 Ornstein–Uhlenbeck 过程<a class="headerlink" href="#problem-b79eb26ffd00" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：积分因子、Itô等距与OU高斯分布</p>
 <p><strong>题目</strong>：<span class="arithmatex">\(dX_{t}=\theta (\mu -X_{t})dt+\sigma dW_{t}\)</span>，<span class="arithmatex">\(\theta &gt;0\)</span>、<span class="arithmatex">\(\mu \in\mathbb{R}\)</span>、<span class="arithmatex">\(\sigma &gt;0\)</span>，<span class="arithmatex">\(X_{0}=x_{0}\)</span> 确定。求显式解，证明均值、方差公式，并给出长期极限分布。</p>
@@ -10623,7 +10482,6 @@ X_{t}=X_{0}e^{-\theta t}+\mu\left(1-e^{-\theta t}\right)+\int_{0}^{t}\sigma e^{\
 \]</div>
 <p>乘 <span class="arithmatex">\(e^{\theta t}\)</span> 后积分得 <span class="arithmatex">\(X_{t}=\mu +(x_{0}-\mu )e^{-\theta t}+\sigma \int _{0}^{t}e^{-\theta (t-s)}dW_{s}\)</span>。积分均值零，所以 <span class="arithmatex">\(\mathbb{E} X_{t}=\mu +(x_{0}-\mu )e^{-\theta t}\)</span>。Itô 等距给方差 <span class="arithmatex">\(\sigma ^{2}\int _{0}^{t}e^{-2\theta (t-s)}ds=\sigma ^{2}(1-e^{-2\theta t})/(2\theta )\)</span>。积分是高斯，故长期分布趋 <span class="arithmatex">\(N(\mu ,\sigma ^{2}/(2\theta ))\)</span>。</p>
 </details>
-<p><span id="q256"></span></p>
 <h3 id="problem-7535877451ad">Q1005 · 标的平方的看涨期权方程<a class="headerlink" href="#problem-7535877451ad" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：Itô 微积分与 SDE｜<strong>副题型</strong>：风险中性幂标的与定价生成元PDE</p>
 <p><strong>题目</strong>：不分红可交易股票在风险中性测度下 <span class="arithmatex">\(dS=rS\,dt+\sigma S\,dW\)</span>，<span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(\sigma\)</span> 常数。到期支付 <span class="arithmatex">\((S_{T}^{2}-K)^+\)</span>，<span class="arithmatex">\(K&gt;0\)</span>。写价格 <span class="arithmatex">\(C(t,S)\)</span> 的 PDE 与终值，再以 <span class="arithmatex">\(V=S^{2}\)</span> 换元求 <span class="arithmatex">\(U(t,V)\)</span> 的 PDE，展示链式求导。</p>
@@ -10754,8 +10612,6 @@ U_t+2\sigma^2V^2U_{VV}+(2r+\sigma^2)VU_V-rU=0,
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

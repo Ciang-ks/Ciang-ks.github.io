@@ -1976,7 +1976,6 @@
 <p>由 <span class="arithmatex">\(IC=\sqrt{R^{2}}\)</span>，得到 <span class="arithmatex">\(IR=\sqrt{.003}\sqrt{1000}=\sqrt{3}\approx 1.73205\)</span>。</p>
 <p>给定约定下，直接合并两平方根得 <span class="arithmatex">\(IR=\sqrt{R^2BR}\)</span>。代入 <span class="arithmatex">\(0.003\times1000=3\)</span>，再开方。若把总押注数误当独立广度，相关押注会使实际有效广度更低；若只给 <span class="arithmatex">\(R^2\)</span> 而不给IC符号，相关符号也不能由平方恢复。因此该数值依赖题设的正相关与独立押注约定。</p>
 </details>
-<p><span id="q435"></span></p>
 <h3 id="problem-86134088e669">Q1169 · Two Sigma：纽约住房价格预测<a class="headerlink" href="#problem-86134088e669" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：统计建模与预测｜<strong>副题型</strong>：重复成交与空间时间分组的房价预测</p>
 <p><strong>题目</strong>：给你一份纽约房产的假想数据集（最近成交价、卧室数、卫浴数、面积 sqft、建造年份、位置——行政区/街区），目标是预测纽约房屋未来的成交价与估值，以及成交价未知的房屋的价值。这是一个常见的数据科学场景。请讨论：如何做多元回归的主框架？如何预处理与编码各变量？如何归一化？如何度量与处理特征间相关性（尤其面积 vs 卧室/卫浴数）？如何应对多重共线性？</p>
@@ -1998,7 +1997,6 @@
 <p><strong>把预测流程闭合。</strong> 先定义预测时点与目标，例如未来成交价或当前可交易估值。按成交时间划分训练、验证和测试集，若同一房屋重复成交或同一楼盘高度相关，还要按房屋/楼盘隔离，防止泄漏。训练集内拟合缺失值填补、类别编码、尺度和正则化超参数，再原样用于未来样本。可先以最近同区同类房屋的价格或每平方英尺价格作基线；比较原价与对数价目标下的MAE/RMSE，并单列高价、稀疏街区和新楼盘误差。</p>
 <p>岭回归收缩的是系数方向，不是按“显著与否”自动识别变量；逐步回归与逐次正交化也不是同一种算法。特征选择应由严格样本外表现决定，不能依赖看过测试集后的筛选。</p>
 </details>
-<p><span id="q437"></span></p>
 <h3 id="problem-a563417ad118">Q1170 · Two Sigma：CitiBike 共享单车用量预测【进阶】<a class="headerlink" href="#problem-a563417ad118" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：统计建模与预测｜<strong>副题型</strong>：容量截断与站点时序需求预测</p>
 <p><strong>题目</strong>：为曼哈顿的 CitiBike 用量建立预测模型：对指定的任一 CitiBike 站点，给定相关近期数据，预测未来短时间内该站停靠的自行车数量及其变化。本题不再给定输入变量集——需要先从"关于曼哈顿的一切可能数据"中头脑风暴出相关变量，再讨论回归的技术细节。面试中典型的做法是"引入新变量 ↔ 预处理/调参"反复迭代。请给出两轮迭代。</p>
@@ -2024,7 +2022,6 @@
 <p>因此普通回归外推若产生负库存或超过容量，应改用有界目标模型或上述受容量限制的流量模型；输出区间和空/满站概率，便于调度决策。历史空站时“没有租车”不表示“没有需求”，需结合空/满时长、邻站流量或服务失败记录处理截断需求。</p>
 <p><strong>避免信息泄漏。</strong> 预测时只能用当时已知的库存、已发布的活动、计划调度与天气预报，不能使用未来实际天气、实际调度或未来站点平均值。按时间滚动回测，在训练段内拟合归一化、样条、正则化强度等；若考查新站泛化，还应整站留出。比较各时长的 MAE/RMSE、预测区间覆盖率及空/满站预警效果。自动逐步筛选后的普通 <span class="arithmatex">\(t\)</span> 检验不能直接当作未筛选模型的显著性证据，优先依据这样的样本外表现决定变量去留。</p>
 </details>
-<p><span id="q436"></span></p>
 <h3 id="problem-48f3f380e606">Q1171 · QuantCo：歌剧院动态定价<a class="headerlink" href="#problem-48f3f380e606" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★★｜<strong>题型</strong>：最优决策与动态规划｜<strong>副题型</strong>：需求弹性识别与有限库存动态定价</p>
 <p><strong>题目</strong>：用演出场馆的售票数据（每个座位/排/区的票价历史、售出时间、对应的演出与时间等）构建模型，为未来定价。我们是场馆的顾问、目标是<strong>最大化利润</strong>（改变定价方式）而不仅是预测价格——有哪些超出输入变量本身的建模思路？</p>
@@ -2048,7 +2045,6 @@ E\left[(p-c)Y_t+V_{t+1}(q-Y_t)\mid\text{当前信息}\right].
 </details>
 <h2 id="sec-二做市理论与案例">盘口、报价基础与成交信息<a class="headerlink" href="#sec-二做市理论与案例" title="Permanent link">&para;</a></h2>
 <p>先明确合约与盘口单位，再区分估值、信息优势和库存偏斜。成交方向的解释取决于对手是否知情、可否拒绝及其估值是否固定。</p>
-<p><span id="problem-23821f0a41f8"></span></p>
 <h3 id="problem-3afb9f05a2cb">Q1172 · 盘口的中间价、基点价差与队列微价格<a class="headerlink" href="#problem-3afb9f05a2cb" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：买卖价归一化与队列不平衡微价格</p>
 <p><strong>题目</strong>：一个L1盘口的最优买价为b、卖价为a，<span class="arithmatex">\(a\ge b&gt;0\)</span>，两侧排队量分别为 <span class="arithmatex">\(Q_b,Q_a\ge0\)</span>，且总量正。</p>
@@ -2072,7 +2068,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 <p>代入 <span class="arithmatex">\(a=m+h,b=m-h\)</span>，分子变成 <span class="arithmatex">\(m(Q_b+Q_a)+h(Q_b-Q_a)\)</span>，所以 <span class="arithmatex">\(\mu=m+hI\)</span>。因 <span class="arithmatex">\(-1\le I\le1\)</span>，有 <span class="arithmatex">\(b\le\mu\le a\)</span>。买侧队列越厚，模型给的微价格越偏向ask；这是一种队列信号定义，不是任意市场下未来价格无偏性的定理。</p>
 <p><strong>3. 边界与应用。</strong> 等深度时 <span class="arithmatex">\(I=0\)</span>，微价格为m；<span class="arithmatex">\(Q_a=0\)</span> 时为a，<span class="arithmatex">\(Q_b=0\)</span> 时为b。第二盘口 <span class="arithmatex">\(m=100.01,h=.01,I=.5\)</span>，故 <span class="arithmatex">\(\mu=100.01+.01\times.5=100.015\)</span>。前例用于说明基点单位，后例用于说明新增深度信息，无须为两组盘口重复计算整列同类指标。</p>
 </details>
-<p><span id="q438"></span></p>
 <h3 id="problem-22d20d603679">Q1173 · 做市的含义与报价三要素<a class="headerlink" href="#problem-22d20d603679" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：公允值、逆向选择与库存偏斜</p>
 <p><strong>题目</strong>：
@@ -2090,7 +2085,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 </ol>
 <p><strong>(c) 不确定性区间</strong>：报价练习中常把主观分布的中央覆盖区间口语化为“置信区间”。例如若数量服从 <span class="arithmatex">\( N(100,10^2) \)</span>，其约 <span class="arithmatex">\(95\%\)</span> 中央区间为 80@120；严格地说，这不是频率学意义下参数的置信区间。SIG 曾让人对“大楼有多少扇窗”给 <span class="arithmatex">\(90\%\)</span> 覆盖区间——没有公式可套的量。不确定性越大，区间与市场都应越宽。报价仍须现实：0@10 亿虽然包住真值，但不会成交；做市的意义在于以风险可控的价格提供流动性。</p>
 </details>
-<p><span id="q439"></span></p>
 <h3 id="problem-bdb3b18b2808">Q1174 · 信息不对称下的报价与成交机制<a class="headerlink" href="#problem-bdb3b18b2808" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：知情自愿／强制成交的信息阈值与选择偏差</p>
 <p><strong>题目</strong>：就"SIG 大楼有多少扇窗户"做市，对手方（可能知道真值）与你的报价成交。"买/卖窗户数"如何结算？假设真值是 400 扇而你不知情，首报 350@370，会发生什么？若你对真值完全确定，报价宽度如何在单位利润与成交概率之间权衡？是否存在不依赖对手模型的最优宽度？若你认为对手的估值偏高，如何偏斜报价？</p>
@@ -2101,7 +2095,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 <p><strong>宽度与偏斜需要订单流模型。</strong> 知道自己的理论价值也不能唯一确定最优价差：更宽可能增加每次成交的补偿，却降低成交率，库存与信息风险也改变最优值。若相信对手主观估值至少600，可考虑550@600，让交易更偏向他在高价买入；这依赖对其估值和交易选择的判断，不是固定真值已知时的普适套利。</p>
 <p><strong>两次成交如何夹值。</strong> 在同一固定真值、知情且自愿交易模型中，对手曾在ask <span class="arithmatex">\(a_1\)</span> 买入，又在较高的bid <span class="arithmatex">\(b_2\)</span> 卖出，才给 <span class="arithmatex">\(a_1\le X\le b_2\)</span>（边界无差异规则另定）。“高价买、低价卖”不能反向夹出同一个固定X；强制成交则应使用各轮中价，而非成交价作不等式。</p>
 </details>
-<p><span id="q555"></span></p>
 <h3 id="problem-cd70d830c75e">Q1175 · 知情对手成交后的条件估值<a class="headerlink" href="#problem-cd70d830c75e" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：截断均匀后验与逆向选择</p>
 <p><strong>题目</strong>：合约支付 <span class="arithmatex">\(V\sim U(0,1)\)</span>，你报买价 <span class="arithmatex">\(b\in(0,1)\)</span>、卖价 <span class="arithmatex">\(a\in(b,1)\)</span>。对手知道 <span class="arithmatex">\(V\)</span>，只在有严格正利润时交易一份。求你分别在买单、卖单被成交时的条件期望利润。</p>
@@ -2112,7 +2105,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 </details>
 <h2 id="sec-强制成交交替收窄">强制成交与交替收窄案例<a class="headerlink" href="#sec-强制成交交替收窄" title="Permanent link">&para;</a></h2>
 <p>强制买卖、可放弃交易和交替收紧市场是不同机制，各自按题设推断信息与记账。</p>
-<p><span id="q440"></span></p>
 <h3 id="problem-82c3c5d4c545">Q1176 · 案例 1：体育博彩（红袜队胜场数）<a class="headerlink" href="#problem-82c3c5d4c545" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：强制成交的中价筛选与固定宽度记账</p>
 <p><strong>题目</strong>：本练习每轮要求对手在买一份或卖一份中选择；在推断方向时，假定其风险中性且在整个脚本中使用同一个固定估值。对"红袜队 2021 赛季常规赛胜场数"做一个<strong>宽度为 10</strong> 的市场；随后给出 <span class="arithmatex">\(50\%\)</span> 与 <span class="arithmatex">\(90\%\)</span> 预测区间。之后对手逐轮成交，你每轮更新报价。终局对手问：你的 PNL 与当前持仓？若红袜赢 90 场你赚/亏多少？盈亏平衡胜场数是多少？</p>
@@ -2139,7 +2131,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 </ul>
 <p>给定p得到的是未来胜场的预测区间；若p也需估计，还应计入参数不确定性，不能把它当作p本身的置信区间。</p>
 </details>
-<p><span id="q441"></span></p>
 <h3 id="problem-cf1edaaae1b3">Q1177 · 案例 2：国家人口（坦桑尼亚）<a class="headerlink" href="#problem-cf1edaaae1b3" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：强制成交的中价筛选与比例报价约束</p>
 <p><strong>题目</strong>：本练习每轮要求对手在买一份或卖一份中选择；在推断方向时，假定其风险中性且在整个脚本中使用同一个固定估值。对坦桑尼亚人口做市（单位：百万人；附加规则：每轮 <span class="arithmatex">\( ask \le 1.5\times bid \)</span>）。对手逐轮成交，最后问 PNL 与持仓。开局信息极少时如何定价与调价？（真值 5600 万，你不知道。）</p>
@@ -2158,7 +2149,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 <p><strong>PNL 与持仓</strong>：对手两买两卖 → <strong>持仓 flat</strong>。配对：前两笔——30 卖给他、60 从他买 → 亏 30；后两笔——60 卖给他、50 从他买 → 赚 10。<strong>总PNL为<span class="arithmatex">\(-20\)</span>个合约计价单位。</strong></p>
 <p><strong>输了钱完全正常</strong>——面试官并不指望你背出非洲国家的人口。本题考的是：<strong>对成交的反应、调价的幅度纪律（信息越多移动越小）、以及 <span class="arithmatex">\( 1.5\times \)</span> 规则下的合规报价</strong>。</p>
 </details>
-<p><span id="q442"></span></p>
 <h3 id="problem-fefb82f6263f">Q1178 · 案例 3：成交还是收窄价差<a class="headerlink" href="#problem-fefb82f6263f" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：报价策略推断与最佳反应</p>
 <p><strong>题目</strong>：你与对手各持一个对股票 XYZ 的理论价值（独立、均匀分布于 <span class="arithmatex">\(90-110\)</span>）。你先开价；之后对手可以选择<strong>收紧你的市场</strong>（抬高 bid 和/或压低 ask）或<strong>按现价成交</strong>；若对手收紧，你可以选择收紧他的新市场或在他的市场上成交；如此交替直到有人成交。你的理论价值是 <strong>100</strong>（对手的你不知道）。请给出并解释一套合理策略；在没有完整规则、效用函数和对手策略时，不存在可直接断言的唯一最优报价。</p>
@@ -2191,7 +2181,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 </details>
 <h2 id="sec-三做市互动">费米先验与做市互动<a class="headerlink" href="#sec-三做市互动" title="Permanent link">&para;</a></h2>
 <p>先声明计数对象与交易机制，再根据成交信息及库存更新；区间估计与买卖价不承担相同作用。</p>
-<p><span id="q444"></span></p>
 <h3 id="problem-955a54497357">Q1179 · 做市场景：Airbnb 杂志数<a class="headerlink" href="#problem-955a54497357" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：计数口径与费米先验下的双边报价演练｜<strong>公司</strong>：Jane Street</p>
 <p><strong>题目</strong>："对我住的 Airbnb 里有几本杂志做个市场。"（主要考察你对做市<strong>术语与流程</strong>的熟悉程度，Fermi 估计本身不是重点。）</p>
@@ -2208,7 +2197,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 </ol>
 <p><strong>评分点</strong>：术语准确（bid/ask/mid/宽度/偏斜）、流程自然、成交后调价有据。</p>
 </details>
-<p><span id="q445"></span></p>
 <h3 id="problem-df8f55737ab5">Q1180 · 做市综合演练：SIG 窗户费米估算<a class="headerlink" href="#problem-df8f55737ab5" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：费米先验、成交信息更新与现金库存演练｜<strong>公司</strong>：SIG</p>
 <p><strong>题目</strong>：面试官就"我们这栋楼有多少扇窗户"与你做市，且他知道真值。请完整走一遍：Fermi 估计 → 报价 → 置信区间 → 根据成交更新 → 复述你的 PNL 与持仓。</p>
@@ -2236,7 +2224,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 <p>燃料切换在<span class="arithmatex">\(30+.95C=50+.37C\)</span>，故<span class="arithmatex">\(C=20/.58=1000/29\approx 34.48275862\)</span>美元/吨。更高碳价使高排放煤电的边际成本更大。</p>
 <p>一般成本 <span class="arithmatex">\(c_1+e_1C\)</span>、<span class="arithmatex">\(c_2+e_2C\)</span> 的交点为 <span class="arithmatex">\(C^*=(c_2-c_1)/(e_1-e_2)\)</span>，前提是排放强度不同。这里每增加1美元/吨碳价，煤相对气的成本增加 <span class="arithmatex">\(0.95-0.37=0.58\)</span> 美元/MWh；初始气贵20美元/MWh，因此需要 <span class="arithmatex">\(20/0.58\)</span> 的碳价填平差距。交点以上气更便宜；若强度相同则没有唯一切换点。</p>
 </details>
-<p><span id="q443"></span></p>
 <h3 id="problem-eafdd527e0d7">Q1182 · 成交后的风险管理（对冲原则）<a class="headerlink" href="#problem-eafdd527e0d7" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★｜<strong>题型</strong>：做市互动｜<strong>副题型</strong>：库存敞口与对冲损益</p>
 <p><strong>题目</strong>：做市商成交（比如从想卖股票的个人那里买入）后承担什么风险？理论上是什么补偿了这份风险？成交后可采取什么措施？这一原则在面试中如何体现？</p>
@@ -2264,7 +2251,6 @@ I=\frac{Q_b-Q_a}{Q_b+Q_a}.
 <summary>解答</summary>
 <p>直接按三状态写为 <span class="arithmatex">\(15=0.1(50-40)+0.1(x-40)_++0.8(14-40)_+\)</span>。先知第二项必须为14，所以 <span class="arithmatex">\(x&gt;40\)</span>，得到 <span class="arithmatex">\(0.1(x-40)=14\)</span>、<span class="arithmatex">\(x=180\)</span>。股票期望为 <span class="arithmatex">\(0.1(50)+0.1(180)+0.8(14)=34.2\)</span>，与现价30不一致。因此题中概率可以用于指定的期望计算，却不是同时为股票和买权定价的无息风险中性概率。</p>
 </details>
-<p><span id="q556"></span></p>
 <h3 id="problem-86a0178153f6">Q1185 · 重掷权属于谁的合约定价<a class="headerlink" href="#problem-86a0178153f6" title="Permanent link">&para;</a></h3>
 <p><strong>难度</strong>：★★｜<strong>题型</strong>：最优停止｜<strong>副题型</strong>：一次重掷的Bellman比较</p>
 <p><strong>题目</strong>：结算为公平 <span class="arithmatex">\(m\)</span> 面骰点数，可在看第一掷后选择免费重掷一次，但必须接受第二掷。分别在合约持有人、卖方拥有重掷决策权时，求持有人的风险中性价值。</p>
@@ -2380,8 +2366,6 @@ V_{\rm holder}=m^{-1}\sum_{x=1}^m\max(x,\mu).
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../javascripts/probability.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       
