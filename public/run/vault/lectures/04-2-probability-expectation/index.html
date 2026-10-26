@@ -1,0 +1,10899 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="量化研究、算法与笔面试">
+      
+      
+      
+        <link rel="canonical" href="https://ciang-ks.github.io/run/vault/lectures/04-2-probability-expectation/">
+      
+      
+        <link rel="prev" href="../04-1-probability-counting/">
+      
+      
+        <link rel="next" href="../04-3-probability-distributions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>概率论二：随机变量、期望与分布变换 - Run</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Run" class="md-header__button md-logo" aria-label="Run" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Run
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              概率论二：随机变量、期望与分布变换
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../research/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  从 0 开始的量化研究
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../algorithems/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  算法讲义与 LeetCode
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  笔面试讲义与题库
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Run" class="md-nav__button md-logo" aria-label="Run" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Run
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ciang-ks/run-quant" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ciang-ks/run-quant
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从 0 开始的量化研究
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    从 0 开始的量化研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    学习路线与阅读指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/lectures/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础讲义
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/01-markets-assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    市场、资产与交易对象
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/02-returns-risk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二章：收益、风险、组合与绩效
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/03-probability-statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三章：概率、统计推断与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/04-data-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四章：数据、偏差与量化研究管线
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/05-strategies-alpha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第五章：策略、Alpha 与信号研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/06-portfolio-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第六章：组合构建、执行与风险控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/07-machine-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章：机器学习用于量化研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/08-language-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第八章：LLM4Quant 与文本研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/lectures/09-research-communication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第九章：全链路项目、岗位能力与面试表达
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/projects/alpha_research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目 A：跨资产 Alpha 与组合研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/projects/ml_llm_research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目 B：ML/LLM 增量研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebook 与项目下载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../algorithems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    算法讲义与 LeetCode
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    算法讲义与 LeetCode
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../algorithems/lectures/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    算法讲义
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    算法讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/01-algorithmic-thinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 1 讲 · 从会写循环，到会分析算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/02-arrays-amortization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 2 讲 · 数组为什么好查，却不好插
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/03-hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 3 讲 · 哈希表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/04-linked-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 4 讲 · 链表、栈与队列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/05-stacks-queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 5 讲 · 双指针与滑动窗口
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/06-recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 6 讲 · 二分：每次排除一半，凭什么安全
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/07-insertion-merge-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 7 讲 · 归并排序与分治
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/08-quick-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 8 讲 · 快速排序与随机化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/09-linear-time-sorting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 9 讲 · 线性时间排序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/10-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 10 讲 · 选择与中位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/11-binary-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 11 讲 · 二叉搜索树与平衡树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/12-search-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 12 讲 · 二叉堆与优先队列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/13-balanced-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 13 讲 · Trie 与前缀结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/14-heaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 14 讲 · 树上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/15-graph-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 15 讲 · 图与图搜索
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/16-topological-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 16 讲 · 强连通分量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/17-shortest-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 17 讲 · 并查集与最小生成树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/18-all-pairs-shortest-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 18 讲 · 最短路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/19-minimum-spanning-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 19 讲 · 欧拉路径与网络流
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/20-dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 20 讲 · 动态规划入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/21-subsequence-dp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 21 讲 · 子序列 DP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/22-knapsack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 22 讲 · 背包 DP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/23-interval-string-dp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 23 讲 · 区间与字符串 DP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/24-greedy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 24 讲 · 贪心
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/25-intervals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 25 讲 · 区间调度与合并
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/26-math-geometry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 26 讲 · 数学与几何
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/27-bit-manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 27 讲 · 位运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/lectures/28-complexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 28 讲 · 计算复杂度与 NP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../algorithems/problems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    典型题
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    典型题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays & Hashing · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arrays & Hashing · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/01-contains-duplicate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    217. Contains Duplicate · 存在重复元素
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/02-valid-anagram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    242. Valid Anagram · 有效的字母异位词
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/03-two-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Two Sum · 两数之和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/04-group-anagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Group Anagrams · 字母异位词分组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/05-top-k-frequent-elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    347. Top K Frequent Elements · 前 K 个高频元素
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/06-product-of-array-except-self/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    238. Product of Array Except Self · 除自身以外数组的乘积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/07-valid-sudoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    36. Valid Sudoku · 有效的数独
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/08-encode-and-decode-strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    271. Encode and Decode Strings · 字符串的编码与解码
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/09-longest-consecutive-sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    128. Longest Consecutive Sequence · 最长连续序列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/01-arrays-and-hashing/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Two Pointers · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Two Pointers · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/01-valid-palindrome/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    125. Valid Palindrome · 验证回文串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/02-two-sum-ii-input-array-is-sorted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    167. Two Sum II - Input Array Is Sorted · 两数之和 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/03-3sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. 3Sum · 三数之和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/04-container-with-most-water/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Container With Most Water · 盛最多水的容器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/05-trapping-rain-water/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Trapping Rain Water · 接雨水
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/02-two-pointers/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliding Window · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sliding Window · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/01-best-time-to-buy-and-sell-stock/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    121. Best Time to Buy and Sell Stock · 买卖股票的最佳时机
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/02-longest-substring-without-repeating-characters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Longest Substring Without Repeating Characters · 无重复字符的最长子串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/03-longest-repeating-character-replacement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    424. Longest Repeating Character Replacement · 替换后的最长重复字符
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/04-permutation-in-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    567. Permutation in String · 字符串的排列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/05-minimum-window-substring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    76. Minimum Window Substring · 最小覆盖子串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/06-sliding-window-maximum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    239. Sliding Window Maximum · 滑动窗口最大值
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/03-sliding-window/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stack · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/01-valid-parentheses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Valid Parentheses · 有效的括号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/02-min-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    155. Min Stack · 最小栈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/03-evaluate-reverse-polish-notation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    150. Evaluate Reverse Polish Notation · 逆波兰表达式求值
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/04-generate-parentheses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. Generate Parentheses · 括号生成
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/05-daily-temperatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    739. Daily Temperatures · 每日温度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/06-car-fleet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    853. Car Fleet · 车队
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/07-largest-rectangle-in-histogram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    84. Largest Rectangle in Histogram · 柱状图中最大的矩形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/04-stack/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary Search · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Binary Search · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/01-binary-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    704. Binary Search · 二分查找
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/02-search-a-2d-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    74. Search a 2D Matrix · 搜索二维矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/03-koko-eating-bananas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    875. Koko Eating Bananas · 爱吃香蕉的珂珂
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/04-find-minimum-in-rotated-sorted-array/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    153. Find Minimum in Rotated Sorted Array · 寻找旋转排序数组中的最小值
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/05-search-in-rotated-sorted-array/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Search in Rotated Sorted Array · 搜索旋转排序数组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/06-time-based-key-value-store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    981. Time Based Key-Value Store · 基于时间的键值存储
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/07-median-of-two-sorted-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Median of Two Sorted Arrays · 寻找两个正序数组的中位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/05-binary-search/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_7" id="__nav_3_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linked List · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linked List · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/01-reverse-linked-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    206. Reverse Linked List · 反转链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/02-merge-two-sorted-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Merge Two Sorted Lists · 合并两个有序链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/03-linked-list-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    141. Linked List Cycle · 环形链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/04-reorder-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    143. Reorder List · 重排链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/05-remove-nth-node-from-end-of-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. Remove Nth Node From End of List · 删除链表的倒数第 N 个节点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/06-copy-list-with-random-pointer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    138. Copy List with Random Pointer · 复制带随机指针的链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/07-add-two-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Add Two Numbers · 两数相加
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/08-find-the-duplicate-number/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    287. Find the Duplicate Number · 寻找重复数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/09-lru-cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    146. LRU Cache · LRU 缓存
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/10-merge-k-sorted-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. Merge k Sorted Lists · 合并 K 个升序链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/11-reverse-nodes-in-k-group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Reverse Nodes in k-Group · K 个一组翻转链表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/06-linked-list/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trees · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/01-invert-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    226. Invert Binary Tree · 翻转二叉树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/02-maximum-depth-of-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    104. Maximum Depth of Binary Tree · 二叉树的最大深度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/03-diameter-of-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    543. Diameter of Binary Tree · 二叉树的直径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/04-balanced-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    110. Balanced Binary Tree · 平衡二叉树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/05-same-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    100. Same Tree · 相同的树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/06-subtree-of-another-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    572. Subtree of Another Tree · 另一棵树的子树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/07-lowest-common-ancestor-of-a-binary-search-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    235. Lowest Common Ancestor of a BST · 二叉搜索树的最近公共祖先
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/08-binary-tree-level-order-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    102. Binary Tree Level Order Traversal · 二叉树的层序遍历
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/09-binary-tree-right-side-view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    199. Binary Tree Right Side View · 二叉树的右视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/10-count-good-nodes-in-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1448. Count Good Nodes in Binary Tree · 统计二叉树中好节点的数目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/11-validate-binary-search-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98. Validate Binary Search Tree · 验证二叉搜索树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/12-kth-smallest-element-in-a-bst/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    230. Kth Smallest Element in a BST · 二叉搜索树中第 K 小的元素
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/13-construct-binary-tree-from-preorder-and-inorder-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    105. Construct Binary Tree from Preorder and Inorder Traversal · 从前序与中序遍历序列构造二叉树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/14-binary-tree-maximum-path-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    124. Binary Tree Maximum Path Sum · 二叉树中的最大路径和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/15-serialize-and-deserialize-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    297. Serialize and Deserialize Binary Tree · 二叉树的序列化与反序列化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/07-trees/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_9" id="__nav_3_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tries
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tries
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/08-tries/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/08-tries/01-implement-trie-prefix-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    208. Implement Trie (Prefix Tree) · 实现 Trie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/08-tries/02-design-add-and-search-words-data-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    211. Design Add and Search Words Data Structure · 添加与搜索单词
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/08-tries/03-word-search-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    212. Word Search II · 单词搜索 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/08-tries/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_10" id="__nav_3_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heap / Priority Queue · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Heap / Priority Queue · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/01-kth-largest-element-in-a-stream/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    703. Kth Largest Element in a Stream · 数据流中的第 K 大元素
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/02-last-stone-weight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1046. Last Stone Weight · 最后一块石头的重量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/03-k-closest-points-to-origin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    973. K Closest Points to Origin · 最接近原点的 K 个点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/04-kth-largest-element-in-an-array/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    215. Kth Largest Element in an Array · 数组中的第 K 个最大元素
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/05-task-scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    621. Task Scheduler · 任务调度器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/06-design-twitter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    355. Design Twitter · 设计推特
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/07-find-median-from-data-stream/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    295. Find Median from Data Stream · 数据流的中位数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/09-heap-priority-queue/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_11" id="__nav_3_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backtracking · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backtracking · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/01-subsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    78. Subsets · 子集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/02-combination-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    39. Combination Sum · 组合总和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/03-permutations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    46. Permutations · 全排列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/04-subsets-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    90. Subsets II · 子集 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/05-combination-sum-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40. Combination Sum II · 组合总和 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/06-word-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    79. Word Search · 单词搜索
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/07-palindrome-partitioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    131. Palindrome Partitioning · 分割回文串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/08-letter-combinations-of-a-phone-number/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Letter Combinations of a Phone Number · 电话号码的字母组合
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/09-n-queens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. N-Queens · N 皇后
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/10-backtracking/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_12" id="__nav_3_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphs · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphs · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/01-number-of-islands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    200. Number of Islands · 岛屿数量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/02-clone-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    133. Clone Graph · 克隆图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/03-max-area-of-island/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    695. Max Area of Island · 岛屿的最大面积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/04-pacific-atlantic-water-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    417. Pacific Atlantic Water Flow · 太平洋大西洋水流问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/05-surrounded-regions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    130. Surrounded Regions · 被围绕的区域
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/06-rotting-oranges/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    994. Rotting Oranges · 腐烂的橘子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/07-walls-and-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    286. Walls and Gates · 墙与门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/08-course-schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    207. Course Schedule · 课程表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/09-course-schedule-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    210. Course Schedule II · 课程表 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/10-redundant-connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    684. Redundant Connection · 冗余连接
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/11-number-of-connected-components-in-an-undirected-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    323. Number of Connected Components in an Undirected Graph · 无向图中连通分量的数目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/12-graph-valid-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    261. Graph Valid Tree · 以图判树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/13-word-ladder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    127. Word Ladder · 单词接龙
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/11-graphs/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_13" id="__nav_3_3_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Graphs · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advanced Graphs · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/01-min-cost-to-connect-all-points/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1584. Min Cost to Connect All Points · 连接所有点的最小费用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/02-network-delay-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    743. Network Delay Time · 网络延迟时间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/03-cheapest-flights-within-k-stops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    787. Cheapest Flights Within K Stops · K 站中转内最便宜的航班
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/04-reconstruct-itinerary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    332. Reconstruct Itinerary · 重新安排行程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/05-swim-in-rising-water/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    778. Swim in Rising Water · 水位上升的泳池中游泳
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/06-alien-dictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    269. Alien Dictionary · 火星词典
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/12-advanced-graphs/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_14" id="__nav_3_3_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-D Dynamic Programming · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1-D Dynamic Programming · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/01-climbing-stairs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    70. Climbing Stairs · 爬楼梯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/02-min-cost-climbing-stairs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    746. Min Cost Climbing Stairs · 使用最小花费爬楼梯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/03-house-robber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    198. House Robber · 打家劫舍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/04-house-robber-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    213. House Robber II · 打家劫舍 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/05-longest-palindromic-substring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Longest Palindromic Substring · 最长回文子串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/06-palindromic-substrings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    647. Palindromic Substrings · 回文子串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/07-decode-ways/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    91. Decode Ways · 解码方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/08-coin-change/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    322. Coin Change · 零钱兑换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/09-maximum-product-subarray/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    152. Maximum Product Subarray · 乘积最大子数组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/10-word-break/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    139. Word Break · 单词拆分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/11-longest-increasing-subsequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    300. Longest Increasing Subsequence · 最长递增子序列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/12-partition-equal-subset-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    416. Partition Equal Subset Sum · 分割等和子集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/13-1d-dp/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_15" id="__nav_3_3_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2-D Dynamic Programming · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2-D Dynamic Programming · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/01-unique-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    62. Unique Paths · 不同路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/02-longest-common-subsequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1143. Longest Common Subsequence · 最长公共子序列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/03-best-time-to-buy-and-sell-stock-with-cooldown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    309. Best Time to Buy and Sell Stock with Cooldown · 最佳买卖股票时机含冷冻期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/04-coin-change-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    518. Coin Change II · 零钱兑换 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/05-target-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    494. Target Sum · 目标和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/06-edit-distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    72. Edit Distance · 编辑距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/07-interleaving-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    97. Interleaving String · 交错字符串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/08-longest-increasing-path-in-a-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    329. Longest Increasing Path in a Matrix · 矩阵中的最长递增路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/09-distinct-subsequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    115. Distinct Subsequences · 不同的子序列
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/10-burst-balloons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    312. Burst Balloons · 戳气球
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/11-regular-expression-matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Regular Expression Matching · 正则表达式匹配
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/14-2d-dp/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_16" id="__nav_3_3_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greedy · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Greedy · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/01-maximum-subarray/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Maximum Subarray · 最大子数组和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/02-jump-game/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Jump Game · 跳跃游戏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/03-jump-game-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    45. Jump Game II · 跳跃游戏 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/04-gas-station/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    134. Gas Station · 加油站
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/05-hand-of-straights/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    846. Hand of Straights · 一手顺子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/06-merge-triplets-to-form-target-triplet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1899. Merge Triplets to Form Target Triplet · 合并若干三元组以形成目标三元组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/07-partition-labels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    763. Partition Labels · 划分字母区间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/08-valid-parenthesis-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    678. Valid Parenthesis String · 有效的括号字符串
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/15-greedy/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_17" id="__nav_3_3_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervals · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Intervals · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/01-meeting-rooms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    252. Meeting Rooms · 会议室
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/02-insert-interval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Insert Interval · 插入区间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/03-merge-intervals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Merge Intervals · 合并区间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/04-non-overlapping-intervals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    435. Non-overlapping Intervals · 无重叠区间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/05-meeting-rooms-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    253. Meeting Rooms II · 会议室 II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/06-minimum-interval-to-include-each-query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1851. Minimum Interval to Include Each Query · 包含每个查询的最小区间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/16-intervals/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_18" id="__nav_3_3_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math & Geometry · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Math & Geometry · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/01-happy-number/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    202. Happy Number · 快乐数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/02-plus-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    66. Plus One · 加一
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/03-rotate-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Rotate Image · 旋转图像
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/04-spiral-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Spiral Matrix · 螺旋矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/05-set-matrix-zeroes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    73. Set Matrix Zeroes · 矩阵置零
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/06-powx-n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. Pow(x, n) · Pow(x, n)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/07-multiply-strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    43. Multiply Strings · 字符串相乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/08-detect-squares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2013. Detect Squares · 检测正方形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/17-math-and-geometry/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_19" id="__nav_3_3_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bit Manipulation · 解题手册
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bit Manipulation · 解题手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/00-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方法指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/01-single-number/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    136. Single Number · 只出现一次的数字
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/02-number-of-1-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    191. Number of 1 Bits · 位 1 的个数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/03-counting-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    338. Counting Bits · 比特位计数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/04-reverse-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    190. Reverse Bits · 颠倒二进制位
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/05-missing-number/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    268. Missing Number · 丢失的数字
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/06-sum-of-two-integers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    371. Sum of Two Integers · 两整数之和
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/07-reverse-integer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reverse Integer · 整数反转
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithems/problems/18-bit-manipulation/99-extra-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    补充练习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    笔面试讲义与题库
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    笔面试讲义与题库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    备考路线
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    系统讲义
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    系统讲义
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-interview-principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    面试总原则、行为举证与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-brainteasers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    脑筋急转弯：把故事转成结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-calculus-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分与线性代数：识别结构，再做运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-1-probability-counting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论一：计数、抽样与信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论二：随机变量、期望与分布变换
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论二：随机变量、期望与分布变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p2-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阅读入口与方法目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机变量、分布函数与支持
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        期望、方差与可积性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-expectation-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        怎样选择期望路线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-distribution-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连续分布与参数约定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-basic-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础矩与线性组合：先把平方展开对
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指示变量与线性期望：让每个贡献有唯一归属
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全期望、全方差与随机和：先把环境固定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-tails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        尾和、尾积分与矩的存在性：平均有多大，取决于尾巴有多长
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        协方差计算与方差优化：找到共享项，再把参数配成平方
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-discrete-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        有限样本计数与离散变量变换：把原像质量加起来
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-geometric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        面积体积与几何事件：支持、区域与截面一起确定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-polar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        极坐标、随机方向与均匀采样：均匀半径不等于均匀面积
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-spacings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机区间、断棒与间距：总和固定带来单纯形结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        周期相位与时间窗：按等待窗口的长度加权
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-ranks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        交换性、随机名次与纪录：对称的是位置，不必是数值
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-order-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次序统计量与极值分布：先问阈值左边有几个样本
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-ordered-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        极值分布与排序后协方差：先做代数表示，再用独立结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变量变换与密度积分：先反演事件，后决定用哪条密度公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正态标准化与联合高斯：把位置、尺度和依赖分别处理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-generating-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩母函数、生成函数与分布分解：把卷积换成乘法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机数构造与拒绝采样：证明接受后的归一化分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-convexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩比较、凸性与熵：由逐点关系控制平均
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率不等式与尾界：按已知信息选最有效的变换
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-existence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率方法与存在性：平均值能迫使某个配置更好
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-3-probability-distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论三：分布、等待与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统计基础：从观测机制到估计与预测 {#statistics}
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-1-stochastic-processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程一：状态、长期行为与停止 {#discrete-processes}
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-2-stochastic-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程二：连续时间与随机微积分 {#continuous-processes}
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-derivatives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    金融衍生品：从现金流到定价、对冲与风险
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-data-science/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据科学与量化研究：从预测目标到可检验的决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-market-making/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    做市、交易与决策：从信息和现金流到策略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-algorithms-numerics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    算法与数值方法：状态、不变量、误差与接口
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../questions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题与解答
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    真题与解答
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/01-brainteasers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 脑筋急转弯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/02-calculus-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 微积分与线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/03-probability-counting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 概率论 一
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/04-probability-expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 概率论 二
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/05-probability-distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 概率论 三
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/06-statistics-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 统计与回归
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/07-stochastic-processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 随机过程与随机微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/08-derivatives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 金融衍生品
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/09-algorithms-numerics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 算法与数值方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/10-cases-market-making/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 案例与做市
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/11-games-decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 博弈与决策
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/12-behavioral-finance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    真题 · 行为面试与金融常识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p2-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阅读入口与方法目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机变量、分布函数与支持
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        期望、方差与可积性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-expectation-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        怎样选择期望路线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-distribution-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连续分布与参数约定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-basic-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础矩与线性组合：先把平方展开对
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指示变量与线性期望：让每个贡献有唯一归属
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全期望、全方差与随机和：先把环境固定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-tails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        尾和、尾积分与矩的存在性：平均有多大，取决于尾巴有多长
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        协方差计算与方差优化：找到共享项，再把参数配成平方
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-discrete-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        有限样本计数与离散变量变换：把原像质量加起来
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-geometric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        面积体积与几何事件：支持、区域与截面一起确定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-polar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        极坐标、随机方向与均匀采样：均匀半径不等于均匀面积
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-spacings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机区间、断棒与间距：总和固定带来单纯形结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        周期相位与时间窗：按等待窗口的长度加权
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-ranks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        交换性、随机名次与纪录：对称的是位置，不必是数值
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-order-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次序统计量与极值分布：先问阈值左边有几个样本
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-ordered-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        极值分布与排序后协方差：先做代数表示，再用独立结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变量变换与密度积分：先反演事件，后决定用哪条密度公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正态标准化与联合高斯：把位置、尺度和依赖分别处理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-generating-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩母函数、生成函数与分布分解：把卷积换成乘法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机数构造与拒绝采样：证明接受后的归一化分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-convexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩比较、凸性与熵：由逐点关系控制平均
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率不等式与尾界：按已知信息选最有效的变换
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p2-existence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概率方法与存在性：平均值能迫使某个配置更好
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">概率论二：随机变量、期望与分布变换<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><a href="../04-1-probability-counting/">第一篇：计数与条件概率</a>；<a href="./">本篇：随机变量与期望</a>；<a href="../04-3-probability-distributions/">第三篇：分布、等待与决策</a></p>
+<p>求一个计数的平均值，不一定需要知道它的完整分布；求变换后的平均值，也不一定需要先推变换后的密度。本篇先建立随机变量和矩的基础，再说明什么时候拆成小贡献、什么时候固定隐藏条件、什么时候改算尾概率，以及何时才需要联合积分。</p>
+<h2 id="p2-contents">阅读入口与方法目录<a class="headerlink" href="#p2-contents" title="Permanent link">&para;</a></h2>
+<p>基础入口：<a href="#p2-foundations">分布与支持</a>；<a href="#p2-moments">期望、方差与可积性</a>；<a href="#p2-expectation-route">选择期望路线</a>；<a href="#p2-distribution-table">连续分布与参数约定</a>。</p>
+<table>
+<thead>
+<tr>
+<th>方法组</th>
+<th>主要路线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#p2-basic-moments">基础矩与线性组合</a></td>
+<td>从定义积分，再用仿射缩放与协方差矩阵</td>
+</tr>
+<tr>
+<td><a href="#p2-indicators">指示变量与线性期望</a></td>
+<td>按边、位置、对象或箱子分解贡献</td>
+</tr>
+<tr>
+<td><a href="#p2-conditioning">全期望、全方差与随机和</a></td>
+<td>固定随机数量或隐藏环境，再平均</td>
+</tr>
+<tr>
+<td><a href="#p2-tails">尾和、尾积分与矩的存在性</a></td>
+<td>把大小写成跨越各层级的总和</td>
+</tr>
+<tr>
+<td><a href="#p2-covariance">协方差计算与方差优化</a></td>
+<td>找共享项，展开二次型，再配方</td>
+</tr>
+<tr>
+<td><a href="#p2-discrete-transforms">有限样本计数与离散变量变换</a></td>
+<td>列出原像，汇合映到同一点的概率</td>
+</tr>
+<tr>
+<td><a href="#p2-geometric">面积体积与几何事件</a></td>
+<td>联合区域、截面长度、允许中心面积</td>
+</tr>
+<tr>
+<td><a href="#p2-polar">极坐标、随机方向与均匀采样</a></td>
+<td>区分半径、方向与面积测度</td>
+</tr>
+<tr>
+<td><a href="#p2-spacings">随机区间、断棒与间距</a></td>
+<td>排序、单纯形平移与交集容斥</td>
+</tr>
+<tr>
+<td><a href="#p2-phase">周期相位与时间窗</a></td>
+<td>把观察时刻压缩到一个周期</td>
+</tr>
+<tr>
+<td><a href="#p2-ranks">交换性、随机名次与纪录</a></td>
+<td>删去无关对象，使用插入名次或间隔</td>
+</tr>
+<tr>
+<td><a href="#p2-order-statistics">次序统计量与极值分布</a></td>
+<td>阈值两侧计数，联合密度与条件积分</td>
+</tr>
+<tr>
+<td><a href="#p2-ordered-covariance">极值分布与排序后协方差</a></td>
+<td>先找和、差、绝对值的代数表示</td>
+</tr>
+<tr>
+<td><a href="#p2-transformations">变量变换与密度积分</a></td>
+<td>反演、分支、雅可比、卷积</td>
+</tr>
+<tr>
+<td><a href="#p2-gaussian">正态标准化与联合高斯</a></td>
+<td>标准化、配方、正交分解与截断</td>
+</tr>
+<tr>
+<td><a href="#p2-generating-functions">矩母函数、生成函数与分布分解</a></td>
+<td>用函数乘积处理独立和与随机复合</td>
+</tr>
+<tr>
+<td><a href="#p2-simulation">随机数构造与拒绝采样</a></td>
+<td>证明输出分布，再分析平均成本</td>
+</tr>
+<tr>
+<td><a href="#p2-convexity">矩比较、凸性与熵</a></td>
+<td>逐点不等式、Jensen 与受控近似</td>
+</tr>
+<tr>
+<td><a href="#p2-bounds">概率不等式与尾界</a></td>
+<td>由已知矩选择变换，再优化参数</td>
+</tr>
+<tr>
+<td><a href="#p2-existence">概率方法与存在性</a></td>
+<td>用正概率或期望越界推出存在</td>
+</tr>
+</tbody>
+</table>
+<h2 id="p2-foundations">随机变量、分布函数与支持<a class="headerlink" href="#p2-foundations" title="Permanent link">&para;</a></h2>
+<p>随机变量把每个实验结果映到一个数。分布函数统一描述离散、连续与混合模型：</p>
+<div class="arithmatex">\[
+F_X(x)=P(X\le x),\qquad P(a&lt;X\le b)=F_X(b)-F_X(a).
+\]</div>
+<p>它单调不减、右连续，左右无穷处分别趋于零与一。跳跃大小是点质量：<span class="arithmatex">\(P(X=x)=F_X(x)-F_X(x-)\)</span>。因此，只有无原子时才能不加说明地交换严格与非严格不等号。</p>
+<p>离散模型使用质量函数 <span class="arithmatex">\(p_X(x)=P(X=x)\)</span>，所有质量和为一。绝对连续模型使用密度 <span class="arithmatex">\(f_X\)</span>，满足</p>
+<div class="arithmatex">\[
+F_X(x)=\int_{-\infty}^x f_X(t)\,dt,
+\qquad f_X(t)\ge0,\qquad\int_{\mathbb R}f_X(t)\,dt=1.
+\]</div>
+<p>密度可以大于一，甚至在某点附近无界；密度高度不是单点概率。模型也可能既有原子又有连续部分，例如把低于阈值的仪器读数统一记为零。只写一条连续密度会丢失这部分质量。</p>
+<p>联合分布描述多个坐标同时取值。连续模型中，求边缘密度要沿另一个坐标的合法截面积分；求条件密度要除以该条件坐标的边缘密度，并注明分母为正的范围。非矩形支持特别容易使积分上下限随条件值变化。</p>
+<h2 id="p2-moments">期望、方差与可积性<a class="headerlink" href="#p2-moments" title="Permanent link">&para;</a></h2>
+<p>离散变量的期望是 <span class="arithmatex">\(\sum_x xp_X(x)\)</span>，连续变量是 <span class="arithmatex">\(\int xf_X(x)dx\)</span>。有限期望通常要求 <span class="arithmatex">\(E|X|&lt;\infty\)</span>，这样正负部分都有限，才能相减。非负变量可以有无穷期望，非负求和与积分交换仍可使用 Tonelli 定理。</p>
+<p>对可积变量，不论是否独立，有限和都满足</p>
+<div class="arithmatex">\[
+E\left[\sum_i a_iX_i+b\right]=\sum_i a_iEX_i+b.
+\]</div>
+<p>乘积则不同，<span class="arithmatex">\(E[XY]=EX\,EY\)</span> 需要独立或其他足以保证因子分解的条件。非线性函数也不能穿过期望：<span class="arithmatex">\(E[g(X)]\)</span> 应直接按原分布积分，不必先推 <span class="arithmatex">\(g(X)\)</span> 的分布，但通常不等于 <span class="arithmatex">\(g(EX)\)</span>。</p>
+<p>二阶矩有限时，</p>
+<div class="arithmatex">\[
+\operatorname{Var}(X)=E[X^2]-(EX)^2,
+\quad\operatorname{Cov}(X,Y)=E[XY]-EX\,EY,
+\]</div>
+<div class="arithmatex">\[
+\operatorname{Var}\left(\sum_i a_iX_i\right)
+=\sum_i a_i^2\operatorname{Var}(X_i)
++2\sum_{i&lt;j}a_ia_j\operatorname{Cov}(X_i,X_j).
+\]</div>
+<p>独立足以使协方差项消失，不相关也足够；反过来，零协方差一般不能推出独立。相关系数还要求两边方差严格为正。</p>
+<p>条件期望 <span class="arithmatex">\(m(Y)=E[X\mid Y]\)</span> 是随所给信息变化的随机变量。固定 <span class="arithmatex">\(Y=y\)</span> 时，它只是对应条件分布中的加权平均。再次平均可还原总体：</p>
+<div class="arithmatex">\[
+EX=E[E(X\mid Y)],
+\quad
+\operatorname{Var}(X)=E[\operatorname{Var}(X\mid Y)]+\operatorname{Var}(E[X\mid Y]).
+\]</div>
+<p>全方差的两项分别描述层内波动与层间均值波动，少一项就换了模型。</p>
+<h2 id="p2-expectation-route">怎样选择期望路线<a class="headerlink" href="#p2-expectation-route" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>目标的结构</th>
+<th>先写出的表达式</th>
+<th>需要留意的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一批局部贡献的总数</td>
+<td><span class="arithmatex">\(X=\sum_i I_i\)</span></td>
+<td>指标可相关，避免重复计算同一贡献</td>
+</tr>
+<tr>
+<td>随机项数、随机环境</td>
+<td><span class="arithmatex">\(E[X\mid Y]\)</span></td>
+<td>给定后是否真的独立，项数是否是停时</td>
+</tr>
+<tr>
+<td>非负大小、首次等待或极值</td>
+<td><span class="arithmatex">\(EX=\int_0^\infty P(X&gt;t)dt\)</span></td>
+<td>非负；尾积分也用于判断是否发散</td>
+</tr>
+<tr>
+<td>同状态失败后重来</td>
+<td><span class="arithmatex">\(v=E[\text{本步奖励}+\text{后续价值}]\)</span></td>
+<td>确认真的回到同状态，明确时间单位</td>
+</tr>
+<tr>
+<td>有选择权</td>
+<td><span class="arithmatex">\(V=\max(\text{停止值},\text{继续值})\)</span></td>
+<td>继续值含未来选择权，不能只用下一次均值</td>
+</tr>
+</tbody>
+</table>
+<p>最后两条在第三篇展开。它们与直接线性期望并不冲突：先判断目标是否能按完整路径上的对象改写，能改写时常可绕过停时递推；不能改写时再选择适当状态。</p>
+<h2 id="p2-distribution-table">连续分布与参数约定<a class="headerlink" href="#p2-distribution-table" title="Permanent link">&para;</a></h2>
+<p>下表的 Gamma、指数分布统一使用速率参数 <span class="arithmatex">\(\lambda\)</span>。若其他资料使用尺度 <span class="arithmatex">\(\theta\)</span>，二者关系为 <span class="arithmatex">\(\theta=1/\lambda\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>分布及支持</th>
+<th>密度</th>
+<th>均值与方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(U(a,b)\)</span>，<span class="arithmatex">\(a&lt;x&lt;b\)</span></td>
+<td><span class="arithmatex">\(1/(b-a)\)</span></td>
+<td><span class="arithmatex">\((a+b)/2\)</span>，<span class="arithmatex">\((b-a)^2/12\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(N(\mu,\sigma^2)\)</span>，<span class="arithmatex">\(\sigma&gt;0\)</span></td>
+<td><span class="arithmatex">\(e^{-(x-\mu)^2/(2\sigma^2)}/(\sqrt{2\pi}\sigma)\)</span></td>
+<td><span class="arithmatex">\(\mu\)</span>，<span class="arithmatex">\(\sigma^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{Exp}(\lambda)\)</span>，<span class="arithmatex">\(x&gt;0\)</span></td>
+<td><span class="arithmatex">\(\lambda e^{-\lambda x}\)</span></td>
+<td><span class="arithmatex">\(1/\lambda\)</span>，<span class="arithmatex">\(1/\lambda^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{Gamma}(r,\lambda)\)</span>，<span class="arithmatex">\(x&gt;0\)</span></td>
+<td><span class="arithmatex">\(\lambda^rx^{r-1}e^{-\lambda x}/\Gamma(r)\)</span></td>
+<td><span class="arithmatex">\(r/\lambda\)</span>，<span class="arithmatex">\(r/\lambda^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{Beta}(a,b)\)</span>，<span class="arithmatex">\(0&lt;x&lt;1\)</span></td>
+<td><span class="arithmatex">\(x^{a-1}(1-x)^{b-1}/B(a,b)\)</span></td>
+<td><span class="arithmatex">\(a/(a+b)\)</span>，<span class="arithmatex">\(ab/[(a+b)^2(a+b+1)]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>指数与Gamma的速率 <span class="arithmatex">\(\lambda&gt;0\)</span>，Gamma形状 <span class="arithmatex">\(r&gt;0\)</span>，Beta形状 <span class="arithmatex">\(a,b&gt;0\)</span>。正态均值 <span class="arithmatex">\(\mu\in\mathbb R\)</span>、标准差 <span class="arithmatex">\(\sigma&gt;0\)</span>；均匀分布端点只要求 <span class="arithmatex">\(a&lt;b\)</span>，不必为正。对数正态指 <span class="arithmatex">\(Y=e^Z\)</span>、<span class="arithmatex">\(Z\sim N(\mu,\sigma^2)\)</span>，因此 <span class="arithmatex">\(E[Y^r]=e^{r\mu+r^2\sigma^2/2}\)</span>；全部实数阶矩存在，不代表它的矩母函数在正半轴也有限。</p>
+<h2 id="p2-basic-moments">基础矩与线性组合：先把平方展开对<a class="headerlink" href="#p2-basic-moments" title="Permanent link">&para;</a></h2>
+<p>常用分布的矩应知道来源。先对标准区间积分，再做平移缩放，比重复积分一般参数更清楚。标准均匀变量满足 <span class="arithmatex">\(EU=1/2\)</span>、<span class="arithmatex">\(E[U^2]=1/3\)</span>，所以方差为 <span class="arithmatex">\(1/12\)</span>；映成 <span class="arithmatex">\(a+(b-a)U\)</span> 后，方差乘以区间长度的平方。</p>
+<p>向量线性组合用同一展开：若均值为 <span class="arithmatex">\(\mu\)</span>、协方差矩阵为 <span class="arithmatex">\(\Sigma\)</span>，则 <span class="arithmatex">\(E[a^{\mathsf T}X]=a^{\mathsf T}\mu\)</span>，方差为 <span class="arithmatex">\(a^{\mathsf T}\Sigma a\)</span>。<a href="../../questions/05-probability-distributions/#problem-1ce98f1d3bf9">Q535 · 独立变量的线性组合</a>中，四百个独立零均值冲击的单期标准差为 <span class="arithmatex">\(0.5\)</span>，故总方差为 <span class="arithmatex">\(400\cdot0.5^2=100\)</span>，总标准差是十。标准差不能逐期直接相加。</p>
+<p>复变量的平方还要分清共轭。<a href="../../questions/05-probability-distributions/#problem-5893332d23c6">Q532 · 复单位圆的二阶量</a>取 <span class="arithmatex">\(Z=e^{i\Theta}\)</span>，均匀角度使 <span class="arithmatex">\(E[Z^2]=(2\pi)^{-1}\int_0^{2\pi}e^{2i\theta}d\theta=0\)</span>，但 <span class="arithmatex">\(|Z|^2=1\)</span> 逐点成立。复方差使用模平方，而不是普通平方。</p>
+<h2 id="p2-indicators">指示变量与线性期望：让每个贡献有唯一归属<a class="headerlink" href="#p2-indicators" title="Permanent link">&para;</a></h2>
+<p>看到“多少条边”“多少个箱子”“多少处切换”“多少个对象保留”时，先确定一个潜在贡献单位，为每个单位设置指标。只算一个单位出现的概率，再相加。指标之间重叠或相关不会妨碍均值相加，但会影响方差。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-dbcc61f2f053">Q420 · 环上互相伸手</a>有十条无向邻边。某边握手要求两端各选择指定方向，概率为 <span class="arithmatex">\(1/4\)</span>，所以期望为 <span class="arithmatex">\(10/4=5/2\)</span>。按人计数再忘记除以二，会把同一握手算两次。</p>
+<p>占位问题应区分按对象、按箱子、按对象对计数。在<a href="../../questions/04-probability-expectation/#problem-0763771d0d30">Q444 · 多项占位中的频数、覆盖数与碰撞对</a>中，<span class="arithmatex">\(n\)</span> 个对象独立均匀投入 <span class="arithmatex">\(m\)</span> 箱，非空箱数 <span class="arithmatex">\(K\)</span> 的期望是</p>
+<div class="arithmatex">\[
+EK=m[1-(1-1/m)^n].
+\]</div>
+<p>四对象四箱时为 <span class="arithmatex">\(175/64\)</span>。若数同箱对象对，答案变为 <span class="arithmatex">\(\binom n2/m\)</span>；一个三对象箱贡献三对碰撞，却只贡献一个多人箱。随机图中三角形数量也是对子图指标求和；计算方差时再按共享边数分类联合概率。</p>
+<p>颜色游程可逐点写成“一加相邻切换数”；固定红黑数量时，单对异色概率要用不放回边缘，不能套独立颜色的乘积。停止后剩余牌数也可能改写为完整排列中晚于所有异色牌的对象数：这样把时间过程换成相对名次指标，便能直接使用线性性。</p>
+<h2 id="p2-conditioning">全期望、全方差与随机和：先把环境固定<a class="headerlink" href="#p2-conditioning" title="Permanent link">&para;</a></h2>
+<p>隐藏盒型、随机人数、随机截面等题，固定条件后常变成普通分布。完整路线是求条件均值与条件方差，再平均，而非先把所有条件参数替换成平均参数。</p>
+<p>若 <span class="arithmatex">\(N\)</span> 独立于整个独立同分布增量序列，且 <span class="arithmatex">\(E[N^2]&lt;\infty\)</span>、<span class="arithmatex">\(E[X_1^2]&lt;\infty\)</span>，<span class="arithmatex">\(S=\sum_{i=1}^NX_i\)</span>，单项均值、方差为 <span class="arithmatex">\(m,v\)</span>，则</p>
+<div class="arithmatex">\[
+E(S\mid N)=Nm,\quad\operatorname{Var}(S\mid N)=Nv,
+\qquad ES=mEN,\quad\operatorname{Var}(S)=vEN+m^2\operatorname{Var}(N).
+\]</div>
+<p><a href="../../questions/04-probability-expectation/#problem-2bef582c373c">Q351 · 随机总量：独立增量与共同冲击</a>给出盒数、每盒件数均值均为十、方差均为十六。各盒独立时总量均值为一百，方差为 <span class="arithmatex">\(16\cdot10+10^2\cdot16=1760\)</span>。所有盒共用同一个随机件数时，总量变成 <span class="arithmatex">\(NX\)</span>，方差为 <span class="arithmatex">\(116^2-100^2=3456\)</span>。均值相同，相关结构不同，方差就明显不同。</p>
+<p>共享成功率是另一种环境。<a href="../../questions/04-probability-expectation/#problem-f8f1856707fe">Q357 · 共享随机成功率的预测、相关与总计数方差</a>中，给定 <span class="arithmatex">\(Q\)</span> 后各指标独立，记 <span class="arithmatex">\(EQ=\mu\)</span>、<span class="arithmatex">\(\operatorname{Var}(Q)=v\)</span>，则两次协方差为 <span class="arithmatex">\(v\)</span>，总成功数的方差为</p>
+<div class="arithmatex">\[
+\operatorname{Var}(S_n)=n\mu(1-\mu)+n(n-1)v.
+\]</div>
+<p>若每次重新独立抽取环境，后一个相关项便消失。若项数是由增量决定的停时，独立随机和方差公式通常不能直接沿用；有时均值可由 Wald 恒等式处理，也要另核对其可积条件。</p>
+<h2 id="p2-tails">尾和、尾积分与矩的存在性：平均有多大，取决于尾巴有多长<a class="headerlink" href="#p2-tails" title="Permanent link">&para;</a></h2>
+<p>非负整数 <span class="arithmatex">\(N\)</span> 可逐点写成 <span class="arithmatex">\(\sum_{k\ge1}\mathbf1_{\{N\ge k\}}\)</span>，故</p>
+<div class="arithmatex">\[
+EN=\sum_{k\ge1}P(N\ge k).
+\]</div>
+<p>连续变量使用同样的层级分解。对 <span class="arithmatex">\(X\ge0\)</span>、<span class="arithmatex">\(r&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+E[X^r]=\int_0^\infty r t^{r-1}P(X&gt;t)dt.
+\]</div>
+<p>这不是只在均值有限时才可使用的技巧：若右侧发散，恰好说明相应矩无穷。若随机变量可取负值，先分正负部分，不要直接从零积分它的尾概率。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-5a715e5f1d62">Q472 · 随机首观测门槛：离散并列与连续等待</a>先取连续样本作为门槛，再等独立后续样本首次超过它。只数后续观测的等待为 <span class="arithmatex">\(N\)</span>。条件于门槛 <span class="arithmatex">\(x\)</span>，成功率为 <span class="arithmatex">\(1-F(x)\)</span>，所以</p>
+<div class="arithmatex">\[
+P(N&gt;n)=E[F(X_1)^n]=\int_0^1u^n du=\frac1{n+1}.
+\]</div>
+<p>尾概率趋零，说明几乎必然会停；调和尾和却发散，说明平均等待无穷。先平均成功率再取倒数，会错误地得到一个有限答案。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-12acbc695bb8">Q478 · 乘法财富的均值、典型路径与对数近似</a>提醒我们区分均值与典型路径。乘数等概率取 <span class="arithmatex">\(1.7,0.5\)</span> 时，均值每期乘 <span class="arithmatex">\(1.1\)</span>，但平均对数增量为 <span class="arithmatex">\(\tfrac12\log0.85&lt;0\)</span>，所以财富几乎必然趋零。稀有大值可以抬高均值；几乎必然收敛并不自动允许交换极限与期望。</p>
+<h2 id="p2-covariance">协方差计算与方差优化：找到共享项，再把参数配成平方<a class="headerlink" href="#p2-covariance" title="Permanent link">&para;</a></h2>
+<p>先把变量表示成基础项的线性组合。两个和的协方差只由共同的基础随机项贡献；相邻差分会共享一个符号相反的项，因此产生负协方差。若随机项本来相关，还必须保留相应交叉项。</p>
+<p>最小方差参数问题通常无需高阶优化。对 <span class="arithmatex">\(R(\theta)=U+\theta V\)</span>，记 <span class="arithmatex">\(d=\operatorname{Cov}(U,V)\)</span>、<span class="arithmatex">\(v=\operatorname{Var}(V)&gt;0\)</span>，则</p>
+<div class="arithmatex">\[
+\operatorname{Var}(R)=v(\theta+d/v)^2+\operatorname{Var}(U)-d^2/v,
+\qquad\theta_*=-d/v.
+\]</div>
+<p><a href="../../questions/05-probability-distributions/#problem-f6c355b6d22d">Q558 · 仿射头寸的最小方差：对冲与全投资约束</a>将两种金融问题放在这个一般式中。固定一股资产、调整卖空股数，与让两项权重之和为一，使用的是不同的 <span class="arithmatex">\(U,V\)</span>。后者独立方差为 <span class="arithmatex">\(25,100\)</span> 时，第一项最优权重为 <span class="arithmatex">\(100/(25+100)=4/5\)</span>。有区间约束时把无约束最优点投影到区间；若 <span class="arithmatex">\(v=0\)</span>，方差对该参数恒定，不能除以零。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-628a7b2b0842">Q552 · 协方差界、取等结构与和差相关</a>用中心化变量的 Cauchy 不等式证明相关系数绝对值不超过一。取等意味着两个中心化变量几乎必然线性相关；零方差时相关系数未定义。与之不同，零相关只控制二阶矩，通常不说明两个变量独立。</p>
+<h2 id="p2-discrete-transforms">有限样本计数与离散变量变换：把原像质量加起来<a class="headerlink" href="#p2-discrete-transforms" title="Permanent link">&para;</a></h2>
+<p>有限分布先列合法结果及权重，归一化后再做函数映射。若多个原值被映到同一个新值，它们的质量应相加。这里没有连续密度的导数或雅可比。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-068e6a8d7d43">Q563 · 三面骰差及平方</a>中，差 <span class="arithmatex">\(D\)</span> 从负二到二的有序实现数依次为 <span class="arithmatex">\(1,2,3,2,1\)</span>，共九个结果。因此平方后的分布是</p>
+<div class="arithmatex">\[
+P(D^2=0)=\frac13,\qquad P(D^2=1)=\frac49,\qquad P(D^2=4)=\frac29.
+\]</div>
+<p>平方把正负一、正负二分别合并。<span class="arithmatex">\(ED=0\)</span> 来自对称性，但方差仍为 <span class="arithmatex">\(E[D^2]=4/3\)</span>，不能由零均值推成零波动。</p>
+<p>若骰面先随机改造，再掷骰，应条件于改造方案后平均；若题目按某个数值加权抽样，先将权重除以总和。对不同随机机制，不能沿用原来公平骰的等可能面计数。</p>
+<h2 id="p2-geometric">面积体积与几何事件：支持、区域与截面一起确定<a class="headerlink" href="#p2-geometric" title="Permanent link">&para;</a></h2>
+<p>只有联合点按面积或体积均匀时，概率才直接等于区域比例。常用的区域变换有对角带、楔形分区、矩形内缩和单纯形缩放；一般非均匀密度则须在区域上积分。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-31cfd883cbcf">Q366 · 均匀两点距离、到达时间与等候相遇</a>把 <span class="arithmatex">\(D=|U-V|\)</span> 放入边长 <span class="arithmatex">\(\ell\)</span> 的正方形。带外两三角形总面积为 <span class="arithmatex">\((\ell-d)^2\)</span>，所以</p>
+<div class="arithmatex">\[
+P(D\le d)=1-(1-d/\ell)^2\quad(0\le d\le\ell),
+\qquad ED=\ell/3.
+\]</div>
+<p>等候相遇是同一区域中的距离阈值事件；救护车时间是距离除以速度的缩放。到达窗不同时，支持成为长方形，改用横截面长度积分，不应直接代入正方形公式。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-2293eb414251">Q374 · 矩形格中的圆片包含与独立随机半径</a>则先固定半径。矩形边长为 <span class="arithmatex">\(a,b\)</span>，半径为 <span class="arithmatex">\(r\)</span> 时，允许圆心区域的面积比例为 <span class="arithmatex">\((1-2r/a)_+(1-2r/b)_+\)</span>。半径独立时才可对这个式子取期望。边长二十、半径均匀于零到十时，积分为 <span class="arithmatex">\(\int_0^1(1-u)^2du=1/3\)</span>。</p>
+<p>如果半径由圆心到另一个随机点的距离决定，先固定圆心，计算另一个点的允许区域；此时半径与圆心相关，不能使用独立半径的平均式。三角形和球体的条件密度也遵循同样的“固定条件坐标，计算截面，再归一化”路线。</p>
+<h2 id="p2-polar">极坐标、随机方向与均匀采样：均匀半径不等于均匀面积<a class="headerlink" href="#p2-polar" title="Permanent link">&para;</a></h2>
+<p>半径为 <span class="arithmatex">\(R\)</span> 的实心球按体积均匀时，小球体积比决定径向分布。<span class="arithmatex">\(d\)</span> 维中</p>
+<div class="arithmatex">\[
+P(D\le t)=(t/R)^d,\qquad f_D(t)=dt^{d-1}/R^d\quad(0&lt;t&lt;R).
+\]</div>
+<p><a href="../../questions/04-probability-expectation/#problem-4c92d5f8d943">Q383 · 实心球的径向分布、矩与均匀采样</a>因此使用 <span class="arithmatex">\(D=RU^{1/d}\)</span>。二维取独立均匀角度后，联合极坐标密度中的半径因子与雅可比相消，得到常数面积密度。单位圆盘中 <span class="arithmatex">\(P(D&gt;1/2)=3/4\)</span>，平均距离为 <span class="arithmatex">\(2/3\)</span>；直接令半径均匀会使点偏向圆心。</p>
+<p>径向对称高斯则把方向与半径分离。<a href="../../questions/04-probability-expectation/#problem-cd99a2307ebf">Q385 · 独立标准正态的半平面与条件夹角</a>中，角度均匀，条件概率是交叠张角除以条件区域张角。例如给定上半平面，直线 <span class="arithmatex">\(y=\sqrt3x\)</span> 上方占角度 <span class="arithmatex">\(2\pi/3\)</span>，故条件概率为 <span class="arithmatex">\(2/3\)</span>。不同方差或相关高斯必须先变换坐标，不能直接使用原图形的欧氏角度。</p>
+<p>球面均匀与实心球均匀也不同。球面高度由球冠面积决定，极角一般不均匀；弦的端点均匀、中点距离均匀、中点面积均匀则对应不同测度。“随机弦”必须附上生成规则，不能只画同一张圆就认为概率相同。</p>
+<h2 id="p2-spacings">随机区间、断棒与间距：总和固定带来单纯形结构<a class="headerlink" href="#p2-spacings" title="Permanent link">&para;</a></h2>
+<p>随机区间是否相交，可以排序所有端点并辨认允许的相对次序；求共同交集则检查最大左端点是否小于最小右端点。独立均匀切棒产生的长度向量不是独立均匀变量，因为各段总和固定。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-94d6789e0485">Q402 · 均匀切棒的间距约束、极值与内间隔</a>中，<span class="arithmatex">\(m-1\)</span> 个排序切点的密度恒为 <span class="arithmatex">\((m-1)!\)</span>，到前 <span class="arithmatex">\(m-1\)</span> 个间距的变换雅可比为一。因此间距在总和为一的单纯形上均匀。要求指定间距分别超过 <span class="arithmatex">\(t_i\)</span>，先减去这些阈值，剩余总长缩成 <span class="arithmatex">\(1-\sum_i t_i\)</span>，于是</p>
+<div class="arithmatex">\[
+P(S_i&gt;t_i\text{ 对所有指定 }i)=(1-\sum_i t_i)_+^{m-1}.
+\]</div>
+<p>这一步同时给出最短段的尾概率；对“某段超过阈值”的并集容斥，再积分，就得最短均值 <span class="arithmatex">\(1/m^2\)</span>、最长均值 <span class="arithmatex">\(H_m/m\)</span>。三段时最短为 <span class="arithmatex">\(1/9\)</span>、最长为 <span class="arithmatex">\(11/18\)</span>，按长度居中的段均值为 <span class="arithmatex">\(5/18\)</span>，而空间位置居中的段均值为 <span class="arithmatex">\(1/3\)</span>。两种“中间”不能混用。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-006b4d2c78c7">Q401 · 不同长度生成机制下的三角形概率</a>中，两独立切点成三角形的概率为 <span class="arithmatex">\(1/4\)</span>，三条独立均匀长度的结果为 <span class="arithmatex">\(1/2\)</span>。前者可用“所有段小于半长”判断；后者须按某边超过另两边之和的互斥失败事件积分。顺序切较长段又是另一种条件密度。</p>
+<h2 id="p2-phase">周期相位与时间窗：按等待窗口的长度加权<a class="headerlink" href="#p2-phase" title="Permanent link">&para;</a></h2>
+<p>固定周期系统中，把随机观察时刻取模压到一个周期，再按“下一次事件是什么”划分相位区间。事件频率相同，不表示随机观察者选中它们的概率相同；观察概率取决于每次事件之前吸引的等待窗口。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-fadd0fb08ee8">Q406 · 相同班次频率与不同乘车概率</a>中，甲在相位零发车，乙在相位 <span class="arithmatex">\(\delta\)</span> 发车，两线周期都是 <span class="arithmatex">\(T\)</span>。旅客相位均匀时，区间 <span class="arithmatex">\((\delta,T)\)</span> 的下一班为甲，因此</p>
+<div class="arithmatex">\[
+P(\text{乘甲})=\frac{T-\delta}{T},\qquad
+EW=\frac{\delta^2+(T-\delta)^2}{2T}.
+\]</div>
+<p>均时公式来自对两个三角形等待窗口积分。若到站相位有非均匀密度，改按该密度加权。若列车是 Poisson 到达，则使用指数剩余等待，不能把固定周期相位的半周期均值搬过去。信号切换题则把允许的提前、延后窗口与每段实际间隔相交，再累加长度。</p>
+<h2 id="p2-ranks">交换性、随机名次与纪录：对称的是位置，不必是数值<a class="headerlink" href="#p2-ranks" title="Permanent link">&para;</a></h2>
+<p>交换性表示重排标签不改变联合分布，弱于独立性。均匀排列中可以删掉无关牌而保留目标牌的均匀相对次序；连续独立同分布样本的全部严格排序也等概率。这些结论可用于条件名次，但给定具体数值后通常不再保持同一概率。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-0d215225e3b0">Q454 · 不放回抽样的位置与离散间隔</a>把 <span class="arithmatex">\(N\)</span> 个位置里的 <span class="arithmatex">\(k\)</span> 个特殊位置转成 <span class="arithmatex">\(k+1\)</span> 个普通间隔。各间隔交换对称且总和为 <span class="arithmatex">\(N-k\)</span>，所以均值都是 <span class="arithmatex">\((N-k)/(k+1)\)</span>，第 <span class="arithmatex">\(j\)</span> 个特殊位置的均值为 <span class="arithmatex">\(j(N+1)/(k+1)\)</span>。五十三张牌中两张鬼牌之间有五十一张普通牌可分入三个间隔，故中间普通牌均值是十七。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-6fee4d23e4b0">Q464 · 随机名次、纪录统计与车辆集群</a>使用独立插入名次码。第 <span class="arithmatex">\(j\)</span> 项在前 <span class="arithmatex">\(j\)</span> 项中的名次均匀于 <span class="arithmatex">\(1,\ldots,j\)</span>，且这些名次码相互独立，所以纪录概率为 <span class="arithmatex">\(1/j\)</span>，纪录总数均值为 <span class="arithmatex">\(H_n\)</span>。十辆不能超车的随机速度车辆最终车群数就是从前向后扫描的下纪录数，均值为 <span class="arithmatex">\(H_{10}=7381/2520\)</span>。</p>
+<p>连续样本的无并列条件很重要；离散骰子严格递增要先数不同点数组合。指示窗口可以重叠，均值照样相加，但不能据此认定相邻窗口独立。特殊牌颜色停止题还要分开“颜色次序”与“牌在整副牌中的位置”，普通牌数量取两个位置差时记得扣除端点。</p>
+<h2 id="p2-order-statistics">次序统计量与极值分布：先问阈值左边有几个样本<a class="headerlink" href="#p2-order-statistics" title="Permanent link">&para;</a></h2>
+<p>最大值不超过阈值等价于每个样本都不超过，最小值超过阈值等价于每个样本都超过；独立性让这些事件的概率可以相乘。第 <span class="arithmatex">\(j\)</span> 小值不超过阈值则等价于至少 <span class="arithmatex">\(j\)</span> 个样本在阈值左侧。若进一步为独立同分布的连续样本，共同CDF为 <span class="arithmatex">\(F\)</span>、密度为 <span class="arithmatex">\(f\)</span>，则次序密度为</p>
+<div class="arithmatex">\[
+f_{(j)}(x)=\frac{n!}{(j-1)!(n-j)!}F(x)^{j-1}[1-F(x)]^{n-j}f(x).
+\]</div>
+<p><a href="../../questions/04-probability-expectation/#problem-3e00c8b3591a">Q481 · 均匀次序统计量的 Beta 分布与矩</a>取 <span class="arithmatex">\(F(x)=x\)</span>，得到 <span class="arithmatex">\(U_{(j)}\sim\operatorname{Beta}(j,n-j+1)\)</span>。三个样本的中位数小于 <span class="arithmatex">\(2/3\)</span>，要求至少两个样本小于该阈值，因此</p>
+<div class="arithmatex">\[
+\binom32(2/3)^2(1/3)+(2/3)^3=\frac{20}{27}.
+\]</div>
+<p>Beta 积分还给出均值 <span class="arithmatex">\(j/(n+1)\)</span>，而极差平均为 <span class="arithmatex">\((n-1)/(n+1)\)</span>。求两端相关时，需要额外的联合信息，不能由边缘分布推出独立。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-03a00f2f74ff">Q494 · 指数寿命最大值的间隔分解与异率推广</a>利用无记忆性：同率的 <span class="arithmatex">\(n\)</span> 个寿命全部失效，先后间隔速率为 <span class="arithmatex">\(n\lambda,(n-1)\lambda,\ldots,\lambda\)</span>，所以总均时为 <span class="arithmatex">\(H_n/\lambda\)</span>。速率不同时仍能用尾部容斥积分，但不再能直接把剩余人数乘同一速率。离散最大点数则应使用组合分布函数或差分，并保留并列概率。</p>
+<h2 id="p2-ordered-covariance">极值分布与排序后协方差：先做代数表示，再用独立结构<a class="headerlink" href="#p2-ordered-covariance" title="Permanent link">&para;</a></h2>
+<p>排序后的变量通常相关。对于两个样本，一个有效表示是把最大、最小写成和与绝对差：</p>
+<div class="arithmatex">\[
+M=\frac{S+|D|}{2},\qquad L=\frac{S-|D|}{2},\qquad S=X+Y,\quad D=X-Y.
+\]</div>
+<p>在<a href="../../questions/05-probability-distributions/#problem-7cb8c3d9d521">Q560 · 两正态最大最小的相关</a>中，原样本独立标准正态，<span class="arithmatex">\(S,D\)</span> 联合正态且不相关，因此独立，且均服从 <span class="arithmatex">\(N(0,2)\)</span>。绝对正态矩给 <span class="arithmatex">\(E|D|=2/\sqrt\pi\)</span>、<span class="arithmatex">\(\operatorname{Var}(|D|)=2-4/\pi\)</span>，故</p>
+<div class="arithmatex">\[
+\operatorname{Var}(M)=\operatorname{Var}(L)=1-1/\pi,
+\qquad\operatorname{Cov}(M,L)=1/\pi,
+\qquad\operatorname{Corr}(M,L)=\frac1{\pi-1}.
+\]</div>
+<p>逐点虽有 <span class="arithmatex">\(ML=XY\)</span>，协方差还必须减去排序后两个均值的乘积，不能沿用原变量的零协方差。和差独立也依赖联合高斯结构，普通独立同分布样本不保证成立。</p>
+<h2 id="p2-transformations">变量变换与密度积分：先反演事件，后决定用哪条密度公式<a class="headerlink" href="#p2-transformations" title="Permanent link">&para;</a></h2>
+<p>最稳妥的起点是 <span class="arithmatex">\(F_{g(X)}(y)=P(g(X)\le y)\)</span>。它迫使你确定支持、单调区间和全部逆像。可微单调变换的密度为原密度乘逆函数导数的绝对值；多分支时逐个原像相加；在正概率集合上变成常数时，还会产生原子。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-155d876676aa">Q500 · 均匀平方与平方根</a>中，<span class="arithmatex">\(U\ge0\)</span>，所以 <span class="arithmatex">\(P(U^2\le y)=\sqrt y\)</span>，密度为 <span class="arithmatex">\(1/(2\sqrt y)\)</span>，支持在零到一。密度在零附近无界，但积分仍是一，并没有零点原子。若原变量可正可负，平方变换就必须同时收集正负两个原像。</p>
+<p>二维变换使用逆映射的雅可比绝对值，还要把原支持变成新支持。独立和的卷积可看作固定一个变量后的条件平均，积分区间是两个支持的交集；比值通常先固定分母，乘积则常可取对数。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-118355e0b08e">Q511 · 均匀乘积、连续保留长度与独立比较</a>令 <span class="arithmatex">\(Z=UV\)</span>。固定 <span class="arithmatex">\(U=x\)</span>，再按 <span class="arithmatex">\(x\le z\)</span> 与 <span class="arithmatex">\(x&gt;z\)</span> 分段，得到</p>
+<div class="arithmatex">\[
+F_Z(z)=z-z\log z,\qquad f_Z(z)=-\log z\quad(0&lt;z&lt;1).
+\]</div>
+<p>更一般地，负对数把均匀乘积变成指数和。若只问独立新均匀变量超过乘积的概率，则直接条件化为 <span class="arithmatex">\(E(1-Z)\)</span>，不必再积分乘积密度。</p>
+<p>概率积分变换与分位数构造是相反方向的接口。连续分布函数使 <span class="arithmatex">\(F(X)\)</span> 均匀，直觉是把原概率质量累积到一个均匀刻度上；严格单调时，<span class="arithmatex">\(P(F(X)\le u)=P(X\le F^{-1}(u))=u\)</span>。连续但有平坦段时，该段本来没有概率质量，结论仍成立。</p>
+<p>有原子时，令 <span class="arithmatex">\(X'\)</span> 为独立同分布副本，则 <span class="arithmatex">\(E[F(X)]=P(X'\le X)\)</span>。交换对称给两个严格先后事件同概率，因此</p>
+<div class="arithmatex">\[
+E[F(X)]=\frac{1+P(X'=X)}2.
+\]</div>
+<p>有原子的模型可能相等，所以不能再一律把均值写成一半。逆向则使用广义分位数 <span class="arithmatex">\(Q(u)=\inf\{x:F(x)\ge u\}\)</span>：<span class="arithmatex">\(Q(U)\le x\)</span> 等价于 <span class="arithmatex">\(U\le F(x)\)</span>，从而 <span class="arithmatex">\(Q(U)\)</span> 总有目标分布。若绝对一阶矩有限，便有 <span class="arithmatex">\(\int_0^1Q(u)du=EX\)</span>。</p>
+<p>条件截断与确定变换也须区分：删掉阈值以下样本后，要除以保留概率重新归一化；把它们记为零，则保留一个零点原子。</p>
+<h2 id="p2-gaussian">正态标准化与联合高斯：把位置、尺度和依赖分别处理<a class="headerlink" href="#p2-gaussian" title="Permanent link">&para;</a></h2>
+<p>一维正态先写 <span class="arithmatex">\(Z=(X-\mu)/\sigma\)</span>，注意第二参数若为方差，分母必须开平方。独立正态线性组合的均值按系数加权，方差按系数平方加权；相关时再加交叉协方差。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-41aaaa6a683c">Q538 · 两项随机价格的预算</a>的均值为 <span class="arithmatex">\(80,70\)</span>，标准差为 <span class="arithmatex">\(15,20\)</span>，且相互独立。总价均值一百五十，标准差 <span class="arithmatex">\(\sqrt{15^2+20^2}=25\)</span>，覆盖概率 <span class="arithmatex">\(0.975\)</span> 的预算因此约为</p>
+<div class="arithmatex">\[
+150+25\Phi^{-1}(0.975)\approx199.
+\]</div>
+<p>联合高斯指任意线性组合都为一维正态，允许零方差方向；边缘分别正态并不足够。确认联合高斯后，零交叉协方差才可推出相应块独立，正交变换与谱白化才能据此产生独立标准正态。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-9aca9f3b9da6">Q544 · 正态尾矩、条件截断与置零删失</a>利用 <span class="arithmatex">\(\phi'(z)=-z\phi(z)\)</span>：尾部一阶积分为 <span class="arithmatex">\(\phi(a)\)</span>，二阶积分为 <span class="arithmatex">\(a\phi(a)+1-\Phi(a)\)</span>。除以尾概率后才是条件矩。零阈值下，半正态均值为 <span class="arithmatex">\(\sqrt{2/\pi}\)</span>，把负值记零的正部均值仅为 <span class="arithmatex">\(1/\sqrt{2\pi}\)</span>，并有一半质量在零点。</p>
+<p>二项和的正态近似需要足够的成功与失败规模，离散阈值常加半格修正；小样本代入正态参数不等于严格预测保证。光滑函数的 Delta 近似则把估计误差作一阶线性化，其方差由导数和协方差矩阵给出；导数为零或尾部不规则时要另看高阶项。</p>
+<h2 id="p2-generating-functions">矩母函数、生成函数与分布分解：把卷积换成乘法<a class="headerlink" href="#p2-generating-functions" title="Permanent link">&para;</a></h2>
+<p>矩母函数是 <span class="arithmatex">\(M_X(t)=E[e^{tX}]\)</span>，先写它在哪些参数处有限。对非负整数变量，概率生成函数是 <span class="arithmatex">\(G_X(z)=E[z^X]\)</span>。独立和的函数相乘，独立随机和的概率生成函数为 <span class="arithmatex">\(G_N(G_X(z))\)</span>，复合时内部计数的起点不能丢。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-8f76dccc266f">Q526 · 正态分布的矩母函数与二阶矩</a>在密度指数中配方：</p>
+<div class="arithmatex">\[
+tx-\frac{(x-\mu)^2}{2\sigma^2}
+=-\frac{(x-\mu-\sigma^2t)^2}{2\sigma^2}+\mu t+\frac12\sigma^2t^2.
+\]</div>
+<p>剩余正态密度积分为一，故 <span class="arithmatex">\(M_X(t)=e^{\mu t+\sigma^2t^2/2}\)</span>。从导数恢复矩还需零附近有限。对一般分布，可取有限开区间内部的正负参数，用指数包住多项式，得到可积控制后再交换求导与期望，不能假设开区间端点也有限。</p>
+<p><a href="../../questions/04-probability-expectation/#problem-23d525d413bf">Q529 · Poisson 矩母函数、累积量与二项极限</a>由指数级数得到 <span class="arithmatex">\(M(t)=\exp[\lambda(e^t-1)]\)</span>。取对数后，各阶导数在零处均为 <span class="arithmatex">\(\lambda\)</span>，故全部累积量相同。二项函数 <span class="arithmatex">\([1+\lambda(e^t-1)/n]^n\)</span> 收敛到它，且极限在零附近有限，才可用矩母函数收敛定理推出分布极限。</p>
+<p>概率生成函数在一处的一阶、二阶导数分别对应 <span class="arithmatex">\(EX\)</span> 与 <span class="arithmatex">\(E[X(X-1)]\)</span>，方差要补回一次均值。特征函数 <span class="arithmatex">\(E[e^{itX}]\)</span> 则总存在，适用于没有指数矩的分布。生成函数也连接分枝和更新问题，但那里还需明确状态与迭代方向。</p>
+<h2 id="p2-simulation">随机数构造与拒绝采样：证明接受后的归一化分布<a class="headerlink" href="#p2-simulation" title="Permanent link">&para;</a></h2>
+<p>能生成均匀变量时，广义分位数给出一般逆变换；某些目标分布有更方便的几何或代数构造。一个确定变换不会凭空增加随机性，也不能把一个样本变成两个独立副本。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-91ab11ea3884">Q710 · 未知偏币的公平提取与耗时</a>每轮抛两次，只接受正反、反正，两者概率同为 <span class="arithmatex">\(p(1-p)\)</span>，分别输出两种结果。接受总概率为 <span class="arithmatex">\(2p(1-p)\)</span>，因此最终输出各半，平均投掷数为 <span class="arithmatex">\(1/[p(1-p)]\)</span>。<span class="arithmatex">\(p=2/5\)</span> 时为 <span class="arithmatex">\(25/6\)</span>；完全偏向一面时方法不会结束。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-rejection-envelope">Q711 · 拒绝采样的包络与平均拒绝次数</a>的目标密度为 <span class="arithmatex">\(12x^2(1-x)\)</span>。先求最大值 <span class="arithmatex">\(16/9\)</span>，选覆盖整个曲线的矩形，再接受曲线下的点。接受率是 <span class="arithmatex">\(9/16\)</span>，总尝试次数均值为 <span class="arithmatex">\(16/9\)</span>，拒绝次数则为 <span class="arithmatex">\(7/9\)</span>。若包络低于密度峰值，输出分布会被截掉，不能用更高接受率补救。</p>
+<p>一般提议密度 <span class="arithmatex">\(g\)</span> 与常数 <span class="arithmatex">\(M\)</span> 满足 <span class="arithmatex">\(f\le Mg\)</span> 时，给定提议 <span class="arithmatex">\(Y\)</span> 以 <span class="arithmatex">\(f(Y)/(Mg(Y))\)</span> 接受；接受密度正比于 <span class="arithmatex">\(g\cdot f/(Mg)=f/M\)</span>，归一化后就是目标分布。分析成本时要明确算尝试数、拒绝数、随机比特还是均匀样本数，带缓存的配对算法还要区分单次调用与长期均摊。</p>
+<p>在线均匀抽样则不需要知道总长度。保存一个样本时，第 <span class="arithmatex">\(j\)</span> 个新对象以 <span class="arithmatex">\(1/j\)</span> 的概率替换旧样本；第 <span class="arithmatex">\(i\)</span> 个对象入选后一直不被覆盖的概率为 <span class="arithmatex">\(\prod_{j=i+1}^N(j-1)/j=i/N\)</span>，乘入选概率 <span class="arithmatex">\(1/i\)</span> 得最终 <span class="arithmatex">\(1/N\)</span>。这类构造证明的是每个对象的最终留存概率，与把某个已有随机变量平方、误当作新独立样本完全不同。</p>
+<h2 id="p2-convexity">矩比较、凸性与熵：由逐点关系控制平均<a class="headerlink" href="#p2-convexity" title="Permanent link">&para;</a></h2>
+<p>不等式首先作用在数值或随机变量上，再取期望。Jensen 来自凸函数在均值处的支撑线：<span class="arithmatex">\(g(x)\ge g(\mu)+a(x-\mu)\)</span>，取期望后线性项消失，得到 <span class="arithmatex">\(Eg(X)\ge g(EX)\)</span>。凹函数方向相反，并须注意可积性与函数定义域。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-8ea4cdf32d9b">Q722 · 同面概率的公平极小性</a>中，两次独立同分布骰面相同的概率是 <span class="arithmatex">\(\sum_i p_i^2\)</span>。由</p>
+<div class="arithmatex">\[
+\sum_i(p_i-1/n)^2=\sum_i p_i^2-1/n\ge0
+\]</div>
+<p>可知公平分布达到最小值 <span class="arithmatex">\(1/n\)</span>。两次若使用不同分布，概率变成 <span class="arithmatex">\(\sum_i p_iq_i\)</span>，同一个下界便不再成立。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-nonlinear-expectation">Q730 · 非线性变换的期望、Taylor 近似与 Jensen 界</a>在均值处展开，得到 <span class="arithmatex">\(Eg(X)\approx g(\mu)+g''(\mu)\operatorname{Var}(X)/2\)</span>。它是近似，不是恒等式；若三阶导数有界、三阶绝对中心矩有限，才能用余项界量化误差。标准正态平方的例子中，<span class="arithmatex">\(E[X^2]=1\)</span>，而 <span class="arithmatex">\((EX)^2=0\)</span>，最基本的差别就是方差。</p>
+<p>倒数、指数及熵问题通常先找凸凹性或概率归一化约束。有限 <span class="arithmatex">\(d\)</span> 类的熵为 <span class="arithmatex">\(H(p)=-\sum_i p_i\log p_i\)</span>，约定 <span class="arithmatex">\(0\log0=0\)</span>。与均匀分布 <span class="arithmatex">\(u_i=1/d\)</span> 比较，相对熵非负给</p>
+<div class="arithmatex">\[
+0\le\sum_i p_i\log(p_i/u_i)=\log d-H(p),
+\]</div>
+<p>所以 <span class="arithmatex">\(H(p)\le\log d\)</span>，取等要求均匀。合并类别的确定映射不会增加熵，可用联合熵的条件分解说明被合并掉的是非负的条件不确定性。无穷支持或无穷熵时，必须另查收敛，不能无条件交换和式与对数。</p>
+<h2 id="p2-bounds">概率不等式与尾界：按已知信息选最有效的变换<a class="headerlink" href="#p2-bounds" title="Permanent link">&para;</a></h2>
+<p>只有非负均值时用 Markov；知道方差时可对中心化平方用它得到 Chebyshev；单侧尾可再平移平方、优化平移量，得到 Cantelli。要求指数级衰减且有独立有界结构时，再用指数变换与 Chernoff。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-83ab21039e66">Q731 · Markov、Chebyshev 与等号分布</a>从逐点关系 <span class="arithmatex">\(X\ge t\mathbf1_{X\ge t}\)</span> 出发，因此</p>
+<div class="arithmatex">\[
+P(X\ge t)\le EX/t,
+\qquad P(|Y-\mu|\ge d)\le\operatorname{Var}(Y)/d^2.
+\]</div>
+<p>边界符号有实际意义：把质量放在恰好等于阈值的位置，可以达到非严格尾界，换成严格尾事件后该质量便不计入。Cantelli 的移位平方优化进一步给单侧界 <span class="arithmatex">\(\sigma^2/(\sigma^2+t^2)\)</span>，也可用来证明中位数离均值不超过一个标准差。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-d1ef9f5d38ea">Q741 · Hoeffding 引理、Chernoff 与占箱最大负载</a>先控制单变量中心化指数矩，再利用独立性把函数相乘，最后优化参数：</p>
+<div class="arithmatex">\[
+P\left(\sum_i(X_i-EX_i)\ge u\right)
+\le\exp\left[-\frac{2u^2}{\sum_i(b_i-a_i)^2}\right],\quad X_i\in[a_i,b_i].
+\]</div>
+<p>占箱例中，<span class="arithmatex">\(n\)</span> 个球各自独立、均匀进入 <span class="arithmatex">\(n\)</span> 个箱，固定箱球数 <span class="arithmatex">\(B\sim\operatorname{Bin}(n,1/n)\)</span>。若它至少有 <span class="arithmatex">\(k\)</span> 球，必有某个大小为 <span class="arithmatex">\(k\)</span> 的球子集全进该箱。对子集取并集界，得 <span class="arithmatex">\(P(B\ge k)\le\binom nk n^{-k}\le(e/k)^k\)</span>；再对全部箱取并集界，最大负载至少为 <span class="arithmatex">\(k\)</span> 的概率不超过 <span class="arithmatex">\(n(e/k)^k\)</span>。一般 <span class="arithmatex">\(m\)</span> 球进入 <span class="arithmatex">\(n\)</span> 箱时，对应单箱界为 <span class="arithmatex">\((em/(nk))^k\)</span>，不能忽略平均负载的变化。箱之间不独立也可取并集界；固定箱的尾界不能冒充任一箱的尾界。近似分布与严格上界也应分开，中心极限定理本身不提供有限样本保证。</p>
+<p>比较两个分布还可构造耦合：令它们在同一概率空间上取值为 <span class="arithmatex">\(X,Y\)</span>，对任一事件，两个指标只有在 <span class="arithmatex">\(X\ne Y\)</span> 时才可能不同，因此 <span class="arithmatex">\(d_{\mathrm{TV}}(P,Q)\le P(X\ne Y)\)</span>。将共同概率质量尽量配成相等值，可达到总变差距离。这是分布间的误差界，与只知道一个变量的均值或方差时使用的尾界不同。</p>
+<h2 id="p2-existence">概率方法与存在性：平均值能迫使某个配置更好<a class="headerlink" href="#p2-existence" title="Permanent link">&para;</a></h2>
+<p>随机化可以用来证明一个确定对象存在。若所有配置都低于某个整数目标，平均值也必低于该目标；若所有坏事件的概率总和小于一，则至少有一个结果没有任何坏事件。这两条路线分别是期望反证与并集界。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-3a711ed16fa1">Q743 · 红色圆周上的正方形</a>随机旋转一个正多边形，每个顶点边缘上都均匀，所以红顶点数均值为 <span class="arithmatex">\(mr\)</span>。顶点颜色即使相关也不影响线性期望。正方形与红色比例 <span class="arithmatex">\(2/3\)</span> 时均值为 <span class="arithmatex">\(8/3\)</span>，故至少有一次旋转出现三个红顶点；若每次至多两个，均值就不可能超过二。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-probabilistic-existence-union">Q742 · 用期望和并集界证明存在性</a>的另一形式是</p>
+<div class="arithmatex">\[
+P\left(\bigcap_iA_i^c\right)\ge1-\sum_iP(A_i)&gt;0.
+\]</div>
+<p>应用于随机覆盖、锦标赛或路径时，先定义每一个坏事件，再算它的概率和事件总数。不要把正概率存在当作已经给出了高效构造算法；寻找实例可能还需要随机重试、条件期望去随机化或专门的组合构造。</p>
+<p>下一篇将把这些工具用于<a href="../04-3-probability-distributions/#p3-foundations">重复试验和等待</a>：先判断是固定次数计数、首次成功，还是有历史状态与控制权的停止问题。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../04-1-probability-counting/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 概率论一：计数、抽样与信息">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                概率论一：计数、抽样与信息
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04-3-probability-distributions/" class="md-footer__link md-footer__link--next" aria-label="下一页: 概率论三：分布、等待与决策">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                概率论三：分布、等待与决策
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="../../../javascripts/vendor/mathjax/tex-chtml.js"></script>
+      
+    
+  </body>
+</html>

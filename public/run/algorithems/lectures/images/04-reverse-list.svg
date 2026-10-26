@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">反转链表：改连接，与移动变量标签，分两步看</title><desc id="desc">三个快照分别为循环开始、只反转next、变量移动之后。</desc>
+<rect width="1000" height="530" fill="white"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#475569"/></marker></defs>
+<text x="24" y="36" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" fill="#172b4d">反转链表：改连接，与移动变量标签，分两步看</text>
+<text x="24" y="90" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" fill="#172b4d">① 循环开始</text>
+<rect x="24" y="108" width="940" height="50" rx="7" fill="#e7efff" stroke="#8290a4"/>
+<text x="36" y="139.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">None     1 → 2 → 3 → None</text>
+<text x="40" y="186" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">prev=None；cur=节点1；nxt=节点2</text>
+<text x="24" y="220" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" fill="#172b4d">② 已保存nxt，再执行cur.next=prev</text>
+<rect x="24" y="238" width="940" height="50" rx="7" fill="#e7efff" stroke="#8290a4"/>
+<text x="36" y="269.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">1 → None        2 → 3 → None</text>
+<text x="40" y="316" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">prev仍为None；cur仍是节点1</text>
+<text x="24" y="350" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" fill="#172b4d">③ 执行prev,cur=cur,nxt</text>
+<rect x="24" y="368" width="940" height="50" rx="7" fill="#e7efff" stroke="#8290a4"/>
+<text x="36" y="399.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">1 → None        2 → 3 → None</text>
+<text x="40" y="446" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">prev=节点1；cur=节点2</text>
+<text x="24" y="505" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">nxt保存的是后继节点的引用；若先改cur.next再读取它，就丢了原来的后路。</text>
+</svg>

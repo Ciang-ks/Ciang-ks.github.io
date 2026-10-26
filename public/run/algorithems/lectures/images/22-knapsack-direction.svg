@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc"><title id="title">0/1 背包压缩：同一件重量 2、价值 3，容量 4</title><desc id="desc">按从上到下、从左到右顺序阅读。状态与正文同一示例，箭头的含义在图内标明。</desc><rect width="1000" height="470" fill="#fff"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#334155"/></marker></defs>
+<text x="24" y="36" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" fill="#172b4d">0/1 背包压缩：同一件重量 2、价值 3，容量 4</text>
+<text x="24" y="82" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">开始 dp=[0,0,0,0,0]；目标是重量不超过 j 的最大价值。</text>
+<rect x="24" y="112" width="950" height="65" rx="8" fill="#eef4ff" stroke="#64748b"/>
+<text x="38" y="151.5" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">倒序 j=4 → 3 → 2：读取的 dp[j−2] 还属于上一行（未用当前物品）</text>
+<text x="44" y="223" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">j=4：dp[4] = max(0, 旧 dp[2]+3) = 3</text>
+<text x="44" y="261" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">j=2：dp[2] = max(0, 旧 dp[0]+3) = 3；结果 [0,0,3,3,3]</text>
+<rect x="24" y="294" width="950" height="65" rx="8" fill="#fff3dc" stroke="#64748b"/>
+<text x="38" y="333.5" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">正序 j=2 → 3 → 4：j=4 会读到本轮刚更新的 dp[2]</text>
+<text x="44" y="402" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="19" fill="#172b4d">j=2 得 3，随后 j=4 得 3+3=6：同一件被用两次，这是完全背包。</text>
+<text x="44" y="446" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" fill="#172b4d">颜色只辅助分区；“旧/新”标签才是循环方向的理由。</text></svg>
