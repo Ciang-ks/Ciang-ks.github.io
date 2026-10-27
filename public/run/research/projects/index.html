@@ -23,7 +23,7 @@
     
     
       
-        <title>教学项目总览 - Run</title>
+        <title>教学项目：把讲义中的小例子接成研究实验 - Run</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              教学项目总览
+              教学项目：把讲义中的小例子接成研究实验
             
           </span>
         </div>
@@ -630,7 +630,7 @@
   <span class="md-ellipsis">
     
   
-    03 概率统计与回归
+    03 金融计量与时序建模
   
 
     
@@ -9746,21 +9746,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#baseline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一次运行两个稳定 baseline
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        互动实验入口
+        环境与批量运行
       
     </span>
   </a>
@@ -9787,48 +9776,42 @@
   
 
 
-<h1 id="_1">教学项目总览<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>两个项目共享“数据 → 特征/信号 → 组合 → 成本 → 报告”的研究语言，但刻意采用不同层面的输入。项目架构与成熟框架的对应关系见 <a href="ARCHITECTURE/"><code>ARCHITECTURE.md</code></a>。</p>
+<h1 id="_1">教学项目：把讲义中的小例子接成研究实验<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>讲义用少量数据解释一件事，项目则要求你让多个步骤同时成立。两个项目都遵循“数据 → 特征 → 预测或信号 → 权重 → 成本 → 报告”，每一步保留显式输入输出。你可以沿同一个日期和资产逐列追踪，判断结果变化来自数据、模型、交易还是指标。</p>
 <table>
 <thead>
 <tr>
 <th>项目</th>
-<th style="text-align: right;">两个完整项目日</th>
-<th>主要学习内容</th>
+<th>主线问题</th>
 <th>默认数据</th>
+<th>建议先读</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>alpha_research</code></td>
-<td style="text-align: right;">Day 7–8</td>
-<td>传统 alpha、跨资产、再平衡、权重约束、成本、回撤和失败分析</td>
-<td>确定性合成资产价格</td>
+<td><a href="alpha_research/">项目 A：跨资产 Alpha</a></td>
+<td>过去价格形成的趋势信号，经过风险缩放和成本后还剩什么？</td>
+<td>八个教学资产的合成日频价格</td>
+<td>第一至六章</td>
 </tr>
 <tr>
-<td><code>ml_llm_research</code></td>
-<td style="text-align: right;">Day 11–12</td>
-<td>时间切分、Ridge baseline、rank IC、文本对齐、词典/可选语义增量</td>
-<td>确定性合成 panel 和 filing 文本</td>
+<td><a href="ml_llm_research/">项目 B：ML/LLM 增量</a></td>
+<td>同样的标签与交易规则下，文本能否超过市场特征？</td>
+<td>十二只教学股票的合成月度表与模板公告</td>
+<td>第三、四、七、八章</td>
 </tr>
 </tbody>
 </table>
-<p>先完成每个项目 README 中的概念思考和手动工程选择，再运行默认代码。默认结果可能不好看，这正是为了让学习者练习 benchmark、成本和失败分析，而不是追逐一条漂亮曲线。</p>
-<p>项目使用小而透明的实现，不复制 Qlib、Lean、vectorbt 或其他框架。完成基础版本后，再根据 README 的提高方向接入真实公开数据或更复杂模型。</p>
-<h2 id="baseline">一次运行两个稳定 baseline<a class="headerlink" href="#baseline" title="Permanent link">&para;</a></h2>
-<p>在 <code>research/.venv</code> 中执行：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>research
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>projects/alpha_research/requirements.txt
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>projects/ml_llm_research/requirements.txt
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>research/.venv/bin/python<span class="w"> </span>projects/run_all.py<span class="w"> </span>--output-root<span class="w"> </span>/tmp/qbasic-baseline
+<p>先运行固定基线，再选一行手工复算，最后只改变一个研究选择。例如项目 A 把再平衡从每 20 日改为每 5 日，应先预期信号反应和换手怎样变化，再查看成本后的结果；项目 B 加入文本时，应先冻结样本、日期和组合规则，避免把覆盖率变化误认为模型增量。</p>
+<p>两个项目的 <code>project_lab.ipynb</code> 把这些过程展开成连续实验，手工题附折叠答案。README 说明默认实现、近似与进一步的工程选择。合成数据中存在的机制由生成器设定，不能作为现实 alpha 的证据。</p>
+<h2 id="_2">环境与批量运行<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>从仓库根目录执行：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.13<span class="w"> </span>research/.venv
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--python<span class="w"> </span>research/.venv/bin/python<span class="w"> </span>-r<span class="w"> </span>research/requirements-notebooks.txt<span class="w"> </span>-r<span class="w"> </span>research/projects/alpha_research/requirements.txt<span class="w"> </span>-r<span class="w"> </span>research/projects/ml_llm_research/requirements.txt
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>research/.venv/bin/python<span class="w"> </span>research/projects/run_all.py<span class="w"> </span>--output-root<span class="w"> </span>/tmp/research-baseline
 </span></code></pre></div>
-<p>命令会创建 <code>/tmp/qbasic-baseline/alpha_research/</code> 和 <code>ml_llm_research/</code>，每个目录包含 CSV、JSON 和 <code>run_manifest.json</code>。后者保存配置、Python/runtime 信息和每个产物的 SHA-256，可用来检查两次运行是否真的一致。单独运行项目仍然是推荐的调试方式。</p>
-<h2 id="_2">互动实验入口<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="alpha_research/project_lab.ipynb"><code>alpha_research/project_lab.ipynb</code></a>：趋势 alpha、成本敏感性、暴露和 benchmark；示例图在 <a href="alpha_research/reports/lab_alpha_equity.png">示例图</a>。</li>
-<li><a href="ml_llm_research/project_lab.ipynb"><code>ml_llm_research/project_lab.ipynb</code></a>：validation/test、文本增量、成本压力和 <span class="arithmatex">\(as-of\)</span> 审计；示例图在 <a href="ml_llm_research/reports/lab_ml_test_equity.png">示例图</a>。</li>
-</ul>
-<p>每个 lab 都要求先运行固定 baseline，再只改变一个参数，运行前写预期，运行后把证据写进 memo。这样 notebook 负责互动探索，<code>src/</code> 负责可复用逻辑，<code>tests/</code> 负责不变量，manifest 负责复现。</p>
+<p>已有环境可以跳过创建。命令将两个项目的 CSV、指标与配置写入各自输出目录；单独运行仍是定位问题最方便的方式。Notebook 负责逐步探索，<code>src/</code> 保存可复用函数，<code>tests/</code> 保护时间、权重与成本等研究不变量。报告只使用能够从这些产物复算的数字。</p>
+<p><a href="ARCHITECTURE/">工程架构与扩展顺序</a>解释这些小模块怎样对应更完整的研究和交易系统。先把真实数据的可见时间、标签成熟与会计做可靠，再扩展框架或模型。</p>
 
 
 

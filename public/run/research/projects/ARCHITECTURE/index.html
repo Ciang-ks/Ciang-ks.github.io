@@ -23,7 +23,7 @@
     
     
       
-        <title>两个项目的研究工程架构对照 - Run</title>
+        <title>从一个趋势实验理解研究工程 - Run</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              两个项目的研究工程架构对照
+              从一个趋势实验理解研究工程
             
           </span>
         </div>
@@ -630,7 +630,7 @@
   <span class="md-ellipsis">
     
   
-    03 概率统计与回归
+    03 金融计量与时序建模
   
 
     
@@ -9749,7 +9749,7 @@
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 从成熟框架反推研究链路
+        1. 数据层决定观察的含义
       
     </span>
   </a>
@@ -9760,7 +9760,7 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 当前项目已经能稳定保证什么
+        2. 特征和模型层只做当时能做的计算
       
     </span>
   </a>
@@ -9771,7 +9771,7 @@
   <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 还没有实现的部分
+        3. 目标权重、真实持仓和成交是不同层次
       
     </span>
   </a>
@@ -9782,7 +9782,7 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 推荐的升级顺序
+        4. 评价层解释结果，编排层保存实验
       
     </span>
   </a>
@@ -9793,7 +9793,7 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 学习者的互动闭环
+        5. 怎样逐步扩大这个系统
       
     </span>
   </a>
@@ -9820,126 +9820,69 @@
   
 
 
-<h1 id="_1">两个项目的研究工程架构对照<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>这两个项目现在是<strong>可复现的 teaching baseline</strong>：它们可以稳定生成同一组数据、权重/预测、成本敏感性和指标，并且能用测试保护研究中最容易犯的时间与会计错误。它们还不是可直接连接券商的生产系统。这个边界必须保留，因为面试时清楚说明“已经实现什么、还缺什么”比把一个小回测包装成 production platform 更可信。</p>
-<h2 id="1">1. 从成熟框架反推研究链路<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h1 id="_1">从一个趋势实验理解研究工程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>以项目 A 为例：今天收盘后，研究员从过去 60 日价格生成趋势分数，将它缩放成目标权重，再观察下一期收益与成本。为了判断结果可信不可信，我们需要知道每一步究竟接收什么、输出什么。如果所有逻辑都写在一个长脚本里，“净收益变好”很难定位原因；把数据、特征、交易会计和评价分开，就能逐段复算同一天。</p>
+<p>这里的分层服务于研究解释。它不要求先学习一个大型框架，两个项目都用小函数和显式参数实现。项目 B 沿用同一结构，把趋势分数替换为市场与文本模型的预测。</p>
+<h2 id="1">1. 数据层决定观察的含义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><code>data.py</code> 只提供价格或资产日期表，以及生成配置。项目 A 的输出是日期乘资产的价格矩阵；项目 B 的输出是以日期与资产共同标识样本的面板（panel）。面板允许一条记录同时包含动量、风险、文本和标签，但未来标签与可用特征必须分开。</p>
+<p>接入真实数据时，首先要建立数据契约（data contract）：某一列是什么单位，在哪个时区、哪个时间可见，缺失代表没交易还是没拿到数据，数据后来是否修订。时点一致（point-in-time）表示历史决策只能使用当时已可见的版本；数据版本（vintage）则保存同一历史观察在不同发布日期的内容。月末财报值不代表月末已公开，今天下载的最终版本也不能无条件回填过去。</p>
+<p>例如，将一季报发布时间从四月改为三月，文件格式仍完全正确，预测结果却已变成偷看未来。数据层的时间语义因此比文件能否成功读取更重要。</p>
+<h2 id="2">2. 特征和模型层只做当时能做的计算<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>项目 A 的 <code>features.py</code> 将历史价格变成动量和滚动波动，再将它们变成目标权重。动量窗口不足时保持缺失，不能从未来向后填补。项目 B 的 <code>text_features.py</code> 将文本转换成数值，<code>models.py</code> 用训练窗口拟合预处理和系数，再对后续窗口预测。</p>
+<p>将标准化放在模型管线里，是为了保证均值、标准差、词表或降维方向只从训练样本学习。若先在全样本上标准化再切分，模型虽没有直接看到未来标签，也已经知道未来特征的分布。相同地，未来标签在训练快照是否已成熟，不能只靠决策日期判断；项目 B 的实验 Notebook 显式演示这一边界。</p>
+<p>一个模型注册表（model registry）可以在更大系统中保存模型版本、训练样本和用途。本项目先用明确配置与输出目录表达这些信息，不把“目录里存在一个系数文件”当成已完成模型管理。</p>
+<h2 id="3">3. 目标权重、真实持仓和成交是不同层次<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>权重 +0.2 的意思是计划让该资产名义头寸占账户净值的 20%，它不是买入 0.2 股，也不是一张已经成交的订单。下单要从已有份额和可用现金计算差额，成交后再更新份额与账本。</p>
+<p>项目源码使用目标权重的向量化近似：项目 A 将上一期目标权重乘当期资产收益，项目 B 将高低预测组的标签做多空差。换手按相邻目标之差估算，没有完整模拟价格漂移后再平衡、部分成交、融资融券与订单队列。这个边界让研究者能看懂分数和成本如何影响结果，但不能据此宣布具有真实撮合能力。讲义第二、六章用份额与现金账本补充这一层。</p>
+<p>事件驱动（event-driven）的交易系统会按事件顺序处理行情、信号、订单、成交与撤单。更完整的订单生命周期（order lifecycle）还包括提交、确认、部分成交、拒单和撤单；目标权重文件只描述其中很早的一步。真实成交审计也需要订单与报价，无法从一条净值曲线恢复。</p>
+<h2 id="4">4. 评价层解释结果，编排层保存实验<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p><code>metrics.py</code> 或 <code>evaluate.py</code> 只接收收益、预测和标签，不反过来修改仓位。这样可以在保持预测不变时单独做成本压力，也可以在保持交易规则不变时比较模型。收益、风险、换手和基准应一起报告，因为同样的平均收益可能来自完全不同的杠杆与集中度。</p>
+<p><code>run.py</code> 负责把这些函数按既定顺序连接起来，并保存配置、预测、权重与结果。<code>run_manifest.json</code> 中的文件摘要是内容的指纹：如果文件内容变化，摘要也随之变化。它帮助确认报告对应哪次运行，但不会证明数据没有前视、模型没有过拟合；这些仍要靠字段语义、切分规则与研究对照判断。</p>
+<p>项目的测试优先检查研究不变量。例如，改变未来价格不应改变过去信号，首笔建仓应收费，增加非负成本不应提高同一仓位的逐期净收益，第一期亏损也应计入从初始资金出发的回撤。它们保护的是经济含义，不是某个库内部如何实现矩阵运算。</p>
+<h2 id="5">5. 怎样逐步扩大这个系统<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>研究层</th>
-<th>本仓库的教学组件</th>
-<th>Qlib 的对应物</th>
-<th>QuantConnect LEAN 的对应物</th>
-<th>仍然缺少的生产能力</th>
+<th>下一步</th>
+<th>对同一趋势实验增加什么</th>
+<th>可观察产物</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Data contract / point-in-time</td>
-<td><code>src/data.py</code>、<code>DataConfig</code>、<code>panel.csv</code></td>
-<td>Data Handler / Dataset</td>
-<td>Security subscriptions、data feeds</td>
-<td>真实 corporate actions、历史 point-in-time 数据、实体/版本主键</td>
+<td>真实数据适配</td>
+<td>复权、退市、交易日、披露与修订版本</td>
+<td>一张有单位和可见时间的数据字典</td>
 </tr>
 <tr>
-<td>Feature / alpha</td>
-<td><code>features.py</code>、<code>text_features.py</code></td>
-<td>Expression / Processor</td>
-<td>Alpha / Insight</td>
-<td>特征注册表、离线缓存、缺失与覆盖率监控</td>
+<td>严格时间验证</td>
+<td>标签成熟、跨边界清理、滚动训练与最终测试</td>
+<td>每次拟合实际可见的样本边界表</td>
 </tr>
 <tr>
-<td>Model / signal</td>
-<td><code>models.py</code>、<code>signal_to_weights</code></td>
-<td>Model / Forecast</td>
-<td>Alpha model</td>
-<td>模型 registry、滚动训练、漂移检测</td>
+<td>交易会计</td>
+<td>份额漂移、报价、订单、部分成交、资金与借券</td>
+<td>每笔成交能对回现金和持仓的账本</td>
 </tr>
 <tr>
-<td>Portfolio / sizing</td>
-<td><code>weights</code>、top-bottom portfolio</td>
-<td>Portfolio / Risk model</td>
-<td>Portfolio construction / Risk management</td>
-<td>组合优化、融资融券、保证金、容量约束</td>
+<td>容量与成本</td>
+<td>下单量占日成交量、冲击、延迟与失败成交</td>
+<td>固定信号下按规模分组的成本压力</td>
 </tr>
 <tr>
-<td>Execution / accounting</td>
-<td><code>backtest.py</code>、<code>evaluate.py</code></td>
-<td>Backtest / Exchange simulator</td>
-<td>Transaction / Execution / Brokerage</td>
-<td>order lifecycle、部分成交、队列、真实 TCA、交易所规则</td>
+<td>实验管理</td>
+<td>数据、代码、模型和配置的版本关联</td>
+<td>每个报告数字能定位到一次完整实验</td>
 </tr>
 <tr>
-<td>Evaluation</td>
-<td><code>metrics.py</code>、rank IC、成本矩阵</td>
-<td>Recorder / Analysis</td>
-<td>Statistics / Reports</td>
-<td>多重检验、purged/embargo、真实 benchmark、归因服务</td>
-</tr>
-<tr>
-<td>Lineage / reproducibility</td>
-<td><code>run_manifest.json</code>、固定 seed、CSV/JSON</td>
-<td>Recorder / experiment record</td>
-<td>Object store / backtest results</td>
-<td>MLflow/DVC、远程 artifact store、CI、权限与审计</td>
-</tr>
-<tr>
-<td>Monitoring / deployment</td>
-<td>README 中的 production gates</td>
-<td>production extensions</td>
-<td>live algorithm / monitoring</td>
-<td>paper/shadow/live、告警、回滚、kill switch</td>
+<td>影子与模拟运行</td>
+<td>在实时信息下生成订单但先不动用真实资金</td>
+<td>预期与实际可得价格、时延和异常记录</td>
 </tr>
 </tbody>
 </table>
-<p>参考入口（均为公开资料）：</p>
-<ul>
-<li><a href="https://github.com/microsoft/qlib">Microsoft Qlib</a>：data handler、dataset、model、strategy、backtest、recorder 的完整研究框架；</li>
-<li><a href="https://github.com/QuantConnect/Lean">QuantConnect LEAN</a>：algorithm、data、portfolio、transaction、execution、brokerage 的事件驱动系统；</li>
-<li><a href="https://github.com/polakowo/vectorbt">vectorbt</a>：适合快速向量化研究和参数矩阵，不等于真实交易撮合器；</li>
-<li><a href="https://mlflow.org/docs/latest/ml/tracking/">MLflow Tracking</a> 与 <a href="https://dvc.org/doc">DVC</a>：分别对应实验记录与数据/产物版本管理；</li>
-<li><a href="https://hydra.cc/">Hydra</a> / <a href="https://docs.pydantic.dev/">Pydantic</a>：成熟项目常用的配置组合和 schema 校验思路。</li>
-</ul>
-<p>项目没有复制这些框架；上表用于回答“一个小项目在大系统中的位置是什么”，也用于决定下一步学习顺序。</p>
-<h2 id="2">2. 当前项目已经能稳定保证什么<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>默认路径不访问网络，seed、日期区间、窗口、成本和模型开关都进入配置。每次运行会在输出目录写入：</p>
-<ul>
-<li>数据/预测/回测 CSV；</li>
-<li><code>metrics.json</code>（Project A 的多成本摘要，Project B 的 test 摘要）；</li>
-<li>Project B 的 <code>validation_metrics.json</code> 和带 <code>split</code> 列的 <code>predictions.csv</code>；</li>
-<li><code>run_manifest.json</code>：配置、运行时、每个产物的字节数和 SHA-256。</li>
-</ul>
-<p>因此一个 baseline run 可以被复制、比较和审阅。manifest 中的 hash 只覆盖本次生成的文件，不把运行时间写进结果，所以适合检查两个运行是否真的产生了相同的研究产物。</p>
-<h2 id="3">3. 还没有实现的部分<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>以下内容明确留在 roadmap 中，不能从当前输出推断已经完成：</p>
-<ol>
-<li>合成数据不是历史市场数据；没有退市、复权、期货换月、时区和修订数据的 point-in-time 适配器。</li>
-<li>成本是教学用线性 bps；没有盘口、成交队列、部分成交、borrow、margin 或交易所撮合。</li>
-<li>没有在线服务、brokerage connector、paper/live account、监控和 kill switch。</li>
-<li>没有把每次运行送入 MLflow/DVC；manifest 是本地、轻量的替代物。</li>
-<li>Project B 默认只展示固定 chronological split；真实重叠标签需要 purged/embargo 和滚动训练。</li>
-</ol>
-<h2 id="4">4. 推荐的升级顺序<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>完成两个教学项目后按下面顺序升级，每一步都保留旧 baseline：</p>
-<ol>
-<li><strong>Data adapter</strong>：接入公开 ETF/SEC 数据，先建立 schema、时间、复权、实体 ID 和缺失报告；</li>
-<li><strong>Research matrix</strong>：用同一 <code>run_manifest</code> 批量保存 lookback、成本、coverage 和 exposure 的实验矩阵；</li>
-<li><strong>Validation</strong>：加入滚动训练、purged/embargo、真实 out-of-sample 锁定；</li>
-<li><strong>Portfolio/TCA</strong>：加入 beta/sector neutralization、order/ADV 冲击、borrow 和容量；</li>
-<li><strong>Experiment store</strong>：把本地 manifest 迁移到 MLflow/DVC，并在 CI 中运行不变量测试；</li>
-<li><strong>Paper/shadow</strong>：最后才接 LEAN/券商模拟、监控和回滚规则。</li>
-</ol>
-<p>每次升级都要回答同一组面试问题：信息何时可得？预测如何变成仓位？成交如何发生？成本和容量怎样改变结论？出了异常怎样停止？</p>
-<h2 id="5">5. 学习者的互动闭环<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<p>每个项目的 <code>project_lab.ipynb</code> 都遵循五步：</p>
-<ol>
-<li>先运行固定 baseline，保存 manifest；</li>
-<li>在 notebook 中只改变一个参数，并在运行前写下预期；</li>
-<li>运行并查看图、分组表和 validation/test 差异；</li>
-<li>回到代码模块定位变化来自 data、feature、portfolio、cost 还是 metric；</li>
-<li>把结论写入 <code>reports/memo_template.md</code>，包括支持证据和失败条件。</li>
-</ol>
-<p>这套闭环使 notebook 用于探索，<code>src/</code> 用于可复用逻辑，<code>tests/</code> 用于不变量，<code>run_manifest.json</code> 用于复现；四者各自职责不同。</p>
+<p>影子运行（shadow）用实时数据产生研究系统本来会做的决定，用来检查离线假设；模拟交易（paper trading）进一步演示资金与订单流转。它们仍不等于真实交易，因为排队、冲击和参与者反应可能不同。监控与回滚也应先有明确规则，例如数据延迟超过决策窗口时暂停，而非上线以后再临时判断。</p>
+<p>阅读更成熟的工具时，可以把 Qlib 的数据、模型与回测组件对应到前几层，把 LEAN 的事件、订单与经纪商接口对应到交易层，把 MLflow 或 DVC 对应到实验与版本管理。名称可以变化，核心问题仍是同一个：过去的信息如何变成一笔可解释、可复算且受到约束的交易。</p>
 
 
 
