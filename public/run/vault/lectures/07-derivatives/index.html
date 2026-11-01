@@ -10499,19 +10499,14 @@
 </thead>
 <tbody>
 <tr>
-<td>模型假设与 BS 推导</td>
-<td>自融资复制、漂移替换、终端与空间边界</td>
-<td><a href="#finance-replication">复制与风险中性</a></td>
+<td>定价模型、BS推导与平值近似</td>
+<td>自融资复制、漂移替换、正态正部积分与误差</td>
+<td><a href="#finance-replication">复制与风险中性</a>、<a href="#finance-atm">平值与单位</a></td>
 </tr>
 <tr>
 <td>无套利关系与价格性质</td>
 <td>终值恒等式、逐状态支配、凸性、条件 Jensen</td>
 <td><a href="#finance-arbitrage">平价、价格界与行权</a></td>
-</tr>
-<tr>
-<td>平值近似与正态终值</td>
-<td>正态正部积分、中心展开、隐波反解</td>
-<td><a href="#finance-atm">平值与单位</a></td>
 </tr>
 <tr>
 <td>希腊字母与动态对冲</td>
@@ -10631,18 +10626,18 @@ dV=\Delta(dS+qS\,dt)+r(V-\Delta S)dt.
 <div class="arithmatex">\[
 V(t,S)=e^{-r\tau}\mathbb E^{\mathbb Q}[f(S_T)\mid S_t=S].
 \]</div>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-6f1f915a8ab9">Q1008 · 从自融资复制到 Black–Scholes–Merton 方程</a>中的历史股价可以有任意合适的漂移 <span class="arithmatex">\(\mu\)</span>，但股票和期权中的同一项会消去。这说明复制价格取决于可交易风险结构，而不是分析师预测收益率。</p>
-<p><a href="../../questions/08-derivatives/#problem-6ff6f73d3549">Q1011 · 一般收益的 BS 边界与闭式公式验证</a>把同一 PDE 用于不同支付。零股价为吸收态时，<span class="arithmatex">\(V(t,0)=e^{-r\tau}f(0)\)</span>；若支付大股价渐近为 <span class="arithmatex">\(as+b\)</span>，相应价格渐近为 <span class="arithmatex">\(aSe^{-q\tau}+be^{-r\tau}\)</span>，但需要允许交换极限与期望的增长控制。幂支付的高端增长是幂函数，不能沿用看涨的线性边界。</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-6f1f915a8ab9">Q961 · 从自融资复制到 Black–Scholes–Merton 方程</a>中的历史股价可以有任意合适的漂移 <span class="arithmatex">\(\mu\)</span>，但股票和期权中的同一项会消去。这说明复制价格取决于可交易风险结构，而不是分析师预测收益率。</p>
+<p><a href="../../questions/08-derivatives/#problem-6ff6f73d3549">Q964 · 一般收益的 BS 边界与闭式公式验证</a>把同一 PDE 用于不同支付。零股价为吸收态时，<span class="arithmatex">\(V(t,0)=e^{-r\tau}f(0)\)</span>；若支付大股价渐近为 <span class="arithmatex">\(as+b\)</span>，相应价格渐近为 <span class="arithmatex">\(aSe^{-q\tau}+be^{-r\tau}\)</span>，但需要允许交换极限与期望的增长控制。幂支付的高端增长是幂函数，不能沿用看涨的线性边界。</p>
 <p><strong>容易混淆。</strong> Girsanov 改变漂移，不改变同一路径的二次变差。历史均值回归不能直接替换风险中性漂移；不过独立波动因子或跳跃增加的未张成风险，会使完备复制前提失效。验证闭式公式时按“PDE、终值、空间边界”三步处理，不能只代回 PDE 就宣称唯一解。</p>
 <h2 id="finance-arbitrage">方法二：用逐状态支付建立平价、价格界和行权结论<a class="headerlink" href="#finance-arbitrage" title="Permanent link">&para;</a></h2>
 <p><strong>直觉。</strong> 比较支付比比较概率更强：若在每个允许状态组合甲都不差于组合乙，甲的成本就不能更低。题目出现“是否套利”“价差方向”“凸性”“提前行权”，先画到期支付，通常无需计算完整正态积分。</p>
 <p>做平价题，分别列 <span class="arithmatex">\(S_T&lt;K\)</span> 和 <span class="arithmatex">\(S_T\ge K\)</span> 的现金流；做不等式题，构造终值非负的差额组合；做严格套利题，还要确认严格正收益的状态有正概率。零成本且终值处处为零只是冗余复制。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-77937ce8422f">Q1012 · 看涨看跌平价</a>使用</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-77937ce8422f">Q967 · 看涨看跌平价</a>使用</p>
 <div class="arithmatex">\[
 (S_T-K)^++K=(K-S_T)^++S_T.
 \]</div>
 <p>到期现金 <span class="arithmatex">\(K\)</span> 今天只需 <span class="arithmatex">\(Ke^{-r\tau}\)</span>，到期股票交付则由预付远期复制，于是得到带股息平价。若两个报价不满足该式，买便宜现金流组合、卖贵组合即可。</p>
-<p><a href="../../questions/08-derivatives/#problem-a5fe85fdcbf6">Q1016 · 看涨价格界、垂直价差与期限条件</a>中，牛市价差支付介于 <span class="arithmatex">\(0\)</span> 与 <span class="arithmatex">\(K_2-K_1\)</span> 之间，故</p>
+<p><a href="../../questions/08-derivatives/#problem-a5fe85fdcbf6">Q971 · 看涨价格界、垂直价差与期限条件</a>中，牛市价差支付介于 <span class="arithmatex">\(0\)</span> 与 <span class="arithmatex">\(K_2-K_1\)</span> 之间，故</p>
 <div class="arithmatex">\[
 0\le C(K_1)-C(K_2)\le e^{-r\tau}(K_2-K_1).
 \]</div>
@@ -10652,13 +10647,13 @@ V(t,S)=e^{-r\tau}\mathbb E^{\mathbb Q}[f(S_T)\mid S_t=S].
 <h2 id="finance-atm">方法三：把平值价格化为正态正部，先查波动率单位<a class="headerlink" href="#finance-atm" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> 平值、短期限、快速估价、给权利金反求波动率，以及正态与对数正态模型比较。先确定是现货平值还是远期平值，再区分比例波动率与绝对金额波动率。</p>
 <p>正态变量的正部均值是通法：<span class="arithmatex">\(Z\sim N(0,1)\)</span> 时，<span class="arithmatex">\(\mathbb E Z^+=\phi(0)=1/\sqrt{2\pi}\)</span>。若风险中性终值为 <span class="arithmatex">\(F+vZ\)</span>，远期平值价格恰为 <span class="arithmatex">\(Dv/\sqrt{2\pi}\)</span>。这里 <span class="arithmatex">\(v\)</span> 是整个期限的价格标准差。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-050c8763773f">Q1021 · 平值期权的价格展开、隐波反解与名义换算</a>在 <span class="arithmatex">\(r=q=0,S=K\)</span> 时令 <span class="arithmatex">\(w=\sigma\sqrt\tau\)</span>，得到</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-050c8763773f">Q965 · 平值期权的价格展开、隐波反解与名义换算</a>在 <span class="arithmatex">\(r=q=0,S=K\)</span> 时令 <span class="arithmatex">\(w=\sigma\sqrt\tau\)</span>，得到</p>
 <div class="arithmatex">\[
 C=S[2\Phi(w/2)-1]
 =\frac{S}{\sqrt{2\pi}}\left(w-\frac{w^3}{24}+O(w^5)\right).
 \]</div>
 <p>因此 <span class="arithmatex">\(C\approx0.4S\sigma\sqrt\tau\)</span>。一个月、年化比例波动率 <span class="arithmatex">\(10\%\)</span>、现价为 <span class="arithmatex">\(1\)</span> 时，每单位价格约 <span class="arithmatex">\(0.0115165\)</span>；名义一百万单位约值一万一千五百美元。必须先算每单位，再乘合约份数。</p>
-<p><a href="../../questions/08-derivatives/#problem-87f129aa27bd">Q1022 · 正态股价下 ATM 看涨的期望价值</a>则恰给 <span class="arithmatex">\(C=v/\sqrt{2\pi}\)</span>。同平值价格的一阶匹配是 <span class="arithmatex">\(v\approx S\sigma\sqrt\tau\)</span>，这只匹配局部价格，不会使两种尾部分布相同。</p>
+<p><a href="../../questions/08-derivatives/#problem-87f129aa27bd">Q966 · 正态股价下 ATM 看涨的期望价值</a>则恰给 <span class="arithmatex">\(C=v/\sqrt{2\pi}\)</span>。同平值价格的一阶匹配是 <span class="arithmatex">\(v\approx S\sigma\sqrt\tau\)</span>，这只匹配局部价格，不会使两种尾部分布相同。</p>
 <p><strong>隐波判断。</strong> 先检查报价位于无套利价格范围，再解单调方程 <span class="arithmatex">\(C_{\rm BS}(\sigma)=C_{\rm mkt}\)</span>。Vega 很小会使反演对价格噪声敏感；带区间保护的 Newton 或二分更稳健。小参数是 <span class="arithmatex">\(w\)</span>，高波动下期限短也未必足够。</p>
 <h2 id="finance-greeks">方法四：把 Greeks 解释成可执行头寸与融资后损益<a class="headerlink" href="#finance-greeks" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> 股票涨后怎样调仓、哪只期权更敏感、Delta 中性是否赚钱、Vega 中性是否也 Gamma 中性。先写价格的局部展开，再明确哪一项通过什么工具抵消：</p>
@@ -10667,18 +10662,18 @@ C=S[2\Phi(w/2)-1]
 +\Theta\,\Delta t+\nu\,\Delta\sigma+\rho\,\Delta r.
 \]</div>
 <p>长一份看涨、空 <span class="arithmatex">\(\Delta\)</span> 股是当前 Delta 中性。上涨后长 Gamma 看涨的 Delta 增加，需要再卖股票；下跌后买回股票。所有调仓都由现金账户支付或收取，不能漏掉融资。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-be9178b51596">Q1025 · Delta 中性后的瞬时曲率收益与融资损益</a>说明：固定时间、固定旧对冲，股价小变动带来约 <span class="arithmatex">\(\Gamma(\Delta S)^2/2\)</span> 的凸性收益；经过时间后还存在 Theta。以模型波动率 <span class="arithmatex">\(\widehat\sigma\)</span> 对冲实际连续路径，扣融资后的主要损益是</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-be9178b51596">Q978 · Delta 中性后的瞬时曲率收益与融资损益</a>说明：固定时间、固定旧对冲，股价小变动带来约 <span class="arithmatex">\(\Gamma(\Delta S)^2/2\)</span> 的凸性收益；经过时间后还存在 Theta。以模型波动率 <span class="arithmatex">\(\widehat\sigma\)</span> 对冲实际连续路径，扣融资后的主要损益是</p>
 <div class="arithmatex">\[
 d\Pi=\tfrac12\Gamma S^2(\sigma_{\rm real}^2-\widehat\sigma^2)dt.
 \]</div>
 <p>实际方差等于定价方差时，曲率收益被时间价值和融资平衡，不存在由“涨跌都赚”推出的套利。</p>
-<p><a href="../../questions/08-derivatives/#problem-e2a8c1fa0da6">Q1030 · Vega 中性与 Gamma 中性的条件</a>使用 <span class="arithmatex">\(\nu=S^2\sigma\tau\Gamma\)</span>。同标的、共同波动率、同到期香草组合才有共同的比例因子。不同期限下，令 <span class="arithmatex">\(n_2=-\nu_1/\nu_2\)</span> 后，剩余 Gamma 为 <span class="arithmatex">\(\Gamma_1(1-\tau_1/\tau_2)\)</span>，通常不为零。</p>
+<p><a href="../../questions/08-derivatives/#problem-e2a8c1fa0da6">Q983 · Vega 中性与 Gamma 中性的条件</a>使用 <span class="arithmatex">\(\nu=S^2\sigma\tau\Gamma\)</span>。同标的、共同波动率、同到期香草组合才有共同的比例因子。不同期限下，令 <span class="arithmatex">\(n_2=-\nu_1/\nu_2\)</span> 后，剩余 Gamma 为 <span class="arithmatex">\(\Gamma_1(1-\tau_1/\tau_2)\)</span>，通常不为零。</p>
 <p><strong>计算顺序。</strong> 求 Delta 时两个正态参数都随现价变，使用 <span class="arithmatex">\(Se^{-q\tau}\phi(d_1)=Ke^{-r\tau}\phi(d_2)\)</span> 让链式项相消。判断期限极限时分清固定 <span class="arithmatex">\(S=K\)</span> 与固定 <span class="arithmatex">\(S\ne K\)</span>：平值 Gamma 按 <span class="arithmatex">\(1/\sqrt\tau\)</span> 发散，固定非平值 Gamma 却趋零；平值 Vega 也趋零。这反映风险集中到越来越窄的价格区域。</p>
 <p><strong>进一步的方法选择。</strong> 比较不同现价与执行价同比缩放的期权，用一次齐次性：价值与 Vega 同比放大，Delta 不变，Gamma 反比缩小。计算模拟 Greeks 时，平滑收益优先考虑路径微分；数字支付逐路径导数几乎处处为零，应改用似然比、条件平滑或受控差分。共同随机数能降低差分噪声，但不会消除离散偏差。欧式 Theta 不总为负，深实值看跌的行权价贴现效应可使其为正。</p>
 <h2 id="finance-exotic">方法五：路径触碰先比事件，多资产先看支付单位<a class="headerlink" href="#finance-exotic" title="Permanent link">&para;</a></h2>
 <h3 id="_6">触障、反射与停止鞅<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>“到期高于某水平”和“期间曾到达某水平”是不同事件。连续路径下前者包含于后者，先得价格比较，再判断能否使用反射。反射最直接适用于零漂移算术 Brownian；GBM 的对数即使零利率仍有 <span class="arithmatex">\(-\sigma^2/2\)</span> 漂移，不能直接套两倍关系。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-795182190530">Q1033 · 触及行权价得 $1 的一元期权</a>在零利率、零股息 GBM 中，用 <span class="arithmatex">\(\tau_H\)</span> 表示首次到 <span class="arithmatex">\(H\)</span>。停止股价 <span class="arithmatex">\(S_{t\wedge\tau_H}\)</span> 被 <span class="arithmatex">\(H\)</span> 界住；未触障路径长期趋零，所以</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-795182190530">Q986 · 触及行权价得 $1 的一元期权</a>在零利率、零股息 GBM 中，用 <span class="arithmatex">\(\tau_H\)</span> 表示首次到 <span class="arithmatex">\(H\)</span>。停止股价 <span class="arithmatex">\(S_{t\wedge\tau_H}\)</span> 被 <span class="arithmatex">\(H\)</span> 界住；未触障路径长期趋零，所以</p>
 <div class="arithmatex">\[
 S_0=\mathbb E[S_{t\wedge\tau_H}]
 \longrightarrow H\mathbb P^{\mathbb Q}(\tau_H&lt;\infty),
@@ -10687,7 +10682,7 @@ S_0=\mathbb E[S_{t\wedge\tau_H}]
 <p>关键是停止过程有界，允许交换极限与期望；直接对未停止股价做同样操作会出错。</p>
 <p>敲入与敲出在相同观察规则、无回扣、同支付日时逐路径相加为香草。双不触碰与到期双一触碰相加为到期现金；触障立即支付则因贴现时点不同需要另算。障碍 Gamma 可以变号，不能套香草凸性。题目若问波动方向，先检查时间变换是否真的把事件变成嵌套关系，非零持有成本可能破坏这一证明。</p>
 <h3 id="_7">比值、有效波动与换测度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-c0e8064c360d">Q1036 · 交换期权</a>支付 <span class="arithmatex">\((S_{1,T}-S_{2,T})^+\)</span>。将其写为 <span class="arithmatex">\(S_{2,T}(S_{1,T}/S_{2,T}-1)^+\)</span>，以不分红股票 <span class="arithmatex">\(S_2\)</span> 为基准，比值在相应测度下为鞅，其有效方差为</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-c0e8064c360d">Q989 · 交换期权</a>支付 <span class="arithmatex">\((S_{1,T}-S_{2,T})^+\)</span>。将其写为 <span class="arithmatex">\(S_{2,T}(S_{1,T}/S_{2,T}-1)^+\)</span>，以不分红股票 <span class="arithmatex">\(S_2\)</span> 为基准，比值在相应测度下为鞅，其有效方差为</p>
 <div class="arithmatex">\[
 \sigma_*^2=\sigma_1^2+\sigma_2^2-2\rho\sigma_1\sigma_2.
 \]</div>
@@ -10705,7 +10700,7 @@ M_p(k)&amp;=e^{-r\tau}\mathbb E^{\mathbb Q}[S_T^p\mathbf1_{\{S_T&gt;k\}}]\\
 \end{aligned}
 \]</div>
 <p>推导只有一步核心配方：<span class="arithmatex">\(e^{pz w}\phi(z)=e^{p^2w^2/2}\phi(z-pw)\)</span>，其中 <span class="arithmatex">\(w=\sigma\sqrt\tau\)</span>。幂权重把正态积分的均值平移 <span class="arithmatex">\(pw\)</span>：正幂向右、负幂向左；支付幂越高，右尾的相对权重越大。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-a7475cf057bc">Q1039 · 平方看涨的截断矩、变坐标PDE与Greeks</a>的行权条件是 <span class="arithmatex">\(S_T&gt;\sqrt K\)</span>，故</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-a7475cf057bc">Q992 · 平方看涨的截断矩、变坐标PDE与Greeks</a>的行权条件是 <span class="arithmatex">\(S_T&gt;\sqrt K\)</span>，故</p>
 <div class="arithmatex">\[
 C=M_2(\sqrt K)-KM_0(\sqrt K).
 \]</div>
@@ -10714,7 +10709,7 @@ C=M_2(\sqrt K)-KM_0(\sqrt K).
 V_S=2SG_U,\qquad V_{SS}=2G_U+4S^2G_{UU}.
 \]</div>
 <p>漏掉第一项会算错 Gamma。</p>
-<p><a href="../../questions/08-derivatives/#problem-cb0f7fa88315">Q1040 · 股票加权看涨的截断矩与股票计价测度</a>支付 <span class="arithmatex">\(S_T(S_T-K)^+\)</span>，所以是 <span class="arithmatex">\(M_2(K)-KM_1(K)\)</span>。也可以换到股票计价测度写成 <span class="arithmatex">\(S\mathbb E^S[(S_T-K)^+]\)</span>，此时期望前不再额外现金贴现。</p>
+<p><a href="../../questions/08-derivatives/#problem-cb0f7fa88315">Q993 · 股票加权看涨的截断矩与股票计价测度</a>支付 <span class="arithmatex">\(S_T(S_T-K)^+\)</span>，所以是 <span class="arithmatex">\(M_2(K)-KM_1(K)\)</span>。也可以换到股票计价测度写成 <span class="arithmatex">\(S\mathbb E^S[(S_T-K)^+]\)</span>，此时期望前不再额外现金贴现。</p>
 <p><strong>容易混淆。</strong> <span class="arithmatex">\(S^p\)</span> 是坐标函数，不自动是一只自融资可交易股票；负幂的行权不等式可能反向。含额外股价因子的支付量纲与普通看涨不同，比较价格前先统一名义和支付单位。</p>
 <h2 id="finance-static">方法七：斜率跳跃复制支付，执行价导数恢复分布<a class="headerlink" href="#finance-static" title="Permanent link">&para;</a></h2>
 <h3 id="_8">连续分段线性支付与曲率测度<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
@@ -10722,13 +10717,13 @@ V_S=2SG_U,\qquad V_{SS}=2G_U+4S^2G_{UU}.
 <div class="arithmatex">\[
 f(s)=f(0)+m_0s+\sum_j\Delta m_j(s-K_j)^+.
 \]</div>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-04d1fbbfa5fb">Q1043 · 分段线性收益的斜率变化与静态合成</a>的三角支付从 <span class="arithmatex">\(90\)</span> 开始斜率为 <span class="arithmatex">\(2\)</span>，过 <span class="arithmatex">\(100\)</span> 变为 <span class="arithmatex">\(-2\)</span>，过 <span class="arithmatex">\(110\)</span> 回到零，因此是</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-04d1fbbfa5fb">Q996 · 分段线性收益的斜率变化与静态合成</a>的三角支付从 <span class="arithmatex">\(90\)</span> 开始斜率为 <span class="arithmatex">\(2\)</span>，过 <span class="arithmatex">\(100\)</span> 变为 <span class="arithmatex">\(-2\)</span>，过 <span class="arithmatex">\(110\)</span> 回到零，因此是</p>
 <div class="arithmatex">\[
 2(s-90)^+-4(s-100)^++2(s-110)^+.
 \]</div>
 <p>用节点值和每段斜率同时核对，避免只凭熟悉组合名称猜权重。光滑曲线则把离散斜率跳跃推广为曲率积分；如果节点本身有支付跳跃，需要数字期权，有限个连续香草不能精确生成不连续函数。</p>
 <h3 id="_9">数字、原子与隐含分布<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-8bcfee0e7eac">Q1046 · 从期权价格反推风险中性密度</a>从 <span class="arithmatex">\(C(K)=D\mathbb E^{\mathbb Q}(S_T-K)^+\)</span> 出发。小幅提高执行价，只减少已实值状态的支付，故</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-8bcfee0e7eac">Q999 · 从期权价格反推风险中性密度</a>从 <span class="arithmatex">\(C(K)=D\mathbb E^{\mathbb Q}(S_T-K)^+\)</span> 出发。小幅提高执行价，只减少已实值状态的支付，故</p>
 <div class="arithmatex">\[
 C'_+(K)=-D\mathbb Q(S_T&gt;K),\qquad
 C'_-(K)=-D\mathbb Q(S_T\ge K).
@@ -10742,8 +10737,8 @@ C'_-(K)=-D\mathbb Q(S_T\ge K).
 <p><strong>容易混淆。</strong> 香草现货 Delta 不是行权概率，数字 Delta 在到期附近形成尖峰，而非处处稳定在某个概率值。知道一个期限的所有香草，只恢复该期限边际分布，不能唯一恢复路径动态。用“过执行价就买、下穿就卖”声称免费复制时，非光滑链式法则还含局部时间，不能漏掉。</p>
 <h2 id="finance-volatility">方法八：先把波动率变回价格，再判断曲面与模型<a class="headerlink" href="#finance-volatility" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> 微笑是否套利、历史波动用哪个、时变波动怎样替换、随机波动是否更贵、哪些模型完备。隐波是价格参数化；套利应检查可执行价格组合，模型则应比较未来动态与对冲表现。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-88b1c175cf78">Q1050 · 隐含波动率微笑、偏斜与真正的套利</a>中，同期限 <span class="arithmatex">\(C(90)=12,C(100)=8,C(110)=2\)</span>。买两翼、卖两份中间的成本为 <span class="arithmatex">\(12+2-16=-2\)</span>，终值蝶式非负，因而套利。仅仅高低执行价隐波不同，没有产生这种结论。</p>
-<p><a href="../../questions/08-derivatives/#problem-1982ff3796d3">Q1054 · 确定性时变波动率的定价与对冲</a>令</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-88b1c175cf78">Q1003 · 隐含波动率微笑、偏斜与真正的套利</a>中，同期限 <span class="arithmatex">\(C(90)=12,C(100)=8,C(110)=2\)</span>。买两翼、卖两份中间的成本为 <span class="arithmatex">\(12+2-16=-2\)</span>，终值蝶式非负，因而套利。仅仅高低执行价隐波不同，没有产生这种结论。</p>
+<p><a href="../../questions/08-derivatives/#problem-1982ff3796d3">Q1007 · 确定性时变波动率的定价与对冲</a>令</p>
 <div class="arithmatex">\[
 R=\int_t^Tr(u)du,\qquad A=\int_t^T\sigma(u)^2du.
 \]</div>
@@ -10757,27 +10752,27 @@ R=\int_t^Tr(u)du,\qquad A=\int_t^T\sigma(u)^2du.
 <p><strong>容易混淆。</strong> 历史长期收益标准差不等于高频二次变差，二者也都不自动等于隐波。补偿下跳比较凸收益时要保持远期均值一致；只加下跳而不补偿漂移，比较条件已改变。定价误差预算应与 Vega、输入误差、价差和头寸规模对照，更多小数位不能修复模型错误。</p>
 <h2 id="finance-numerical">方法九：两态先复制，多态先查维度，提前行权向后递推<a class="headerlink" href="#finance-numerical" title="Permanent link">&para;</a></h2>
 <p><strong>直觉。</strong> 股票加现金可以匹配两个独立状态的支付；增加状态而不增加交易工具，通常留下定价自由度。数值三叉树却可以只是给定连续模型的离散工具，两者的问题层次不同。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-c271fa12fdd4">Q1059 · 单期两态定价的通式与风险中性概率</a>中，现金增长因子为 <span class="arithmatex">\(R\)</span>，终值为 <span class="arithmatex">\(S_u&gt;S_d\)</span>，匹配支付给</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-c271fa12fdd4">Q1012 · 单期两态定价的通式与风险中性概率</a>中，现金增长因子为 <span class="arithmatex">\(R\)</span>，终值为 <span class="arithmatex">\(S_u&gt;S_d\)</span>，匹配支付给</p>
 <div class="arithmatex">\[
 \Delta=\frac{H_u-H_d}{S_u-S_d},\qquad
 q=\frac{RS-S_d}{S_u-S_d},\qquad
 V=\frac{qH_u+(1-q)H_d}{R}.
 \]</div>
 <p>先验检查 <span class="arithmatex">\(S_d&lt;RS&lt;S_u\)</span>。在 <span class="arithmatex">\(100\)</span> 变成 <span class="arithmatex">\(150\)</span> 或 <span class="arithmatex">\(75\)</span>、零利率的例子中，<span class="arithmatex">\(q=1/3\)</span>，执行价 <span class="arithmatex">\(100\)</span> 的看涨价为 <span class="arithmatex">\(50/3\)</span>，Delta 为 <span class="arithmatex">\(2/3\)</span>。真实上涨概率不进入复制成本。</p>
-<p><a href="../../questions/08-derivatives/#problem-8d29949b0636">Q1065 · Longstaff–Schwartz 算法</a>处理高维提前行权：模拟训练路径，向后把未来已选现金流贴现到当前，再回归其对当前状态的条件期望，得到继续价值。立即行权收益更高就改记支付；继续时保留未来真实现金流，不把拟合值当支付。最后固定策略，在独立路径上估值。</p>
+<p><a href="../../questions/08-derivatives/#problem-8d29949b0636">Q1018 · Longstaff–Schwartz 算法</a>处理高维提前行权：模拟训练路径，向后把未来已选现金流贴现到当前，再回归其对当前状态的条件期望，得到继续价值。立即行权收益更高就改记支付；继续时保留未来真实现金流，不把拟合值当支付。最后固定策略，在独立路径上估值。</p>
 <p><strong>判断路线。</strong> 低维、提前行权适合树或 PDE；高维、路径依赖适合 Monte Carlo，但停止决策需要额外条件期望。亚式必须将累计均值加入状态；只保留现价会把不同历史错误合并。三叉树应以非负概率匹配目标风险中性局部均值与方差，再检验步长收敛。</p>
 <p><strong>容易混淆。</strong> 三态不完备模型的价格区间不能通过猜一个真实概率补齐。模拟误差的平方根收敛只描述独立有限方差采样误差，不包括时间离散与回归偏差。同路径训练估值的前视效应与次优停止策略的向下偏差方向不同；独立估值去掉前者，不会自动消除后者。</p>
 <h2 id="finance-fixed-income">方法十：固收与外汇先匹配日期和币种，再谈利率<a class="headerlink" href="#finance-fixed-income" title="Permanent link">&para;</a></h2>
 <h3 id="_10">现金流与报价口径<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>单利、年复利和连续复利是相同累积因子的不同表达。先把题给利率还原为贴现因子，再拼接现金流；这样可避免把半年收益直接当成年化收益。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-7cd5f56f0065">Q1072 · 贴现因子比与单利、复利远期报价</a>给区间长度 <span class="arithmatex">\(\delta\)</span> 的累积因子</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-7cd5f56f0065">Q1025 · 贴现因子比与单利、复利远期报价</a>给区间长度 <span class="arithmatex">\(\delta\)</span> 的累积因子</p>
 <div class="arithmatex">\[
 A=\frac{P(0,T_1)}{P(0,T_2)},\quad
 f_{\rm simple}=\frac{A-1}{\delta},\quad
 f_{\rm eff}=A^{1/\delta}-1.
 \]</div>
 <p>一年即期有效年利率 <span class="arithmatex">\(4\%\)</span>、两年 <span class="arithmatex">\(5\%\)</span>，则一年后开始的一年远期为 <span class="arithmatex">\(1.05^2/1.04-1\approx6.0096\%\)</span>，不是两个即期率之差。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-9d8ac6359935">Q1070 · 外汇远期的覆盖利率平价与双向套利</a>中，<span class="arithmatex">\(S\)</span> 表示每欧元的美元数，本币与外币利率分别 <span class="arithmatex">\(r_d,r_f\)</span>，现金流匹配给 <span class="arithmatex">\(F=Se^{(r_d-r_f)T}\)</span>。远期过高就借美元、买欧元并投资、卖出到期欧元远期。逐币种列账，到期欧元抵消，美元留下正收益。</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-9d8ac6359935">Q1023 · 外汇远期的覆盖利率平价与双向套利</a>中，<span class="arithmatex">\(S\)</span> 表示每欧元的美元数，本币与外币利率分别 <span class="arithmatex">\(r_d,r_f\)</span>，现金流匹配给 <span class="arithmatex">\(F=Se^{(r_d-r_f)T}\)</span>。远期过高就借美元、买欧元并投资、卖出到期欧元远期。逐币种列账，到期欧元抵消，美元留下正收益。</p>
 <h3 id="black">互换、Black 公式和债券敏感度<a class="headerlink" href="#black" title="Permanent link">&para;</a></h3>
 <p>普通互换是已知曲线上的线性现金流估值。单曲线下浮动腿逐期有 <span class="arithmatex">\(\delta_iF_iP_{i+1}=P_i-P_{i+1}\)</span>，求和望远镜；固定腿为 <span class="arithmatex">\(KA\)</span>，其中 <span class="arithmatex">\(A=\sum_i\delta_iP_{i+1}\)</span>。多曲线时预测与贴现分开，通常不能再作同一望远镜化简。</p>
 <p>远期 Black 公式需要合约支付日对应的计价基准与对数正态假设。期权在 <span class="arithmatex">\(T\)</span> 行权但远期在 <span class="arithmatex">\(U\)</span> 交割时，<span class="arithmatex">\(P(T,U)(F_T^U-K)^+\)</span> 与 <span class="arithmatex">\((F_T^U-K)^+\)</span> 是不同支付；不能见到远期就机械贴现同一个日期。</p>
@@ -10818,8 +10813,8 @@ f_{\rm eff}=A^{1/\delta}-1.
 </tbody>
 </table>
 <p>常系数均值回归模型的条件均值为 <span class="arithmatex">\(b+(r_t-b)e^{-au}\)</span>。因此当前短率偏高的影响会随未来跨度 <span class="arithmatex">\(u\)</span> 衰减；这会改变整个积分短率分布，而不只是未来某日的平均利率。历史测度估计的 <span class="arithmatex">\(a,b\)</span> 不一定等于表中定价测度参数。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-7919189b6568">Q1078 · LMM 的马尔可夫性条件</a>中，若完整利率向量的 SDE 系数只依赖时间与当前向量且满足解的常规条件，该向量就是 Markov。单个利率的漂移依赖其他利率时，单个标量一般不是充分状态。一个 Brownian 驱动也不自动等于一个状态变量；路径相关漂移积分仍可能需要更多信息。</p>
-<p><a href="../../questions/08-derivatives/#problem-726fe53cd8ea">Q1079 · LMM的计价基准、终端测度漂移与模拟定价</a>从</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-7919189b6568">Q1031 · LMM 的马尔可夫性条件</a>中，若完整利率向量的 SDE 系数只依赖时间与当前向量且满足解的常规条件，该向量就是 Markov。单个利率的漂移依赖其他利率时，单个标量一般不是充分状态。一个 Brownian 驱动也不自动等于一个状态变量；路径相关漂移积分仍可能需要更多信息。</p>
+<p><a href="../../questions/08-derivatives/#problem-726fe53cd8ea">Q1032 · LMM的计价基准、终端测度漂移与模拟定价</a>从</p>
 <div class="arithmatex">\[
 1+\delta_jL_j=\frac{P(t,T_j)}{P(t,T_{j+1})}
 \]</div>
@@ -10836,12 +10831,12 @@ f_{\rm eff}=A^{1/\delta}-1.
 <h2 id="finance-risk">方法十二：收益、风险和优化先统一计量口径<a class="headerlink" href="#finance-risk" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> ETF 成分变动、融资杠杆、每日重置、同资金股票与期权风险、最小方差组合、VaR 和冲击重估。先说明比较单份、同资金、同保证金还是同 Delta，再写组合真实现金流。</p>
 <p>线性组合一期收益按期初价值权重相加；多日复利按财富逐期相乘。每日重置杠杆 <span class="arithmatex">\(\ell\)</span> 的财富是 <span class="arithmatex">\(V_n=V_0\prod_j(1+\ell r_j)\)</span>，不是累计标的收益乘 <span class="arithmatex">\(\ell\)</span>。看涨同资金一阶风险用弹性 <span class="arithmatex">\(S\Delta/C\)</span>，但 Delta 中性组合仍有曲率和波动风险。</p>
-<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-9359788c8831">Q1085 · 组合优化</a>中，两资产均值相同，只需最小化</p>
+<p><strong>例题。</strong> <a href="../../questions/08-derivatives/#problem-9359788c8831">Q1038 · 组合优化</a>中，两资产均值相同，只需最小化</p>
 <div class="arithmatex">\[
 w^2\sigma_A^2+(1-w)^2\sigma_B^2+2w(1-w)\rho\sigma_A\sigma_B.
 \]</div>
 <p>求导得 <span class="arithmatex">\(w=(\sigma_B^2-\rho\sigma_A\sigma_B)/(\sigma_A^2+\sigma_B^2-2\rho\sigma_A\sigma_B)\)</span>。代入 <span class="arithmatex">\(20\%\)</span>、<span class="arithmatex">\(30\%\)</span>、相关 <span class="arithmatex">\(0.5\)</span>，得 <span class="arithmatex">\(w=6/7\)</span>，另一个权重为 <span class="arithmatex">\(1/7\)</span>。若禁止卖空，需检查权重位于可行区间，多资产则是带约束二次规划。</p>
-<p><a href="../../questions/08-derivatives/#problem-b449ef24574e">Q1083 · VaR 及其缺陷</a>中，一份违约概率 <span class="arithmatex">\(3\%\)</span>、违约损失一百万的头寸，其 <span class="arithmatex">\(95\%\)</span> VaR 为零。两份独立头寸至少一份违约的概率为 <span class="arithmatex">\(1-0.97^2&gt;5\%\)</span>，组合 VaR 变成一百万，说明 VaR 不总次可加。可积损失的 ES 应使用</p>
+<p><a href="../../questions/08-derivatives/#problem-b449ef24574e">Q1036 · VaR 及其缺陷</a>中，一份违约概率 <span class="arithmatex">\(3\%\)</span>、违约损失一百万的头寸，其 <span class="arithmatex">\(95\%\)</span> VaR 为零。两份独立头寸至少一份违约的概率为 <span class="arithmatex">\(1-0.97^2&gt;5\%\)</span>，组合 VaR 变成一百万，说明 VaR 不总次可加。可积损失的 ES 应使用</p>
 <div class="arithmatex">\[
 \mathrm{ES}_\alpha(L)=\frac1{1-\alpha}\int_\alpha^1\mathrm{VaR}_u(L)\,du,
 \]</div>

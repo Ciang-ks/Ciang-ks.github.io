@@ -10664,7 +10664,7 @@ C\sum_i\max(0,1-y_i(w^\top x_i+b))
 <h3 id="research-ensemble-basics">树与集成：用局部规则表示非线性<a class="headerlink" href="#research-ensemble-basics" title="Permanent link">&para;</a></h3>
 <p>树反复用阈值把特征空间分成区域。平方损失回归树在每个叶子预测训练目标均值；分类树在叶子估计类别比例，常用 Gini 或交叉熵选择分裂。分裂后的指标必须按子节点样本权重平均，不能把一个很小的纯叶子与一个很大的混杂叶子等权处理。</p>
 <p>树能自动表示阈值效应与交互，例如“下雨且早高峰”的需求变化；单树却会因样本的小扰动换分裂点，方差较高。限制深度、叶子最小样本量、剪枝与缺失处理，是模型定义的一部分。</p>
-<p><a href="../../questions/06-statistics-regression/#problem-32c5e9d8a0a3">Q782 · 树分裂的加权Gini</a>中，父节点六正四负，混杂度为 <span class="arithmatex">\(12/25\)</span>；左节点六个样本、右节点四个样本，分裂后的加权混杂度为 <span class="arithmatex">\((6/10)(5/18)+(4/10)(3/8)=19/60\)</span>。下降量为 <span class="arithmatex">\(49/300\)</span>，表明分裂确实降低了当前训练节点的混杂，但是否改善未来分类还要独立评价。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-32c5e9d8a0a3">Q735 · 树分裂的加权Gini</a>中，父节点六正四负，混杂度为 <span class="arithmatex">\(12/25\)</span>；左节点六个样本、右节点四个样本，分裂后的加权混杂度为 <span class="arithmatex">\((6/10)(5/18)+(4/10)(3/8)=19/60\)</span>。下降量为 <span class="arithmatex">\(49/300\)</span>，表明分裂确实降低了当前训练节点的混杂，但是否改善未来分类还要独立评价。</p>
 <p><strong>Bagging 与随机森林。</strong> 对多棵树平均可以降低不稳定性；随机森林再随机选择候选特征，减少树之间的相关。若各树预测方差同为 <span class="arithmatex">\(\tau^2\)</span>、两两相关同为 <span class="arithmatex">\(\rho\)</span>，平均 <span class="arithmatex">\(B\)</span> 棵树的方差为</p>
 <div class="arithmatex">\[
 \tau^2\left(\rho+\frac{1-\rho}{B}\right).
@@ -10717,46 +10717,46 @@ h_t=\omega+\alpha\varepsilon_{t-1}^2+\beta h_{t-1},
 <p>实体分组与时间切分应服务于目标：预测已知房屋未来成交，可允许使用其真正过去成交；测试新房屋泛化，则整栋房屋留出。站点、用户或演出层面的相关性，同样要在验证与标准误中体现。</p>
 <h2 id="research-regression">方法一：用投影和残差化解释回归，而非逐个猜系数<a class="headerlink" href="#research-regression" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> 特征完全或近似相关、系数不唯一、单变量回归与多变量回归不同、重复数据或“控制其他变量后”的解释。直觉是：系数只能识别数据中真正出现的独立方向；没有被观察到的方向，无法靠求逆制造信息。</p>
-<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-ddcb55ad9352">Q751 · 秩亏、共线性与最小二乘的可识别性</a>设 <span class="arithmatex">\(x_2=3x_1\)</span>，预测只依赖 <span class="arithmatex">\(\beta_1+3\beta_2\)</span>，因此许多系数向量给同样拟合值。近似共线对应 <span class="arithmatex">\(X^\top X\)</span> 很小的特征值，其逆放大该方向的方差；训练预测可能仍很稳定，单个系数却会大幅变动。</p>
+<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-ddcb55ad9352">Q704 · 秩亏、共线性与最小二乘的可识别性</a>设 <span class="arithmatex">\(x_2=3x_1\)</span>，预测只依赖 <span class="arithmatex">\(\beta_1+3\beta_2\)</span>，因此许多系数向量给同样拟合值。近似共线对应 <span class="arithmatex">\(X^\top X\)</span> 很小的特征值，其逆放大该方向的方差；训练预测可能仍很稳定，单个系数却会大幅变动。</p>
 <p>判断某变量的额外贡献，可以先把它对其他变量回归取残差 <span class="arithmatex">\(r_x\)</span>，再把目标对同一组变量取残差 <span class="arithmatex">\(r_y\)</span>。其多元系数为 <span class="arithmatex">\(r_x^\top r_y/(r_x^\top r_x)\)</span>。分母小表示该变量几乎没有独立变化，也解释标准误为何大。</p>
-<p><a href="../../questions/06-statistics-regression/#problem-7d4414f5380a">Q753 · 数据翻倍</a>把每行复制一次，正规方程两边同时乘二，系数不变。精确复制没有增加独立信息，不能把软件缩小的独立行标准误当成真实精度提升。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-7d4414f5380a">Q706 · 数据翻倍</a>把每行复制一次，正规方程两边同时乘二，系数不变。精确复制没有增加独立信息，不能把软件缩小的独立行标准误当成真实精度提升。</p>
 <p><strong>解题路线。</strong> 先看设计列空间与秩，再看条件数和独立观测单位，最后区分“改参数表示”“改拟合空间”“改惩罚”。中心化能改善一些数值表现，却不会消除完全共线；删变量可改预测目标或引入遗漏变量，不能仅凭一个较大的标准误机械删除。</p>
 <h2 id="research-regularization">方法二：通过收缩和样本外验证控制复杂度<a class="headerlink" href="#research-regularization" title="Permanent link">&para;</a></h2>
 <p><strong>直觉。</strong> 数据中的弱方向往往主要是噪声。OLS 将其全部拟合，未来会不稳定；正则化允许舍弃一些样本内拟合，换取可重复的预测。选择惩罚要看信号是否稀疏、特征是否成组相关，以及验证任务。</p>
-<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-regularization-scalar">Q756 · 从标量惩罚到正交设计下的ridge与lasso</a>把多元问题缩成</p>
+<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-regularization-scalar">Q709 · 从标量惩罚到正交设计下的ridge与lasso</a>把多元问题缩成</p>
 <div class="arithmatex">\[
 \min_b\tfrac12(b-z)^2+\tfrac\lambda2b^2,\qquad
 \min_b\tfrac12(b-z)^2+\lambda|b|.
 \]</div>
 <p>第一式解 <span class="arithmatex">\(b=z/(1+\lambda)\)</span>；第二式在零点用次梯度，解为 <span class="arithmatex">\(\operatorname{sign}(z)(|z|-\lambda)_+\)</span>。当 <span class="arithmatex">\(z=0.8,\lambda=1\)</span>，分别得到 <span class="arithmatex">\(0.4\)</span> 与零。正交设计可以逐坐标应用；一般相关设计不行。</p>
-<p><a href="../../questions/06-statistics-regression/#problem-666c2cabace7">Q757 · lasso vs ridge 的偏差方差</a>提示：一组相关特征都携带信号时，lasso 可能在它们之间不稳定切换；ridge 往往共同收缩。稀疏机制下，lasso 又可能更合适，不能给无条件排序。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-666c2cabace7">Q710 · lasso vs ridge 的偏差方差</a>提示：一组相关特征都携带信号时，lasso 可能在它们之间不稳定切换；ridge 往往共同收缩。稀疏机制下，lasso 又可能更合适，不能给无条件排序。</p>
 <p><strong>主成分的判断。</strong> 若 <span class="arithmatex">\(X=UDV^\top\)</span>，ridge 在每个右奇异方向的收缩因子为 <span class="arithmatex">\(d_j^2/(d_j^2+\lambda)\)</span>。PCR 则直接丢掉部分小方差方向。PCA 只看输入方差，不看目标；预测信号可能恰在低方差方向，因而不能只按解释方差比例决定模型。</p>
 <p><strong>方法选择。</strong> 需要稀疏解释时可比较 lasso、elastic net；信号稠密且共线时比较 ridge；有明确低维结构时比较 PCR、业务聚合或平滑。逐步回归是搜索并重拟合变量子集，逐次残差化是分解给定回归，两者不同。所有候选、尺度与调参都在训练和验证流程内部比较，最终使用未来误差决定复杂度。</p>
 <p><strong>易错点。</strong> 单个变量不显著不代表整组无用。选完变量后直接引用原来的普通 <span class="arithmatex">\(t\)</span> 检验会忽略选择过程；若目标是预测，应优先看样本外增量与稳定性。</p>
 <h2 id="research-loss">方法三：先问错误代价，再选择损失与评价指标<a class="headerlink" href="#research-loss" title="Permanent link">&para;</a></h2>
 <p><strong>识别信号。</strong> 题目问“最好的预测值”“异常值影响”“不平衡分类”“排序能力”或“预测区间”。损失决定什么量值得预测：平方误差对应条件均值，绝对误差对应条件中位数，非对称绝对误差对应条件分位数。</p>
-<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-81811b682077">Q783 · 平方损失、绝对损失与分位数的统一最优性</a>给</p>
+<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-81811b682077">Q736 · 平方损失、绝对损失与分位数的统一最优性</a>给</p>
 <div class="arithmatex">\[
 \mathbb E(Y-a)^2=\operatorname{Var}Y+(\mathbb EY-a)^2.
 \]</div>
 <p>所以最优常数是均值。绝对损失的左右导数给 <span class="arithmatex">\(F(a-)\le1/2\le F(a)\)</span>；将低估与高估的单位代价改为 <span class="arithmatex">\(\tau\)</span>、<span class="arithmatex">\(1-\tau\)</span>，得到 <span class="arithmatex">\(\tau\)</span> 分位数。库存缺货成本高时，适当高分位预测可能比均值更符合决策。</p>
-<p><a href="../../questions/06-statistics-regression/#problem-auc-pair-comparison">Q780 · AUC的配对概率、并列处理与秩和公式</a>把指标写成正类评分高于负类的概率，并列计半。例中总共十六对、累计十一对胜，故 AUC 为 <span class="arithmatex">\(11/16\)</span>。这个指标看排序，不保证概率校准，也不确定某个交易阈值的净收益。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-auc-pair-comparison">Q733 · AUC的配对概率、并列处理与秩和公式</a>把指标写成正类评分高于负类的概率，并列计半。例中总共十六对、累计十一对胜，故 AUC 为 <span class="arithmatex">\(11/16\)</span>。这个指标看排序，不保证概率校准，也不确定某个交易阈值的净收益。</p>
 <p><strong>分类判断。</strong> 先画混淆矩阵：精确率的分母是预测正类，召回率的分母是真实正类；<span class="arithmatex">\(F_1=2TP/(2TP+FP+FN)\)</span>。少数类很少时，总准确率容易被多数类主导。若动作依赖事件概率，应用 log loss、Brier 分数和校准曲线，并按成本选阈值；若只做候选排序，才突出排序指标。</p>
 <p><strong>模型内部指标。</strong> 树的 Gini 是节点类别混杂度，分裂后必须按子节点样本数加权；它是训练准则，不能代替样本外业务指标。预测区间还应检查整体及不同状态下的覆盖率、宽度和尾部失配。</p>
 <h2 id="research-causal">方法四：把选择偏差、因果识别和抽样权重分开<a class="headerlink" href="#research-causal" title="Permanent link">&para;</a></h2>
 <p><strong>直觉。</strong> “被观察到”或“接受某处理”本身可能筛选人群。回归控制可以调整已观测差异，却不会自动恢复未观察到的反事实。先写要估计的总体与因果效应，再说明哪些假设使它可识别。</p>
-<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-261b0692bbbc">Q763 · 随机试验与选择偏差</a>用潜在结果分解：</p>
+<p><strong>例题。</strong> <a href="../../questions/06-statistics-regression/#problem-261b0692bbbc">Q716 · 随机试验与选择偏差</a>用潜在结果分解：</p>
 <div class="arithmatex">\[
 \mathbb E[Y\mid D=1]-\mathbb E[Y\mid D=0]
 =\mathbb E[Y_1-Y_0\mid D=1]
 +\mathbb E[Y_0\mid D=1]-\mathbb E[Y_0\mid D=0].
 \]</div>
 <p>最后两项是处理前就可能存在的健康差异。随机分配使处理独立于潜在结果，在设计与执行假设成立时消除系统选择偏差；有限样本仍有不确定性，需报告平衡、失访和执行情况。</p>
-<p><a href="../../questions/06-statistics-regression/#problem-be0d6768d7ac">Q764 · 短回归与长回归</a>给遗漏变量恒等式 <span class="arithmatex">\(\beta^{s}-\beta^{l}=\pi\gamma\)</span>。如果高需求同时抬高历史价格和销量，遗漏需求热度可能使价格系数偏正；单纯扩充非线性模型不会解决识别问题。</p>
-<p><strong>抽样另有一层。</strong> 均匀抽人会更多遇到大群体。若目标是按群体平均大小，人的样本均值估的是另一种加权目标。<a href="../../questions/06-statistics-regression/#problem-ecc2a9823238">Q765 · 规模偏倚抽样、逆规模加权与平均群体大小</a>中，<span class="arithmatex">\(\mathbb E_{\rm person}(1/S)=M/N\)</span>，所以 <span class="arithmatex">\(n/\sum_i(1/S_i)\)</span> 一致估计 <span class="arithmatex">\(N/M\)</span>。取倒数造成有限样本偏差，一致不等于无偏。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-be0d6768d7ac">Q717 · 短回归与长回归</a>给遗漏变量恒等式 <span class="arithmatex">\(\beta^{s}-\beta^{l}=\pi\gamma\)</span>。如果高需求同时抬高历史价格和销量，遗漏需求热度可能使价格系数偏正；单纯扩充非线性模型不会解决识别问题。</p>
+<p><strong>抽样另有一层。</strong> 均匀抽人会更多遇到大群体。若目标是按群体平均大小，人的样本均值估的是另一种加权目标。<a href="../../questions/06-statistics-regression/#problem-ecc2a9823238">Q718 · 规模偏倚抽样、逆规模加权与平均群体大小</a>中，<span class="arithmatex">\(\mathbb E_{\rm person}(1/S)=M/N\)</span>，所以 <span class="arithmatex">\(n/\sum_i(1/S_i)\)</span> 一致估计 <span class="arithmatex">\(N/M\)</span>。取倒数造成有限样本偏差，一致不等于无偏。</p>
 <p><strong>判断路线。</strong> 有条件随机实验时先讲随机化单位、溢出效应和执行偏差；观测研究则陈述条件独立、重叠性等识别假设，说明控制集来自业务机制。逆概率权重可以修正已知抽样机制，不能凭空修复所有遗漏混杂。加入控制后系数稳定是一个诊断信号，也不能证明不存在未观测混杂。</p>
 <h2 id="research-housing">方法五：房价预测用空间与时间定义可泛化任务<a class="headerlink" href="#research-housing" title="Permanent link">&para;</a></h2>
-<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-86134088e669">Q1169 · Two Sigma：纽约住房价格预测</a>给面积、卧室数、卫浴数、年份和街区。先区分“预测已知房产未来成交”与“给从未成交房产估值”；训练与测试结构应模拟最终使用方式。</p>
+<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-86134088e669">Q1122 · Two Sigma：纽约住房价格预测</a>给面积、卧室数、卫浴数、年份和街区。先区分“预测已知房产未来成交”与“给从未成交房产估值”；训练与测试结构应模拟最终使用方式。</p>
 <p><strong>建模直觉。</strong> 房价可粗分为市场整体水平、地理位置、房屋属性和个体差异。一个可解释起点是</p>
 <div class="arithmatex">\[
 \log P_i=\alpha+f(\log A_i)+g(\mathrm{age}_i)
@@ -10767,7 +10767,7 @@ h_t=\omega+\alpha\varepsilon_{t-1}^2+\beta h_{t-1},
 <p>对数目标减少高价房的支配，但 <span class="arithmatex">\(e^{\mathbb E[\log P\mid X]}\)</span> 一般不是 <span class="arithmatex">\(\mathbb E[P\mid X]\)</span>。如果评价用原价均方误差，应处理反变换偏差，并在原价尺度重新评估。分别报告高价房、稀疏街区、新楼盘和不同成交时段，平均误差可能掩盖这些重要失败区域。</p>
 <p><strong>易错点。</strong> 同一房屋过去成交价可以是合法历史特征，未来成交或全样本街区均价则可能泄漏。右偏不证明严格对数正态。仅按随机行切分，常把同楼盘近邻记录分到两侧，从而高估独立泛化能力。</p>
 <h2 id="research-bike">方法六：库存预测先写守恒，再处理空满站的隐藏需求<a class="headerlink" href="#research-bike" title="Permanent link">&para;</a></h2>
-<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-a563417ad118">Q1170 · Two Sigma：CitiBike 共享单车用量预测【进阶】</a>要求预测未来短时可用车辆数，目标不是累计租车量。容量为 <span class="arithmatex">\(C\)</span>、当前库存为 <span class="arithmatex">\(B_t\)</span>，实际完成的租车、还车与调度净流量为 <span class="arithmatex">\(R,A,Q\)</span>，必须满足</p>
+<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-a563417ad118">Q1123 · Two Sigma：CitiBike 共享单车用量预测【进阶】</a>要求预测未来短时可用车辆数，目标不是累计租车量。容量为 <span class="arithmatex">\(C\)</span>、当前库存为 <span class="arithmatex">\(B_t\)</span>，实际完成的租车、还车与调度净流量为 <span class="arithmatex">\(R,A,Q\)</span>，必须满足</p>
 <div class="arithmatex">\[
 B_{t+h}=B_t-R+A+Q,\qquad 0\le B_{t+h}\le C.
 \]</div>
@@ -10777,7 +10777,7 @@ B_{t+h}=B_t-R+A+Q,\qquad 0\le B_{t+h}\le C.
 <p><strong>验证与输出。</strong> 按时间滚动，若测试新站再整站留出。除点误差外给空站概率、满站概率与区间覆盖，最终看是否减少调度成本和服务失败。只用预测时已发布的天气预报和计划调度，未来实际天气、未来实际调度不得作为先验特征。</p>
 <p><strong>易错点。</strong> 温度与季节相关不意味着必须把温度减去昨天值；这种变换会改变信号含义，应与季节基线加温度偏差等方案比较。普通回归预测超过容量只是一个告警，事后截断虽可改善平方误差，却不能替代对截断需求机制的解释。</p>
 <h2 id="research-pricing">方法七：动态定价从可控需求出发，连接库存机会成本<a class="headerlink" href="#research-pricing" title="Permanent link">&para;</a></h2>
-<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-48f3f380e606">Q1171 · QuantCo：歌剧院动态定价</a>的目标是利润。预测旧政策下的成交价，只会模仿旧政策；需要回答给定不同报价后销量如何变化。</p>
+<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-48f3f380e606">Q1124 · QuantCo：歌剧院动态定价</a>的目标是利润。预测旧政策下的成交价，只会模仿旧政策；需要回答给定不同报价后销量如何变化。</p>
 <p>先定义价格 <span class="arithmatex">\(p\)</span>、剩余库存 <span class="arithmatex">\(q\)</span>、距演出时间和可见状态。估计潜在需求 <span class="arithmatex">\(D_t(p)\)</span>，实际销量 <span class="arithmatex">\(Y_t=\min(q,D_t(p))\)</span>。在单票区简化模型中，单位可变成本为 <span class="arithmatex">\(c\)</span>，价值函数为</p>
 <div class="arithmatex">\[
 V_t(q)=\max_{p\in\mathcal P_t}
@@ -10789,7 +10789,7 @@ V_t(q)=\max_{p\in\mathcal P_t}
 <p>在未见演出上验证需求概率校准，然后比较策略利润、售罄率、空座率和价格约束满足情况。历史行为数据只覆盖旧政策常用价格时，对从未尝试过的新价格外推需要额外证据；仿真依赖需求模型，不能替代真实实验。</p>
 <p><strong>易错点。</strong> 支付意愿分布不等于收入分布；所谓稀缺或 FOMO 是待检验机制。多票区有相互替代，逐区独立优化可能互相抢客。需求随时间增加与库存减少，也不能单独推出最优价格的指数函数形式。</p>
 <h2 id="research-breadth">方法八：小相关能否积累成收益，要看有效独立广度<a class="headerlink" href="#research-breadth" title="Permanent link">&para;</a></h2>
-<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-8f019ab130c5">Q1168 · 由预测相关估计信息比率</a>明确给定 <span class="arithmatex">\(IC&gt;0\)</span>、<span class="arithmatex">\(R^2=IC^2\)</span>、<span class="arithmatex">\(IR=IC\sqrt{BR}\)</span>。当 <span class="arithmatex">\(R^2=0.003\)</span>、独立广度为 <span class="arithmatex">\(1000\)</span> 时，</p>
+<p><strong>对应例题。</strong> <a href="../../questions/10-cases-market-making/#problem-8f019ab130c5">Q1121 · 由预测相关估计信息比率</a>明确给定 <span class="arithmatex">\(IC&gt;0\)</span>、<span class="arithmatex">\(R^2=IC^2\)</span>、<span class="arithmatex">\(IR=IC\sqrt{BR}\)</span>。当 <span class="arithmatex">\(R^2=0.003\)</span>、独立广度为 <span class="arithmatex">\(1000\)</span> 时，</p>
 <div class="arithmatex">\[
 IR=\sqrt{R^2BR}=\sqrt3\approx1.732.
 \]</div>
@@ -10797,7 +10797,7 @@ IR=\sqrt{R^2BR}=\sqrt3\approx1.732.
 <p><strong>判断路线。</strong> 先问相关是截面相关还是时序相关、哪个预测期限、是否样本外、是否已净化共同因子。再问所谓押注是否在资产、时间或信号上重叠。最后检查持仓约束、成本和信号转化效率。题中的公式是明确约定下的计算，不是任意策略未来信息比率的保证。</p>
 <p>若只给 <span class="arithmatex">\(R^2\)</span>，不能恢复相关符号；一千笔交易也不等于一千个独立押注。对等方差、等两两相关的简化组合，平均值方差为 <span class="arithmatex">\(\sigma^2[1+(n-1)\rho]/n\)</span>，说明正相关会使独立信息增长很快受限。实际广度应依据相关结构与实施方式评估。</p>
 <h2 id="research-backtest">方法九：把策略盈利声明变成时间、成本和容量都闭合的检验<a class="headerlink" href="#research-backtest" title="Permanent link">&para;</a></h2>
-<p><strong>对应例题。</strong> <a href="../../questions/08-derivatives/#problem-b80d42ba5869">Q1058 · 如何证明你的交易模型赚钱</a>要求向经理提供证据。核心是研究规则可以在当时真实执行，未来数据没有参与选择，并且净收益能够承担资金与风险成本。</p>
+<p><strong>对应例题。</strong> <a href="../../questions/08-derivatives/#problem-b80d42ba5869">Q1011 · 如何证明你的交易模型赚钱</a>要求向经理提供证据。核心是研究规则可以在当时真实执行，未来数据没有参与选择，并且净收益能够承担资金与风险成本。</p>
 <h3 id="_6">从信号到真实损益<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>先写预测如何变成目标权重、何时下单、怎样成交和何时退出。简化的一期组合可写</p>
 <div class="arithmatex">\[

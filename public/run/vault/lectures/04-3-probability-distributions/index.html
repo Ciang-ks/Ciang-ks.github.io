@@ -10387,8 +10387,8 @@
 <td>本次是否有奖励，失败后回到哪里？</td>
 </tr>
 <tr>
-<td><a href="#p3-optimization">概率优化与混合策略</a></td>
-<td>最大化的是概率、金额还是最坏保证？</td>
+<td><a href="#p3-optimization">概率优化、分装与混合策略</a></td>
+<td>哪些分配或行动可控，最大化的是概率、金额还是最坏保证？</td>
 </tr>
 <tr>
 <td><a href="#p3-finite-stopping">动态规划与停止阈值</a></td>
@@ -10493,16 +10493,16 @@ V_r(x)=\max\{g(x),\ C_r(x)\}.
 <p>继续价值要包含未来全部选择权。只有确实只剩一次重抽时，它才简化为一次新样本的均值减费用。无限模型通常先找候选阈值，再证明其方程有适当解，并验证策略能达到该值。</p>
 <h2 id="p3-counts">二项、多项与 Poisson 计数：先定义指标，再看它们能否相乘<a class="headerlink" href="#p3-counts" title="Permanent link">&para;</a></h2>
 <p>把每次成功写成指标，若独立且参数相同，和就是二项；同一次试验可落入多个互斥类别时，则用多项分布。多项各类数量受固定总数限制，类间协方差为负，而不是独立二项变量。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-1a9c3545643a">Q566 · 十发射击的随机收益</a>的命中率为 <span class="arithmatex">\(0.2\)</span>，所以 <span class="arithmatex">\(X\sim\operatorname{Bin}(10,0.2)\)</span>，均值二、方差 <span class="arithmatex">\(1.6\)</span>。命中多于落空要求 <span class="arithmatex">\(X\ge6\)</span>，不是“至少命中一半”。若每中返二、入场费三，净收益 <span class="arithmatex">\(Y=2X-3\)</span>，于是 <span class="arithmatex">\(EY=1\)</span>、<span class="arithmatex">\(\operatorname{Var}(Y)=6.4\)</span>；奖金改为平方时应算 <span class="arithmatex">\(E[X^2]=1.6+4=5.6\)</span>，而非把均值平方。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-1a9c3545643a">Q518 · 十发射击的随机收益</a>的命中率为 <span class="arithmatex">\(0.2\)</span>，所以 <span class="arithmatex">\(X\sim\operatorname{Bin}(10,0.2)\)</span>，均值二、方差 <span class="arithmatex">\(1.6\)</span>。命中多于落空要求 <span class="arithmatex">\(X\ge6\)</span>，不是“至少命中一半”。若每中返二、入场费三，净收益 <span class="arithmatex">\(Y=2X-3\)</span>，于是 <span class="arithmatex">\(EY=1\)</span>、<span class="arithmatex">\(\operatorname{Var}(Y)=6.4\)</span>；奖金改为平方时应算 <span class="arithmatex">\(E[X^2]=1.6+4=5.6\)</span>，而非把均值平方。</p>
 <p>求尾概率时，先把语言改成整数阈值，再决定直接求小尾还是取补集。Poisson 计数可以用移位求和或生成函数求阶乘矩；零计数概率为 <span class="arithmatex">\(e^{-\lambda}\)</span>，从它反推速率必须连同观察区间长度。二项稀有事件的 Poisson 极限保留的是 <span class="arithmatex">\(np\)</span>，不能把成功概率本身当作 Poisson 参数。</p>
 <h2 id="p3-conditioned-counts">条件计数、奇偶与多数表决：条件改变阈值，也改变归一化<a class="headerlink" href="#p3-conditioned-counts" title="Permanent link">&para;</a></h2>
 <p>给定至少成功一次，只是从二项分布删去零质量，再除以 <span class="arithmatex">\(1-q^n\)</span>。这个条件通常会使各次指标相关，不能在截零后继续按独立硬币处理。</p>
-<p>多数表决还要辨认候选面何时确定。<a href="../../questions/05-probability-distributions/#problem-fair-binomial-strict-majority">Q582 · 严格多数中的预定候选面与首掷信息</a>给定第一掷贡献 <span class="arithmatex">\(s\in\{0,1\}\)</span> 票后，剩余正面数为 <span class="arithmatex">\(Y\sim\operatorname{Bin}(n-1,1/2)\)</span>，门槛是</p>
+<p>多数表决还要辨认候选面何时确定。<a href="../../questions/05-probability-distributions/#problem-fair-binomial-strict-majority">Q534 · 严格多数中的预定候选面与首掷信息</a>给定第一掷贡献 <span class="arithmatex">\(s\in\{0,1\}\)</span> 票后，剩余正面数为 <span class="arithmatex">\(Y\sim\operatorname{Bin}(n-1,1/2)\)</span>，门槛是</p>
 <div class="arithmatex">\[
 Y\ge\lfloor n/2\rfloor+1-s.
 \]</div>
 <p>三掷后押首掷面获严格多数，后两次至少一次同面即可，概率为 <span class="arithmatex">\(3/4\)</span>。十掷押首掷面时概率为 <span class="arithmatex">\(1/2\)</span>，但首掷反面后仍押预定正面的概率是 <span class="arithmatex">\(65/256\)</span>。只有“首掷结果”与“预定候选”两个信息都写清，才能选对门槛。</p>
-<p>奇偶题不必逐项相加。<a href="../../questions/05-probability-distributions/#problem-8d7d8ea4bac7">Q585 · 二项计数的奇偶概率与校验漏检</a>在生成函数 <span class="arithmatex">\(G(z)=(1-p+pz)^n\)</span> 中代入负一，把奇偶概率的差提取出来：</p>
+<p>奇偶题不必逐项相加。<a href="../../questions/05-probability-distributions/#problem-8d7d8ea4bac7">Q537 · 二项计数的奇偶概率与校验漏检</a>在生成函数 <span class="arithmatex">\(G(z)=(1-p+pz)^n\)</span> 中代入负一，把奇偶概率的差提取出来：</p>
 <div class="arithmatex">\[
 P(H\text{ 偶})=\frac{1+(1-2p)^n}{2}.
 \]</div>
@@ -10513,7 +10513,7 @@ P(H\text{ 偶})=\frac{1+(1-2p)^n}{2}.
 P(X=Y)=\sum_jp_X(j)p_Y(j).
 \]</div>
 <p>同分布时变成概率质量的平方和，而不是“可能值有多少个”的倒数。若比较的是两个和，先求单个和的卷积分布，再做这个内积。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-dbbf12c748fb">Q588 · 两个独立离散和相等的概率</a>让双方各取两个均匀整数，相加后的实现数呈三角形。每个整数来自 <span class="arithmatex">\(1,\ldots,m\)</span>，所以重合概率为</p>
+<p><a href="../../questions/05-probability-distributions/#problem-dbbf12c748fb">Q540 · 两个独立离散和相等的概率</a>让双方各取两个均匀整数，相加后的实现数呈三角形。每个整数来自 <span class="arithmatex">\(1,\ldots,m\)</span>，所以重合概率为</p>
 <div class="arithmatex">\[
 \frac{m^2+2\sum_{j=1}^{m-1}j^2}{m^4}
 =\frac{2m^2+1}{3m^3}.
@@ -10522,8 +10522,8 @@ P(X=Y)=\sum_jp_X(j)p_Y(j).
 <p>二项计数相同的平方和可用 Vandermonde 恒等式化为中央组合数；多个独立装置相同则先找公共支持，再逐值相乘。若两组成功率不同，总数的分布要用不同参数的卷积；仅均值相同不足以合成一个二项分布。</p>
 <h2 id="p3-series">胜负事件、连胜与累计胜场：看清“最后一局”与“必要中场”<a class="headerlink" href="#p3-series" title="Permanent link">&para;</a></h2>
 <p>累计到若干胜就停的比赛，可按获胜方最后一局分类，也可先补完规定总局数；补完后附加的结果不能改变已确定胜者。连续获胜则限制相邻位置，需要游程或窗口事件，不能只数总胜场。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-887e404c4cef">Q596 · 累计得分达到四的最长比赛</a>打到第七局，当且仅当前六局是三比三。因此公平时概率为 <span class="arithmatex">\(\binom63/2^6=5/16\)</span>。它不是等到连续四胜的等待问题。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-consecutive-win-scheduling">Q593 · 三场比赛中的相邻连胜与顺序优化</a>有三场独立比赛，胜率为 <span class="arithmatex">\(p_1,p_2,p_3\)</span>。目标是至少两场连胜，事件为前两场都胜或后两场都胜，容斥得到</p>
+<p><a href="../../questions/05-probability-distributions/#problem-887e404c4cef">Q548 · 累计得分达到四的最长比赛</a>打到第七局，当且仅当前六局是三比三。因此公平时概率为 <span class="arithmatex">\(\binom63/2^6=5/16\)</span>。它不是等到连续四胜的等待问题。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-consecutive-win-scheduling">Q545 · 三场比赛中的相邻连胜与顺序优化</a>有三场独立比赛，胜率为 <span class="arithmatex">\(p_1,p_2,p_3\)</span>。目标是至少两场连胜，事件为前两场都胜或后两场都胜，容斥得到</p>
 <div class="arithmatex">\[
 P=p_1p_2+p_2p_3-p_1p_2p_3
 =p_2[1-(1-p_1)(1-p_3)].
@@ -10531,39 +10531,39 @@ P=p_1p_2+p_2p_3-p_1p_2p_3
 <p>中场必须赢，外侧只需至少赢一场。原题允许选择对手序列 <span class="arithmatex">\(C-F-C\)</span> 或 <span class="arithmatex">\(F-C-F\)</span>，其中对容易对手 <span class="arithmatex">\(F\)</span> 的胜率为 <span class="arithmatex">\(0.8\)</span>，对困难对手 <span class="arithmatex">\(C\)</span> 的胜率为 <span class="arithmatex">\(0.4\)</span>。前一序列的成功率为 <span class="arithmatex">\(0.8[1-0.6^2]=0.512\)</span>，后一序列为 <span class="arithmatex">\(0.4[1-0.2^2]=0.384\)</span>。两种方案连对手组成也不同，不能误读为同一组三场比赛仅换顺序。比较期望总胜场会优化错目标。若比赛结果还改变下一轮对手，则按赛程分支全概率，观测比赛长度后的后验也须保留这个筛选机制。</p>
 <h2 id="p3-geometric">几何等待与事件竞赛：固定成功率以后才取倒数<a class="headerlink" href="#p3-geometric" title="Permanent link">&para;</a></h2>
 <p>失败后回到同一个试验机制，且每次独立、成功率固定为 <span class="arithmatex">\(p&gt;0\)</span>，首次成功总次数才是几何变量。它的尾概率是 <span class="arithmatex">\(P(T&gt;n)=q^n\)</span>，无记忆性由尾概率比 <span class="arithmatex">\(q^{m+n}/q^m=q^n\)</span> 直接得到。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-1e3fd7cda784">Q600 · 几何等待的分布、生成函数、矩与计数起点</a>区分失败数 <span class="arithmatex">\(K\)</span> 与总次数 <span class="arithmatex">\(T=K+1\)</span>：</p>
+<p><a href="../../questions/05-probability-distributions/#problem-1e3fd7cda784">Q552 · 几何等待的分布、生成函数、矩与计数起点</a>区分失败数 <span class="arithmatex">\(K\)</span> 与总次数 <span class="arithmatex">\(T=K+1\)</span>：</p>
 <div class="arithmatex">\[
 G_K(z)=\frac p{1-qz},\qquad G_T(z)=\frac{pz}{1-qz}.
 \]</div>
 <p><span class="arithmatex">\(p=2/3,z=1/3\)</span> 时分别为 <span class="arithmatex">\(3/4,1/4\)</span>。差的一次试验体现在乘上的 <span class="arithmatex">\(z\)</span>，不能只改变量名称。<span class="arithmatex">\(p&lt;1\)</span> 时幂级数要求 <span class="arithmatex">\(|z|&lt;1/q\)</span>，矩母函数相应要求 <span class="arithmatex">\(t&lt;-\log q\)</span>；<span class="arithmatex">\(p=1\)</span> 时两个变量都退化。</p>
 <p>环境随机时先条件化。等到第二种标签出现，给定首标签为 <span class="arithmatex">\(i\)</span> 后的额外成功率为 <span class="arithmatex">\(1-p_i\)</span>，总均时是 <span class="arithmatex">\(1+\sum_i p_i/(1-p_i)\)</span>，而不是先平均成功率再取倒数。逐阶段移除对象时，分别计算各阶段几何均值再相加，成功率可以随阶段变化。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-b9a16205269b">Q606 · 首女停止规则的家庭人数与总体性别比</a>生到首名女孩即停。每家总孩子数为几何变量，平均 <span class="arithmatex">\(1/p\)</span>，最终女孩恰一个、平均男孩为 <span class="arithmatex">\((1-p)/p\)</span>。大量家庭的女孩比例用总女孩数除以总孩子数，强大数律给极限 <span class="arithmatex">\(p\)</span>。公平性别下每家平均两孩，总体男女仍各半；不能先平均各家的女孩比例来替代总体人数比例。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-b9a16205269b">Q558 · 首女停止规则的家庭人数与总体性别比</a>生到首名女孩即停。每家总孩子数为几何变量，平均 <span class="arithmatex">\(1/p\)</span>，最终女孩恰一个、平均男孩为 <span class="arithmatex">\((1-p)/p\)</span>。大量家庭的女孩比例用总女孩数除以总孩子数，强大数律给极限 <span class="arithmatex">\(p\)</span>。公平性别下每家平均两孩，总体男女仍各半；不能先平均各家的女孩比例来替代总体人数比例。</p>
 <h2 id="p3-neutral">删去中性结果与条件等待：赢家与时钟分开算<a class="headerlink" href="#p3-neutral" title="Permanent link">&para;</a></h2>
 <p>若每次有互斥终局事件 <span class="arithmatex">\(A,B\)</span>，概率为 <span class="arithmatex">\(a,b\)</span>，其余结果只让原状态重来，那么可以忽略中性结果来求谁先发生，但等待的原始步数仍包含中性结果。删去中性结果只改变时钟，不改变终局类型的相对权重。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-9fe2b6799939">Q610 · 互斥事件竞赛的赢家、等待与独立性</a>中，</p>
+<p><a href="../../questions/05-probability-distributions/#problem-9fe2b6799939">Q562 · 互斥事件竞赛的赢家、等待与独立性</a>中，</p>
 <div class="arithmatex">\[
 P(T=t,A\text{ 赢})=(1-a-b)^{t-1}a,
 \quad P(T=t)=(1-a-b)^{t-1}(a+b).
 \]</div>
 <p>联合式可分解，所以终局时间与赢家独立，<span class="arithmatex">\(P(A\text{ 赢})=a/(a+b)\)</span>，均时为 <span class="arithmatex">\(1/(a+b)\)</span>。每轮两骰的和五先于和二，分别有四个、一个有序结果，故胜率为 <span class="arithmatex">\(4/5\)</span>，平均原始轮数为 <span class="arithmatex">\(36/5\)</span>。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-a45d219a5b26">Q615 · 首六先于首五的条件均时</a>正是条件于赢家之后保留同一终局时钟：骰子到首个五或六的等待率为 <span class="arithmatex">\(1/3\)</span>，所以给定先见六后，均时仍为三。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-a45d219a5b26">Q567 · 首六先于首五的条件均时</a>正是条件于赢家之后保留同一终局时钟：骰子到首个五或六的等待率为 <span class="arithmatex">\(1/3\)</span>，所以给定先见六后，均时仍为三。</p>
 <p>若一次结果会作废整个历史，则需要再生周期，而非只删去一个中性符号；若给定好终局后要求保留段分布，则应先把完整终止路径重新归一化。集齐多个目标类型时，某类出现后会改变剩余状态，也不能从头到尾只用一个 <span class="arithmatex">\(a/(a+b)\)</span>。</p>
 <h2 id="p3-alternating">轮流竞赛与离散并列：把先手的机会留在方程里<a class="headerlink" href="#p3-alternating" title="Permanent link">&para;</a></h2>
 <p>轮流尝试与同一时钟上的两个独立等待不同。先手可能在后手第一次行动前就结束，因此不能直接用两种单次成功率的比值。通常把双方各尝试一次作为一个重启轮，但计算均时要按实际出手次数记账。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-bd49dd090fa4">Q620 · 交替出手且成功率不同的先手优势</a>中，甲、乙成功率为 <span class="arithmatex">\(a,b\)</span>，甲先。甲胜率 <span class="arithmatex">\(h\)</span> 满足</p>
+<p><a href="../../questions/05-probability-distributions/#problem-bd49dd090fa4">Q572 · 交替出手且成功率不同的先手优势</a>中，甲、乙成功率为 <span class="arithmatex">\(a,b\)</span>，甲先。甲胜率 <span class="arithmatex">\(h\)</span> 满足</p>
 <div class="arithmatex">\[
 h=a+(1-a)(1-b)h,
 \qquad h=\frac a{a+b-ab}.
 \]</div>
 <p>尝试次数满足 <span class="arithmatex">\(e=1+(1-a)[1+(1-b)e]\)</span>，所以 <span class="arithmatex">\(e=(2-a)/(a+b-ab)\)</span>。甲掷两骰求和六、乙求和七时，<span class="arithmatex">\(a=5/36,b=1/6\)</span>，甲胜率是 <span class="arithmatex">\(30/61\)</span>。多人竞赛同理：先写一整轮全失败概率，再把到达某人之前其余人必须失败的因子乘进分子。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-9a16351a34a6">Q626 · 几何等待严格先后</a>则必须处理并列。同参独立几何变量的同值概率为 <span class="arithmatex">\(p/(2-p)\)</span>，每一侧严格领先概率为 <span class="arithmatex">\((1-p)/(2-p)\)</span>。<span class="arithmatex">\(p=1/3\)</span> 时，平局为 <span class="arithmatex">\(1/5\)</span>、严格先后各 <span class="arithmatex">\(2/5\)</span>。连续时间中零概率的并列，在离散时间中不能省略。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-9a16351a34a6">Q578 · 几何等待严格先后</a>则必须处理并列。同参独立几何变量的同值概率为 <span class="arithmatex">\(p/(2-p)\)</span>，每一侧严格领先概率为 <span class="arithmatex">\((1-p)/(2-p)\)</span>。<span class="arithmatex">\(p=1/3\)</span> 时，平局为 <span class="arithmatex">\(1/5\)</span>、严格先后各 <span class="arithmatex">\(2/5\)</span>。连续时间中零概率的并列，在离散时间中不能省略。</p>
 <h2 id="p3-exponential">指数分布与无记忆性：剩余寿命的比例为何不依赖过去<a class="headerlink" href="#p3-exponential" title="Permanent link">&para;</a></h2>
 <p>指数分布的生存函数为 <span class="arithmatex">\(e^{-\lambda t}\)</span>，因此</p>
 <div class="arithmatex">\[
 P(X&gt;s+t\mid X&gt;s)=e^{-\lambda t}.
 \]</div>
 <p>已存活的时间不会改变剩余寿命分布，但并不表示所有涉及这个寿命的条件事件都可忽略。延迟开始的服务、保留价筛选的报价，应先明确从哪个时点计时，再计算相应的正部或剩余量。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-cc3381f96e23">Q633 · 指数竞争的最早时刻、类型与剩余等待</a>对独立时钟取最小值，生存函数相乘给总速率 <span class="arithmatex">\(L=\sum_i\lambda_i\)</span>。赢家为 <span class="arithmatex">\(j\)</span>、时间在 <span class="arithmatex">\(t\)</span> 附近的联合密度是</p>
+<p><a href="../../questions/05-probability-distributions/#problem-cc3381f96e23">Q585 · 指数竞争的最早时刻、类型与剩余等待</a>对独立时钟取最小值，生存函数相乘给总速率 <span class="arithmatex">\(L=\sum_i\lambda_i\)</span>。赢家为 <span class="arithmatex">\(j\)</span>、时间在 <span class="arithmatex">\(t\)</span> 附近的联合密度是</p>
 <div class="arithmatex">\[
 f_{T,J}(t,j)=\lambda_j e^{-Lt}
 =[Le^{-Lt}]\frac{\lambda_j}{L}.
@@ -10572,7 +10572,7 @@ f_{T,J}(t,j)=\lambda_j e^{-Lt}
 <p>整数阶 Gamma 表示连续若干次指数等待之和；其尾概率还可用 Poisson 到达计数解释。指数最大值可以用独立间隔或容斥尾积分，指定到达排序可逐次删除赢家并更新剩余总速率。不同寿命分布的最小值仍可相乘生存函数，但一般不再有时间与赢家独立；在随机观察时刻看到的寿命还会产生长度偏倚，不能只凭“等车”二字套无记忆性。</p>
 <h2 id="p3-rewards">首步分解与奖励递推：每个分支都要保留本次收入<a class="headerlink" href="#p3-rewards" title="Permanent link">&para;</a></h2>
 <p>同状态重来时，方程里既有本次发生的奖励，也有继续分支的未来值。别把停止那一次的奖励漏掉，也别把已经归零的累计金额保留到后续状态。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-7af14c192746">Q643 · 领取点数且大点继续</a>每次都领取点数，四、五、六继续。首次点数均值为 <span class="arithmatex">\(7/2\)</span>，继续概率为 <span class="arithmatex">\(1/2\)</span>，所以总均值满足</p>
+<p><a href="../../questions/05-probability-distributions/#problem-7af14c192746">Q595 · 领取点数且大点继续</a>每次都领取点数，四、五、六继续。首次点数均值为 <span class="arithmatex">\(7/2\)</span>，继续概率为 <span class="arithmatex">\(1/2\)</span>，所以总均值满足</p>
 <div class="arithmatex">\[
 v=\frac72+\frac12v,\qquad v=7.
 \]</div>
@@ -10580,38 +10580,38 @@ v=\frac72+\frac12v,\qquad v=7.
 <p>若通往出口的路径有不同耗时，首步分类要同时加入相应用时；返回原点的路径才接同一个继续值。若本次结果清空旧奖金，状态可能要保存累计分数，或利用价值关于累计量的仿射结构。一般先列完整状态方程，再看能否用这种结构降维。</p>
 <h2 id="p3-optimization">概率优化与混合策略：先写正确的目标函数<a class="headerlink" href="#p3-optimization" title="Permanent link">&para;</a></h2>
 <p>“更可能猜中”不等于“期望奖金更高”。金额随结果改变时，应按结果金额加权成功概率。参数有合法区间时，求导或配方后还要检查边界与整数邻点。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-0099210b50da">Q651 · 加权支付的大小猜测</a>先看一枚百面骰的结果 <span class="arithmatex">\(x\)</span>，再猜第二枚 <span class="arithmatex">\(y\)</span> 是“至少 <span class="arithmatex">\(x\)</span>”还是“小于 <span class="arithmatex">\(x\)</span>”，猜中获得第二枚点数。两事件为 <span class="arithmatex">\(y\ge x\)</span> 与 <span class="arithmatex">\(y&lt;x\)</span>，平局归前者。猜小的期望奖金为 <span class="arithmatex">\(x(x-1)/200\)</span>，两种猜法的总期望奖金为 <span class="arithmatex">\(50.5\)</span>。所以猜小当且仅当 <span class="arithmatex">\(x(x-1)\ge5050\)</span>，最小整数门槛为七十二。只比较两边可能点数的个数，会忽略高点数奖金较大。</p>
-<p>双方会针对彼此策略时，应比较最坏保证而非单人期望。<a href="../../questions/05-probability-distributions/#problem-41aef0aed2a0">Q657 · 对角支付的有限、可数混合策略与最优性</a>在匹配动作 <span class="arithmatex">\(k\)</span> 时支付 <span class="arithmatex">\(a_k&gt;0\)</span>。有限动作下令 <span class="arithmatex">\(S=\sum_k1/a_k\)</span>，双方各取概率 <span class="arithmatex">\(1/(Sa_k)\)</span>，就使对手每个纯动作的期望支付都等于 <span class="arithmatex">\(1/S\)</span>，同时给出上下保证，因而是均衡。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-0099210b50da">Q603 · 加权支付的大小猜测</a>先看一枚百面骰的结果 <span class="arithmatex">\(x\)</span>，再猜第二枚 <span class="arithmatex">\(y\)</span> 是“至少 <span class="arithmatex">\(x\)</span>”还是“小于 <span class="arithmatex">\(x\)</span>”，猜中获得第二枚点数。两事件为 <span class="arithmatex">\(y\ge x\)</span> 与 <span class="arithmatex">\(y&lt;x\)</span>，平局归前者。猜小的期望奖金为 <span class="arithmatex">\(x(x-1)/200\)</span>，两种猜法的总期望奖金为 <span class="arithmatex">\(50.5\)</span>。所以猜小当且仅当 <span class="arithmatex">\(x(x-1)\ge5050\)</span>，最小整数门槛为七十二。只比较两边可能点数的个数，会忽略高点数奖金较大。</p>
+<p>双方会针对彼此策略时，应比较最坏保证而非单人期望。<a href="../../questions/05-probability-distributions/#problem-41aef0aed2a0">Q609 · 对角支付的有限、可数混合策略与最优性</a>在匹配动作 <span class="arithmatex">\(k\)</span> 时支付 <span class="arithmatex">\(a_k&gt;0\)</span>。有限动作下令 <span class="arithmatex">\(S=\sum_k1/a_k\)</span>，双方各取概率 <span class="arithmatex">\(1/(Sa_k)\)</span>，就使对手每个纯动作的期望支付都等于 <span class="arithmatex">\(1/S\)</span>，同时给出上下保证，因而是均衡。</p>
 <p>可数动作要进一步检查逆支付和能否归一化。和发散时，付款方可用有限截断把最坏支付逼近零，但任何实际概率分布仍会给某个动作正质量，因此未必存在达到最优的策略。有博弈值、能找到逼近策略、存在鞍点，是不同层次的结论。</p>
 <h2 id="p3-finite-stopping">动态规划与停止阈值：先从最后一次权利倒推<a class="headerlink" href="#p3-finite-stopping" title="Permanent link">&para;</a></h2>
 <p>一次重抽最容易看清阈值。观察支付 <span class="arithmatex">\(x\)</span>，保留价值是 <span class="arithmatex">\(x\)</span>，重抽并支付费用 <span class="arithmatex">\(c\)</span> 的价值是 <span class="arithmatex">\(EX-c\)</span>，取两者较大。若还有多次机会，继续价值应换成剩余机会的最优价值，而非一直使用原样本均值。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-3456f1f7f47b">Q661 · 骰子博弈 II：免费重掷</a>的继续值为 <span class="arithmatex">\(3.5\)</span>。一、二、三重掷，四、五、六保留，初始公平价格为</p>
+<p><a href="../../questions/05-probability-distributions/#problem-3456f1f7f47b">Q614 · 骰子博弈 II：免费重掷</a>的继续值为 <span class="arithmatex">\(3.5\)</span>。一、二、三重掷，四、五、六保留，初始公平价格为</p>
 <div class="arithmatex">\[
 \frac{3\cdot3.5+4+5+6}{6}=\frac{17}{4}.
 \]</div>
-<p><a href="../../questions/05-probability-distributions/#problem-40a9842f5f66">Q659 · 各枚硬币分别重抛</a>有八枚公平币，每枚都可独立决定是否免费重抛一次。保留正面、重抛反面，使每枚最终正面率变为 <span class="arithmatex">\(3/4\)</span>，总价值为六。能够逐枚控制，才允许逐枚优化再相加；若只能整组一起重抛，就是另一份继续值。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-40a9842f5f66">Q612 · 各枚硬币分别重抛</a>有八枚公平币，每枚都可独立决定是否免费重抛一次。保留正面、重抛反面，使每枚最终正面率变为 <span class="arithmatex">\(3/4\)</span>，总价值为六。能够逐枚控制，才允许逐枚优化再相加；若只能整组一起重抛，就是另一份继续值。</p>
 <p>动作预算题还要把剩余预算计入状态；观察牌但不能改变后续抽样分布的猜测题，有时可以每步分别贪心。随机对手的有限树则在自己的节点取最大、对手随机节点取平均。先解释转移与控制关系，才能判断用独立分解、贪心还是完整倒推。</p>
 <h2 id="p3-infinite-stopping">无限重试、作废风险与累计停止：阈值方程还要通过价值验证<a class="headerlink" href="#p3-infinite-stopping" title="Permanent link">&para;</a></h2>
 <p>无限次付费重抽与一次重抽的关键区别，是继续价值已经包含后续所有重抽权利。设首次抽样免费、每次重抽费 <span class="arithmatex">\(c&gt;0\)</span>，观察前最优价值为 <span class="arithmatex">\(V\)</span>。继续价值是 <span class="arithmatex">\(V-c\)</span>，不是 <span class="arithmatex">\(EX-c\)</span>。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-b5db1ef3cb3c">Q672 · 无限次付费重抽的尾超额阈值与公平价格</a>令 <span class="arithmatex">\(b=V-c\)</span>，Bellman 方程化为</p>
+<p><a href="../../questions/05-probability-distributions/#problem-b5db1ef3cb3c">Q625 · 无限次付费重抽的尾超额阈值与公平价格</a>令 <span class="arithmatex">\(b=V-c\)</span>，Bellman 方程化为</p>
 <div class="arithmatex">\[
 V=E\max(X,V-c),\qquad E(X-b)_+=c.
 \]</div>
 <p>这是尾超额方程：超过门槛的平均额外支付恰好补偿重抽费用。六面骰、每次费用一时，<span class="arithmatex">\((1+2+3)/6=1\)</span> 给 <span class="arithmatex">\(b=3,V=4\)</span>。一、二重抽，四、五、六接受，三处等价。门槛策略的停止概率为正，能直接算其几何重抽费用并验证确实达到价值；不能只解一个不动点就结束论证。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-bust-reroll">Q673 · 遇到作废点数的无限重掷决策</a>则没有费用，但六立即归零。方程为 <span class="arithmatex">\(V=\sum_{k=1}^5\max(k,V)/6\)</span>，解为三。作废分支不应贡献任何继续值；否则会错误地认为可以免费等到最大点数。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-bust-reroll">Q626 · 遇到作废点数的无限重掷决策</a>则没有费用，但六立即归零。方程为 <span class="arithmatex">\(V=\sum_{k=1}^5\max(k,V)/6\)</span>，解为三。作废分支不应贡献任何继续值；否则会错误地认为可以免费等到最大点数。</p>
 <p>如果支付累计、失败会清空历史，就必须保留累计总分。相邻重复还会改变未失败时的可加点数，状态要同时记总分与末次点数。证明高分区域应停止，可构造继续算子的上界，再在有界低分区域倒推；“再掷一次便收下”的局部比较一般不足以证明无限期最优。</p>
 <h2 id="p3-information">信息约束下的停止与赢率均衡：同一故事可以有三种不同最优问题<a class="headerlink" href="#p3-information" title="Permanent link">&para;</a></h2>
 <p>只有相对名次、知道真实数值分布、以及存在固定未知整体平移，是不同的信息结构。目标是最大化期望值还是选中最大值的概率，也必须分别声明。没有先验的未知参数不能随意补上一个“所有整数均匀”的先验。例如只有一个固定未知整体平移时，平移不变策略只能利用已见值的差与相对次序；应在这个允许的策略类中倒推，不能凭空给未知平移分配概率。三张相邻数的题目就可先拒绝第一张，再在第二张高于第一张时接受，否则继续到第三张；它优化的是期望数值，与选中最大值的秘书目标不同。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-relative-secretary-rule">Q680 · 只知相对名次的秘书停止规则</a>只在纪录处可能选中全局最大。先观察 <span class="arithmatex">\(r\)</span> 人，再接受第一个新纪录时，若全局最大位于第 <span class="arithmatex">\(k\)</span> 位，成功还要求此前最大落在观察区，故</p>
+<p><a href="../../questions/05-probability-distributions/#problem-relative-secretary-rule">Q633 · 只知相对名次的秘书停止规则</a>只在纪录处可能选中全局最大。先观察 <span class="arithmatex">\(r\)</span> 人，再接受第一个新纪录时，若全局最大位于第 <span class="arithmatex">\(k\)</span> 位，成功还要求此前最大落在观察区，故</p>
 <div class="arithmatex">\[
 P_r=\frac rn\sum_{j=r}^{n-1}\frac1j.
 \]</div>
 <p>先用 Bellman 比较证明停止纪录的收益随阶段增加、继续机会价值不增，才能说明一个观察阈值已覆盖全部最优策略。<span class="arithmatex">\(n=100\)</span> 时最优先观察三十七人，成功率约 <span class="arithmatex">\(0.371042779\)</span>。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-full-information-secretary">Q681 · 已知均匀分布的纪录阈值选择</a>还看到具体纪录值 <span class="arithmatex">\(x\)</span>。后面剩 <span class="arithmatex">\(r\)</span> 个样本时，立即接受成功率为 <span class="arithmatex">\(x^r\)</span>，继续值要对未来数值积分，因此门槛随剩余人数改变；只剩一个未来样本时门槛为 <span class="arithmatex">\(1/2\)</span>。不能再使用固定观察三十七人的规则。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-full-information-secretary">Q634 · 已知均匀分布的纪录阈值选择</a>还看到具体纪录值 <span class="arithmatex">\(x\)</span>。后面剩 <span class="arithmatex">\(r\)</span> 个样本时，立即接受成功率为 <span class="arithmatex">\(x^r\)</span>，继续值要对未来数值积分，因此门槛随剩余人数改变；只剩一个未来样本时门槛为 <span class="arithmatex">\(1/2\)</span>。不能再使用固定观察三十七人的规则。</p>
 <p>若双方都能选择阈值、目标为战胜对方，停止值由对方最终分布决定，应求最佳反应与对称均衡；若允许保留历史最大值并回看，也必须另建状态。可见信息与可选动作改变后，旧阈值公式没有自动继承的理由。</p>
 <h2 id="p3-integral-recursion">积分递推与累计越界：先写首步积分，再考虑微分<a class="headerlink" href="#p3-integral-recursion" title="Permanent link">&para;</a></h2>
 <p>连续状态的递推仍来自首步分解。若下一步为独立均匀增量，条件平均就是在允许增量区间上积分。先写完整积分式与边界，再用微分简化，可以避免微分后丢失常数或越界分支。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-afd6ba075802">Q683 · 均匀增量的首越时间与逐段积分递推</a>令 <span class="arithmatex">\(f(x)\)</span> 为从零累计严格超过 <span class="arithmatex">\(x\)</span> 的平均抽数。一步必花一次，未超过才继续，所以</p>
+<p><a href="../../questions/05-probability-distributions/#problem-afd6ba075802">Q636 · 均匀增量的首越时间与逐段积分递推</a>令 <span class="arithmatex">\(f(x)\)</span> 为从零累计严格超过 <span class="arithmatex">\(x\)</span> 的平均抽数。一步必花一次，未超过才继续，所以</p>
 <div class="arithmatex">\[
 f(x)=1+\int_0^{\min(x,1)}f(x-u)du.
 \]</div>
@@ -10621,8 +10621,8 @@ f(x)=1+\int_0^{\min(x,1)}f(x-u)du.
 <p>离散有界增量使用相邻递推相减；随机停车按第一辆车的位置把左右剩余空间分解；连续博弈把停止、越界及对手阈值写进不同积分分支。微分方程只是原积分方程的一个后果，解出后仍应检查原边界、状态意义与有限期望。</p>
 <h2 id="p3-symmetry">对称性与不变量：先证明保持了什么<a class="headerlink" href="#p3-symmetry" title="Permanent link">&para;</a></h2>
 <p>对称论证有三项要核对：变换是否保持原分布，是否保持已给信息，如何改变目标。仅仅画面相似不能证明条件概率相等。交换性可决定平均分担，镜像可决定条件均值，冲突链的两个终点可决定吸收概率。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-125abd819037">Q694 · 醉汉登机</a>把随机选座的影响沿冲突链传递。只要座位一与最后一号都没被占，它们就同时空着，每次随机选空座时被选中的条件概率相同；有限冲突链最终必先碰到其中之一。因此最后一人坐对的概率是 <span class="arithmatex">\(1/2\)</span>，一百人时也相同。不是因为全部中间座位“无关”，而是它们只延迟了两个对称终点的竞争。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-conditional-symmetry">Q695 · 给定正弦后的镜像对称</a>取 <span class="arithmatex">\(X\sim U(0,\pi)\)</span>。镜像 <span class="arithmatex">\(X\mapsto\pi-X\)</span> 同时保持分布和 <span class="arithmatex">\(\sin X\)</span>，所以</p>
+<p><a href="../../questions/05-probability-distributions/#problem-125abd819037">Q647 · 醉汉登机</a>把随机选座的影响沿冲突链传递。只要座位一与最后一号都没被占，它们就同时空着，每次随机选空座时被选中的条件概率相同；有限冲突链最终必先碰到其中之一。因此最后一人坐对的概率是 <span class="arithmatex">\(1/2\)</span>，一百人时也相同。不是因为全部中间座位“无关”，而是它们只延迟了两个对称终点的竞争。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-conditional-symmetry">Q648 · 给定正弦后的镜像对称</a>取 <span class="arithmatex">\(X\sim U(0,\pi)\)</span>。镜像 <span class="arithmatex">\(X\mapsto\pi-X\)</span> 同时保持分布和 <span class="arithmatex">\(\sin X\)</span>，所以</p>
 <div class="arithmatex">\[
 E[X\mid\sin X]=E[\pi-X\mid\sin X]=\pi-E[X\mid\sin X],
 \]</div>
@@ -10630,15 +10630,15 @@ E[X\mid\sin X]=E[\pi-X\mid\sin X]=\pi-E[X\mid\sin X],
 <p>归一化分量的平均分担还要满足分母定义与可积性；实力转移模型则需证明总实力及每个阵营的条件均值如何保持。找到不变量只是第一步，要继续说明它能否唯一确定所求量。</p>
 <h2 id="p3-collisions">碰撞换标签与轨迹守恒：把相互作用转移到身份上<a class="headerlink" href="#p3-collisions" title="Permanent link">&para;</a></h2>
 <p>等速对象迎面相撞后同时掉头，与彼此穿过但交换标签，在每条具体路径上的位置集合相同。因此只依赖位置集合的目标，如最后离开时间、无标签碰撞轨迹数，可以改用独立直线轨迹；指定身份最后到哪里则不能不加处理地照搬。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-24ca14382a9a">Q701 · 随机蚂蚁</a>有五百只蚂蚁，位置独立均匀于单位绳，方向独立各半、速度均为一。虚拟穿透后，每只离开时间是 <span class="arithmatex">\(X\)</span> 或 <span class="arithmatex">\(1-X\)</span>，边缘都为 <span class="arithmatex">\(U(0,1)\)</span>，且各蚂蚁的时间独立。全部离开时间 <span class="arithmatex">\(M\)</span> 因此满足</p>
+<p><a href="../../questions/05-probability-distributions/#problem-24ca14382a9a">Q654 · 随机蚂蚁</a>有五百只蚂蚁，位置独立均匀于单位绳，方向独立各半、速度均为一。虚拟穿透后，每只离开时间是 <span class="arithmatex">\(X\)</span> 或 <span class="arithmatex">\(1-X\)</span>，边缘都为 <span class="arithmatex">\(U(0,1)\)</span>，且各蚂蚁的时间独立。全部离开时间 <span class="arithmatex">\(M\)</span> 因此满足</p>
 <div class="arithmatex">\[
 P(M\le t)=t^{500},\qquad EM=\int_0^1(1-t^{500})dt=\frac{500}{501}.
 \]</div>
 <p>这里先证明路径等价，再证明虚拟离开时间独立，最后才可把分布函数相乘。若速度不同，交换标签后不一定保持原来的运动规则。圆周版本还需跟踪标签的循环平移与总位移取模；询问某个身份的终点时，这部分标签信息正是不能删掉的状态。</p>
 <h2 id="p3-flips">翻币状态与奇偶线性约束：先分清定向翻面和重新抽样<a class="headerlink" href="#p3-flips" title="Permanent link">&para;</a></h2>
 <p>定向翻面会把已知结果确定地反转；随机重抛则重新产生随机结果。二者的可达性与期望成本不同。只有可观察并能选择翻哪两枚，才能利用确定性奇偶不变量。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-pair-flip-parity">Q703 · 成对翻转可达状态的奇偶不变量</a>中，每次同时翻两枚，正面数的奇偶保持。还需证明充分性：两个同奇偶配置的差异位置数为偶数，把这些位置配对翻转，就能互相到达。因此初始奇偶与总枚数一致时能全正，否则最多少一个正面。公平初始下两种奇偶各半，最大正面数的期望为 <span class="arithmatex">\(n-1/2\)</span>，四枚时为 <span class="arithmatex">\(7/2\)</span>。</p>
-<p><a href="../../questions/05-probability-distributions/#problem-f2223013c5e5">Q704 · 定向翻面加随机重抛</a>则用反面数 <span class="arithmatex">\(k\)</span> 为状态，比较所有合法动作。最佳动作先把反面定向翻正，再优先重抛另一枚反面；每轮两次移动。由首步方程得到额外移动均值 <span class="arithmatex">\(e_1=e_2=4,e_3=6,e_4=7\)</span>，初始四枚公平币平均额外移动为 <span class="arithmatex">\((4e_1+6e_2+4e_3+e_4)/16=71/16\)</span>。把初始投掷也算入则为 <span class="arithmatex">\(135/16\)</span>。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-pair-flip-parity">Q656 · 成对翻转可达状态的奇偶不变量</a>中，每次同时翻两枚，正面数的奇偶保持。还需证明充分性：两个同奇偶配置的差异位置数为偶数，把这些位置配对翻转，就能互相到达。因此初始奇偶与总枚数一致时能全正，否则最多少一个正面。公平初始下两种奇偶各半，最大正面数的期望为 <span class="arithmatex">\(n-1/2\)</span>，四枚时为 <span class="arithmatex">\(7/2\)</span>。</p>
+<p><a href="../../questions/05-probability-distributions/#problem-f2223013c5e5">Q657 · 定向翻面加随机重抛</a>则用反面数 <span class="arithmatex">\(k\)</span> 为状态，比较所有合法动作。最佳动作先把反面定向翻正，再优先重抛另一枚反面；每轮两次移动。由首步方程得到额外移动均值 <span class="arithmatex">\(e_1=e_2=4,e_3=6,e_4=7\)</span>，初始四枚公平币平均额外移动为 <span class="arithmatex">\((4e_1+6e_2+4e_3+e_4)/16=71/16\)</span>。把初始投掷也算入则为 <span class="arithmatex">\(135/16\)</span>。</p>
 <p>行列奇偶约束可把币面编码到二元线性空间，消元得到全部可行配置；若初始奇数个数固定，还要在解空间中筛选相应重数，不能仅用线性方程的解数除以全部排列数。这样的题先处理可达或可行结构，再讨论随机性，通常比直接枚举完整操作序列清楚。</p>
 <h2 id="p3-reading-path">把三篇连起来使用<a class="headerlink" href="#p3-reading-path" title="Permanent link">&para;</a></h2>
 <p>遇到新题，先回到第一篇明确样本空间与信息机制。只求平均数量时，试第二篇的局部指标、条件化或尾积分；需要完整分布时，再决定使用计数、变量变换还是次序统计量。确有历史状态时，才在本篇建立首步递推；有控制权时，再把条件平均替换成停止与继续的价值比较。</p>

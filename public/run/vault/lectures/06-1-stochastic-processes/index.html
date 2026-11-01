@@ -10273,7 +10273,7 @@
 
 <h1 id="discrete-processes">随机过程一：状态、长期行为与停止<a class="headerlink" href="#discrete-processes" title="Permanent link">&para;</a></h1>
 <p>随机过程题的困难通常先出在“现在的状态是什么”，然后才是求解方程。同样叫等待时间，可能指累计成功、连续成功、首次命中、正时间回返或覆盖所有状态；同样叫长期概率，可能指固定时刻的分布、路径中的时间比例或按事件抽样的比例。先把这些对象区分开，许多看似不同的题会变成同一套计算。</p>
-<p>本页先建立离散过程的概念与公式，再展开十五个方法组。连续时间链、Poisson、更新、排队、布朗运动和随机微积分见<a href="../06-2-stochastic-calculus/">随机过程二</a>。概率与极限定理分别见<a href="../04-1-probability-counting/">概率论</a>和<a href="../05-statistics/">统计基础</a>。</p>
+<p>本页先建立离散过程的概念与公式，再按十三个题库方法组展开；分枝递推归入状态构造，强化比例归入鞅。连续时间链、Poisson、更新、排队、布朗运动和随机微积分见<a href="../06-2-stochastic-calculus/">随机过程二</a>。概率与极限定理分别见<a href="../04-1-probability-counting/">概率论</a>和<a href="../05-statistics/">统计基础</a>。</p>
 <h2 id="navigation">方法导航<a class="headerlink" href="#navigation" title="Permanent link">&para;</a></h2>
 <p>前半部分：<a href="#state-foundations">信息与状态</a>、<a href="#long-run-foundations">状态分类与三种长期命题</a>、<a href="#first-step-foundations">首步方程与矩阵公式</a>、<a href="#stopping-foundations">鞅与合法停止</a>。后半部分按题库方法组查阅：</p>
 <table>
@@ -10286,9 +10286,9 @@
 </thead>
 <tbody>
 <tr>
-<td>状态构造、互通类与周期</td>
-<td><a href="#state-construction">保留决定未来的信息</a></td>
-<td>只记计数是否足够，能否合并</td>
+<td>状态构造、链结构与分枝递推</td>
+<td><a href="#state-construction">保留决定未来的信息</a>、<a href="#branching">谱系与不动点</a></td>
+<td>状态是否充分，能否合并，独立后代如何递推</td>
 </tr>
 <tr>
 <td>两状态链、平稳分布与回返</td>
@@ -10336,19 +10336,9 @@
 <td>恰在某步首次到达、无限边界</td>
 </tr>
 <tr>
-<td>鞅、可选停时与序贯检验</td>
-<td><a href="#martingale-methods">先证条件再传递期望</a></td>
-<td>停下时的收益、随机样本量</td>
-</tr>
-<tr>
-<td>分枝过程与灭绝概率</td>
-<td><a href="#branching">谱系独立与最小不动点</a></td>
-<td>个体独立产生后代</td>
-</tr>
-<tr>
-<td>强化抽样与比例过程</td>
-<td><a href="#reinforcement">交换性、Beta混合与比例鞅</a></td>
-<td>抽中后增加同类权重</td>
+<td>鞅、强化抽样与可选停时</td>
+<td><a href="#martingale-methods">合法停止</a>、<a href="#reinforcement">强化比例鞅</a></td>
+<td>停下时的收益、随机样本量、抽中后增加同类权重</td>
 </tr>
 <tr>
 <td>首次重复、集齐与随机下降</td>
@@ -10472,12 +10462,12 @@ E\sum_{i=1}^TX_i=EX_1\,ET.
 <h2 id="state-construction">保留决定未来的信息：状态构造、互通类与周期<a class="headerlink" href="#state-construction" title="Permanent link">&para;</a></h2>
 <p><strong>识别与步骤。</strong> 对每一步列出随机来源；问下一步概率是否还依赖当前记号以外的历史；用反例排除过度压缩；在充分状态上列完整转移，再按图识别闭类与周期。建模时应先处理边界，例如越界原地停与越界反向走会给不同转移。</p>
 <p><strong>倒计时与身份信息。</strong> 非几何到达间隔没有无记忆性，“到达或未到达”通常不够。若间隔取 <span class="arithmatex">\(1,3,4\)</span>，可用到达态和剩余 <span class="arithmatex">\(1,2,3\)</span> 步作四态链；在到达后下一步抽取间隔并消耗一步，所以间隔三进入剩余两步，而非三步。异质机器或多个行动者也可能需要保留身份和轮到谁行动。</p>
-<p><strong>例题：绝对位移与纪录。</strong> <a href="../../questions/07-stochastic-processes/#problem-0c7d19b883a1">Q799 · 绝对位移和最大偏离的充分状态</a>中，对称反射游走的 <span class="arithmatex">\(R_n=|X_n|\)</span> 是马氏的：内部各半增减，零点确定到一，外端各半停留或向内。最大偏离 <span class="arithmatex">\(Y_n=\max_{k\le n}R_k\)</span> 却通常不够。时刻四的两种纪录历史</p>
+<p><strong>例题：绝对位移与纪录。</strong> <a href="../../questions/07-stochastic-processes/#problem-0c7d19b883a1">Q752 · 绝对位移和最大偏离的充分状态</a>中，对称反射游走的 <span class="arithmatex">\(R_n=|X_n|\)</span> 是马氏的：内部各半增减，零点确定到一，外端各半停留或向内。最大偏离 <span class="arithmatex">\(Y_n=\max_{k\le n}R_k\)</span> 却通常不够。时刻四的两种纪录历史</p>
 <div class="arithmatex">\[
 (1,2,2,2),\qquad(1,1,1,2)
 \]</div>
 <p>都有当前 <span class="arithmatex">\(Y_4=2\)</span>，但下一步到纪录三的概率分别为 <span class="arithmatex">\(1/4\)</span>、<span class="arithmatex">\(1/2\)</span>。第一种当前半数在零、半数在二，第二种确定在二。因此取联合状态 <span class="arithmatex">\((R_n,Y_n)\)</span>，先按 <span class="arithmatex">\(R_n\)</span> 转移，再令 <span class="arithmatex">\(Y_{n+1}=\max(Y_n,R_{n+1})\)</span>，才保留充分信息。</p>
-<p><strong>例题：何时可以只记零与非零。</strong> <a href="../../questions/07-stochastic-processes/#problem-residue-states">Q795 · 六面骰和模七</a>的骰子增量恰均匀覆盖六个非零余数。从余数零下一步不可能仍零，从任一非零余数下一步到零概率同为 <span class="arithmatex">\(1/6\)</span>，所以合法合并。令 <span class="arithmatex">\(p_n=P(S_n\equiv0\pmod7)\)</span>，</p>
+<p><strong>例题：何时可以只记零与非零。</strong> <a href="../../questions/07-stochastic-processes/#problem-residue-states">Q748 · 六面骰和模七</a>的骰子增量恰均匀覆盖六个非零余数。从余数零下一步不可能仍零，从任一非零余数下一步到零概率同为 <span class="arithmatex">\(1/6\)</span>，所以合法合并。令 <span class="arithmatex">\(p_n=P(S_n\equiv0\pmod7)\)</span>，</p>
 <div class="arithmatex">\[
 p_{n+1}=\frac{1-p_n}6,
 \qquad p_n=\frac17+\frac67\left(-\frac16\right)^n.
@@ -10498,7 +10488,7 @@ u_{n+1}=q+(p-q)u_n,
 \quad u_*=\frac q{1-p+q}.
 \]</div>
 <p>衰减因子绝对值小于一时收敛；恒等链与确定交替链需要分开处理。</p>
-<p><strong>例题：首达和正回返。</strong> <a href="../../questions/07-stochastic-processes/#problem-70c4264b0982">Q807 · 两状态链的首次命中、正回返与平稳倒数</a>取课程跟上、落后转移 <span class="arithmatex">\(a=0.2,b=0.6\)</span>。从落后到跟上，每步成功率固定为 <span class="arithmatex">\(b\)</span>，均时 <span class="arithmatex">\(1/b=5/3\)</span>。从跟上要求正时间回返时，第一步必耗一次，若落后还需重新等：</p>
+<p><strong>例题：首达和正回返。</strong> <a href="../../questions/07-stochastic-processes/#problem-70c4264b0982">Q762 · 两状态链的首次命中、正回返与平稳倒数</a>取课程跟上、落后转移 <span class="arithmatex">\(a=0.2,b=0.6\)</span>。从落后到跟上，每步成功率固定为 <span class="arithmatex">\(b\)</span>，均时 <span class="arithmatex">\(1/b=5/3\)</span>。从跟上要求正时间回返时，第一步必耗一次，若落后还需重新等：</p>
 <div class="arithmatex">\[
 E_1T_1^+=1+a/b=\frac43.
 \]</div>
@@ -10509,7 +10499,7 @@ E_1T_1^+=1+a/b=\frac43.
 \qquad \pi_iP(i,j)=\frac1D=\pi_jP(j,i).
 \]</div>
 <p>以每次返回 <span class="arithmatex">\(i\)</span> 为再生周期，一个周期恰有一个 <span class="arithmatex">\(i\)</span> 的占用时刻（含首不含尾），故长期比例为 <span class="arithmatex">\(1/E_iT_i^+\)</span>。于是 <span class="arithmatex">\(E_iT_i^+=D/d_i\)</span>，不需要非周期。</p>
-<p><strong>例题：国王回到角格。</strong> <a href="../../questions/07-stochastic-processes/#problem-graph-degree-stationary">Q811 · 无向图的度数平稳、Kac回返与国王位置</a>有四个角格度三、二十四个边格度五、三十六个内格度八，总度</p>
+<p><strong>例题：国王回到角格。</strong> <a href="../../questions/07-stochastic-processes/#problem-graph-degree-stationary">Q766 · 无向图的度数平稳、Kac回返与国王位置</a>有四个角格度三、二十四个边格度五、三十六个内格度八，总度</p>
 <div class="arithmatex">\[
 D=4\cdot3+24\cdot5+36\cdot8=420.
 \]</div>
@@ -10522,7 +10512,7 @@ D=4\cdot3+24\cdot5+36\cdot8=420.
 f=\sum_{i\in A,j\notin A}\pi_iP_{ij}
 \]</div>
 <p>等于内流。证明只需把平稳质量 <span class="arithmatex">\(\pi(A)\)</span> 按来源分解，消去内部流。每次跨入开启一段连续停留，因此按入口事件平均的停留长度为 <span class="arithmatex">\(\pi(A)/f\)</span>。</p>
-<p><strong>例题：运行与停机段。</strong> <a href="../../questions/07-stochastic-processes/#problem-f354db4ce41e">Q823 · 平稳集合流量与连续停留</a>给 <span class="arithmatex">\(\pi(A)=7/16,f=9/32\)</span>。长期在集合内的时刻数除以进入次数，得到</p>
+<p><strong>例题：运行与停机段。</strong> <a href="../../questions/07-stochastic-processes/#problem-f354db4ce41e">Q778 · 平稳集合流量与连续停留</a>给 <span class="arithmatex">\(\pi(A)=7/16,f=9/32\)</span>。长期在集合内的时刻数除以进入次数，得到</p>
 <div class="arithmatex">\[
 E[\text{一段内停留}]=\frac{7/16}{9/32}=\frac{14}9,
 \qquad
@@ -10534,7 +10524,7 @@ E[\text{一段外停留}]=\frac{9/16}{9/32}=2.
 P(X_{n-1}=i\mid X_n=j)=\frac{\pi_iP_{ij}}{\pi_j}.
 \]</div>
 <p>它先算正向联合流，再除当前质量。仅在可逆时才与对应反向的原转移相同。</p>
-<p><strong>例题：切换牌堆。</strong> <a href="../../questions/07-stochastic-processes/#problem-regime-switching-gambler">Q827 · 切换牌堆的平稳奖励、多闭类与时间反演</a>的类内赢率为 <span class="arithmatex">\(p_1=3/5,p_2=4/5\)</span>，赢后到第二堆、败后到第一堆。流量平衡给 <span class="arithmatex">\(\pi=(1/4,3/4)\)</span>。每次赢后恰落第二堆，长期赢率为 <span class="arithmatex">\(3/4\)</span>。已知当前在第一堆，上一手在第二堆的概率为</p>
+<p><strong>例题：切换牌堆。</strong> <a href="../../questions/07-stochastic-processes/#problem-regime-switching-gambler">Q782 · 切换牌堆的平稳奖励、多闭类与时间反演</a>的类内赢率为 <span class="arithmatex">\(p_1=3/5,p_2=4/5\)</span>，赢后到第二堆、败后到第一堆。流量平衡给 <span class="arithmatex">\(\pi=(1/4,3/4)\)</span>。每次赢后恰落第二堆，长期赢率为 <span class="arithmatex">\(3/4\)</span>。已知当前在第一堆，上一手在第二堆的概率为</p>
 <div class="arithmatex">\[
 \frac{(3/4)(1/5)}{1/4}=\frac35.
 \]</div>
@@ -10543,7 +10533,7 @@ P(X_{n-1}=i\mid X_n=j)=\frac{\pi_iP_{ij}}{\pi_j}.
 <p><strong>排列模型。</strong> Move-to-front适合向过去扫描最近请求次序，得到逐次偏置抽样的乘积概率；成功处理器只向前换一位，适合逐相邻交换验证详细平衡。两者的状态都是完整排列，更新规则不同，不能套同一个乘积分布。</p>
 <h2 id="multiple-classes">先选闭类再混合：多闭类、周期与联合链极限<a class="headerlink" href="#multiple-classes" title="Permanent link">&para;</a></h2>
 <p><strong>步骤。</strong> 先拆暂态与各闭类；分别求进入每个闭类的概率；再求类内平稳分布；最后检查类内非周期性。只有相应类的逐时分布收敛，才能把进入概率直接与类内平稳行相乘得到 <span class="arithmatex">\(P^n\)</span> 的普通极限。周期类应追踪相位或改看时间平均。</p>
-<p><strong>例题：两个长期去向。</strong> <a href="../../questions/07-stochastic-processes/#problem-9f6b61c0932f">Q833 · 多个闭类的极限矩阵</a>中，一吸收，<span class="arithmatex">\(\{2,4\}\)</span> 闭类的平稳质量为 <span class="arithmatex">\((1/3,2/3)\)</span>。从三最终到一的概率 <span class="arithmatex">\(u_3\)</span> 满足</p>
+<p><strong>例题：两个长期去向。</strong> <a href="../../questions/07-stochastic-processes/#problem-9f6b61c0932f">Q788 · 多个闭类的极限矩阵</a>中，一吸收，<span class="arithmatex">\(\{2,4\}\)</span> 闭类的平稳质量为 <span class="arithmatex">\((1/3,2/3)\)</span>。从三最终到一的概率 <span class="arithmatex">\(u_3\)</span> 满足</p>
 <div class="arithmatex">\[
 u_3=\frac18+\frac58u_3,
 \qquad u_3=\frac13.
@@ -10553,7 +10543,7 @@ u_3=\frac18+\frac58u_3,
 \left(\frac13,\frac29,0,\frac49,0\right).
 \]</div>
 <p>单条路径最终选定一个闭类；对所有路径取平均才得到这个混合。它并不意味着一条路径不断在两个闭类之间切换。</p>
-<p><strong>例题：独立并不保证联合不可约。</strong> <a href="../../questions/07-stochastic-processes/#problem-a6ed2ea917fa">Q835 · 周期链与联合回返的辨析</a>中，每条链都确定在零与一交替，从全零开始，两步就同回零，回返均时为二。各边际平稳零概率为 <span class="arithmatex">\(1/2\)</span>，直接取 <span class="arithmatex">\((1/2)^{-3}=8\)</span> 会错。</p>
+<p><strong>例题：独立并不保证联合不可约。</strong> <a href="../../questions/07-stochastic-processes/#problem-a6ed2ea917fa">Q790 · 周期链与联合回返的辨析</a>中，每条链都确定在零与一交替，从全零开始，两步就同回零，回返均时为二。各边际平稳零概率为 <span class="arithmatex">\(1/2\)</span>，直接取 <span class="arithmatex">\((1/2)^{-3}=8\)</span> 会错。</p>
 <p>原因是联合链分成不同同步相位闭类。从全零可达的类只有全零与全一。完整乘积平稳分布在该类上的质量为 <span class="arithmatex">\(2/8=1/4\)</span>，全零质量为 <span class="arithmatex">\(1/8\)</span>，条件于该类后，Kac公式给</p>
 <div class="arithmatex">\[
 E_aT_a^+=\frac{\pi(C)}{\pi(a)}=\frac{1/4}{1/8}=2.
@@ -10562,7 +10552,7 @@ E_aT_a^+=\frac{\pi(C)}{\pi(a)}=\frac{1/4}{1/8}=2.
 <p><strong>固定有限时刻。</strong> 把很大的 <span class="arithmatex">\(n\)</span> 替成无穷只是数值近似。精确表达仍是初始行乘 <span class="arithmatex">\(P^n\)</span>。若暂态有自环，则有限 <span class="arithmatex">\(n\)</span> 下其质量可能极小而严格为正，不能称它已经精确消失。</p>
 <h2 id="absorption-rewards">同一转移，不同右端项：吸收概率、首达时间与奖励矩<a class="headerlink" href="#absorption-rewards" title="Permanent link">&para;</a></h2>
 <p><strong>先分类目标。</strong> 问最终到哪儿，用调和方程；问耗几步，用每步成本一；问购买数、赢局数或访问数，用相应状态或转移奖励；问给定最终成功的时间，必须调整条件分布。它们共享转移结构，右端项与边界各有含义。</p>
-<p><strong>例题：概率与时间。</strong> <a href="../../questions/07-stochastic-processes/#problem-d0f431d1f06c">Q838 · 双终点吸收的概率与均时</a>的暂态矩阵与一步入目标向量是</p>
+<p><strong>例题：概率与时间。</strong> <a href="../../questions/07-stochastic-processes/#problem-d0f431d1f06c">Q793 · 双终点吸收的概率与均时</a>的暂态矩阵与一步入目标向量是</p>
 <div class="arithmatex">\[
 Q=\begin{pmatrix}.4&amp;.3\\.2&amp;.2\end{pmatrix},
 \qquad b=\begin{pmatrix}.2\\.2\end{pmatrix}.
@@ -10577,7 +10567,7 @@ t_1=\frac{.8+.3}{.42}=\frac{55}{21}.
 \]</div>
 <p>前者直接入目标才贡献，后者任何第一步都耗时。把概率式也加常数一，会改变所求对象。</p>
 <p><strong>距离聚合与边界时间。</strong> 空间游走常可按到目标的距离分层，但要验证同层到各层的总概率相同。立方体从距离 <span class="arithmatex">\(i\)</span> 向目标靠近的概率为 <span class="arithmatex">\(i/3\)</span>，这来自会改变的坐标数，不是凭对称性把每层等概率。</p>
-<p><strong>例题：立方体与休息。</strong> <a href="../../questions/07-stochastic-processes/#problem-e5b694c7ce2a">Q841 · 立方体游走的距离链、返回、对角首达与惰性时钟</a>对目标距离均时有</p>
+<p><strong>例题：立方体与休息。</strong> <a href="../../questions/07-stochastic-processes/#problem-e5b694c7ce2a">Q796 · 立方体游走的距离链、返回、对角首达与惰性时钟</a>对目标距离均时有</p>
 <div class="arithmatex">\[
 e_0=0,\quad e_1=1+\frac23e_2,
 \quad e_2=1+\frac23e_1+\frac13e_3,
@@ -10610,7 +10600,7 @@ e_j=1+pe_{j+1}+(1-p)e_0,\qquad0\le j&lt;r.
 E_0T=\sum_{j=1}^rp^{-j}.
 \]</div>
 <p>写成和式也涵盖 <span class="arithmatex">\(p=1\)</span>，此时恰需 <span class="arithmatex">\(r\)</span> 次。它不是 <span class="arithmatex">\(r/p\)</span>，因为失败会丢失进度。</p>
-<p><strong>例题：连续成功。</strong> <a href="../../questions/07-stochastic-processes/#problem-2af9a31e8133">Q862 · 连续成功游程的状态递推与公平赌徒证明</a>中，公平币三连正面均时为 <span class="arithmatex">\(2+4+8=14\)</span>，四连为 <span class="arithmatex">\(30\)</span>，骰子连续两次六为 <span class="arithmatex">\(6+36=42\)</span>。若等任一面连续三次，已有一个面后只需记录同面长度一或二，</p>
+<p><strong>例题：连续成功。</strong> <a href="../../questions/07-stochastic-processes/#problem-2af9a31e8133">Q817 · 连续成功游程的状态递推与公平赌徒证明</a>中，公平币三连正面均时为 <span class="arithmatex">\(2+4+8=14\)</span>，四连为 <span class="arithmatex">\(30\)</span>，骰子连续两次六为 <span class="arithmatex">\(6+36=42\)</span>。若等任一面连续三次，已有一个面后只需记录同面长度一或二，</p>
 <div class="arithmatex">\[
 e_1=1+\frac12e_2+\frac12e_1,
 \qquad e_2=1+\frac12e_1.
@@ -10627,12 +10617,12 @@ ET=\sum_{k\in\mathcal B(w)}
 \frac1{p_{w_1}\cdots p_{w_k}}.
 \]</div>
 <p>一种解释是每个时刻都有带一单位资本的新赌徒依次押目标字符；命中后资本除以该字符概率，失败归零。每步公平，目标首次完成时仍有资本的赌徒恰对应重叠前缀。独立长为 <span class="arithmatex">\(m\)</span> 的区块给停止时间几何尾，停止前总资本也有固定上界，才可合法取停时期望。</p>
-<p><strong>例题：重叠结构。</strong> <a href="../../questions/07-stochastic-processes/#problem-86f1b47d81ce">Q866 · 独立字符模式等待：重叠结构与支持可达性</a>中，公平目标 <span class="arithmatex">\(TTHTHTT\)</span> 的重叠长度为 <span class="arithmatex">\(1,2,7\)</span>，因此均时 <span class="arithmatex">\(2+4+128=134\)</span>。<span class="arithmatex">\(HHTTHH\)</span> 的长度为 <span class="arithmatex">\(1,2,6\)</span>，均时七十。无真重叠的 <span class="arithmatex">\(HT\)</span> 只有全长项，均时四；<span class="arithmatex">\(TT\)</span> 有长度一和二，首次均时六，但已见 <span class="arithmatex">\(TT\)</span> 后可复用最后一个 <span class="arithmatex">\(T\)</span>，再次出现的新增均时为四。</p>
+<p><strong>例题：重叠结构。</strong> <a href="../../questions/07-stochastic-processes/#problem-86f1b47d81ce">Q821 · 独立字符模式等待：重叠结构与支持可达性</a>中，公平目标 <span class="arithmatex">\(TTHTHTT\)</span> 的重叠长度为 <span class="arithmatex">\(1,2,7\)</span>，因此均时 <span class="arithmatex">\(2+4+128=134\)</span>。<span class="arithmatex">\(HHTTHH\)</span> 的长度为 <span class="arithmatex">\(1,2,6\)</span>，均时七十。无真重叠的 <span class="arithmatex">\(HT\)</span> 只有全长项，均时四；<span class="arithmatex">\(TT\)</span> 有长度一和二，首次均时六，但已见 <span class="arithmatex">\(TT\)</span> 后可复用最后一个 <span class="arithmatex">\(T\)</span>，再次出现的新增均时为四。</p>
 <p><strong>适用边界。</strong> 目标中有零概率字符则等待无穷；共享随机成功率时先条件计算再对先验积分，不能把率换成均值。Markov源下还需保留决定下一字符分布的原链状态，独立字符的重叠和不能只把乘积换成路径概率就继续使用。平稳模式频率的倒数对应回访间隔，也不自动等于从空前缀首次等待。</p>
 <h2 id="pattern-races">共同前缀自动机：模式竞赛与有限时域概率<a class="headerlink" href="#pattern-races" title="Permanent link">&para;</a></h2>
 <p><strong>识别所求量。</strong> 单目标均时、两个目标谁先出现、固定长度内至少出现一次，是三类不同问题。竞赛的两个等待时间来自同一序列，彼此依赖；单独均值的大小不足以决定竞赛胜率。</p>
 <p><strong>通用建模步骤。</strong> 收集所有目标的真前缀，包括空串；每次追加字符后，先判断是否完整命中某个目标，再保留最长可用后缀。命中目标作为吸收态。求某目标先胜时给其边界一、其他目标零，列调和方程。求等待均时给全部终点零、内部加一步。若一个目标含另一个目标，还需先明确同一步同时命中的结算规则。</p>
-<p><strong>例题：两目标的后缀竞争。</strong> <a href="../../questions/07-stochastic-processes/#problem-152fc3a862bb">Q871 · 两个指定模式的竞赛</a>暂态取空、<span class="arithmatex">\(H,HH,HT\)</span>。令 <span class="arithmatex">\(h_s\)</span> 为 <span class="arithmatex">\(HHT\)</span> 先胜概率，有</p>
+<p><strong>例题：两目标的后缀竞争。</strong> <a href="../../questions/07-stochastic-processes/#problem-152fc3a862bb">Q826 · 两个指定模式的竞赛</a>暂态取空、<span class="arithmatex">\(H,HH,HT\)</span>。令 <span class="arithmatex">\(h_s\)</span> 为 <span class="arithmatex">\(HHT\)</span> 先胜概率，有</p>
 <div class="arithmatex">\[
 h_0=h_H,\qquad h_H=\frac{h_{HH}+h_{HT}}2,
 \qquad h_{HH}=1,\qquad h_{HT}=\frac{h_0}2.
@@ -10656,7 +10646,7 @@ P(T&gt;N)=a_0Q^N\mathbf1,
 \qquad P(T\le N)=1-a_0Q^N\mathbf1.
 \]</div>
 <p>矩阵行和小于一的缺失质量，正是已经命中的概率。逐步递推适合中等长度，快速幂适合很长序列；两者都保留重叠依赖。</p>
-<p><strong>例题：短窗口容斥。</strong> <a href="../../questions/07-stochastic-processes/#problem-6e247c5fd904">Q877 · 固定长度内至少三连目标</a>有三个长度三窗口，各概率 <span class="arithmatex">\(p^3\)</span>。相邻窗口交集各为 <span class="arithmatex">\(p^4\)</span>，首尾交集与三重交集同为 <span class="arithmatex">\(p^5\)</span>，抵消后</p>
+<p><strong>例题：短窗口容斥。</strong> <a href="../../questions/07-stochastic-processes/#problem-6e247c5fd904">Q832 · 固定长度内至少三连目标</a>有三个长度三窗口，各概率 <span class="arithmatex">\(p^3\)</span>。相邻窗口交集各为 <span class="arithmatex">\(p^4\)</span>，首尾交集与三重交集同为 <span class="arithmatex">\(p^5\)</span>，抵消后</p>
 <div class="arithmatex">\[
 P(T\le5)=3p^3-2p^4.
 \]</div>
@@ -10670,12 +10660,12 @@ e_i=1+\sum_{j:(i,j)\notin A}p_je_j,
 \qquad ET=1+\sum_ip_ie_i.
 \]</div>
 <p>总均时额外的一，是还没有形成窗口的第一掷。有限状态中先判断每个可达末值能否到命中；不能命中的闭类会造成无限等待。</p>
-<p><strong>例题：骰子六后跟五。</strong> <a href="../../questions/07-stochastic-processes/#problem-de5ff582698e">Q879 · 连续不同的两个指定点数</a>只需空前缀和末六两态。前者等到一个六，故 <span class="arithmatex">\(e_0=6+e_6\)</span>；末六后，五结束、六保留前缀、其他四点回空：</p>
+<p><strong>例题：骰子六后跟五。</strong> <a href="../../questions/07-stochastic-processes/#problem-de5ff582698e">Q834 · 连续不同的两个指定点数</a>只需空前缀和末六两态。前者等到一个六，故 <span class="arithmatex">\(e_0=6+e_6\)</span>；末六后，五结束、六保留前缀、其他四点回空：</p>
 <div class="arithmatex">\[
 e_6=1+\frac16e_6+\frac46e_0.
 \]</div>
 <p>代回解得 <span class="arithmatex">\(e_0=36\)</span>。连续两个六的均时却是四十二，因为再来六时已经完成，而失败后的尾部规则也不同。</p>
-<p><strong>例题：差不超过一。</strong> <a href="../../questions/07-stochastic-processes/#problem-bb3f76b63c20">Q881 · 一般相邻命中集合与非几何等待</a>中，公平六面骰的成功条件为 <span class="arithmatex">\(|i-j|\le1\)</span>。反射对称把状态分为 <span class="arithmatex">\(A=e_1=e_6\)</span>、<span class="arithmatex">\(B=e_2=e_5\)</span>、<span class="arithmatex">\(C=e_3=e_4\)</span>：</p>
+<p><strong>例题：差不超过一。</strong> <a href="../../questions/07-stochastic-processes/#problem-bb3f76b63c20">Q836 · 一般相邻命中集合与非几何等待</a>中，公平六面骰的成功条件为 <span class="arithmatex">\(|i-j|\le1\)</span>。反射对称把状态分为 <span class="arithmatex">\(A=e_1=e_6\)</span>、<span class="arithmatex">\(B=e_2=e_5\)</span>、<span class="arithmatex">\(C=e_3=e_4\)</span>：</p>
 <div class="arithmatex">\[
 6A=6+A+B+2C,
 \quad6B=6+A+B+C,
@@ -10704,13 +10694,13 @@ h_i=\begin{cases}
 \dfrac iN,&amp;p=1/2.
 \end{cases}
 \]</div>
-<p><strong>例题：有偏资本。</strong> <a href="../../questions/07-stochastic-processes/#problem-988b899a4a63">Q883 · 赌徒破产</a>取 <span class="arithmatex">\(p=1/3,i=7,N=10\)</span>，向下与向上概率比为二，故成功率为</p>
+<p><strong>例题：有偏资本。</strong> <a href="../../questions/07-stochastic-processes/#problem-988b899a4a63">Q838 · 赌徒破产</a>取 <span class="arithmatex">\(p=1/3,i=7,N=10\)</span>，向下与向上概率比为二，故成功率为</p>
 <div class="arithmatex">\[
 \frac{1-2^7}{1-2^{10}}=\frac{127}{1023}.
 \]</div>
 <p>公平时均时方程二阶差分为负二，零边界给 <span class="arithmatex">\(t_i=i(N-i)\)</span>。从零到上三或下四，平移后起点四、总宽七，所以上端率 <span class="arithmatex">\(4/7\)</span>、均时 <span class="arithmatex">\(4\cdot3=12\)</span>。有偏时可先求 <span class="arithmatex">\(h\)</span>，再用有限可积停止的漂移等式求均时。</p>
 <p><strong>边界要重新写。</strong> 确定反射给 <span class="arithmatex">\(t_0=1+t_1\)</span>；尝试越界则原地停，会有自环；两个方向都被改成向内，还可能改变端点总移动率。内部的二阶差分公式不能直接代到端点。</p>
-<p><strong>例题：沿河移动与山边反射。</strong> <a href="../../questions/07-stochastic-processes/#problem-1109a85c141b">Q891 · 垂直移动不改变到河距离</a>只记录离山距离 <span class="arithmatex">\(x\)</span>。内部沿河两方向使距离不变，另两方向各改变一，河在 <span class="arithmatex">\(N=20\)</span>：</p>
+<p><strong>例题：沿河移动与山边反射。</strong> <a href="../../questions/07-stochastic-processes/#problem-1109a85c141b">Q846 · 垂直移动不改变到河距离</a>只记录离山距离 <span class="arithmatex">\(x\)</span>。内部沿河两方向使距离不变，另两方向各改变一，河在 <span class="arithmatex">\(N=20\)</span>：</p>
 <div class="arithmatex">\[
 t_x=1+\frac12t_x+\frac14t_{x-1}+\frac14t_{x+1},
 \quad t_0=1+\frac12t_0+\frac12t_1,
@@ -10721,7 +10711,7 @@ t_x=1+\frac12t_x+\frac14t_{x-1}+\frac14t_{x+1},
 <p><strong>下注策略与目标。</strong> 负优势下较大下注可能提高“先翻倍”的概率，却不改变负期望。比较下注尺度、最大化终值期望、最大化长期对数增长属于不同优化目标。</p>
 <h2 id="path-counting">反射计数与返回级数：路径计数、首回与无限游走<a class="headerlink" href="#path-counting" title="Permanent link">&para;</a></h2>
 <p><strong>何时用计数。</strong> 题目要求恰在某步首次到达，不能只看该时刻终点。先由终点确定上下步数，再用反射、投票定理或Catalan计数排除提前碰界的路径，最后乘每条路径权重。有偏时同样可用路径条数，但每条权重应改为 <span class="arithmatex">\(p^uq^d\)</span>。</p>
-<p><strong>例题：首次破产的精确步数。</strong> <a href="../../questions/07-stochastic-processes/#problem-a224596ce1f4">Q895 · 首次破产的精确步数</a>从 <span class="arithmatex">\(n\)</span> 出发，首次到零恰在 <span class="arithmatex">\(L=n+2k\)</span> 步，需要 <span class="arithmatex">\(k\)</span> 次上行、<span class="arithmatex">\(n+k\)</span> 次下行。反射计数给合法路径数 <span class="arithmatex">\(\frac nL\binom Lk\)</span>，所以</p>
+<p><strong>例题：首次破产的精确步数。</strong> <a href="../../questions/07-stochastic-processes/#problem-a224596ce1f4">Q850 · 首次破产的精确步数</a>从 <span class="arithmatex">\(n\)</span> 出发，首次到零恰在 <span class="arithmatex">\(L=n+2k\)</span> 步，需要 <span class="arithmatex">\(k\)</span> 次上行、<span class="arithmatex">\(n+k\)</span> 次下行。反射计数给合法路径数 <span class="arithmatex">\(\frac nL\binom Lk\)</span>，所以</p>
 <div class="arithmatex">\[
 P(T=L)=\frac n{n+2k}\binom{n+2k}k p^kq^{n+k}.
 \]</div>
@@ -10736,7 +10726,7 @@ U(z)=(1-z^2)^{-1/2},\qquad
 F(z)=1-\sqrt{1-z^2}.
 \]</div>
 <p><span class="arithmatex">\(F(1)=1\)</span> 表示常返，<span class="arithmatex">\(F'(1^-)=\infty\)</span> 表示均回返无穷，是零常返而非正常返。平稳方程的解在全整数上呈仿射形式，非负又迫使常数，无法归一化为概率。</p>
-<p><strong>例题：无穷下界与均时。</strong> <a href="../../questions/07-stochastic-processes/#problem-1db41b75a8b9">Q897 · 无限半轴命中概率与公平游走的无穷均时</a>先在 <span class="arithmatex">\([-m,a]\)</span> 求上端命中，再令 <span class="arithmatex">\(m\to\infty\)</span>，得到</p>
+<p><strong>例题：无穷下界与均时。</strong> <a href="../../questions/07-stochastic-processes/#problem-1db41b75a8b9">Q852 · 无限半轴命中概率与公平游走的无穷均时</a>先在 <span class="arithmatex">\([-m,a]\)</span> 求上端命中，再令 <span class="arithmatex">\(m\to\infty\)</span>，得到</p>
 <div class="arithmatex">\[
 P(T_a&lt;\infty)=\begin{cases}(p/q)^a,&amp;p&lt;q,\\1,&amp;p\ge q.
 \end{cases}
@@ -10745,7 +10735,7 @@ P(T_a&lt;\infty)=\begin{cases}(p/q)^a,&amp;p&lt;q,\\1,&amp;p\ge q.
 <p><strong>多维与模型区分。</strong> 各坐标每步独立取正负一时，<span class="arithmatex">\(u_{2n}=[\binom{2n}n4^{-n}]^d\)</span>，由Stirling约为 <span class="arithmatex">\((\pi n)^{-d/2}\)</span>。返回级数发散给常返，收敛时最终回返率为 <span class="arithmatex">\(1-1/U(1)\)</span>。三维同时变动各坐标的模型有八个方向，回返率约 <span class="arithmatex">\(0.28223\)</span>；每次只沿一个坐标轴走的六方向模型不同。先写一步定义，再选返回概率公式。</p>
 <h2 id="martingale-methods">先证条件再传递期望：鞅、可选停时与序贯检验<a class="headerlink" href="#martingale-methods" title="Permanent link">&para;</a></h2>
 <p><strong>判断顺序。</strong> 先指定信息集，验证条件均值与可积性，再判断停止规则是否当时可知。找一个停止后容易表达终值的鞅：位置用来求命中率，平方补偿用来求时间，指数调和函数用来处理有偏命中。最后说明截断停时如何过极限。</p>
-<p><strong>例题：桥上的醉汉。</strong> <a href="../../questions/07-stochastic-processes/#problem-86f5857b8293">Q901 · 桥上的醉汉</a>停后位置在 <span class="arithmatex">\([0,100]\)</span> 有界。每个长为一百的区块都有正概率连续走到边界，因此停时有几何尾。令起点平移为零，两端为 <span class="arithmatex">\(-17,83\)</span>。对 <span class="arithmatex">\(S_n\)</span> 与 <span class="arithmatex">\(S_n^2-n\)</span> 在 <span class="arithmatex">\(T\wedge n\)</span> 停止，再用有界收敛与单调收敛：</p>
+<p><strong>例题：桥上的醉汉。</strong> <a href="../../questions/07-stochastic-processes/#problem-86f5857b8293">Q856 · 桥上的醉汉</a>停后位置在 <span class="arithmatex">\([0,100]\)</span> 有界。每个长为一百的区块都有正概率连续走到边界，因此停时有几何尾。令起点平移为零，两端为 <span class="arithmatex">\(-17,83\)</span>。对 <span class="arithmatex">\(S_n\)</span> 与 <span class="arithmatex">\(S_n^2-n\)</span> 在 <span class="arithmatex">\(T\wedge n\)</span> 停止，再用有界收敛与单调收敛：</p>
 <div class="arithmatex">\[
 ES_T=0,\qquad ES_T^2=ET.
 \]</div>
@@ -10754,7 +10744,7 @@ ES_T=0,\qquad ES_T^2=ET.
 ET=83^2\frac{17}{100}+17^2\frac{83}{100}=1411.
 \]</div>
 <p>先得可积性再传递期望，避免循环论证。</p>
-<p><strong>例题：随机项数的Wald等式。</strong> <a href="../../questions/07-stochastic-processes/#problem-15f316a7747e">Q904 · 首次超过一时的累计总量</a>中，<span class="arithmatex">\(T=\inf\{n:S_n&gt;1\}\)</span>，<span class="arithmatex">\(X_i\sim U(0,1)\)</span> 独立。对 <span class="arithmatex">\(n\ge0\)</span>，单纯形体积给 <span class="arithmatex">\(P(T&gt;n)=P(S_n\le1)=1/n!\)</span>，故 <span class="arithmatex">\(ET=e\)</span>。再写</p>
+<p><strong>例题：随机项数的Wald等式。</strong> <a href="../../questions/07-stochastic-processes/#problem-15f316a7747e">Q859 · 首次超过一时的累计总量</a>中，<span class="arithmatex">\(T=\inf\{n:S_n&gt;1\}\)</span>，<span class="arithmatex">\(X_i\sim U(0,1)\)</span> 独立。对 <span class="arithmatex">\(n\ge0\)</span>，单纯形体积给 <span class="arithmatex">\(P(T&gt;n)=P(S_n\le1)=1/n!\)</span>，故 <span class="arithmatex">\(ET=e\)</span>。再写</p>
 <div class="arithmatex">\[
 S_T=\sum_{i\ge1}X_i\mathbf1_{\{T\ge i\}}.
 \]</div>
@@ -10781,14 +10771,14 @@ EN=\frac{M}{P_1-P_2}\frac{1-r^M}{1+r^M}.
 q_0=0,\quad q_{n+1}=f(q_n),\qquad q_n\uparrow q=f(q).
 \]</div>
 <p>对任意另一非负不动点 <span class="arithmatex">\(s\)</span>，归纳有 <span class="arithmatex">\(q_n\le s\)</span>，故灭绝率是区间 <span class="arithmatex">\([0,1]\)</span> 的最小不动点。不能只解多项式后任选一个根。多个独立祖先的灭绝率为 <span class="arithmatex">\(q^m\)</span>。</p>
-<p><strong>例题：四种等概率后代。</strong> <a href="../../questions/07-stochastic-processes/#problem-c88cecc0b380">Q964 · Galton–Watson 灭绝概率的最小不动点</a>的后代数 <span class="arithmatex">\(0,1,2,3\)</span> 各占四分之一，</p>
+<p><strong>例题：四种等概率后代。</strong> <a href="../../questions/07-stochastic-processes/#problem-c88cecc0b380">Q759 · Galton–Watson 灭绝概率的最小不动点</a>的后代数 <span class="arithmatex">\(0,1,2,3\)</span> 各占四分之一，</p>
 <div class="arithmatex">\[
 q=\frac{1+q+q^2+q^3}4,
 \qquad(q-1)(q^2+2q-1)=0.
 \]</div>
 <p>区间内两个根是 <span class="arithmatex">\(\sqrt2-1\)</span> 与一，从零迭代选出前者。初始 <span class="arithmatex">\(m\)</span> 个独立个体，全部谱系灭绝才算灭绝，故概率为 <span class="arithmatex">\((\sqrt2-1)^m\)</span>。后代均值大于一使生存成为可能，但不表示一定生存；临界规则还需排除永远恰一个后代的退化情形。</p>
 <p><strong>预算状态与生存概率。</strong> 无限树问题若允许有限个异常，状态还要记剩余预算。此时常从“有限深度存在合法路径”的事件向无限深度递减，选取的是对应的最大生存不动点，与从零迭代的灭绝概率方向不同。</p>
-<p><strong>例题：至多一个异常。</strong> <a href="../../questions/07-stochastic-processes/#problem-binary-tree-one-budget">Q965 · 无限二叉树上至多一个异常标记的路径</a>节点独立以 <span class="arithmatex">\(p\)</span> 标零。令 <span class="arithmatex">\(b_j\)</span> 为存在无限路径、至多 <span class="arithmatex">\(j\)</span> 个一的概率，<span class="arithmatex">\(b_{-1}=0\)</span>。按根标记、两子树独立：</p>
+<p><strong>例题：至多一个异常。</strong> <a href="../../questions/07-stochastic-processes/#problem-binary-tree-one-budget">Q760 · 无限二叉树上至多一个异常标记的路径</a>节点独立以 <span class="arithmatex">\(p\)</span> 标零。令 <span class="arithmatex">\(b_j\)</span> 为存在无限路径、至多 <span class="arithmatex">\(j\)</span> 个一的概率，<span class="arithmatex">\(b_{-1}=0\)</span>。按根标记、两子树独立：</p>
 <div class="arithmatex">\[
 b_j=p\{1-(1-b_j)^2\}
 +(1-p)\{1-(1-b_{j-1})^2\}.
@@ -10815,7 +10805,7 @@ P(K_n=k)=\binom nk\frac{B(a+k,b+n-k)}{B(a,b)}.
 +\left(1-\frac AT\right)\frac A{T+1}=\frac AT.
 \]</div>
 <p>所以比例是有界鞅，均值固定在 <span class="arithmatex">\(a/(a+b)\)</span>。由此可求均值，但完整分布还需要上面的路径计数。</p>
-<p><strong>例题：百次罚球。</strong> <a href="../../questions/07-stochastic-processes/#problem-ac4d499ea6c7">Q966 · Pólya 强化的分布、比例鞅与较小份额</a>已经固定首中次失，后续命中率为当前比例，等价于 <span class="arithmatex">\(a=b=1\)</span> 再抽 <span class="arithmatex">\(98\)</span> 次。此时</p>
+<p><strong>例题：百次罚球。</strong> <a href="../../questions/07-stochastic-processes/#problem-ac4d499ea6c7">Q864 · Pólya 强化的分布、比例鞅与较小份额</a>已经固定首中次失，后续命中率为当前比例，等价于 <span class="arithmatex">\(a=b=1\)</span> 再抽 <span class="arithmatex">\(98\)</span> 次。此时</p>
 <div class="arithmatex">\[
 P(K_{98}=k)=\binom{98}k\frac{k!(98-k)!}{99!}=\frac1{99}.
 \]</div>
@@ -10829,7 +10819,7 @@ E\min(J,N-J)=\frac{\lfloor N^2/4\rfloor}{N-1}\sim\frac N4.
 <h2 id="collection-descent">阶段等待、尾和与纪录：首次重复、集齐与随机下降<a class="headerlink" href="#collection-descent" title="Permanent link">&para;</a></h2>
 <p>这一组有三个进度变量：未见标签数、首次重复前的全异前缀、不断缩小的当前上界。它们都可递推，但停止事件和边界各不相同。</p>
 <p><strong>均匀集齐。</strong> 还缺 <span class="arithmatex">\(j\)</span> 类时，下次获得新品种概率为 <span class="arithmatex">\(j/N\)</span>。从当前到下一个新品种的等待 <span class="arithmatex">\(G_j\)</span> 是包含成功当次的几何变量；独立抽样在每个新品种出现后重新开始，且参数只依赖缺失数，因此阶段等待独立。</p>
-<p><strong>例题：赠券收集。</strong> <a href="../../questions/07-stochastic-processes/#problem-cba917b27288">Q970 · 均匀集齐的阶段等待、方差与渐近</a>给</p>
+<p><strong>例题：赠券收集。</strong> <a href="../../questions/07-stochastic-processes/#problem-cba917b27288">Q923 · 均匀集齐的阶段等待、方差与渐近</a>给</p>
 <div class="arithmatex">\[
 T=\sum_{j=1}^NG_j,
 \quad ET=NH_N,
@@ -10846,7 +10836,7 @@ a_j=\frac{1+\sum_{k\ge1}w_{jk}a_{j-k}}{1-w_{j0}}.
 \]</div>
 <p>一次可得到多种新品种，不能拆成参数固定的独立几何阶段。有限牌堆不放回收集花色则适合尾和与缺失花色容斥。两骰共同覆盖对应 <span class="arithmatex">\(\lceil T/2\rceil\)</span>，每枚各自覆盖对应 <span class="arithmatex">\(\max(T_1,T_2)\)</span>，也不能都把均值除二。</p>
 <p><strong>首次重复。</strong> 前 <span class="arithmatex">\(k\)</span> 个全异的概率为 <span class="arithmatex">\((N)_k/N^k\)</span>，所以包含重复当次的均时是 <span class="arithmatex">\(\sum_{k=0}^N(N)_k/N^k\)</span>。六标签得到 <span class="arithmatex">\(1223/324\)</span>。这里结束于第一次旧标签，不是等全异窗口，也不是等相邻重复。</p>
-<p><strong>例题：均匀下降。</strong> <a href="../../questions/07-stochastic-processes/#problem-506f1299a656">Q974 · 均匀下降链的调和均时、访问指标与方差</a>从 <span class="arithmatex">\(n\)</span> 出发，当前 <span class="arithmatex">\(i&gt;1\)</span> 时下一步均匀于 <span class="arithmatex">\(1,\ldots,i-1\)</span>，到一停止。首步式</p>
+<p><strong>例题：均匀下降。</strong> <a href="../../questions/07-stochastic-processes/#problem-506f1299a656">Q927 · 均匀下降链的调和均时、访问指标与方差</a>从 <span class="arithmatex">\(n\)</span> 出发，当前 <span class="arithmatex">\(i&gt;1\)</span> 时下一步均匀于 <span class="arithmatex">\(1,\ldots,i-1\)</span>，到一停止。首步式</p>
 <div class="arithmatex">\[
 e_i=1+\frac1{i-1}\sum_{j=1}^{i-1}e_j,
 \qquad e_1=0
@@ -10864,7 +10854,7 @@ e_i=1+\frac1{i-1}\sum_{j=1}^{i-1}e_j,
 V_n(s)=\max_a\left\{r_n(s,a)+\sum_{s'}P_n(s,s';a)V_{n+1}(s')\right\}.
 \]</div>
 <p>最优停止把动作简化为立即停止和继续：<span class="arithmatex">\(V(s)=\max\{g(s),\text{继续价值}\}\)</span>。必须保证状态足以决定动作的转移与收益；仅按当前赢输额记录不放回牌堆，可能丢掉剩余颜色构成。</p>
-<p><strong>例题：红黑牌新增收益。</strong> <a href="../../questions/07-stochastic-processes/#problem-8934c81cf47c">Q976 · 红黑加减分的最优停止</a>取 <span class="arithmatex">\(F(r,b)\)</span> 为从现在起最优新增收益，停止新增收益为零：</p>
+<p><strong>例题：红黑牌新增收益。</strong> <a href="../../questions/07-stochastic-processes/#problem-8934c81cf47c">Q929 · 红黑加减分的最优停止</a>取 <span class="arithmatex">\(F(r,b)\)</span> 为从现在起最优新增收益，停止新增收益为零：</p>
 <div class="arithmatex">\[
 F(r,b)=\max\left\{0,
 \frac{r[1+F(r-1,b)]+b[-1+F(r,b-1)]}{r+b}\right\}.
@@ -10874,7 +10864,7 @@ F(r,b)=\max\left\{0,
 F(2,3)=\max\left(0,\frac{2[1+0]+3[-1+2/3]}5\right)=\frac15.
 \]</div>
 <p>同法逐层倒推得 <span class="arithmatex">\(F(4,4)=1\)</span>。状态总牌数严格减少，归纳比较了每个后继的最优行为，因此得到全策略最优，而非某个预设阈值下的收益。</p>
-<p><strong>例题：掷六清零。</strong> <a href="../../questions/07-stochastic-processes/#problem-e6d77359e099">Q979 · 动态骰子博弈</a>当前累计 <span class="arithmatex">\(s\)</span>，掷一至五加对应点数，六清零。仅再掷一次后停的期望为 <span class="arithmatex">\((5s+15)/6\)</span>，在 <span class="arithmatex">\(s&lt;15\)</span> 时严格优于立即兑现。在 <span class="arithmatex">\(s\ge15\)</span> 的存活区域，累计收益每次条件期望不增，非负超鞅加停止条件使任何继续策略都不能提高期望，所以十五是停止阈值，等号处可任选。</p>
+<p><strong>例题：掷六清零。</strong> <a href="../../questions/07-stochastic-processes/#problem-e6d77359e099">Q932 · 动态骰子博弈</a>当前累计 <span class="arithmatex">\(s\)</span>，掷一至五加对应点数，六清零。仅再掷一次后停的期望为 <span class="arithmatex">\((5s+15)/6\)</span>，在 <span class="arithmatex">\(s&lt;15\)</span> 时严格优于立即兑现。在 <span class="arithmatex">\(s\ge15\)</span> 的存活区域，累计收益每次条件期望不增，非负超鞅加停止条件使任何继续策略都不能提高期望，所以十五是停止阈值，等号处可任选。</p>
 <div class="arithmatex">\[
 V(s)=s\quad(s\ge15),\qquad
 V(s)=\frac16\sum_{j=1}^5V(s+j)\quad(s&lt;15).
@@ -10886,7 +10876,7 @@ g(t)=pe^{-\lambda(1-p)t}\left(t+\frac1\lambda\right).
 \]</div>
 <p>先推完整收益再求导，可得最优阈值 <span class="arithmatex">\(p/[\lambda(1-p)]\)</span>。条件于最终兑现成功后的局数分布会被 <span class="arithmatex">\(p^k\)</span> 倾斜，不能仍使用未经条件化的Poisson参数。</p>
 <p><strong>动态复制与概率最优。</strong> 系列赛终值复制使用赔率决定的定价概率，和真实胜率下最大化收益是不同目标。若赢、输一局后的复制财富为 <span class="arithmatex">\(V_+,V_-\)</span>，一比一净赔率下当前财富 <span class="arithmatex">\((V_++V_-)/2\)</span>，下注额 <span class="arithmatex">\((V_+-V_-)/2\)</span>。按比分倒推能逐路径复制终值；事先固定每场下注额通常无法适应不同比分状态。</p>
-<p>例如<a href="../../questions/07-stochastic-processes/#problem-07428d057a00">Q980 · 系列赛终值的动态复制与下注策略</a>本金 <span class="arithmatex">\(B\)</span>、先胜 <span class="arithmatex">\(m\)</span> 场夺冠，初始下注为 <span class="arithmatex">\(B\binom{2m-2}{m-1}/2^{2m-2}\)</span>。取 <span class="arithmatex">\(B=100,m=4\)</span>，得到 <span class="arithmatex">\(100\cdot20/64=31.25\)</span>。这是用公平赔率复制夺冠时总财富 <span class="arithmatex">\(200\)</span>、落败时零的逐路径策略，不需要真实单场胜率等于一半。</p>
+<p>例如<a href="../../questions/07-stochastic-processes/#problem-07428d057a00">Q933 · 系列赛终值的动态复制与下注策略</a>本金 <span class="arithmatex">\(B\)</span>、先胜 <span class="arithmatex">\(m\)</span> 场夺冠，初始下注为 <span class="arithmatex">\(B\binom{2m-2}{m-1}/2^{2m-2}\)</span>。取 <span class="arithmatex">\(B=100,m=4\)</span>，得到 <span class="arithmatex">\(100\cdot20/64=31.25\)</span>。这是用公平赔率复制夺冠时总财富 <span class="arithmatex">\(200\)</span>、落败时零的逐路径策略，不需要真实单场胜率等于一半。</p>
 <p><strong>折扣MDP的两种表达。</strong> 有限模型、折扣 <span class="arithmatex">\(0&lt;\alpha&lt;1\)</span> 下，可用</p>
 <div class="arithmatex">\[
 V(i)=\max_a\{R(i,a)+\alpha\sum_jP_{ij}(a)V(j)\}

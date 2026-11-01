@@ -10317,14 +10317,14 @@ N\bigl(0,[g'(\theta)]^2v\bigr).
 =\frac{\sigma^2}{\sum_i(x_{ij}-\bar x_j)^2(1-R_j^2)}.
 \]</div>
 <p>这里 <span class="arithmatex">\(R_j^2\)</span> 来自用其余设计列解释第 <span class="arithmatex">\(j\)</span> 个特征。标准误大说明独立识别困难，不等于该特征毫无预测信息。删除变量、合并变量、主成分回归和ridge分别改变解释对象或估计目标，应结合问题选择。</p>
-<p><strong>例题：双向回归。</strong> <a href="../../questions/06-statistics-regression/#problem-ca570a140938">Q752 · 双向一元回归的斜率乘积与取等条件</a>中，含截距且两变量非常数。中心化后记 <span class="arithmatex">\(x,y\)</span> 为样本向量：</p>
+<p><strong>例题：双向回归。</strong> <a href="../../questions/06-statistics-regression/#problem-ca570a140938">Q705 · 双向一元回归的斜率乘积与取等条件</a>中，含截距且两变量非常数。中心化后记 <span class="arithmatex">\(x,y\)</span> 为样本向量：</p>
 <div class="arithmatex">\[
 b=\frac{x^\top y}{x^\top x},\qquad
 c=\frac{x^\top y}{y^\top y},\qquad
 bc=\frac{(x^\top y)^2}{\|x\|^2\|y\|^2}=\rho^2\le1.
 \]</div>
 <p>Cauchy–Schwarz取等当且仅当两中心化向量成比例。因而非零斜率互为倒数，需要完全仿射关系。两个回归分别最小化不同方向的残差。若无截距，乘积仍是未中心化夹角的余弦平方，却通常不是Pearson相关系数平方。</p>
-<p><strong>例题：复制数据。</strong> <a href="../../questions/06-statistics-regression/#problem-7d4414f5380a">Q753 · 数据翻倍</a>把每行复制 <span class="arithmatex">\(k\)</span> 次，新的正规方程两边同时乘 <span class="arithmatex">\(k\)</span>，所以系数不变。若原样本量为 <span class="arithmatex">\(n\)</span>、设计秩为 <span class="arithmatex">\(d\)</span>，原残差平方和为 <span class="arithmatex">\(\mathrm{RSS}\)</span>，误当独立行时软件会给</p>
+<p><strong>例题：复制数据。</strong> <a href="../../questions/06-statistics-regression/#problem-7d4414f5380a">Q706 · 数据翻倍</a>把每行复制 <span class="arithmatex">\(k\)</span> 次，新的正规方程两边同时乘 <span class="arithmatex">\(k\)</span>，所以系数不变。若原样本量为 <span class="arithmatex">\(n\)</span>、设计秩为 <span class="arithmatex">\(d\)</span>，原残差平方和为 <span class="arithmatex">\(\mathrm{RSS}\)</span>，误当独立行时软件会给</p>
 <div class="arithmatex">\[
 \widehat{\operatorname{Var}}_{\rm copied}(\hat\beta)
 =\frac{k\mathrm{RSS}}{kn-d}(kX^\top X)^{-1}
@@ -10342,7 +10342,7 @@ E\{Y-\hat f(x)\}^2
 \]</div>
 <p>正则化可以增加偏差并减小估计方差，是否改善预测取决于总和。不能脱离惩罚强度、真实信号和特征相关结构，给ridge与lasso一个无条件的偏差方差排序。</p>
 <p><strong>惩罚的尺度。</strong> 本节采用平方损失的一半与 <span class="arithmatex">\(\lambda\)</span> 惩罚。若损失另除以 <span class="arithmatex">\(n\)</span>，同一个数值 <span class="arithmatex">\(\lambda\)</span> 表示的收缩强度就不同。一般应先标准化解释变量；截距通常不惩罚，可先中心化后估计斜率。</p>
-<p><strong>例题：光滑收缩与软阈值。</strong> <a href="../../questions/06-statistics-regression/#problem-regularization-scalar">Q756 · 从标量惩罚到正交设计下的ridge与lasso</a>的ridge目标为</p>
+<p><strong>例题：光滑收缩与软阈值。</strong> <a href="../../questions/06-statistics-regression/#problem-regularization-scalar">Q709 · 从标量惩罚到正交设计下的ridge与lasso</a>的ridge目标为</p>
 <div class="arithmatex">\[
 \frac12(\beta-z)^2+\frac\lambda2\beta^2.
 \]</div>
@@ -10362,7 +10362,7 @@ E\{Y-\hat f(x)\}^2
 <h2 id="inference">标准误与覆盖率：假设检验与置信区间<a class="headerlink" href="#inference" title="Permanent link">&para;</a></h2>
 <p>识别信号是“误差多大”“是否显著”“需要多少样本”。第一步不是选临界值，而是写估计量的抽样方差；第二步才说明方差已知、可一致估计，还是只有上界。</p>
 <p><strong>区间的一般流程。</strong> 明确参数与独立单位，构造中心估计量，推其方差及极限分布，用一致估计替换未知方差，最后选择单侧或双侧临界值。若使用正态近似，必须把“近似”写在覆盖率结论中。</p>
-<p><strong>例题：支持率的三种方差。</strong> <a href="../../questions/06-statistics-regression/#problem-76b82afb7943">Q758 · 三种二项支持率置信区间</a>有 <span class="arithmatex">\(n=1200\)</span>、支持人数 <span class="arithmatex">\(684\)</span>，故 <span class="arithmatex">\(\hat p=0.57\)</span>。Bernoulli单人方差的代入值为 <span class="arithmatex">\(0.57(0.43)=0.2451\)</span>。三种半宽依次为</p>
+<p><strong>例题：支持率的三种方差。</strong> <a href="../../questions/06-statistics-regression/#problem-76b82afb7943">Q711 · 三种二项支持率置信区间</a>有 <span class="arithmatex">\(n=1200\)</span>、支持人数 <span class="arithmatex">\(684\)</span>，故 <span class="arithmatex">\(\hat p=0.57\)</span>。Bernoulli单人方差的代入值为 <span class="arithmatex">\(0.57(0.43)=0.2451\)</span>。三种半宽依次为</p>
 <div class="arithmatex">\[
 1.96\sqrt{\frac{0.2451}{1199}}\approx0.02802323,
 \qquad
@@ -10371,7 +10371,7 @@ E\{Y-\hat f(x)\}^2
 \frac{1.96}{2\sqrt{1200}}\approx0.02829016.
 \]</div>
 <p>第一式来自无偏样本方差 <span class="arithmatex">\(s^2=n\hat p(1-\hat p)/(n-1)\)</span>；第二式直接代入Bernoulli方差；第三式使用 <span class="arithmatex">\(p(1-p)\le1/4\)</span>。第三种更宽，但方差上界不会使正态近似变成精确的分布无关保证。</p>
-<p><strong>例题：分组信息与独立单位。</strong> <a href="../../questions/06-statistics-regression/#problem-27c5b63c3ec2">Q759 · 三比特消息的误码率估计</a>记录 <span class="arithmatex">\(100\)</span> 组、每组 <span class="arithmatex">\(3\)</span> 个独立比特，总错误 <span class="arithmatex">\(20\)</span>。因此真正的Bernoulli单位数是 <span class="arithmatex">\(300\)</span>，</p>
+<p><strong>例题：分组信息与独立单位。</strong> <a href="../../questions/06-statistics-regression/#problem-27c5b63c3ec2">Q712 · 三比特消息的误码率估计</a>记录 <span class="arithmatex">\(100\)</span> 组、每组 <span class="arithmatex">\(3\)</span> 个独立比特，总错误 <span class="arithmatex">\(20\)</span>。因此真正的Bernoulli单位数是 <span class="arithmatex">\(300\)</span>，</p>
 <div class="arithmatex">\[
 \hat p=\frac{20}{300}=\frac1{15},\qquad
 \widehat{\operatorname{SE}}=\sqrt{\frac{14/225}{300}}.
@@ -10406,7 +10406,7 @@ n\ge\frac{\sigma^2(z_{1-\alpha}+z_{1-\beta})^2}{\delta^2}.
 E_{\rm group}S=\frac NM,\qquad
 E_{\rm person}S=\frac{\sum_js_j^2}N\ge\frac NM.
 \]</div>
-<p><strong>例题：大巴人数与逆规模校正。</strong> <a href="../../questions/06-statistics-regression/#problem-ecc2a9823238">Q765 · 规模偏倚抽样、逆规模加权与平均群体大小</a>的四车载客数为 <span class="arithmatex">\(40,33,25,50\)</span>，总数 <span class="arithmatex">\(148\)</span>。随机司机代表随机一车，均值是 <span class="arithmatex">\(37\)</span>；随机学生看到的平均车人数是</p>
+<p><strong>例题：大巴人数与逆规模校正。</strong> <a href="../../questions/06-statistics-regression/#problem-ecc2a9823238">Q718 · 规模偏倚抽样、逆规模加权与平均群体大小</a>的四车载客数为 <span class="arithmatex">\(40,33,25,50\)</span>，总数 <span class="arithmatex">\(148\)</span>。随机司机代表随机一车，均值是 <span class="arithmatex">\(37\)</span>；随机学生看到的平均车人数是</p>
 <div class="arithmatex">\[
 \frac{40^2+33^2+25^2+50^2}{148}
 =\frac{2907}{74}\approx39.2838.
@@ -10417,7 +10417,7 @@ EY=\sum_j\frac{s_j}N\frac1{s_j}=\frac MN,
 \qquad
 \widehat{N/M}=\frac1{\bar Y_n}.
 \]</div>
-<p>大数律给一致性；Jensen给有限样本向上偏差。由Delta方法，标准误可估为 <span class="arithmatex">\(s_Y/(\sqrt n\bar Y_n^2)\)</span>。这同时说明“先取比再平均”和“汇总后取比”不同。<a href="../../questions/06-statistics-regression/#problem-5b2a6824ca07">Q766 · 随机排列分组的三种抽样单位</a>中，<span class="arithmatex">\(n=50\)</span> 时，随机人的环长均值为 <span class="arithmatex">\(25.5\)</span>，逐次排列的平均组大小再平均约为 <span class="arithmatex">\(13.32348\)</span>，汇集全部组后的平均约为 <span class="arithmatex">\(50/H_{50}\)</span>。它们各有自己的抽样权重。</p>
+<p>大数律给一致性；Jensen给有限样本向上偏差。由Delta方法，标准误可估为 <span class="arithmatex">\(s_Y/(\sqrt n\bar Y_n^2)\)</span>。这同时说明“先取比再平均”和“汇总后取比”不同。<a href="../../questions/06-statistics-regression/#problem-5b2a6824ca07">Q719 · 随机排列分组的三种抽样单位</a>中，<span class="arithmatex">\(n=50\)</span> 时，随机人的环长均值为 <span class="arithmatex">\(25.5\)</span>，逐次排列的平均组大小再平均约为 <span class="arithmatex">\(13.32348\)</span>，汇集全部组后的平均约为 <span class="arithmatex">\(50/H_{50}\)</span>。它们各有自己的抽样权重。</p>
 <p><strong>因果识别的路线。</strong> 定义潜在结果 <span class="arithmatex">\(Y_1,Y_0\)</span>，处理指标 <span class="arithmatex">\(D\)</span>，并假定实际结果与对应潜在结果一致。观测差异分解为</p>
 <div class="arithmatex">\[
 E(Y\mid D=1)-E(Y\mid D=0)
@@ -10425,7 +10425,7 @@ E(Y\mid D=1)-E(Y\mid D=0)
 +E(Y_0\mid D=1)-E(Y_0\mid D=0).
 \]</div>
 <p>右侧第一项是处理组平均处理效应，第二项是选择偏差。随机分配使处理与潜在结果独立；连同一致性、无干扰等设定，它提供识别依据。有限样本协变量可能偶然不平衡，需报告预先指定的平衡性与不确定性；平衡性检验本身不能证明观测研究已经没有遗漏混杂。</p>
-<p><strong>例题：遗漏变量恒等式。</strong> <a href="../../questions/06-statistics-regression/#problem-be0d6768d7ac">Q764 · 短回归与长回归</a>可直接代入投影关系。写长回归为</p>
+<p><strong>例题：遗漏变量恒等式。</strong> <a href="../../questions/06-statistics-regression/#problem-be0d6768d7ac">Q717 · 短回归与长回归</a>可直接代入投影关系。写长回归为</p>
 <div class="arithmatex">\[
 Y=\alpha+\beta^lX+\gamma A+u,
 \qquad A=\pi_0+\pi_1X+v.
@@ -10438,7 +10438,7 @@ Y=\alpha+\beta^lX+\gamma A+u,
 <h2 id="limit-methods">先选尺度再取极限：极限定理与渐近近似<a class="headerlink" href="#limit-methods" title="Permanent link">&para;</a></h2>
 <p>把问题先归为样本均值、最大值、乘积、变换后的估计量或首次越界。不同对象不必使用同一条定理。尤其不能看到样本量大就把最大值或乘积机械地标准化为正态。</p>
 <p><strong>和与差。</strong> 独立和的均值、方差相加；独立两组相减时，均值相减而方差仍相加。先算 <span class="arithmatex">\(ES_n\)</span> 与 <span class="arithmatex">\(\operatorname{Var}S_n\)</span>，最后再标准化阈值。重尾Student样本需先看自由度是否使方差有限；Cauchy样本均值不会因样本多而集中到零。</p>
-<p><strong>例题：二项尾与半格边界。</strong> <a href="../../questions/06-statistics-regression/#problem-0da255e21023">Q767 · 二项尾概率的正态近似与连续性修正</a>中，<span class="arithmatex">\(H\sim\operatorname{Bin}(100,1/2)\)</span>，均值 <span class="arithmatex">\(50\)</span>、标准差 <span class="arithmatex">\(5\)</span>。不修正时</p>
+<p><strong>例题：二项尾与半格边界。</strong> <a href="../../questions/06-statistics-regression/#problem-0da255e21023">Q720 · 二项尾概率的正态近似与连续性修正</a>中，<span class="arithmatex">\(H\sim\operatorname{Bin}(100,1/2)\)</span>，均值 <span class="arithmatex">\(50\)</span>、标准差 <span class="arithmatex">\(5\)</span>。不修正时</p>
 <div class="arithmatex">\[
 P(H\ge60)\approx1-\Phi(2)\approx0.02275.
 \]</div>
@@ -10447,7 +10447,7 @@ P(H\ge60)\approx1-\Phi(2)\approx0.02275.
 P(H\ge60)\approx1-\Phi(1.9)\approx0.02872.
 \]</div>
 <p>同理，整数差严格大于零，应把连续边界放在 <span class="arithmatex">\(0.5\)</span>。阈值处在很远尾部时，CLT不保证很小概率的相对误差；需要精确二项尾或适合的尾部近似。</p>
-<p><strong>例题：首次越界的下标。</strong> <a href="../../questions/06-statistics-regression/#problem-236ecdc6d623">Q770 · 每日产量的和与首次越界</a>的非负独立日产量均值 <span class="arithmatex">\(5\)</span>、方差 <span class="arithmatex">\(9\)</span>。令 <span class="arithmatex">\(N=\inf\{n:S_n&gt;1000\}\)</span>。因为累计量不回落，</p>
+<p><strong>例题：首次越界的下标。</strong> <a href="../../questions/06-statistics-regression/#problem-236ecdc6d623">Q723 · 每日产量的和与首次越界</a>的非负独立日产量均值 <span class="arithmatex">\(5\)</span>、方差 <span class="arithmatex">\(9\)</span>。令 <span class="arithmatex">\(N=\inf\{n:S_n&gt;1000\}\)</span>。因为累计量不回落，</p>
 <div class="arithmatex">\[
 \{N\ge220\}=\{S_{219}\le1000\},
 \]</div>
@@ -10477,7 +10477,7 @@ E(X-a)^2=\operatorname{Var}X+(EX-a)^2,
 \rho_\tau(u)=u\{\tau-\mathbf1_{\{u&lt;0\}}\},\qquad0&lt;\tau&lt;1
 \]</div>
 <p>的最优条件是 <span class="arithmatex">\(F(a-)\le\tau\le F(a)\)</span>。经验样本中，若 <span class="arithmatex">\(n\tau=k\)</span> 为整数，整个 <span class="arithmatex">\([x_{(k)},x_{(k+1)}]\)</span> 都最优；不能总把答案写成唯一的中央值。非对称平方损失对应expectile，目标不同。</p>
-<p><strong>例题：AUC的配对计数。</strong> <a href="../../questions/06-statistics-regression/#problem-auc-pair-comparison">Q780 · AUC的配对概率、并列处理与秩和公式</a>有正类分数 <span class="arithmatex">\(0.9,0.6,0.6,0.3\)</span>，负类分数 <span class="arithmatex">\(0.8,0.6,0.2,0.1\)</span>。每个正类战胜的负类数（并列半胜）为</p>
+<p><strong>例题：AUC的配对计数。</strong> <a href="../../questions/06-statistics-regression/#problem-auc-pair-comparison">Q733 · AUC的配对概率、并列处理与秩和公式</a>有正类分数 <span class="arithmatex">\(0.9,0.6,0.6,0.3\)</span>，负类分数 <span class="arithmatex">\(0.8,0.6,0.2,0.1\)</span>。每个正类战胜的负类数（并列半胜）为</p>
 <div class="arithmatex">\[
 4,\quad\frac52,\quad\frac52,\quad2.
 \]</div>
@@ -10487,7 +10487,7 @@ E(X-a)^2=\operatorname{Var}X+(EX-a)^2,
 \frac{R_+-n_+(n_++1)/2}{n_+n_-}.
 \]</div>
 <p>减去的项消掉正类内部排序贡献。AUC关心排序，严格递增变换评分保持它不变；严格递减变换会在并列半胜口径下把它变成 <span class="arithmatex">\(1-\mathrm{AUC}\)</span>。它不直接评价概率校准或某个阈值下的利润。</p>
-<p><strong>例题：不平衡分类。</strong> <a href="../../questions/06-statistics-regression/#problem-classifier-impurity">Q781 · 不平衡分类的<span class="arithmatex">\(F_1\)</span></a>中，真实正类 <span class="arithmatex">\(200\)</span>，预测正类 <span class="arithmatex">\(300\)</span>，其中正确 <span class="arithmatex">\(120\)</span>。所以</p>
+<p><strong>例题：不平衡分类。</strong> <a href="../../questions/06-statistics-regression/#problem-classifier-impurity">Q734 · 不平衡分类的<span class="arithmatex">\(F_1\)</span></a>中，真实正类 <span class="arithmatex">\(200\)</span>，预测正类 <span class="arithmatex">\(300\)</span>，其中正确 <span class="arithmatex">\(120\)</span>。所以</p>
 <div class="arithmatex">\[
 TP=120,\quad FP=180,\quad FN=80,
 \]</div>
@@ -10511,7 +10511,7 @@ F_1=\frac{2TP}{2TP+FP+FN}=\frac{12}{25}.
 =\sum_i(X_i-\bar X)^2+n(\bar X-\mu)^2
 \]</div>
 <p>先给 <span class="arithmatex">\(\hat\mu=\bar X\)</span>，再给方差MLE <span class="arithmatex">\(\hat v=n^{-1}\sum_i(X_i-\bar X)^2\)</span>。无偏方差用分母 <span class="arithmatex">\(n-1\)</span>。若数据全相等且要求 <span class="arithmatex">\(v&gt;0\)</span>，似然在 <span class="arithmatex">\(v\downarrow0\)</span> 时无界，开放参数域内没有达到的最大值。Poisson率允许 <span class="arithmatex">\(\lambda=0\)</span> 时，全零样本的MLE就在该边界。</p>
-<p><strong>例题：指数率与受限参数域。</strong> <a href="../../questions/06-statistics-regression/#problem-6eba8016f79d">Q785 · 指数率的极大似然</a>记 <span class="arithmatex">\(S=\sum_iX_i&gt;0\)</span>，</p>
+<p><strong>例题：指数率与受限参数域。</strong> <a href="../../questions/06-statistics-regression/#problem-6eba8016f79d">Q738 · 指数率的极大似然</a>记 <span class="arithmatex">\(S=\sum_iX_i&gt;0\)</span>，</p>
 <div class="arithmatex">\[
 \ell(\theta)=n\log\theta-\theta S,
 \qquad\ell'=n/\theta-S,
@@ -10521,14 +10521,14 @@ F_1=\frac{2TP}{2TP+FP+FN}=\frac{12}{25}.
 <div class="arithmatex">\[
 \hat\theta=\max\left(\frac nS,\frac1{\sqrt v}\right).
 \]</div>
-<p><a href="../../questions/06-statistics-regression/#problem-63fd9028d43d">Q760 · 玻璃均重区间与受方差约束的指数率MLE</a>取 <span class="arithmatex">\(n=1000,S=2340,v=4\)</span>，无约束驻点为 <span class="arithmatex">\(50/117&lt;1/2\)</span>，受限MLE为 <span class="arithmatex">\(1/2\)</span>。样本均值可以超出模型总体均值的允许范围；这会推动估计到边界，不表示该有限样本不可能出现。</p>
+<p><a href="../../questions/06-statistics-regression/#problem-63fd9028d43d">Q713 · 玻璃均重区间与受方差约束的指数率MLE</a>取 <span class="arithmatex">\(n=1000,S=2340,v=4\)</span>，无约束驻点为 <span class="arithmatex">\(50/117&lt;1/2\)</span>，受限MLE为 <span class="arithmatex">\(1/2\)</span>。样本均值可以超出模型总体均值的允许范围；这会推动估计到边界，不表示该有限样本不可能出现。</p>
 <p>MLE的无偏性另算。因为 <span class="arithmatex">\(S\sim\operatorname{Gamma}(n,\theta)\)</span>，当 <span class="arithmatex">\(n&gt;1\)</span> 时 <span class="arithmatex">\(E(1/S)=\theta/(n-1)\)</span>，所以 <span class="arithmatex">\(E(n/S)=n\theta/(n-1)\)</span>，而 <span class="arithmatex">\((n-1)/S\)</span> 无偏。一致性来自 <span class="arithmatex">\(S/n\to1/\theta\)</span>，与有限样本偏差并不矛盾。</p>
-<p><strong>例题：有限总体端点。</strong> <a href="../../questions/06-statistics-regression/#problem-serial-number-estimation">Q789 · 有限总体序号的极大值估计</a>从 <span class="arithmatex">\(1,\ldots,N\)</span> 不放回均匀抽 <span class="arithmatex">\(k\)</span> 件，最大观察值 <span class="arithmatex">\(M=m\)</span>。似然为</p>
+<p><strong>例题：有限总体端点。</strong> <a href="../../questions/06-statistics-regression/#problem-serial-number-estimation">Q742 · 有限总体序号的极大值估计</a>从 <span class="arithmatex">\(1,\ldots,N\)</span> 不放回均匀抽 <span class="arithmatex">\(k\)</span> 件，最大观察值 <span class="arithmatex">\(M=m\)</span>。似然为</p>
 <div class="arithmatex">\[
 L(N)=\frac{\binom{m-1}{k-1}}{\binom Nk}\mathbf1_{\{N\ge m\}}.
 \]</div>
 <p>分母随 <span class="arithmatex">\(N\)</span> 增加，最大值在最小可行参数 <span class="arithmatex">\(N=m\)</span>，无需求导。对称空隙给 <span class="arithmatex">\(EM=k(N+1)/(k+1)\)</span>，所以无偏估计为 <span class="arithmatex">\((k+1)M/k-1\)</span>。当 <span class="arithmatex">\(M=60\)</span> 时，<span class="arithmatex">\(k=1\)</span> 给 <span class="arithmatex">\(119\)</span>，<span class="arithmatex">\(k=5\)</span> 给 <span class="arithmatex">\(71\)</span>；两次MLE都是 <span class="arithmatex">\(60\)</span>。连续均匀端点近似会漏掉整数修正项。</p>
-<p><strong>重参数化与精度。</strong> 一一对应的参数变换可把MLE直接变换，但标准误要用Delta导数传播。<a href="../../questions/06-statistics-regression/#problem-thermal-geometric-count">Q788 · 几何光子计数的似然估计与参数精度</a>有 <span class="arithmatex">\(\mu=1/(e^{1/\theta}-1)\)</span>，<span class="arithmatex">\(\operatorname{Var}K=\mu(1+\mu)\)</span>，故</p>
+<p><strong>重参数化与精度。</strong> 一一对应的参数变换可把MLE直接变换，但标准误要用Delta导数传播。<a href="../../questions/06-statistics-regression/#problem-thermal-geometric-count">Q741 · 几何光子计数的似然估计与参数精度</a>有 <span class="arithmatex">\(\mu=1/(e^{1/\theta}-1)\)</span>，<span class="arithmatex">\(\operatorname{Var}K=\mu(1+\mu)\)</span>，故</p>
 <div class="arithmatex">\[
 \hat\theta=\frac1{\log(1+1/\bar K)},\qquad
 \frac{\operatorname{SE}(\hat\theta)}\theta
@@ -10545,14 +10545,14 @@ E(\Theta-g(X))^2
 +E\{m(X)-g(X)\}^2.
 \]</div>
 <p>展开后的交叉项为零，因为 <span class="arithmatex">\(E(\Theta-m\mid X)=0\)</span>。后验均值在所有可测预测中最优；若只许仿射函数，则得到另一种受限投影。条件无偏 <span class="arithmatex">\(E(T\mid\Theta)=\Theta\)</span> 与后验均值条件化方向相反，不能互相替换。</p>
-<p><strong>例题：均匀端点后验。</strong> <a href="../../questions/06-statistics-regression/#problem-uniform-endpoint-posterior">Q791 · 均匀端点的后验、损失最优与仿射预测</a>给 <span class="arithmatex">\(\Theta\sim U(0,1)\)</span>，<span class="arithmatex">\(X\mid\Theta=\theta\sim U(0,\theta)\)</span>。观察 <span class="arithmatex">\(0&lt;x&lt;1\)</span>，令 <span class="arithmatex">\(L=-\log x\)</span>，则</p>
+<p><strong>例题：均匀端点后验。</strong> <a href="../../questions/06-statistics-regression/#problem-uniform-endpoint-posterior">Q744 · 均匀端点的后验、损失最优与仿射预测</a>给 <span class="arithmatex">\(\Theta\sim U(0,1)\)</span>，<span class="arithmatex">\(X\mid\Theta=\theta\sim U(0,\theta)\)</span>。观察 <span class="arithmatex">\(0&lt;x&lt;1\)</span>，令 <span class="arithmatex">\(L=-\log x\)</span>，则</p>
 <div class="arithmatex">\[
 \pi(\theta\mid x)=\frac1{L\theta}\mathbf1_{\{x\le\theta\le1\}},
 \qquad E(\Theta\mid x)=\frac{1-x}L,
 \qquad E(\Theta^2\mid x)=\frac{1-x^2}{2L}.
 \]</div>
 <p>MAP在左端点 <span class="arithmatex">\(x\)</span>，平方损失估计是后验均值。任意选值 <span class="arithmatex">\(b\)</span> 的条件风险为后验方差加 <span class="arithmatex">\((b-E(\Theta\mid x))^2\)</span>，所以不用逐个复杂积分比较它们。若只许仿射估计，联合矩给斜率 <span class="arithmatex">\(6/7\)</span>、截距 <span class="arithmatex">\(2/7\)</span>，即 <span class="arithmatex">\((2+6x)/7\)</span>；它在仿射类中整体最优，却不等于逐观察值的后验最优估计。</p>
-<p><strong>例题：共享几何参数。</strong> <a href="../../questions/06-statistics-regression/#problem-geometric-parameter-estimation">Q792 · 几何等待的共轭估计、经典精度与条件预测</a>记录包含成功当次的 <span class="arithmatex">\(k\)</span> 个间隔，<span class="arithmatex">\(S=\sum_it_i\)</span>。共享成功率先验为 <span class="arithmatex">\(Q\sim\operatorname{Beta}(a,b)\)</span>，似然为 <span class="arithmatex">\(q^k(1-q)^{S-k}\)</span>，所以</p>
+<p><strong>例题：共享几何参数。</strong> <a href="../../questions/06-statistics-regression/#problem-geometric-parameter-estimation">Q745 · 几何等待的共轭估计、经典精度与条件预测</a>记录包含成功当次的 <span class="arithmatex">\(k\)</span> 个间隔，<span class="arithmatex">\(S=\sum_it_i\)</span>。共享成功率先验为 <span class="arithmatex">\(Q\sim\operatorname{Beta}(a,b)\)</span>，似然为 <span class="arithmatex">\(q^k(1-q)^{S-k}\)</span>，所以</p>
 <div class="arithmatex">\[
 Q\mid t\sim\operatorname{Beta}(a+k,b+S-k),
 \qquad E(Q\mid t)=\frac{a+k}{a+b+S}.
