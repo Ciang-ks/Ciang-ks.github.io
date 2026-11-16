@@ -55,7 +55,7 @@
   <img id="right" class="stim" alt="右侧图片" draggable="false" hidden>
   <div id="feedback" class="center feedback" hidden></div>
   <div id="attention" hidden>
-    <div id="check-hint">找到与中央数字相同的中文数字，按它所在方向的键。</div>
+    <div id="check-hint">按与中央数字对应的中文数字所在方向的键。</div>
     <div class="attention" id="up"></div><div class="attention" id="east"></div>
     <div class="attention" id="down"></div><div class="attention" id="west"></div>
     <div class="center feedback" id="target"></div>
@@ -340,15 +340,18 @@ async function instructions() {
   const pages = [
     {
       title: "图片比较任务",
-      body: `<p>每题会在屏幕左右各显示一张图片。你的任务是选出你认为<strong>价值较高</strong>的那张。</p>
-        <p>价值由任务设定，屏幕上不会显示数值。同一阶段里，每张图片的价值固定，出现的位置可能改变。刚开始可以凭直觉选，之后根据反馈逐渐学习。即使拿不准，也请选一张。</p>`
+      body: `<p>这是一个图片二选一任务。每题屏幕左右各显示一张图片，你要选出其中<strong>价值更高</strong>的一张。</p>
+        <p>实验给每张图片设定了一个隐藏的「价值」。屏幕上不会显示具体数值。价值更高的图片就是这道题的正确答案。</p>
+        <p>在同一阶段内，每张图片的价值固定。同一张图片有时在左边，有时在右边。请根据图片本身判断。</p>
+        <p>有些题作答后会显示「正确」或「错误」。刚开始可以凭直觉选，之后根据反馈逐渐学习。即使拿不准，也请选一张。</p>`
     },
     {
       title: "用方向键选图片",
-      body: `<p>看到中央的十字，先看向屏幕中间。两张图片出现后，选左图按 <kbd>←</kbd>，选右图按 <kbd>→</kbd>。每题有 <strong>2.5 秒</strong>，请尽量又快又准。</p>
+      body: `<p>看到中央的十字后，先看屏幕中间。两张图片出现后，选左图按 <kbd>←</kbd>，选右图按 <kbd>→</kbd>。每题限时 <strong>2.5 秒</strong>，请尽量又快又准。</p>
+        <p>每题只记录第一次按 <kbd>←</kbd> / <kbd>→</kbd> 的选择。按一次后等待即可。</p>
         <section class="demo" aria-labelledby="demo-heading">
           <h2 id="demo-heading">试一试</h2>
-          <p>假设右边的圆形价值更高。请用方向键选中它，也可以点击下方按键体验。</p>
+          <p>假设右边的圆形价值更高。请按 <kbd>←</kbd> / <kbd>→</kbd> 选择，也可以点击下方按钮。</p>
           <div class="demo-pair">
             <div><span class="demo-shape" aria-hidden="true">■</span><button type="button" data-demo-key="ArrowLeft" aria-label="左边的方形">← 左图</button></div>
             <b aria-hidden="true">+</b>
@@ -358,25 +361,25 @@ async function instructions() {
         </section>`,
       demo: {
         answer: "ArrowRight",
-        correct: "选对了。想选屏幕右边的图片，就按 →。",
-        retry: "刚才选了左边的图片。圆形在右边，请试试 →。"
+        correct: "选对了。● 在右边，所以按 →。",
+        retry: "你选了左边。● 在右边，请按 → 再试。"
       }
     },
     {
       title: "看懂作答后的反馈",
-      body: `<p>按下方向键后，中央十字消失，表示已收到选择。图片会在 2.5 秒结束时消失。每题只记第一次选择，按一次后等待即可。</p><ul>
-        <li>看到<strong>正确</strong>，表示这次选中的图片价值较高。</li>
-        <li>看到<strong>错误</strong>，表示这次另一张图片价值较高。</li>
-        <li>有些题按键后只有短暂空白。比如你按了 <kbd>←</kbd> 后没看到文字，等下一对图片出现即可。</li>
-        <li>看到<strong>请更快作答</strong>，表示这题超时。下一题请在图片出现后尽快选。</li>
+      body: `<p>按 <kbd>←</kbd> / <kbd>→</kbd> 后，中央十字会消失，表示已收到选择。图片会在 2.5 秒结束时消失。</p><ul>
+        <li>看到<strong>正确</strong>：你选的图片价值更高。</li>
+        <li>看到<strong>错误</strong>：另一张图片价值更高。</li>
+        <li>只看到短暂空白：你的选择已记录，等下一对图片出现即可。</li>
+        <li>看到<strong>请更快作答</strong>：本题超时。下一题请在图片出现后尽快选。</li>
         </ul>`
     },
     {
       title: "数字检查",
-      body: `<p>先读屏幕中央的数字，再从上、右、下、左四个位置找出对应的中文数字。按它<strong>所在方向</strong>的键。每题有 <strong>10 秒</strong>。</p>
+      body: `<p>屏幕中央是阿拉伯数字（如 3），四周是中文数字。找到与中央数字对应的那一个（如「三」），按它<strong>所在方向</strong>的键。每题限时 <strong>10 秒</strong>。</p>
         <section class="demo" aria-labelledby="demo-heading">
           <h2 id="demo-heading">试一试</h2>
-          <p>中央是 3，找一找“三”在哪里。按那个方向的键，或点击示例里的对应选项。</p>
+          <p>中央是 3，找一找「三」在哪里。按它所在方向的键，或点击示例里的对应选项。</p>
           <div class="demo-numbers">
             <button type="button" style="grid-area:up" data-demo-key="ArrowUp" aria-label="上方的二">二 ↑</button>
             <button type="button" style="grid-area:east" data-demo-key="ArrowRight" aria-label="右方的一">一 →</button>
@@ -388,20 +391,22 @@ async function instructions() {
         </section>`,
       demo: {
         answer: "ArrowLeft",
-        correct: "选对了。三在左边，所以按 ←。每题都要重新看数字的位置。",
-        retry: "再看看中央的 3。“三”在左边，请试试 ←。"
+        correct: "选对了。「三」在左边，所以按 ←。每题都要重新找位置。",
+        retry: "再看看中央的 3。「三」在左边，请试试 ←。"
       }
     },
     {
       title: "每组结束后",
-      body: `<p>我们会问你刚才有没有受到干扰。例如，手机响了并打断了你的作答，就按主键盘上的 <kbd>1</kbd>。如果顺利做完、没有受到干扰，就按 <kbd>0</kbd>。</p>
-        <p>正式任务结束后会随机抽取 10 道正式题判断奖励资格，至少答对 6 道即可达到条件。最后可以留言，例如说明是否遇到图片加载或按键问题。留言可留空。</p>`
+      body: `<p>每组结束后，我们会问你是否受到干扰。如果手机响了或旁人说话打断了你的作答，就按主键盘上的 <kbd>1</kbd>。如果没有受到干扰，就按 <kbd>0</kbd>。</p>
+        <p>正式任务结束后，系统会随机抽取 10 道正式题核对奖励资格。答对至少 6 道就达到奖励条件。最后可以留言，例如说明是否遇到图片加载或按键问题。留言可留空。</p>`
     },
     {
       title: "准备开始练习",
-      body: `<p>先做两轮练习。每轮有 8 道图片题和 4 道数字检查题。练习帮助你熟悉按键、反馈和作答时间。</p>
-        <p>通过数字检查后，正式任务会换一组新图片，共 6 组，每组 70 道图片题。正式任务中还会出现一次数字检查，组间可以休息。</p>
-        <p>请在安静的环境中使用带实体键盘的电脑。整个任务约需 25–30 分钟。</p>`
+      body: `<ul>
+        <li><strong>练习</strong>。先做 2 轮。每轮有 8 道图片题和 4 道数字检查题，帮助你熟悉按键、反馈和作答时间。</li>
+        <li><strong>正式任务</strong>。通过练习中的数字检查后，换一组新图片，共做 6 组，每组 70 道图片题。正式任务中还会出现数字检查，组间可以休息。</li>
+        <li><strong>时长</strong>。整个任务约需 25–30 分钟。请使用带实体键盘的电脑，在安静环境中完成。</li>
+        </ul>`
     }
   ];
   const completedDemos = new Set();
@@ -571,8 +576,8 @@ async function perform(step) {
       const practice = phase === "practice";
       const title = practice ? "练习 " + block + " / 2" : "正式任务 " + block + " / 6";
       const body = practice
-        ? "<p>先做 8 道图片比较题。图片出现后，用 ← 或 → 选你认为价值较高的一张。拿不准时也请作答。</p><p>随后做 4 道数字检查题，按与中央数字相同的中文数字所在方向。</p>"
-        : "<p>本组有 70 道图片题。用 ← 或 → 选价值较高的图片，尽量又快又准。按键后遇到空白，等下一题即可。</p>";
+        ? "<p>先做 8 道图片题。按 ← / → 选出价值更高的一张，拿不准也请作答。</p><p>再做 4 道数字检查题。按与中央数字对应的中文数字所在方向的键。</p>"
+        : "<p>本组有 70 道图片题。按 ← / → 选出价值更高的一张，尽量又快又准。如果看到空白，等下一题即可。</p>";
       const start = showPrompt("<h1>" + title + "</h1>" + body + pauseHint, nextButton("开始"));
       if (!storageOK) addDownloadButton();
       await start;
@@ -584,14 +589,14 @@ async function perform(step) {
       const passed = correct >= 4;
       const html = passed
         ? '<h1>数字检查已通过</h1><p>' + (phase === "practice" ? "正式任务将使用一组新图片。" : "请继续查看本组表现。") + '</p>'
-        : '<h1>任务提前结束</h1><p>数字检查正确率未达到要求。请继续保存已记录的数据。</p>';
+        : '<h1>任务提前结束</h1><p>本次数字检查未通过。请选择「继续」，前往结果页。</p>';
       await showPrompt(html + pauseHint, nextButton());
       return {attention_correct: correct, attention_total: 8, passed};
     }
     case "disturbance": {
       const onset = performance.now();
       const {key, time} = await showPrompt(
-        '<h1>环境情况</h1><p>刚才这一组任务中，你是否受到周围环境的干扰？比如，手机铃声或旁人说话打断了你的作答。</p><p>受到干扰按 <kbd>1</kbd>，没有受到干扰按 <kbd>0</kbd>。请使用主键盘的数字键，也可以点击下方选项。</p>',
+        '<h1>环境情况</h1><p>刚才这组任务中，你有被打断吗？</p><p>有，按 <kbd>1</kbd>。没有，按 <kbd>0</kbd>。请用主键盘上的数字键，也可以点击下方选项。</p>',
         [{label:"受到干扰（1）",keys:["1"]},{label:"没有受到干扰（0）",keys:["0"],secondary:true}]);
       return {response_key: key, disturbed: key === "1", rt_ms: round(time - onset)};
     }
@@ -603,7 +608,7 @@ async function perform(step) {
       const band = cumulative >= .8 ? "very_high" : cumulative >= .6 ? "high" : cumulative >= .5 ? "medium" : "low";
       const message = {very_high:"到目前为止，你的正确率很高。",high:"到目前为止，你的正确率较高。",medium:"目前表现不错，还有提高的空间。",low:"目前的正确率偏低。请继续尝试。"}[band];
       await showPrompt('<h1>第 ' + block + ' 组结束</h1><p>' + message +
-        '</p><p>正式任务的正确作答会影响最后的奖励判定。</p>' + (block < 6 ? '<p>你可以在这里休息，准备好后再继续。</p>' : "") + pauseHint, nextButton());
+        '</p>' + (block < 6 ? '<p>可以先休息一下，准备好后再继续。</p>' : "") + pauseHint, nextButton());
       return {accuracy, cumulative_accuracy: cumulative, feedback_band: band};
     }
     case "bonus": {
@@ -611,12 +616,12 @@ async function perform(step) {
       const sample = run.design.bonusTrials.map(number => trials[number - 1]);
       const correct = sample.filter(row => row.correct === 1).length;
       const eligible = correct >= 6;
-      await showPrompt('<h1>奖励判定</h1><p>系统从正式任务随机抽取了 10 题。</p><p>' +
-        (eligible ? "你的正确题数超过一半，达到奖励条件。" : "你的正确题数未超过一半，未达到奖励条件。") + '</p>' + pauseHint, nextButton());
+      await showPrompt('<h1>奖励结果</h1><p>系统随机抽取了 10 道正式题。答对至少 6 道就达到奖励条件。</p><p>' +
+        (eligible ? "你已达到奖励条件。" : "你这次未达到奖励条件。") + '</p>' + pauseHint, nextButton());
       return {sampled_main_trials: sample.map(row => row.main_trial), bonus_correct: correct, bonus_eligible: eligible};
     }
     case "comments": {
-      setPanel('<h1>任务反馈</h1><form id="comments-form"><label for="comments">你可以留下对任务的意见（选填）。</label><textarea id="comments" maxlength="2000" placeholder="请勿填写姓名或联系方式。"></textarea><button>完成任务</button></form>');
+      setPanel('<h1>任务反馈</h1><form id="comments-form"><label for="comments">欢迎留下意见（选填）。</label><textarea id="comments" maxlength="2000" placeholder="请勿填写姓名或联系方式。"></textarea><button>完成任务</button></form>');
       return new Promise(resolve => {
         waiter = {keys: [], handler: () => { waiter = null; resolve({}); }};
         $("comments-form").onsubmit = event => {
@@ -716,10 +721,10 @@ async function results() {
   await submit();
   async function submit() {
     retry.hidden = true;
-    status.textContent = "正在提交数据，也可下载数据文件。";
+    status.textContent = "正在提交作答。你也可以下载数据文件。";
     const revision = run.rows.length * 2 + 1;
     const ok = lastUploaded >= revision || await uploadSnapshot();
-    status.textContent = ok ? "数据已提交。" : "数据提交未确认。请重新提交，或下载数据文件交给实验组织者。";
+    status.textContent = ok ? "数据已提交。" : "暂未收到提交确认。你可以重新提交，或下载 JSON 文件交给实验组织者。";
     retry.hidden = ok;
   }
 }
@@ -766,8 +771,8 @@ async function home() {
       return;
     }
   }
-  setPanel('<h1>图片比较任务</h1><p>请使用带实体键盘的电脑，在安静的环境下完成任务。你可以按 Esc 键提前结束。</p>' +
-    (collection ? '<p>程序会自动尝试把作答记录提交到实验服务器。提交失败时可下载数据文件。</p>' : '<p>程序在此浏览器中记录作答。结束后请下载数据文件。</p>') +
+  setPanel('<h1>图片比较任务</h1><p>请使用带实体键盘的电脑，在安静环境中完成。按 <kbd>Esc</kbd> 可提前结束。</p><p>如果页面退出全屏，可按 <kbd>F11</kbd> 尝试重新进入全屏。</p>' +
+    (collection ? '<p>作答会自动提交。如果提交失败，你可以下载数据文件。</p>' : '<p>作答会保存在这个浏览器里。结束后请下载数据文件。</p>') +
     '<form id="start"><label for="code">参与者编号（选填）</label><input id="code" type="text" maxlength="60" autocomplete="off" placeholder="请勿填写姓名或联系方式。">' +
     '<fieldset><label><input type="checkbox" required> 我已了解任务和数据记录方式，自愿参加。</label></fieldset><button>阅读说明</button></form>');
   $("start").onsubmit = async event => {
