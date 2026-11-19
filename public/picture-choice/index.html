@@ -14,8 +14,12 @@
   h1 { font-size: 1.65rem; line-height: 1.3; margin: 0 0 20px; }
   p { margin: 0 0 14px; }
   fieldset { border: 0; margin: 16px 0 0; padding: 0; }
-  input[type=text], textarea { display: block; width: 100%; margin: 5px 0 12px; border: 1px solid #777; border-radius: 4px; padding: 8px; font: inherit; }
+  input[type=text], input[type=number], select, textarea { display: block; width: 100%; margin: 5px 0 12px; border: 1px solid #777; border-radius: 4px; padding: 8px; font: inherit; }
   textarea { min-height: 115px; }
+  details { margin: 0 0 14px; }
+  summary { cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; }
+  th, td { border-bottom: 1px solid #ddd; padding: 3px 12px; text-align: left; }
   button { cursor: pointer; font: inherit; background: #1d262d; color: #fff; border: 1px solid #1d262d; border-radius: 5px; padding: 8px 15px; margin: 5px 8px 5px 0; }
   button.secondary { color: #1d262d; background: #fff; }
   button:disabled { opacity: .55; cursor: default; }
@@ -107,6 +111,19 @@ const STORAGE_KEY = "picture-choice-session-v1:" + location.pathname.replace(/in
 const ENDPOINT = "https://pi.tail6efca3.ts.net/collect";
 const MAX_RESPONSE = 2500;
 const ATTENTION_RESPONSE = 10000;
+const PAYMENT_POLICY = {
+  id: "last_two_blocks_v1",
+  base_yuan: 20,
+  max_bonus_yuan: 10,
+  total_trials: 420,
+  bonus_trials: 140,
+  bonus_points: [[0.6, 0], [0.75, 5], [0.9, 8], [1, 10]],
+  bonus_correct_thresholds: [[0, 0], [85, 1], [91, 2], [95, 3], [99, 4], [103, 5],
+    [109, 6], [116, 7], [123, 8], [130, 9], [137, 10]],
+  base_rounding: "floor",
+  bonus_rounding: "nearest_integer_minimum_one_above_threshold",
+  timeout_counts_as_incorrect: true
+};
 const DIRS = ["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft"];
 const CN_DIGITS = ["", "一", "二", "三", "四"];
 const PRACTICE_RANKS = ["handmixer", "beetle", "sock", "rabbit", "canary", "pullover", "glasses", "squirrel"];
@@ -162,20 +179,19 @@ function createDesign() {
     practice: PRACTICE,
     main: Array.from({length: 6}, () => shuffle(orderedPairs)),
     practiceChecks: [shuffle(CHECKS.slice(0,4)), shuffle(CHECKS.slice(0,4))],
-    mainChecks: shuffle(CHECKS),
-    bonusTrials: shuffle(Array.from({length: 420}, (_, i) => i + 1)).slice(0, 10)
+    mainChecks: shuffle(CHECKS)
   };
 }
 
-function makeRun(code) {
+function makeRun(code, demographics) {
   const id = Array.from(crypto.getRandomValues(new Uint8Array(16)), x => x.toString(16).padStart(2, "0")).join("");
   return {
-    version: 1, session_id: id, participant_code: code, mode: sessionMode, stimulus_set: STIMULUS_SET,
+    version: 1, session_id: id, participant_code: code, demographics, mode: sessionMode, stimulus_set: STIMULUS_SET,
     started_at: timestamp(), ended_at: null, status: "in_progress",
     environment: {width: window.innerWidth, height: window.innerHeight, screen_width: window.screen.width,
       screen_height: window.screen.height, device_pixel_ratio: window.devicePixelRatio,
       user_agent: navigator.userAgent},
-    design: createDesign(), cursor: 0, rows: []
+    design: createDesign(), compensation_policy: PAYMENT_POLICY, cursor: 0, rows: []
   };
 }
 
@@ -376,14 +392,15 @@ async function instructions() {
     {
       title: "每组结束后",
       body: `<p>每组结束后，我们会问你是否受到干扰。如果手机响了或旁人说话打断了你的作答，就按主键盘上的 <kbd>1</kbd>。如果没有受到干扰，就按 <kbd>0</kbd>。</p>
-        <p>正式任务结束后，系统会随机抽取 10 道正式题核对奖励资格。答对至少 6 道就达到奖励条件。最后可以留言，例如说明是否遇到图片加载或按键问题。留言可留空。</p>`
+        <p>完成全部任务后，根据最后 2 组的正确率计算奖励。超时题按答错计。正确率超过 60% 才有奖励，75% 奖励 5 元，90% 奖励 8 元，全部答对奖励 10 元。中间金额按比例计算，四舍五入取整数，超过 60% 至少奖励 1 元。</p>
+        ${rewardStandards()}<p>最后可以留言，例如说明是否遇到图片加载或按键问题。留言可留空。</p>`
     },
     {
       title: "准备开始练习",
       body: `<ul>
         <li><strong>练习</strong>。先做 2 轮。每轮有 8 道图片题和 4 道数字检查题，帮助你熟悉按键、反馈和作答时间。</li>
         <li><strong>正式任务</strong>。通过练习中的数字检查后，换一组新图片，共做 6 组，每组 70 道图片题。正式任务中还会出现数字检查，组间可以休息。</li>
-        <li><strong>时长</strong>。整个任务约需 25–30 分钟。请使用带实体键盘的电脑，在安静环境中完成。</li>
+        <li><strong>时长</strong>。整个任务约需 30–35 分钟。请使用带实体键盘的电脑，在安静环境中完成。</li>
         </ul>`
     }
   ];
@@ -613,13 +630,8 @@ async function perform(step) {
       return {accuracy, cumulative_accuracy: cumulative, feedback_band: band};
     }
     case "bonus": {
-      const trials = run.rows.filter(row => row.event === "choice" && row.phase === "main");
-      const sample = run.design.bonusTrials.map(number => trials[number - 1]);
-      const correct = sample.filter(row => row.correct === 1).length;
-      const eligible = correct >= 6;
-      await showPrompt('<h1>奖励结果</h1><p>系统随机抽取了 10 道正式题。答对至少 6 道就达到奖励条件。</p><p>' +
-        (eligible ? "你已达到奖励条件。" : "你这次未达到奖励条件。") + '</p>' + pauseHint, nextButton());
-      return {sampled_main_trials: sample.map(row => row.main_trial), bonus_correct: correct, bonus_eligible: eligible};
+      await showPrompt('<h1>图片任务已完成</h1><p>最后可以留下意见。点击「完成任务」后，会显示本次被试费。</p>' + pauseHint, nextButton());
+      return {};
     }
     case "comments": {
       setPanel('<h1>任务反馈</h1><form id="comments-form"><label for="comments">欢迎留下意见（选填）。</label><textarea id="comments" maxlength="2000" placeholder="请勿填写姓名或联系方式。"></textarea><button>完成任务</button></form>');
@@ -685,6 +697,34 @@ function binomialTail(correct, total) {
   return Math.min(1, probability);
 }
 
+function calculateCompensation(session) {
+  const trials = new Map();
+  for (const row of session.rows) {
+    if (row.event === "choice" && row.phase === "main" && !row.interrupted &&
+        Number.isInteger(row.main_trial) && row.main_trial >= 1 && row.main_trial <= 420) {
+      trials.set(row.main_trial, row);
+    }
+  }
+  const completed = session.status === "completed" && trials.size === 420;
+  const finalCorrect = [...trials].filter(([number, row]) => number > 280 && !row.timeout && row.correct === 1).length;
+  let bonus = 0;
+  if (completed && finalCorrect > 84) {
+    bonus = PAYMENT_POLICY.bonus_correct_thresholds.findLast(([threshold]) => finalCorrect >= threshold)[1];
+  }
+  const base = completed ? 20 : Math.floor(20 * trials.size / 420);
+  return {
+    policy_id: PAYMENT_POLICY.id,
+    completed_main_trials: trials.size,
+    total_main_trials: 420,
+    completed_all_tasks: completed,
+    final_two_blocks_correct: finalCorrect,
+    final_two_blocks_total: 140,
+    final_two_blocks_accuracy: finalCorrect / 140,
+    bonus_eligible: completed && finalCorrect > 84,
+    base_yuan: base, bonus_yuan: bonus, total_yuan: base + bonus
+  };
+}
+
 async function finish(status) {
   run.status = status;
   run.ended_at = timestamp();
@@ -698,13 +738,17 @@ async function finish(status) {
       final_two_blocks_accuracy: accuracy, final_two_blocks_binomial_p: p,
       meets_learning_threshold: accuracy !== null && accuracy >= .6, passes_binomial_threshold: p !== null && p < .01};
   }
+  run.compensation = calculateCompensation(run);
   save();
   await results();
 }
 
 async function results() {
   const completed = run.status === "completed";
+  const payment = run.compensation || calculateCompensation(run);
   setPanel('<h1>' + (completed ? '任务已完成' : '任务已结束') + '</h1><p>感谢参与。</p>' +
+    '<p><strong>被试费：' + payment.total_yuan + '元</strong></p>' +
+    '<p>基础报酬 ' + payment.base_yuan + ' 元，表现奖励 ' + payment.bonus_yuan + ' 元。</p>' +
     '<p id="save-status" role="status"></p><div id="actions"></div>');
   addDownloadButton();
   const status = $("save-status");
@@ -730,6 +774,50 @@ async function results() {
   }
 }
 
+function demographicsFields() {
+  return '<label for="gender">性别（必填）</label><select id="gender" required>' +
+    '<option value="" disabled selected>请选择</option><option value="male">男</option>' +
+    '<option value="female">女</option><option value="other">其他</option></select>' +
+    '<label for="age">年龄（周岁，必填）</label><input id="age" type="number" min="1" max="120" step="1" required inputmode="numeric">';
+}
+
+function readDemographics() {
+  return {gender: $("gender").value, age: Number($("age").value)};
+}
+
+function paymentInformation() {
+  return '<p>实验约需 30–35 分钟。基础报酬 20 元，另有 0～10 元表现奖励，合计 20～30 元。完成全部任务后发放。</p>' +
+    '<p>中途结束按已完成正式题的比例折算基础报酬，向下取整。表现奖励仅在完成全部任务且最后 2 组正确率超过 60% 时发放。</p>' + rewardStandards();
+}
+
+function rewardStandards() {
+  const rows = PAYMENT_POLICY.bonus_correct_thresholds.map(([minimum, bonus], i, thresholds) => {
+    const maximum = i + 1 < thresholds.length ? thresholds[i + 1][0] - 1 : 140;
+    return '<tr><td>' + minimum + '～' + maximum + ' 题</td><td>' + bonus + ' 元</td></tr>';
+  }).join('');
+  return '<details><summary>查看完整奖励标准（0～10 元）</summary>' +
+    '<p>完成全部任务后，按最后 2 组共 140 题的答对题数计算。超时按答错计。</p>' +
+    '<table><thead><tr><th scope="col">答对题数</th><th scope="col">奖励</th></tr></thead><tbody>' +
+    rows + '</tbody></table></details>';
+}
+
+async function completeParticipantInfo() {
+  if (run.demographics && run.compensation_policy) return;
+  setPanel('<h1>补充参与信息</h1><p>继续任务前，请确认以下信息。</p>' + paymentInformation() +
+    '<form id="demographics-form">' + (run.demographics ? "" : demographicsFields()) +
+    '<label><input type="checkbox" required> 我已了解报酬规则，同意继续参加。</label><button>继续任务</button></form>');
+  await new Promise(resolve => {
+    $("demographics-form").onsubmit = event => {
+      event.preventDefault();
+      if (!$("demographics-form").reportValidity()) return;
+      if (!run.demographics) run.demographics = readDemographics();
+      run.compensation_policy = PAYMENT_POLICY;
+      save();
+      resolve();
+    };
+  });
+}
+
 async function home() {
   setPanel('<h1>图片比较任务</h1><p>正在加载图片，请稍候。</p>');
   try {
@@ -752,6 +840,7 @@ async function home() {
       [{label:"继续任务",keys:[" "]},{label:"开始新任务",value:"new",secondary:true}]);
     if (key !== "new") {
       run = saved;
+      await completeParticipantInfo();
       if (!run.stimulus_set) {
         run.stimulus_set = STIMULUS_SET;
         save();
@@ -773,14 +862,17 @@ async function home() {
     }
   }
   setPanel('<h1>图片比较任务</h1><p>请使用带实体键盘的电脑，在安静环境中完成。按 <kbd>Esc</kbd> 可提前结束。</p><p>如果页面退出全屏，可按 <kbd>F11</kbd> 尝试重新进入全屏。</p>' +
+    paymentInformation() +
     (collection ? '<p>作答会自动提交。如果提交失败，你可以下载数据文件。</p>' : '<p>作答会保存在这个浏览器里。结束后请下载数据文件。</p>') +
     '<form id="start"><label for="code">参与者编号（选填）</label><input id="code" type="text" maxlength="60" autocomplete="off" placeholder="请勿填写姓名或联系方式。">' +
-    '<fieldset><label><input type="checkbox" required> 我已了解任务和数据记录方式，自愿参加。</label></fieldset><button>阅读说明</button></form>');
+    demographicsFields() +
+    '<fieldset><label><input type="checkbox" required> 我已了解任务、报酬规则和数据记录方式，自愿参加。</label></fieldset><button>阅读说明</button></form>');
   $("start").onsubmit = async event => {
     event.preventDefault();
     if (starting) return;
+    if (!$("start").reportValidity()) return;
     starting = true;
-    run = makeRun($("code").value.trim());
+    run = makeRun($("code").value.trim(), readDemographics());
     lastUploaded = -1;
     save();
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
